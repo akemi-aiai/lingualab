@@ -69,7 +69,7 @@ Here you can find exercises.
 .autumn { background: linear-gradient(135deg, #E76F51, #F4A261); }
 </style>
 
-<div class="calendar">...</div>
+<div class="calendar"></div>
   <!-- January -->
   <div>
     <div class="month-card winter" onclick="toggleWeeks('jan')">January</div>
