@@ -2,13 +2,13 @@
 layout: default
 title: Wiki Parents
 ---
-
+{% raw %}
 <style>
 .nav-button {
   display: inline-block;
   padding: 10px 20px;
   margin: 5px;
-  background-color: #1f4e79; /* фон под Architect */
+  background-color: #6ca0dc; /* фон под Architect */
   color: white;              /* текст всегда белый */
   text-decoration: none;
   border-radius: 5px;
@@ -17,7 +17,7 @@ title: Wiki Parents
 }
 
 .accordion {
-  background-color: #1f4e79;
+  background-color: #6ca0dc;
   color: white;
   cursor: pointer;
   padding: 10px 15px;
@@ -39,9 +39,9 @@ title: Wiki Parents
   padding: 10px 15px;
   display: none;
   background-color: #f4f8fb;
-  border-left: 2px solid #1f4e79;
-  border-right: 2px solid #1f4e79;
-  border-bottom: 2px solid #1f4e79;
+  border-left: 2px solid #6ca0dc;
+  border-right: 2px solid #6ca0dc;
+  border-bottom: 2px solid #6ca0dc;
   border-radius: 0 0 5px 5px;
   margin-bottom: 10px;
 }
@@ -97,6 +97,7 @@ title: Wiki Parents
     });
   }
 </script>
+{% endraw %}
 
 <!-- Кнопка назад -->
 <div style="text-align: center; margin-top: 20px;">
