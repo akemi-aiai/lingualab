@@ -54,7 +54,7 @@ title: Wiki Parents
 }
 </style>
 
-<h2>Reading Corner</h2>
+# Reading Corner
 <div class="accordion">Academic Papers</div>
 <div class="panel">
   <ul>
