@@ -11,7 +11,7 @@ Tips for practicing English at home
 
 <!-- Кнопка назад -->
 <div style="text-align: center; margin-top: 20px;">
-  <a href="/" style="
+  <a href="/lingualab/" style="
     display: inline-block;
     padding: 10px 20px;
     background-color: #1f4e79;
