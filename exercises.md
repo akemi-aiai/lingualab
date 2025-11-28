@@ -89,7 +89,7 @@ Here you can find exercises.
     <div class="month-card winter" onclick="toggleWeeks('feb')">February</div>
     <div id="feb" class="weeks">
       <div class="week-grid">
-        <a class="week-box" href="/homework/january/week1">Week 1</a>
+        <a class="week-box" href="../homework/january/week1">Week 1</a>
         <a class="week-box" href="/homework/january/week2">Week 2</a>
         <a class="week-box" href="/homework/january/week3">Week 3</a>
         <a class="week-box" href="/homework/january/week4">Week 4</a>
