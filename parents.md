@@ -58,11 +58,11 @@ title: Wiki Parents
 <button class="accordion">Academic Papers</button>
 <div class="panel">
   <ul>
-    <li><a href="[https://srcd.onlinelibrary.wiley.com/doi/pdfdirect/10.1111/cdev.13575](https://cyberleninka.ru/article/n/organizational-and-methodological-support-of-preschoolers-thinking-skills-development-during-problem-foreign-language-teaching/viewer)"> Kartashova Valentina N., Volynkina Natalia V. (2021) ORGANIZATIONAL AND METHODOLOGICAL SUPPORT OF PRESCHOOLERS’ THINKING SKILLS DEVELOPMENT DURING PROBLEM FOREIGN LANGUAGE TEACHING</a></li>
+    <li><a href="https://cyberleninka.ru/article/n/organizational-and-methodological-support-of-preschoolers-thinking-skills-development-during-problem-foreign-language-teaching/viewer"> Kartashova Valentina N., Volynkina Natalia V. (2021) ORGANIZATIONAL AND METHODOLOGICAL SUPPORT OF PRESCHOOLERS’ THINKING SKILLS DEVELOPMENT DURING PROBLEM FOREIGN LANGUAGE TEACHING</a></li>
     <li><a href="https://cyberleninka.ru/article/n/comprehension-of-idiomatic-expressions-by-russian-speaking-typically-developing-children/viewer"> by Eliseeva Nadezda N (2017) Comprehension of idiomatic expressions by Russian speaking typically developing children</a></li>
     <li><a href="https://srcd.onlinelibrary.wiley.com/doi/pdfdirect/10.1111/cdev.13575)">Philippine Courtier, Marie-Line Gardes (2021) Effects of Montessori Education on the Academic, Cognitive, and Social Development of Disadvantaged Preschoolers: A Randomized Controlled Study in the French Public‐School System</a></li>
-    <li><a href="[https://cyberleninka.ru/article/n/comprehension-of-idiomatic-expressions-by-russian-speaking-typically-developing-children/viewe](https://cyberleninka.ru/article/n/constructing-a-russian-language-version-of-the-international-early-reading-assessment-tool/viewer)r">Alina Ivanova (2019) Constructing a Russian-Language Version of the International Early Reading Assessment Tool</a></li>
-    <li><a href="[https://srcd.onlinelibrary.wiley.com/doi/pdfdirect/10.1111/cdev.13575)](https://cyberleninka.ru/article/n/psihologicheskoe-razvitie-doshkolnikov-v-proektnoy-deyatelnosti-obzor-empiricheskih-issledovaniy/viewer)">Плотникова В. А (2023) Психологическое развитие дошкольников в проектной деятельности: обзор эмпирических исследований</a></li>
+    <li><a href="https://cyberleninka.ru/article/n/constructing-a-russian-language-version-of-the-international-early-reading-assessment-tool/viewer">Alina Ivanova (2019) Constructing a Russian-Language Version of the International Early Reading Assessment Tool</a></li>
+    <li><a href="https://cyberleninka.ru/article/n/psihologicheskoe-razvitie-doshkolnikov-v-proektnoy-deyatelnosti-obzor-empiricheskih-issledovaniy/viewer">Плотникова В. А (2023) Психологическое развитие дошкольников в проектной деятельности: обзор эмпирических исследований</a></li>
   </ul>
 </div>
 
@@ -83,17 +83,20 @@ title: Wiki Parents
 </div>
 
 <script>
-var acc = document.getElementsByClassName("accordion");
-for (var i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var panel = this.nextElementSibling;
-    panel.style.display = (panel.style.display === "block") ? "none" : "block";
-  });
-}
+  var acc = document.getElementsByClassName("accordion");
+  for (let i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function () {
+      this.classList.toggle("active");
+
+      var panel = this.nextElementSibling;
+      if (panel.style.display === "block") {
+        panel.style.display = "none";
+      } else {
+        panel.style.display = "block";
+      }
+    });
+  }
 </script>
-
-
 ---
 
 <!-- Кнопка назад -->
