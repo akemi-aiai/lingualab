@@ -97,7 +97,6 @@ title: Wiki Parents
     });
   }
 </script>
----
 
 <!-- Кнопка назад -->
 <div style="text-align: center; margin-top: 20px;">
