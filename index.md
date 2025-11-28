@@ -5,15 +5,37 @@ title: LinguaLab
 
 <!-- Навигация -->
 <style>
+/* Навигация Flex */
+.nav-container {
+  display: flex;
+  justify-content: center; /* Центрируем кнопки по горизонтали */
+  flex-wrap: wrap;         /* Перенос кнопок на новую строку при маленьком экране */
+  margin-bottom: 20px;
+}
+
+/* Кнопки */
 .nav-button {
   display: inline-block;
   padding: 10px 20px;
-  margin: 0 5px;
+  margin: 5px;
+  background-color: #1f4e79;
   color: white;
   text-decoration: none;
-  border-radius: 10px;
-  background-color: #1f4e79;  /* Единый цвет */
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  border-radius: 5px;
+  transition: transform 0.2s ease; /* только подъем при hover, без смены цвета */
+}
+
+/* Hover-эффект: только движение, без смены цвета */
+.nav-button:hover {
+  transform: translateY(-2px);
+}
+
+/* Медиазапрос для мобильных */
+@media (max-width: 600px) {
+  .nav-container {
+    flex-direction: column; /* Кнопки в колонку */
+    align-items: center;
+  }
 }
 </style>
 
