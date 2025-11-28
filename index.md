@@ -28,13 +28,14 @@ title: LinguaLab
 /* Hover-эффект: только движение, без смены цвета */
 .nav-button:hover {
   transform: translateY(-2px);
+  color: white;                     /* текст не меняется */
 }
 
 /* Медиазапрос для мобильных */
 @media (max-width: 600px) {
   .nav-container {
     flex-direction: column; /* Кнопки в колонку */
-    align-items: center;
+    align-items: baseline;
   }
 }
 </style>
@@ -64,10 +65,8 @@ The goal of this project is to make learning English **simple, engaging, and enj
 
 ## Tips
 
-Parents can access a **special section with articles and guidance** on supporting their child’s English learning. This includes:
+Parents can click a **Wiki Parents** button to find:
 
 - Tips for practicing English at home  
 - Advice on motivating children  
 - Useful resources and exercises for parents to help their kids  
-
-Click the **Wiki Parents** button above to explore this section.
