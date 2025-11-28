@@ -24,10 +24,10 @@ title: LinguaLab
 </style>
 
 <div style="text-align: center; margin-bottom: 20px;">
-  <a class="nav-button" href="grammar.html">Grammar Magic</a>
-  <a class="nav-button" href="vocabulary.html">Word Bank</a>
-  <a class="nav-button" href="exercises.html">Fun Homework</a>
-  <a class="nav-button" href="parents.html">Wiki Parents</a>
+  <a class="nav-button" href="grammar">Grammar Magic</a>
+  <a class="nav-button" href="vocabulary">Word Bank</a>
+  <a class="nav-button" href="exercises">Fun Homework</a>
+  <a class="nav-button" href="parents">Wiki Parents</a>
 </div>
 
 # Welcome to LinguaLab!
