@@ -75,10 +75,10 @@ Here you can find exercises.
     <div class="month-card winter" onclick="toggleWeeks('jan')">January</div>
     <div id="jan" class="weeks">
       <div class="week-grid">
-        <a class="week-box" href="/lingualab/homework/january/week1">Week 1</a>
-        <a class="week-box" href="/homework/january/week2">Week 2</a>
-        <a class="week-box" href="/homework/january/week3">Week 3</a>
-        <a class="week-box" href="/homework/january/week4">Week 4</a>
+        <a class="week-box" href="january/week1">Week 1</a>
+        <a class="week-box" href="january/week2">Week 2</a>
+        <a class="week-box" href="january/week3">Week 3</a>
+        <a class="week-box" href="january/week4">Week 4</a>
       </div>
     </div>
   </div>
