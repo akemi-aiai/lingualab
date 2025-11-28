@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Grammar Magic
+title: Word Bank
 ---
 
 # Word Bank
@@ -11,7 +11,7 @@ Here you can boost your vocabulary
 
 <!-- Кнопка назад -->
 <div style="text-align: center; margin-top: 20px;">
-  <a href="index.html" style="
+  <a href="/" style="
     display: inline-block;
     padding: 10px 20px;
     background-color: #1f4e79;
