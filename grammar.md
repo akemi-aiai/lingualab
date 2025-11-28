@@ -8,7 +8,7 @@ title: Grammar Magic
 Here you can explore grammar rules, tips, and examples.
 
 - Present Tense  
-- Past Tense  
+- Past Tense
 - Conditional Sentences  
 
 ---
