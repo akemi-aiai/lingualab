@@ -75,23 +75,24 @@ Here you can find exercises.
     <div class="month-card winter" onclick="toggleWeeks('jan')">January</div>
     <div id="jan" class="weeks">
       <div class="week-grid">
-        <div class="week-box">Week 1</div>
-        <div class="week-box">Week 2</div>
-        <div class="week-box">Week 3</div>
-        <div class="week-box">Week 4</div>
+        <a class="week-box" href="/homework/january/week1">Week 1</a>
+        <a class="week-box" href="/homework/january/week2">Week 2</a>
+        <a class="week-box" href="/homework/january/week3">Week 3</a>
+        <a class="week-box" href="/homework/january/week4">Week 4</a>
       </div>
     </div>
   </div>
+
 
   <!-- February -->
   <div>
     <div class="month-card winter" onclick="toggleWeeks('feb')">February</div>
     <div id="feb" class="weeks">
       <div class="week-grid">
-        <div class="week-box">Week 1</div>
-        <div class="week-box">Week 2</div>
-        <div class="week-box">Week 3</div>
-        <div class="week-box">Week 4</div>
+        <a class="week-box" href="/homework/january/week1">Week 1</a>
+        <a class="week-box" href="/homework/january/week2">Week 2</a>
+        <a class="week-box" href="/homework/january/week3">Week 3</a>
+        <a class="week-box" href="/homework/january/week4">Week 4</a>
       </div>
     </div>
   </div>
@@ -101,10 +102,10 @@ Here you can find exercises.
     <div class="month-card spring" onclick="toggleWeeks('mar')">March</div>
     <div id="mar" class="weeks">
       <div class="week-grid">
-        <div class="week-box">Week 1</div>
-        <div class="week-box">Week 2</div>
-        <div class="week-box">Week 3</div>
-        <div class="week-box">Week 4</div>
+        <a class="week-box" href="/homework/january/week1">Week 1</a>
+        <a class="week-box" href="/homework/january/week2">Week 2</a>
+        <a class="week-box" href="/homework/january/week3">Week 3</a>
+        <a class="week-box" href="/homework/january/week4">Week 4</a>
       </div>
     </div>
   </div>
@@ -114,10 +115,10 @@ Here you can find exercises.
     <div class="month-card spring" onclick="toggleWeeks('apr')">April</div>
     <div id="apr" class="weeks">
       <div class="week-grid">
-        <div class="week-box">Week 1</div>
-        <div class="week-box">Week 2</div>
-        <div class="week-box">Week 3</div>
-        <div class="week-box">Week 4</div>
+        <a class="week-box" href="/homework/january/week1">Week 1</a>
+        <a class="week-box" href="/homework/january/week2">Week 2</a>
+        <a class="week-box" href="/homework/january/week3">Week 3</a>
+        <a class="week-box" href="/homework/january/week4">Week 4</a>
       </div>
     </div>
   </div>
@@ -127,10 +128,10 @@ Here you can find exercises.
     <div class="month-card spring" onclick="toggleWeeks('may')">May</div>
     <div id="may" class="weeks">
       <div class="week-grid">
-        <div class="week-box">Week 1</div>
-        <div class="week-box">Week 2</div>
-        <div class="week-box">Week 3</div>
-        <div class="week-box">Week 4</div>
+        <a class="week-box" href="/homework/january/week1">Week 1</a>
+        <a class="week-box" href="/homework/january/week2">Week 2</a>
+        <a class="week-box" href="/homework/january/week3">Week 3</a>
+        <a class="week-box" href="/homework/january/week4">Week 4</a>
       </div>
     </div>
   </div>
@@ -140,10 +141,10 @@ Here you can find exercises.
     <div class="month-card summer" onclick="toggleWeeks('jun')">June</div>
     <div id="jun" class="weeks">
       <div class="week-grid">
-        <div class="week-box">Week 1</div>
-        <div class="week-box">Week 2</div>
-        <div class="week-box">Week 3</div>
-        <div class="week-box">Week 4</div>
+        <a class="week-box" href="/homework/january/week1">Week 1</a>
+        <a class="week-box" href="/homework/january/week2">Week 2</a>
+        <a class="week-box" href="/homework/january/week3">Week 3</a>
+        <a class="week-box" href="/homework/january/week4">Week 4</a>
       </div>
     </div>
   </div>
@@ -153,10 +154,10 @@ Here you can find exercises.
     <div class="month-card summer" onclick="toggleWeeks('jul')">July</div>
     <div id="jul" class="weeks">
       <div class="week-grid">
-        <div class="week-box">Week 1</div>
-        <div class="week-box">Week 2</div>
-        <div class="week-box">Week 3</div>
-        <div class="week-box">Week 4</div>
+        <a class="week-box" href="/homework/january/week1">Week 1</a>
+        <a class="week-box" href="/homework/january/week2">Week 2</a>
+        <a class="week-box" href="/homework/january/week3">Week 3</a>
+        <a class="week-box" href="/homework/january/week4">Week 4</a>
       </div>
     </div>
   </div>
@@ -166,10 +167,10 @@ Here you can find exercises.
     <div class="month-card summer" onclick="toggleWeeks('aug')">August</div>
     <div id="aug" class="weeks">
       <div class="week-grid">
-        <div class="week-box">Week 1</div>
-        <div class="week-box">Week 2</div>
-        <div class="week-box">Week 3</div>
-        <div class="week-box">Week 4</div>
+        <a class="week-box" href="/homework/january/week1">Week 1</a>
+        <a class="week-box" href="/homework/january/week2">Week 2</a>
+        <a class="week-box" href="/homework/january/week3">Week 3</a>
+        <a class="week-box" href="/homework/january/week4">Week 4</a>
       </div>
     </div>
   </div>
@@ -179,10 +180,10 @@ Here you can find exercises.
     <div class="month-card autumn" onclick="toggleWeeks('sep')">September</div>
     <div id="sep" class="weeks">
       <div class="week-grid">
-        <div class="week-box">Week 1</div>
-        <div class="week-box">Week 2</div>
-        <div class="week-box">Week 3</div>
-        <div class="week-box">Week 4</div>
+        <a class="week-box" href="/homework/january/week1">Week 1</a>
+        <a class="week-box" href="/homework/january/week2">Week 2</a>
+        <a class="week-box" href="/homework/january/week3">Week 3</a>
+        <a class="week-box" href="/homework/january/week4">Week 4</a>
       </div>
     </div>
   </div>
@@ -192,10 +193,10 @@ Here you can find exercises.
     <div class="month-card autumn" onclick="toggleWeeks('oct')">October</div>
     <div id="oct" class="weeks">
       <div class="week-grid">
-        <div class="week-box">Week 1</div>
-        <div class="week-box">Week 2</div>
-        <div class="week-box">Week 3</div>
-        <div class="week-box">Week 4</div>
+        <a class="week-box" href="/homework/january/week1">Week 1</a>
+        <a class="week-box" href="/homework/january/week2">Week 2</a>
+        <a class="week-box" href="/homework/january/week3">Week 3</a>
+        <a class="week-box" href="/homework/january/week4">Week 4</a>
       </div>
     </div>
   </div>
@@ -205,10 +206,10 @@ Here you can find exercises.
     <div class="month-card autumn" onclick="toggleWeeks('nov')">November</div>
     <div id="nov" class="weeks">
       <div class="week-grid">
-        <div class="week-box">Week 1</div>
-        <div class="week-box">Week 2</div>
-        <div class="week-box">Week 3</div>
-        <div class="week-box">Week 4</div>
+        <a class="week-box" href="/homework/january/week1">Week 1</a>
+        <a class="week-box" href="/homework/january/week2">Week 2</a>
+        <a class="week-box" href="/homework/january/week3">Week 3</a>
+        <a class="week-box" href="/homework/january/week4">Week 4</a>
       </div>
     </div>
   </div>
@@ -218,15 +219,14 @@ Here you can find exercises.
     <div class="month-card winter" onclick="toggleWeeks('dec')">December</div>
     <div id="dec" class="weeks">
       <div class="week-grid">
-        <div class="week-box">Week 1</div>
-        <div class="week-box">Week 2</div>
-        <div class="week-box">Week 3</div>
-        <div class="week-box">Week 4</div>
+        <a class="week-box" href="/homework/january/week1">Week 1</a>
+        <a class="week-box" href="/homework/january/week2">Week 2</a>
+        <a class="week-box" href="/homework/january/week3">Week 3</a>
+        <a class="week-box" href="/homework/january/week4">Week 4</a>
       </div>
     </div>
   </div>
 
-</div>
 
 <script>
 function toggleWeeks(id) {
