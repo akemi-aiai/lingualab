@@ -26,17 +26,13 @@ title: LinguaLab
 <div style="text-align: center; margin-bottom: 20px;">
   <a class="nav-button" href="grammar.html">Grammar Magic</a>
   <a class="nav-button" href="vocabulary.html">Word Bank</a>
-  <a class="nav-button" href="homework.html">Fun Homework</a>
+  <a class="nav-button" href="exercises.html">Fun Homework</a>
   <a class="nav-button" href="parents.html">Wiki Parents</a>
 </div>
 
 # Welcome to LinguaLab!
 
-LinguaLab is an **interactive homework website for learning English**. It features:
-
-- **Exercises** for vocabulary and grammar  
-- **Flashcards** to memorize new words  
-- **Mini-games** for practicing English in a fun way  
+LinguaLab is an **interactive website for learning English**. 
 
 The goal of this project is to make learning English **simple, engaging, and enjoyable** for students.
 
@@ -50,7 +46,7 @@ The goal of this project is to make learning English **simple, engaging, and enj
 
 ---
 
-## Parent Tips
+## Tips
 
 Parents can access a **special section with articles and guidance** on supporting their child’s English learning. This includes:
 
