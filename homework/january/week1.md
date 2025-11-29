@@ -27,5 +27,3 @@ Draw your favourite winter activity and describe it with 3 sentences.
 ---
 
 <a href="/lingualab/exercises">← Back to Homework</a>
-
-[← Back to Fun Homework](/lingualab/exercises)
