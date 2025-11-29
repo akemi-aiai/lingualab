@@ -7,7 +7,7 @@ title: January — Week 1
 
 Welcome to your homework for Week 1!
 
-## 📘 Reading Task
+## Reading Task
 Read the short story “Snowy Day” and underline all winter vocabulary.
 
 ## Writing Task
@@ -26,4 +26,6 @@ Draw your favourite winter activity and describe it with 3 sentences.
 
 ---
 
-[⬅ Back to January](../)
+<a href="/lingualab/exercises">← Back to Homework</a>
+
+[← Back to Fun Homework](/lingualab/exercises)
