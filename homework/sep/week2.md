@@ -18,7 +18,7 @@ Ask your child:
 Let the child try both roles.
 
 中文
-展示「爸爸 daddy」、「媽媽 mommy」、「家庭 family」的圖片。
+展示爸爸 daddy、媽媽 mommy、家庭 family的圖片。
 請孩子大聲念出單詞。
 你可以把圖片放在臉前，扮演爸爸或媽媽，問孩子：
 
