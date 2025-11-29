@@ -177,8 +177,8 @@ Here you can find exercises.
 
   <!-- September -->
   <div>
-    <div class="month-card autumn" onclick="toggleWeeks('sep')">September</div>
-    <div id="sep" class="weeks">
+    <div class="month-card autumn" onclick="toggleWeeks('sept')">September</div>
+    <div id="sept" class="weeks">
       <div class="week-grid">
         <a class="week-box" href="/homework/sep/week1">Week 1</a>
         <a class="week-box" href="/homework/sep/week2">Week 2</a>
