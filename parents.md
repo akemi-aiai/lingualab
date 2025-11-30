@@ -80,33 +80,32 @@ title: Wiki Parents
     <b>Tongue twisters</b> are one of the most playful and effective tools for helping children (and even adults!) improve pronunciation and spelling. They turn learning into a game, and games are something every child understands.
 <p>What makes tongue twisters so special? They are silly, catchy, and full of surprises. You don’t need to convince a child to sit and study for a long time — just say one funny, tricky line, and they immediately want to hear more. When learning feels like play, children learn faster and enjoy the process much more.</p>
 
-<div style="text-align:center; font-size:14px; max-width:600px; margin:0 auto; color:#3399ff;">
+<div style="text-align:center; font-size:16px; max-width:600px; margin:0 auto; color: #2c3e50;">
+  <ol>
+    <li> A big black bug bit a big black dog on his big black nose.</li> 
+      
+    <li> Give papa a cup of proper coffee in a copper coffee cup.</li> 
 
-<ol>1. A big black bug bit a big black dog on his big black nose.
+    <li> Fresh fried fish, fish fresh fried, fried fish fresh, fish fried fresh.</li> 
 
-2. The blue bluebird blinks.
+    <li> Eleven elves licked eleven little liquorice lollipops.</li> 
 
-3. Give papa a cup of proper coffee in a copper coffee cup.
+    <li> Kitty caught the kitten in the kitchen.</li> 
 
-4. Fresh fried fish, fish fresh fried, fried fish fresh, fish fried fresh.
+    <li> Red lorry, yellow lorry.</li> 
 
-5. Eleven elves licked eleven little liquorice lollipops.
+    <li> Toy phone, toy phone, toy phone.</li> 
 
-6. Kitty caught the kitten in the kitchen.
+    <li> Zebras zig and zebras zag.</li> 
 
-7. Red lorry, yellow lorry.
+    <li> Whether the weather is warm, whether the weather is hot, we have to put up with the weather, whether we like it or not.</li> 
 
-8. Toy phone, toy phone, toy phone.
+    <li> I can think of six thin things, but I can think of six thick things too.</li> 
 
-9. Zebras zig and zebras zag.
+    <li> I scream, you scream, we all scream for ice cream.</li> 
 
-10. Whether the weather is warm, whether the weather is hot, we have to put up with the weather, whether we like it or not.
-
-11. I can think of six thin things, but I can think of six thick things too.
-
-12. I scream, you scream, we all scream for ice cream.
-
-13. Six sick sea-serpents swam the seven seas.</ol>
+    <li> Six sick sea-serpents swam the seven seas.</li> 
+  </ol>
 </div>
 
 <h2>Summing up</h2>
