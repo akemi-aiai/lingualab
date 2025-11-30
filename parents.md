@@ -74,11 +74,46 @@ title: Wiki Parents
   </ul>
 </div>
 
-<div class="accordion">Learning Routine</div>
+<div class="accordion">Tongue Twisters for Kids</div>
 <div class="panel">
   <ul>
-    <li>Create a quiet and comfortable space</li>
-    <li>Minimize distractions</li>
+    <li><b>Tongue twisters</b> are one of the most playful and effective tools for helping children (and even adults!) improve pronunciation and spelling. They turn learning into a game, and games are something every child understands.</li>
+What makes tongue twisters so special? They are silly, catchy, and full of surprises. You don’t need to convince a child to sit and study for a long time — just say one funny, tricky line, and they immediately want to hear more. When learning feels like play, children learn faster and enjoy the process much more.</li>
+
+
+<li>1. A big black bug bit a big black dog on his big black nose. </li>
+
+<li>2. The blue bluebird blinks.</li>
+
+<li>3. Give papa a cup of proper coffee in a copper coffee cup.</li>
+
+<li>4. Fresh fried fish, fish fresh fried, fried fish fresh, fish fried fresh. </li>
+
+<li>5. Eleven elves licked eleven little liquorice lollipops.</li>
+
+<li>6. Kitty caught the kitten in the kitchen.</li>
+
+<li>7. Red lorry, yellow lorry.</li>
+
+<li>8. Toy phone, toy phone, toy phone.</li>
+
+<li>9. Zebras zig and zebras zag.</li>
+
+<li>10. Whether the weather is warm, whether the weather is hot, we have to put up with the weather, whether we like it or not.</li>
+
+<li>11. I can think of six thin things, but I can think of six thick things too.</li>
+
+<li>12. I scream, you scream, we all scream for ice cream. </li>
+
+<li>13. Six sick sea-serpents swam the seven seas.</li>
+
+
+<li><h2>Summing up</h2></li>
+<li>English tongue twisters for kids is the best way to learn problematic sounds and root them in your memory. Most tongue twisters are easy, consisting of one or two sentences. There are more difficult ones, which consist of four or more lines. First, take on those that are easier, and gradually conquer the tasks more difficult. There are tongue twisters for the weather, food, study, housework, lifestyle, etc.
+</li>Choose a topic that you like and go to new knowledge! And more importantly, tongue twisters should be pronounced with a pronunciation that is correct. If you notice that the language is confused, take a break, and then - back into battle. </li>
+<li>Good luck!</li>
+
+    
   </ul>
 </div>
 
