@@ -80,7 +80,7 @@ title: Wiki Parents
     <b>Tongue twisters</b> are one of the most playful and effective tools for helping children (and even adults!) improve pronunciation and spelling. They turn learning into a game, and games are something every child understands.
 <p>What makes tongue twisters so special? They are silly, catchy, and full of surprises. You don’t need to convince a child to sit and study for a long time — just say one funny, tricky line, and they immediately want to hear more. When learning feels like play, children learn faster and enjoy the process much more.</p>
 
-<div style="text-align:center; font-size:16px; max-width:600px; margin:0 auto; color: #2c3e50;">
+<div style="font-size:18px; max-width:600px; margin:0 auto; color: #2c5050;">
   <ol>
     <li> A big black bug bit a big black dog on his big black nose.</li> 
       
