@@ -80,8 +80,9 @@ title: Wiki Parents
     <b>Tongue twisters</b> are one of the most playful and effective tools for helping children (and even adults!) improve pronunciation and spelling. They turn learning into a game, and games are something every child understands.
 <p>What makes tongue twisters so special? They are silly, catchy, and full of surprises. You don’t need to convince a child to sit and study for a long time — just say one funny, tricky line, and they immediately want to hear more. When learning feels like play, children learn faster and enjoy the process much more.</p>
 
+<div style="text-align:center; font-size:14px; max-width:600px; margin:0 auto; color:#3399ff;">
 
-<p align="center" size="14" width="50%" color="#3399ff">1. A big black bug bit a big black dog on his big black nose.
+<ol>1. A big black bug bit a big black dog on his big black nose.
 
 2. The blue bluebird blinks.
 
@@ -105,7 +106,8 @@ title: Wiki Parents
 
 12. I scream, you scream, we all scream for ice cream.
 
-13. Six sick sea-serpents swam the seven seas.</p>
+13. Six sick sea-serpents swam the seven seas.</ol>
+</div>
 
 <h2>Summing up</h2>
 English tongue twisters for kids is the best way to learn problematic sounds and root them in your memory. Most tongue twisters are easy, consisting of one or two sentences. There are more difficult ones, which consist of four or more lines. First, take on those that are easier, and gradually conquer the tasks more difficult. There are tongue twisters for the weather, food, study, housework, lifestyle, etc.
