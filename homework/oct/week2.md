@@ -56,7 +56,7 @@ Maze activity: Match characters to the correct phrases.
 練習冊第8頁，將 Miss Wang 連到 a teacher，帶孩子朗讀，完成其餘練習。
 練習冊第9頁，問 “Who’s this?” 孩子回答後用短語 “Hello, I’m (名字)” 朗讀並完成迷宮遊戲。
 
-6. Mini Activity / 小遊戲
+## Mini Activity / 小遊戲
 
 Give each child a card and some crayons.
 Draw a self-portrait or favorite picture.
