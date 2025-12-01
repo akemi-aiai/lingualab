@@ -62,6 +62,19 @@ If your child enjoys the games, feel free to repeat them anytime!
 
 下次課前請完成以上練習。如果孩子喜歡這些遊戲，可以多玩幾次！
 
+<audio controls>
+  <source src="/lingualab/homework/sep/Track 11.mp3" type="audio/mpeg">
+</audio>
+<audio controls>
+  <source src="/lingualab/homework/sep/Track 12.mp3" type="audio/mpeg">
+</audio>
+<audio controls>
+  <source src="/lingualab/homework/sep/Track 7.mp3" type="audio/mpeg">
+</audio>
+<audio controls>
+  <source src="/lingualab/homework/sep/Track 8.mp3" type="audio/mpeg">
+</audio>
+
 ---
 
 <a href="/lingualab/exercises">← Back to Homework</a>
