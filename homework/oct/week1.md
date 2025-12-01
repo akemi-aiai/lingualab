@@ -32,7 +32,9 @@ Repeat songs and commands to reinforce learning.
 鼓勵孩子起立、唱歌、做動作。
 重複歌曲和動作指令，加強記憶。
 
-
+<audio controls>
+  <source src="/lingualab/homework/oct/Track 16.mp3" type="audio/mpeg">
+</audio>
 <audio controls>
   <source src="/lingualab/homework/oct/Track 13.mp3" type="audio/mpeg">
 </audio>
