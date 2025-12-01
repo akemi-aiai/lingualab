@@ -25,7 +25,7 @@ Welcome to your Word Bank! Here you can find all the key vocabulary for our unit
   border-radius: 12px;
   font-size: 18px;
   font-weight: 600;
-  color: white;
+  color: white !important;
   text-decoration: none;
   cursor: pointer;
   transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
