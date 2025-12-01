@@ -11,7 +11,7 @@ Welcome to your Word Bank! Here you can find all the key vocabulary for our unit
 <style>
 .unit-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); /* 20 кнопок в 4 ряда по 5 */
+  grid-template-columns: repeat(4, 1fr); /* 4 кнопки в ряд */
   gap: 20px;
   margin-bottom: 40px;
 }
@@ -25,17 +25,12 @@ Welcome to your Word Bank! Here you can find all the key vocabulary for our unit
   border-radius: 12px;
   font-size: 18px;
   font-weight: 600;
-  color: white; /* текст всегда белый */
+  color: white;
   text-decoration: none;
   cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
 }
 
-/* Анимация при наведении */
-.unit-button:hover {
-  transform: translateY(-6px) scale(1.05);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-}
 
 /* Цвета кнопок в стиле Architecture */
 .unit1 { background: #1B4965; }
