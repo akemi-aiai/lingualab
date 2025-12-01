@@ -72,9 +72,6 @@ Pair up: children introduce themselves: “Hello, I’m (name).” Exchange card
 <audio controls>
   <source src="/lingualab/homework/oct/Track 17.mp3" type="audio/mpeg">
 </audio>
-<audio controls>
-  <source src="/lingualab/homework/oct/Track 14.mp3" type="audio/mpeg">
-</audio>
 
 ---
 
