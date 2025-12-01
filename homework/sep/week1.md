@@ -54,7 +54,12 @@ Focus on fun, not perfection.
 - daddy
 - mommy
 
-[Download the worksheet](worksheet.pdf)
+<audio controls>
+  <source src="/lingualab/homework/sep/Track 3.mp3" type="audio/mpeg">
+</audio>
+<audio controls>
+  <source src="/lingualab/homework/sep/Track 4.mp3" type="audio/mpeg">
+</audio>
 
 ---
 
