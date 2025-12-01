@@ -51,7 +51,12 @@ Please help your child bring a family photo next class for speaking practice.
 - daddy
 - mommy
 
-[Download the worksheet](worksheet.pdf)
+<audio controls>
+  <source src="/lingualab/homework/sep/Track 5.mp3" type="audio/mpeg">
+</audio>
+<audio controls>
+  <source src="/lingualab/homework/sep/Track 6.mp3" type="audio/mpeg">
+</audio>
 
 ---
 
