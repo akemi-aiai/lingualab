@@ -52,9 +52,6 @@ book / 書
   <source src="/lingualab/homework/oct/Track 20.mp3" type="audio/mpeg">
 </audio>
 <audio controls>
-  <source src="/lingualab/homework/oct/Track 20.mp3" type="audio/mpeg">
-</audio>
-<audio controls>
   <source src="/lingualab/homework/oct/Track 21.mp3" type="audio/mpeg">
 </audio>
 
