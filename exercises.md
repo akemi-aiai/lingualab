@@ -88,10 +88,10 @@ Here you can find exercises.
     <div class="month-card autumn" onclick="toggleWeeks('oct')">October</div>
     <div id="oct" class="weeks">
       <div class="week-grid">
-        <a class="week-box" href="/homework/oct/week1">Week 1</a>
-        <a class="week-box" href="/homework/oct/week2">Week 2</a>
-        <a class="week-box" href="/homework/oct/week3">Week 3</a>
-        <a class="week-box" href="/homework/oct/week4">Week 4</a>
+        <a class="week-box" href="homework/oct/week1">Week 1</a>
+        <a class="week-box" href="homework/oct/week2">Week 2</a>
+        <a class="week-box" href="homework/oct/week3">Week 3</a>
+        <a class="week-box" href="homework/oct/week4">Week 4</a>
       </div>
     </div>
   </div>
@@ -101,10 +101,10 @@ Here you can find exercises.
     <div class="month-card autumn" onclick="toggleWeeks('nov')">November</div>
     <div id="nov" class="weeks">
       <div class="week-grid">
-        <a class="week-box" href="/homework/nov/week1">Week 1</a>
-        <a class="week-box" href="/homework/nov/week2">Week 2</a>
-        <a class="week-box" href="/homework/nov/week3">Week 3</a>
-        <a class="week-box" href="/homework/nov/week4">Week 4</a>
+        <a class="week-box" href="homework/nov/week1">Week 1</a>
+        <a class="week-box" href="homework/nov/week2">Week 2</a>
+        <a class="week-box" href="homework/nov/week3">Week 3</a>
+        <a class="week-box" href="homework/nov/week4">Week 4</a>
       </div>
     </div>
   </div>
@@ -142,10 +142,10 @@ Here you can find exercises.
     <div class="month-card winter" onclick="toggleWeeks('feb')">February</div>
     <div id="feb" class="weeks">
       <div class="week-grid">
-        <a class="week-box" href="/homework/feb/week1">Week 1</a>
-        <a class="week-box" href="/homework/feb/week2">Week 2</a>
-        <a class="week-box" href="/homework/feb/week3">Week 3</a>
-        <a class="week-box" href="/homework/feb/week4">Week 4</a>
+        <a class="week-box" href="homework/feb/week1">Week 1</a>
+        <a class="week-box" href="homework/feb/week2">Week 2</a>
+        <a class="week-box" href="homework/feb/week3">Week 3</a>
+        <a class="week-box" href="homework/feb/week4">Week 4</a>
       </div>
     </div>
   </div>
@@ -155,10 +155,10 @@ Here you can find exercises.
     <div class="month-card spring" onclick="toggleWeeks('mar')">March</div>
     <div id="mar" class="weeks">
       <div class="week-grid">
-        <a class="week-box" href="/homework/mar/week1">Week 1</a>
-        <a class="week-box" href="/homework/mar/week2">Week 2</a>
-        <a class="week-box" href="/homework/mar/week3">Week 3</a>
-        <a class="week-box" href="/homework/mar/week4">Week 4</a>
+        <a class="week-box" href="homework/mar/week1">Week 1</a>
+        <a class="week-box" href="homework/mar/week2">Week 2</a>
+        <a class="week-box" href="homework/mar/week3">Week 3</a>
+        <a class="week-box" href="homework/mar/week4">Week 4</a>
       </div>
     </div>
   </div>
@@ -168,10 +168,10 @@ Here you can find exercises.
     <div class="month-card spring" onclick="toggleWeeks('apr')">April</div>
     <div id="apr" class="weeks">
       <div class="week-grid">
-        <a class="week-box" href="/homework/apr/week1">Week 1</a>
-        <a class="week-box" href="/homework/apr/week2">Week 2</a>
-        <a class="week-box" href="/homework/apr/week3">Week 3</a>
-        <a class="week-box" href="/homework/apr/week4">Week 4</a>
+        <a class="week-box" href="homework/apr/week1">Week 1</a>
+        <a class="week-box" href="homework/apr/week2">Week 2</a>
+        <a class="week-box" href="homework/apr/week3">Week 3</a>
+        <a class="week-box" href="homework/apr/week4">Week 4</a>
       </div>
     </div>
   </div>
@@ -181,10 +181,10 @@ Here you can find exercises.
     <div class="month-card spring" onclick="toggleWeeks('may')">May</div>
     <div id="may" class="weeks">
       <div class="week-grid">
-        <a class="week-box" href="/homework/may/week1">Week 1</a>
-        <a class="week-box" href="/homework/may/week2">Week 2</a>
-        <a class="week-box" href="/homework/may/week3">Week 3</a>
-        <a class="week-box" href="/homework/may/week4">Week 4</a>
+        <a class="week-box" href="homework/may/week1">Week 1</a>
+        <a class="week-box" href="homework/may/week2">Week 2</a>
+        <a class="week-box" href="homework/may/week3">Week 3</a>
+        <a class="week-box" href="homework/may/week4">Week 4</a>
       </div>
     </div>
   </div>
@@ -194,10 +194,10 @@ Here you can find exercises.
     <div class="month-card summer" onclick="toggleWeeks('jun')">June</div>
     <div id="jun" class="weeks">
       <div class="week-grid">
-        <a class="week-box" href="/homework/june/week1">Week 1</a>
-        <a class="week-box" href="/homework/june/week2">Week 2</a>
-        <a class="week-box" href="/homework/june/week3">Week 3</a>
-        <a class="week-box" href="/homework/june/week4">Week 4</a>
+        <a class="week-box" href="homework/june/week1">Week 1</a>
+        <a class="week-box" href="homework/june/week2">Week 2</a>
+        <a class="week-box" href="homework/june/week3">Week 3</a>
+        <a class="week-box" href="homework/june/week4">Week 4</a>
       </div>
     </div>
   </div>
@@ -207,10 +207,10 @@ Here you can find exercises.
     <div class="month-card summer" onclick="toggleWeeks('jul')">July</div>
     <div id="jul" class="weeks">
       <div class="week-grid">
-        <a class="week-box" href="/homework/july/week1">Week 1</a>
-        <a class="week-box" href="/homework/july/week2">Week 2</a>
-        <a class="week-box" href="/homework/july/week3">Week 3</a>
-        <a class="week-box" href="/homework/july/week4">Week 4</a>
+        <a class="week-box" href="homework/july/week1">Week 1</a>
+        <a class="week-box" href="homework/july/week2">Week 2</a>
+        <a class="week-box" href="homework/july/week3">Week 3</a>
+        <a class="week-box" href="homework/july/week4">Week 4</a>
       </div>
     </div>
   </div>
