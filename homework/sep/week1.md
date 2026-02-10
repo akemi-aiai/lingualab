@@ -54,7 +54,7 @@ Focus on fun, not perfection.
 - daddy
 - mommy
 
-<h2>🧩 Let's play a game</h2>
+<h2>I challenge you to a game</h2>
 <p>Find: 爸爸</p>
 
 <div id="letters"></div>
@@ -86,14 +86,8 @@ function addLetter(l) {
   current += l;
   if (current.length > correct.length) {
     current = "";
-    document.getElementById("result").innerText = "It's pk, try again!";
+    document.getElementById("result").innerText = "It's 0k, try again!";
     return;
-  }
-  if (current === correct) {
-    document.getElementById("result").innerHTML =
-      "🎉 Правильно! <br><a href='https://t.me/YourBotUsername' target='_blank'>Получить награду в Telegram 🎁</a>";
-  } else {
-    document.getElementById("result").innerText = current;
   }
 }
 
