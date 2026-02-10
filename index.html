@@ -7,7 +7,7 @@ title: LinguaLab
 <style>
 /* Общие стили */
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: Arial, sans-serif;
   background-color: #f7f9fc;
   margin: 0;
   padding: 0;
@@ -18,54 +18,49 @@ body {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  margin: 20px 0;
+  margin-bottom: 20px;
 }
 
 .nav-button {
   display: inline-block;
-  padding: 15px 30px;
-  margin: 8px;
+  padding: 10px 20px;
+  margin: 5px;
   background-color: #1f4e79;
   color: white;
-  font-size: 18px;
   text-decoration: none;
-  border-radius: 12px;
-  transition: transform 0.2s ease, background-color 0.2s ease;
+  border-radius: 5px;
+  transition: transform 0.2s ease;
 }
 
 .nav-button:hover {
-  transform: translateY(-3px);
-  background-color: #ff9f43;
+  transform: translateY(-2px);
   color: white;
 }
 
 /* Баннер */
 .banner {
   width: 100%;
-  max-height: 400px;
+  max-height: 350px;
   object-fit: cover;
   display: block;
   margin-bottom: 20px;
-  border-radius: 12px;
+  border-radius: 10px;
 }
 
 /* Главный блок */
 .hero {
   text-align: center;
-  padding: 40px 20px;
-  background: linear-gradient(135deg, #6dd5fa, #ffffff);
-  border-radius: 12px;
-  margin-bottom: 30px;
+  padding: 30px 20px;
 }
 
 .hero h1 {
-  font-size: 48px;
-  margin-bottom: 15px;
+  font-size: 36px;
   color: #1f4e79;
+  margin-bottom: 15px;
 }
 
 .hero p {
-  font-size: 20px;
+  font-size: 18px;
   color: #333;
 }
 
@@ -80,10 +75,10 @@ body {
 
 .card {
   background-color: white;
-  border-radius: 12px;
-  padding: 25px;
+  border-radius: 10px;
+  padding: 20px;
   width: 220px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -94,38 +89,38 @@ body {
 }
 
 .card h3 {
-  font-size: 22px;
+  font-size: 20px;
   margin-bottom: 10px;
   color: #1f4e79;
 }
 
 .card p {
-  font-size: 16px;
+  font-size: 14px;
   color: #555;
 }
 
 .card span {
-  font-size: 36px;
+  font-size: 30px;
   display: block;
   margin-bottom: 10px;
 }
 
-/* Секция для родителей */
+/* Секция родителей */
 .parents-section {
   background-color: #ffeaa7;
-  padding: 30px 20px;
-  border-radius: 12px;
+  padding: 25px 20px;
+  border-radius: 10px;
   text-align: center;
   margin-bottom: 40px;
 }
 
 .parents-section h2 {
   color: #d35400;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .parents-section p {
-  font-size: 18px;
+  font-size: 16px;
 }
 
 /* Мобильная адаптация */
@@ -140,11 +135,11 @@ body {
   }
 
   .hero h1 {
-    font-size: 36px;
+    font-size: 28px;
   }
 
   .hero p {
-    font-size: 18px;
+    font-size: 16px;
   }
 }
 </style>
@@ -154,50 +149,49 @@ body {
 
 <!-- Навигация -->
 <div class="nav-container">
-  <a class="nav-button" href="#grammar">Grammar Magic 🧙</a>
-  <a class="nav-button" href="#vocabulary">Word Bank 📚</a>
-  <a class="nav-button" href="#homework">Fun Homework 🎮</a>
-  <a class="nav-button" href="#parents">Wiki Parents 👨‍👩‍👧</a>
+  <a class="nav-button" href="#grammar">Grammar Magic</a>
+  <a class="nav-button" href="#vocabulary">Word Bank</a>
+  <a class="nav-button" href="#homework">Fun Homework</a>
+  <a class="nav-button" href="#parents">Wiki Parents</a>
 </div>
 
 <!-- Главный блок -->
 <div class="hero">
   <h1>Welcome to LinguaLab!</h1>
-  <p>Interactive English learning made <strong>fun, simple, and engaging</strong> for kids and parents!</p>
+  <p>Interactive English learning made simple, fun, and engaging for students.</p>
 </div>
 
-<!-- Разделы сайта -->
+<!-- Разделы -->
 <div class="section-cards">
   <div class="card" id="grammar">
     <span>🧙</span>
     <h3>Grammar Magic</h3>
-    <p>Learn English grammar with fun examples and interactive exercises.</p>
+    <p>Learn English grammar through interactive and fun exercises.</p>
   </div>
 
   <div class="card" id="vocabulary">
     <span>📚</span>
     <h3>Word Bank</h3>
-    <p>Expand your vocabulary with engaging activities and games.</p>
+    <p>Expand your vocabulary with games and activities.</p>
   </div>
 
   <div class="card" id="homework">
     <span>🎮</span>
     <h3>Fun Homework</h3>
-    <p>Practice your skills with quizzes, puzzles, and interactive tasks.</p>
+    <p>Practice your skills with quizzes and interactive tasks.</p>
   </div>
 
   <div class="card" id="parents">
-    <span>bvbbb</span>
+    <span>👨‍👩‍👧</span>
     <h3>Wiki Parents</h3>
-    <p>Tips, advice, and resources for parents to support their children's learning.</p>
+    <p>Tips and resources for parents to support their children.</p>
   </div>
 </div>
 
 <!-- Секция для родителей -->
-<div class="parents-section" id="parents-info">
+<div class="parents-section">
   <h2>For Parents</h2>
-  <p>Learn how to help your child practice English at home, motivate them, and track progress. 🏆</p>
-  <p>We provide interactive guides, videos, and printable resources.</p>
+  <p>Discover tips, guides, and resources to help your child learn English at home effectively.</p>
 </div>
 
 <!-- Подвал -->
