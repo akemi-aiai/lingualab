@@ -3,12 +3,6 @@ layout: default
 title: LinguaLab
 ---
 
-<img
-  src="assets/img/banner.png"
-  alt="LinguaLab Banner"
-  class="banner"
-/>
-
 <!-- Навигация -->
 <style>
 /* Навигация Flex */
