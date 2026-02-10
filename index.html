@@ -80,40 +80,74 @@ footer a { color: #fff; text-decoration: none; }
 </section>
 
 <!-- Features Section -->
-<section id="grammar" class="page-section colord">
-  <div class="container">
-    <div class="row"> 
-      <div class="col-md-3 text-center">
-        <div class="box-item">
-          <i class="circle"><img src="assets/img/grammar.png" alt="" /></i>
+<section id="interactive" class="page-section colord" style="padding:50px 0; background:#f0f8ff;">
+  <div class="container text-center">
+    <h2 style="color:#1f4e79; margin-bottom:40px;">Explore LinguaLab</h2>
+    <div class="row">
+      
+      <!-- Grammar Magic -->
+      <div class="col-md-3 col-sm-6">
+        <a href="grammar.html" target="_blank" class="interactive-card">
+          <img src="assets/img/grammar.png" alt="Grammar Magic" class="img-responsive">
           <h3>Grammar Magic</h3>
-          <p><a href="grammar.html" target="_blank">Go to Grammar Lessons</a></p>
-        </div>
+        </a>
       </div>
-      <div class="col-md-3 text-center">
-        <div class="box-item">
-          <i class="circle"><img src="assets/img/word.png" alt="" /></i>
+      
+      <!-- Word Bank -->
+      <div class="col-md-3 col-sm-6">
+        <a href="vocabulary.html" target="_blank" class="interactive-card">
+          <img src="assets/img/word.png" alt="Word Bank" class="img-responsive">
           <h3>Word Bank</h3>
-          <p><a href="vocabulary.html" target="_blank">Go to Vocabulary</a></p>
-        </div>
+        </a>
       </div>
-      <div class="col-md-3 text-center">
-        <div class="box-item">
-          <i class="circle"><img src="assets/img/hw.png" alt="" /></i>
+      
+      <!-- Fun Homework -->
+      <div class="col-md-3 col-sm-6">
+        <a href="homework.html" target="_blank" class="interactive-card">
+          <img src="assets/img/hw.png" alt="Fun Homework" class="img-responsive">
           <h3>Fun Homework</h3>
-          <p><a href="homework.html" target="_blank">Go to Homework</a></p>
-        </div>
+        </a>
       </div>
-      <div class="col-md-3 text-center">
-        <div class="box-item">
-          <i class="circle"><img src="assets/img/parents.png" alt="" /></i>
+      
+      <!-- Wiki Parents -->
+      <div class="col-md-3 col-sm-6">
+        <a href="parents.html" target="_blank" class="interactive-card">
+          <img src="assets/img/parents.png" alt="Wiki Parents" class="img-responsive">
           <h3>Wiki Parents</h3>
-          <p>Resources and tips for parents to support learning.</p>
-        </div>
+        </a>
       </div>
+
     </div>
   </div>
 </section>
+
+<style>
+.interactive-card {
+  display: block;
+  text-decoration: none;
+  color: #1f4e79;
+  margin-bottom: 30px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.interactive-card img {
+  width: 100%;
+  border-radius: 15px;
+}
+
+.interactive-card h3 {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.interactive-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+</style>
+
 
 <!-- About Me Section -->
 <section id="aboutMe" class="about-section">
