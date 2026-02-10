@@ -31,6 +31,13 @@ title: LinguaLab
   color: white;                     /* текст не меняется */
 }
 
+  .banner {
+    width: 100%;
+    max-height: 350px;
+    object-fit: cover;
+    display: block;
+  }
+
 /* Медиазапрос для мобильных */
 @media (max-width: 600px) {
   .nav-container {
