@@ -4,19 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>LinguaLab - Interactive English Learning</title>
-<meta name="description" content="LinguaLab - Learn English with fun and interactive lessons!">
-<meta name="author" content="LinguaLab">
-
 <link rel="stylesheet" href="css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="css/isotope.css" media="screen" />
-<link rel="stylesheet" href="js/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
-<link href="css/animate.css" rel="stylesheet" media="screen">
-<link href="js/owl-carousel/owl.carousel.css" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css" />
 <link href="font/css/font-awesome.min.css" rel="stylesheet">
 
 <style>
-/* Цветовая схема LinguaLab */
+/* Цвета LinguaLab */
 .navbar-inverse { background-color: #1f4e79; border: none; }
 .navbar-nav li a { color: #fff !important; font-weight: bold; }
 .navbar-nav li a:hover { background-color: #163959 !important; }
@@ -26,19 +19,19 @@
 .hero-text2 h2 { color: #1f4e79; }
 .hero-text2 p { color: #555; }
 
-.box-item { padding: 20px; margin: 20px 0; text-align: center; }
+.box-item { padding: 20px; margin: 20px 0; text-align: center; border-radius: 10px; background: #f0f8ff; transition: transform 0.3s; }
+.box-item:hover { transform: translateY(-5px); }
 .box-item i img { width: 60px; margin-bottom: 15px; }
 .box-item h3 { color: #1f4e79; }
 .box-item p { color: #555; font-size: 14px; }
 
-.parents-section { background-color: #ffeaa7; padding: 50px 20px; border-radius: 10px; text-align: center; }
-.parents-section h2 { color: #d35400; }
+.about-section { background-color: #ffeaa7; padding: 50px 20px; border-radius: 10px; text-align: center; }
+.about-section h2 { color: #d35400; }
 
 footer { background-color: #1f4e79; color: white; padding: 30px 0; }
 footer a { color: #fff; text-decoration: none; }
 
 .topHome { position: fixed; bottom: 30px; right: 30px; display: none; background: #1f4e79; color: #fff; padding: 10px 15px; border-radius: 50%; }
-
 </style>
 </head>
 
@@ -53,20 +46,15 @@ footer a { color: #fff; text-decoration: none; }
           <span class="icon-bar"></span> 
           <span class="icon-bar"></span> 
         </button>
-        <a href="#" class="navbar-brand scroll-top logo animated bounceInLeft">
-          <img src="images/logo.png" alt="LinguaLab Logo" />
-        </a>
+        <a href="#" class="navbar-brand scroll-top logo"><img src="images/logo.png" alt="LinguaLab Logo" /></a>
       </div>
       <div id="main-nav" class="collapse navbar-collapse">
         <ul class="nav navbar-nav" id="mainNav">
           <li class="active"><a href="#home" class="scroll-link">Home</a></li>
-          <li><a href="#grammar" class="scroll-link">Grammar Magic</a></li>
-          <li><a href="#vocabulary" class="scroll-link">Word Bank</a></li>
-          <li><a href="#homework" class="scroll-link">Fun Homework</a></li>
-          <li><a href="#parents" class="scroll-link">Wiki Parents</a></li>
-          <li><a href="#events" class="scroll-link">Events</a></li>
-          <li><a href="#fees" class="scroll-link">Fees</a></li>
-          <li><a href="#team" class="scroll-link">Team</a></li>
+          <li><a href="grammar.html" target="_blank">Grammar Magic</a></li>
+          <li><a href="vocabulary.html" target="_blank">Word Bank</a></li>
+          <li><a href="homework.html" target="_blank">Fun Homework</a></li>
+          <li><a href="#aboutMe" class="scroll-link">About Me</a></li>
           <li><a href="#contact" class="scroll-link">Contact</a></li>
         </ul>
       </div>
@@ -77,20 +65,7 @@ footer a { color: #fff; text-decoration: none; }
 <!-- Banner -->
 <section id="home">
   <div class="banner-container">
-    <div id="carousel" class="carousel slide carousel-fade" data-ride="carousel">
-      <ol class="carousel-indicators">
-        <li data-target="#carousel" data-slide-to="0" class="active"></li>
-        <li data-target="#carousel" data-slide-to="1"></li>
-        <li data-target="#carousel" data-slide-to="2"></li>
-      </ol>
-      <div class="carousel-inner">
-        <div class="active item"><img src="images/banner-bg.jpg" alt="LinguaLab Banner" /></div>
-        <div class="item"><img src="images/banner-bg2.jpg" alt="LinguaLab Banner" /></div>
-        <div class="item"><img src="images/banner-bg3.jpg" alt="LinguaLab Banner" /></div>
-      </div>
-      <a class="carousel-control left" href="#carousel" data-slide="prev">&lsaquo;</a>
-      <a class="carousel-control right" href="#carousel" data-slide="next">&rsaquo;</a>
-    </div>
+    <img src="images/banner-bg.jpg" alt="LinguaLab Banner" />
   </div>
   
   <div class="container hero-text2">        
@@ -99,7 +74,7 @@ footer a { color: #fff; text-decoration: none; }
       <p>Interactive English learning for children made fun, simple, and engaging. Explore grammar, vocabulary, and interactive games!</p>   
     </div>  
     <div class="col-md-3">
-      <a class="btn btn-apply" href="#"><i class="fa fa-play-circle"></i> Get Started</a>  
+      <a class="btn btn-apply" href="#aboutMe"><i class="fa fa-play-circle"></i> Learn More</a>  
     </div>
   </div>
 </section>
@@ -112,122 +87,47 @@ footer a { color: #fff; text-decoration: none; }
         <div class="box-item">
           <i class="circle"><img src="images/5.png" alt="" /></i>
           <h3>Grammar Magic</h3>
-          <p>Learn English grammar with fun exercises and interactive lessons.</p>
+          <p><a href="grammar.html" target="_blank">Go to Grammar Lessons</a></p>
         </div>
       </div>
       <div class="col-md-3 text-center">
         <div class="box-item">
           <i class="circle"><img src="images/1.png" alt="" /></i>
           <h3>Word Bank</h3>
-          <p>Expand vocabulary through engaging games and activities.</p>
+          <p><a href="vocabulary.html" target="_blank">Go to Vocabulary</a></p>
         </div>
       </div>
       <div class="col-md-3 text-center">
         <div class="box-item">
           <i class="circle"><img src="images/2.png" alt="" /></i>
           <h3>Fun Homework</h3>
-          <p>Practice skills with quizzes and interactive challenges.</p>
+          <p><a href="homework.html" target="_blank">Go to Homework</a></p>
         </div>
       </div>
-      <div class="col-md-3 text-center" id="parents">
+      <div class="col-md-3 text-center">
         <div class="box-item">
           <i class="circle"><img src="images/3.png" alt="" /></i>
           <h3>Wiki Parents</h3>
-          <p>Resources and tips for parents to support children’s learning.</p>
+          <p>Resources and tips for parents to support learning.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Events Section -->
-<section id="events" class="page-section">
-  <div class="container text-center">
-    <h2>Events</h2>
-    <p>Explore past events and interactive workshops at LinguaLab.</p>
+<!-- About Me Section -->
+<section id="aboutMe" class="about-section">
+  <div class="container">
+    <h2>About Me / LinguaLab</h2>
+    <p>Here you can write anything about yourself or the LinguaLab project: your experience, goals, or story. This section replaces Events, Fees, and Team sections.</p>
     <div class="row">
-      <div class="col-md-12">
-        <div id="portfolio">
-          <ul class="items list-unstyled clearfix animated fadeInRight showing">
-            <li class="item photography"> 
-              <figure class="effect-bubba">
-                <img src="images/work/1.jpg" alt="Event"/>
-                <figcaption>
-                  <h2>Storytelling Workshop</h2> 
-                  <a href="images/work/1.jpg" class="fancybox">View more</a> 
-                </figcaption>			
-              </figure> 
-            </li>
-            <li class="item branding"> 
-              <figure class="effect-bubba">
-                <img src="images/work/2.jpg" alt="Event"/>
-                <figcaption>
-                  <h2>English Games</h2> 
-                  <a href="images/work/2.jpg" class="fancybox">View more</a> 
-                </figcaption>			
-              </figure> 
-            </li>
-          </ul>
-        </div>
+      <div class="col-md-6">
+        <h3>Background</h3>
+        <p>Describe your background, teaching philosophy, or inspiration for LinguaLab.</p>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- Fees Section -->
-<section id="fees" class="page-section">
-  <div class="container text-center">
-    <h2>Fees</h2>
-    <p>Choose the right plan for your child’s learning journey.</p>
-    <div class="row flat">
-      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <ul class="plan plan1">
-          <li class="plan-name">Starter</li>
-          <li class="plan-price"><strong>$29</strong>/month</li>
-          <li>Access to Grammar & Vocabulary</li>
-          <li>Interactive Games</li>
-          <li class="plan-action"><a href="#" class="btn btn-danger btn-lg">Signup</a></li>
-        </ul>
-      </div>
-      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <ul class="plan plan2 featured">
-          <li class="plan-name">Intermediate</li>
-          <li class="plan-price"><strong>$49</strong>/month</li>
-          <li>Full Grammar Courses</li>
-          <li>Weekly Quizzes</li>
-          <li class="plan-action"><a href="#" class="btn btn-danger btn-lg">Signup</a></li>
-        </ul>
-      </div>
-      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <ul class="plan plan3">
-          <li class="plan-name">Advanced</li>
-          <li class="plan-price"><strong>$99</strong>/month</li>
-          <li>All Courses + Games</li>
-          <li>Parent Dashboard</li>
-          <li class="plan-action"><a href="#" class="btn btn-danger btn-lg">Signup</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Team Section -->
-<section id="team" class="page-section">
-  <div class="container text-center">
-    <h2>Our Team</h2>
-    <p>Meet the educators behind LinguaLab.</p>
-    <div class="row">
-      <div class="col-md-3 col-sm-6">
-        <div class="team-member pDark">
-          <div class="member-img"><img src="images/photo-1.jpg" class="img-responsive" alt=""></div>
-          <div class="team-title"><h4>Anna Smith</h4><span class="pos">Founder</span></div>
-        </div>
-      </div>
-      <div class="col-md-3 col-sm-6">
-        <div class="team-member pDark">
-          <div class="member-img"><img src="images/photo-2.jpg" class="img-responsive" alt=""></div>
-          <div class="team-title"><h4>Gaosheng</h4><span class="pos">Co-Founder</span></div>
-        </div>
+      <div class="col-md-6">
+        <h3>Achievements</h3>
+        <p>List achievements, milestones, or any highlights that show expertise and credibility.</p>
       </div>
     </div>
   </div>
@@ -237,7 +137,7 @@ footer a { color: #fff; text-decoration: none; }
 <section id="contact" class="contact-parlex">
   <div class="parlex-back">
     <div class="container">
-      <h2 class="text-center">Contact Us</h2>
+      <h2 class="text-center">Contact Me</h2>
       <form id="contactfrm">
         <div class="col-sm-12">
           <input type="text" class="form-control" placeholder="Name">
@@ -258,15 +158,8 @@ footer a { color: #fff; text-decoration: none; }
 
 <a href="#top" class="topHome"><i class="fa fa-chevron-up fa-2x"></i></a>
 
-<script src="js/modernizr-latest.js"></script>
 <script src="js/jquery-1.8.2.min.js"></script> 
 <script src="js/bootstrap.min.js"></script> 
-<script src="js/jquery.isotope.min.js"></script> 
-<script src="js/fancybox/jquery.fancybox.pack.js"></script> 
-<script src="js/jquery.nav.js"></script> 
-<script src="js/jquery.fittext.js"></script> 
-<script src="js/waypoints.js"></script> 
-<script src="js/custom.js"></script> 
-<script src="js/owl-carousel/owl.carousel.js"></script>
+<script src="js/custom.js"></script>
 </body>
 </html>
