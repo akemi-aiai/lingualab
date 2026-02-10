@@ -54,14 +54,58 @@ Focus on fun, not perfection.
 - daddy
 - mommy
 
-<!-- Telegram Widget -->
-<script async src="https://telegram.org/js/telegram-widget.js?7"
-        data-telegram-login="lingualab_kids_bot"
-        data-size="large"
-        data-radius="10"
-        data-auth-url=""
-        data-request-access="write">
+<h2>🧩 Let's play a game</h2>
+<p>Find: 爸爸</p>
+
+<div id="letters"></div>
+<p id="result"></p>
+
+<button onclick="restart()">Play one more time?</button>
+
+<script>
+const correct = "daddy";
+let current = "";
+
+function shuffle(array) {
+  return array.sort(() => Math.random() - 0.5);
+}
+
+function render() {
+  const container = document.getElementById("letters");
+  container.innerHTML = "";
+  shuffle(correct.split("")).forEach(l => {
+    const btn = document.createElement("button");
+    btn.textContent = l;
+    btn.style.margin = "5px";
+    btn.onclick = () => addLetter(l);
+    container.appendChild(btn);
+  });
+}
+
+function addLetter(l) {
+  current += l;
+  if (current.length > correct.length) {
+    current = "";
+    document.getElementById("result").innerText = "It's pk, try again!";
+    return;
+  }
+  if (current === correct) {
+    document.getElementById("result").innerHTML =
+      "🎉 Правильно! <br><a href='https://t.me/YourBotUsername' target='_blank'>Получить награду в Telegram 🎁</a>";
+  } else {
+    document.getElementById("result").innerText = current;
+  }
+}
+
+function restart() {
+  current = "";
+  document.getElementById("result").innerText = "";
+  render();
+}
+
+render();
 </script>
+
 
 
 <audio controls>
