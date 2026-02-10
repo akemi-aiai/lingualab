@@ -7,10 +7,15 @@
 
 <!-- CSS -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/styles.css">
 <link rel="stylesheet" href="font/css/font-awesome.min.css">
 
 <style>
+/* Общие стили */
+body { font-family: Arial, sans-serif; margin:0; padding:0; }
+.section { padding: 60px 0; }
+.section h2 { text-align: center; margin-bottom: 30px; }
+.section p { text-align: center; max-width: 800px; margin: auto; }
+
 /* Навигация */
 .nav-container {
   display: flex;
@@ -26,11 +31,11 @@
   color: white;
   text-decoration: none;
   border-radius: 5px;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, background 0.2s ease;
 }
 .nav-button:hover {
   transform: translateY(-2px);
-  color: white;
+  background-color: #3b6aa0;
 }
 
 /* Баннер */
@@ -42,26 +47,11 @@
     margin-bottom: 20px;
 }
 
-/* Секции */
-.section {
-  padding: 60px 0;
-}
-.section h2 {
-  text-align: center;
-  margin-bottom: 30px;
-}
-.section p {
-  text-align: center;
-  max-width: 800px;
-  margin: auto;
-}
-
 /* Карусель */
-.carousel-inner img {
-    width: 100%;
-    max-height: 350px;
-    object-fit: cover;
-}
+.carousel-inner img { width: 100%; max-height: 350px; object-fit: cover; }
+
+/* Быстрое переключение секций */
+html { scroll-behavior: smooth; }
 
 /* Footer */
 footer {
@@ -73,10 +63,7 @@ footer {
 
 /* Мобильные */
 @media (max-width: 600px) {
-  .nav-container {
-    flex-direction: column;
-    align-items: center;
-  }
+  .nav-container { flex-direction: column; align-items: center; }
 }
 </style>
 </head>
@@ -89,44 +76,66 @@ footer {
 
 <!-- Навигация -->
 <div class="nav-container">
+  <a class="nav-button" href="#home">Home</a>
   <a class="nav-button" href="#grammar">Grammar Magic</a>
   <a class="nav-button" href="#vocabulary">Word Bank</a>
   <a class="nav-button" href="#exercises">Fun Homework</a>
   <a class="nav-button" href="#parents">Wiki Parents</a>
 </div>
 
-<!-- Баннер -->
-<img src="assets/img/banner.png" alt="LinguaLab Banner" class="banner">
+<!-- Баннер с каруселью -->
+<div id="bannerCarousel" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#bannerCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#bannerCarousel" data-slide-to="1"></li>
+    <li data-target="#bannerCarousel" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="assets/img/banner.png" alt="Banner 1" class="banner">
+    </div>
+    <div class="carousel-item">
+      <img src="assets/img/banner2.png" alt="Banner 2" class="banner">
+    </div>
+    <div class="carousel-item">
+      <img src="assets/img/banner3.png" alt="Banner 3" class="banner">
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#bannerCarousel" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#bannerCarousel" role="button" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+</div>
 
-<!-- Hero Section -->
+<!-- Главная секция -->
 <section class="section" id="home">
   <h2>Welcome to LinguaLab!</h2>
   <p>LinguaLab is an <strong>interactive website for learning English</strong>.  
-     The goal of this project is to make learning English <strong>simple, engaging, and enjoyable</strong> for students.</p>
+     Our goal is to make learning English <strong>simple, engaging, and fun</strong> for kids and beginners.</p>
 </section>
 
-<!-- Quick Access -->
-<section class="section" id="features">
-  <div class="container">
-    <div class="row text-center">
-      <div class="col-md-4">
-        <h3>Grammar Magic</h3>
-        <p>Learn English grammar rules with fun examples and exercises.</p>
-      </div>
-      <div class="col-md-4">
-        <h3>Word Bank</h3>
-        <p>Expand your vocabulary with interactive word games and challenges.</p>
-      </div>
-      <div class="col-md-4">
-        <h3>Fun Homework</h3>
-        <p>Practice your English skills through interactive quizzes and activities.</p>
-      </div>
-    </div>
-  </div>
+<!-- Grammar Magic -->
+<section class="section" id="grammar" style="background:#f4f4f4;">
+  <h2>Grammar Magic</h2>
+  <p>Learn English grammar rules with fun examples and interactive exercises.</p>
 </section>
 
-<!-- Parents Section -->
-<section class="section" id="parents" style="background:#f4f4f4;">
+<!-- Word Bank -->
+<section class="section" id="vocabulary">
+  <h2>Word Bank</h2>
+  <p>Expand your vocabulary with games, flashcards, and challenges to remember new words easily.</p>
+</section>
+
+<!-- Fun Homework -->
+<section class="section" id="exercises" style="background:#f4f4f4;">
+  <h2>Fun Homework</h2>
+  <p>Practice your English skills through quizzes and interactive exercises. Learning can be playful!</p>
+</section>
+
+<!-- Wiki Parents -->
+<section class="section" id="parents">
   <h2>Wiki Parents</h2>
   <p>Parents can find tips for practicing English at home, advice on motivating children, and useful exercises to support learning.</p>
 </section>
@@ -144,5 +153,12 @@ footer {
 <!-- JS -->
 <script src="js/jquery-1.8.2.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function(){
+  $('.carousel').carousel({
+    interval: 5000
+  });
+});
+</script>
 </body>
 </html>
