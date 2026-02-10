@@ -54,6 +54,16 @@ Focus on fun, not perfection.
 - daddy
 - mommy
 
+<!-- Telegram Widget -->
+<script async src="https://telegram.org/js/telegram-widget.js?7"
+        data-telegram-login="lingualab_kids_bot"
+        data-size="large"
+        data-radius="10"
+        data-auth-url=""
+        data-request-access="write">
+</script>
+
+
 <audio controls>
   <source src="/lingualab/homework/sep/Track 3.mp3" type="audio/mpeg">
 </audio>
