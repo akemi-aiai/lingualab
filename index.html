@@ -1,19 +1,23 @@
----
-layout: default
-title: LinguaLab
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LinguaLab</title>
 
-<!-- Навигация -->
+<!-- CSS -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="font/css/font-awesome.min.css">
+
 <style>
-/* Навигация Flex */
+/* Навигация */
 .nav-container {
   display: flex;
-  justify-content: center; /* Центрируем кнопки по горизонтали */
-  flex-wrap: wrap;         /* Перенос кнопок на новую строку при маленьком экране */
+  justify-content: center;
+  flex-wrap: wrap;
   margin-bottom: 20px;
 }
-
-/* Кнопки */
 .nav-button {
   display: inline-block;
   padding: 10px 20px;
@@ -22,61 +26,123 @@ title: LinguaLab
   color: white;
   text-decoration: none;
   border-radius: 5px;
-  transition: transform 0.2s ease; /* только подъем при hover, без смены цвета */
+  transition: transform 0.2s ease;
 }
-
-/* Hover-эффект: только движение, без смены цвета */
 .nav-button:hover {
   transform: translateY(-2px);
-  color: white;                     /* текст не меняется */
+  color: white;
 }
 
+/* Баннер */
 .banner {
-    width: 100%;      /* растянуть на всю ширину */
-    max-height: 350px; /* ограничение по высоте */
-    object-fit: cover; /* обрезка и сохранение пропорций */
+    width: 100%;
+    max-height: 350px;
+    object-fit: cover;
     display: block;
-    margin-bottom: 20px; /* расстояние под баннером */
+    margin-bottom: 20px;
 }
-  
 
-/* Медиазапрос для мобильных */
+/* Секции */
+.section {
+  padding: 60px 0;
+}
+.section h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.section p {
+  text-align: center;
+  max-width: 800px;
+  margin: auto;
+}
+
+/* Карусель */
+.carousel-inner img {
+    width: 100%;
+    max-height: 350px;
+    object-fit: cover;
+}
+
+/* Footer */
+footer {
+  background-color: #1f4e79;
+  color: white;
+  padding: 40px 0;
+  text-align: center;
+}
+
+/* Мобильные */
 @media (max-width: 600px) {
   .nav-container {
-    flex-direction: column; /* Кнопки в колонку */
-    align-items: baseline;
+    flex-direction: column;
+    align-items: center;
   }
 }
 </style>
+</head>
+<body>
 
-<div style="text-align: center; margin-bottom: 20px;">
-  <a class="nav-button" href="grammar">Grammar Magic</a>
-  <a class="nav-button" href="vocabulary">Word Bank</a>
-  <a class="nav-button" href="exercises">Fun Homework</a>
-  <a class="nav-button" href="parents">Wiki Parents</a>
+<!-- Логотип -->
+<header style="text-align:center; margin:20px;">
+  <img src="assets/img/logo.png" alt="LinguaLab Logo" style="max-height:80px;">
+</header>
+
+<!-- Навигация -->
+<div class="nav-container">
+  <a class="nav-button" href="#grammar">Grammar Magic</a>
+  <a class="nav-button" href="#vocabulary">Word Bank</a>
+  <a class="nav-button" href="#exercises">Fun Homework</a>
+  <a class="nav-button" href="#parents">Wiki Parents</a>
 </div>
 
+<!-- Баннер -->
+<img src="assets/img/banner.png" alt="LinguaLab Banner" class="banner">
 
-# Welcome to LinguaLab!
+<!-- Hero Section -->
+<section class="section" id="home">
+  <h2>Welcome to LinguaLab!</h2>
+  <p>LinguaLab is an <strong>interactive website for learning English</strong>.  
+     The goal of this project is to make learning English <strong>simple, engaging, and enjoyable</strong> for students.</p>
+</section>
 
-LinguaLab is an **interactive website for learning English**. 
+<!-- Quick Access -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-4">
+        <h3>Grammar Magic</h3>
+        <p>Learn English grammar rules with fun examples and exercises.</p>
+      </div>
+      <div class="col-md-4">
+        <h3>Word Bank</h3>
+        <p>Expand your vocabulary with interactive word games and challenges.</p>
+      </div>
+      <div class="col-md-4">
+        <h3>Fun Homework</h3>
+        <p>Practice your English skills through interactive quizzes and activities.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-The goal of this project is to make learning English **simple, engaging, and enjoyable** for students.
+<!-- Parents Section -->
+<section class="section" id="parents" style="background:#f4f4f4;">
+  <h2>Wiki Parents</h2>
+  <p>Parents can find tips for practicing English at home, advice on motivating children, and useful exercises to support learning.</p>
+</section>
 
----
+<!-- Footer -->
+<footer>
+  <p>&copy; 2026 LinguaLab. All Rights Reserved.</p>
+  <p>Follow us: 
+    <a href="#"><i class="fa fa-facebook"></i></a>
+    <a href="#"><i class="fa fa-twitter"></i></a>
+    <a href="#"><i class="fa fa-google-plus"></i></a>
+  </p>
+</footer>
 
-## Quick Access Sections
-
-- **Grammar Magic** – learn rules and examples  
-- **Word Bank** – expand your vocabulary  
-- **Fun Homework** – practice your skills with interactive quizzes  
-
----
-
-## Tips
-
-Parents can click a **Wiki Parents** button to find:
-
-- Tips for practicing English at home  
-- Advice on motivating children  
-- Useful resources and exercises for parents to help their kids  
+<!-- JS -->
+<script src="js/jquery-1.8.2.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>
