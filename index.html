@@ -1,185 +1,272 @@
----
-layout: default
-title: LinguaLab
----
-
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en-gb" class="no-js">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LinguaLab</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>LinguaLab - Interactive English Learning</title>
+<meta name="description" content="LinguaLab - Learn English with fun and interactive lessons!">
+<meta name="author" content="LinguaLab">
+
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="css/isotope.css" media="screen" />
+<link rel="stylesheet" href="js/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
+<link href="css/animate.css" rel="stylesheet" media="screen">
+<link href="js/owl-carousel/owl.carousel.css" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css" />
+<link href="font/css/font-awesome.min.css" rel="stylesheet">
+
 <style>
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f7f9fc;
-    margin: 0;
-    padding: 0;
-}
+/* Цветовая схема LinguaLab */
+.navbar-inverse { background-color: #1f4e79; border: none; }
+.navbar-nav li a { color: #fff !important; font-weight: bold; }
+.navbar-nav li a:hover { background-color: #163959 !important; }
 
-/* Навигация */
-.navbar {
-    margin-bottom: 0;
-    border-radius: 0;
-    background-color: #1f4e79;
-}
-.navbar-nav li a {
-    color: white !important;
-    font-weight: bold;
-}
-.navbar-nav li a:hover {
-    background-color: #163959 !important;
-}
+.banner-container img { width: 100%; height: 450px; object-fit: cover; }
 
-/* Баннер */
-.banner {
-    width: 100%;
-    max-height: 400px;
-    object-fit: cover;
-}
+.hero-text2 h2 { color: #1f4e79; }
+.hero-text2 p { color: #555; }
 
-/* Секции */
-.section {
-    padding: 60px 0;
-}
-.section h2 {
-    color: #1f4e79;
-    margin-bottom: 30px;
-    text-align: center;
-}
-.section p {
-    text-align: center;
-    color: #555;
-    font-size: 16px;
-}
+.box-item { padding: 20px; margin: 20px 0; text-align: center; }
+.box-item i img { width: 60px; margin-bottom: 15px; }
+.box-item h3 { color: #1f4e79; }
+.box-item p { color: #555; font-size: 14px; }
 
-/* Карточки */
-.cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-}
-.card {
-    background-color: white;
-    width: 250px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    padding: 20px;
-    text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-}
-.card i {
-    font-size: 40px;
-    color: #1f4e79;
-    margin-bottom: 10px;
-}
-.card h3 {
-    color: #1f4e79;
-    margin-bottom: 10px;
-}
-.card p {
-    color: #555;
-    font-size: 14px;
-}
+.parents-section { background-color: #ffeaa7; padding: 50px 20px; border-radius: 10px; text-align: center; }
+.parents-section h2 { color: #d35400; }
 
-/* Секция для родителей */
-.parents-section {
-    background-color: #ffeaa7;
-    padding: 50px 20px;
-    text-align: center;
-    border-radius: 10px;
-}
-.parents-section h2 {
-    color: #d35400;
-    margin-bottom: 15px;
-}
+footer { background-color: #1f4e79; color: white; padding: 30px 0; }
+footer a { color: #fff; text-decoration: none; }
 
-/* Footer */
-footer {
-    background-color: #1f4e79;
-    color: white;
-    text-align: center;
-    padding: 20px 0;
-}
+.topHome { position: fixed; bottom: 30px; right: 30px; display: none; background: #1f4e79; color: #fff; padding: 10px 15px; border-radius: 50%; }
 
-/* Мобильная адаптация */
-@media (max-width: 768px) {
-    .cards {
-        flex-direction: column;
-        align-items: center;
-    }
-}
 </style>
 </head>
+
 <body>
-
-<!-- Навигация -->
-<nav class="navbar navbar-inverse">
+<header class="header">
   <div class="container">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">LinguaLab</a>
-    </div>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="#grammar">Grammar Magic</a></li>
-      <li><a href="#vocabulary">Word Bank</a></li>
-      <li><a href="#homework">Fun Homework</a></li>
-      <li><a href="#parents">Wiki Parents</a></li>
-    </ul>
+    <nav class="navbar navbar-inverse" role="navigation">
+      <div class="navbar-header">
+        <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav"> 
+          <span class="sr-only">Toggle navigation</span> 
+          <span class="icon-bar"></span> 
+          <span class="icon-bar"></span> 
+          <span class="icon-bar"></span> 
+        </button>
+        <a href="#" class="navbar-brand scroll-top logo animated bounceInLeft">
+          <img src="images/logo.png" alt="LinguaLab Logo" />
+        </a>
+      </div>
+      <div id="main-nav" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav" id="mainNav">
+          <li class="active"><a href="#home" class="scroll-link">Home</a></li>
+          <li><a href="#grammar" class="scroll-link">Grammar Magic</a></li>
+          <li><a href="#vocabulary" class="scroll-link">Word Bank</a></li>
+          <li><a href="#homework" class="scroll-link">Fun Homework</a></li>
+          <li><a href="#parents" class="scroll-link">Wiki Parents</a></li>
+          <li><a href="#events" class="scroll-link">Events</a></li>
+          <li><a href="#fees" class="scroll-link">Fees</a></li>
+          <li><a href="#team" class="scroll-link">Team</a></li>
+          <li><a href="#contact" class="scroll-link">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
   </div>
-</nav>
+</header>
 
-<!-- Баннер -->
-<img src="assets/img/banner.png" alt="LinguaLab Banner" class="banner">
-
-<!-- Hero -->
-<section class="section">
-    <h2>Welcome to LinguaLab!</h2>
-    <p>Interactive English learning made simple, fun, and engaging for students.</p>
-</section>
-
-<!-- Основные разделы -->
-<section class="section" id="grammar">
-    <div class="cards">
-        <div class="card">
-            <i class="fa fa-book"></i>
-            <h3>Grammar Magic</h3>
-            <p>Learn English grammar through interactive exercises.</p>
-        </div>
-        <div class="card" id="vocabulary">
-            <i class="fa fa-language"></i>
-            <h3>Word Bank</h3>
-            <p>Expand your vocabulary with games and activities.</p>
-        </div>
-        <div class="card" id="homework">
-            <i class="fa fa-gamepad"></i>
-            <h3>Fun Homework</h3>
-            <p>Practice your skills with quizzes and interactive tasks.</p>
-        </div>
-        <div class="card" id="parents">
-            <i class="fa fa-users"></i>
-            <h3>Wiki Parents</h3>
-            <p>Tips and resources for parents to support their children.</p>
-        </div>
+<!-- Banner -->
+<section id="home">
+  <div class="banner-container">
+    <div id="carousel" class="carousel slide carousel-fade" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carousel" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel" data-slide-to="1"></li>
+        <li data-target="#carousel" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="active item"><img src="images/banner-bg.jpg" alt="LinguaLab Banner" /></div>
+        <div class="item"><img src="images/banner-bg2.jpg" alt="LinguaLab Banner" /></div>
+        <div class="item"><img src="images/banner-bg3.jpg" alt="LinguaLab Banner" /></div>
+      </div>
+      <a class="carousel-control left" href="#carousel" data-slide="prev">&lsaquo;</a>
+      <a class="carousel-control right" href="#carousel" data-slide="next">&rsaquo;</a>
     </div>
+  </div>
+  
+  <div class="container hero-text2">        
+    <div class="col-md-9">
+      <h2>Welcome to LinguaLab!</h2>
+      <p>Interactive English learning for children made fun, simple, and engaging. Explore grammar, vocabulary, and interactive games!</p>   
+    </div>  
+    <div class="col-md-3">
+      <a class="btn btn-apply" href="#"><i class="fa fa-play-circle"></i> Get Started</a>  
+    </div>
+  </div>
 </section>
 
-<!-- Секция для родителей -->
-<section class="parents-section" id="parents">
-    <h2>For Parents</h2>
-    <p>Discover tips, guides, and resources to help your child learn English at home effectively.</p>
+<!-- Features Section -->
+<section id="grammar" class="page-section colord">
+  <div class="container">
+    <div class="row"> 
+      <div class="col-md-3 text-center">
+        <div class="box-item">
+          <i class="circle"><img src="images/5.png" alt="" /></i>
+          <h3>Grammar Magic</h3>
+          <p>Learn English grammar with fun exercises and interactive lessons.</p>
+        </div>
+      </div>
+      <div class="col-md-3 text-center">
+        <div class="box-item">
+          <i class="circle"><img src="images/1.png" alt="" /></i>
+          <h3>Word Bank</h3>
+          <p>Expand vocabulary through engaging games and activities.</p>
+        </div>
+      </div>
+      <div class="col-md-3 text-center">
+        <div class="box-item">
+          <i class="circle"><img src="images/2.png" alt="" /></i>
+          <h3>Fun Homework</h3>
+          <p>Practice skills with quizzes and interactive challenges.</p>
+        </div>
+      </div>
+      <div class="col-md-3 text-center" id="parents">
+        <div class="box-item">
+          <i class="circle"><img src="images/3.png" alt="" /></i>
+          <h3>Wiki Parents</h3>
+          <p>Resources and tips for parents to support children’s learning.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- Footer -->
+<!-- Events Section -->
+<section id="events" class="page-section">
+  <div class="container text-center">
+    <h2>Events</h2>
+    <p>Explore past events and interactive workshops at LinguaLab.</p>
+    <div class="row">
+      <div class="col-md-12">
+        <div id="portfolio">
+          <ul class="items list-unstyled clearfix animated fadeInRight showing">
+            <li class="item photography"> 
+              <figure class="effect-bubba">
+                <img src="images/work/1.jpg" alt="Event"/>
+                <figcaption>
+                  <h2>Storytelling Workshop</h2> 
+                  <a href="images/work/1.jpg" class="fancybox">View more</a> 
+                </figcaption>			
+              </figure> 
+            </li>
+            <li class="item branding"> 
+              <figure class="effect-bubba">
+                <img src="images/work/2.jpg" alt="Event"/>
+                <figcaption>
+                  <h2>English Games</h2> 
+                  <a href="images/work/2.jpg" class="fancybox">View more</a> 
+                </figcaption>			
+              </figure> 
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Fees Section -->
+<section id="fees" class="page-section">
+  <div class="container text-center">
+    <h2>Fees</h2>
+    <p>Choose the right plan for your child’s learning journey.</p>
+    <div class="row flat">
+      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <ul class="plan plan1">
+          <li class="plan-name">Starter</li>
+          <li class="plan-price"><strong>$29</strong>/month</li>
+          <li>Access to Grammar & Vocabulary</li>
+          <li>Interactive Games</li>
+          <li class="plan-action"><a href="#" class="btn btn-danger btn-lg">Signup</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <ul class="plan plan2 featured">
+          <li class="plan-name">Intermediate</li>
+          <li class="plan-price"><strong>$49</strong>/month</li>
+          <li>Full Grammar Courses</li>
+          <li>Weekly Quizzes</li>
+          <li class="plan-action"><a href="#" class="btn btn-danger btn-lg">Signup</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <ul class="plan plan3">
+          <li class="plan-name">Advanced</li>
+          <li class="plan-price"><strong>$99</strong>/month</li>
+          <li>All Courses + Games</li>
+          <li>Parent Dashboard</li>
+          <li class="plan-action"><a href="#" class="btn btn-danger btn-lg">Signup</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team Section -->
+<section id="team" class="page-section">
+  <div class="container text-center">
+    <h2>Our Team</h2>
+    <p>Meet the educators behind LinguaLab.</p>
+    <div class="row">
+      <div class="col-md-3 col-sm-6">
+        <div class="team-member pDark">
+          <div class="member-img"><img src="images/photo-1.jpg" class="img-responsive" alt=""></div>
+          <div class="team-title"><h4>Anna Smith</h4><span class="pos">Founder</span></div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="team-member pDark">
+          <div class="member-img"><img src="images/photo-2.jpg" class="img-responsive" alt=""></div>
+          <div class="team-title"><h4>Gaosheng</h4><span class="pos">Co-Founder</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="contact-parlex">
+  <div class="parlex-back">
+    <div class="container">
+      <h2 class="text-center">Contact Us</h2>
+      <form id="contactfrm">
+        <div class="col-sm-12">
+          <input type="text" class="form-control" placeholder="Name">
+          <input type="email" class="form-control" placeholder="Email">
+          <textarea class="form-control" placeholder="Message"></textarea>
+          <button class="btn btn-primary btn-lg">Send Message</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
 <footer>
-    &copy; 2026 LinguaLab. All Rights Reserved.
+<div class="container text-center">
+  <p>&copy; 2026 LinguaLab. All Rights Reserved.</p>
+</div>
 </footer>
 
+<a href="#top" class="topHome"><i class="fa fa-chevron-up fa-2x"></i></a>
+
+<script src="js/modernizr-latest.js"></script>
+<script src="js/jquery-1.8.2.min.js"></script> 
+<script src="js/bootstrap.min.js"></script> 
+<script src="js/jquery.isotope.min.js"></script> 
+<script src="js/fancybox/jquery.fancybox.pack.js"></script> 
+<script src="js/jquery.nav.js"></script> 
+<script src="js/jquery.fittext.js"></script> 
+<script src="js/waypoints.js"></script> 
+<script src="js/custom.js"></script> 
+<script src="js/owl-carousel/owl.carousel.js"></script>
 </body>
 </html>
