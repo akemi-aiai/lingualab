@@ -3,6 +3,12 @@ layout: default
 title: LinguaLab
 ---
 
+<img
+  src="assets/img/banner.png"
+  alt="LinguaLab Banner"
+  class="banner"
+/>
+
 <!-- Навигация -->
 <style>
 /* Навигация Flex */
@@ -32,11 +38,13 @@ title: LinguaLab
 }
 
 .banner {
-    width: 100%;
-    max-height: 350px;
-    object-fit: cover;
+    width: 100%;      /* растянуть на всю ширину */
+    max-height: 350px; /* ограничение по высоте */
+    object-fit: cover; /* обрезка и сохранение пропорций */
     display: block;
+    margin-bottom: 20px; /* расстояние под баннером */
 }
+  
 
 /* Медиазапрос для мобильных */
 @media (max-width: 600px) {
@@ -53,6 +61,7 @@ title: LinguaLab
   <a class="nav-button" href="exercises">Fun Homework</a>
   <a class="nav-button" href="parents">Wiki Parents</a>
 </div>
+
 
 # Welcome to LinguaLab!
 
