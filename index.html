@@ -3,7 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>LinguaLab — Interactive English for Kids</title>
+
+<!-- SEO + COPYRIGHT -->
+<meta name="author" content="LinguaLab">
+<meta name="copyright" content="LinguaLab 2026">
+<meta name="description" content="Interactive English learning platform for preschool children.">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -18,162 +24,136 @@
 }
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Inter', sans-serif;
 }
 
 body {
-  background: var(--bg);
-  color: var(--text-dark);
+  background:var(--bg);
+  color:var(--text-dark);
 }
 
-/* ===== NAVBAR ===== */
+/* NAV */
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 8%;
-  background: white;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-.logo {
-  font-weight: 700;
-  font-size: 22px;
-  color: var(--primary);
+  display:flex;
+  justify-content:space-between;
+  padding:20px 8%;
+  background:white;
+  box-shadow:0 4px 20px rgba(0,0,0,0.05);
 }
 
 .nav-links {
-  display: flex;
-  gap: 30px;
+  display:flex;
+  gap:30px;
 }
 
 .nav-links a {
-  text-decoration: none;
-  color: var(--text-dark);
-  font-weight: 500;
-  transition: 0.3s;
+  text-decoration:none;
+  color:var(--text-dark);
+  font-weight:500;
 }
 
 .nav-links a:hover {
-  color: var(--primary);
+  color:var(--primary);
 }
 
-/* ===== HERO ===== */
+/* HERO */
 .hero {
-  padding: 100px 8%;
-  text-align: center;
-  background: linear-gradient(135deg, #2563eb, #7c3aed);
-  color: white;
-}
-
-.hero h1 {
-  font-size: 48px;
-  margin-bottom: 20px;
-}
-
-.hero p {
-  font-size: 20px;
-  opacity: 0.9;
-  margin-bottom: 40px;
+  padding:100px 8%;
+  text-align:center;
+  background:linear-gradient(135deg,#2563eb,#7c3aed);
+  color:white;
 }
 
 .hero a {
-  background: var(--accent);
-  padding: 15px 35px;
-  font-size: 16px;
-  border-radius: 50px;
-  color: white;
-  text-decoration: none;
-  transition: 0.3s;
-  display: inline-block;
+  background:var(--accent);
+  padding:15px 35px;
+  border-radius:50px;
+  color:white;
+  text-decoration:none;
+  display:inline-block;
+  margin-top:30px;
 }
 
-.hero a:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-}
-
-/* ===== FEATURES ===== */
+/* FEATURES */
 .features {
-  padding: 100px 8%;
-  text-align: center;
-}
-
-.features h2 {
-  font-size: 36px;
-  margin-bottom: 60px;
+  padding:100px 8%;
+  text-align:center;
 }
 
 .cards {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:30px;
 }
 
 .card {
-  background: var(--card-bg);
-  padding: 30px 20px 40px 20px;
-  border-radius: 20px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.05);
-  transition: 0.3s;
-  text-decoration: none;
-  color: var(--text-dark);
-  display: block;
+  background:white;
+  padding:25px;
+  border-radius:20px;
+  box-shadow:0 10px 40px rgba(0,0,0,0.05);
+  transition:.3s;
 }
 
 .card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+  transform:translateY(-6px);
 }
 
 .card img {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-  border-radius: 16px;
+  width:100%;
+  height:160px;
+  object-fit:cover;
+  border-radius:16px;
 }
 
-.card h3 {
-  margin-top: 20px;
-  margin-bottom: 10px;
+.card a {
+  display:block;
+  margin-top:10px;
+  color:var(--primary);
+  font-weight:600;
+  text-decoration:none;
 }
 
-.card p {
-  color: var(--text-light);
-  font-size: 14px;
+.card a:hover {
+  text-decoration:underline;
 }
 
-/* ===== MOBILE ===== */
-@media (max-width: 992px) {
-  .cards {
-    grid-template-columns: repeat(2, 1fr);
-  }
+/* ABOUT */
+.about {
+  padding:100px 8%;
+  background:white;
+  text-align:center;
 }
 
-@media (max-width: 600px) {
+.about p {
+  max-width:700px;
+  margin:20px auto;
+  color:var(--text-light);
+}
 
-  .nav-links {
-    flex-direction: column;
-    gap: 15px;
-  }
+/* FOOTER */
+footer {
+  background:#0f172a;
+  color:white;
+  padding:40px;
+  text-align:center;
+  font-size:14px;
+}
 
-  .hero h1 {
-    font-size: 32px;
-  }
+footer a {
+  color:#93c5fd;
+  text-decoration:none;
+}
 
-  .cards {
-    grid-template-columns: 1fr;
-  }
+/* MOBILE */
+@media(max-width:992px){
+.cards{grid-template-columns:repeat(2,1fr);}
+}
 
-  .features {
-    padding: 60px 5%;
-  }
+@media(max-width:600px){
+.cards{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -182,20 +162,20 @@ body {
 
 <!-- NAV -->
 <div class="navbar">
-  <div class="logo">LinguaLab</div>
+  <strong>LinguaLab</strong>
   <div class="nav-links">
-    <a href="grammar.html">Grammar</a>
-    <a href="vocabulary.html">Word Bank</a>
-    <a href="homework.html">Homework</a>
-    <a href="parents.html">Parents</a>
+    <a href="grammar.md">Grammar</a>
+    <a href="vocabulary.md">Word Bank</a>
+    <a href="exercises.md">Homework</a>
+    <a href="parents.md">Parents</a>
   </div>
 </div>
 
 <!-- HERO -->
 <section class="hero">
-  <h1>Learn English the Fun Way </h1>
-  <p>Interactive digital English for children.</p>
-  <a href="grammar.html">Start Learning</a>
+  <h1>Learn English the Fun Way</h1>
+  <p>Interactive English for children</p>
+  <a href="grammar.md">Start Learning</a>
 </section>
 
 <!-- FEATURES -->
@@ -204,32 +184,62 @@ body {
 
   <div class="cards">
 
-    <a href="grammar.md" class="card">
+    <div class="card">
       <img src="assets/img/grammar.png" alt="Grammar Magic">
       <h3>Grammar Magic</h3>
       <p>Playful grammar activities designed for young learners.</p>
-    </a>
+      <a href="grammar.md">Open Grammar Magic →</a>
+    </div>
 
-    <a href="vocabulary.md" class="card">
+    <div class="card">
       <img src="assets/img/word.png" alt="Word Bank">
       <h3>Word Bank</h3>
       <p>Interactive vocabulary games and visual memory tools.</p>
-    </a>
+      <a href="vocabulary.html">Open Word Bank →</a>
+    </div>
 
-    <a href="exercises.md" class="card">
+    <div class="card">
       <img src="assets/img/hw.png" alt="Fun Homework">
       <h3>Fun Homework</h3>
       <p>Creative tasks children actually enjoy completing.</p>
-    </a>
+      <a href="exercises.md">Open Homework →</a>
+    </div>
 
-    <a href="parents.md" class="card">
+    <div class="card">
       <img src="assets/img/parents.png" alt="Parents Wiki">
       <h3>Parents Wiki</h3>
       <p>Guides and support materials for parents.</p>
-    </a>
+      <a href="parents.md">Open Parents Wiki →</a>
+    </div>
 
   </div>
 </section>
+
+<!-- ABOUT -->
+<section class="about">
+  <h2>About LinguaLab</h2>
+
+  <p>
+  LinguaLab combines digital education, playful interaction, and structured learning 
+  to help preschool children develop strong English foundations.
+  </p>
+</section>
+
+<!-- FOOTER + COPYRIGHT -->
+<footer>
+
+<p>© 2026 LinguaLab. All Rights Reserved.</p>
+
+<p>
+<a href="privacy.html">Privacy Policy</a> |
+<a href="terms.html">Terms of Use</a>
+</p>
+
+<p>
+All educational materials, design, and content are protected by copyright law. Unauthorized copying, distribution, or reproduction is prohibited. Some ideas and exercises are inspired by <strong>TOT Longman®</strong>. All content on this site is original. TOT Longman® is a registered trademark. We do not claim ownership of TOT Longman materials.
+</p>
+
+</footer>
 
 </body>
 </html>
