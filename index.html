@@ -1,199 +1,258 @@
-<!doctype html>
-<html lang="en-gb" class="no-js">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>LinguaLab - Interactive English Learning</title>
-<link rel="stylesheet" href="css/bootstrap.min.css" />
-<link rel="stylesheet" href="css/styles.css" />
-<link href="font/css/font-awesome.min.css" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LinguaLab — Interactive English for Kids</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* Цвета LinguaLab */
-.navbar-inverse { background-color: #1f4e79; border: none; }
-.navbar-nav li a { color: #fff !important; font-weight: bold; }
-.navbar-nav li a:hover { background-color: #163959 !important; }
+:root {
+  --primary: #2563eb;
+  --primary-dark: #1e40af;
+  --accent: #f97316;
+  --bg: #f8fafc;
+  --card-bg: #ffffff;
+  --text-dark: #1e293b;
+  --text-light: #64748b;
+}
 
-.banner-container img { width: 100%; height: 450px; object-fit: cover; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
 
-.hero-text2 h2 { color: #1f4e79; }
-.hero-text2 p { color: #555; }
+body {
+  background: var(--bg);
+  color: var(--text-dark);
+}
 
-.box-item { padding: 20px; margin: 20px 0; text-align: center; border-radius: 10px; background: #f0f8ff; transition: transform 0.3s; }
-.box-item:hover { transform: translateY(-5px); }
-.box-item i img { width: 60px; margin-bottom: 15px; }
-.box-item h3 { color: #1f4e79; }
-.box-item p { color: #555; font-size: 14px; }
+/* ===== NAVBAR ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 8%;
+  background: white;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
 
-.about-section { background-color: #ffeaa7; padding: 50px 20px; border-radius: 10px; text-align: center; }
-.about-section h2 { color: #d35400; }
+.logo {
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--primary);
+}
 
-footer { background-color: #1f4e79; color: white; padding: 30px 0; }
-footer a { color: #fff; text-decoration: none; }
+.nav-links {
+  display: flex;
+  gap: 30px;
+}
 
-.topHome { position: fixed; bottom: 30px; right: 30px; display: none; background: #1f4e79; color: #fff; padding: 10px 15px; border-radius: 50%; }
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-dark);
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--primary);
+}
+
+/* ===== HERO ===== */
+.hero {
+  padding: 100px 8%;
+  text-align: center;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: white;
+}
+
+.hero h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 20px;
+  opacity: 0.9;
+  margin-bottom: 40px;
+}
+
+.hero button {
+  background: var(--accent);
+  border: none;
+  padding: 15px 35px;
+  font-size: 16px;
+  border-radius: 50px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.hero button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* ===== FEATURES ===== */
+.features {
+  padding: 100px 8%;
+  text-align: center;
+}
+
+.features h2 {
+  font-size: 36px;
+  margin-bottom: 60px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.card {
+  background: var(--card-bg);
+  padding: 40px 20px;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+}
+
+.card h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.card p {
+  color: var(--text-light);
+  font-size: 14px;
+}
+
+/* ===== ABOUT ===== */
+.about {
+  padding: 100px 8%;
+  background: white;
+  text-align: center;
+}
+
+.about p {
+  max-width: 700px;
+  margin: auto;
+  margin-top: 20px;
+  color: var(--text-light);
+}
+
+/* ===== FOOTER ===== */
+footer {
+  padding: 40px;
+  text-align: center;
+  background: #0f172a;
+  color: white;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 992px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+
+  .nav-links {
+    display: none;
+  }
+
+  .hero h1 {
+    font-size: 32px;
+  }
+
+  .hero {
+    padding: 80px 5%;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .features, .about {
+    padding: 60px 5%;
+  }
+}
 </style>
 </head>
 
 <body>
-<header class="header">
-  <div class="container">
-    <nav class="navbar navbar-inverse" role="navigation">
-      <div class="navbar-header">
-        <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav"> 
-          <span class="sr-only">Toggle navigation</span> 
-          <span class="icon-bar"></span> 
-          <span class="icon-bar"></span> 
-          <span class="icon-bar"></span> 
-        </button>
-        <a href="#" class="navbar-brand scroll-top logo"><img src="images/logo.png" alt="LinguaLab Logo" /></a>
-      </div>
-      <div id="main-nav" class="collapse navbar-collapse">
-        <ul class="nav navbar-nav" id="mainNav">
-          <li class="active"><a href="#home" class="scroll-link">Home</a></li>
-          <li><a href="grammar.html" target="_blank">Grammar Magic</a></li>
-          <li><a href="vocabulary.html" target="_blank">Word Bank</a></li>
-          <li><a href="homework.html" target="_blank">Fun Homework</a></li>
-          <li><a href="#aboutMe" class="scroll-link">About Me</a></li>
-          <li><a href="#contact" class="scroll-link">Contact</a></li>
-        </ul>
-      </div>
-    </nav>
-  </div>
-</header>
 
-<!-- Banner -->
-<section id="home">
-  <div class="banner-container">
-    <img src="assets/img/banner.png alt="LinguaLab Banner" />
+<!-- NAV -->
+<div class="navbar">
+  <div class="logo">LinguaLab</div>
+  <div class="nav-links">
+    <a href="#">Grammar</a>
+    <a href="#">Word Bank</a>
+    <a href="#">Homework</a>
+    <a href="#">Parents</a>
   </div>
-  
-  <div class="container hero-text2">        
-    <div class="col-md-9">
-      <h2>Welcome to LinguaLab!</h2>
-      <p>Interactive English learning for children made fun, simple, and engaging. Explore grammar, vocabulary, and interactive games!</p>   
-    </div>  
-    <div class="col-md-3">
-      <a class="btn btn-apply" href="#aboutMe"><i class="fa fa-play-circle"></i> Learn More</a>  
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Learn English the Fun Way 🚀</h1>
+  <p>Interactive digital English for children aged 4–7.</p>
+  <button>Start Learning</button>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <h2>Explore LinguaLab</h2>
+  <div class="cards">
+
+    <div class="card">
+      <h3>Grammar Magic</h3>
+      <p>Playful grammar activities designed for young learners.</p>
     </div>
+
+    <div class="card">
+      <h3>Word Bank</h3>
+      <p>Interactive vocabulary games and visual memory tools.</p>
+    </div>
+
+    <div class="card">
+      <h3>Fun Homework</h3>
+      <p>Creative tasks children actually enjoy completing.</p>
+    </div>
+
+    <div class="card">
+      <h3>Parents Wiki</h3>
+      <p>Guides and support materials for parents.</p>
+    </div>
+
   </div>
 </section>
 
-<!-- Features Section -->
-<section id="interactive" class="page-section colord" style="padding:50px 0; background:#f0f8ff;">
-  <div class="container text-center">
-    <h2 style="color:#1f4e79; margin-bottom:40px;">Explore LinguaLab</h2>
-    <div class="row">
-      
-      <!-- Grammar Magic -->
-      <div class="col-md-3 col-sm-6">
-        <a href="grammar.html" target="_blank" class="interactive-card">
-          <img src="assets/img/grammar.png" alt="Grammar Magic" class="img-responsive">
-          <h3>Grammar Magic</h3>
-        </a>
-      </div>
-      
-      <!-- Word Bank -->
-      <div class="col-md-3 col-sm-6">
-        <a href="vocabulary.html" target="_blank" class="interactive-card">
-          <img src="assets/img/word.png" alt="Word Bank" class="img-responsive">
-          <h3>Word Bank</h3>
-        </a>
-      </div>
-      
-      <!-- Fun Homework -->
-      <div class="col-md-3 col-sm-6">
-        <a href="homework.html" target="_blank" class="interactive-card">
-          <img src="assets/img/hw.png" alt="Fun Homework" class="img-responsive">
-          <h3>Fun Homework</h3>
-        </a>
-      </div>
-      
-      <!-- Wiki Parents -->
-      <div class="col-md-3 col-sm-6">
-        <a href="parents.html" target="_blank" class="interactive-card">
-          <img src="assets/img/parents.png" alt="Wiki Parents" class="img-responsive">
-          <h3>Wiki Parents</h3>
-        </a>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<style>
-.interactive-card {
-  display: block;
-  text-decoration: none;
-  color: #1f4e79;
-  margin-bottom: 30px;
-  transition: transform 0.3s, box-shadow 0.3s;
-  border-radius: 15px;
-  overflow: hidden;
-}
-
-.interactive-card img {
-  width: 100%;
-  border-radius: 15px;
-}
-
-.interactive-card h3 {
-  margin-top: 10px;
-  font-weight: bold;
-}
-
-.interactive-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-}
-</style>
-
-
-<!-- About Me Section -->
-<section id="aboutMe" class="about-section">
-  <div class="container">
-    <h2>About Me / LinguaLab</h2>
-    <p>Here you can write anything about yourself or the LinguaLab project: your experience, goals, or story. This section replaces Events, Fees, and Team sections.</p>
-    <div class="row">
-      <div class="col-md-6">
-        <h3>Background</h3>
-        <p>Describe your background, teaching philosophy, or inspiration for LinguaLab.</p>
-      </div>
-      <div class="col-md-6">
-        <h3>Achievements</h3>
-        <p>List achievements, milestones, or any highlights that show expertise and credibility.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Contact Section -->
-<section id="contact" class="contact-parlex">
-  <div class="parlex-back">
-    <div class="container">
-      <h2 class="text-center">Contact Me</h2>
-      <form id="contactfrm">
-        <div class="col-sm-12">
-          <input type="text" class="form-control" placeholder="Name">
-          <input type="email" class="form-control" placeholder="Email">
-          <textarea class="form-control" placeholder="Message"></textarea>
-          <button class="btn btn-primary btn-lg">Send Message</button>
-        </div>
-      </form>
-    </div>
-  </div>
+<!-- ABOUT -->
+<section class="about">
+  <h2>About LinguaLab</h2>
+  <p>
+    LinguaLab combines digital education, playful interaction, and structured learning 
+    to help preschool children develop strong English foundations.
+  </p>
 </section>
 
 <footer>
-<div class="container text-center">
-  <p>&copy; 2026 LinguaLab. All Rights Reserved.</p>
-</div>
+  © 2026 LinguaLab — Modern EdTech Platform
 </footer>
 
-<a href="#top" class="topHome"><i class="fa fa-chevron-up fa-2x"></i></a>
-
-<script src="js/jquery-1.8.2.min.js"></script> 
-<script src="js/bootstrap.min.js"></script> 
-<script src="js/custom.js"></script>
 </body>
 </html>
