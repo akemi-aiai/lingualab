@@ -36,15 +36,20 @@ body {
 }
 
 /* NAV */
-/* Базовый navbar */
 .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 40px;
-  background-color: #1f4e79;
-  color: white;
+  padding: 12px 40px;
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  z-index: 1000;
 }
+
 
 /* Лого и название */
 .navbar-left {
@@ -54,7 +59,7 @@ body {
 }
 
 .nav-logo {
-  height: 36px; /* компактный размер логотипа */
+  height: 50px;
   width: auto;
 }
 
@@ -81,7 +86,11 @@ body {
 .navbar-right a:hover {
   background: #163959;
 }
-  
+
+.body {
+  padding-top: 80px; /* примерно высота navbar */
+}
+
 
 /* HERO */
 .hero {
