@@ -87,42 +87,54 @@ body {
   z-index: 1;
 }
 
-.cards {
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:30px;
-}
-
 .card {
-  background:white;
-  padding:25px;
-  border-radius:20px;
-  box-shadow:0 10px 40px rgba(0,0,0,0.05);
-  transition:.3s;
+  display: block; /* делает всю карточку кликабельной */
+  text-decoration: none; /* убирает подчеркивание */
+  color: #1f2937; /* основной цвет текста */
+  background: #ffffff;
+  padding: 30px 20px 40px 20px;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .card:hover {
-  transform:translateY(-6px);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.1);
 }
 
 .card img {
-  width:100%;
-  height:160px;
-  object-fit:cover;
-  border-radius:16px;
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 16px;
 }
 
-.card a {
-  display:block;
-  margin-top:10px;
-  color:var(--primary);
-  font-weight:600;
-  text-decoration:none;
+.card h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
-.card a:hover {
-  text-decoration:underline;
+.card p {
+  color: #64748b;
+  font-size: 14px;
 }
+
+/* декоративная подсказка внизу */
+.card-link {
+  display: inline-block;
+  margin-top: 15px;
+  color: #2563eb;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none; /* убираем подчеркивание для подсказки */
+}
+
+/* на случай, если браузер подсвечивает ссылки на hover */
+.card-link:hover {
+  text-decoration: underline; /* можно оставить только на hover */
+}
+
 
 /* ABOUT */
 .about {
@@ -232,10 +244,10 @@ footer a {
 <div class="navbar">
   <strong>LinguaLab</strong>
   <div class="nav-links">
-    <a href="grammar.md">Grammar</a>
-    <a href="vocabulary.md">Word Bank</a>
-    <a href="exercises.md">Homework</a>
-    <a href="parents.md">Parents</a>
+    <a href="grammar.html">Grammar</a>
+    <a href="vocabulary.html">Word Bank</a>
+    <a href="exercises.html">Homework</a>
+    <a href="parents.html">Parents</a>
   </div>
 </div>
 
