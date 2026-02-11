@@ -80,11 +80,12 @@ body {
 /* FEATURES */
 
 .features {
-  padding: 100px 8%;
-  margin-top: -40px; /* <-- вставь сюда */
+  padding: 120px 8% 60px 8%; 
+  margin-top: 0; 
   text-align: center;
+  position: relative; 
+  z-index: 1;
 }
-
 
 .cards {
   display:grid;
@@ -251,36 +252,37 @@ footer a {
 
   <div class="cards">
 
-    <div class="card">
+    <a href="grammar.md" class="card">
       <img src="assets/img/grammar.png" alt="Grammar Magic">
       <h3>Grammar Magic</h3>
       <p>Playful grammar activities designed for young learners.</p>
-      <a href="grammar.md">Open Grammar Magic →</a>
-    </div>
+      <span class="card-link">Open Grammar Magic →</span>
+    </a>
 
-    <div class="card">
+    <a href="vocabulary.md" class="card">
       <img src="assets/img/word.png" alt="Word Bank">
       <h3>Word Bank</h3>
       <p>Interactive vocabulary games and visual memory tools.</p>
-      <a href="vocabulary.md">Open Word Bank →</a>
-    </div>
+      <span class="card-link">Open Word Bank →</span>
+    </a>
 
-    <div class="card">
+    <a href="homework.md" class="card">
       <img src="assets/img/hw.png" alt="Fun Homework">
       <h3>Fun Homework</h3>
       <p>Creative tasks children actually enjoy completing.</p>
-      <a href="exercises.md">Open Homework →</a>
-    </div>
+      <span class="card-link">Open Homework →</span>
+    </a>
 
-    <div class="card">
+    <a href="parents.md" class="card">
       <img src="assets/img/parents.png" alt="Parents Wiki">
       <h3>Parents Wiki</h3>
       <p>Guides and support materials for parents.</p>
-      <a href="parents.md">Open Parents Wiki →</a>
-    </div>
+      <span class="card-link">Open Parents Wiki →</span>
+    </a>
 
   </div>
 </section>
+
 
 <!-- ABOUT -->
 <section class="about">
