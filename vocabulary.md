@@ -1,8 +1,3 @@
----
-layout: default
-title: Word Bank
----
-
 # Word Bank
 
 Welcome to your Word Bank! Here you can find all the key vocabulary for our units. Review, practice, and play with the words to make learning English fun and easy.
@@ -52,7 +47,7 @@ Welcome to your Word Bank! Here you can find all the key vocabulary for our unit
 </style>
 
 <div class="unit-grid">
-  <a class="unit-button unit1" href="/vocabulary/unit1.md">Unit 1</a>
+  <a class="unit-button unit1" href="/lingualab/vocabulary/unit1.html">Unit 1</a>
   <a class="unit-button unit2" href="/homework/unit2">Unit 2</a>
   <a class="unit-button unit3" href="/homework/unit3">Unit 3</a>
   <a class="unit-button unit4" href="/homework/unit4">Unit 4</a>
