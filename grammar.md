@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Grammar Magic — LinguaLab</title>
 
-  <meta name="description" content="Grammar Magic — bright grammar games with listening for kids 4–7." />
+  <meta name="description" content="Grammar Magic — bright grammar games with listening for kids 4–5." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -23,8 +23,7 @@
 
       --good:#16a34a;
       --bad:#ef4444;
-
-      --radius:18px;
+      --radius:20px;
     }
 
     *{ box-sizing:border-box; margin:0; padding:0; }
@@ -34,8 +33,9 @@
       background:var(--bg);
       color:var(--text);
       line-height:1.6;
-      padding-top:86px;
+      padding-top:86px; /* fixed navbar */
     }
+
     a{ color:inherit; text-decoration:none; }
     a:focus-visible, button:focus-visible{
       outline:3px solid rgba(37,99,235,.45);
@@ -43,7 +43,7 @@
       border-radius:14px;
     }
 
-    /* NAV (same vibe as main) */
+    /* NAV (like main) */
     .navbar{
       position: fixed;
       top:0; left:0;
@@ -109,13 +109,10 @@
     .hero::after{
       content:"";
       position:absolute;
-      inset:-40px -40px auto auto;
-      width:220px;
-      height:220px;
+      top:-80px; right:-80px;
+      width:240px; height:240px;
       border-radius:50%;
-      background:rgba(255,255,255,.12);
-      filter: blur(0px);
-      transform: rotate(10deg);
+      background:rgba(255,255,255,.14);
     }
     .hero-top{
       display:flex;
@@ -165,14 +162,12 @@
       align-items:center;
       justify-content:space-between;
     }
-
     .seg{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
       align-items:center;
     }
-
     .chip{
       border:0;
       cursor:pointer;
@@ -206,11 +201,9 @@
       gap:10px;
     }
     .mode-btn:hover{ transform:translateY(-2px); filter:brightness(.98); }
-    .mode-btn.active{
-      background:rgba(255,255,255,.30);
-    }
+    .mode-btn.active{ background:rgba(255,255,255,.30); }
 
-    /* Game panel */
+    /* Panel */
     .panel{
       margin-top:18px;
       background:#fff;
@@ -219,7 +212,6 @@
       box-shadow:0 6px 24px rgba(0,0,0,.06);
       border:1px solid rgba(15,23,42,.06);
     }
-
     .panel-top{
       display:flex;
       justify-content:space-between;
@@ -239,8 +231,8 @@
       margin-top:6px;
       color:var(--muted);
       font-size:14px;
+      font-weight:700;
     }
-
     .score{
       display:flex;
       gap:10px;
@@ -255,6 +247,26 @@
       padding:8px 12px;
       font-size:12px;
       white-space:nowrap;
+    }
+
+    /* Prompt bubble */
+    .prompt{
+      margin-top:14px;
+      font-size:18px;
+      font-weight:1000;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .bubble{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      background:#eef2ff;
+      padding:10px 12px;
+      border-radius:16px;
+      font-weight:1000;
     }
 
     /* Big cards for kids */
@@ -276,25 +288,15 @@
       text-align:left;
       position:relative;
       overflow:hidden;
-      min-height:130px;
+      min-height:140px;
     }
-    .big-card:hover{ transform:translateY(-3px); box-shadow:0 14px 28px rgba(0,0,0,.12); }
-    .big-card .emoji{
-      font-size:34px;
-      line-height:1;
-      margin-bottom:10px;
+    .big-card:hover{
+      transform:translateY(-3px);
+      box-shadow:0 14px 28px rgba(0,0,0,.12);
     }
-    .big-card .txt{
-      font-size:16px;
-      font-weight:1000;
-      line-height:1.2;
-    }
-    .big-card .hint{
-      margin-top:8px;
-      color:var(--muted);
-      font-size:13px;
-      font-weight:800;
-    }
+    .emoji{ font-size:36px; line-height:1; margin-bottom:10px; }
+    .txt{ font-size:18px; font-weight:1000; line-height:1.2; }
+    .hint{ margin-top:8px; color:var(--muted); font-size:13px; font-weight:800; }
 
     .big-card.good{
       background: rgba(22,163,74,.06);
@@ -305,34 +307,8 @@
       border-color: rgba(239,68,68,.22);
     }
 
-    /* Prompt */
-    .prompt{
-      margin-top:14px;
-      font-size:18px;
-      font-weight:1000;
-      display:flex;
-      gap:10px;
-      align-items:center;
-      flex-wrap:wrap;
-    }
-    .prompt .bubble{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      background: #eef2ff;
-      padding:10px 12px;
-      border-radius:16px;
-      font-weight:1000;
-    }
-
-    /* Build area */
-    .build-wrap{
-      margin-top:12px;
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:12px;
-    }
-
+    /* Build */
+    .build-wrap{ margin-top:12px; display:none; gap:12px; }
     .built{
       display:flex;
       gap:10px;
@@ -344,17 +320,9 @@
       align-items:center;
       background:#fafcff;
     }
-    .slot-hint{
-      color:var(--muted);
-      font-weight:900;
-      font-size:14px;
-    }
+    .slot-hint{ color:var(--muted); font-weight:900; font-size:14px; }
+    .tile-row{ display:flex; gap:10px; flex-wrap:wrap; }
 
-    .tile-row{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
     .tile{
       border:0;
       cursor:pointer;
@@ -368,7 +336,6 @@
       user-select:none;
     }
     .tile:hover{ transform:translateY(-2px); filter:brightness(.99); }
-
     .tile.small{
       padding:10px 12px;
       border-radius:14px;
@@ -382,7 +349,7 @@
       display:flex;
       gap:10px;
       flex-wrap:wrap;
-      margin-top:8px;
+      margin-top:10px;
     }
     .btn{
       border:0;
@@ -397,14 +364,13 @@
       gap:10px;
     }
     .btn:hover{ transform:translateY(-2px); filter:brightness(.98); }
-
     .btn-primary{ background:var(--primary); color:#fff; }
     .btn-accent{ background:var(--accent); color:#fff; }
     .btn-dark{ background:#0f172a; color:#fff; }
     .btn-light{ background:#f1f5f9; color:var(--text); }
 
     .feedback{
-      min-height:24px;
+      min-height:26px;
       font-weight:1000;
       margin-top:10px;
       font-size:16px;
@@ -412,24 +378,17 @@
     .feedback.good{ color:var(--good); }
     .feedback.bad{ color:var(--bad); }
 
-    /* Stars (reward) */
-    .stars{
-      display:inline-flex;
-      gap:6px;
-      align-items:center;
-      margin-left:6px;
-    }
+    /* Stars */
+    .stars{ display:inline-flex; gap:6px; align-items:center; margin-left:6px; }
     .star{
       width:18px; height:18px;
       border-radius:6px;
       background:#e2e8f0;
       display:inline-block;
-      position:relative;
-      overflow:hidden;
     }
     .star.on{
-      background: #fde047;
-      box-shadow: 0 6px 18px rgba(253,224,71,.45);
+      background:#fde047;
+      box-shadow:0 6px 18px rgba(253,224,71,.45);
       animation: pop .18s ease-out;
     }
     @keyframes pop{
@@ -437,7 +396,7 @@
       to{ transform: scale(1); }
     }
 
-    /* Footer (same vibe as main) */
+    /* Footer */
     footer{
       background:#0f172a;
       color:#e2e8f0;
@@ -480,7 +439,6 @@
   </header>
 
   <main class="wrap">
-    <!-- HERO -->
     <section class="hero" aria-label="Grammar Magic">
       <div class="hero-top">
         <div>
@@ -489,32 +447,31 @@
         </div>
 
         <div class="hero-badges" aria-label="Rewards">
-          <span class="badge">Listening ON</span>
-          <span class="badge">Stars: <span class="stars" id="stars"></span></span>
+          <span class="badge">🎧 Listening ON</span>
+          <span class="badge">⭐ Stars: <span class="stars" id="stars"></span></span>
         </div>
       </div>
 
       <div class="controls" aria-label="Controls">
         <div class="seg" aria-label="Topics">
-          <button class="chip active" data-topic="today">Today</button>
-          <button class="chip" data-topic="yesterday">Yesterday</button>
-          <button class="chip" data-topic="if"> If</button>
+          <button class="chip active" data-topic="today" type="button">🏠 Today</button>
+          <button class="chip" data-topic="yesterday" type="button">📖 Yesterday</button>
+          <button class="chip" data-topic="if" type="button">🌈 If</button>
         </div>
 
         <div class="seg" aria-label="Modes">
-          <button class="mode-btn active" data-mode="listen">Listen & Tap</button>
-          <button class="mode-btn" data-mode="choose">Choose</button>
-          <button class="mode-btn" data-mode="build">Build</button>
+          <button class="mode-btn active" data-mode="listen" type="button">🔊 Listen & Tap</button>
+          <button class="mode-btn" data-mode="choose" type="button">🎯 Choose</button>
+          <button class="mode-btn" data-mode="build" type="button">🪄 Build</button>
         </div>
       </div>
     </section>
 
-    <!-- GAME PANEL -->
     <section class="panel" aria-live="polite">
       <div class="panel-top">
         <div>
-          <h2 class="panel-title" id="panelTitle">Listen & Tap</h2>
-          <div class="panel-sub" id="panelSub">Tap a card — it will speak. Great for 4–5 years.</div>
+          <h2 class="panel-title" id="panelTitle">🔊 Listen & Tap</h2>
+          <div class="panel-sub" id="panelSub">Tap a card — it will speak.</div>
         </div>
         <div class="score">
           <span id="topicBadge">Topic: TODAY</span>
@@ -523,38 +480,32 @@
         </div>
       </div>
 
-      <!-- Prompt -->
       <div class="prompt" id="prompt">
-        <span class="bubble">Tap a card!</span>
+        <span class="bubble">👆 Tap a card!</span>
       </div>
 
-      <!-- LISTEN/CHOOSE cards -->
       <div class="cards" id="cards"></div>
 
-      <!-- BUILD mode UI -->
-      <div class="build-wrap" id="buildArea" style="display:none;">
+      <div class="build-wrap" id="buildArea">
         <div class="prompt">
           <span class="bubble">🪄 Build a sentence!</span>
-          <button class="btn btn-light" id="btnBuildListen" type="button">Listen</button>
+          <button class="btn btn-light" id="btnBuildListen" type="button">🔊 Listen</button>
         </div>
 
-        <div class="built" id="built">
-          <span class="slot-hint" id="builtHint">Tap tiles to add words here…</span>
-        </div>
-
+        <div class="built" id="built"></div>
         <div class="tile-row" id="tiles"></div>
 
         <div class="row-actions">
-          <button class="btn btn-accent" id="btnCheckBuild" type="button">Check</button>
-          <button class="btn btn-light" id="btnClearBuild" type="button">Clear</button>
-          <button class="btn btn-dark" id="btnNextBuild" type="button">Next</button>
+          <button class="btn btn-accent" id="btnCheckBuild" type="button">✅ Check</button>
+          <button class="btn btn-light" id="btnClearBuild" type="button">↺ Clear</button>
+          <button class="btn btn-dark" id="btnNextBuild" type="button">Next ▶</button>
         </div>
       </div>
 
       <div class="row-actions" id="commonActions">
-        <button class="btn btn-primary" id="btnListen" type="button">Listen</button>
-        <button class="btn btn-dark" id="btnNext" type="button">Next</button>
-        <button class="btn btn-light" id="btnReset" type="button">Reset</button>
+        <button class="btn btn-primary" id="btnListen" type="button">🔊 Listen</button>
+        <button class="btn btn-dark" id="btnNext" type="button">Next ▶</button>
+        <button class="btn btn-light" id="btnReset" type="button">Reset ↺</button>
       </div>
 
       <div class="feedback" id="feedback"></div>
@@ -579,100 +530,37 @@
   </footer>
 
   <script>
-    // ---------- Data (very simple for 4–5) ----------
+    // Kid-friendly grammar mini bank (simple, 4–5)
     const BANK = {
       today: [
-        {
-          emoji: "🐶",
-          say: "He goes to school.",
-          correct: "He goes to school.",
-          wrong: ["He go to school.", "He going to school."],
-          build: ["He","goes","to","school"],
-          tips: "goes (with he/she)"
-        },
-        {
-          emoji: "🍎",
-          say: "I like apples.",
-          correct: "I like apples.",
-          wrong: ["I likes apples.", "I liking apples."],
-          build: ["I","like","apples"],
-          tips: "I like…"
-        },
-        {
-          emoji: "🎈",
-          say: "She plays every day.",
-          correct: "She plays every day.",
-          wrong: ["She play every day.", "She playing every day."],
-          build: ["She","plays","every","day"],
-          tips: "plays (with she)"
-        }
+        { emoji:"🐶", say:"He goes to school.", correct:"He goes to school.", wrong:["He go to school.","He going to school."], build:["He","goes","to","school"], tip:"goes (he/she)" },
+        { emoji:"🍎", say:"I like apples.",      correct:"I like apples.",      wrong:["I likes apples.","I liking apples."],       build:["I","like","apples"], tip:"I like…" },
+        { emoji:"🎈", say:"She plays every day.",correct:"She plays every day.",wrong:["She play every day.","She playing every day."],build:["She","plays","every","day"], tip:"plays (she)" }
       ],
       yesterday: [
-        {
-          emoji: "⚽️",
-          say: "I played yesterday.",
-          correct: "I played yesterday.",
-          wrong: ["I play yesterday.", "I playing yesterday."],
-          build: ["I","played","yesterday"],
-          tips: "played = yesterday"
-        },
-        {
-          emoji: "🎬",
-          say: "We watched a movie.",
-          correct: "We watched a movie.",
-          wrong: ["We watch a movie.", "We watches a movie."],
-          build: ["We","watched","a","movie"],
-          tips: "watched (past)"
-        },
-        {
-          emoji: "🏠",
-          say: "He went home.",
-          correct: "He went home.",
-          wrong: ["He goed home.", "He goes home."],
-          build: ["He","went","home"],
-          tips: "went (not goed)"
-        }
+        { emoji:"⚽️", say:"I played yesterday.", correct:"I played yesterday.", wrong:["I play yesterday.","I playing yesterday."], build:["I","played","yesterday"], tip:"played = yesterday" },
+        { emoji:"🎬", say:"We watched a movie.",  correct:"We watched a movie.",  wrong:["We watch a movie.","We watches a movie."], build:["We","watched","a","movie"], tip:"watched (past)" },
+        { emoji:"🏠", say:"He went home.",        correct:"He went home.",        wrong:["He goed home.","He goes home."],          build:["He","went","home"], tip:"went (not goed)" }
       ],
       if: [
-        {
-          emoji: "☔️",
-          say: "If it rains, I take an umbrella.",
-          correct: "If it rains, I take an umbrella.",
-          wrong: ["If it rains, I takes an umbrella.", "If it rains, I took an umbrella."],
-          build: ["If","it","rains,","I","take","an","umbrella"],
-          tips: "If… I take…"
-        },
-        {
-          emoji: "😴",
-          say: "If you are tired, you sleep.",
-          correct: "If you are tired, you sleep.",
-          wrong: ["If you are tired, you sleeps.", "If you are tired, you sleeping."],
-          build: ["If","you","are","tired,","you","sleep"],
-          tips: "are (you are)"
-        },
-        {
-          emoji: "🍪",
-          say: "If I am hungry, I eat.",
-          correct: "If I am hungry, I eat.",
-          wrong: ["If I hungry, I eat.", "If I am hungry, I eats."],
-          build: ["If","I","am","hungry,","I","eat"],
-          tips: "I am…"
-        }
+        { emoji:"☔️", say:"If it rains, I take an umbrella.", correct:"If it rains, I take an umbrella.", wrong:["If it rains, I takes an umbrella.","If it rains, I took an umbrella."], build:["If","it","rains,","I","take","an","umbrella"], tip:"If… I take…" },
+        { emoji:"😴", say:"If you are tired, you sleep.",      correct:"If you are tired, you sleep.",      wrong:["If you are tired, you sleeps.","If you are tired, you sleeping."],     build:["If","you","are","tired,","you","sleep"], tip:"you are…" },
+        { emoji:"🍪", say:"If I am hungry, I eat.",            correct:"If I am hungry, I eat.",            wrong:["If I hungry, I eat.","If I am hungry, I eats."],                     build:["If","I","am","hungry,","I","eat"], tip:"I am…" }
       ]
     };
 
-    // ---------- State ----------
+    // State
     let topic = "today";
     let mode = "listen"; // listen | choose | build
     let score = 0;
     let streak = 0;
-    let stars = 0;       // reward (0..5)
+    let stars = 0;
     let current = null;
 
     // Build state
     let builtWords = [];
 
-    // ---------- Elements ----------
+    // Elements
     const elTopicBadge = document.getElementById("topicBadge");
     const elScore = document.getElementById("scoreBadge");
     const elStreak = document.getElementById("streakBadge");
@@ -683,21 +571,20 @@
     const elFeedback = document.getElementById("feedback");
     const elStars = document.getElementById("stars");
 
+    const elBuildArea = document.getElementById("buildArea");
+    const elBuilt = document.getElementById("built");
+    const elTiles = document.getElementById("tiles");
+
     const elCommonActions = document.getElementById("commonActions");
     const btnListen = document.getElementById("btnListen");
     const btnNext = document.getElementById("btnNext");
     const btnReset = document.getElementById("btnReset");
 
-    const elBuildArea = document.getElementById("buildArea");
-    const elBuilt = document.getElementById("built");
-    const elBuiltHint = document.getElementById("builtHint");
-    const elTiles = document.getElementById("tiles");
     const btnBuildListen = document.getElementById("btnBuildListen");
     const btnCheckBuild = document.getElementById("btnCheckBuild");
     const btnClearBuild = document.getElementById("btnClearBuild");
     const btnNextBuild = document.getElementById("btnNextBuild");
 
-    // ---------- Helpers ----------
     function pick(){
       const arr = BANK[topic];
       return arr[Math.floor(Math.random() * arr.length)];
@@ -707,7 +594,7 @@
       try{
         const u = new SpeechSynthesisUtterance(text);
         u.lang = "en-US";
-        u.rate = 0.92; // a bit slower for kids
+        u.rate = 0.92; // slower for kids
         window.speechSynthesis.cancel();
         window.speechSynthesis.speak(u);
       }catch(e){}
@@ -724,16 +611,6 @@
       elFeedback.className = "feedback " + (kind || "");
     }
 
-    function addStar(){
-      stars = Math.min(5, stars + 1);
-      renderStars();
-    }
-
-    function resetStars(){
-      stars = 0;
-      renderStars();
-    }
-
     function renderStars(){
       elStars.innerHTML = "";
       for(let i=0;i<5;i++){
@@ -743,52 +620,62 @@
       }
     }
 
-    // ---------- Render modes ----------
+    function addStar(){
+      stars = Math.min(5, stars + 1);
+      renderStars();
+    }
+
+    function resetAll(){
+      score = 0;
+      streak = 0;
+      stars = 0;
+      renderStars();
+      setBadges();
+      setFeedback("", "");
+      render();
+    }
+
     function render(){
+      current = pick();
       setBadges();
       setFeedback("", "");
 
-      current = pick();
-
-      // shared listen button always reads "correct" version
+      // Always keep listening available
       btnListen.onclick = () => speak(current.say);
 
       if(mode === "listen"){
-        elTitle.textContent = "Listen & Tap";
-        elSub.textContent = "Tap a card — it will speak. No pressure, just listening!";
+        elTitle.textContent = "🔊 Listen & Tap";
+        elSub.textContent = "Tap a card — it will speak.";
+        elPrompt.innerHTML = `<span class="bubble">👆 Tap a card!</span> <span class="bubble">💡 ${current.tip}</span>`;
         elBuildArea.style.display = "none";
         elCommonActions.style.display = "flex";
-
-        elPrompt.innerHTML = `<span class="bubble"> Tap a card!</span> <span class="bubble"> ${current.tips}</span>`;
         renderListenCards();
       }
 
       if(mode === "choose"){
-        elTitle.textContent = "Choose the Right One";
-        elSub.textContent = "Pick the correct sentence. Win stars!";
+        elTitle.textContent = "🎯 Choose the Right One";
+        elSub.textContent = "Pick the correct sentence. Win stars ⭐";
+        elPrompt.innerHTML = `<span class="bubble">${current.emoji} Choose!</span> <span class="bubble">💡 ${current.tip}</span>`;
         elBuildArea.style.display = "none";
         elCommonActions.style.display = "flex";
-
-        elPrompt.innerHTML = `<span class="bubble">${current.emoji} Choose!</span> <span class="bubble">💡 ${current.tips}</span>`;
         renderChooseCards();
       }
 
       if(mode === "build"){
-        elTitle.textContent = "Build a Sentence";
-        elSub.textContent = "Tap tiles to build. Then check";
+        elTitle.textContent = "🪄 Build a Sentence";
+        elSub.textContent = "Tap tiles to build. Then check ✅";
+        elPrompt.innerHTML = `<span class="bubble">${current.emoji} Build!</span> <span class="bubble">💡 ${current.tip}</span>`;
         elCommonActions.style.display = "none";
         elBuildArea.style.display = "grid";
-
-        elPrompt.innerHTML = ""; // build has its own prompt
         startBuild();
       }
     }
 
     function renderListenCards(){
       elCards.innerHTML = "";
-      // In listen mode, cards are the correct sentence + two simple variants (still clickable)
+      // For listening: show correct + two variants
       const texts = [current.correct, ...current.wrong];
-      // Keep order stable for small kids: correct in the middle
+      // Keep it simple: correct in middle
       const ordered = [texts[1], texts[0], texts[2]];
 
       ordered.forEach((t)=>{
@@ -798,11 +685,14 @@
         card.innerHTML = `
           <div class="emoji">${current.emoji}</div>
           <div class="txt">${t}</div>
-          <div class="hint">Tap to listen</div>
+          <div class="hint">Tap to listen 🔊</div>
         `;
         card.onclick = () => {
           speak(t);
-          card.animate([{transform:"scale(1)"},{transform:"scale(1.03)"},{transform:"scale(1)"}], {duration:180});
+          card.animate(
+            [{transform:"scale(1)"},{transform:"scale(1.03)"},{transform:"scale(1)"}],
+            {duration:180}
+          );
         };
         elCards.appendChild(card);
       });
@@ -811,27 +701,22 @@
     function renderChooseCards(){
       elCards.innerHTML = "";
 
-      // 3 options: 1 correct + 2 wrong
-      const options = [current.correct, ...current.wrong];
-
-      // Shuffle a bit (but not too chaotic)
-      const shuffled = options
+      const options = [current.correct, ...current.wrong]
         .map(v => ({ v, r: Math.random() }))
         .sort((a,b)=>a.r-b.r)
         .map(x=>x.v);
 
-      shuffled.forEach((t)=>{
+      options.forEach((t)=>{
         const card = document.createElement("button");
         card.type = "button";
         card.className = "big-card";
         card.innerHTML = `
           <div class="emoji">${current.emoji}</div>
           <div class="txt">${t}</div>
-          <div class="hint">Tap one</div>
+          <div class="hint">Tap one ✅</div>
         `;
 
         card.onclick = () => {
-          // lock
           [...elCards.querySelectorAll("button")].forEach(b=> b.disabled = true);
 
           if(t === current.correct){
@@ -839,15 +724,13 @@
             score += 1;
             streak += 1;
             addStar();
-            setFeedback("Great job!", "good");
+            setFeedback("✅ Yay! Great job! ⭐", "good");
             speak(current.correct);
           }else{
             card.classList.add("bad");
             streak = 0;
-            setFeedback("Oops! Listen and try again.", "bad");
+            setFeedback("❌ Oops! Listen and try again.", "bad");
             speak(current.correct);
-
-            // show correct one too
             [...elCards.querySelectorAll("button")].forEach(b=>{
               const txt = b.querySelector(".txt")?.textContent || "";
               if(txt === current.correct) b.classList.add("good");
@@ -861,22 +744,46 @@
     }
 
     function startBuild(){
-      // new build question
-      current = pick();
       builtWords = [];
-
       btnBuildListen.onclick = () => speak(current.say);
 
       renderBuilt();
       renderTiles();
 
-      setBadges();
-      setFeedback("", "");
+      btnClearBuild.onclick = () => {
+        builtWords = [];
+        renderBuilt();
+        setFeedback("", "");
+      };
+
+      btnNextBuild.onclick = () => {
+        current = pick();
+        render();
+      };
+
+      btnCheckBuild.onclick = () => {
+        const built = builtWords.join(" ").replace(/\s+/g," ").trim();
+        const target = current.build.join(" ").replace(/\s+/g," ").trim();
+
+        if(built === target){
+          score += 1;
+          streak += 1;
+          addStar();
+          setBadges();
+          setFeedback("✅ Perfect! ⭐", "good");
+          speak(current.say);
+          elBuilt.animate([{transform:"scale(1)"},{transform:"scale(1.03)"},{transform:"scale(1)"}], {duration:200});
+        }else{
+          streak = 0;
+          setBadges();
+          setFeedback("❌ Not yet. Tap 🔊 and try again!", "bad");
+          speak(current.say);
+        }
+      };
     }
 
     function renderBuilt(){
       elBuilt.innerHTML = "";
-
       if(builtWords.length === 0){
         const hint = document.createElement("span");
         hint.className = "slot-hint";
@@ -902,7 +809,6 @@
     function renderTiles(){
       elTiles.innerHTML = "";
 
-      // create tiles in random order (fun)
       const tiles = current.build
         .map(v => ({ v, r: Math.random() }))
         .sort((a,b)=>a.r-b.r)
@@ -919,38 +825,8 @@
         };
         elTiles.appendChild(t);
       });
-
-      btnClearBuild.onclick = () => {
-        builtWords = [];
-        renderBuilt();
-        setFeedback("", "");
-      };
-
-      btnNextBuild.onclick = () => startBuild();
-
-      btnCheckBuild.onclick = () => {
-        const built = builtWords.join(" ").replace(/\s+/g," ").trim();
-        const target = current.build.join(" ").replace(/\s+/g," ").trim();
-
-        if(built === target){
-          score += 1;
-          streak += 1;
-          addStar();
-          setBadges();
-          setFeedback("Perfect!", "good");
-          speak(current.say);
-          // tiny celebration
-          elBuilt.animate([{transform:"scale(1)"},{transform:"scale(1.03)"},{transform:"scale(1)"}], {duration:200});
-        }else{
-          streak = 0;
-          setBadges();
-          setFeedback("❌ Not yet. Tap 🔊 and try again!", "bad");
-          speak(current.say);
-        }
-      };
     }
 
-    // ---------- Mode/Topic switching ----------
     function setTopic(newTopic){
       topic = newTopic;
       document.querySelectorAll(".chip").forEach(b=>{
@@ -967,26 +843,18 @@
       render();
     }
 
-    // Chips
+    // Wire up buttons
     document.querySelectorAll(".chip").forEach(btn=>{
       btn.addEventListener("click", ()=> setTopic(btn.dataset.topic));
     });
-
-    // Modes
     document.querySelectorAll(".mode-btn").forEach(btn=>{
       btn.addEventListener("click", ()=> setMode(btn.dataset.mode));
     });
 
-    // Common actions
     btnNext.addEventListener("click", ()=> render());
-    btnReset.addEventListener("click", ()=>{
-      score = 0; streak = 0;
-      resetStars();
-      setBadges();
-      render();
-    });
+    btnReset.addEventListener("click", ()=> resetAll());
 
-    // ---------- Init ----------
+    // Init
     renderStars();
     setTopic("today");
     setMode("listen");
