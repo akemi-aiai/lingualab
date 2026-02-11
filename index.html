@@ -78,10 +78,13 @@ body {
 }
 
 /* FEATURES */
+
 .features {
-  padding:100px 8%;
-  text-align:center;
+  padding: 100px 8%;
+  margin-top: -40px; /* <-- вставь сюда */
+  text-align: center;
 }
+
 
 .cards {
   display:grid;
@@ -147,13 +150,77 @@ footer a {
   text-decoration:none;
 }
 
-/* MOBILE */
-@media(max-width:992px){
-.cards{grid-template-columns:repeat(2,1fr);}
+
+/* ===== MOBILE ===== */
+@media (max-width: 992px) {
+  /* Сетки карточек — 2 колонки */
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
 }
 
-@media(max-width:600px){
-.cards{grid-template-columns:1fr;}
+@media (max-width: 600px) {
+  /* Навбар в колонку */
+  .nav-links {
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+
+  /* Hero */
+  .hero {
+    padding: 60px 5%;
+  }
+
+  .hero h1 {
+    font-size: 28px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  .hero a {
+    padding: 12px 25px;
+    font-size: 14px;
+  }
+
+  /* Features / карточки */
+  .features {
+    padding: 60px 5%;
+    margin-top: -20px; /* блок Explore LinguaLab поднят */
+  }
+
+  .cards {
+    grid-template-columns: 1fr; /* 1 колонка на телефоне */
+  }
+
+  .card h3 {
+    font-size: 18px;
+  }
+
+  .card p {
+    font-size: 13px;
+  }
+
+  .card img {
+    height: 140px; /* меньше высота для мобильных */
+  }
+
+  /* About */
+  .about {
+    padding: 60px 5%;
+  }
+
+  .about p {
+    font-size: 16px;
+  }
+
+  /* Footer */
+  .legal-footer {
+    padding: 30px 10px;
+  }
 }
 </style>
 </head>
@@ -195,7 +262,7 @@ footer a {
       <img src="assets/img/word.png" alt="Word Bank">
       <h3>Word Bank</h3>
       <p>Interactive vocabulary games and visual memory tools.</p>
-      <a href="vocabulary.html">Open Word Bank →</a>
+      <a href="vocabulary.md">Open Word Bank →</a>
     </div>
 
     <div class="card">
