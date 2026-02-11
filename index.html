@@ -9,7 +9,7 @@
 <!-- SEO + COPYRIGHT -->
 <meta name="author" content="LinguaLab">
 <meta name="copyright" content="LinguaLab 2026">
-<meta name="description" content="Interactive English learning platform for preschool children.">
+<meta name="description" content="Welcome to LinguaLab! LinguaLab is an interactive website for learning English. The goal of this project is to make learning English simple, engaging, and enjoyable for students.">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -36,28 +36,52 @@ body {
 }
 
 /* NAV */
+/* Базовый navbar */
 .navbar {
-  display:flex;
-  justify-content:space-between;
-  padding:20px 8%;
-  background:white;
-  box-shadow:0 4px 20px rgba(0,0,0,0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px;
+  background-color: #1f4e79;
+  color: white;
 }
 
-.nav-links {
-  display:flex;
-  gap:30px;
+/* Лого и название */
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.nav-links a {
-  text-decoration:none;
-  color:var(--text-dark);
-  font-weight:500;
+.nav-logo {
+  height: 36px; /* компактный размер логотипа */
+  width: auto;
 }
 
-.nav-links a:hover {
-  color:var(--primary);
+.nav-title {
+  font-size: 20px;
+  font-weight: bold;
 }
+
+/* Навигация */
+.navbar-right {
+  display: flex;
+  gap: 18px;
+}
+
+.navbar-right a {
+  color: white;
+  text-decoration: none; /* убираем подчеркивание */
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+
+.navbar-right a:hover {
+  background: #163959;
+}
+  
 
 /* HERO */
 .hero {
@@ -247,20 +271,20 @@ footer a {
 <body>
 
 <!-- NAV -->
-<div class="navbar">
-
-  <div class="logo">
-    <img src="assets/img/logo.png" alt="LinguaLab Logo">
-    <span>LinguaLab</span>
+<header class="navbar">
+  <div class="navbar-left">
+    <img src="assets/img/logo.png" alt="LinguaLab Logo" class="nav-logo">
+    <span class="nav-title">LinguaLab</span>
   </div>
 
-  <div class="nav-links">
-    <a href="grammar.html">Grammar</a>
+  <nav class="navbar-right">
+    <a href="index.html">Home</a>
+    <a href="grammar.html">Grammar Magic</a>
     <a href="vocabulary.html">Word Bank</a>
-    <a href="exercises.html">Homework</a>
-    <a href="parents.html">Parents</a>
-  </div>
-</div>
+    <a href="exercises.html">Fun Homework</a>
+    <a href="parents.html">Wiki Parents</a>
+  </nav>
+</header>
 
 
 <!-- HERO -->
