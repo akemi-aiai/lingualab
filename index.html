@@ -119,57 +119,80 @@
   </footer>
 
   <script>
-    // Восстановление ключа при загрузке
+    let cooldownActive = false;
+
     window.onload = () => {
         const saved = localStorage.getItem('ll_magic_key');
         if (saved) document.getElementById('apiKey').value = saved;
     };
 
     async function generateAiTask() {
-      const apiKey = document.getElementById('apiKey').value.trim();
-      const animal = document.getElementById('animal').value;
-      const result = document.getElementById('ai-result');
-      const btn = document.getElementById('aiBtn');
+        if (cooldownActive) return;
 
-      if (!apiKey) { alert("Please enter API Key!"); return; }
-      localStorage.setItem('ll_magic_key', apiKey);
+        const apiKey = document.getElementById('apiKey').value.trim();
+        const animal = document.getElementById('animal').value;
+        const result = document.getElementById('ai-result');
+        const btn = document.getElementById('aiBtn');
 
-      btn.disabled = true;
-      btn.innerText = "Connecting...";
-      result.style.display = "none";
+        if (!apiKey) { alert("Please enter API Key!"); return; }
+        localStorage.setItem('ll_magic_key', apiKey);
 
-      // Прямой путь к модели gemini-2.0-flash, которую мы нашли в твоем списке
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+        btn.disabled = true;
+        btn.innerText = "Connecting...";
+        result.style.display = "none";
 
-      try {
-        const response = await fetch(url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            contents: [{ parts: [{ text: `Create a 1-sentence English task for a 5yo about a ${animal}. No emojis.` }] }]
-          })
-        });
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
-        const data = await response.json();
-        
-        if (response.status === 429) {
-          result.innerText = "AI is resting. Wait 60 seconds...";
-          result.style.display = "block";
-        } else if (data.candidates && data.candidates[0].content) {
-          result.innerText = data.candidates[0].content.parts[0].text;
-          result.style.display = "block";
-        } else {
-          result.innerText = "Error: " + (data.error ? data.error.message : "Try again");
-          result.style.display = "block";
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    contents: [{ parts: [{ text: `Short English task for 5yo about ${animal}.` }] }]
+                })
+            });
+
+            const data = await response.json();
+            
+            if (response.status === 429) {
+                // Если лимит исчерпан - запускаем таймер
+                startCooldown(btn, result);
+            } else if (data.candidates) {
+                result.innerText = data.candidates[0].content.parts[0].text;
+                result.style.display = "block";
+                btn.disabled = false;
+                btn.innerText = "Generate Task";
+            } else {
+                result.innerText = "Error: " + (data.error ? data.error.message : "Try again later");
+                result.style.display = "block";
+                btn.disabled = false;
+                btn.innerText = "Generate Task";
+            }
+        } catch (e) {
+            result.innerText = "Check your VPN or Internet connection.";
+            result.style.display = "block";
+            btn.disabled = false;
         }
-      } catch (e) {
-        result.innerText = "Connection error. Check your internet.";
-        result.style.display = "block";
-      } finally {
-        btn.disabled = false;
-        btn.innerText = "Generate Task";
-      }
     }
-  </script>
+
+    function startCooldown(button, display) {
+        cooldownActive = true;
+        let sec = 60;
+        display.style.display = "block";
+        display.style.color = "#f97316";
+        display.innerText = "Daily limit reached for this key. Please use a NEW API Key or wait.";
+        
+        const timer = setInterval(() => {
+            sec--;
+            button.innerText = `Wait ${sec}s...`;
+            if (sec <= 0) {
+                clearInterval(timer);
+                cooldownActive = false;
+                button.disabled = false;
+                button.innerText = "Generate Task";
+            }
+        }, 1000);
+    }
+</script>
 </body>
 </html>
