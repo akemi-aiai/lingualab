@@ -18,7 +18,7 @@
       --text: #0f172a;
       --muted: #64748b;
       --navy: #1f4e79;
-      --radius: 16px;
+      --radius: 20px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -27,110 +27,121 @@
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
-      padding-top: 86px;
+      padding-top: 70px;
     }
 
-    /* NAVBAR (как на главной) */
+    /* NAVBAR С ЛОГОТИПОМ */
     .navbar {
       position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 12px 40px; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,.05);
+      padding: 10px 30px; background: #fff; box-shadow: 0 2px 15px rgba(0,0,0,.05);
     }
-    .nav-title { font-size: 20px; font-weight: 800; color: var(--navy); }
-    .back-home { color: var(--navy); font-weight: 600; text-decoration: none; border: 2px solid var(--navy); padding: 6px 16px; border-radius: 10px; transition: 0.2s; }
-    .back-home:hover { background: var(--navy); color: #fff; }
+    .nav-left { display: flex; align-items: center; gap: 8px; }
+    .nav-logo-circle { width: 35px; height: 35px; background: var(--primary); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 20px; }
+    .nav-title { font-size: 18px; font-weight: 800; color: var(--navy); letter-spacing: -0.5px; }
+    .back-home { color: var(--primary); font-weight: 700; text-decoration: none; font-size: 14px; transition: 0.2s; border: 1.5px solid var(--primary); padding: 5px 12px; border-radius: 10px; }
+    .back-home:hover { background: var(--primary); color: white; }
 
-    /* HERO SECTION */
-    .hero { padding: 60px 8% 40px; text-align: center; background: linear-gradient(135deg, #2563eb, #7c3aed); color: #fff; }
-    .hero h1 { font-size: clamp(24px, 4vw, 36px); margin-bottom: 10px; }
+    /* ОБНОВЛЕННАЯ ФИОЛЕТОВАЯ ПЛАШКА */
+    .hero { 
+      padding: 30px 5%; 
+      text-align: center; 
+      background: linear-gradient(135deg, #4f46e5, #7c3aed); 
+      color: #fff;
+      border-bottom-left-radius: 30px;
+      border-bottom-right-radius: 30px;
+    }
+    .hero h1 { font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+    .hero p { font-size: 14px; opacity: 0.9; }
 
-    /* GAME AREA */
-    .main-container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+    .main-container { max-width: 800px; margin: 0 auto; padding: 20px; }
 
+    /* КАРТОЧКА ЗАДАНИЯ */
     .task-card {
       background: var(--card-bg); border-radius: var(--radius);
-      padding: 40px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-      margin-bottom: 40px; min-height: 300px; display: flex; flex-direction: column; justify-content: center;
+      padding: 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      margin-bottom: 30px; transition: 0.3s;
+      border: 1px solid #e2e8f0;
     }
+    #question { font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 25px; min-height: 50px; }
 
-    .task-image { width: 120px; height: 120px; margin: 0 auto 20px; background: #f1f5f9; border-radius: 50%; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-    .task-image img { width: 100%; height: 100%; object-fit: cover; }
-
-    #question { font-size: 22px; font-weight: 700; color: var(--navy); margin-bottom: 25px; }
-
-    /* КНОПКИ ОТВЕТОВ */
-    .answers-grid { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+    .answers-grid { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
     .answer-btn {
-      padding: 16px 40px; border-radius: 999px; border: 3px solid var(--primary);
-      background: #fff; color: var(--primary); font-size: 18px; font-weight: 800;
-      cursor: pointer; transition: 0.2s; min-width: 140px;
+      padding: 14px 30px; border-radius: 15px; border: 2px solid #e2e8f0;
+      background: #fff; color: var(--navy); font-size: 17px; font-weight: 700;
+      cursor: pointer; transition: 0.2s; min-width: 120px;
     }
-    .answer-btn:hover { background: var(--primary); color: #fff; transform: translateY(-2px); }
-    .answer-btn.correct { background: #22c55e; border-color: #22c55e; color: #fff; }
-    .answer-btn.wrong { background: #ef4444; border-color: #ef4444; color: #fff; }
+    .answer-btn:hover { border-color: var(--primary); background: #f0f7ff; }
+    .answer-btn.correct { background: #22c55e; border-color: #22c55e; color: #fff; transform: scale(1.05); }
+    .answer-btn.wrong { background: #ef4444; border-color: #ef4444; color: #fff; animation: shake 0.3s; }
 
-    /* ТЕМЫ (Сетка карточек как на главной) */
-    .topic-title { text-align: center; margin-bottom: 20px; font-weight: 800; color: var(--navy); }
-    .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+    /* СЕТКА ТЕМ */
+    .topic-title { text-align: center; margin: 30px 0 15px; font-size: 18px; font-weight: 800; color: var(--navy); text-transform: uppercase; letter-spacing: 1px; }
+    .cards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
     
     .card-item {
-      background: var(--card-bg); padding: 25px; border-radius: var(--radius);
-      text-align: center; text-decoration: none; cursor: pointer;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s; border: 2px solid transparent;
+      background: var(--card-bg); padding: 15px; border-radius: 15px;
+      text-align: center; cursor: pointer; border: 2px solid transparent;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.04); transition: 0.2s;
     }
-    .card-item:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 12px 30px rgba(0,0,0,0.1); }
-    .card-item h3 { font-size: 18px; color: var(--navy); margin-bottom: 8px; }
-    .card-item p { font-size: 14px; color: var(--muted); }
+    .card-item:hover { border-color: var(--primary); transform: translateY(-3px); }
+    .card-item.active { background: var(--navy); border-color: var(--navy); }
+    .card-item.active h3, .card-item.active p { color: white; }
+    .card-item h3 { font-size: 15px; color: var(--navy); margin-bottom: 4px; }
+    .card-item p { font-size: 12px; color: var(--muted); }
 
-    /* MOBILE ADAPTATION */
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+
     @media (max-width: 600px) {
-      .navbar { padding: 12px 20px; }
-      .hero { padding: 40px 6%; }
+      .navbar { padding: 10px 15px; }
       .cards-grid { grid-template-columns: 1fr; }
-      .answer-btn { width: 100%; }
-      .task-card { padding: 25px; }
+      .hero { padding: 25px 5%; }
     }
   </style>
 </head>
 <body>
 
   <header class="navbar">
-    <span class="nav-title">LinguaLab</span>
-    <a href="index.html" class="back-home">Home Page</a>
+    <div class="nav-left">
+      <div class="nav-logo-circle">L</div>
+      <span class="nav-title">LinguaLab</span>
+    </div>
+    <a href="index.html" class="back-home">Home</a>
   </header>
 
   <main>
     <section class="hero">
       <h1>Grammar Lab</h1>
-      <p>Interactive English Practice for Kids</p>
+      <p>Interactive tasks for little explorers</p>
     </section>
 
     <div class="main-container">
       <div class="task-card" id="task-card">
-        <div class="task-image" id="task-img">
-          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></svg>
-        </div>
-        <div id="question">Choose a topic below to start!</div>
+        <div id="question">Select a topic below to start learning! 🚀</div>
         <div class="answers-grid" id="answer-grid"></div>
       </div>
 
-      <h2 class="topic-title">Choose Your Magic Topic</h2>
-      <div class="cards-grid">
-        <div class="card-item" onclick="loadNewTask('he_she')">
+      <h2 class="topic-title">Topics</h2>
+      <div class="cards-grid" id="topics-container">
+        <div class="card-item" onclick="selectTopic('he_she', this)">
           <h3>He or She?</h3>
-          <p>Practice personal pronouns</p>
+          <p>👦 & 👧 Pronouns</p>
         </div>
-        <div class="card-item" onclick="loadNewTask('plural')">
+        <div class="card-item" onclick="selectTopic('plural', this)">
           <h3>One or Many</h3>
-          <p>Learn plural endings -s</p>
+          <p>🍎 & 🍎🍎 Plurals</p>
         </div>
-        <div class="card-item" onclick="loadNewTask('prepositions')">
-          <h3>In, On, Under</h3>
-          <p>Find where objects are</p>
+        <div class="card-item" onclick="selectTopic('prepositions', this)">
+          <h3>Prepositions</h3>
+          <p>📦 Position Words</p>
         </div>
-        <div class="card-item" onclick="loadNewTask('can')">
-          <h3>I can...</h3>
-          <p>Abilities and actions</p>
+        <div class="card-item" onclick="selectTopic('can', this)">
+          <h3>Can / Can't</h3>
+          <p>🏃 Action Skills</p>
         </div>
       </div>
     </div>
@@ -141,68 +152,102 @@
       he_she: [
         { q: "This is a girl. ___ is happy!", a: "She", options: ["He", "She"] },
         { q: "This is a boy. ___ has a ball.", a: "He", options: ["He", "She"] },
-        { q: "Look at the teacher. ___ is a woman.", a: "She", options: ["He", "She"] },
-        { q: "My brother is big. ___ can run.", a: "He", options: ["He", "She"] },
-        { q: "This is my sister. ___ is four.", a: "She", options: ["He", "She"] },
-        { q: "The king is on the chair. ___ is old.", a: "He", options: ["He", "She"] }
+        { q: "My Mom is nice. ___ loves me.", a: "She", options: ["He", "She"] },
+        { q: "My Dad is strong. ___ is big.", a: "He", options: ["He", "She"] },
+        { q: "The Queen is here. ___ is beautiful.", a: "She", options: ["He", "She"] },
+        { q: "The King is on the horse. ___ is brave.", a: "He", options: ["He", "She"] },
+        { q: "My brother is a baby. ___ is small.", a: "He", options: ["He", "She"] },
+        { q: "My sister is a student. ___ has a book.", a: "She", options: ["He", "She"] },
+        { q: "The policeman is here. ___ is tall.", a: "He", options: ["He", "She"] },
+        { q: "The ballerina is dancing. ___ is pretty.", a: "She", options: ["He", "She"] },
+        { q: "Tom is my friend. ___ is 5 years old.", a: "He", options: ["He", "She"] },
+        { q: "Alice is playing. ___ is a girl.", a: "She", options: ["He", "She"] }
       ],
       plural: [
         { q: "One cat, two ___?", a: "Cats", options: ["Cat", "Cats"] },
         { q: "One apple, three ___?", a: "Apples", options: ["Apple", "Apples"] },
-        { q: "One dog, four ___?", a: "Dogs", options: ["Dog", "Dogs"] },
-        { q: "I have one star, you have ten ___!", a: "Stars", options: ["Star", "Stars"] },
-        { q: "One flower is red, six ___ are blue.", a: "Flowers", options: ["Flower", "Flowers"] },
-        { q: "Look! One bird, two ___.", a: "Birds", options: ["Bird", "Birds"] }
+        { q: "I see one dog and two ___.", a: "Dogs", options: ["Dog", "Dogs"] },
+        { q: "One star, many ___ in the sky.", a: "Stars", options: ["Star", "Stars"] },
+        { q: "One flower, five ___ in the garden.", a: "Flowers", options: ["Flower", "Flowers"] },
+        { q: "I have one ball, you have four ___.", a: "Balls", options: ["Ball", "Balls"] },
+        { q: "One car, two ___ on the street.", a: "Cars", options: ["Car", "Cars"] },
+        { q: "Look! One bird, six ___!", a: "Birds", options: ["Bird", "Birds"] },
+        { q: "One banana, three ___.", a: "Bananas", options: ["Banana", "Bananas"] },
+        { q: "I see one tree and ten ___.", a: "Trees", options: ["Tree", "Trees"] },
+        { q: "One frog, four ___ jump!", a: "Frogs", options: ["Frog", "Frogs"] },
+        { q: "One book, many ___ on the shelf.", a: "Books", options: ["Book", "Books"] }
       ],
       prepositions: [
         { q: "The ball is ___ the box.", a: "In", options: ["In", "On", "Under"] },
-        { q: "The book is ___ the table.", a: "On", options: ["In", "On", "Under"] },
-        { q: "The teddy is ___ the bed.", a: "Under", options: ["In", "On", "Under"] },
+        { q: "The cat is ___ the table.", a: "On", options: ["In", "On", "Under"] },
+        { q: "The shoes are ___ the bed.", a: "Under", options: ["In", "On", "Under"] },
         { q: "The pencil is ___ the cup.", a: "In", options: ["In", "On", "Under"] },
-        { q: "The cat is sleeping ___ the chair.", a: "On", options: ["In", "On", "Under"] },
-        { q: "My shoes are ___ the table.", a: "Under", options: ["In", "On", "Under"] }
+        { q: "The sun is ___ the sky.", a: "In", options: ["In", "On", "Under"] },
+        { q: "The hat is ___ your head.", a: "On", options: ["In", "On", "Under"] },
+        { q: "The toy is ___ the chair.", a: "Under", options: ["In", "On", "Under"] },
+        { q: "The apple is ___ the plate.", a: "On", options: ["In", "On", "Under"] },
+        { q: "A fish is ___ the water.", a: "In", options: ["In", "On", "Under"] },
+        { q: "The dog is sleeping ___ the rug.", a: "On", options: ["In", "On", "Under"] },
+        { q: "My bag is ___ the desk.", a: "Under", options: ["In", "On", "Under"] },
+        { q: "The orange is ___ the basket.", a: "In", options: ["In", "On", "Under"] }
       ],
       can: [
-        { q: "A fish ___ swim.", a: "Can", options: ["Can", "Can't"] },
         { q: "A bird ___ fly.", a: "Can", options: ["Can", "Can't"] },
-        { q: "A baby ___ drive a car.", a: "Can't", options: ["Can", "Can't"] },
+        { q: "A fish ___ walk.", a: "Can't", options: ["Can", "Can't"] },
         { q: "A frog ___ jump.", a: "Can", options: ["Can", "Can't"] },
-        { q: "A horse ___ sing.", a: "Can't", options: ["Can", "Can't"] },
-        { q: "I ___ eat an apple.", a: "Can", options: ["Can", "Can't"] }
+        { q: "A baby ___ drive.", a: "Can't", options: ["Can", "Can't"] },
+        { q: "I ___ clap my hands.", a: "Can", options: ["Can", "Can't"] },
+        { q: "A lion ___ sing.", a: "Can't", options: ["Can", "Can't"] },
+        { q: "A monkey ___ climb trees.", a: "Can", options: ["Can", "Can't"] },
+        { q: "A cat ___ fly.", a: "Can't", options: ["Can", "Can't"] },
+        { q: "A kangaroo ___ hop.", a: "Can", options: ["Can", "Can't"] },
+        { q: "A snake ___ run.", a: "Can't", options: ["Can", "Can't"] },
+        { q: "A dolphin ___ swim.", a: "Can", options: ["Can", "Can't"] },
+        { q: "An elephant ___ jump.", a: "Can't", options: ["Can", "Can't"] }
       ]
     };
 
-    let activeTask = null;
+    let currentTopic = '';
+    let currentTask = null;
 
-    function loadNewTask(topic) {
-      const tasks = gameData[topic];
-      activeTask = tasks[Math.floor(Math.random() * tasks.length)];
+    function selectTopic(topic, element) {
+      currentTopic = topic;
+      
+      // Смена активного класса
+      document.querySelectorAll('.card-item').forEach(c => c.classList.remove('active'));
+      element.classList.add('active');
+      
+      loadNextTask();
+    }
+
+    function loadNextTask() {
+      const tasks = gameData[currentTopic];
+      currentTask = tasks[Math.floor(Math.random() * tasks.length)];
       
       const qDiv = document.getElementById('question');
       const grid = document.getElementById('answer-grid');
       
-      qDiv.innerText = activeTask.q;
+      qDiv.innerText = currentTask.q;
       grid.innerHTML = '';
 
-      activeTask.options.forEach(opt => {
+      currentTask.options.forEach(opt => {
         const btn = document.createElement('button');
         btn.className = 'answer-btn';
         btn.innerText = opt;
         btn.onclick = () => check(opt, btn);
         grid.appendChild(btn);
       });
-
-      document.getElementById('task-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
     function check(choice, btn) {
-      if (choice === activeTask.a) {
+      if (choice === currentTask.a) {
         btn.classList.add('correct');
-        document.getElementById('question').innerText = "🎉 Well done! You are right!";
+        document.getElementById('question').innerText = "🎉 Brilliant! Correct!";
+        
+        // Автоматически загружаем следующее задание через 2 сек
         setTimeout(() => {
-          document.getElementById('question').innerText = "Pick another topic!";
-          document.getElementById('answer-grid').innerHTML = '';
-        }, 2000);
+          loadNextTask();
+        }, 1800);
       } else {
         btn.classList.add('wrong');
         setTimeout(() => btn.classList.remove('wrong'), 500);
