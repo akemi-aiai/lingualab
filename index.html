@@ -3,196 +3,264 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LinguaLab — Interactive English for Kids</title>
+  <title>LinguaLab — Education is Magical</title>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+
   <style>
     :root {
-      --primary: #2563eb;
+      --primary: #22d3ee;
       --accent: #f97316;
-      --bg: #f8fafc;
-      --card-bg: #ffffff;
-      --text: #0f172a;
       --navy: #1f4e79;
-      --radius: 16px;
+      --bg: #f8fafc;
+      --radius: 24px;
     }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Inter', sans-serif;
-      background: var(--bg); color: var(--text); padding-top: 86px;
+      background: var(--bg);
+      color: #0f172a;
+      line-height: 1.6;
+      padding-top: 80px;
     }
-    a { color: inherit; text-decoration: none; }
 
-    /* NAVBAR: ОФИЦИАЛЬНЫЙ ЛОГО И ВСЕ КНОПКИ */
+    /* NAVBAR */
     .navbar {
       position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
       display: flex; align-items: center; justify-content: space-between;
       padding: 12px 40px; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,.05);
     }
-    .navbar-left { display: flex; align-items: center; gap: 10px; }
-    .nav-logo { height: 54px; width: auto; display: block; }
-    .nav-title { font-size: 20px; font-weight: 800; color: var(--navy); }
-    .navbar-right { display: flex; gap: 12px; }
-    .navbar-right a { color: var(--navy); font-weight: 600; padding: 8px 12px; border-radius: 12px; transition: 0.2s; font-size: 14px; }
-    .navbar-right a:hover { background: var(--navy); color: #fff; }
+    .navbar-left { display: flex; align-items: center; gap: 12px; }
+    .nav-logo { height: 50px; width: auto; }
+    .nav-title { font-size: 22px; font-weight: 800; color: var(--navy); }
+    .navbar-right { display: flex; gap: 10px; }
+    .navbar-right a { color: var(--navy); font-weight: 600; text-decoration: none; font-size: 14px; padding: 8px 15px; border-radius: 12px; transition: 0.3s; }
+    .navbar-right a:hover { background: #f1f5f9; color: var(--accent); }
 
-    /* HERO: БИРЮЗОВЫЙ ГРАДИЕНТ */
-    .hero { padding: 96px 8% 84px; text-align: center; background: linear-gradient(135deg, #22d3ee, #a78bfa); color: #fff; }
-    .hero h1 { font-size: clamp(28px, 4vw, 44px); margin-bottom: 14px; font-weight: 800; }
-    .hero .cta { display: inline-block; margin-top: 28px; background: var(--navy); color: #fff; font-weight: 700; padding: 14px 32px; border-radius: 999px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+    /* HERO */
+    .hero {
+      padding: 100px 8%;
+      text-align: center;
+      background: linear-gradient(135deg, #22d3ee, #a78bfa);
+      color: #fff;
+    }
+    .hero h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 800; margin-bottom: 20px; letter-spacing: -1px; }
+    .hero p { max-width: 700px; margin: 0 auto 30px; font-size: 20px; opacity: 0.95; }
 
-    /* FEATURES */
-    .features { padding: 72px 8% 70px; text-align: center; }
-    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
-    .card { display: block; background: #fff; border-radius: var(--radius); overflow: hidden; box-shadow: 0 6px 24px rgba(0,0,0,0.06); text-align: left; transition: 0.2s; border: 1px solid #e2e8f0; }
-    .card:hover { transform: translateY(-5px); border-color: #22d3ee; }
-    .card img { width: 100%; height: 140px; object-fit: cover; }
-    .card-body { padding: 20px; }
-    .card h3 { color: var(--navy); margin-bottom: 8px; font-size: 18px; }
+    /* PROGRESS BLOCK (KNOWLEDGE TREE) */
+    .progress-section { padding: 60px 8%; margin-top: -50px; }
+    .progress-container {
+      max-width: 1000px; margin: 0 auto; background: #fff;
+      padding: 40px; border-radius: var(--radius);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+      display: flex; align-items: center; justify-content: space-around; flex-wrap: wrap; gap: 40px;
+    }
+    .tree-box { width: 280px; height: 280px; background: #f0fdfa; border-radius: 50%; padding: 10px; }
+    .stats-content { flex: 1; min-width: 300px; text-align: left; }
+    .stat-val { font-size: 56px; font-weight: 800; color: var(--navy); line-height: 1; }
+    .btn-group { display: flex; gap: 15px; margin-top: 25px; }
+    
+    .btn {
+      padding: 16px 32px; border-radius: 999px; border: none;
+      font-weight: 700; cursor: pointer; transition: 0.3s; font-family: inherit; font-size: 15px;
+    }
+    .btn-main { background: var(--accent); color: #fff; box-shadow: 0 10px 20px rgba(249, 115, 22, 0.2); }
+    .btn-outline { background: transparent; color: var(--navy); border: 2px solid var(--navy); }
+    .btn-main:hover { transform: translateY(-3px); filter: brightness(1.1); }
 
-    /* AI GENERATOR */
-    .ai-section { padding: 80px 8%; background: #edf2f7; text-align: center; }
-    .ai-container { max-width: 600px; margin: 0 auto; background: #fff; padding: 40px; border-radius: var(--radius); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
-    .ai-input, .ai-select { width: 100%; padding: 12px; margin: 10px 0; border-radius: 12px; border: 1px solid #cbd5e1; font-family: inherit; }
-    .ai-btn { width: 100%; background: var(--accent); color: #fff; border: none; padding: 16px; border-radius: 999px; font-weight: 700; cursor: pointer; transition: 0.2s; }
-    .ai-btn:disabled { background: #94a3b8; cursor: wait; }
-    #ai-result { margin-top: 25px; padding: 20px; border-radius: 12px; background: #fdf2f8; border-left: 5px solid var(--accent); text-align: left; display: none; }
+    /* EXPLORE BLOCKS (ОСТАЛЬНЫЕ БЛОКИ) */
+    .features { padding: 80px 8%; text-align: center; }
+    .features h2 { font-size: 32px; color: var(--navy); margin-bottom: 40px; }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+    .card {
+      background: #fff; border-radius: var(--radius); overflow: hidden;
+      text-decoration: none; transition: 0.3s; border: 1px solid #e2e8f0;
+      display: flex; flex-direction: column;
+    }
+    .card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); border-color: var(--primary); }
+    .card-img { width: 100%; height: 180px; object-fit: cover; background: #cbd5e1; }
+    .card-content { padding: 25px; text-align: left; }
+    .card-content h3 { color: var(--navy); font-size: 20px; margin-bottom: 10px; }
+    .card-content p { color: #64748b; font-size: 15px; }
 
     /* FOOTER */
-    footer { background: #0f172a; color: #e2e8f0; padding: 40px 8%; text-align: center; font-size: 14px; }
-    footer a { color: #93c5fd; text-decoration: none; margin: 0 10px; }
+    footer { background: #0f172a; color: #94a3b8; padding: 60px 8%; text-align: center; }
+    .footer-links { margin-top: 20px; }
+    .footer-links a { color: #fff; text-decoration: none; margin: 0 15px; opacity: 0.6; transition: 0.3s; }
+    .footer-links a:hover { opacity: 1; color: var(--primary); }
+
+    @media (max-width: 768px) {
+      .navbar { padding: 10px 20px; }
+      .navbar-right { display: none; }
+      .progress-container { text-align: center; }
+      .stats-content { text-align: center; }
+      .btn-group { justify-content: center; }
+    }
   </style>
 </head>
 <body>
 
   <header class="navbar">
     <div class="navbar-left">
-      <img src="assets/img/logo.png" alt="Logo" class="nav-logo" />
+      <img src="assets/img/logo.png" alt="LL Logo" class="nav-logo">
       <span class="nav-title">LinguaLab</span>
     </div>
     <nav class="navbar-right">
-      <a href="grammar.html">Grammar Magic</a>
-      <a href="vocabulary.html">Word Bank</a>
-      <a href="exercises.html">Fun Homework</a>
-      <a href="parents.html">Wiki Parents</a>
+      <a href="grammar.html">Grammar</a>
+      <a href="vocabulary.html">Vocabulary</a>
+      <a href="exercises.html">Exercises</a>
+      <a href="parents.html">For Parents</a>
     </nav>
   </header>
 
-  <main>
-    <section class="hero">
-      <h1>Learn English the Fun Way</h1>
-      <p>Interactive tasks for little explorers and their parents.</p>
-      <a class="cta" href="#ai-tool">Start Journey</a>
-    </section>
+  <section class="hero">
+    <h1>Education is Magical</h1>
+    <p>Discover a world where learning English and Chinese feels like a grand adventure. Grow your knowledge forest today!</p>
+  </section>
 
-    <section class="features">
-      <div class="cards">
-        <a href="grammar.html" class="card"><img src="assets/img/grammar.png" alt="Grammar" /><div class="card-body"><h3>Grammar Magic</h3><p>Playful patterns for kids</p></div></a>
-        <a href="vocabulary.html" class="card"><img src="assets/img/word.png" alt="Word" /><div class="card-body"><h3>Word Bank</h3><p>Visual memory tools</p></div></a>
-        <a href="exercises.html" class="card"><img src="assets/img/hw.png" alt="HW" /><div class="card-body"><h3>Fun Homework</h3><p>Creative tasks</p></div></a>
-        <a href="parents.html" class="card"><img src="assets/img/parents.png" alt="Parents" /><div class="card-body"><h3>Wiki Parents</h3><p>Guides for parents</p></div></a>
+  <section class="progress-section">
+    <div class="progress-container">
+      <div class="tree-box">
+        <svg viewBox="0 0 100 100" id="knowledge-tree">
+          <path d="M50 85 L50 60" stroke="#5d4037" stroke-width="5" stroke-linecap="round"/>
+          <path d="M50 72 L42 58" stroke="#5d4037" stroke-width="3" stroke-linecap="round"/>
+          <path d="M50 68 L60 55" stroke="#5d4037" stroke-width="3" stroke-linecap="round"/>
+          <g id="tree-leaves"></g>
+        </svg>
       </div>
-    </section>
 
-    <section class="ai-section" id="ai-tool">
-      <div class="ai-container">
-        <h2>AI Magic Generation</h2>
-        <input type="password" id="apiKey" class="ai-input" placeholder="Paste Gemini API Key here...">
-        <select id="animal" class="ai-select">
-          <option value="Panda">Panda</option>
-          <option value="Lion">Lion</option>
-          <option value="Elephant">Elephant</option>
-          <option value="Giraffe">Giraffe</option>
-        </select>
-        <button class="ai-btn" id="aiBtn" onclick="generateAiTask()">Generate Task</button>
-        <div id="ai-result"></div>
+      <div class="stats-content">
+        <p style="text-transform: uppercase; font-weight: 700; color: var(--primary); font-size: 13px; letter-spacing: 1px;">Live Success Tracker</p>
+        <div id="words-count" class="stat-val">0</div>
+        <p style="font-size: 18px; color: #64748b; margin-top: 5px;">Knowledge Rank: <strong id="level-name" style="color: #10b981;">Sprout</strong></p>
+        
+        <div class="btn-group">
+          <button class="btn btn-main" onclick="addKnowledge()">Grow Forest ✨</button>
+          <button class="btn btn-outline" onclick="downloadReport()">Get Report 📄</button>
+        </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
+
+  <section class="features">
+    <h2>Explore the Magic</h2>
+    <div class="cards-grid">
+      
+      <a href="grammar.html" class="card">
+        <img src="assets/img/grammar.png" alt="Grammar" class="card-img">
+        <div class="card-content">
+          <h3>Grammar Magic</h3>
+          <p>Complex rules turned into simple, playful patterns for young explorers.</p>
+        </div>
+      </a>
+
+      <a href="vocabulary.html" class="card">
+        <img src="assets/img/word.png" alt="Vocabulary" class="card-img">
+        <div class="card-content">
+          <h3>Word Bank</h3>
+          <p>Build a massive vocabulary using visual memory and interactive games.</p>
+        </div>
+      </a>
+
+      <a href="exercises.html" class="card">
+        <img src="assets/img/hw.png" alt="Exercises" class="card-img">
+        <div class="card-content">
+          <h3>Fun Homework</h3>
+          <p>Daily challenges that keep the brain sharp and the heart happy.</p>
+        </div>
+      </a>
+
+      <a href="parents.html" class="card">
+        <img src="assets/img/parents.png" alt="Parents" class="card-img">
+        <div class="card-content">
+          <h3>Wiki Parents</h3>
+          <p>Resources and guides to help you support your child's bilingual journey.</p>
+        </div>
+      </a>
+
+    </div>
+  </section>
 
   <footer>
-    <p>© 2026 LinguaLab. All Rights Reserved.</p>
-    <p style="margin-top: 10px;">
-      <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a>
-    </p>
+    <p>© 2026 LinguaLab. Making Education Magical.</p>
+    <div class="footer-links">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
   </footer>
 
   <script>
-    let cooldownActive = false;
+    let score = parseInt(localStorage.getItem('ll_score')) || 0;
 
-    window.onload = () => {
-        const saved = localStorage.getItem('ll_magic_key');
-        if (saved) document.getElementById('apiKey').value = saved;
-    };
+    function updateDisplay() {
+      const wordsDisplay = document.getElementById('words-count');
+      const levelDisplay = document.getElementById('level-name');
+      const leavesContainer = document.getElementById('tree-leaves');
+      
+      wordsDisplay.innerText = score;
 
-    async function generateAiTask() {
-        if (cooldownActive) return;
+      if (score >= 40) levelDisplay.innerText = "Magic Oak 🌳";
+      else if (score >= 20) levelDisplay.innerText = "Blooming Bush 🌿";
+      else if (score > 0) levelDisplay.innerText = "Green Sprout 🌱";
+      else levelDisplay.innerText = "Seedling";
 
-        const apiKey = document.getElementById('apiKey').value.trim();
-        const animal = document.getElementById('animal').value;
-        const result = document.getElementById('ai-result');
-        const btn = document.getElementById('aiBtn');
+      leavesContainer.innerHTML = '';
+      for (let i = 0; i < score; i++) {
+        if (i >= 60) break; 
+        const angle = (i * 137.5) % 360; 
+        const radius = Math.sqrt(i) * 5;
+        const x = 50 + radius * Math.cos(angle * Math.PI / 180);
+        const y = 55 + radius * Math.sin(angle * Math.PI / 180);
 
-        if (!apiKey) { alert("Please enter API Key!"); return; }
-        localStorage.setItem('ll_magic_key', apiKey);
-
-        btn.disabled = true;
-        btn.innerText = "Connecting...";
-        result.style.display = "none";
-
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-
-        try {
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    contents: [{ parts: [{ text: `Short English task for 5yo about ${animal}.` }] }]
-                })
-            });
-
-            const data = await response.json();
-            
-            if (response.status === 429) {
-                // Если лимит исчерпан - запускаем таймер
-                startCooldown(btn, result);
-            } else if (data.candidates) {
-                result.innerText = data.candidates[0].content.parts[0].text;
-                result.style.display = "block";
-                btn.disabled = false;
-                btn.innerText = "Generate Task";
-            } else {
-                result.innerText = "Error: " + (data.error ? data.error.message : "Try again later");
-                result.style.display = "block";
-                btn.disabled = false;
-                btn.innerText = "Generate Task";
-            }
-        } catch (e) {
-            result.innerText = "Check your VPN or Internet connection.";
-            result.style.display = "block";
-            btn.disabled = false;
-        }
+        const leaf = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        leaf.setAttribute("cx", x); leaf.setAttribute("cy", y); leaf.setAttribute("r", "2.8");
+        leaf.setAttribute("fill", i % 2 === 0 ? "#4ade80" : "#10b981");
+        leavesContainer.appendChild(leaf);
+      }
     }
 
-    function startCooldown(button, display) {
-        cooldownActive = true;
-        let sec = 60;
-        display.style.display = "block";
-        display.style.color = "#f97316";
-        display.innerText = "Daily limit reached for this key. Please use a NEW API Key or wait.";
-        
-        const timer = setInterval(() => {
-            sec--;
-            button.innerText = `Wait ${sec}s...`;
-            if (sec <= 0) {
-                clearInterval(timer);
-                cooldownActive = false;
-                button.disabled = false;
-                button.innerText = "Generate Task";
-            }
-        }, 1000);
+    function addKnowledge() {
+      score++;
+      localStorage.setItem('ll_score', score);
+      updateDisplay();
+
+      // Звук
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain); gain.connect(audioCtx.destination);
+      osc.frequency.setValueAtTime(523, audioCtx.currentTime); 
+      osc.frequency.exponentialRampToValueAtTime(1046, audioCtx.currentTime + 0.1);
+      gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
+      osc.start(); osc.stop(audioCtx.currentTime + 0.2);
     }
-</script>
+
+    function downloadReport() {
+      const level = document.getElementById('level-name').innerText;
+      const reportWindow = window.open('', '_blank');
+      reportWindow.document.write(`
+        <html><body style="font-family:sans-serif; text-align:center; padding:50px; border:20px solid #22d3ee;">
+          <h1 style="color:#1f4e79;">LinguaLab Progress Certificate</h1>
+          <p>Total Tasks Completed:</p>
+          <h2 style="font-size:72px; color:#f97316;">${score}</h2>
+          <h3>Current Rank: ${level}</h3>
+          <p>Generated on: ${new Date().toLocaleDateString()}</p>
+          <script>window.print();<\/script>
+        </body></html>
+      `);
+      reportWindow.document.close();
+    }
+
+    window.onload = updateDisplay;
+  </script>
 </body>
 </html>
