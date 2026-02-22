@@ -220,7 +220,15 @@
       element.classList.add('active');
       loadTask();
     }
-
+    function awardPoint() {
+    // Получаем текущий прогресс
+    let score = parseInt(localStorage.getItem('ll_score')) || 0;
+    score++; // Добавляем очко за верный ответ
+    localStorage.setItem('ll_score', score);
+    
+    // Визуальный эффект успеха на странице грамматики
+    alert("Correct! Your Knowledge Tree has grown! 🌳");
+    }
     function loadTask() {
       const tasks = gameData[activeTopic];
       activeTask = tasks[Math.floor(Math.random() * tasks.length)];
