@@ -7,109 +7,101 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
 
   <style>
     :root {
-      --primary: #2563eb;
+      --primary: #22d3ee;
       --accent: #f97316;
       --bg: #f8fafc;
-      --card-bg: #ffffff;
-      --text: #0f172a;
-      --muted: #64748b;
       --navy: #1f4e79;
-      --radius: 16px;
+      --radius: 20px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
     body {
-      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-family: 'Inter', sans-serif;
       background: var(--bg);
-      color: var(--text);
+      color: #0f172a;
       line-height: 1.6;
-      padding-top: 86px; 
+      padding-top: 80px;
     }
 
-    a { color: inherit; text-decoration: none; }
-
-    /* NAV (Копия с главной) */
+    /* NAV (Копия с главной для единообразия) */
     .navbar {
       position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
       display: flex; align-items: center; justify-content: space-between;
-      gap: 16px; padding: 12px 40px; background: #fff;
-      box-shadow: 0 4px 20px rgba(0,0,0,.05);
+      padding: 12px 40px; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,.05);
     }
     .navbar-left { display: flex; align-items: center; gap: 10px; }
-    .nav-logo { height: 54px; width: auto; display: block; }
-    .nav-title { font-size: 20px; font-weight: 800; color: var(--navy); letter-spacing: .2px; }
-    .navbar-right { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
-    .navbar-right a { color: var(--navy); font-weight: 600; padding: 8px 12px; border-radius: 12px; transition: 0.2s; }
-    .navbar-right a:hover { background: var(--navy); color: #fff; }
+    .nav-logo { height: 50px; width: auto; }
+    .nav-title { font-size: 22px; font-weight: 800; color: var(--navy); }
+    .navbar-right a { color: var(--navy); font-weight: 600; text-decoration: none; padding: 8px 12px; font-size: 14px; transition: 0.3s; }
+    .navbar-right a:hover { color: var(--primary); }
 
-    /* HERO (Копия с главной) */
-    .hero { padding: 96px 8% 84px; text-align: center; background: linear-gradient(135deg, #2563eb, #7c3aed); color: #fff; }
-    .hero h1 { font-size: clamp(28px, 4vw, 44px); margin-bottom: 14px; line-height: 1.15; }
-    .hero p { max-width: 860px; margin: 0 auto; font-size: clamp(16px, 1.6vw, 20px); color: rgba(255,255,255,.92); }
+    /* HERO - Теперь совпадает с главной */
+    .hero { 
+      padding: 80px 8%; 
+      text-align: center; 
+      background: linear-gradient(135deg, #22d3ee, #a78bfa); 
+      color: #fff; 
+    }
+    .hero h1 { font-size: clamp(32px, 5vw, 48px); margin-bottom: 10px; font-weight: 800; }
+    .hero p { opacity: 0.9; font-size: 18px; }
 
     /* GAME AREA */
-    .main-container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+    .main-container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
 
     .task-card {
-      background: var(--card-bg); border-radius: var(--radius);
-      padding: 40px; text-align: center; box-shadow: 0 6px 24px rgba(0,0,0,.06);
-      margin-bottom: 40px; min-height: 250px; display: flex; flex-direction: column; justify-content: center;
-      border: 1px solid #e2e8f0;
+      background: #fff; border-radius: var(--radius);
+      padding: 40px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,.05);
+      margin-bottom: 40px; min-height: 280px; display: flex; flex-direction: column; 
+      justify-content: center; border: 1px solid #e2e8f0;
     }
 
-    #question { font-size: 24px; font-weight: 700; color: var(--navy); margin-bottom: 25px; }
+    #question { font-size: 26px; font-weight: 800; color: var(--navy); margin-bottom: 30px; }
 
     .answers-grid { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
     .answer-btn {
-      padding: 16px 40px; border-radius: 999px; border: 3px solid var(--primary);
-      background: #fff; color: var(--primary); font-size: 18px; font-weight: 800;
-      cursor: pointer; transition: 0.2s; min-width: 140px;
+      padding: 18px 45px; border-radius: 999px; border: 3px solid var(--primary);
+      background: #fff; color: var(--primary); font-size: 20px; font-weight: 800;
+      cursor: pointer; transition: 0.3s; min-width: 160px;
     }
-    .answer-btn:hover { background: var(--primary); color: #fff; transform: translateY(-2px); }
-    .answer-btn.correct { background: #22c55e; border-color: #22c55e; color: #fff; }
-    .answer-btn.wrong { background: #ef4444; border-color: #ef4444; color: #fff; }
+    .answer-btn:hover { background: var(--primary); color: #fff; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(34,211,238,0.2); }
+    .answer-btn.correct { background: #10b981; border-color: #10b981; color: #fff; }
+    .answer-btn.wrong { background: #ef4444; border-color: #ef4444; color: #fff; animation: shake 0.4s; }
 
-    /* TOPIC SELECTION (Стиль карточек с главной) */
-    .topic-title { text-align: center; margin-bottom: 30px; font-weight: 800; color: var(--navy); font-size: 24px; }
-    .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+
+    /* UNITS SELECTION */
+    .topic-title { text-align: center; margin-bottom: 30px; font-weight: 800; color: var(--navy); font-size: 28px; }
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
     
     .card-item {
-      background: var(--card-bg); padding: 25px; border-radius: var(--radius);
-      text-align: center; cursor: pointer;
-      box-shadow: 0 6px 24px rgba(0,0,0,.06); transition: 0.3s; border: 2px solid transparent;
+      background: #fff; padding: 25px; border-radius: var(--radius);
+      text-align: center; cursor: pointer; border: 2px solid transparent;
+      box-shadow: 0 4px 15px rgba(0,0,0,.04); transition: 0.3s;
     }
-    .card-item:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 12px 34px rgba(0,0,0,0.1); }
-    .card-item h3 { font-size: 18px; color: var(--navy); margin-bottom: 8px; font-weight: 700; }
-    .card-item p { font-size: 14px; color: var(--muted); }
-    .card-item.active { background: var(--navy); border-color: var(--navy); }
-    .card-item.active h3, .card-item.active p { color: white; }
+    .card-item:hover { transform: translateY(-5px); border-color: var(--primary); background: #f0fdfa; }
+    .card-item.active { background: var(--navy); border-color: var(--navy); color: #fff; }
+    .card-item.active p { color: rgba(255,255,255,0.8); }
 
-    footer { background: #0f172a; color: #e2e8f0; padding: 40px 8%; text-align: center; font-size: 14px; margin-top: 40px; }
-
-    @media (max-width: 992px) { .navbar { padding: 12px 20px; } }
-    @media (max-width: 600px) {
-      body { padding-top: 104px; }
-      .navbar { flex-wrap: wrap; justify-content: center; }
-      .navbar-right { width: 100%; justify-content: center; }
-      .cards-grid { grid-template-columns: 1fr; }
-      .answer-btn { width: 100%; }
-    }
+    footer { background: #0f172a; color: #94a3b8; padding: 40px 8%; text-align: center; font-size: 14px; margin-top: 50px; }
   </style>
 </head>
 <body>
 
   <header class="navbar">
     <div class="navbar-left">
-      <img src="assets/img/logo.png" alt="Logo" class="nav-logo" />
+      <img src="assets/img/logo.png" alt="LL" class="nav-logo" />
       <span class="nav-title">LinguaLab</span>
     </div>
     <nav class="navbar-right">
-      <a href="grammar.html">Grammar Magic</a>
+      <a href="index.html">Main Page</a>
       <a href="vocabulary.html">Word Bank</a>
       <a href="exercises.html">Fun Homework</a>
       <a href="parents.html">Wiki Parents</a>
@@ -118,18 +110,13 @@
 
   <main>
     <section class="hero">
-  <h1>Grammar Magic</h1>
-  <p>Discover English through fun patterns and interactive practice.</p>
-  <a href="index.html" style="display: inline-block; margin-top: 15px; color: #fff; text-decoration: none; font-weight: 600; border: 1.5px solid rgba(255,255,255,0.4); padding: 8px 20px; border-radius: 12px; font-size: 14px; transition: 0.3s;" 
-     onmouseover="this.style.background='rgba(255,255,255,0.1)'" 
-     onmouseout="this.style.background='transparent'">
-    Back to Home
-  </a>
-</section>
+      <h1>Grammar Magic</h1>
+      <p>Play games and grow your Knowledge Tree!</p>
+    </section>
 
     <div class="main-container">
       <div class="task-card" id="task-card">
-        <div id="question">Select a topic below to start your journey</div>
+        <div id="question">Select a Unit below to start! 🚀</div>
         <div class="answers-grid" id="answer-grid"></div>
       </div>
 
@@ -137,77 +124,50 @@
       <div class="cards-grid">
         <div class="card-item" onclick="selectTopic('he_she', this)">
           <h3>Friends & Family</h3>
-          <p>Personal pronouns practice</p>
+          <p>He / She</p>
         </div>
         <div class="card-item" onclick="selectTopic('plural', this)">
           <h3>Counting World</h3>
-          <p>Singular and plural nouns</p>
+          <p>Plural nouns</p>
         </div>
         <div class="card-item" onclick="selectTopic('prepositions', this)">
           <h3>Secret Places</h3>
-          <p>In, On, Under and more</p>
+          <p>In / On / Under</p>
         </div>
         <div class="card-item" onclick="selectTopic('can', this)">
           <h3>I can...</h3>
-          <p>Actions and abilities</p>
+          <p>Abilities</p>
         </div>
       </div>
     </div>
   </main>
 
   <footer>
-    <p>© 2026 LinguaLab. All Rights Reserved.</p>
+    <p>© 2026 LinguaLab. Making Education Magical.</p>
   </footer>
 
   <script>
     const gameData = {
       he_she: [
         { q: "This is a girl. ___ is happy.", a: "She", options: ["He", "She"] },
-        { q: "This is a boy. ___ has a blue ball.", a: "He", options: ["He", "She"] },
-        { q: "My Mother is nice. ___ loves me.", a: "She", options: ["He", "She"] },
-        { q: "My Father is strong. ___ is big.", a: "He", options: ["He", "She"] },
-        { q: "The Queen is here. ___ is beautiful.", a: "She", options: ["He", "She"] },
-        { q: "The King is brave. ___ is on the horse.", a: "He", options: ["He", "She"] },
-        { q: "My brother is small. ___ is a baby.", a: "He", options: ["He", "She"] },
-        { q: "My sister is a student. ___ has a book.", a: "She", options: ["He", "She"] },
-        { q: "The policeman is tall. ___ is here.", a: "He", options: ["He", "She"] },
-        { q: "The ballerina is pretty. ___ is dancing.", a: "She", options: ["He", "She"] }
+        { q: "This is a boy. ___ has a ball.", a: "He", options: ["He", "She"] },
+        { q: "Mother is nice. ___ loves me.", a: "She", options: ["He", "She"] },
+        { q: "Father is big. ___ is strong.", a: "He", options: ["He", "She"] }
       ],
       plural: [
         { q: "One cat, two ___?", a: "Cats", options: ["Cat", "Cats"] },
         { q: "One apple, three ___?", a: "Apples", options: ["Apple", "Apples"] },
-        { q: "I see one dog and two ___.", a: "Dogs", options: ["Dog", "Dogs"] },
-        { q: "One star, many ___ in the sky.", a: "Stars", options: ["Star", "Stars"] },
-        { q: "One flower, five ___ in the garden.", a: "Flowers", options: ["Flower", "Flowers"] },
-        { q: "I have one ball, you have four ___.", a: "Balls", options: ["Ball", "Balls"] },
-        { q: "One car, two ___ on the street.", a: "Cars", options: ["Car", "Cars"] },
-        { q: "Look! One bird, six ___.", a: "Birds", options: ["Bird", "Birds"] },
-        { q: "One banana, three ___.", a: "Bananas", options: ["Banana", "Bananas"] },
-        { q: "I see one tree and ten ___.", a: "Trees", options: ["Tree", "Trees"] }
+        { q: "One dog, many ___.", a: "Dogs", options: ["Dog", "Dogs"] }
       ],
       prepositions: [
         { q: "The ball is ___ the box.", a: "In", options: ["In", "On", "Under"] },
         { q: "The cat is ___ the table.", a: "On", options: ["In", "On", "Under"] },
-        { q: "The shoes are ___ the bed.", a: "Under", options: ["In", "On", "Under"] },
-        { q: "The pencil is ___ the cup.", a: "In", options: ["In", "On", "Under"] },
-        { q: "The sun is ___ the sky.", a: "In", options: ["In", "On", "Under"] },
-        { q: "The hat is ___ your head.", a: "On", options: ["In", "On", "Under"] },
-        { q: "The toy is ___ the chair.", a: "Under", options: ["In", "On", "Under"] },
-        { q: "The apple is ___ the plate.", a: "On", options: ["In", "On", "Under"] },
-        { q: "A fish is ___ the water.", a: "In", options: ["In", "On", "Under"] },
-        { q: "My bag is ___ the desk.", a: "Under", options: ["In", "On", "Under"] }
+        { q: "The toy is ___ the bed.", a: "Under", options: ["In", "On", "Under"] }
       ],
       can: [
         { q: "A bird ___ fly.", a: "Can", options: ["Can", "Can't"] },
         { q: "A fish ___ walk.", a: "Can't", options: ["Can", "Can't"] },
-        { q: "A frog ___ jump.", a: "Can", options: ["Can", "Can't"] },
-        { q: "A baby ___ drive.", a: "Can't", options: ["Can", "Can't"] },
-        { q: "I ___ clap my hands.", a: "Can", options: ["Can", "Can't"] },
-        { q: "A lion ___ sing.", a: "Can't", options: ["Can", "Can't"] },
-        { q: "A monkey ___ climb trees.", a: "Can", options: ["Can", "Can't"] },
-        { q: "A cat ___ fly.", a: "Can't", options: ["Can", "Can't"] },
-        { q: "A kangaroo ___ hop.", a: "Can", options: ["Can", "Can't"] },
-        { q: "A snake ___ run.", a: "Can't", options: ["Can", "Can't"] }
+        { q: "A frog ___ jump.", a: "Can", options: ["Can", "Can't"] }
       ]
     };
 
@@ -220,15 +180,21 @@
       element.classList.add('active');
       loadTask();
     }
+
     function awardPoint() {
-    // Получаем текущий прогресс
-    let score = parseInt(localStorage.getItem('ll_score')) || 0;
-    score++; // Добавляем очко за верный ответ
-    localStorage.setItem('ll_score', score);
-    
-    // Визуальный эффект успеха на странице грамматики
-    alert("Correct! Your Knowledge Tree has grown! 🌳");
+      // КЛЮЧЕВАЯ ФУНКЦИЯ: Связь с главной страницей
+      let score = parseInt(localStorage.getItem('ll_score')) || 0;
+      score++; 
+      localStorage.setItem('ll_score', score);
+      
+      // Мини-эффект звука
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = audioCtx.createOscillator();
+      osc.connect(audioCtx.destination);
+      osc.frequency.setValueAtTime(880, audioCtx.currentTime);
+      osc.start(); osc.stop(audioCtx.currentTime + 0.1);
     }
+
     function loadTask() {
       const tasks = gameData[activeTopic];
       activeTask = tasks[Math.floor(Math.random() * tasks.length)];
@@ -251,8 +217,9 @@
     function checkResult(choice, btn) {
       if (choice === activeTask.a) {
         btn.classList.add('correct');
-        document.getElementById('question').innerText = "Excellent! You found the right answer";
-        setTimeout(loadTask, 1500);
+        awardPoint(); // НАЧИСЛЯЕМ ОЧКО!
+        document.getElementById('question').innerText = "Correct! +1 Knowledge Point! 🌟";
+        setTimeout(loadTask, 1200);
       } else {
         btn.classList.add('wrong');
         setTimeout(() => btn.classList.remove('wrong'), 500);
