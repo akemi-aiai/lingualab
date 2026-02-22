@@ -4,6 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LinguaLab — Interactive English for Kids</title>
+
+  <meta name="author" content="LinguaLab" />
+  <meta name="copyright" content="LinguaLab 2026" />
+  <meta name="description" content="LinguaLab — interactive English for preschool kids: grammar, vocabulary games, fun homework, and parent guides." />
+
+  <meta property="og:title" content="LinguaLab — Interactive English for Kids" />
+  <meta property="og:description" content="Playful English learning: grammar, vocabulary games, fun homework, and parent guides." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
   <style>
     :root{
       --primary:#2563eb;
@@ -15,6 +28,7 @@
       --navy:#1f4e79;
       --radius:16px;
     }
+
     *{ box-sizing:border-box; margin:0; padding:0; }
     html{ scroll-behavior:smooth; }
     body{
@@ -24,153 +38,179 @@
       line-height:1.6;
       padding-top:86px; 
     }
+
     a{ color:inherit; text-decoration:none; }
+    .skip-link{
+      position:absolute; left:-999px; top:10px;
+      background:#fff; color:var(--text); padding:10px 14px;
+      border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.12); z-index:2000;
+    }
+    .skip-link:focus{ left:12px; }
+
+    /* NAV */
     .navbar{
-      position:fixed;
-      top:0; left:0;
-      width:100%;
-      z-index:1000;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      padding:12px 40px;
-      background:#fff;
+      position:fixed; top:0; left:0; width:100%; z-index:1000;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px; padding:12px 40px; background:#fff;
       box-shadow:0 4px 20px rgba(0,0,0,.05);
     }
+    .navbar-left{ display:flex; align-items:center; gap:10px; }
     .nav-logo{ height:54px; width:auto; display:block; }
-    .nav-title{ font-size:20px; font-weight:800; color:var(--navy); }
-    .navbar-right{ display:flex; gap:10px; }
-    .navbar-right a{ color:var(--navy); font-weight:600; padding:8px 12px; border-radius:12px; transition: 0.2s; }
+    .nav-title{ font-size:20px; font-weight:800; color:var(--navy); letter-spacing:.2px; }
+    .navbar-right{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
+    .navbar-right a{ color:var(--navy); font-weight:600; padding:8px 12px; border-radius:12px; transition:0.2s; }
     .navbar-right a:hover{ background:var(--navy); color:#fff; }
-    
+
+    /* HERO */
     .hero{ padding:96px 8% 84px; text-align:center; background:linear-gradient(135deg,#2563eb,#7c3aed); color:#fff; }
     .hero h1{ font-size:clamp(28px, 4vw, 44px); margin-bottom:14px; }
-    .hero .cta{ display:inline-block; margin-top:28px; background:var(--accent); color:#fff; font-weight:700; padding:14px 28px; border-radius:999px; }
+    .hero p{ max-width:860px; margin:0 auto; font-size:clamp(16px, 1.6vw, 20px); color:rgba(255,255,255,.92); }
+    .hero .cta{ display:inline-block; margin-top:28px; background:var(--accent); color:#fff; font-weight:700; padding:14px 28px; border-radius:999px; transition:0.2s; }
 
+    /* FEATURES */
     .features{ padding:72px 8% 70px; text-align:center; }
-    .cards{ display:grid; grid-template-columns:repeat(4, 1fr); gap:20px; margin-top:20px; }
-    .card{ background:var(--card-bg); border-radius:var(--radius); overflow:hidden; text-align:left; box-shadow:0 6px 24px rgba(0,0,0,0.06); transition: 0.2s; }
-    .card:hover{ transform:translateY(-5px); }
-    .card img{ width:100%; height:140px; object-fit:cover; }
-    .card-body{ padding:15px; }
+    .features h2{ font-size:clamp(22px, 2.4vw, 32px); margin-bottom:22px; }
+    .cards{ display:grid; grid-template-columns:repeat(4, 1fr); gap:20px; }
+    .card{ display:block; background:var(--card-bg); border-radius:var(--radius); overflow:hidden; text-align:left; box-shadow:0 6px 24px rgba(0,0,0,.06); transition:0.2s; }
+    .card:hover{ transform:translateY(-5px); box-shadow:0 12px 34px rgba(0,0,0,.1); }
+    .card img{ width:100%; height:140px; object-fit:cover; display:block; }
+    .card-body{ padding:14px; }
+    .card h3{ font-size:16px; margin-bottom:6px; }
+    .card p{ font-size:14px; color:var(--muted); }
 
+    /* AI GENERATOR */
     .ai-section { padding: 70px 8%; background: #edf2f7; text-align: center; }
     .ai-container { max-width: 600px; margin: 0 auto; background: var(--card-bg); padding: 30px; border-radius: var(--radius); box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
     .ai-input, .ai-select { width: 100%; padding: 12px; margin: 10px 0; border-radius: 12px; border: 1px solid #e2e8f0; font-family: inherit; }
     .ai-btn { width: 100%; background: var(--accent); color: #fff; border: none; padding: 14px; border-radius: 999px; font-weight: 700; cursor: pointer; transition: 0.2s; }
-    .ai-btn:hover { filter: brightness(1.1); }
-    #ai-result { margin-top: 20px; padding: 20px; border-radius: 12px; background: #fdf2f8; border-left: 5px solid var(--accent); text-align: left; display: none; white-space: pre-wrap; }
+    #ai-result { margin-top: 20px; padding: 20px; border-radius: 12px; background: #fdf2f8; border-left: 5px solid var(--accent); text-align: left; display: none; white-space: pre-wrap; font-size: 14px; }
     .loader { display: none; margin: 15px 0; color: var(--primary); font-weight: 600; }
 
+    /* ABOUT */
     .about{ padding:70px 8%; background:#fff; text-align:center; }
-    footer{ background:#0f172a; color:#e2e8f0; padding:40px 8%; text-align:center; }
+    footer{ background:#0f172a; color:#e2e8f0; padding:40px 8%; text-align:center; font-size:14px; }
+    footer a{ color:#93c5fd; }
+
+    @media (max-width: 992px){ .cards{ grid-template-columns:repeat(2, 1fr); } }
+    @media (max-width: 600px){ .cards{ grid-template-columns:1fr; } .navbar{ padding:10px 14px; } }
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
   <header class="navbar">
     <div class="navbar-left">
+      <img src="assets/img/logo.png" alt="Logo" class="nav-logo" />
       <span class="nav-title">LinguaLab</span>
     </div>
     <nav class="navbar-right">
-      <a href="#">Grammar</a>
-      <a href="#">Vocabulary</a>
-      <a href="#">Homework</a>
+      <a href="grammar.html">Grammar Magic</a>
+      <a href="vocabulary.html">Word Bank</a>
+      <a href="exercises.html">Fun Homework</a>
+      <a href="parents.html">Wiki Parents</a>
     </nav>
   </header>
 
   <main id="main">
     <section class="hero">
       <h1>Learn English the Fun Way</h1>
-      <p>Interactive tasks created by AI for young learners.</p>
-      <a class="cta" href="#ai-tool">Try AI Generator</a>
+      <p>Welcome to LinguaLab — making English simple and enjoyable for kids.</p>
+      <a class="cta" href="#ai-tool">Try AI Magic</a>
+    </section>
+
+    <section class="features">
+      <h2>Explore LinguaLab</h2>
+      <div class="cards">
+        <a href="grammar.html" class="card">
+          <img src="assets/img/grammar.png" alt="Grammar" />
+          <div class="card-body"><h3>Grammar Magic</h3><p>Playful grammar for kids.</p></div>
+        </a>
+        <a href="vocabulary.html" class="card">
+          <img src="assets/img/word.png" alt="Word" />
+          <div class="card-body"><h3>Word Bank</h3><p>Visual memory tools.</p></div>
+        </a>
+        <a href="exercises.html" class="card">
+          <img src="assets/img/hw.png" alt="HW" />
+          <div class="card-body"><h3>Fun Homework</h3><p>Creative tasks.</p></div>
+        </a>
+        <a href="parents.html" class="card">
+          <img src="assets/img/parents.png" alt="Parents" />
+          <div class="card-body"><h3>Parents Wiki</h3><p>Guides for parents.</p></div>
+        </a>
+      </div>
     </section>
 
     <section class="ai-section" id="ai-tool">
       <div class="ai-container">
-        <h2>Magic Task Generator</h2>
-        <p style="color:var(--muted); margin-bottom:20px;">Choose an animal and task type!</p>
-        
+        <h2>✨ AI Task Generator</h2>
         <input type="password" id="apiKey" class="ai-input" placeholder="Paste Gemini API Key here...">
-        
         <select id="animal" class="ai-select">
-          <option value="Giraffe">Giraffe</option>
-          <option value="Panda">Panda</option>
-          <option value="Zebra">Zebra</option>
-          <option value="Lion">Lion</option>
-          <option value="Elephant">Elephant</option>
+          <option value="Giraffe">Giraffe 🦒</option>
+          <option value="Panda">Panda 🐼</option>
+          <option value="Lion">Lion 🦁</option>
         </select>
-
         <select id="taskType" class="ai-select">
-          <option value="riddle">Magic Riddle (Загадка)</option>
-          <option value="story">Short Story (Сказка)</option>
-          <option value="action">Action Game (Разминка)</option>
+          <option value="riddle">Magic Riddle</option>
+          <option value="story">Short Story</option>
         </select>
-
-        <button class="ai-btn" onclick="generateAiTask()">Generate Task</button>
-        <div class="loader" id="ai-loader">AI is thinking...</div>
+        <button class="ai-btn" onclick="generateAiTask()">Generate Task ✨</button>
+        <div class="loader" id="ai-loader">Connecting to AI... 🧠</div>
         <div id="ai-result"></div>
       </div>
     </section>
 
     <section class="about">
       <h2>About LinguaLab</h2>
-      <p>Combining EdTech and AI for the next generation of students.</p>
+      <p>Combining digital education and playful interaction for preschoolers.</p>
     </section>
   </main>
 
   <footer>
-    <p>© 2026 LinguaLab. Powered by Gemini AI.</p>
+    <p>© 2026 LinguaLab. Inspired by TOT Longman®.</p>
+    <p><a href="privacy.html">Privacy</a> | <a href="terms.html">Terms</a></p>
   </footer>
 
   <script>
     async function generateAiTask() {
-        console.log("Button clicked!");
-        
-        const apiKey = document.getElementById('apiKey').value;
-        const animal = document.getElementById('animal').value;
-        const taskType = document.getElementById('taskType').value;
-        const resultDiv = document.getElementById('ai-result');
-        const loader = document.getElementById('ai-loader');
+      const apiKey = document.getElementById('apiKey').value;
+      const animal = document.getElementById('animal').value;
+      const taskType = document.getElementById('taskType').value;
+      const resultDiv = document.getElementById('ai-result');
+      const loader = document.getElementById('ai-loader');
 
-        if (!apiKey) { 
-            alert("Please enter your API Key!"); 
-            return; 
+      if (!apiKey) { alert("Please enter API Key!"); return; }
+
+      loader.style.display = "block";
+      resultDiv.style.display = "none";
+
+      try {
+        // Пробуем стандартную генерацию (v1beta)
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ contents: [{ parts: [{ text: `Create a ${taskType} about ${animal} for a 5 year old child. Max 15 words.` }] }] })
+        });
+
+        const data = await response.json();
+
+        if (data.error) {
+          // ЕСЛИ ОШИБКА — ЗАПУСКАЕМ ДИАГНОСТИКУ МОДЕЛЕЙ
+          const listRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
+          const listData = await listRes.json();
+          const modelList = listData.models ? listData.models.map(m => m.name).join("\n") : "No models found";
+          
+          throw new Error(`Model error. Available models for your key:\n\n${modelList}`);
         }
 
-        loader.style.display = "block";
-        resultDiv.style.display = "none";
+        resultDiv.innerText = data.candidates[0].content.parts[0].text;
+        resultDiv.style.display = "block";
 
-        const prompt = `Act as an expert ESL teacher for children aged 4-6. 
-        Create a ${taskType} about a ${animal}. 
-        Rules: 1. Max 15 simple words. 2. Use Present Simple. 3. Include emojis.`;
-
-        try {
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    contents: [{ parts: [{ text: prompt }] }]
-                })
-            });
-
-            const data = await response.json();
-            
-            if (data.error) throw new Error(data.error.message);
-
-            if (data.candidates && data.candidates[0].content) {
-                const text = data.candidates[0].content.parts[0].text;
-                resultDiv.innerText = text;
-                resultDiv.style.display = "block";
-            } else {
-                throw new Error("No response from AI.");
-            }
-        } catch (error) {
-            console.error(error);
-            alert("Error: " + error.message);
-        } finally {
-            loader.style.display = "none";
-        }
+      } catch (error) {
+        resultDiv.innerText = "DIAGNOSTIC INFO:\n" + error.message;
+        resultDiv.style.display = "block";
+      } finally {
+        loader.style.display = "none";
+      }
     }
   </script>
 </body>
