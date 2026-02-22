@@ -3,152 +3,132 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LinguaLab — Interactive English for Kids</title>
+  <title>LinguaLab — Interactive Language Magic</title>
 
-  <meta name="author" content="LinguaLab" />
-  <meta name="copyright" content="LinguaLab 2026" />
-  <meta name="description" content="LinguaLab — interactive English for preschool kids: grammar, vocabulary games, fun homework, and parent guides." />
-
-  <meta property="og:title" content="LinguaLab — Interactive English for Kids" />
-  <meta property="og:description" content="Playful English learning: grammar, vocabulary games, fun homework, and parent guides." />
-  <meta property="og:type" content="website" />
-
+  <meta name="description" content="Safe and magical language learning platform for preschool children. Compliance with GDPR, COPPA, and RF Privacy Laws." />
+  
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 
   <style>
-    :root{
-      --primary:#2563eb;
-      --accent:#f97316;
-      --bg:#f8fafc;
-      --card-bg:#ffffff;
-      --text:#0f172a;
-      --muted:#64748b;
-      --navy:#1f4e79;
-      --radius:16px;
+    :root {
+      --primary: #2563eb;
+      --accent: #f97316;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --navy: #1f4e79;
+      --radius: 16px;
     }
 
-    *{ box-sizing:border-box; margin:0; padding:0; }
-    html{ scroll-behavior:smooth; }
-    body{
-      font-family:'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      line-height:1.6;
-      padding-top:86px; 
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-top: 86px;
     }
 
-    a{ color:inherit; text-decoration:none; }
-    .skip-link{
-      position:absolute; left:-999px; top:10px;
-      background:#fff; color:var(--text); padding:10px 14px;
-      border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.12); z-index:2000;
+    /* PRIVACY BANNER */
+    .cookie-banner {
+      position: fixed; bottom: 0; width: 100%; background: #fff;
+      padding: 15px 40px; border-top: 1px solid #e2e8f0;
+      display: flex; justify-content: space-between; align-items: center;
+      z-index: 2000; font-size: 13px; box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
     }
-    .skip-link:focus{ left:12px; }
-    
-    /* ACCESSIBILITY: keyboard focus */
-    :focus-visible{
-      outline: 3px solid rgba(34,211,238,.95); /* бирюза */
-      outline-offset: 4px;
-    }
-    
-    .navbar-right a:focus-visible,
-    .cta:focus-visible,
-    .ai-btn:focus-visible,
-    .ai-input:focus-visible,
-    .ai-select:focus-visible,
-    .card:focus-visible{
-      border-radius: 14px;
-    }
+    .cookie-btn { background: var(--navy); color: #fff; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; }
+
     /* NAV */
-    .navbar{
-      position:fixed; top:0; left:0; width:100%; z-index:1000;
-      display:flex; align-items:center; justify-content:space-between;
-      gap:16px; padding:12px 40px; background:#fff;
-      box-shadow:0 4px 20px rgba(0,0,0,.05);
+    .navbar {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 40px; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,.05);
     }
-    .navbar-left{ display:flex; align-items:center; gap:10px; }
-    .nav-logo{ height:54px; width:auto; display:block; }
-    .nav-title{ font-size:20px; font-weight:800; color:var(--navy); letter-spacing:.2px; }
-    .navbar-right{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
-    .navbar-right a{ color:var(--navy); font-weight:600; padding:8px 12px; border-radius:12px; transition:0.2s; }
-    .navbar-right a:hover{ background:var(--navy); color:#fff; }
+    .nav-logo { height: 50px; width: auto; }
+    .nav-title { font-size: 22px; font-weight: 800; color: var(--navy); letter-spacing: -0.5px; }
+    .navbar-right { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+    .navbar-right a { color: var(--navy); font-weight: 600; padding: 8px 14px; border-radius: 12px; transition: 0.2s; text-decoration: none; font-size: 14px; }
+    .navbar-right a:hover { background: var(--navy); color: #fff; }
 
     /* HERO */
-    .hero{ padding:96px 8% 84px; text-align:center; background: linear-gradient(135deg,#22d3ee,#a78bfa); color:#fff; }   
-    .hero h1{ font-size:clamp(28px, 4vw, 44px); margin-bottom:14px; }
-    .hero p{ max-width:860px; margin:0 auto; font-size:clamp(16px, 1.6vw, 20px); color:rgba(255,255,255,.92); }
-    .hero .cta{ display:inline-block; margin-top:28px; background:rgba(255,255,255,.95); color:#0f172a; font-weight:800; padding:14px 28px; border-radius:999px; border:1px solid rgba(15,23,42,.12); box-shadow:0 12px 30px rgba(2,6,23,.18); transition:0.2s; }
-    .hero .cta:hover{ transform:translateY(-1px); background:#ffffff; box-shadow:0 16px 38px rgba(2,6,23,.22); }
+    .hero { 
+      padding: 110px 8%; text-align: center; 
+      background: linear-gradient(135deg, #2563eb, #7c3aed); color: #fff; 
+    }
+    .hero h1 { font-size: clamp(32px, 5vw, 48px); font-weight: 800; margin-bottom: 20px; }
+    .hero p { max-width: 800px; margin: 0 auto 30px; font-size: 19px; opacity: 0.95; }
+    .hero .cta { background: var(--accent); color: #fff; padding: 16px 36px; border-radius: 999px; font-weight: 700; display: inline-block; text-decoration: none; box-shadow: 0 10px 20px rgba(0,0,0,0.1); transition: 0.3s; }
+    .hero .cta:hover { transform: translateY(-2px); box-shadow: 0 15px 25px rgba(0,0,0,0.15); }
+
+    /* AI SECTION */
+    .ai-section { padding: 80px 8%; background: #f1f5f9; text-align: center; }
+    .ai-container { 
+      max-width: 600px; margin: 0 auto; background: #fff; 
+      padding: 40px; border-radius: var(--radius); 
+      box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+    }
+    .ai-container h2 { margin-bottom: 10px; color: var(--navy); font-weight: 800; }
+    .ai-subtitle { font-size: 14px; color: var(--muted); margin-bottom: 25px; }
+
+    .form-group { text-align: left; margin-bottom: 18px; }
+    .form-label { display: block; font-weight: 700; font-size: 13px; margin-bottom: 6px; color: var(--navy); text-transform: uppercase; }
+    .ai-input, .ai-select { 
+      width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #cbd5e1; 
+      font-size: 15px; font-family: inherit;
+    }
+    
+    .legal-notice { font-size: 11px; color: var(--muted); margin-bottom: 20px; line-height: 1.4; text-align: left; background: #f8fafc; padding: 10px; border-radius: 8px; }
+
+    .ai-btn { 
+      width: 100%; background: var(--accent); color: #fff; border: none; 
+      padding: 16px; border-radius: 999px; font-weight: 700; font-size: 16px;
+      cursor: pointer; transition: 0.2s; box-shadow: 0 8px 16px rgba(249, 115, 22, 0.2);
+    }
+    .ai-btn:disabled { background: #94a3b8; box-shadow: none; }
+
+    #ai-result { 
+      margin-top: 30px; padding: 25px; border-radius: 12px; 
+      background: #fdf2f8; border-left: 5px solid var(--accent);
+      text-align: left; display: none; font-size: 16px; color: var(--text);
+    }
+
     /* FEATURES */
-    .features{ padding:72px 8% 70px; text-align:center; }
-    .features h2{ font-size:clamp(22px, 2.4vw, 32px); margin-bottom:22px; }
-    .cards{ display:grid; grid-template-columns:repeat(4, 1fr); gap:20px; }
-    .card{ display:block; background:var(--card-bg); border-radius:var(--radius); overflow:hidden; text-align:left; box-shadow:0 6px 24px rgba(0,0,0,.06); transition:0.2s; }
-    .card:hover{ transform:translateY(-5px); box-shadow:0 12px 34px rgba(0,0,0,.1); }
-    .card img{ width:100%; height:140px; object-fit:cover; display:block; }
-    .card-body{ padding:14px; }
-    .card h3{ font-size:16px; margin-bottom:6px; }
-    .card p{ font-size:14px; color:var(--muted); }
+    .features { padding: 80px 8%; text-align: center; }
+    .features h2 { font-size: 28px; font-weight: 800; margin-bottom: 40px; }
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; }
+    .card { 
+      background: #fff; border-radius: var(--radius); overflow: hidden;
+      text-decoration: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+      transition: 0.3s; border: 1px solid #e2e8f0; text-align: left;
+    }
+    .card:hover { transform: translateY(-5px); border-color: var(--primary); }
+    .card img { width: 100%; height: 140px; object-fit: cover; }
+    .card-body { padding: 20px; }
+    .card h3 { color: var(--navy); margin-bottom: 8px; font-size: 18px; font-weight: 700; }
+    .card p { font-size: 14px; color: var(--muted); }
 
-    /* AI GENERATOR */
-    .ai-section { padding: 70px 8%; background: #edf2f7; text-align: center; }
-    .ai-container { max-width: 600px; margin: 0 auto; background: var(--card-bg); padding: 30px; border-radius: var(--radius); box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
-    .ai-input, .ai-select { width: 100%; padding: 12px; margin: 10px 0; border-radius: 12px; border: 1px solid #e2e8f0; font-family: inherit; }
-    .ai-btn { width: 100%; background: var(--accent); color: #fff; border: none; padding: 14px; border-radius: 999px; font-weight: 700; cursor: pointer; transition: 0.2s; }
-    #ai-result { margin-top: 20px; padding: 20px; border-radius: 12px; background: #fdf2f8; border-left: 5px solid var(--accent); text-align: left; display: none; white-space: pre-wrap; font-size: 14px; }
-    .loader { display: none; margin: 15px 0; color: var(--primary); font-weight: 600; }
-    .ai-label{
-    display:block;
-    text-align:left;
-    font-weight:700;
-    font-size:13px;
-    color:var(--text);
-    margin:12px 0 6px;
-  }
-  .ai-note{
-    margin: 0 0 14px;
-    color: var(--muted);
-    font-size: 13px;
-    text-align: left;
-  }
-  .ai-advanced{
-    text-align:left;
-    margin: 10px 0 14px;
-    padding: 12px;
-    border-radius: 14px;
-    border: 1px solid #e2e8f0;
-    background: #f8fafc;
-  }
-  .ai-advanced summary{
-    cursor:pointer;
-    font-weight:800;
-    color:var(--navy);
-    list-style:none;
-  }
-  .ai-help{
-    margin-top:8px;
-    font-size:12px;
-    color:var(--muted);
-    line-height:1.45;
-  }
+    footer { background: #0f172a; color: #94a3b8; padding: 60px 8%; text-align: center; font-size: 14px; }
+    footer a { color: #fff; text-decoration: none; margin: 0 10px; }
 
-    /* ABOUT */
-    .about{ padding:70px 8%; background:#fff; text-align:center; }
-    footer{ background:#0f172a; color:#e2e8f0; padding:40px 8%; text-align:center; font-size:14px; }
-    footer a{ color:#93c5fd; }
-
-    @media (max-width: 992px){ .cards{ grid-template-columns:repeat(2, 1fr); } }
-    @media (max-width: 600px){ .cards{ grid-template-columns:1fr; } .navbar{ padding:10px 14px; } }
+    @media (max-width: 600px) {
+      .navbar { padding: 10px 20px; }
+      .navbar-right { width: 100%; justify-content: center; margin-top: 5px; }
+      .hero { padding: 70px 6% 60px; }
+    }
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="cookie-banner" id="cb">
+    <p>We use local storage for your safety and best experience. GDPR & COPPA Compliant.</p>
+    <button class="cookie-btn" onclick="document.getElementById('cb').style.display='none'">Accept</button>
+  </div>
 
   <header class="navbar">
     <div class="navbar-left">
-      <img src="assets/img/logo.png" alt="Logo" class="nav-logo" />
       <span class="nav-title">LinguaLab</span>
     </div>
     <nav class="navbar-right">
@@ -161,136 +141,134 @@
 
   <main id="main">
     <section class="hero">
-      <h1>Learn English the Fun Way</h1>
-      <p>Welcome to LinguaLab — making English simple and enjoyable for kids.</p>
-      <a class="cta" href="#ai-tool">Try AI Magic</a>
+      <h1>Language Magic</h1>
+      <p>Bilingual adventure for preschool explorers and their parents. Secure, smart and fun.</p>
+      <a class="cta" href="#ai-tool">Start Journey</a>
+    </section>
+
+    <section class="ai-section" id="ai-tool">
+      <div class="ai-container">
+        <h2>AI Magic Generator</h2>
+        <p class="ai-subtitle">Create a unique learning task instantly!</p>
+        
+        <div class="legal-notice">
+          <strong>Teacher & Parent Note:</strong> Your API Key is stored only in your browser. We respect GDPR and COPPA privacy standards.
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Secure Access Key</label>
+          <input type="password" id="apiKey" class="ai-input" placeholder="Paste your Gemini Key here...">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Choose Language</label>
+          <select id="subject" class="ai-select">
+            <option value="English">English</option>
+            <option value="Chinese">Chinese (with Pinyin)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Pick an Animal</label>
+          <select id="animal" class="ai-select">
+            <option value="Giraffe">Giraffe</option>
+            <option value="Panda">Panda</option>
+            <option value="Lion">Lion</option>
+            <option value="Elephant">Elephant</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Task Type</label>
+          <select id="taskType" class="ai-select">
+            <option value="riddle">Magic Riddle</option>
+            <option value="story">Short Story</option>
+          </select>
+        </div>
+
+        <button class="ai-btn" id="aiBtn" onclick="generateAiTask()">Create Task</button>
+        <div id="ai-result"></div>
+      </div>
     </section>
 
     <section class="features">
       <h2>Explore LinguaLab</h2>
-      <div class="cards">
+      <div class="cards-grid">
         <a href="grammar.html" class="card">
           <img src="assets/img/grammar.png" alt="Grammar" />
-          <div class="card-body"><h3>Grammar Magic</h3><p>Playful grammar for kids</p></div>
+          <div class="card-body"><h3>Grammar Magic</h3><p>Playful grammar patterns for little learners</p></div>
         </a>
         <a href="vocabulary.html" class="card">
           <img src="assets/img/word.png" alt="Word" />
-          <div class="card-body"><h3>Word Bank</h3><p>Visual memory tools</p></div>
+          <div class="card-body"><h3>Word Bank</h3><p>Visual memory tools for new words</p></div>
         </a>
         <a href="exercises.html" class="card">
-          <img src="assets/img/hw.png" alt="HW" />
-          <div class="card-body"><h3>Fun Homework</h3><p>Creative tasks</p></div>
+          <img src="assets/img/hw.png" alt="Homework" />
+          <div class="card-body"><h3>Fun Homework</h3><p>Creative activities children love to do</p></div>
         </a>
         <a href="parents.html" class="card">
           <img src="assets/img/parents.png" alt="Parents" />
-          <div class="card-body"><h3>Wiki Parents</h3><p>Guides for parents</p></div>
+          <div class="card-body"><h3>Wiki Parents</h3><p>Essential guides and support for you</p></div>
         </a>
       </div>
-    </section>
-
-    <section class="ai-section" id="ai-tool">
-  <div class="ai-container">
-    <h2>AI Task Generator</h2>
-    <input type="password" id="apiKey" class="ai-input" placeholder="Paste Gemini API Key here...">
-    
-    <select id="animal" class="ai-select">
-      <option value="Giraffe">Giraffe</option>
-      <option value="Panda">Panda</option>
-      <option value="Lion">Lion</option>
-    </select>
-
-    <select id="taskType" class="ai-select">
-      <option value="riddle">Magic Riddle</option>
-      <option value="story">Short Story</option>
-    </select>
-
-    <button class="ai-btn" id="aiBtn" onclick="generateAiTask()">Generate Task</button>
-    
-    <div class="loader" id="loader">Connecting to AI...</div>
-    <div id="ai-result"></div>
-  </div>
-</section>
-
-    <section class="about">
-      <h2>About LinguaLab</h2>
-      <p>Combining digital education and playful interaction for preschoolers.</p>
     </section>
   </main>
 
   <footer>
-    <p>© 2026 LinguaLab. Inspired by TOT Longman®.</p>
-    <p><a href="privacy.html">Privacy</a> | <a href="terms.html">Terms</a></p>
+    <p>&copy; 2026 LinguaLab. Making Education Magical.</p>
+    <p style="margin-top: 15px; font-size: 12px;">
+      <a href="#">Privacy Policy</a> | <a href="#">COPPA Compliance</a> | <a href="#">GDPR</a>
+    </p>
   </footer>
 
   <script>
-    let cooldownTimer;
-    
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedKey = localStorage.getItem('ll_magic_key');
+      if (savedKey) document.getElementById('apiKey').value = savedKey;
+    });
+
     async function generateAiTask() {
-      const apiKey = document.getElementById('apiKey').value;
+      const key = document.getElementById('apiKey').value.trim();
+      const subject = document.getElementById('subject').value;
       const animal = document.getElementById('animal').value;
-      const taskType = document.getElementById('taskType').value;
-      const resultDiv = document.getElementById('ai-result');
-      const loader = document.getElementById('loader');
+      const type = document.getElementById('taskType').value;
+      const result = document.getElementById('ai-result');
       const btn = document.getElementById('aiBtn');
 
-      if (!apiKey) { alert("Please enter API Key!"); return; }
+      if (!key) { alert("Please enter your magic key!"); return; }
+      localStorage.setItem('ll_magic_key', key);
 
-      loader.style.display = "block";
-      resultDiv.style.display = "none";
+      btn.disabled = true;
+      btn.innerText = "Casting a spell...";
+      result.style.display = "none";
 
-      const prompt = `ESL Teacher for 5yo. Create a ${taskType} about ${animal}. Max 15 words. Simple English.`;
+      const prompt = `Act as an ESL Teacher for 5yo. Create a very simple ${type} about a ${animal} in ${subject}. Max 15 words. Simple vocabulary. ${subject === 'Chinese' ? 'Include Pinyin.' : ''} No emojis in result.`;
 
       try {
-        // модель Lite
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${apiKey}`, {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${key}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
         });
 
         const data = await response.json();
-
-        // Обработка лимитов (429 ошибка)
+        
         if (response.status === 429) {
-          startCooldown(btn, resultDiv);
-          return;
+          result.innerText = "The magic is cooling down. Please wait 60 seconds.";
+        } else if (data.candidates) {
+          result.innerText = data.candidates[0].content.parts[0].text;
+        } else {
+          result.innerText = "Magic failed. Please check your key.";
         }
-
-        if (data.candidates && data.candidates[0].content) {
-          resultDiv.innerText = data.candidates[0].content.parts[0].text;
-          resultDiv.style.display = "block";
-        } else if (data.error) {
-          resultDiv.innerText = "API Error: " + data.error.message;
-          resultDiv.style.display = "block";
-        }
+        result.style.display = "block";
       } catch (e) {
-        resultDiv.innerText = "Error! Connection failed.";
-        resultDiv.style.display = "block";
+        result.innerText = "Magic connection lost.";
+        result.style.display = "block";
       } finally {
-        loader.style.display = "none";
+        btn.disabled = false;
+        btn.innerText = "Create Task";
       }
     }
-
-    function startCooldown(button, display) {
-      let sec = 60;
-      button.disabled = true;
-      display.style.display = "block";
-      display.style.color = "#f97316";
-      display.innerText = "ИИ немного устал. Отдыхаем 60 секунд...";
-      
-      clearInterval(cooldownTimer);
-      cooldownTimer = setInterval(() => {
-        sec--;
-        button.innerText = `Wait ${sec}s...`;
-        if (sec <= 0) {
-          clearInterval(cooldownTimer);
-          button.disabled = false;
-          button.innerText = "Generate Task";
-          display.innerText = "Готово! Можно пробовать снова.";
-          display.style.color = "inherit";
-        }
-      }, 1000);
-    }
-</script>
+  </script>
 </body>
 </html>
