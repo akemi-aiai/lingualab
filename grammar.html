@@ -118,9 +118,14 @@
 
   <main>
     <section class="hero">
-      <h1>Grammar Magic</h1>
-      <p>Master English patterns through play and practice.</p>
-    </section>
+  <h1>Grammar Magic</h1>
+  <p>Discover English through fun patterns and interactive practice.</p>
+  <a href="index.html" style="display: inline-block; margin-top: 15px; color: #fff; text-decoration: none; font-weight: 600; border: 1.5px solid rgba(255,255,255,0.4); padding: 8px 20px; border-radius: 12px; font-size: 14px; transition: 0.3s;" 
+     onmouseover="this.style.background='rgba(255,255,255,0.1)'" 
+     onmouseout="this.style.background='transparent'">
+    Back to Home
+  </a>
+</section>
 
     <div class="main-container">
       <div class="task-card" id="task-card">
@@ -128,18 +133,18 @@
         <div class="answers-grid" id="answer-grid"></div>
       </div>
 
-      <h2 class="topic-title">Explore Topics</h2>
+      <h2 class="topic-title">Our Units</h2>
       <div class="cards-grid">
         <div class="card-item" onclick="selectTopic('he_she', this)">
-          <h3>He or She?</h3>
+          <h3>Friends & Family</h3>
           <p>Personal pronouns practice</p>
         </div>
         <div class="card-item" onclick="selectTopic('plural', this)">
-          <h3>One or Many</h3>
+          <h3>Counting World</h3>
           <p>Singular and plural nouns</p>
         </div>
         <div class="card-item" onclick="selectTopic('prepositions', this)">
-          <h3>Where is it?</h3>
+          <h3>Secret Places</h3>
           <p>In, On, Under and more</p>
         </div>
         <div class="card-item" onclick="selectTopic('can', this)">
@@ -238,7 +243,7 @@
     function checkResult(choice, btn) {
       if (choice === activeTask.a) {
         btn.classList.add('correct');
-        document.getElementById('question').innerText = "Well done! Correct answer.";
+        document.getElementById('question').innerText = "Excellent! You found the right answer";
         setTimeout(loadTask, 1500);
       } else {
         btn.classList.add('wrong');
