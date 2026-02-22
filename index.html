@@ -46,7 +46,21 @@
       border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.12); z-index:2000;
     }
     .skip-link:focus{ left:12px; }
-
+    
+    /* ACCESSIBILITY: keyboard focus */
+    :focus-visible{
+      outline: 3px solid rgba(34,211,238,.95); /* бирюза */
+      outline-offset: 4px;
+    }
+    
+    .navbar-right a:focus-visible,
+    .cta:focus-visible,
+    .ai-btn:focus-visible,
+    .ai-input:focus-visible,
+    .ai-select:focus-visible,
+    .card:focus-visible{
+      border-radius: 14px;
+    }
     /* NAV */
     .navbar{
       position:fixed; top:0; left:0; width:100%; z-index:1000;
@@ -65,8 +79,8 @@
     .hero{ padding:96px 8% 84px; text-align:center; background: linear-gradient(135deg,#22d3ee,#a78bfa); color:#fff; }   
     .hero h1{ font-size:clamp(28px, 4vw, 44px); margin-bottom:14px; }
     .hero p{ max-width:860px; margin:0 auto; font-size:clamp(16px, 1.6vw, 20px); color:rgba(255,255,255,.92); }
-    .hero .cta{ display:inline-block; margin-top:28px; background:var(--accent); color:#fff; font-weight:700; padding:14px 28px; border-radius:999px; transition:0.2s; }
-
+    .hero .cta{ display:inline-block; margin-top:28px; background:rgba(255,255,255,.95); color:#0f172a; font-weight:800; padding:14px 28px; border-radius:999px; border:1px solid rgba(15,23,42,.12); box-shadow:0 12px 30px rgba(2,6,23,.18); transition:0.2s; }
+    .hero .cta:hover{ transform:translateY(-1px); background:#ffffff; box-shadow:0 16px 38px rgba(2,6,23,.22); }
     /* FEATURES */
     .features{ padding:72px 8% 70px; text-align:center; }
     .features h2{ font-size:clamp(22px, 2.4vw, 32px); margin-bottom:22px; }
@@ -85,6 +99,40 @@
     .ai-btn { width: 100%; background: var(--accent); color: #fff; border: none; padding: 14px; border-radius: 999px; font-weight: 700; cursor: pointer; transition: 0.2s; }
     #ai-result { margin-top: 20px; padding: 20px; border-radius: 12px; background: #fdf2f8; border-left: 5px solid var(--accent); text-align: left; display: none; white-space: pre-wrap; font-size: 14px; }
     .loader { display: none; margin: 15px 0; color: var(--primary); font-weight: 600; }
+    .ai-label{
+    display:block;
+    text-align:left;
+    font-weight:700;
+    font-size:13px;
+    color:var(--text);
+    margin:12px 0 6px;
+  }
+  .ai-note{
+    margin: 0 0 14px;
+    color: var(--muted);
+    font-size: 13px;
+    text-align: left;
+  }
+  .ai-advanced{
+    text-align:left;
+    margin: 10px 0 14px;
+    padding: 12px;
+    border-radius: 14px;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+  }
+  .ai-advanced summary{
+    cursor:pointer;
+    font-weight:800;
+    color:var(--navy);
+    list-style:none;
+  }
+  .ai-help{
+    margin-top:8px;
+    font-size:12px;
+    color:var(--muted);
+    line-height:1.45;
+  }
 
     /* ABOUT */
     .about{ padding:70px 8%; background:#fff; text-align:center; }
@@ -135,7 +183,7 @@
         </a>
         <a href="parents.html" class="card">
           <img src="assets/img/parents.png" alt="Parents" />
-          <div class="card-body"><h3>Parents Wiki</h3><p>Guides for parents</p></div>
+          <div class="card-body"><h3>Wiki Parents</h3><p>Guides for parents</p></div>
         </a>
       </div>
     </section>
