@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LinguaLab — Interactive English for Kids</title>
+  <title>LinguaLab — Education is Magical</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -88,7 +88,7 @@
       box-shadow: 0 20px 50px rgba(0,0,0,0.05);
     }
     .tree-box { 
-      flex: 0 0 320px; /* Фиксированный размер для дерева, чтобы не деформировалось */
+      flex: 0 0 320px; 
       height: 320px; 
       background: #f0fdfa; 
       border-radius: 50%;
@@ -96,12 +96,23 @@
       align-items: center;
       justify-content: center;
     }
-    #knowledge-tree { width: 100%; height: 100%; }
+
+    /* Анимация покачивания дерева */
+    @keyframes sway {
+      0%, 100% { transform: rotate(-1.5deg); }
+      50% { transform: rotate(1.5deg); }
+    }
+    #knowledge-tree { 
+      width: 100%; height: 100%; 
+      transform-origin: bottom center;
+      animation: sway 4s ease-in-out infinite;
+    }
     
     .stats-content { flex: 1; min-width: 300px; }
     .stat-val { font-size: 64px; font-weight: 800; color: var(--navy); line-height: 1; }
-    .btn { padding: 16px 32px; border-radius: 999px; border: none; font-weight: 700; cursor: pointer; transition: 0.3s; }
-    .btn-main { background: var(--accent); color: #fff; margin-right: 15px; font-size: 16px; }
+    .btn { padding: 16px 32px; border-radius: 999px; border: none; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: inherit; }
+    .btn-outline { background: transparent; color: var(--navy); border: 2px solid var(--navy); font-size: 16px; }
+    .btn-outline:hover { background: var(--navy); color: #fff; }
 
     footer { background: #0f172a; color: #94a3b8; padding: 40px 8%; text-align: center; }
 
@@ -175,13 +186,13 @@
           <path d="M50 72 L42 58" stroke="#5d4037" stroke-width="3" stroke-linecap="round"/>
           <path d="M50 68 L60 55" stroke="#5d4037" stroke-width="3" stroke-linecap="round"/>
           <g id="tree-leaves"></g>
+          <g id="tree-fruits"></g>
         </svg>
       </div>
       <div class="stats-content">
-        <p style="text-transform: uppercase; font-weight: 700; color: var(--primary); letter-spacing: 1px;">Growth Tracker</p>
+        <p style="text-transform: uppercase; font-weight: 700; color: var(--primary); letter-spacing: 1px;">Academy Growth Tracker</p>
         <div class="stat-val" id="words-count">0</div>
-        <p style="font-size: 20px; color: #64748b; margin: 10px 0 25px;">Level: <strong id="level-name" style="color: #10b981;">Seedling</strong></p>
-        <button class="btn btn-main" onclick="addKnowledge()">Grow Knowledge ✨</button>
+        <p style="font-size: 20px; color: #64748b; margin: 10px 0 25px;" id="status-text">Go to "Grammar Magic" to grow your tree!</p>
         <button class="btn btn-outline" onclick="downloadReport()">Download Report 📄</button>
       </div>
     </div>
@@ -197,45 +208,54 @@
     function updateDisplay() {
       document.getElementById('words-count').innerText = score;
       const leavesContainer = document.getElementById('tree-leaves');
-      const levelDisplay = document.getElementById('level-name');
+      const fruitsContainer = document.getElementById('tree-fruits');
+      const statusText = document.getElementById('status-text');
 
-      if (score >= 40) levelDisplay.innerText = "Magic Oak";
-      else if (score >= 20) levelDisplay.innerText = "Strong Sapling";
-      else if (score > 0) levelDisplay.innerText = "Young Sprout";
-      else levelDisplay.innerText = "Seedling";
+      // Обновление текста статуса
+      if (score >= 40) statusText.innerHTML = "Level: <strong style='color:#10b981'>Magic Oak 🌳</strong>";
+      else if (score >= 20) statusText.innerHTML = "Level: <strong style='color:#10b981'>Strong Sapling 🌿</strong>";
+      else if (score > 0) statusText.innerHTML = "Level: <strong style='color:#10b981'>Young Sprout 🌱</strong>";
 
       leavesContainer.innerHTML = '';
+      fruitsContainer.innerHTML = '';
+
       for (let i = 0; i < score; i++) {
-        if (i >= 80) break;
+        if (i >= 100) break;
         const angle = (i * 137.5) % 360; 
-        const radius = Math.sqrt(i) * 4.5;
+        const radius = Math.sqrt(i) * 4.2;
         const x = 50 + radius * Math.cos(angle * Math.PI / 180);
         const y = 55 + radius * Math.sin(angle * Math.PI / 180);
+        
+        // Листья
         const leaf = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-        leaf.setAttribute("cx", x); leaf.setAttribute("cy", y); leaf.setAttribute("r", "2.8");
-        leaf.setAttribute("fill", i % 2 === 0 ? "#4ade80" : "#22c55e");
+        leaf.setAttribute("cx", x); leaf.setAttribute("cy", y); leaf.setAttribute("r", "2.5");
+        leaf.setAttribute("fill", i % 3 === 0 ? "#4ade80" : (i % 3 === 1 ? "#22c55e" : "#16a34a"));
         leavesContainer.appendChild(leaf);
-      }
-    }
 
-    function addKnowledge() {
-      score++;
-      localStorage.setItem('ll_score', score);
-      updateDisplay();
-      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.connect(gain); gain.connect(audioCtx.destination);
-      osc.frequency.setValueAtTime(523, audioCtx.currentTime);
-      gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
-      osc.start(); osc.stop(audioCtx.currentTime + 0.1);
+        // Плоды (яблоки), если очков > 20
+        if (score >= 20 && i % 6 === 0) {
+          const fruit = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+          fruit.setAttribute("cx", x + 1.2); fruit.setAttribute("cy", y + 1.2); fruit.setAttribute("r", "1.5");
+          fruit.setAttribute("fill", "#ef4444");
+          fruitsContainer.appendChild(fruit);
+        }
+      }
     }
 
     function downloadReport() {
         const reportWindow = window.open('', '_blank');
-        reportWindow.document.write(`<html><body style="text-align:center;padding:50px;font-family:sans-serif;border:10px solid #22d3ee"><h1>LinguaLab Certificate</h1><p>Words Learned: ${score}</p><h2>Level: ${document.getElementById('level-name').innerText}</h2><script>window.print()<\/script></body></html>`);
+        reportWindow.document.write(`<html><body style="text-align:center;padding:50px;font-family:sans-serif;border:10px solid #22d3ee"><h1>LinguaLab Certificate</h1><p>Tasks Completed: ${score}</p><h2>Great Progress!</h2><script>window.print()<\/script></body></html>`);
         reportWindow.document.close();
     }
+
+    // Авто-обновление дерева, если очки начислены в другой вкладке
+    setInterval(() => {
+      let currentScore = parseInt(localStorage.getItem('ll_score')) || 0;
+      if (currentScore !== score) {
+        score = currentScore;
+        updateDisplay();
+      }
+    }, 1500);
 
     window.onload = updateDisplay;
   </script>
