@@ -4,11 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LinguaLab — Interactive English for Kids</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-
   <style>
     :root {
       --primary: #2563eb;
@@ -16,59 +14,50 @@
       --bg: #f8fafc;
       --card-bg: #ffffff;
       --text: #0f172a;
-      --muted: #64748b;
       --navy: #1f4e79;
       --radius: 16px;
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      padding-top: 86px;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg); color: var(--text); padding-top: 86px;
     }
+    a { color: inherit; text-decoration: none; }
 
-    /* NAV: ЛОГОТИП И ВСЕ КНОПКИ */
+    /* NAVBAR: ОФИЦИАЛЬНЫЙ ЛОГО И ВСЕ КНОПКИ */
     .navbar {
       position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
       display: flex; align-items: center; justify-content: space-between;
-      gap: 16px; padding: 12px 40px; background: #fff;
-      box-shadow: 0 4px 20px rgba(0,0,0,.05);
+      padding: 12px 40px; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,.05);
     }
     .navbar-left { display: flex; align-items: center; gap: 10px; }
     .nav-logo { height: 54px; width: auto; display: block; }
     .nav-title { font-size: 20px; font-weight: 800; color: var(--navy); }
-    
-    .navbar-right { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
-    .navbar-right a { color: var(--navy); font-weight: 600; padding: 8px 12px; border-radius: 12px; transition: 0.2s; text-decoration: none; font-size: 14px; }
+    .navbar-right { display: flex; gap: 12px; }
+    .navbar-right a { color: var(--navy); font-weight: 600; padding: 8px 12px; border-radius: 12px; transition: 0.2s; font-size: 14px; }
     .navbar-right a:hover { background: var(--navy); color: #fff; }
 
-    /* HERO: ВАШ ГРАДИЕНТ */
+    /* HERO: БИРЮЗОВЫЙ ГРАДИЕНТ */
     .hero { padding: 96px 8% 84px; text-align: center; background: linear-gradient(135deg, #22d3ee, #a78bfa); color: #fff; }
-    .hero h1 { font-size: clamp(28px, 4vw, 44px); margin-bottom: 14px; }
-    .hero .cta { 
-        display: inline-block; margin-top: 28px; background: var(--navy); color: #fff; 
-        font-weight: 700; padding: 14px 28px; border-radius: 999px; transition: 0.2s; 
-        text-decoration: none; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    }
+    .hero h1 { font-size: clamp(28px, 4vw, 44px); margin-bottom: 14px; font-weight: 800; }
+    .hero .cta { display: inline-block; margin-top: 28px; background: var(--navy); color: #fff; font-weight: 700; padding: 14px 32px; border-radius: 999px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
 
     /* FEATURES */
     .features { padding: 72px 8% 70px; text-align: center; }
     .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
-    .card { display: block; background: var(--card-bg); border-radius: var(--radius); overflow: hidden; text-align: left; box-shadow: 0 6px 24px rgba(0,0,0,.06); transition: 0.2s; text-decoration: none; }
-    .card:hover { transform: translateY(-5px); }
-    .card img { width: 100%; height: 140px; object-fit: cover; display: block; }
-    .card-body { padding: 14px; }
-    .card h3 { font-size: 16px; margin-bottom: 6px; color: var(--navy); }
+    .card { display: block; background: #fff; border-radius: var(--radius); overflow: hidden; box-shadow: 0 6px 24px rgba(0,0,0,0.06); text-align: left; transition: 0.2s; border: 1px solid #e2e8f0; }
+    .card:hover { transform: translateY(-5px); border-color: #22d3ee; }
+    .card img { width: 100%; height: 140px; object-fit: cover; }
+    .card-body { padding: 20px; }
+    .card h3 { color: var(--navy); margin-bottom: 8px; font-size: 18px; }
 
     /* AI GENERATOR */
-    .ai-section { padding: 70px 8%; background: #edf2f7; text-align: center; }
-    .ai-container { max-width: 600px; margin: 0 auto; background: var(--card-bg); padding: 30px; border-radius: var(--radius); box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
-    .ai-input, .ai-select { width: 100%; padding: 12px; margin: 10px 0; border-radius: 12px; border: 1px solid #e2e8f0; font-family: inherit; }
-    .ai-btn { width: 100%; background: var(--accent); color: #fff; border: none; padding: 14px; border-radius: 999px; font-weight: 700; cursor: pointer; transition: 0.2s; }
-    #ai-result { margin-top: 20px; padding: 20px; border-radius: 12px; background: #fdf2f8; border-left: 5px solid var(--accent); text-align: left; display: none; }
+    .ai-section { padding: 80px 8%; background: #edf2f7; text-align: center; }
+    .ai-container { max-width: 600px; margin: 0 auto; background: #fff; padding: 40px; border-radius: var(--radius); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+    .ai-input, .ai-select { width: 100%; padding: 12px; margin: 10px 0; border-radius: 12px; border: 1px solid #cbd5e1; font-family: inherit; }
+    .ai-btn { width: 100%; background: var(--accent); color: #fff; border: none; padding: 16px; border-radius: 999px; font-weight: 700; cursor: pointer; transition: 0.2s; }
+    .ai-btn:disabled { background: #94a3b8; cursor: wait; }
+    #ai-result { margin-top: 25px; padding: 20px; border-radius: 12px; background: #fdf2f8; border-left: 5px solid var(--accent); text-align: left; display: none; }
 
     /* FOOTER */
     footer { background: #0f172a; color: #e2e8f0; padding: 40px 8%; text-align: center; font-size: 14px; }
@@ -93,42 +82,28 @@
   <main>
     <section class="hero">
       <h1>Learn English the Fun Way</h1>
-      <p>Bilingual adventure for preschool explorers and their parents.</p>
+      <p>Interactive tasks for little explorers and their parents.</p>
       <a class="cta" href="#ai-tool">Start Journey</a>
     </section>
 
     <section class="features">
       <div class="cards">
-        <a href="grammar.html" class="card">
-          <img src="assets/img/grammar.png" alt="Grammar" />
-          <div class="card-body"><h3>Grammar Magic</h3><p>Playful patterns for kids</p></div>
-        </a>
-        <a href="vocabulary.html" class="card">
-          <img src="assets/img/word.png" alt="Word" />
-          <div class="card-body"><h3>Word Bank</h3><p>Visual memory tools</p></div>
-        </a>
-        <a href="exercises.html" class="card">
-          <img src="assets/img/hw.png" alt="HW" />
-          <div class="card-body"><h3>Fun Homework</h3><p>Creative tasks</p></div>
-        </a>
-        <a href="parents.html" class="card">
-          <img src="assets/img/parents.png" alt="Parents" />
-          <div class="card-body"><h3>Wiki Parents</h3><p>Guides for parents</p></div>
-        </a>
+        <a href="grammar.html" class="card"><img src="assets/img/grammar.png" alt="Grammar" /><div class="card-body"><h3>Grammar Magic</h3><p>Playful patterns for kids</p></div></a>
+        <a href="vocabulary.html" class="card"><img src="assets/img/word.png" alt="Word" /><div class="card-body"><h3>Word Bank</h3><p>Visual memory tools</p></div></a>
+        <a href="exercises.html" class="card"><img src="assets/img/hw.png" alt="HW" /><div class="card-body"><h3>Fun Homework</h3><p>Creative tasks</p></div></a>
+        <a href="parents.html" class="card"><img src="assets/img/parents.png" alt="Parents" /><div class="card-body"><h3>Wiki Parents</h3><p>Guides for parents</p></div></a>
       </div>
     </section>
 
     <section class="ai-section" id="ai-tool">
       <div class="ai-container">
         <h2>AI Magic Generation</h2>
-        <p style="font-size: 13px; color: gray; margin-bottom: 10px; text-align: left;">
-          Privacy: Your API key is stored locally in your browser. Compliance with GDPR and COPPA.
-        </p>
         <input type="password" id="apiKey" class="ai-input" placeholder="Paste Gemini API Key here...">
         <select id="animal" class="ai-select">
           <option value="Panda">Panda</option>
           <option value="Lion">Lion</option>
           <option value="Elephant">Elephant</option>
+          <option value="Giraffe">Giraffe</option>
         </select>
         <button class="ai-btn" id="aiBtn" onclick="generateAiTask()">Generate Task</button>
         <div id="ai-result"></div>
@@ -144,56 +119,57 @@
   </footer>
 
   <script>
-    // Автоматически загружаем сохраненный ключ
-    document.addEventListener('DOMContentLoaded', () => {
-        const savedKey = localStorage.getItem('ll_key');
-        if (savedKey) document.getElementById('apiKey').value = savedKey;
-    });
+    // Восстановление ключа при загрузке
+    window.onload = () => {
+        const saved = localStorage.getItem('ll_magic_key');
+        if (saved) document.getElementById('apiKey').value = saved;
+    };
 
     async function generateAiTask() {
-        const apiKey = document.getElementById('apiKey').value.trim();
-        const animal = document.getElementById('animal').value;
-        const result = document.getElementById('ai-result');
-        const btn = document.getElementById('aiBtn');
+      const apiKey = document.getElementById('apiKey').value.trim();
+      const animal = document.getElementById('animal').value;
+      const result = document.getElementById('ai-result');
+      const btn = document.getElementById('aiBtn');
 
-        if (!apiKey) { alert("Please enter API Key!"); return; }
-        localStorage.setItem('ll_key', apiKey); // Сохраняем для удобства
+      if (!apiKey) { alert("Please enter API Key!"); return; }
+      localStorage.setItem('ll_magic_key', apiKey);
 
-        btn.disabled = true;
-        btn.innerText = "Connecting...";
-        result.style.display = "none";
+      btn.disabled = true;
+      btn.innerText = "Connecting...";
+      result.style.display = "none";
 
-        // Исправленный URL: используем стабильную версию v1 вместо v1beta
-        const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+      // Прямой путь к модели gemini-2.0-flash, которую мы нашли в твоем списке
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
-        try {
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    contents: [{ parts: [{ text: `Create a very short English task for a 5yo child about a ${animal}. Max 12 words.` }] }]
-                })
-            });
+      try {
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: `Create a 1-sentence English task for a 5yo about a ${animal}. No emojis.` }] }]
+          })
+        });
 
-            const data = await response.json();
-
-            if (response.ok && data.candidates) {
-                result.innerText = data.candidates[0].content.parts[0].text;
-                result.style.display = "block";
-            } else {
-                // Выводим детальную ошибку прямо в блок результата
-                console.error("Full Error Data:", data);
-                result.innerText = "Error: " + (data.error ? data.error.message : "Not Found (404)");
-                result.style.display = "block";
-            }
-        } catch (e) {
-            result.innerText = "Connection failed. Please check your VPN or Internet.";
-            result.style.display = "block";
-        } finally {
-            btn.disabled = false;
-            btn.innerText = "Generate Task";
+        const data = await response.json();
+        
+        if (response.status === 429) {
+          result.innerText = "AI is resting. Wait 60 seconds...";
+          result.style.display = "block";
+        } else if (data.candidates && data.candidates[0].content) {
+          result.innerText = data.candidates[0].content.parts[0].text;
+          result.style.display = "block";
+        } else {
+          result.innerText = "Error: " + (data.error ? data.error.message : "Try again");
+          result.style.display = "block";
         }
+      } catch (e) {
+        result.innerText = "Connection error. Check your internet.";
+        result.style.display = "block";
+      } finally {
+        btn.disabled = false;
+        btn.innerText = "Generate Task";
+      }
     }
-</script>
+  </script>
 </body>
 </html>
