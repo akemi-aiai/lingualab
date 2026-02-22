@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LinguaLab — Education is Magical</title>
+  <title>LinguaLab — Interactive English for Kids</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,7 +15,7 @@
       --accent: #f97316;
       --navy: #1f4e79;
       --bg: #f8fafc;
-      --radius: 24px;
+      --radius: 20px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -37,71 +37,59 @@
     .nav-logo { height: 50px; width: auto; }
     .nav-title { font-size: 22px; font-weight: 800; color: var(--navy); }
     .navbar-right { display: flex; gap: 10px; }
-    .navbar-right a { color: var(--navy); font-weight: 600; text-decoration: none; font-size: 14px; padding: 8px 15px; border-radius: 12px; transition: 0.3s; }
-    .navbar-right a:hover { background: #f1f5f9; color: var(--accent); }
+    .navbar-right a { color: var(--navy); font-weight: 600; text-decoration: none; font-size: 13px; padding: 8px 12px; }
 
     /* HERO */
     .hero {
-      padding: 100px 8%;
+      padding: 80px 8%;
       text-align: center;
       background: linear-gradient(135deg, #22d3ee, #a78bfa);
       color: #fff;
     }
-    .hero h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 800; margin-bottom: 20px; letter-spacing: -1px; }
-    .hero p { max-width: 700px; margin: 0 auto 30px; font-size: 20px; opacity: 0.95; }
+    .hero h1 { font-size: clamp(30px, 4vw, 48px); font-weight: 800; margin-bottom: 15px; }
 
-    /* PROGRESS BLOCK (KNOWLEDGE TREE) */
-    .progress-section { padding: 60px 8%; margin-top: -50px; }
-    .progress-container {
-      max-width: 1000px; margin: 0 auto; background: #fff;
-      padding: 40px; border-radius: var(--radius);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-      display: flex; align-items: center; justify-content: space-around; flex-wrap: wrap; gap: 40px;
-    }
-    .tree-box { width: 280px; height: 280px; background: #f0fdfa; border-radius: 50%; padding: 10px; }
-    .stats-content { flex: 1; min-width: 300px; text-align: left; }
-    .stat-val { font-size: 56px; font-weight: 800; color: var(--navy); line-height: 1; }
-    .btn-group { display: flex; gap: 15px; margin-top: 25px; }
-    
-    .btn {
-      padding: 16px 32px; border-radius: 999px; border: none;
-      font-weight: 700; cursor: pointer; transition: 0.3s; font-family: inherit; font-size: 15px;
-    }
-    .btn-main { background: var(--accent); color: #fff; box-shadow: 0 10px 20px rgba(249, 115, 22, 0.2); }
-    .btn-outline { background: transparent; color: var(--navy); border: 2px solid var(--navy); }
-    .btn-main:hover { transform: translateY(-3px); filter: brightness(1.1); }
-
-    /* EXPLORE BLOCKS (ОСТАЛЬНЫЕ БЛОКИ) */
-    .features { padding: 80px 8%; text-align: center; }
-    .features h2 { font-size: 32px; color: var(--navy); margin-bottom: 40px; }
+    /* КАРТОЧКИ В ОДНУ СТРОКУ */
+    .features { padding: 50px 5%; text-align: center; }
     .cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
+      grid-template-columns: repeat(4, 1fr); /* 4 колонки в ряд */
+      gap: 20px;
+      margin-top: 20px;
     }
     .card {
       background: #fff; border-radius: var(--radius); overflow: hidden;
-      text-decoration: none; transition: 0.3s; border: 1px solid #e2e8f0;
-      display: flex; flex-direction: column;
+      text-decoration: none; border: 1px solid #e2e8f0; transition: 0.3s;
     }
-    .card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); border-color: var(--primary); }
-    .card-img { width: 100%; height: 180px; object-fit: cover; background: #cbd5e1; }
-    .card-content { padding: 25px; text-align: left; }
-    .card-content h3 { color: var(--navy); font-size: 20px; margin-bottom: 10px; }
-    .card-content p { color: #64748b; font-size: 15px; }
+    .card:hover { transform: translateY(-5px); border-color: var(--primary); }
+    .card-img { width: 100%; height: 120px; object-fit: cover; }
+    .card-content { padding: 15px; text-align: left; }
+    .card-content h3 { color: var(--navy); font-size: 16px; margin-bottom: 5px; }
+    .card-content p { color: #64748b; font-size: 13px; line-height: 1.4; }
 
-    /* FOOTER */
-    footer { background: #0f172a; color: #94a3b8; padding: 60px 8%; text-align: center; }
-    .footer-links { margin-top: 20px; }
-    .footer-links a { color: #fff; text-decoration: none; margin: 0 15px; opacity: 0.6; transition: 0.3s; }
-    .footer-links a:hover { opacity: 1; color: var(--primary); }
+    /* ДЕРЕВО ЗНАНИЙ (НИЖЕ КАРТОЧЕК) */
+    .progress-section { padding: 60px 8%; background: #f1f5f9; }
+    .progress-container {
+      max-width: 900px; margin: 0 auto; background: #fff;
+      padding: 30px; border-radius: 30px;
+      display: flex; align-items: center; justify-content: space-around; flex-wrap: wrap; gap: 30px;
+    }
+    .tree-box { width: 250px; height: 250px; background: #f0fdfa; border-radius: 50%; }
+    .stats-content { text-align: left; }
+    .stat-val { font-size: 44px; font-weight: 800; color: var(--navy); }
+    
+    .btn { padding: 12px 24px; border-radius: 999px; border: none; font-weight: 700; cursor: pointer; font-family: inherit; }
+    .btn-main { background: var(--accent); color: #fff; margin-right: 10px; }
+    .btn-outline { background: transparent; color: var(--navy); border: 2px solid var(--navy); }
 
-    @media (max-width: 768px) {
-      .navbar { padding: 10px 20px; }
+    footer { background: #0f172a; color: #94a3b8; padding: 40px 8%; text-align: center; font-size: 14px; }
+    
+    /* Адаптив для карточек на маленьких экранах */
+    @media (max-width: 1024px) {
+      .cards-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .cards-grid { grid-template-columns: 1fr; }
       .navbar-right { display: none; }
-      .progress-container { text-align: center; }
-      .stats-content { text-align: center; }
-      .btn-group { justify-content: center; }
     }
   </style>
 </head>
@@ -109,20 +97,53 @@
 
   <header class="navbar">
     <div class="navbar-left">
-      <img src="assets/img/logo.png" alt="LL Logo" class="nav-logo">
+      <img src="assets/img/logo.png" alt="Logo" class="nav-logo">
       <span class="nav-title">LinguaLab</span>
     </div>
     <nav class="navbar-right">
-      <a href="grammar.html">Grammar</a>
-      <a href="vocabulary.html">Vocabulary</a>
-      <a href="exercises.html">Exercises</a>
-      <a href="parents.html">For Parents</a>
+      <a href="grammar.html">Grammar Magic</a>
+      <a href="vocabulary.html">Word Bank</a>
+      <a href="exercises.html">Fun Homework</a>
+      <a href="parents.html">Wiki Parents</a>
     </nav>
   </header>
 
   <section class="hero">
     <h1>Education is Magical</h1>
-    <p>Discover a world where learning English and Chinese feels like a grand adventure. Grow your knowledge forest today!</p>
+    <p>Explore English and Chinese through interactive play.</p>
+  </section>
+
+  <section class="features">
+    <div class="cards-grid">
+      <a href="grammar.html" class="card">
+        <img src="assets/img/grammar.png" alt="Grammar" class="card-img">
+        <div class="card-content">
+          <h3>Grammar Magic</h3>
+          <p>Simple patterns for young explorers.</p>
+        </div>
+      </a>
+      <a href="vocabulary.html" class="card">
+        <img src="assets/img/word.png" alt="Vocabulary" class="card-img">
+        <div class="card-content">
+          <h3>Word Bank</h3>
+          <p>Visual memory and fun games.</p>
+        </div>
+      </a>
+      <a href="exercises.html" class="card">
+        <img src="assets/img/hw.png" alt="Exercises" class="card-img">
+        <div class="card-content">
+          <h3>Fun Homework</h3>
+          <p>Daily creative challenges.</p>
+        </div>
+      </a>
+      <a href="parents.html" class="card">
+        <img src="assets/img/parents.png" alt="Parents" class="card-img">
+        <div class="card-content">
+          <h3>Wiki Parents</h3>
+          <p>Guides for a bilingual journey.</p>
+        </div>
+      </a>
+    </div>
   </section>
 
   <section class="progress-section">
@@ -135,94 +156,43 @@
           <g id="tree-leaves"></g>
         </svg>
       </div>
-
       <div class="stats-content">
-        <p style="text-transform: uppercase; font-weight: 700; color: var(--primary); font-size: 13px; letter-spacing: 1px;">Live Success Tracker</p>
-        <div id="words-count" class="stat-val">0</div>
-        <p style="font-size: 18px; color: #64748b; margin-top: 5px;">Knowledge Rank: <strong id="level-name" style="color: #10b981;">Sprout</strong></p>
-        
-        <div class="btn-group">
-          <button class="btn btn-main" onclick="addKnowledge()">Grow Forest ✨</button>
-          <button class="btn btn-outline" onclick="downloadReport()">Get Report 📄</button>
+        <div class="stat-val" id="words-count">0</div>
+        <p style="color: #64748b;">Current Status: <strong id="level-name" style="color: #10b981;">Seedling</strong></p>
+        <div style="margin-top: 20px;">
+          <button class="btn btn-main" onclick="addKnowledge()">Grow Knowledge ✨</button>
+          <button class="btn btn-outline" onclick="downloadReport()">Report 📄</button>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="features">
-    <h2>Explore the Magic</h2>
-    <div class="cards-grid">
-      
-      <a href="grammar.html" class="card">
-        <img src="assets/img/grammar.png" alt="Grammar" class="card-img">
-        <div class="card-content">
-          <h3>Grammar Magic</h3>
-          <p>Complex rules turned into simple, playful patterns for young explorers.</p>
-        </div>
-      </a>
-
-      <a href="vocabulary.html" class="card">
-        <img src="assets/img/word.png" alt="Vocabulary" class="card-img">
-        <div class="card-content">
-          <h3>Word Bank</h3>
-          <p>Build a massive vocabulary using visual memory and interactive games.</p>
-        </div>
-      </a>
-
-      <a href="exercises.html" class="card">
-        <img src="assets/img/hw.png" alt="Exercises" class="card-img">
-        <div class="card-content">
-          <h3>Fun Homework</h3>
-          <p>Daily challenges that keep the brain sharp and the heart happy.</p>
-        </div>
-      </a>
-
-      <a href="parents.html" class="card">
-        <img src="assets/img/parents.png" alt="Parents" class="card-img">
-        <div class="card-content">
-          <h3>Wiki Parents</h3>
-          <p>Resources and guides to help you support your child's bilingual journey.</p>
-        </div>
-      </a>
-
-    </div>
-  </section>
-
   <footer>
-    <p>© 2026 LinguaLab. Making Education Magical.</p>
-    <div class="footer-links">
-      <a href="privacy.html">Privacy Policy</a>
-      <a href="terms.html">Terms of Service</a>
-      <a href="contact.html">Contact Us</a>
-    </div>
+    <p>© 2026 LinguaLab. All Rights Reserved.</p>
   </footer>
 
   <script>
     let score = parseInt(localStorage.getItem('ll_score')) || 0;
 
     function updateDisplay() {
-      const wordsDisplay = document.getElementById('words-count');
-      const levelDisplay = document.getElementById('level-name');
+      document.getElementById('words-count').innerText = score;
       const leavesContainer = document.getElementById('tree-leaves');
-      
-      wordsDisplay.innerText = score;
+      const levelDisplay = document.getElementById('level-name');
 
-      if (score >= 40) levelDisplay.innerText = "Magic Oak 🌳";
-      else if (score >= 20) levelDisplay.innerText = "Blooming Bush 🌿";
-      else if (score > 0) levelDisplay.innerText = "Green Sprout 🌱";
+      if (score >= 30) levelDisplay.innerText = "Magic Forest";
+      else if (score >= 15) levelDisplay.innerText = "Growing Sprout";
       else levelDisplay.innerText = "Seedling";
 
       leavesContainer.innerHTML = '';
       for (let i = 0; i < score; i++) {
-        if (i >= 60) break; 
+        if (i >= 60) break;
         const angle = (i * 137.5) % 360; 
         const radius = Math.sqrt(i) * 5;
         const x = 50 + radius * Math.cos(angle * Math.PI / 180);
         const y = 55 + radius * Math.sin(angle * Math.PI / 180);
-
         const leaf = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-        leaf.setAttribute("cx", x); leaf.setAttribute("cy", y); leaf.setAttribute("r", "2.8");
-        leaf.setAttribute("fill", i % 2 === 0 ? "#4ade80" : "#10b981");
+        leaf.setAttribute("cx", x); leaf.setAttribute("cy", y); leaf.setAttribute("r", "2.5");
+        leaf.setAttribute("fill", i % 2 === 0 ? "#4ade80" : "#22c55e");
         leavesContainer.appendChild(leaf);
       }
     }
@@ -231,33 +201,20 @@
       score++;
       localStorage.setItem('ll_score', score);
       updateDisplay();
-
-      // Звук
+      // Легкий звук
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       const osc = audioCtx.createOscillator();
       const gain = audioCtx.createGain();
       osc.connect(gain); gain.connect(audioCtx.destination);
-      osc.frequency.setValueAtTime(523, audioCtx.currentTime); 
-      osc.frequency.exponentialRampToValueAtTime(1046, audioCtx.currentTime + 0.1);
-      gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
-      osc.start(); osc.stop(audioCtx.currentTime + 0.2);
+      osc.frequency.setValueAtTime(523, audioCtx.currentTime);
+      gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+      osc.start(); osc.stop(audioCtx.currentTime + 0.1);
     }
 
     function downloadReport() {
-      const level = document.getElementById('level-name').innerText;
-      const reportWindow = window.open('', '_blank');
-      reportWindow.document.write(`
-        <html><body style="font-family:sans-serif; text-align:center; padding:50px; border:20px solid #22d3ee;">
-          <h1 style="color:#1f4e79;">LinguaLab Progress Certificate</h1>
-          <p>Total Tasks Completed:</p>
-          <h2 style="font-size:72px; color:#f97316;">${score}</h2>
-          <h3>Current Rank: ${level}</h3>
-          <p>Generated on: ${new Date().toLocaleDateString()}</p>
-          <script>window.print();<\/script>
-        </body></html>
-      `);
-      reportWindow.document.close();
+        const reportWindow = window.open('', '_blank');
+        reportWindow.document.write(`<html><body style="text-align:center;padding:50px;font-family:sans-serif;border:10px solid #22d3ee"><h1>LinguaLab Report</h1><p>Score: ${score}</p><script>window.print()<\/script></body></html>`);
+        reportWindow.document.close();
     }
 
     window.onload = updateDisplay;
