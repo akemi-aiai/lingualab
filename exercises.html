@@ -3,150 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fun Homework — LinguaLab</title>
+    <title>Fun Homework</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #22d3ee;
-            --secondary: #a78bfa;
-            --navy: #1f4e79;
-            --bg: #f8fafc;
-            --white: #ffffff;
+        :root { 
+            --primary: #22d3ee; 
+            --primary-light: #ecfeff;
+            --navy: #1f4e79; 
+            --bg: #f8fafc; 
+            --white: #ffffff; 
+            --text: #334155;
             --accent: #f97316;
-            --green: #10b981;
-            --red: #ef4444;
         }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; padding: 0; color: #334155; }
         
-        /* Navigation */
-        .navbar { background: #fff; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 20px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
-        .nav-left { display: flex; align-items: center; gap: 10px; }
-        .nav-logo { height: 40px; }
+        * { box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; padding: 0; color: var(--text); }
+        
+        /* Nav & Header */
+        .navbar { 
+            background: #fff; padding: 15px 40px; display: flex; 
+            justify-content: space-between; align-items: center; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100;
+        }
         .nav-title { font-weight: 800; color: var(--navy); font-size: 22px; }
-        .nav-links a { text-decoration: none; color: var(--navy); margin-left: 20px; font-weight: 600; font-size: 14px; transition: 0.3s; }
+        .nav-links a { 
+            text-decoration: none; color: var(--navy); margin-left: 20px; 
+            font-weight: 600; font-size: 14px; transition: 0.2s;
+        }
         .nav-links a:hover { color: var(--primary); }
+        
+        .header { 
+            background: linear-gradient(135deg, #22d3ee, #a78bfa); 
+            color: white; padding: 60px 20px; text-align: center; 
+        }
+        .header h1 { margin: 0; font-size: 36px; font-weight: 800; letter-spacing: -1px; }
+        .header p { margin-top: 10px; font-size: 18px; opacity: 0.95; }
 
-        /* Header */
-        .header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 60px 20px; text-align: center; }
-        .header h1 { margin: 0; font-size: 36px; font-weight: 800; }
-        .header p { opacity: 0.95; margin-top: 10px; font-size: 18px; }
-
-        /* Month Selector (Horizontal Scroll) */
+        /* Month Scroller */
         .month-scroller { 
-            display: flex; overflow-x: auto; gap: 12px; padding: 20px; 
-            background: #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-            scrollbar-width: thin; 
+            display: flex; overflow-x: auto; gap: 12px; padding: 25px 20px; 
+            background: #fff; justify-content: flex-start; /* Changed for better mobile scroll */
+            border-bottom: 1px solid #e2e8f0;
         }
-        .month-btn {
-            background: #f1f5f9; border: none; padding: 12px 24px; border-radius: 99px; 
-            white-space: nowrap; cursor: pointer; font-weight: 700; color: #64748b; transition: 0.3s;
-            font-size: 15px;
+        /* Hide scrollbar */
+        .month-scroller::-webkit-scrollbar { display: none; }
+        .month-scroller { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .month-btn { 
+            background: #f1f5f9; border: none; padding: 10px 24px; 
+            border-radius: 99px; cursor: pointer; font-weight: 700; 
+            color: #64748b; transition: 0.3s; white-space: nowrap; font-size: 14px;
         }
-        .month-btn.active { background: var(--navy); color: #fff; transform: scale(1.05); box-shadow: 0 4px 12px rgba(31, 78, 121, 0.3); }
+        .month-btn:hover { background: #e2e8f0; color: var(--navy); }
+        .month-btn.active { 
+            background: var(--navy); color: #fff; 
+            box-shadow: 0 4px 12px rgba(31, 78, 121, 0.3); transform: translateY(-1px);
+        }
 
-        /* Content Container */
-        .container { max-width: 800px; margin: 30px auto; padding: 0 20px 60px; }
-
-        /* Parent's Wiki Box */
+        /* Container */
+        .container { max-width: 900px; margin: 40px auto; padding: 0 20px 60px; }
+        
+        /* Parent Wiki */
         .wiki-box { 
-            background: #fff7ed; border-left: 5px solid #f97316; padding: 25px; 
-            border-radius: 12px; margin-bottom: 40px; 
+            background: #fff7ed; border-left: 4px solid var(--accent); 
+            padding: 25px; border-radius: 12px; margin-bottom: 40px; 
         }
-        .wiki-title { font-weight: 800; color: #c2410c; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; font-size: 18px; }
-        .wiki-text { color: #475569; font-size: 15px; line-height: 1.6; }
+        .wiki-title { 
+            font-weight: 800; color: #c2410c; margin-bottom: 8px; 
+            text-transform: uppercase; font-size: 12px; letter-spacing: 1px;
+        }
+        .wiki-content { font-size: 15px; line-height: 1.6; color: #431407; }
 
-        /* Week Card */
+        /* Week Grid */
+        .week-grid { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; 
+        }
         .week-card { 
-            background: var(--white); border-radius: 24px; padding: 30px; margin-bottom: 30px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #f1f5f9;
-            position: relative; overflow: hidden; transition: 0.3s;
+            background: white; border-radius: 20px; padding: 30px 20px; text-align: center; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04); transition: 0.3s; 
+            cursor: pointer; text-decoration: none; color: inherit; 
+            border: 2px solid transparent; display: flex; flex-direction: column; align-items: center;
         }
-        .week-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.08); }
+        .week-card:hover { 
+            transform: translateY(-5px); border-color: var(--primary); 
+            box-shadow: 0 20px 40px rgba(34, 211, 238, 0.15);
+        }
         
-        .week-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #f8fafc; padding-bottom: 15px; }
-        .week-title { font-size: 22px; font-weight: 800; color: var(--navy); }
-        .week-tag { 
-            background: #e0f2fe; color: var(--navy); padding: 5px 12px; 
-            border-radius: 8px; font-size: 12px; font-weight: 700; text-transform: uppercase; 
+        /* Stylized Number Circle instead of Emoji */
+        .week-number { 
+            font-size: 20px; font-weight: 800; color: var(--primary);
+            background: var(--primary-light); width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            margin-bottom: 15px;
         }
 
-        /* Tasks Styling */
-        .task-section { margin-bottom: 25px; }
-        .task-label { font-size: 13px; font-weight: 700; color: var(--accent); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 8px; display: block; }
-        .text-en { font-size: 18px; color: #0f172a; margin-bottom: 6px; font-weight: 600; }
-        .text-zh { font-size: 15px; color: #64748b; line-height: 1.6; }
+        .week-title { font-weight: 800; color: var(--navy); font-size: 18px; display: block; margin-bottom: 6px; }
+        .week-desc { font-size: 14px; color: #64748b; font-weight: 500; }
 
-        /* Audio Recorder */
-        .audio-rec-wrapper {
-            background: #f8fafc; border: 2px dashed #cbd5e1; border-radius: 16px; padding: 15px;
-            display: flex; align-items: center; gap: 15px; margin-top: 10px;
-        }
-        .rec-btn {
-            background: var(--red); color: white; border: none; width: 44px; height: 44px; border-radius: 50%;
-            cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s;
-            box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
-        }
-        .rec-btn:hover { transform: scale(1.1); }
-        .rec-btn.recording { animation: pulse 1.5s infinite; background: #991b1b; }
-        .play-btn {
-            background: var(--green); color: white; border: none; padding: 10px 20px; border-radius: 10px;
-            font-weight: 600; cursor: pointer; display: none; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
-        }
-        .rec-status { font-size: 14px; color: #64748b; font-weight: 500; flex-grow: 1; }
-
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); } 70% { box-shadow: 0 0 0 12px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
-
-        /* Challenge Button */
-        .challenge-btn {
-            width: 100%; background: var(--navy); color: white; border: none; padding: 18px;
-            border-radius: 16px; font-size: 18px; font-weight: 800; cursor: pointer;
-            margin-top: 25px; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px;
-        }
-        .challenge-btn:hover { background: #334155; transform: translateY(-2px); }
-        .challenge-btn.completed { background: var(--green); pointer-events: none; }
-
-        /* Sticker Overlay */
-        .sticker-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.6); display: none; align-items: center; justify-content: center;
-            z-index: 1000; backdrop-filter: blur(5px);
-        }
-        .sticker-card {
-            background: white; padding: 40px; border-radius: 30px; text-align: center;
-            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.2); max-width: 300px;
-        }
-        .sticker-img { width: 140px; height: 140px; margin-bottom: 20px; }
-        
-        @keyframes popIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-
-        /* Footer */
-        footer { text-align: center; padding: 40px; color: #94a3b8; font-size: 14px; border-top: 1px solid #e2e8f0; margin-top: 40px; }
-
-        @media (max-width: 600px) {
-            .navbar { padding: 15px 20px; }
-            .nav-links { display: none; } /* Mobile Menu would go here */
-            .header h1 { font-size: 28px; }
+        @media (min-width: 800px) {
+            .month-scroller { justify-content: center; }
         }
     </style>
 </head>
 <body>
 
 <nav class="navbar">
-    <div class="nav-left">
-        <img src="assets/img/logo.png" alt="LL" class="nav-logo" onerror="this.style.display='none'">
-        <span class="nav-title">LinguaLab</span>
-    </div>
+    <div class="nav-title">LinguaLab</div>
     <div class="nav-links">
-        <a href="index.html">Main Page</a>
+        <a href="index.html">Main</a>
         <a href="grammar.html">Grammar Magic</a>
-        <a href="parents.html">Wiki Parents</a>
+        <a href="vocabulary.html">Word Bank</a>
+        <a href="parents.html">Wiki Parents Bank</a>
     </div>
 </nav>
 
 <header class="header">
-    <h1>Fun Homework 🏠</h1>
-    <p>Practice together, grow together!</p>
+    <h1>Homework Dashboard</h1>
+    <p>Select a month to start your mission</p>
 </header>
 
 <div class="month-scroller" id="month-list">
@@ -155,566 +128,77 @@
 <div class="container" id="content-area">
     </div>
 
-<div class="sticker-overlay" id="sticker-modal" onclick="this.style.display='none'">
-    <div class="sticker-card">
-        <img src="https://cdn-icons-png.flaticon.com/512/2665/2665489.png" class="sticker-img" alt="Star">
-        <h2 style="color: var(--navy); margin: 0;">Super Job!</h2>
-        <p style="color: #64748b;">You earned a new sticker!</p>
-    </div>
-</div>
-
-<footer>
-    <p>© 2026 LinguaLab. Making Education Magical.</p>
-</footer>
-
 <script>
-    // ==========================================
-    // 📚 CURRICULUM DATABASE (12 MONTHS)
-    // Based on Units 2-7, Readers 1-2, Revisions
-    // ==========================================
+    // Data Base
     const curriculum = {
-        "Sep": {
-            title: "September (Unit 2: My School)",
-            wiki: "Educational Goal: Focus on greetings and listening to classroom commands. We start with the letter 'B' and school objects.\n教學目標：理解打招呼方式 (Hello, I'm...)，學會課堂聆聽指示 (Open your book)，認識學校物品 [cite: 7, 10, 18]。",
-            weeks: [
-                {
-                    title: "Week 1: Hello, Teacher!",
-                    en: "Song: 'Hello, I'm Miss Wang'. Practice saying 'Good morning' and your name.",
-                    zh: "歌曲練習：Hello, I'm... 練習說 Good morning 和介紹自己的名字 [cite: 28, 32]。",
-                    rec_phrase: "Good morning, teacher."
-                },
-                {
-                    title: "Week 2: School Objects",
-                    en: "Vocabulary: Teacher, Bag, Book. Game: Find the bag!",
-                    zh: "單詞練習：Teacher (老師), Bag (書包), Book (書)。遊戲：把書包找出來 [cite: 8, 57]。",
-                    rec_phrase: "It is a book."
-                },
-                {
-                    title: "Week 3: Phonics Bb",
-                    en: "Sound /b/. Words: Bag, Book. Action: 'Open your book'.",
-                    zh: "自然拼讀 Bb：發音 /b/。動作指令：Open your book (打開書) [cite: 12, 16]。",
-                    rec_phrase: "/b/ /b/ Bag."
-                },
-                {
-                    title: "Week 4: Review Fun",
-                    en: "Story: First day of school. Review Mike and Kelly.",
-                    zh: "複習：學校的第一天。複習人物 Mike 和 Kelly [cite: 53]。",
-                    rec_phrase: "Hello, I'm Mike."
-                }
-            ]
-        },
-        "Oct": {
-            title: "October (Unit 3: My Friends)",
-            wiki: "Educational Goal: Understanding gender (boy/girl) and friendship. Learning to follow rules like 'Line up'.\n教學目標：理解性別 (boy/girl) 和朋友的意義。學會遵守秩序 (Line up) [cite: 393, 394]。",
-            weeks: [
-                {
-                    title: "Week 1: Boy or Girl?",
-                    en: "Song: 'You're a boy / You're a girl'.",
-                    zh: "歌曲：你是男孩/你是女孩。練習區分性別 [cite: 413, 423]。",
-                    rec_phrase: "I am a girl."
-                },
-                {
-                    title: "Week 2: My Friend",
-                    en: "Vocabulary: My friend. Draw your friend.",
-                    zh: "單詞：My friend (我的朋友)。畫出你的好朋友 [cite: 390, 473]。",
-                    rec_phrase: "This is my friend."
-                },
-                {
-                    title: "Week 3: Phonics Gg",
-                    en: "Sound /g/. Words: Girls, Game. Action: 'Stand up / Sit down'.",
-                    zh: "自然拼讀 Gg：/g/。單詞：Girls, Game。動作：Stand up (起立), Sit down (坐下) [cite: 397, 541]。",
-                    rec_phrase: "Stand up, please."
-                },
-                {
-                    title: "Week 4: Reader: Messy Family",
-                    en: "Story: 'A Messy Family'. Words: Father, Mother.",
-                    zh: "閱讀故事：A Messy Family。單詞：Father (爸爸), Mother (媽媽) [cite: 276, 288]。",
-                    rec_phrase: "My mother."
-                }
-            ]
-        },
-        "Nov": {
-            title: "November (Unit 4: My Face)",
-            wiki: "Educational Goal: Learn facial parts (eyes, ears, mouth, nose) and the importance of protecting eyes.\n教學目標：認識五官 (eye, ear...)，學會保護眼睛 [cite: 592, 593]。",
-            weeks: [
-                {
-                    title: "Week 1: Face Song",
-                    en: "Song: 'Eyes, ears, nose and mouth'. Touch your nose!",
-                    zh: "歌曲：Eyes, ears, nose and mouth。摸摸你的鼻子 [cite: 620]！",
-                    rec_phrase: "My nose."
-                },
-                {
-                    title: "Week 2: Funny Faces",
-                    en: "Make a face with fruit. Say: 'This is my mouth'.",
-                    zh: "用水果拼出臉譜。說：This is my mouth (這是我的嘴巴) [cite: 652]。",
-                    rec_phrase: "This is my mouth."
-                },
-                {
-                    title: "Week 3: Phonics Mm",
-                    en: "Sound /m/. Words: Monkey, Mouth. Action: 'Close your eyes'.",
-                    zh: "自然拼讀 Mm：/m/ (Monkey, Mouth)。動作：Close your eyes (閉眼) [cite: 735, 746]。",
-                    rec_phrase: "Open your eyes."
-                },
-                {
-                    title: "Week 4: Reader: Buzz! Buzz!",
-                    en: "Story: A bee! Say 'Oh, my hair!'",
-                    zh: "閱讀故事：蜜蜂來了！練習說：Oh, my hair (噢，我的頭髮) [cite: 831, 860]。",
-                    rec_phrase: "Oh, my hair!"
-                }
-            ]
-        },
-        "Dec": {
-            title: "December (Unit 5: On the Farm)",
-            wiki: "Educational Goal: Understanding numbers 1-3 and identifying farm animals.\n教學目標：理解數字 1-3，認識農場動物 [cite: 944, 945]。",
-            weeks: [
-                {
-                    title: "Week 1: Farm Animals",
-                    en: "Vocabulary: Cow, Pig, Hen, Duck. What sound does a Cow make?",
-                    zh: "單詞：Cow (牛), Pig (豬), Hen (母雞), Duck (鴨子) [cite: 940]。",
-                    rec_phrase: "It is a duck."
-                },
-                {
-                    title: "Week 2: Counting 1-2-3",
-                    en: "Count: One duck, Two pigs. Action: 'Show me your fingers'.",
-                    zh: "數數：一隻鴨子，兩隻豬。動作：Show me your fingers (伸出手指) [cite: 948, 1008]。",
-                    rec_phrase: "One, Two, Three."
-                },
-                {
-                    title: "Week 3: Phonics Pp",
-                    en: "Sound /p/. Words: Pig, Pink. Find something Pink.",
-                    zh: "自然拼讀 Pp：/p/ (Pig, Pink)。找一個粉紅色的東西 [cite: 1112, 1115]。",
-                    rec_phrase: "A pink pig."
-                },
-                {
-                    title: "Week 4: Winter Review",
-                    en: "Review all animals. Song: 'Cows! Cows! 1, 2, 3'.",
-                    zh: "複習所有動物。唱：Cows! Cows! 1, 2, 3 [cite: 979]。",
-                    rec_phrase: "I like animals."
-                }
-            ]
-        },
-        "Jan": {
-            title: "January (Unit 6: At the Zoo)",
-            wiki: "Educational Goal: Numbers 4-5 and public rules (keeping quiet at the zoo).\n教學目標：數字 4-5，公共場所規則 (保持安靜) [cite: 1161, 1162]。",
-            weeks: [
-                {
-                    title: "Week 1: Zoo Visit",
-                    en: "Look! Four pandas. Five monkeys.",
-                    zh: "看！四隻熊貓 (Four pandas)，五隻猴子 (Five monkeys) [cite: 1159]。",
-                    rec_phrase: "Four pandas."
-                },
-                {
-                    title: "Week 2: Photo Time",
-                    en: "Action: 'Take a photo'. Pretend to use a camera.",
-                    zh: "動作：Take a photo (拍照)。假裝用相機拍照 [cite: 1171]。",
-                    rec_phrase: "Take a photo."
-                },
-                {
-                    title: "Week 3: Phonics Tt",
-                    en: "Sound /t/. Words: Tiger, Tea. Chant: 'Two tigers having tea'.",
-                    zh: "自然拼讀 Tt：/t/ (Tiger, Tea)。歌謠：兩隻老虎喝茶 [cite: 1329, 1357]。",
-                    rec_phrase: "Tiger and Tea."
-                },
-                {
-                    title: "Week 4: Zoo Rules",
-                    en: "We need to be quiet. Shh!",
-                    zh: "規則：我們要保持安靜。Shh! [cite: 1306]。",
-                    rec_phrase: "Be quiet, please."
-                }
-            ]
-        },
-        "Feb": {
-            title: "February (Unit 7: On the Road)",
-            wiki: "Educational Goal: Recognizing transport and traffic safety rules (Stop/Go).\n教學目標：認識交通工具，遵守交通規則 [cite: 1383, 1384]。",
-            weeks: [
-                {
-                    title: "Week 1: Transport",
-                    en: "Vocabulary: Car, Bus, Bike, Taxi. Beep Beep!",
-                    zh: "單詞：Car (車), Bus (巴士), Bike (單車), Taxi (的士) [cite: 1380]。",
-                    rec_phrase: "It is a bus."
-                },
-                {
-                    title: "Week 2: Oops! My Bike!",
-                    en: "Dialogue: 'Oh, my bike!'. Pretend to drop a toy.",
-                    zh: "對話：Oh, my bike! (噢，我的單車)。假裝玩具掉了 [cite: 1379, 1449]。",
-                    rec_phrase: "Oh, my bike!"
-                },
-                {
-                    title: "Week 3: Phonics Cc",
-                    en: "Sound /k/. Words: Cat, Car. Action: 'Stop / Wait / Go'.",
-                    zh: "自然拼讀 Cc：/k/。動作：Stop (停), Wait (等), Go (走) [cite: 1387, 1543]。",
-                    rec_phrase: "Stop and Go."
-                },
-                {
-                    title: "Week 4: Red Light, Green Light",
-                    en: "Game: Teacher says 'Red Light' (Stop). 'Green Light' (Go).",
-                    zh: "遊戲：紅綠燈。紅燈停，綠燈行 [cite: 1526]。",
-                    rec_phrase: "Green light, Go!"
-                }
-            ]
-        },
-        "Mar": {
-            title: "March (Review: Family)",
-            wiki: "Educational Goal: Reviewing family members based on Reader 1 'A Messy Family'.\n教學目標：複習家庭成員 [cite: 271, 288]。",
-            weeks: [
-                {
-                    title: "Week 1: Family Photos",
-                    en: "Show a photo. Say: 'This is my Daddy'.",
-                    zh: "展示照片。說：This is my Daddy (這是我的爸爸)。",
-                    rec_phrase: "This is my Daddy."
-                },
-                {
-                    title: "Week 2: My Toys",
-                    en: "Vocabulary: Toy, Cat. Where is the cat?",
-                    zh: "單詞：Toy (玩具), Cat (貓)。貓在哪裡？ [cite: 289]",
-                    rec_phrase: "My toy."
-                },
-                {
-                    title: "Week 3: Story Time",
-                    en: "Read 'A Messy Family'. Who is messy?",
-                    zh: "閱讀：A Messy Family。誰弄得亂七八糟？",
-                    rec_phrase: "A messy family."
-                },
-                {
-                    title: "Week 4: Acting Out",
-                    en: "Act like Daddy or Mommy. Roleplay.",
-                    zh: "角色扮演：扮演爸爸或媽媽 [cite: 280]。",
-                    rec_phrase: "I am Mommy."
-                }
-            ]
-        },
-        "Apr": {
-            title: "April (Review: Body)",
-            wiki: "Educational Goal: Reviewing body parts based on Reader 2 'Buzz! Buzz!'.\n教學目標：複習身體部位 [cite: 831, 842]。",
-            weeks: [
-                {
-                    title: "Week 1: Body Game",
-                    en: "Touch your hair, touch your ear.",
-                    zh: "遊戲：摸摸你的頭髮 (hair)，摸摸你的耳朵 (ear) [cite: 842]。",
-                    rec_phrase: "Touch your ear."
-                },
-                {
-                    title: "Week 2: The Bee",
-                    en: "Pretend to be a bee. Buzz... Buzz...",
-                    zh: "假裝是一隻蜜蜂。Buzz... Buzz... [cite: 860]。",
-                    rec_phrase: "Buzz! Buzz!"
-                },
-                {
-                    title: "Week 3: Hide the Face",
-                    en: "Cover your eyes. Peek-a-boo!",
-                    zh: "遮住眼睛。Peek-a-boo (躲貓貓)！",
-                    rec_phrase: "Peek-a-boo!"
-                },
-                {
-                    title: "Week 4: Making Masks",
-                    en: "Draw a face on a paper plate.",
-                    zh: "製作面具：在紙盤上畫一張臉 [cite: 850]。",
-                    rec_phrase: "A happy face."
-                }
-            ]
-        },
-        "May": {
-            title: "May (Revision 1)",
-            wiki: "Educational Goal: General review of Units 1-2. Greetings and School.\n教學目標：總複習第一、二單元 (學校與問候) [cite: 228]。",
-            weeks: [
-                {
-                    title: "Week 1: Hello Song",
-                    en: "Sing the Hello Song again with actions.",
-                    zh: "再次唱 Hello 歌，加上動作 [cite: 231]。",
-                    rec_phrase: "Hello, hello!"
-                },
-                {
-                    title: "Week 2: Who is this?",
-                    en: "Review Tinky, Kelly, Mike, Henry.",
-                    zh: "複習人物名字：Tinky, Kelly, Mike, Henry [cite: 234]。",
-                    rec_phrase: "It is Kelly."
-                },
-                {
-                    title: "Week 3: Phonics B & D",
-                    en: "Review sounds /b/ and /d/.",
-                    zh: "複習發音 /b/ 和 /d/ [cite: 255]。",
-                    rec_phrase: "Baby and Dog."
-                },
-                {
-                    title: "Week 4: Action Game",
-                    en: "Simon says: 'Open your book'.",
-                    zh: "老師說：Open your book (打開書) [cite: 248]。",
-                    rec_phrase: "Open your book."
-                }
-            ]
-        },
-        "Jun": {
-            title: "June (Revision 2)",
-            wiki: "Educational Goal: General review of Units 3-4. Friends and Face.\n教學目標：總複習第三、四單元 (朋友與臉) [cite: 789]。",
-            weeks: [
-                {
-                    title: "Week 1: Find a Friend",
-                    en: "Find a boy or a girl. Say 'Hi'.",
-                    zh: "找一個朋友。說 'Hi' [cite: 794]。",
-                    rec_phrase: "Hi, friend."
-                },
-                {
-                    title: "Week 2: Face Match",
-                    en: "Match words to pictures: Ear, Eye, Nose.",
-                    zh: "單詞配對：Ear, Eye, Nose [cite: 795]。",
-                    rec_phrase: "My eye."
-                },
-                {
-                    title: "Week 3: Phonics G & M",
-                    en: "Review sounds /g/ and /m/.",
-                    zh: "複習發音 /g/ 和 /m/ [cite: 815]。",
-                    rec_phrase: "Game and Monkey."
-                },
-                {
-                    title: "Week 4: Stop and Go",
-                    en: "Review commands: Stand up, Sit down.",
-                    zh: "複習指令：Stand up, Sit down [cite: 806]。",
-                    rec_phrase: "Sit down."
-                }
-            ]
-        },
-        "Jul": {
-            title: "July (Summer Lab 1)",
-            wiki: "Educational Goal: Summer fun! Reviewing action verbs and abilities.\n教學目標：暑期活動！複習動作和能力。",
-            weeks: [
-                {
-                    title: "Week 1: I Can Jump",
-                    en: "Action: Jump! Run! Walk!",
-                    zh: "動作：Jump (跳), Run (跑), Walk (走)。",
-                    rec_phrase: "I can jump."
-                },
-                {
-                    title: "Week 2: Animal Moves",
-                    en: "Walk like a bear. Hop like a rabbit.",
-                    zh: "像熊一樣走。像兔子一樣跳。",
-                    rec_phrase: "I am a bear."
-                },
-                {
-                    title: "Week 3: Summer Song",
-                    en: "Sing a happy song. Clap your hands.",
-                    zh: "唱一首快樂的歌。拍拍手。",
-                    rec_phrase: "Clap your hands."
-                },
-                {
-                    title: "Week 4: Water Play",
-                    en: "Vocabulary: Water, Swim. Be careful!",
-                    zh: "單詞：Water (水), Swim (游泳)。小心！",
-                    rec_phrase: "I can swim."
-                }
-            ]
-        },
-        "Aug": {
-            title: "August (Summer Lab 2)",
-            wiki: "Educational Goal: Preparation for next level. Alphabet review.\n教學目標：準備下一階段。字母總複習。",
-            weeks: [
-                {
-                    title: "Week 1: ABC Song",
-                    en: "Sing the ABC song together.",
-                    zh: "一起唱 ABC 字母歌。",
-                    rec_phrase: "A B C D E F G."
-                },
-                {
-                    title: "Week 2: Phonics Hunt",
-                    en: "Find something starting with B, C, G.",
-                    zh: "找出 B, C, G 開頭的東西。",
-                    rec_phrase: "C is for Cat."
-                },
-                {
-                    title: "Week 3: Phonics Hunt 2",
-                    en: "Find something starting with M, P, T.",
-                    zh: "找出 M, P, T 開頭的東西。",
-                    rec_phrase: "P is for Pig."
-                },
-                {
-                    title: "Week 4: Graduation",
-                    en: "You are a Super Star! Get your diploma.",
-                    zh: "你是超級明星！領取你的證書。",
-                    rec_phrase: "I am a super star!"
-                }
-            ]
-        }
+        "Sep": { title: "September: My School", wiki: "Goal: Greetings & School Objects. We learn 'B' for Book/Bag.", weeks: ["Greetings", "School Objects", "Phonics Bb", "Review"] },
+        "Oct": { title: "October: My Friends", wiki: "Goal: Friendship. We learn 'G' for Game/Girl.", weeks: ["Boy or Girl?", "My Friend", "Phonics Gg", "Messy Family"] },
+        "Nov": { title: "November: My Face", wiki: "Goal: Facial parts & Hygiene. We learn 'M' for Mouth.", weeks: ["Face Song", "Funny Faces", "Phonics Mm", "Buzz! Buzz!"] },
+        "Dec": { title: "December: On the Farm", wiki: "Goal: Animals & Counting 1-3. We learn 'P' for Pig.", weeks: ["Farm Animals", "Counting 1-2-3", "Phonics Pp", "Winter Review"] },
+        "Jan": { title: "January: At the Zoo", wiki: "Goal: Wild Animals & Counting 4-5. We learn 'T' for Tiger.", weeks: ["Zoo Visit", "Photo Time", "Phonics Tt", "Zoo Rules"] },
+        "Feb": { title: "February: On the Road", wiki: "Goal: Transport & Safety. We learn 'C' for Car.", weeks: ["Transport", "Oops! My Bike", "Phonics Cc", "Traffic Lights"] },
+        "Mar": { title: "March: Family Fun", wiki: "Goal: Family members review based on Reader 1.", weeks: ["Family Photos", "My Toys", "Story Time", "Roleplay"] },
+        "Apr": { title: "April: Body Review", wiki: "Goal: Body parts review based on Reader 2.", weeks: ["Body Game", "The Bee", "Hide the Face", "Making Masks"] },
+        "May": { title: "May: Revision 1", wiki: "Goal: General review of Units 1-2.", weeks: ["Hello Song", "Who is this?", "Phonics B & D", "Action Game"] },
+        "Jun": { title: "June: Revision 2", wiki: "Goal: General review of Units 3-4.", weeks: ["Find a Friend", "Face Match", "Phonics G & M", "Stop and Go"] },
+        "Jul": { title: "July: Summer Lab 1", wiki: "Goal: Action verbs and physical abilities.", weeks: ["I Can Jump", "Animal Moves", "Summer Song", "Water Play"] },
+        "Aug": { title: "August: Summer Lab 2", wiki: "Goal: Preparation for next level.", weeks: ["ABC Song", "Phonics Hunt 1", "Phonics Hunt 2", "Graduation"] }
     };
 
-    // ==========================================
-    // ⚙️ LOGIC & RENDERER
-    // ==========================================
-    
     const monthListEl = document.getElementById('month-list');
     const contentAreaEl = document.getElementById('content-area');
-    let currentMonth = "Sep"; // Default month
 
-    // 1. Initialize Month Buttons
     function init() {
-        const months = ["Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"];
-        months.forEach(m => {
+        let firstBtn = null;
+        Object.keys(curriculum).forEach((m, index) => {
             const btn = document.createElement('button');
-            btn.className = `month-btn ${m === currentMonth ? 'active' : ''}`;
-            btn.innerText = curriculum[m].title.split(' ')[0]; // Just Month Name
-            btn.onclick = () => loadMonth(m);
+            btn.className = 'month-btn';
+            btn.innerText = m;
+            
+            // Set first button as active initially
+            if (index === 0) {
+                btn.classList.add('active');
+                firstBtn = btn;
+            }
+
+            btn.onclick = () => loadMonth(m, btn);
             monthListEl.appendChild(btn);
         });
-        loadMonth(currentMonth);
+        
+        // Load the first month by default
+        if (firstBtn) loadMonth("Sep", firstBtn);
     }
 
-    // 2. Load Content for Selected Month
-    function loadMonth(monthKey) {
-        currentMonth = monthKey;
-        
-        // Update Active Button State
-        document.querySelectorAll('.month-btn').forEach(b => {
-            b.classList.remove('active');
-            if(b.innerText === curriculum[monthKey].title.split(' ')[0]) b.classList.add('active');
-        });
+    function loadMonth(monthKey, btn) {
+        // Handle Active State
+        document.querySelectorAll('.month-btn').forEach(b => b.classList.remove('active'));
+        if(btn) btn.classList.add('active');
 
-        // Generate HTML
         const data = curriculum[monthKey];
+        
         let html = `
             <div class="wiki-box">
-                <div class="wiki-title">🔍 Parent's Corner (Wiki)</div>
-                <div class="wiki-text" style="white-space: pre-line">${data.wiki}</div>
+                <div class="wiki-title">Parent's Corner</div>
+                <div class="wiki-content">${data.wiki}</div>
             </div>
+            <div class="week-grid">
         `;
 
-        data.weeks.forEach((week, index) => {
+        data.weeks.forEach((weekTitle, index) => {
+            // Creates a link to lesson.html with parameters
             html += `
-                <div class="week-card">
-                    <div class="week-header">
-                        <span class="week-title">${week.title}</span>
-                        <span class="week-tag">Mission</span>
-                    </div>
-                    
-                    <div class="task-section">
-                        <span class="task-label">Activity / 活動:</span>
-                        <div class="text-en">${week.en}</div>
-                        <div class="text-zh">${week.zh}</div>
-                    </div>
-
-                    <div class="task-section">
-                        <span class="task-label">Audio-Rec 🎤 / 錄音挑戰:</span>
-                        <div class="text-zh" style="margin-bottom: 8px;">Record your child saying: <strong style="color:var(--navy); font-size:18px;">"${week.rec_phrase}"</strong></div>
-                        
-                        <div class="audio-rec-wrapper" id="rec-wrapper-${index}">
-                            <button class="rec-btn" onclick="toggleRecord(this, ${index})" title="Start Recording">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
-                                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
-                                    <line x1="12" y1="19" x2="12" y2="23"></line>
-                                    <line x1="8" y1="23" x2="16" y2="23"></line>
-                                </svg>
-                            </button>
-                            <span class="rec-status">Tap red button to record</span>
-                            <button class="play-btn" onclick="playAudio(${index})">▶ Play</button>
-                        </div>
-                    </div>
-
-                    <button class="challenge-btn" onclick="completeChallenge(this)">
-                        <span>🏆 Challenge Completed!</span>
-                    </button>
-                </div>
+                <a href="lesson.html?m=${monthKey}&w=${index}" class="week-card">
+                    <div class="week-number">${index + 1}</div>
+                    <span class="week-title">Week ${index + 1}</span>
+                    <span class="week-desc">${weekTitle}</span>
+                </a>
             `;
         });
-
+        html += `</div>`;
         contentAreaEl.innerHTML = html;
     }
 
-    // 3. Audio Recording Logic (Browser Memory)
-    let mediaRecorder;
-    let audioChunks = [];
-    let audioBlobs = {}; // Store blobs by index to play them back
-
-    async function toggleRecord(btn, index) {
-        const statusSpan = btn.nextElementSibling;
-        const playBtn = statusSpan.nextElementSibling;
-
-        if (btn.classList.contains('recording')) {
-            // STOP RECORDING
-            if(mediaRecorder && mediaRecorder.state !== 'inactive') {
-                mediaRecorder.stop();
-            }
-            btn.classList.remove('recording');
-            // Reset Icon to Mic
-            btn.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>`;
-            statusSpan.innerText = "Saved! Ready to play.";
-            playBtn.style.display = "block";
-        } else {
-            // START RECORDING
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                mediaRecorder = new MediaRecorder(stream);
-                audioChunks = [];
-                
-                mediaRecorder.ondataavailable = event => {
-                    audioChunks.push(event.data);
-                };
-
-                mediaRecorder.onstop = () => {
-                    const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
-                    const audioUrl = URL.createObjectURL(audioBlob);
-                    audioBlobs[index] = new Audio(audioUrl);
-                };
-
-                mediaRecorder.start();
-                btn.classList.add('recording');
-                // Change Icon to Stop Square
-                btn.innerHTML = `<div style="width: 14px; height: 14px; background: white; border-radius: 3px;"></div>`; 
-                statusSpan.innerText = "Recording... (Tap again to stop)";
-                playBtn.style.display = "none";
-            } catch (err) {
-                alert("Please allow microphone access to use the recording feature.");
-                console.error(err);
-            }
-        }
-    }
-
-    function playAudio(index) {
-        if (audioBlobs[index]) {
-            audioBlobs[index].play();
-        } else {
-            alert("No recording found.");
-        }
-    }
-
-    // 4. Sticker Logic
-    function completeChallenge(btn) {
-        // Show Modal
-        const modal = document.getElementById('sticker-modal');
-        modal.style.display = 'flex';
-        
-        // Play Sound Effect
-        try {
-            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-            
-            // "Magic" Sound
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
-            osc.frequency.exponentialRampToValueAtTime(1046.5, audioCtx.currentTime + 0.1); // C6
-            gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
-            
-            osc.start();
-            osc.stop(audioCtx.currentTime + 0.5);
-        } catch(e) {
-            console.log("Audio play failed");
-        }
-
-        // Change Button State
-        btn.classList.add('completed');
-        btn.innerHTML = "🌟 Amazing! Task Done!";
-        
-        // Auto hide modal after 2 seconds
-        setTimeout(() => {
-            modal.style.display = 'none';
-        }, 2000);
-    }
-
-    // Start App
     init();
-
 </script>
-
 </body>
 </html>
