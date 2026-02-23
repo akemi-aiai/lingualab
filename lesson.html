@@ -5,149 +5,223 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lesson — LinguaLab</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
     <style>
         :root { 
             --primary: #22d3ee; 
+            --primary-dark: #0ea5e9;
             --navy: #1f4e79; 
             --bg: #f8fafc; 
             --white: #ffffff; 
             --orange: #f97316; 
-            --radius: 24px;
+            --radius: 20px;
+            --shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
         
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Inter', sans-serif; background: var(--bg); color: #334155; padding-top: 80px; }
         
-        /* NAVBAR */
-        .navbar { 
-            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-            display: flex; align-items: center; justify-content: space-between; 
-            padding: 12px 40px; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,.05);
-        }
-        .navbar-left { display: flex; align-items: center; gap: 10px; }
-        .nav-logo { height: 50px; width: auto; display: block; }
-        .nav-title { font-size: 22px; font-weight: 800; color: var(--navy); }
-        .navbar-right { display: flex; gap: 15px; }
-        .navbar-right a { 
-            text-decoration: none; color: var(--navy); font-weight: 600; font-size: 14px; transition: 0.2s; 
-            padding: 8px 12px; border-radius: 8px;
-        }
-        .navbar-right a:hover { background: #f1f5f9; color: var(--primary); }
+        /* --- ICONS (SVG) --- */
+        .icon { width: 24px; height: 24px; fill: currentColor; }
+        .icon-lg { width: 48px; height: 48px; fill: currentColor; }
 
-        /* HERO COMPACT */
+        /* --- NAVBAR --- */
+        .navbar {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 15px 40px; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,.05);
+            height: 80px;
+        }
+        .navbar-left { display: flex; align-items: center; gap: 12px; }
+        .nav-logo { height: 40px; width: auto; display: block; }
+        .nav-title { font-size: 22px; font-weight: 800; color: var(--navy); }
+        .navbar-right { display: flex; align-items: center; gap: 20px; }
+        .navbar-right a { 
+            color: var(--navy); font-weight: 600; text-decoration: none; 
+            font-size: 14px; transition: 0.3s;
+        }
+        .navbar-right a:hover { color: var(--primary); }
+
+        /* --- PROGRESS BAR --- */
+        .progress-container {
+            position: fixed; top: 80px; left: 0; width: 100%; height: 6px; background: #e2e8f0; z-index: 999;
+        }
+        .progress-fill {
+            height: 100%; background: var(--orange); width: 0%; transition: width 0.5s ease;
+        }
+
+        /* --- HERO --- */
         .hero-compact {
-            padding: 40px 8% 100px;
+            width: 100%;
+            padding: 60px 20px 140px;
             text-align: center;
             background: linear-gradient(135deg, #22d3ee, #a78bfa);
             color: #fff;
+            position: relative;
         }
-        .hero-compact h1 { font-size: 36px; font-weight: 800; margin-bottom: 5px; }
-        
-        /* CONTAINER */
+        .hero-compact h1 { font-size: 38px; font-weight: 800; margin-bottom: 5px; }
+        .hero-date { opacity: 0.9; font-size: 16px; font-weight: 500; }
+
+        /* --- CONTAINER --- */
         .container { 
-            max-width: 800px; margin: -60px auto 40px; 
+            max-width: 800px; margin: -100px auto 40px; 
             padding: 0 20px; position: relative; z-index: 10;
         }
 
-        /* BACK BUTTON */
+        /* --- BACK BUTTON --- */
+        .back-btn-wrapper { text-align: center; margin-bottom: 30px; }
         .back-btn { 
             display: inline-flex; align-items: center; text-decoration: none; 
-            color: var(--navy); font-weight: 700; margin-bottom: 20px; 
-            background: white; padding: 12px 25px; border-radius: 99px; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: 0.3s;
+            color: var(--navy); font-weight: 700; gap: 8px;
+            background: white; padding: 12px 30px; border-radius: 99px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); transition: 0.3s;
         }
-        .back-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
-        .back-btn span { margin-right: 8px; font-size: 18px; }
+        .back-btn:hover { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
 
-        /* LESSON HEADER CARD */
+        /* --- LESSON HEADER --- */
         .lesson-header-card { 
-            background: white; border-radius: var(--radius); padding: 30px; 
+            background: white; border-radius: var(--radius); padding: 40px 30px; 
             margin-bottom: 30px; text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-top: 6px solid var(--primary);
+            box-shadow: var(--shadow); border-top: 6px solid var(--primary);
         }
         .lesson-tag { 
             background: #e0f2fe; color: var(--navy); padding: 6px 14px; 
             border-radius: 20px; font-size: 12px; text-transform: uppercase; 
             letter-spacing: 1px; font-weight: 700;
         }
-        .lesson-title { font-size: 28px; font-weight: 800; color: var(--navy); margin: 15px 0 5px; }
-        .lesson-subtitle { color: #64748b; font-size: 16px; }
+        .lesson-title { font-size: 28px; font-weight: 800; color: var(--navy); margin: 15px 0 10px; }
+        .lesson-goal { 
+            background: #fff7ed; color: #9a3412; padding: 15px; border-radius: 12px;
+            font-size: 15px; line-height: 1.5; text-align: left; margin-top: 20px;
+            border-left: 4px solid var(--orange);
+        }
 
-        /* STEPS */
+        /* --- STEP CARDS --- */
         .step-card { 
-            background: white; border-radius: 20px; padding: 25px; margin-bottom: 25px; 
+            background: white; border-radius: 20px; padding: 30px; margin-bottom: 25px; 
             border: 1px solid #e2e8f0; position: relative; overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02); transition: 0.3s;
         }
-        .step-number { 
-            background: var(--primary); color: white; width: 32px; height: 32px; 
-            border-radius: 50%; display: flex; align-items: center; justify-content: center; 
-            font-weight: 800; margin-bottom: 15px; font-size: 14px;
-        }
-        .step-title { font-weight: 800; color: var(--navy); font-size: 18px; margin-bottom: 5px; }
-        .step-desc-en { font-size: 18px; color: #0f172a; margin-bottom: 8px; font-weight: 600; }
-        .step-desc-zh { font-size: 15px; color: #64748b; line-height: 1.6; border-left: 3px solid #cbd5e1; padding-left: 10px; margin-bottom: 15px; }
+        .step-card:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
 
-        /* INTERACTIVE */
-        .flashcard-box { 
-            background: #f0f9ff; border: 2px dashed #bae6fd; border-radius: 12px; 
-            padding: 15px; text-align: center; margin: 15px 0; 
+        .step-badge {
+            display: inline-block; font-size: 11px; font-weight: 800; text-transform: uppercase; 
+            color: #fff; background: var(--navy); padding: 4px 10px; border-radius: 6px;
+            margin-bottom: 15px; letter-spacing: 0.5px;
         }
-        .vocab-word { font-size: 20px; font-weight: 700; color: #0284c7; margin: 0 10px; }
+        .badge-vocab { background: #3b82f6; }
+        .badge-phonics { background: #8b5cf6; }
+        .badge-tpr { background: #f59e0b; }
+        .badge-speak { background: #ef4444; }
 
+        .step-title { font-weight: 800; color: var(--navy); font-size: 20px; margin-bottom: 10px; }
+        .step-desc-en { font-size: 18px; color: #0f172a; font-weight: 600; margin-bottom: 5px; }
+        .step-desc-zh { font-size: 15px; color: #64748b; line-height: 1.6; }
+
+        /* --- FLASHCARDS GRID --- */
+        .flashcards-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px; margin-top: 20px;
+        }
+        .flashcard {
+            background: #f0f9ff; border: 2px solid #bae6fd; border-radius: 16px;
+            padding: 20px; text-align: center; cursor: pointer; transition: 0.2s;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            height: 120px;
+        }
+        .flashcard:hover { background: #e0f2fe; transform: scale(1.03); border-color: var(--primary); }
+        .flashcard-word { font-weight: 800; color: var(--navy); font-size: 18px; margin-bottom: 5px; }
+        .flashcard-zh { font-size: 13px; color: #64748b; }
+        .play-icon { width: 20px; height: 20px; fill: var(--primary); margin-top: 8px; opacity: 0.7; }
+
+        /* --- AUDIO BOX --- */
         .audio-box { 
-            background: #f8fafc; padding: 15px; border-radius: 16px; 
-            display: flex; align-items: center; gap: 15px; border: 1px solid #e2e8f0; 
+            background: #fff7ed; padding: 25px; border-radius: 20px; 
+            display: flex; align-items: center; gap: 20px; border: 1px solid #fed7aa; margin-top: 20px;
         }
         .rec-btn { 
-            width: 45px; height: 45px; border-radius: 50%; border: none; 
+            width: 64px; height: 64px; border-radius: 50%; border: none; 
             background: #ef4444; color: white; cursor: pointer; 
             display: flex; justify-content: center; align-items: center; 
-            transition: 0.2s; font-size: 20px;
+            transition: 0.2s; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
         }
+        .rec-btn:hover { transform: scale(1.05); }
         .rec-btn.recording { animation: pulse 1.5s infinite; background: #991b1b; }
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6); } 70% { box-shadow: 0 0 0 15px rgba(239, 68, 68, 0); } }
-
-        /* FOOTER BUTTON */
-        .complete-btn { 
-            background: var(--navy); color: white; border: none; padding: 18px; 
-            border-radius: 16px; font-size: 18px; font-weight: 800; cursor: pointer; 
-            transition: 0.3s; width: 100%; margin-top: 20px; display: block;
+        
+        .listen-btn {
+            background: white; border: 2px solid var(--primary); color: var(--navy);
+            padding: 10px 20px; border-radius: 99px; font-weight: 700; cursor: pointer;
+            margin-top: 10px; font-size: 14px; display: inline-flex; align-items: center; gap: 8px;
+            transition: 0.2s;
         }
-        .complete-btn:hover { background: #334155; transform: translateY(-2px); }
+        .listen-btn:hover { background: var(--primary-light); }
 
-        /* MODAL */
+        /* --- FOOTER BUTTON --- */
+        .complete-btn { 
+            background: var(--navy); color: white; border: none; padding: 22px; 
+            border-radius: 16px; font-size: 18px; font-weight: 800; cursor: pointer; 
+            transition: 0.3s; width: 100%; margin-top: 30px; display: flex; 
+            justify-content: center; align-items: center; gap: 10px;
+            box-shadow: 0 10px 20px rgba(31, 78, 121, 0.15);
+        }
+        .complete-btn:hover { background: #334155; transform: translateY(-3px); }
+
+        /* --- MODAL --- */
         .sticker-modal { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); 
-            display: none; justify-content: center; align-items: center; z-index: 2000; backdrop-filter: blur(5px);
+            display: none; justify-content: center; align-items: center; z-index: 2000; backdrop-filter: blur(8px);
         }
         .sticker-content { 
-            background: white; padding: 40px; border-radius: 30px; text-align: center; 
+            background: white; padding: 50px; border-radius: 30px; text-align: center; 
+            box-shadow: 0 25px 60px rgba(0,0,0,0.3); max-width: 400px; width: 90%;
             animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+        .sticker-icon { color: #eab308; width: 80px; height: 80px; margin-bottom: 20px; }
+
         @keyframes pop { 0% { transform: scale(0); } 100% { transform: scale(1); } }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6); } 70% { box-shadow: 0 0 0 20px rgba(239, 68, 68, 0); } }
+
+        /* MOBILE */
+        @media (max-width: 600px) {
+            .navbar { padding: 10px 20px; flex-direction: column; gap: 10px; height: auto; }
+            .navbar-right { width: 100%; justify-content: center; flex-wrap: wrap; border-top: 1px solid #f1f5f9; padding-top: 10px; }
+            .hero-compact h1 { font-size: 32px; }
+            .content-wrapper { margin-top: -80px; }
+            .progress-container { top: 110px; }
+            .flashcards-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
+
+<div class="progress-container"><div class="progress-fill" id="progress-bar"></div></div>
 
 <nav class="navbar">
     <div class="navbar-left">
         <img src="assets/img/logo.png" alt="LL" class="nav-logo" onerror="this.style.display='none'">
         <span class="nav-title">LinguaLab</span>
     </div>
-    <div class="navbar-right">
-        <a href="index.html">Main Page</a>
+    <nav class="navbar-right">
         <a href="grammar.html">Grammar Magic</a>
         <a href="vocabulary.html">Word Bank</a>
-        <a href="parents.html">Parents Wiki</a>
-    </div>
+        <a href="index.html">Main Page</a>
+        <a href="parents.html">Wiki Parents</a>
+    </nav>
 </nav>
 
 <section class="hero-compact">
-    <h1>Lesson Time ⚡</h1>
+    <h1>Lesson Time</h1>
+    <div class="hero-date" id="hero-subtitle">Ready to learn?</div>
 </section>
 
 <div class="container">
-    <a href="exercises.html" class="back-btn"><span>←</span> Back to Dashboard</a>
+    <div class="back-btn-wrapper">
+        <a href="exercises.html" class="back-btn">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+            Back
+        </a>
+    </div>
 
     <div id="lesson-container">
         </div>
@@ -155,101 +229,169 @@
 
 <div class="sticker-modal" id="modal" onclick="this.style.display='none'">
     <div class="sticker-content">
-        <div style="font-size: 60px;">🌟</div>
-        <h2 style="color: var(--navy); margin: 10px 0;">Super Star!</h2>
-        <p>Mission Completed!</p>
+        <svg class="sticker-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <h2 style="color: var(--navy); margin-bottom: 10px; font-size: 32px;">Excellent!</h2>
+        <p style="color: #64748b; font-size: 18px;">Lesson Complete!</p>
+        <button class="complete-btn" style="margin-top: 25px; width: 100%;" onclick="window.location.href='exercises.html'">
+            Back to Menu
+        </button>
     </div>
 </div>
 
 <script>
-    // DATABASE (Sep - Feb)
+    // ===========================================
+    // SVG ICONS (CONSTANTS)
+    // ===========================================
+    const ICONS = {
+        play: '<svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>',
+        mic: '<svg class="icon" viewBox="0 0 24 24"><path fill="white" d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path fill="white" d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>',
+        check: '<svg class="icon" viewBox="0 0 24 24"><path fill="white" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>',
+        speaker: '<svg class="icon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>'
+    };
+
+    // ===========================================
+    // DATABASE (Updated from PDF Content)
+    // ===========================================
     const db = {
         "Sep": [
             {
-                title: "Greetings & Song", tag: "Unit 2: My School",
+                title: "My Family (Unit 1)", tag: "Unit 1: Family",
+                [cite_start]goal: "Goal: Greetings & Family members. [cite: 216]",
                 steps: [
-                    { title: "Sing Along", en: "Play the 'Hello' song. Wave your hand!", zh: "播放 'Hello' 歌 (課本第10頁)。一邊唱一邊揮手打招呼！" },
-                    { title: "Practice Speaking", en: "Say: 'Hello, I'm (Name).'", zh: "練習自我介紹：'Hello, I'm... (加上孩子的名字)'。", vocab: ["Hello", "I'm..."] },
-                    { title: "Record Voice", en: "Record: 'Good morning, teacher.'", zh: "錄音挑戰：'Good morning, teacher.'", phrase: "Good morning, teacher.", type: "speak" }
+                    { label: "Vocabulary", badge: "badge-vocab", title: "Family Members", en: "Tap to listen & repeat", zh: "點擊卡片聽發音", type: "flashcards", 
+                      items: [
+                          { w: "Family", zh: "家庭" }, 
+                          { w: "Daddy", zh: "爸爸" },
+                          { w: "Mommy", zh: "媽媽" }
+                      ] 
+                    },
+                    { label: "Action (TPR)", badge: "badge-tpr", title: "Love your family", en: "Hug Daddy! [cite_start]Kiss Mommy!", zh: "擁抱爸爸！親吻媽媽！[cite: 224]", type: "simple", text: "Hug Daddy and Kiss Mommy!" },
+                    [cite_start]{ label: "Speaking", badge: "badge-speak", title: "Challenge", en: "Say: 'Good morning, Daddy.'", zh: "錄音挑戰 [cite: 216]", phrase: "Good morning, Daddy.", type: "speak" }
                 ]
             },
             {
-                title: "School Objects Hunt", tag: "Unit 2: My School",
+                title: "My School (Unit 2)", tag: "Unit 2: School",
+                [cite_start]goal: "Goal: Identify classroom objects and greetings. [cite: 432]",
                 steps: [
-                    { title: "New Words", en: "Learn: Bag, Book, Teacher.", zh: "學習單詞：Bag (書包), Book (書), Teacher (老師)。", vocab: ["Bag", "Book"] },
-                    { title: "Hide & Seek", en: "Hide a book. Ask: 'Where is the book?'", zh: "尋寶遊戲：把書藏起來。問 'Where is the book?' 讓孩子找出來。" },
-                    { title: "Record Voice", en: "Record: 'It is a book.'", zh: "錄音挑戰：'It is a book.'", phrase: "It is a book.", type: "speak" }
+                    { label: "Vocabulary", badge: "badge-vocab", title: "Objects", en: "Tap to listen", zh: "點擊聽發音", type: "flashcards", 
+                      items: [ { w: "Teacher", zh: "老師" }, { w: "Bag", zh: "書包" }, { w: "Book", zh: "書本" } ] 
+                    },
+                    [cite_start]{ label: "Phonics", badge: "badge-phonics", title: "Letter Bb", en: "B is for Bag.", zh: "B 的發音 /b/ [cite: 610]", type: "flashcards", items: [{w: "Bb", zh: "/b/"}, {w: "Bag", zh: "書包"}] },
+                    [cite_start]{ label: "Speaking", badge: "badge-speak", title: "Challenge", en: "Say: 'Hello, I am Kelly.'", zh: "錄音挑戰 [cite: 433]", phrase: "Hello, I am Kelly.", type: "speak" }
                 ]
             },
             {
-                title: "The Magic 'B' & TPR", tag: "Unit 2: Phonics",
+                title: "Phonics & TPR", tag: "Unit 2: Practice",
+                [cite_start]goal: "Goal: Classroom commands and Phonics. [cite: 445]",
                 steps: [
-                    { title: "Phonics Sound", en: "The letter B makes the /b/ sound.", zh: "字母 B 發出 /b/ 的聲音。", vocab: ["Bb", "/b/"] },
-                    { title: "Commands", en: "Action: 'Open your book'. 'Show me your book'.", zh: "聽指令做動作：Open your book (打開書)，Show me your book (給我看書)。" },
-                    { title: "Record Voice", en: "Record: 'Open your book.'", zh: "錄音挑戰：'Open your book.'", phrase: "Open your book.", type: "speak" }
+                    { label: "Action (TPR)", badge: "badge-tpr", title: "Commands", en: "1. Open your book.<br>2. Show me your book.", zh: "1. 打開書。 2. 給我看書。", type: "simple", text: "Follow the commands!" },
+                    { label: "Speaking", badge: "badge-speak", title: "Challenge", en: "Say: 'Open your book.'", zh: "錄音挑戰", phrase: "Open your book.", type: "speak" }
                 ]
             },
             {
-                title: "Review: First Day", tag: "Unit 2: Revision",
+                title: "Review 1", tag: "Revision 1",
+                goal: "Goal: Review Units 1 & 2.",
                 steps: [
-                    { title: "Who is this?", en: "Point to Mike and Kelly.", zh: "看圖片。指出誰是 Mike，誰是 Kelly。" },
-                    { title: "Record Voice", en: "Record: 'Hello, I'm Mike.'", zh: "錄音挑戰：'Hello, I'm Mike.'", phrase: "Hello, I'm Mike.", type: "speak" }
+                    { label: "Vocabulary", badge: "badge-vocab", title: "Review", en: "Tap to check", zh: "複習", type: "flashcards", items: [ { w: "Daddy", zh: "Father" }, { w: "Teacher", zh: "Miss Wang" } ] },
+                    [cite_start]{ label: "Speaking", badge: "badge-speak", title: "Roleplay", en: "Say: 'Kiss Mommy.'", zh: "角色扮演 [cite: 675]", phrase: "Kiss Mommy.", type: "speak" }
                 ]
             }
         ],
         "Oct": [
             {
-                title: "Boy or Girl?", tag: "Unit 3: My Friends",
+                title: "Boy or Girl? (Unit 3)", tag: "Unit 3: Friends",
+                [cite_start]goal: "Goal: Understand gender and friendship. [cite: 818]",
                 steps: [
-                    { title: "Song Time", en: "Sing: 'You're a boy / You're a girl'.", zh: "唱歌：'You're a boy' (你是男孩)，'You're a girl' (你是女孩)。", vocab: ["Boy", "Girl"] },
-                    { title: "Record Voice", en: "Record: 'I am a girl.'", zh: "錄音挑戰：'I am a girl/boy.'", phrase: "I am a girl.", type: "speak" }
+                    { label: "Vocabulary", badge: "badge-vocab", title: "Gender", en: "Tap to listen", zh: "點擊聽音", type: "flashcards", items: [{w:"Boy", zh:"男孩"}, {w:"Girl", zh:"女孩"}, {w:"Friend", zh:"朋友"}] },
+                    { label: "Action (TPR)", badge: "badge-tpr", title: "Commands", en: "Stand up! [cite_start]Sit down!", zh: "起立！坐下！[cite: 826]", type: "simple", text: "Stand up and Sit down." },
+                    [cite_start]{ label: "Speaking", badge: "badge-speak", title: "Record", en: "Say: 'You are a boy.'", zh: "錄音 [cite: 818]", phrase: "You are a boy.", type: "speak" }
                 ]
             },
             {
-                title: "My Best Friend", tag: "Unit 3: My Friends",
+                title: "Phonics Gg (Unit 3)", tag: "Unit 3: Phonics",
+                [cite_start]goal: "Goal: Learn Letter G /g/. [cite: 971]",
                 steps: [
-                    { title: "Phrase", en: "Say: 'This is my friend'.", zh: "練習說：'This is my friend' (這是我的朋友)。", vocab: ["My Friend"] },
-                    { title: "Record Voice", en: "Record: 'This is my friend.'", zh: "錄音挑戰：'This is my friend.'", phrase: "This is my friend.", type: "speak" }
-                ]
-            },
-            {
-                title: "Phonics Gg", tag: "Unit 3: Phonics",
-                steps: [
-                    { title: "Listen", en: "Listen to /g/. 'Girls' and 'Game'.", zh: "聽 /g/ 的發音。單詞：Girls (女孩們), Game (遊戲)。", vocab: ["Gg", "/g/"] },
-                    { title: "Record Voice", en: "Record: 'Stand up, please.'", zh: "錄音挑戰：'Stand up, please.'", phrase: "Stand up, please.", type: "speak" }
-                ]
-            },
-            {
-                title: "Messy Family", tag: "Reader 1",
-                steps: [
-                    { title: "Story Time", en: "Read 'A Messy Family'. Find Daddy.", zh: "閱讀故事：'A Messy Family'。找出 Daddy (爸爸)。" },
-                    { title: "Record Voice", en: "Record: 'This is my Daddy.'", zh: "錄音挑戰：'This is my Daddy.'", phrase: "This is my Daddy.", type: "speak" }
+                    { label: "Phonics", badge: "badge-phonics", title: "Letter G", en: "G is for...", zh: "G發音", type: "flashcards", items: [{w:"Gg", zh:"/g/"}, {w:"Girl", zh:"女孩"}, {w:"Game", zh:"遊戲"}] },
+                    { label: "Speaking", badge: "badge-speak", title: "Record", en: "Say: 'Stand up, please.'", zh: "錄音", phrase: "Stand up, please.", type: "speak" }
                 ]
             }
         ],
         "Nov": [
-            { title: "Face Song", tag: "Unit 4", steps: [{ title: "Touch", en: "Touch your nose!", zh: "摸鼻子！", type: "speak", phrase: "My nose." }] },
-            { title: "Funny Faces", tag: "Unit 4", steps: [{ title: "Make", en: "Make a fruit face.", zh: "做水果臉譜。", type: "speak", phrase: "My mouth." }] },
-            { title: "Phonics Mm", tag: "Unit 4", steps: [{ title: "Sound", en: "M is for Monkey.", zh: "M 是 Monkey。", type: "speak", phrase: "Monkey." }] },
-            { title: "Buzz! Buzz!", tag: "Reader 2", steps: [{ title: "Bee", en: "Oh, my hair!", zh: "噢，我的頭髮！", type: "speak", phrase: "My hair." }] }
+            {
+                title: "My Face (Unit 4)", tag: "Unit 4: Face",
+                [cite_start]goal: "Goal: Learn face parts. [cite: 1018]",
+                steps: [
+                    { label: "Vocabulary", badge: "badge-vocab", title: "Parts", en: "Tap to listen", zh: "五官", type: "flashcards", items: [{w:"Eye", zh:"眼睛"}, {w:"Nose", zh:"鼻子"}, {w:"Mouth", zh:"嘴巴"}, {w:"Ear", zh:"耳朵"}] },
+                    { label: "Action (TPR)", badge: "badge-tpr", title: "Touch!", en: "Close your eyes. [cite_start]Open your eyes.", zh: "閉眼 / 睜眼 [cite: 1025]", type: "simple", text: "Close and Open your eyes." },
+                    [cite_start]{ label: "Speaking", badge: "badge-speak", title: "Record", en: "Say: 'This is my nose.'", zh: "錄音 [cite: 1017]", phrase: "This is my nose.", type: "speak" }
+                ]
+            },
+            {
+                title: "Phonics Mm (Unit 4)", tag: "Unit 4: Phonics",
+                [cite_start]goal: "Goal: Letter M /m/. [cite: 1176]",
+                steps: [
+                    { label: "Phonics", badge: "badge-phonics", title: "Letter M", en: "M is for...", zh: "M發音", type: "flashcards", items: [{w:"Mm", zh:"/m/"}, {w:"Monkey", zh:"猴子"}, {w:"Mouth", zh:"嘴巴"}] },
+                    { label: "Speaking", badge: "badge-speak", title: "Record", en: "Say: 'My mouth.'", zh: "錄音", phrase: "My mouth.", type: "speak" }
+                ]
+            }
         ],
         "Dec": [
-            { title: "Farm Animals", tag: "Unit 5", steps: [{ title: "Moo", en: "Cow says Moo.", zh: "牛叫 Moo。", type: "speak", phrase: "Cow." }] },
-            { title: "Counting 1-3", tag: "Unit 5", steps: [{ title: "Count", en: "One, Two, Three.", zh: "一，二，三。", type: "speak", phrase: "One, Two." }] },
-            { title: "Phonics Pp", tag: "Unit 5", steps: [{ title: "Color", en: "Pink Pig.", zh: "粉紅豬。", type: "speak", phrase: "Pink pig." }] },
-            { title: "Winter Review", tag: "Unit 5", steps: [{ title: "Review", en: "I like animals.", zh: "我喜歡動物。", type: "speak", phrase: "Animals." }] }
+            {
+                title: "On the Farm (Unit 5)", tag: "Unit 5: Farm",
+                [cite_start]goal: "Goal: Farm animals and numbers 1-3. [cite: 1369]",
+                steps: [
+                    { label: "Vocabulary", badge: "badge-vocab", title: "Animals", en: "Tap to listen", zh: "農場動物", type: "flashcards", items: [{w:"Cow", zh:"牛"}, {w:"Pig", zh:"豬"}, {w:"Hen", zh:"母雞"}, {w:"Duck", zh:"鴨"}] },
+                    { label: "Vocabulary", badge: "badge-vocab", title: "Numbers", en: "1, 2, 3", zh: "數字", type: "flashcards", items: [{w:"One", zh:"1"}, {w:"Two", zh:"2"}, {w:"Three", zh:"3"}] },
+                    { label: "Speaking", badge: "badge-speak", title: "Record", en: "Say: 'Look! [cite_start]Two pigs.'", zh: "錄音 [cite: 1368]", phrase: "Look! Two pigs.", type: "speak" }
+                ]
+            },
+            {
+                title: "Phonics Pp (Unit 5)", tag: "Unit 5: Phonics",
+                [cite_start]goal: "Goal: Letter P /p/ and TPR. [cite: 1543]",
+                steps: [
+                    { label: "Phonics", badge: "badge-phonics", title: "Letter P", en: "P is for...", zh: "P發音", type: "flashcards", items: [{w:"Pp", zh:"/p/"}, {w:"Pig", zh:"豬"}, {w:"Pink", zh:"粉色"}] },
+                    { label: "Action (TPR)", badge: "badge-tpr", title: "Count", en: "Show me your fingers. [cite_start]Count the ducks.", zh: "給我看手指。數數鴨子。[cite: 1377]", type: "simple", text: "Show fingers and count!" },
+                    { label: "Speaking", badge: "badge-speak", title: "Record", en: "Say: 'A pink pig.'", zh: "錄音", phrase: "A pink pig.", type: "speak" }
+                ]
+            }
         ],
         "Jan": [
-            { title: "Zoo Visit", tag: "Unit 6", steps: [{ title: "Look", en: "Look at the Panda.", zh: "看熊貓。", type: "speak", phrase: "Panda." }] },
-            { title: "Photo Time", tag: "Unit 6", steps: [{ title: "Click", en: "Take a photo.", zh: "拍照。", type: "speak", phrase: "Photo." }] },
-            { title: "Phonics Tt", tag: "Unit 6", steps: [{ title: "Tea", en: "Tiger and Tea.", zh: "老虎和茶。", type: "speak", phrase: "Tea please." }] },
-            { title: "Zoo Rules", tag: "Unit 6", steps: [{ title: "Shh", en: "Be quiet.", zh: "安靜。", type: "speak", phrase: "Be quiet." }] }
+            {
+                title: "At the Zoo (Unit 6)", tag: "Unit 6: Zoo",
+                [cite_start]goal: "Goal: Wild animals and numbers 4-5. [cite: 1593]",
+                steps: [
+                    { label: "Vocabulary", badge: "badge-vocab", title: "Wild Animals", en: "Tap to listen", zh: "野生動物", type: "flashcards", items: [{w:"Panda", zh:"熊貓"}, {w:"Tiger", zh:"老虎"}, {w:"Bear", zh:"熊"}, {w:"Monkey", zh:"猴子"}] },
+                    { label: "Action (TPR)", badge: "badge-tpr", title: "Photo", en: "Look at the panda. [cite_start]Take a photo.", zh: "看熊貓。拍照。[cite: 1600]", type: "simple", text: "Click! Take a photo." },
+                    [cite_start]{ label: "Speaking", badge: "badge-speak", title: "Record", en: "Say: 'Four pandas.'", zh: "錄音 [cite: 1588]", phrase: "Four pandas.", type: "speak" }
+                ]
+            },
+            {
+                title: "Phonics Tt (Unit 6)", tag: "Unit 6: Phonics",
+                [cite_start]goal: "Goal: Letter T /t/. [cite: 1760]",
+                steps: [
+                    { label: "Phonics", badge: "badge-phonics", title: "Letter T", en: "T is for...", zh: "T發音", type: "flashcards", items: [{w:"Tt", zh:"/t/"}, {w:"Tiger", zh:"老虎"}, {w:"Tea", zh:"茶"}] },
+                    { label: "Speaking", badge: "badge-speak", title: "Record", en: "Say: 'Take a photo.'", zh: "錄音", phrase: "Take a photo.", type: "speak" }
+                ]
+            }
         ],
         "Feb": [
-            { title: "Transport", tag: "Unit 7", steps: [{ title: "Car", en: "Beep beep!", zh: "必必！", type: "speak", phrase: "It is a car." }] },
-            { title: "My Bike", tag: "Unit 7", steps: [{ title: "Oops", en: "Oh my bike.", zh: "噢我的單車。", type: "speak", phrase: "My bike." }] },
-            { title: "Phonics Cc", tag: "Unit 7", steps: [{ title: "Cat", en: "Cat and Car.", zh: "貓和車。", type: "speak", phrase: "Car." }] },
-            { title: "Traffic Lights", tag: "Unit 7", steps: [{ title: "Stop", en: "Red light Stop.", zh: "紅燈停。", type: "speak", phrase: "Stop." }] }
+            {
+                title: "On the Road (Unit 7)", tag: "Unit 7: Transport",
+                [cite_start]goal: "Goal: Vehicles and traffic rules. [cite: 4]",
+                steps: [
+                    { label: "Vocabulary", badge: "badge-vocab", title: "Vehicles", en: "Tap to listen", zh: "交通工具", type: "flashcards", items: [{w:"Car", zh:"車"}, {w:"Bus", zh:"巴士"}, {w:"Bike", zh:"自行車"}, {w:"Taxi", zh:"的士"}] },
+                    { label: "Action (TPR)", badge: "badge-tpr", title: "Traffic", en: "Stop. Wait. [cite_start]Go.", zh: "停。等。走。[cite: 11]", type: "simple", text: "Red light: Stop. Green light: Go." },
+                    [cite_start]{ label: "Speaking", badge: "badge-speak", title: "Record", en: "Say: 'Oh, my bike!'", zh: "錄音 [cite: 3]", phrase: "Oh, my bike!", type: "speak" }
+                ]
+            },
+            {
+                title: "Phonics Cc (Unit 7)", tag: "Unit 7: Phonics",
+                [cite_start]goal: "Goal: Letter C /k/. [cite: 169]",
+                steps: [
+                    { label: "Phonics", badge: "badge-phonics", title: "Letter C", en: "C is for...", zh: "C發音", type: "flashcards", items: [{w:"Cc", zh:"/k/"}, {w:"Cat", zh:"貓"}, {w:"Car", zh:"車"}] },
+                    { label: "Speaking", badge: "badge-speak", title: "Record", en: "Say: 'Stop and Go.'", zh: "錄音", phrase: "Stop and Go.", type: "speak" }
+                ]
+            }
         ]
     };
 
@@ -261,12 +403,12 @@
         const month = params.get('m');
         const weekIndex = parseInt(params.get('w'));
 
-        // Error Handling if data missing
         if (!month || !db[month] || !db[month][weekIndex]) {
             document.getElementById('lesson-container').innerHTML = `
-                <div style="text-align:center; padding: 40px;">
-                    <h2>Lesson Under Development</h2>
-                    <p>Please check back later!</p>
+                <div style="text-align:center; padding: 40px; background:white; border-radius:24px;">
+                    <h2 style="color:var(--navy)">Content Coming Soon</h2>
+                    <p>This lesson is under development.</p>
+                    <a href="exercises.html" class="back-btn" style="margin-top:20px;">Back</a>
                 </div>
             `;
             return;
@@ -274,38 +416,61 @@
 
         const lesson = db[month][weekIndex];
 
-        // 1. Render Header
+        // 1. HEADER
         let html = `
             <div class="lesson-header-card">
                 <span class="lesson-tag">${lesson.tag}</span>
                 <h1 class="lesson-title">${lesson.title}</h1>
                 <div class="lesson-subtitle">${month} • Week ${weekIndex + 1}</div>
+                <div class="lesson-goal">${lesson.goal}</div>
             </div>
         `;
 
-        // 2. Render Steps
+        // 2. STEPS
+        let stepCount = 0;
         lesson.steps.forEach((step, index) => {
+            stepCount++;
             html += `
                 <div class="step-card">
-                    <div class="step-number">${index + 1}</div>
+                    <span class="step-badge ${step.badge}">${step.label}</span>
                     <div class="step-title">${step.title}</div>
                     <div class="step-desc-en">${step.en}</div>
                     <div class="step-desc-zh">${step.zh}</div>
             `;
 
-            if (step.vocab) {
-                html += `<div class="flashcard-box">`;
-                step.vocab.forEach(w => html += `<span class="vocab-word">${w}</span>`);
+            // FLASHCARDS
+            if (step.type === 'flashcards' && step.items) {
+                html += `<div class="flashcards-grid">`;
+                step.items.forEach(item => {
+                    html += `
+                        <div class="flashcard" onclick="speakText('${item.w}')">
+                            <div class="flashcard-word">${item.w}</div>
+                            <div class="flashcard-zh">${item.zh}</div>
+                            ${ICONS.speaker}
+                        </div>
+                    `;
+                });
                 html += `</div>`;
             }
 
+            // SIMPLE TEXT/ACTION
+            if (step.type === 'simple' && step.text) {
+                html += `
+                    <div style="margin-top:15px; padding:15px; background:#f1f5f9; border-radius:12px; font-style:italic; color:#475569;">
+                        ${step.text}
+                    </div>
+                `;
+            }
+
+            // SPEAKING
             if (step.type === 'speak') {
                 html += `
                     <div class="audio-box">
-                        <button class="rec-btn" onclick="toggleRecord(this)">🎤</button>
-                        <div>
-                            <strong>Tap mic & say:</strong><br>
-                            <span style="color:#64748b">"${step.phrase}"</span>
+                        <button class="rec-btn" onclick="toggleRecord(this)">${ICONS.mic}</button>
+                        <div style="flex:1">
+                            <strong style="color:var(--navy); display:block; margin-bottom:5px;">Tap mic & say:</strong>
+                            <span style="font-size:18px; font-weight:700;">"${step.phrase}"</span><br>
+                            <button class="listen-btn" onclick="speakText('${step.phrase}')">${ICONS.speaker} Listen first</button>
                         </div>
                     </div>
                 `;
@@ -314,39 +479,72 @@
             html += `</div>`;
         });
 
-        // 3. Footer Button
+        // 3. FOOTER
         html += `
-            <button class="complete-btn" onclick="document.getElementById('modal').style.display='flex'">
-                Complete Lesson
+            <button class="complete-btn" onclick="finishLesson()">
+                ${ICONS.check} Complete Mission
             </button>
         `;
 
         document.getElementById('lesson-container').innerHTML = html;
+        
+        // Progress Bar (Simple animation)
+        setTimeout(() => { document.getElementById('progress-bar').style.width = '20%'; }, 500);
     }
 
-    // Audio Simulation
+    // --- UTILS ---
+    function speakText(text) {
+        if ('speechSynthesis' in window) {
+            const msg = new SpeechSynthesisUtterance();
+            msg.text = text;
+            msg.lang = 'en-US';
+            msg.rate = 0.8; 
+            window.speechSynthesis.speak(msg);
+        } else {
+            alert("Audio not supported in this browser");
+        }
+    }
+
     let isRecording = false;
     function toggleRecord(btn) {
+        // Simple UI simulation of recording
         if (!isRecording) {
             btn.classList.add('recording');
             isRecording = true;
+            // Update progress bar
+            let currentWidth = parseInt(document.getElementById('progress-bar').style.width) || 20;
+            document.getElementById('progress-bar').style.width = Math.min(currentWidth + 25, 90) + '%';
         } else {
             btn.classList.remove('recording');
             isRecording = false;
-            // Play success sound
+            // Success Audio Feedback
             const ctx = new (window.AudioContext || window.webkitAudioContext)();
             const osc = ctx.createOscillator();
             const gain = ctx.createGain();
             osc.connect(gain);
             gain.connect(ctx.destination);
             osc.frequency.setValueAtTime(600, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(1000, ctx.currentTime + 0.1);
             gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
             osc.start();
             osc.stop(ctx.currentTime + 0.5);
         }
     }
 
-    // Run
+    function finishLesson() {
+        document.getElementById('progress-bar').style.width = '100%';
+        document.getElementById('modal').style.display = 'flex';
+        
+        if (typeof confetti === 'function') {
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#22d3ee', '#f97316', '#a78bfa']
+            });
+        }
+    }
+
     loadLesson();
 </script>
 
