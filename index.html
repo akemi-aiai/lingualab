@@ -191,7 +191,7 @@
         <p style="text-transform: uppercase; font-weight: 700; color: var(--primary); letter-spacing: 1px;">Academy Growth Tracker</p>
         <div class="stat-val" id="words-count">0</div>
         <p style="font-size: 20px; color: #64748b; margin: 10px 0 25px;" id="status-text">Go to "Grammar Magic" to grow your tree!</p>
-        <button class="btn btn-outline" onclick="downloadReport()">Download Report 📄</button>
+        <button class="btn btn-outline" onclick="downloadReport()">Download Report</button>
       </div>
     </div>
   </section>
@@ -241,8 +241,103 @@
     }
 
     function downloadReport() {
+        const score = localStorage.getItem('ll_score') || 0;
+        const date = new Date().toLocaleDateString();
+        
+        // Определяем звание на основе очков
+        let rank = "Beginner Explorer";
+        if (score >= 100) rank = "Master of Magic";
+        else if (score >= 50) rank = "Knowledge Hero";
+        else if (score >= 20) rank = "Bright Sprout";
+    
         const reportWindow = window.open('', '_blank');
-        reportWindow.document.write(`<html><body style="text-align:center;padding:50px;font-family:sans-serif;border:10px solid #22d3ee"><h1>LinguaLab Certificate</h1><p>Tasks Completed: ${score}</p><h2>Great Progress!</h2><script>window.print()<\/script></body></html>`);
+        reportWindow.document.write(`
+            <html>
+            <head>
+                <title>LinguaLab Diploma</title>
+                <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;800&display=swap" rel="stylesheet">
+                <style>
+                    body { 
+                        margin: 0; padding: 0; 
+                        background: #f1f5f9; 
+                        font-family: 'Inter', sans-serif; 
+                        display: flex; justify-content: center; align-items: center; min-height: 100vh;
+                    }
+                    .diploma {
+                        width: 800px;
+                        padding: 60px;
+                        background: #fff;
+                        border: 15px solid #22d3ee;
+                        border-image: linear-gradient(135deg, #22d3ee, #a78bfa) 1;
+                        text-align: center;
+                        position: relative;
+                        box-shadow: 0 40px 60px rgba(0,0,0,0.1);
+                    }
+                    .logo { font-size: 24px; font-weight: 800; color: #1f4e79; margin-bottom: 40px; }
+                    h1 { font-size: 54px; margin: 0; color: #1f4e79; text-transform: uppercase; letter-spacing: 2px; }
+                    .award-text { font-size: 22px; color: #64748b; margin: 20px 0; }
+                    .rank-badge { 
+                        display: inline-block; 
+                        padding: 10px 30px; 
+                        background: #f97316; 
+                        color: #fff; 
+                        border-radius: 999px; 
+                        font-size: 28px; 
+                        font-weight: 800;
+                        margin-bottom: 30px;
+                    }
+                    .stats-box {
+                        display: flex; justify-content: center; gap: 40px; margin: 40px 0;
+                    }
+                    .stat-item { text-align: center; }
+                    .stat-val { font-size: 48px; font-weight: 800; color: #22d3ee; display: block; }
+                    .stat-label { font-size: 14px; color: #94a3b8; text-transform: uppercase; }
+                    
+                    .seal {
+                        position: absolute; bottom: 40px; right: 40px;
+                        width: 120px; height: 120px;
+                        background: #fbbf24;
+                        border-radius: 50%;
+                        display: flex; align-items: center; justify-content: center;
+                        border: 4px dashed #fff;
+                        box-shadow: 0 0 0 8px #fbbf24;
+                        color: #fff; font-weight: 800; transform: rotate(-15deg);
+                    }
+                    @media print {
+                        body { background: #fff; }
+                        .diploma { box-shadow: none; border-width: 20px; }
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="diploma">
+                    <div class="logo">LINGUALAB ACADEMY</div>
+                    <h1>DIPLOMA</h1>
+                    <p class="award-text">This is to certify that our brilliant student has reached the rank of:</p>
+                    <div class="rank-badge">${rank}</div>
+                    
+                    <div class="stats-box">
+                        <div class="stat-item">
+                            <span class="stat-val">${score}</span>
+                            <span class="stat-label">Tasks Completed</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-val">100%</span>
+                            <span class="stat-label">Effort</span>
+                        </div>
+                    </div>
+    
+                    <p style="font-size: 18px; color: #1f4e79; font-weight: 600;">Your Knowledge Tree is blooming!</p>
+                    <div style="margin-top: 40px; font-size: 14px; color: #cbd5e1;">Date: ${date} • Certificate ID: LL-${Math.floor(Math.random()*10000)}</div>
+                    
+                    <div class="seal">OFFICIAL<br>LinguaLab</div>
+                </div>
+                <script>
+                    setTimeout(() => { window.print(); }, 500);
+                <\/script>
+            </body>
+            </html>
+        `);
         reportWindow.document.close();
     }
 
