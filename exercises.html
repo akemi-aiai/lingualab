@@ -9,226 +9,169 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
 
-  <style>
-    :root {
-      --primary: #22d3ee;
-      --accent: #f97316;
-      --navy: #1f4e79;
-      --bg: #f8fafc;
-      --radius: 24px;
-      --primary-light: rgba(34, 211, 238, .16);
-    }
+    <style>
+        :root {
+            --primary: #22d3ee;
+            --accent: #f97316;
+            --navy: #1f4e79;
+            --bg: #f8fafc;
+            --radius: 24px;
+            --primary-light: rgba(34, 211, 238, .16);
+            /* Пастельные цвета для кнопок месяцев */
+            --c1: #e0f2fe; /* Голубой */
+            --c2: #dcfce7; /* Зеленый */
+            --c3: #fef3c7; /* Желтый */
+            --c4: #fee2e2; /* Розовый */
+        }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Inter', sans-serif; background: var(--bg); color: #0f172a; padding-top: 80px; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: #0f172a;
+            line-height: 1.6;
+            padding-top: 80px;
+        }
 
-    /* NAVBAR */
-    .navbar {
-      position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 15px 40px; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,.05);
-    }
-    .navbar-left { display: flex; align-items: center; gap: 12px; }
-    .nav-logo { height: 50px; }
-    .nav-title { font-size: 24px; font-weight: 800; color: var(--navy); }
-    .navbar-right a { color: var(--navy); font-weight: 600; text-decoration: none; font-size: 14px; margin-left: 20px; }
-    footer { background: #0f172a; color: #94a3b8; padding: 40px 8%; text-align: center; }
+        /* --- NAVBAR (Как в Grammar Magic) --- */
+        .navbar {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 15px 40px; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,.05);
+        }
+        .navbar-left { display: flex; align-items: center; gap: 12px; }
+        .nav-logo { height: 50px; width: auto; }
+        .nav-title { font-size: 24px; font-weight: 800; color: var(--navy); }
+        
+        .navbar-right { display: flex; align-items: center; gap: 20px; }
+        .navbar-right a { 
+            color: var(--navy); font-weight: 600; text-decoration: none; 
+            font-size: 14px; transition: 0.3s; 
+        }
+        .navbar-right a:hover { color: var(--primary); }
 
-    }
-    /* COMPACT HERO */
-    .hero-compact{
-      position: relative;
-      overflow: hidden;
-      padding: 64px 8% 150px;
-      text-align: center;
-      color: #fff;
-      background: var(--hero-grad);
-    }
-    
-    .hero-compact h1 { font-size: 42px; font-weight: 800; margin-bottom: 10px; }
-    
-    .hero-info{
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      gap: 20px;
-      font-size: 18px;
-      opacity: .95;
-    }
+        /* --- HERO COMPACT (Эталонный градиент) --- */
+        .hero-compact {
+            padding: 60px 8% 140px;
+            text-align: center;
+            background: linear-gradient(135deg, #22d3ee, #a78bfa);
+            color: #fff;
+            position: relative;
+        }
+        .hero-compact h1 { font-size: 42px; font-weight: 800; margin-bottom: 10px; }
+        .hero-info { 
+            display: flex; justify-content: center; align-items: center; 
+            gap: 20px; font-size: 18px; opacity: 0.95;
+        }
 
-    /* CONTENT WRAPPER */
-    .content-wrapper { max-width: 1100px; margin: -100px auto 50px; position: relative; z-index: 10; padding: 0 20px; }
+        /* --- CONTENT WRAPPER --- */
+        .content-wrapper {
+            max-width: 1100px;
+            margin: -100px auto 50px; /* Наплыв на Hero */
+            position: relative;
+            z-index: 10;
+            padding: 0 20px;
+        }
 
-    /* --- MONTH SELECTOR (GRID VIEW) --- */
+        /* --- MONTH SELECTOR (GRID VIEW) --- */
+        .month-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            margin-bottom: 40px;
+            border: 1px solid #e2e8f0;
+            
+            /* Сетка: перенос строк, чтобы всё влезло без прокрутки */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+        }
 
-    .month-container{
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      gap:12px;
-      flex-wrap:nowrap;      /* одна строка */
-      white-space:nowrap;
-      margin: 18px auto 10px;
-      padding: 10px 12px;
-      max-width: 1100px;
-      overflow-x:auto;
-      -webkit-overflow-scrolling: touch;
-    }
-    
-    .month-btn{
-      flex: 0 0 auto;
-      border-radius: 999px;
-      border: 1px solid rgba(15,23,42,.10);
-      box-shadow: 0 10px 24px rgba(2,6,23,.06);
-      padding: 14px 20px;      /* ⬅️ крупнее */
-      min-height: 48px;        /* ⬅️ крупнее */
-      font-size: 15px;         /* ⬅️ крупнее */
-      font-weight: 800;
-      letter-spacing: .25px;
-    }
-    
-    /* пастель по кругу (1-4 цвета повторяются) */
-    .month-btn:nth-child(4n+1){ background: var(--c1); }
-    .month-btn:nth-child(4n+2){ background: var(--c2); }
-    .month-btn:nth-child(4n+3){ background: var(--c3); }
-    .month-btn:nth-child(4n){   background: var(--c4); }
-    
-    
-    .month-btn.active,
-    .month-btn[aria-selected="true"]{
-      outline: none;
-      border-color: rgba(34,211,238,.55);
-      box-shadow: 0 0 0 4px var(--primary-light), 0 10px 26px rgba(2,6,23,.08);
-    }
+        .month-btn {
+            flex: 0 0 auto;
+            border-radius: 99px;
+            border: 1px solid rgba(15,23,42,.10);
+            padding: 12px 24px;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.2s;
+            color: #475569;
+            min-width: 80px;
+            text-align: center;
+        }
 
+        /* Чередование пастельных цветов */
+        .month-btn:nth-child(4n+1) { background: var(--c1); }
+        .month-btn:nth-child(4n+2) { background: var(--c2); }
+        .month-btn:nth-child(4n+3) { background: var(--c3); }
+        .month-btn:nth-child(4n)   { background: var(--c4); }
+
+        .month-btn:hover { transform: translateY(-2px); filter: brightness(0.95); }
+        
+        .month-btn.active {
+            border-color: var(--navy);
+            background: var(--navy);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(31, 78, 121, 0.3);
+            transform: scale(1.05);
+        }
 
         /* --- PARENT WIKI --- */
-
-      .wiki-box{
-  background: rgba(255,255,255,.92);
-  border: 1px solid rgba(15,23,42,.10);
-  border-radius: 22px;
-  box-shadow: 0 18px 44px rgba(2,6,23,.10);
-  padding: 28px 26px;     /* ⬅️ крупнее */
-  max-width: 1100px;      /* ⬅️ шире */
-  margin: 18px auto 22px;
-}
-
-.wiki-title{
-  font-weight: 900;
-  color: #c2410c;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  font-size: 14px;         /* ⬅️ крупнее */
-  letter-spacing: 1.2px;
-}
-
-.wiki-content{
-  font-size: 17px;         /* ⬅️ крупнее */
-  line-height: 1.75;
-  color: #334155;          /* более “премиум”, чем коричневый */
-}
-
-.wiki-content b{
-  color:#0f172a;
-}
-      
-        .wiki-box h1, .wiki-box h2, .wiki-box h3{
-          color: var(--text);
-          letter-spacing: -0.2px;
-          line-height: 1.15;
-          margin: 0 0 10px;
+        .wiki-box {
+            background: rgba(255,255,255,.95);
+            border-left: 5px solid var(--accent);
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            padding: 30px;
+            margin-bottom: 30px;
         }
-        
-    .wiki-box p{
-      color: var(--muted);
-      line-height: 1.7;
-      margin: 10px 0;
-      font-size: 15px;
-    }
-    
-    .wiki-box ul{
-      list-style: none;
-      padding: 0;
-      margin: 12px 0 0;
-      display: grid;
-      gap: 10px;
-    }
-    
-    .wiki-box li{
-      margin: 0;
-    }
-    
-    /* ссылки-ресурсы как “плитки” */
-    .wiki-box li a{
-      display: block;
-      padding: 12px 14px;
-      border-radius: 16px;
-      border: 1px solid rgba(15,23,42,.08);
-      background: rgba(183,156,255,.10);
-      color: var(--text);
-      text-decoration: none;
-      box-shadow: 0 8px 18px rgba(2,6,23,.06);
-    }
-    
-    .wiki-box li a:hover{
-      transform: none;
-      filter: brightness(.99);
-    }
-    
-    /* мягкая подсветка секций (если у тебя секции разбиты блоками внутри wiki-box) */
-    .wiki-box .section:nth-of-type(4n+1){ background: var(--c1); }
-    .wiki-box .section:nth-of-type(4n+2){ background: var(--c2); }
-    .wiki-box .section:nth-of-type(4n+3){ background: var(--c3); }
-    .wiki-box .section:nth-of-type(4n){   background: var(--c4); }
-    
-    .wiki-box .section{
-      border-radius: 18px;
-      padding: 16px;
-      border: 1px solid rgba(15,23,42,.08);
-    }
-    
-    /* длинные списки “скручиваем” в удобный ритм */
-    .wiki-box ol{
-      padding-left: 18px;
-      margin: 12px 0;
-    }
-    
-    .wiki-box ol li{
-      margin: 8px 0;
-      color: var(--text);
-      line-height: 1.6;
-    }
+        .wiki-title {
+            font-weight: 900;
+            color: #c2410c;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+        .wiki-content {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #334155;
+        }
+        .wiki-content b { color: #0f172a; }
 
         /* --- WEEK GRID --- */
-        .week-grid { 
-            display: grid; 
+        .week-grid {
+            display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 20px; 
+            gap: 20px;
         }
-        
-        .week-card { 
-            background: #fff; 
-            border-radius: var(--radius); 
-            padding: 30px 20px; 
-            text-align: center; 
-            cursor: pointer; 
-            border: 2px solid transparent; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04); 
+
+        .week-card {
+            background: #fff;
+            border-radius: var(--radius);
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            border: 2px solid transparent;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
             transition: 0.3s;
-            text-decoration: none; 
-            color: inherit; 
-            display: flex; 
-            flex-direction: column; 
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
             align-items: center;
         }
-        .week-card:hover { 
-            transform: translateY(-5px); 
-            border-color: var(--primary); 
+        .week-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
             box-shadow: 0 20px 40px rgba(34, 211, 238, 0.15);
         }
-        
-        .week-number { 
+
+        .week-number {
             font-size: 20px; font-weight: 800; color: var(--primary);
             background: var(--primary-light); width: 50px; height: 50px;
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
@@ -239,20 +182,22 @@
 
         .coming-soon { opacity: 0.5; pointer-events: none; border: 1px dashed #cbd5e1; background: #f8fafc; }
 
-        /* --- MOBILE --- */
+        footer { background: #0f172a; color: #94a3b8; padding: 40px 8%; text-align: center; margin-top: 50px; }
 
-        @media (max-width: 520px) {
+        /* --- MOBILE --- */
+        @media (max-width: 900px) {
+            .week-grid { grid-template-columns: repeat(2, 1fr); }
+            .hero-compact { padding-bottom: 160px; }
+        }
+
+        @media (max-width: 600px) {
             .navbar { padding: 10px 20px; flex-direction: column; gap: 10px; }
             .navbar-left { width: 100%; justify-content: center; }
-            .navbar-right { 
-                width: 100%; justify-content: center; gap: 15px; flex-wrap: wrap; 
-                border-top: 1px solid #f1f5f9; padding-top: 10px;
-            }
+            .navbar-right { width: 100%; justify-content: center; gap: 15px; flex-wrap: wrap; border-top: 1px solid #f1f5f9; padding-top: 10px; }
             .hero-compact h1 { font-size: 32px; }
             .content-wrapper { margin-top: -80px; }
             .week-grid { grid-template-columns: 1fr; }
-            .month-container{ gap:8px; padding: 6px 8px; }
-            .month-btn{ padding: 9px 12px; font-size: 13px; }
+            .month-btn { flex-grow: 1; text-align: center; padding: 10px 15px; font-size: 13px; }
         }
     </style>
 </head>
@@ -264,9 +209,9 @@
         <span class="nav-title">LinguaLab</span>
     </div>
     <nav class="navbar-right">
+        <a href="index.html">Main Page</a>
         <a href="grammar.html">Grammar Magic</a>
         <a href="vocabulary.html">Word Bank</a>
-        <a href="index.html">Main Page</a>
         <a href="parents.html">Wiki Parents</a>
     </nav>
 </header>
@@ -283,8 +228,9 @@
 
     <div id="content-area"></div>
 </div>
-  <footer class="footer">
-  © <span id="year">2026</span> LinguaLab • Small lessons. Real progress. All rights reserved.
+
+<footer>
+    <p>© 2026 LinguaLab. Small lessons. Real progress.</p>
 </footer>
 
 <script>
@@ -320,7 +266,7 @@
             wiki: "<b>Educational Goal:</b> Transport names and traffic safety (Stop/Go).<br><b>教學目標：</b>認識交通工具 (Bus, Car) 和交通規則。學習字母 C。", 
             weeks: ["Transport", "Oops! My Bike", "Phonics Cc", "Traffic Lights"] 
         },
-        // Placeholders
+        // Placeholders for Mar-Aug
         "Mar": { title: "March", wiki: "Content under development...", weeks: ["Coming Soon", "Coming Soon", "Coming Soon", "Coming Soon"], active: false },
         "Apr": { title: "April", wiki: "Content under development...", weeks: ["Coming Soon", "Coming Soon", "Coming Soon", "Coming Soon"], active: false },
         "May": { title: "May", wiki: "Content under development...", weeks: ["Coming Soon", "Coming Soon", "Coming Soon", "Coming Soon"], active: false },
