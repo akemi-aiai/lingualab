@@ -239,9 +239,7 @@
 </div>
 
 <script>
-    // ===========================================
     // SVG ICONS (CONSTANTS)
-    // ===========================================
     const ICONS = {
         play: '<svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>',
         mic: '<svg class="icon" viewBox="0 0 24 24"><path fill="white" d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path fill="white" d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>',
@@ -249,14 +247,13 @@
         speaker: '<svg class="icon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>'
     };
 
-    // ===========================================
     // DATABASE (Updated from PDF Content)
-    // ===========================================
+
     const db = {
         "Sep": [
             {
                 title: "My Family (Unit 1)", tag: "Unit 1: Family",
-                goal: "Goal: Greetings & Family members. [cite: 216]",
+                goal: "Goal: Greetings & Family members.",
                 steps: [
                     { label: "Vocabulary", badge: "badge-vocab", title: "Family Members", en: "Tap to listen & repeat", zh: "點擊卡片聽發音", type: "flashcards", 
                       items: [
@@ -265,24 +262,24 @@
                           { w: "Mommy", zh: "媽媽" }
                       ] 
                     },
-                    { label: "Action (TPR)", badge: "badge-tpr", title: "Love your family", en: "Hug Daddy! Kiss Mommy!", zh: "擁抱爸爸！親吻媽媽！[cite: 224]", type: "simple", text: "Hug Daddy and Kiss Mommy!" },
-                    { label: "Speaking", badge: "badge-speak", title: "Challenge", en: "Say: 'Good morning, Daddy.'", zh: "錄音挑戰 [cite: 216]", phrase: "Good morning, Daddy.", type: "speak" }
+                    { label: "Action (TPR)", badge: "badge-tpr", title: "Love your family", en: "Hug Daddy! Kiss Mommy!", zh: "擁抱爸爸！親吻媽媽!", type: "simple", text: "Hug Daddy and Kiss Mommy!" },
+                    { label: "Speaking", badge: "badge-speak", title: "Challenge", en: "Say: 'Good morning, Daddy.'", zh: "錄音挑戰 ", phrase: "Good morning, Daddy.", type: "speak" }
                 ]
             },
             {
                 title: "My School (Unit 2)", tag: "Unit 2: School",
-                goal: "Goal: Identify classroom objects and greetings. [cite: 432]",
+                goal: "Goal: Identify classroom objects and greetings.",
                 steps: [
                     { label: "Vocabulary", badge: "badge-vocab", title: "Objects", en: "Tap to listen", zh: "點擊聽發音", type: "flashcards", 
                       items: [ { w: "Teacher", zh: "老師" }, { w: "Bag", zh: "書包" }, { w: "Book", zh: "書本" } ] 
                     },
-                    { label: "Phonics", badge: "badge-phonics", title: "Letter Bb", en: "B is for Bag.", zh: "B 的發音 /b/ [cite: 610]", type: "flashcards", items: [{w: "Bb", zh: "/b/"}, {w: "Bag", zh: "書包"}] },
-                    { label: "Speaking", badge: "badge-speak", title: "Challenge", en: "Say: 'Hello, I am Kelly.'", zh: "錄音挑戰 [cite: 433]", phrase: "Hello, I am Kelly.", type: "speak" }
+                    { label: "Phonics", badge: "badge-phonics", title: "Letter Bb", en: "B is for Bag.", zh: "B 的發音 /b/", type: "flashcards", items: [{w: "Bb", zh: "/b/"}, {w: "Bag", zh: "書包"}] },
+                    { label: "Speaking", badge: "badge-speak", title: "Challenge", en: "Say: 'Hello, I am Kelly.'", zh: "錄音挑戰", phrase: "Hello, I am Kelly.", type: "speak" }
                 ]
             },
             {
                 title: "Phonics & TPR", tag: "Unit 2: Practice",
-                goal: "Goal: Classroom commands and Phonics. [cite: 445]",
+                goal: "Goal: Classroom commands and Phonics.",
                 steps: [
                     { label: "Action (TPR)", badge: "badge-tpr", title: "Commands", en: "1. Open your book.<br>2. Show me your book.", zh: "1. 打開書。 2. 給我看書。", type: "simple", text: "Follow the commands!" },
                     { label: "Speaking", badge: "badge-speak", title: "Challenge", en: "Say: 'Open your book.'", zh: "錄音挑戰", phrase: "Open your book.", type: "speak" }
@@ -293,23 +290,23 @@
                 goal: "Goal: Review Units 1 & 2.",
                 steps: [
                     { label: "Vocabulary", badge: "badge-vocab", title: "Review", en: "Tap to check", zh: "複習", type: "flashcards", items: [ { w: "Daddy", zh: "Father" }, { w: "Teacher", zh: "Miss Wang" } ] },
-                    { label: "Speaking", badge: "badge-speak", title: "Roleplay", en: "Say: 'Kiss Mommy.'", zh: "角色扮演 [cite: 675]", phrase: "Kiss Mommy.", type: "speak" }
+                    { label: "Speaking", badge: "badge-speak", title: "Roleplay", en: "Say: 'Kiss Mommy.'", zh: "角色扮演", phrase: "Kiss Mommy.", type: "speak" }
                 ]
             }
         ],
         "Oct": [
             {
                 title: "Boy or Girl? (Unit 3)", tag: "Unit 3: Friends",
-                goal: "Goal: Understand gender and friendship. [cite: 818]",
+                goal: "Goal: Understand gender and friendship.",
                 steps: [
                     { label: "Vocabulary", badge: "badge-vocab", title: "Gender", en: "Tap to listen", zh: "點擊聽音", type: "flashcards", items: [{w:"Boy", zh:"男孩"}, {w:"Girl", zh:"女孩"}, {w:"Friend", zh:"朋友"}] },
-                    { label: "Action (TPR)", badge: "badge-tpr", title: "Commands", en: "Stand up! Sit down!", zh: "起立！坐下！[cite: 826]", type: "simple", text: "Stand up and Sit down." },
-                   { label: "Speaking", badge: "badge-speak", title: "Record", en: "Say: 'You are a boy.'", zh: "錄音 [cite: 818]", phrase: "You are a boy.", type: "speak" }
+                    { label: "Action (TPR)", badge: "badge-tpr", title: "Commands", en: "Stand up! Sit down!", zh: "起立！坐下", type: "simple", text: "Stand up and Sit down." },
+                   { label: "Speaking", badge: "badge-speak", title: "Record", en: "Say: 'You are a boy.'", zh: "錄音 ", phrase: "You are a boy.", type: "speak" }
                 ]
             },
             {
                 title: "Phonics Gg (Unit 3)", tag: "Unit 3: Phonics",
-                goal: "Goal: Learn Letter G /g/. [cite: 971]",
+                goal: "Goal: Learn Letter G /g/.",
                 steps: [
                     { label: "Phonics", badge: "badge-phonics", title: "Letter G", en: "G is for...", zh: "G發音", type: "flashcards", items: [{w:"Gg", zh:"/g/"}, {w:"Girl", zh:"女孩"}, {w:"Game", zh:"遊戲"}] },
                     { label: "Speaking", badge: "badge-speak", title: "Record", en: "Say: 'Stand up, please.'", zh: "錄音", phrase: "Stand up, please.", type: "speak" }
@@ -319,16 +316,16 @@
         "Nov": [
             {
                 title: "My Face (Unit 4)", tag: "Unit 4: Face",
-                goal: "Goal: Learn face parts. [cite: 1018]",
+                goal: "Goal: Learn face parts.",
                 steps: [
                     { label: "Vocabulary", badge: "badge-vocab", title: "Parts", en: "Tap to listen", zh: "五官", type: "flashcards", items: [{w:"Eye", zh:"眼睛"}, {w:"Nose", zh:"鼻子"}, {w:"Mouth", zh:"嘴巴"}, {w:"Ear", zh:"耳朵"}] },
-                    { label: "Action (TPR)", badge: "badge-tpr", title: "Touch!", en: "Close your eyes. Open your eyes.", zh: "閉眼 / 睜眼 [cite: 1025]", type: "simple", text: "Close and Open your eyes." },
-                    { label: "Speaking", badge: "badge-speak", title: "Record", en: "Say: 'This is my nose.'", zh: "錄音 [cite: 1017]", phrase: "This is my nose.", type: "speak" }
+                    { label: "Action (TPR)", badge: "badge-tpr", title: "Touch!", en: "Close your eyes. Open your eyes.", zh: "閉眼 / 睜眼", type: "simple", text: "Close and Open your eyes." },
+                    { label: "Speaking", badge: "badge-speak", title: "Record", en: "Say: 'This is my nose.'", zh: "錄音", phrase: "This is my nose.", type: "speak" }
                 ]
             },
             {
                 title: "Phonics Mm (Unit 4)", tag: "Unit 4: Phonics",
-                goal: "Goal: Letter M /m/. [cite: 1176]",
+                goal: "Goal: Letter M /m/.",
                 steps: [
                     { label: "Phonics", badge: "badge-phonics", title: "Letter M", en: "M is for...", zh: "M發音", type: "flashcards", items: [{w:"Mm", zh:"/m/"}, {w:"Monkey", zh:"猴子"}, {w:"Mouth", zh:"嘴巴"}] },
                     { label: "Speaking", badge: "badge-speak", title: "Record", en: "Say: 'My mouth.'", zh: "錄音", phrase: "My mouth.", type: "speak" }
@@ -338,19 +335,19 @@
         "Dec": [
             {
                 title: "On the Farm (Unit 5)", tag: "Unit 5: Farm",
-                goal: "Goal: Farm animals and numbers 1-3. [cite: 1369]",
+                goal: "Goal: Farm animals and numbers 1-3.",
                 steps: [
                     { label: "Vocabulary", badge: "badge-vocab", title: "Animals", en: "Tap to listen", zh: "農場動物", type: "flashcards", items: [{w:"Cow", zh:"牛"}, {w:"Pig", zh:"豬"}, {w:"Hen", zh:"母雞"}, {w:"Duck", zh:"鴨"}] },
                     { label: "Vocabulary", badge: "badge-vocab", title: "Numbers", en: "1, 2, 3", zh: "數字", type: "flashcards", items: [{w:"One", zh:"1"}, {w:"Two", zh:"2"}, {w:"Three", zh:"3"}] },
-                    { label: "Speaking", badge: "badge-speak", title: "Record", en: "Say: 'Look! Two pigs.'", zh: "錄音 [cite: 1368]", phrase: "Look! Two pigs.", type: "speak" }
+                    { label: "Speaking", badge: "badge-speak", title: "Record", en: "Say: 'Look! Two pigs.'", zh: "錄音", phrase: "Look! Two pigs.", type: "speak" }
                 ]
             },
             {
                 title: "Phonics Pp (Unit 5)", tag: "Unit 5: Phonics",
-                goal: "Goal: Letter P /p/ and TPR. [cite: 1543]",
+                goal: "Goal: Letter P /p/ and TPR.",
                 steps: [
                     { label: "Phonics", badge: "badge-phonics", title: "Letter P", en: "P is for...", zh: "P發音", type: "flashcards", items: [{w:"Pp", zh:"/p/"}, {w:"Pig", zh:"豬"}, {w:"Pink", zh:"粉色"}] },
-                    { label: "Action (TPR)", badge: "badge-tpr", title: "Count", en: "Show me your fingers. Count the ducks.", zh: "給我看手指。數數鴨子。[cite: 1377]", type: "simple", text: "Show fingers and count!" },
+                    { label: "Action (TPR)", badge: "badge-tpr", title: "Count", en: "Show me your fingers. Count the ducks.", zh: "給我看手指。數數鴨子.", type: "simple", text: "Show fingers and count!" },
                     { label: "Speaking", badge: "badge-speak", title: "Record", en: "Say: 'A pink pig.'", zh: "錄音", phrase: "A pink pig.", type: "speak" }
                 ]
             }
@@ -358,16 +355,16 @@
         "Jan": [
             {
                 title: "At the Zoo (Unit 6)", tag: "Unit 6: Zoo",
-                goal: "Goal: Wild animals and numbers 4-5. [cite: 1593]",
+                goal: "Goal: Wild animals and numbers 4-5.",
                 steps: [
                     { label: "Vocabulary", badge: "badge-vocab", title: "Wild Animals", en: "Tap to listen", zh: "野生動物", type: "flashcards", items: [{w:"Panda", zh:"熊貓"}, {w:"Tiger", zh:"老虎"}, {w:"Bear", zh:"熊"}, {w:"Monkey", zh:"猴子"}] },
-                    { label: "Action (TPR)", badge: "badge-tpr", title: "Photo", en: "Look at the panda. Take a photo.", zh: "看熊貓。拍照。[cite: 1600]", type: "simple", text: "Click! Take a photo." },
-                    { label: "Speaking", badge: "badge-speak", title: "Record", en: "Say: 'Four pandas.'", zh: "錄音 [cite: 1588]", phrase: "Four pandas.", type: "speak" }
+                    { label: "Action (TPR)", badge: "badge-tpr", title: "Photo", en: "Look at the panda. Take a photo.", zh: "看熊貓。拍照。", type: "simple", text: "Click! Take a photo." },
+                    { label: "Speaking", badge: "badge-speak", title: "Record", en: "Say: 'Four pandas.'", zh: "錄音", phrase: "Four pandas.", type: "speak" }
                 ]
             },
             {
                 title: "Phonics Tt (Unit 6)", tag: "Unit 6: Phonics",
-                goal: "Goal: Letter T /t/. [cite: 1760]",
+                goal: "Goal: Letter T /t/.",
                 steps: [
                     { label: "Phonics", badge: "badge-phonics", title: "Letter T", en: "T is for...", zh: "T發音", type: "flashcards", items: [{w:"Tt", zh:"/t/"}, {w:"Tiger", zh:"老虎"}, {w:"Tea", zh:"茶"}] },
                     { label: "Speaking", badge: "badge-speak", title: "Record", en: "Say: 'Take a photo.'", zh: "錄音", phrase: "Take a photo.", type: "speak" }
@@ -377,16 +374,16 @@
         "Feb": [
             {
                 title: "On the Road (Unit 7)", tag: "Unit 7: Transport",
-                goal: "Goal: Vehicles and traffic rules. [cite: 4]",
+                goal: "Goal: Vehicles and traffic rules.",
                 steps: [
                     { label: "Vocabulary", badge: "badge-vocab", title: "Vehicles", en: "Tap to listen", zh: "交通工具", type: "flashcards", items: [{w:"Car", zh:"車"}, {w:"Bus", zh:"巴士"}, {w:"Bike", zh:"自行車"}, {w:"Taxi", zh:"的士"}] },
-                    { label: "Action (TPR)", badge: "badge-tpr", title: "Traffic", en: "Stop. Wait. Go.", zh: "停。等。走。[cite: 11]", type: "simple", text: "Red light: Stop. Green light: Go." },
-                    { label: "Speaking", badge: "badge-speak", title: "Record", en: "Say: 'Oh, my bike!'", zh: "錄音 [cite: 3]", phrase: "Oh, my bike!", type: "speak" }
+                    { label: "Action (TPR)", badge: "badge-tpr", title: "Traffic", en: "Stop. Wait. Go.", zh: "停。等。走。", type: "simple", text: "Red light: Stop. Green light: Go." },
+                    { label: "Speaking", badge: "badge-speak", title: "Record", en: "Say: 'Oh, my bike!'", zh: "錄音", phrase: "Oh, my bike!", type: "speak" }
                 ]
             },
             {
                 title: "Phonics Cc (Unit 7)", tag: "Unit 7: Phonics",
-                goal: "Goal: Letter C /k/. [cite: 169]",
+                goal: "Goal: Letter C /k/.",
                 steps: [
                     { label: "Phonics", badge: "badge-phonics", title: "Letter C", en: "C is for...", zh: "C發音", type: "flashcards", items: [{w:"Cc", zh:"/k/"}, {w:"Cat", zh:"貓"}, {w:"Car", zh:"車"}] },
                     { label: "Speaking", badge: "badge-speak", title: "Record", en: "Say: 'Stop and Go.'", zh: "錄音", phrase: "Stop and Go.", type: "speak" }
