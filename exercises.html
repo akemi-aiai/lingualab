@@ -14,31 +14,32 @@
             --white: #ffffff; 
             --text: #0f172a;
             --accent: #f97316;
-            --radius: 24px;
+            --radius: 20px;
         }
         
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); padding-top: 80px; }
         
-        /* NAVBAR (Единый стиль) */
-        .navbar { 
+        /* NAVBAR (Точная копия Grammar Magic) */
+        .navbar {
             position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-            display: flex; align-items: center; justify-content: space-between; 
+            display: flex; align-items: center; justify-content: space-between;
             padding: 12px 40px; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,.05);
         }
         .navbar-left { display: flex; align-items: center; gap: 10px; }
         .nav-logo { height: 50px; width: auto; display: block; }
         .nav-title { font-size: 22px; font-weight: 800; color: var(--navy); }
-        .navbar-right { display: flex; gap: 15px; }
+        
+        .navbar-right { display: flex; gap: 10px; }
         .navbar-right a { 
-            text-decoration: none; color: var(--navy); font-weight: 600; font-size: 14px; transition: 0.2s; 
-            padding: 8px 12px; border-radius: 8px;
+            color: var(--navy); font-weight: 600; text-decoration: none; 
+            padding: 8px 12px; font-size: 14px; transition: 0.3s; border-radius: 8px;
         }
-        .navbar-right a:hover { background: #f1f5f9; color: var(--primary); }
+        .navbar-right a:hover { background: var(--navy); color: #fff; }
 
-        /* HERO (Как в Grammar Magic) */
+        /* HERO COMPACT (Градиент как в Grammar) */
         .hero-compact {
-            padding: 50px 8% 130px;
+            padding: 60px 8% 140px;
             text-align: center;
             background: linear-gradient(135deg, #22d3ee, #a78bfa);
             color: #fff;
@@ -47,10 +48,10 @@
         .hero-compact h1 { font-size: 42px; font-weight: 800; margin-bottom: 10px; }
         .hero-info { font-size: 18px; opacity: 0.95; }
 
-        /* CONTENT CONTAINER (Наплыв на Hero) */
+        /* CONTENT CONTAINER (Наплыв) */
         .content-wrapper {
             max-width: 1000px;
-            margin: -90px auto 50px;
+            margin: -100px auto 50px;
             position: relative;
             z-index: 10;
             padding: 0 20px;
@@ -58,42 +59,43 @@
 
         /* MONTH SCROLLER */
         .month-scroller { 
-            background: white; padding: 20px; border-radius: 20px;
+            background: white; padding: 15px; border-radius: var(--radius);
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             display: flex; overflow-x: auto; gap: 10px; margin-bottom: 30px;
             scrollbar-width: none; justify-content: flex-start;
+            border: 1px solid #e2e8f0;
         }
         .month-scroller::-webkit-scrollbar { display: none; }
         
         .month-btn { 
-            background: #f1f5f9; border: none; padding: 12px 25px; 
+            background: #f1f5f9; border: none; padding: 12px 24px; 
             border-radius: 99px; cursor: pointer; font-weight: 700; 
             color: #64748b; transition: 0.3s; white-space: nowrap; font-size: 14px;
         }
-        .month-btn:hover { background: #e2e8f0; }
+        .month-btn:hover { background: #e2e8f0; color: var(--navy); }
         .month-btn.active { 
             background: var(--navy); color: #fff; 
-            box-shadow: 0 4px 15px rgba(31, 78, 121, 0.3); transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(31, 78, 121, 0.3); transform: translateY(-1px);
         }
 
         /* PARENT WIKI */
         .wiki-box { 
             background: #fff7ed; border-left: 5px solid var(--accent); 
-            padding: 25px; border-radius: 16px; margin-bottom: 30px; 
+            padding: 30px; border-radius: 16px; margin-bottom: 30px; 
             box-shadow: 0 4px 15px rgba(0,0,0,0.03);
         }
         .wiki-title { 
             font-weight: 800; color: #c2410c; margin-bottom: 10px; 
-            display: flex; align-items: center; gap: 10px; font-size: 18px;
+            text-transform: uppercase; font-size: 13px; letter-spacing: 1px;
         }
-        .wiki-content { font-size: 15px; line-height: 1.6; color: #431407; }
+        .wiki-content { font-size: 16px; line-height: 1.6; color: #431407; }
 
         /* WEEK GRID */
         .week-grid { 
             display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; 
         }
         .week-card { 
-            background: white; border-radius: 20px; padding: 30px 20px; text-align: center; 
+            background: white; border-radius: var(--radius); padding: 30px 20px; text-align: center; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: 0.3s; 
             cursor: pointer; text-decoration: none; color: inherit; 
             border: 2px solid transparent; display: flex; flex-direction: column; align-items: center;
@@ -105,19 +107,21 @@
         
         .week-number { 
             font-size: 20px; font-weight: 800; color: var(--primary);
-            background: var(--primary-light); width: 50px; height: 50px;
+            background: var(--primary-light); width: 54px; height: 54px;
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
             margin-bottom: 15px;
         }
-        .week-title { font-weight: 800; color: var(--navy); font-size: 18px; margin-bottom: 5px; }
+        .week-title { font-weight: 800; color: var(--navy); font-size: 18px; margin-bottom: 6px; }
         .week-desc { font-size: 14px; color: #64748b; font-weight: 500; }
 
         /* Coming Soon State */
-        .coming-soon { opacity: 0.6; pointer-events: none; border: 1px dashed #cbd5e1; }
+        .coming-soon { opacity: 0.5; pointer-events: none; border: 1px dashed #cbd5e1; background: #f8fafc; }
 
-        @media (max-width: 600px) {
-            .navbar { flex-wrap: wrap; justify-content: center; padding: 10px; }
-            .navbar-right { display: none; } /* Mobile menu needed separately */
+        @media (max-width: 800px) {
+            .navbar { justify-content: center; padding: 10px; }
+            .navbar-left { margin-bottom: 0; }
+            .navbar-right { display: none; } /* Скрываем меню на мобильном для простоты */
+            .month-scroller { justify-content: flex-start; }
         }
     </style>
 </head>
@@ -125,54 +129,75 @@
 
 <nav class="navbar">
     <div class="navbar-left">
-        <img src="assets/img/logo.png" alt="LL" class="nav-logo" onerror="this.style.display='none'; document.querySelector('.nav-title').innerText='LinguaLab'">
+        <img src="assets/img/logo.png" alt="Logo" class="nav-logo" onerror="this.style.display='none'">
         <span class="nav-title">LinguaLab</span>
     </div>
     <div class="navbar-right">
         <a href="index.html">Main Page</a>
         <a href="grammar.html">Grammar Magic</a>
         <a href="vocabulary.html">Word Bank</a>
-        <a href="parents.html">Wiki Parents</a>
+        <a href="parents.html">Parents Wiki</a>
     </div>
 </nav>
 
 <section class="hero-compact">
-    <h1>Homework Fun</h1>
-    <div class="hero-info">Select a month to start your mission!</div>
+    <h1>Homework Dashboard</h1>
+    <div class="hero-info">Select a month to start your mission</div>
 </section>
 
 <div class="content-wrapper">
-    <div class="month-scroller" id="month-list">
-        </div>
+    <div class="month-scroller" id="month-list"></div>
 
-    <div id="content-area">
-        </div>
+    <div id="content-area"></div>
 </div>
 
 <script>
-    // БАЗА ДАННЫХ (12 Месяцев)
+    // БАЗА ДАННЫХ (Расширенная)
     const curriculum = {
-        "Sep": { title: "September: My School", wiki: " <b>Goal:</b> Greetings & School Objects.<br>💡 <b>Tip:</b> We focus on the letter 'B' (Book/Bag). Ask your child to show you their bag!", weeks: ["Greetings", "School Objects", "Phonics Bb", "Review"] },
-        "Oct": { title: "October: My Friends", wiki: " <b>Goal:</b> Understanding Boy/Girl & Friendship.<br>💡 <b>Tip:</b> Encourage your child to introduce their friend using 'This is...'.", weeks: ["Boy or Girl?", "My Friend", "Phonics Gg", "Messy Family"] },
-        "Nov": { title: "November: My Face", wiki: " <b>Goal:</b> Facial parts & Hygiene.<br> <b>Tip:</b> Play 'Touch your nose' game at home.", weeks: ["Face Song", "Funny Faces", "Phonics Mm", "Buzz! Buzz!"] },
-        "Dec": { title: "December: On the Farm", wiki: " <b>Goal:</b> Animals & Counting 1-3.<br> <b>Tip:</b> Count fruits or toys together: One, Two, Three.", weeks: ["Farm Animals", "Counting 1-2-3", "Phonics Pp", "Winter Review"] },
-        "Jan": { title: "January: At the Zoo", wiki:  " <b>Goal:</b> Wild Animals & Counting 4-5.<br>💡 <b>Tip:</b> Practice being quiet like at the zoo 'Shh!'.", weeks: ["Zoo Visit", "Photo Time", "Phonics Tt", "Zoo Rules"] },
-        "Feb": { title: "February: On the Road", wiki:  " <b>Goal:</b> Transport & Safety.<br>💡 <b>Tip:</b> Play Red Light (Stop) / Green Light (Go) when walking.", weeks: ["Transport", "Oops! My Bike", "Phonics Cc", "Traffic Lights"] },
+        "Sep": { 
+            title: "September: My School", 
+            wiki: "<b>Educational Goal:</b> Greetings & School Objects. We focus on listening to classroom commands and recognizing the letter 'B'.<br><b>教學目標：</b>學習打招呼 (Hello) 和學校物品 (Bag, Book)。重點學習字母 B。", 
+            weeks: ["Greetings", "School Objects", "Phonics Bb", "Review: First Day"] 
+        },
+        "Oct": { 
+            title: "October: My Friends", 
+            wiki: "<b>Educational Goal:</b> Understanding gender (boy/girl) and friendship. Learning rules like 'Line up'.<br><b>教學目標：</b>理解性別 (Boy/Girl) 和朋友。學習排隊 (Line up) 和字母 G。", 
+            weeks: ["Boy or Girl?", "My Friend", "Phonics Gg", "Messy Family"] 
+        },
+        "Nov": { 
+            title: "November: My Face", 
+            wiki: "<b>Educational Goal:</b> Learn facial parts (eyes, ears, mouth, nose) and hygiene.<br><b>教學目標：</b>認識五官 (Eye, Ear, Mouth, Nose) 和字母 M。", 
+            weeks: ["Face Song", "Funny Faces", "Phonics Mm", "Buzz! Buzz!"] 
+        },
+        "Dec": { 
+            title: "December: On the Farm", 
+            wiki: "<b>Educational Goal:</b> Understanding numbers 1-3 and farm animals.<br><b>教學目標：</b>學習數字 1-3 和農場動物 (Cow, Pig, Duck)。", 
+            weeks: ["Farm Animals", "Counting 1-2-3", "Phonics Pp", "Winter Review"] 
+        },
+        "Jan": { 
+            title: "January: At the Zoo", 
+            wiki: "<b>Educational Goal:</b> Wild animals and numbers 4-5. Public rules.<br><b>教學目標：</b>認識野生動物 (Panda, Tiger) 和數字 4-5。學習字母 T。", 
+            weeks: ["Zoo Visit", "Photo Time", "Phonics Tt", "Zoo Rules"] 
+        },
+        "Feb": { 
+            title: "February: On the Road", 
+            wiki: "<b>Educational Goal:</b> Transport names and traffic safety (Stop/Go).<br><b>教學目標：</b>認識交通工具 (Bus, Car) 和交通規則。學習字母 C。", 
+            weeks: ["Transport", "Oops! My Bike", "Phonics Cc", "Traffic Lights"] 
+        },
         
-        // Placeholder months (March - August)
-        "Mar": { title: "March: Family Fun", wiki: "Developing content...", weeks: ["Coming Soon", "Coming Soon", "Coming Soon", "Coming Soon"], active: false },
-        "Apr": { title: "April: Body Review", wiki: "Developing content...", weeks: ["Coming Soon", "Coming Soon", "Coming Soon", "Coming Soon"], active: false },
-        "May": { title: "May: Revision 1", wiki: "Developing content...", weeks: ["Coming Soon", "Coming Soon", "Coming Soon", "Coming Soon"], active: false },
-        "Jun": { title: "June: Revision 2", wiki: "Developing content...", weeks: ["Coming Soon", "Coming Soon", "Coming Soon", "Coming Soon"], active: false },
-        "Jul": { title: "July: Summer Lab 1", wiki: "Developing content...", weeks: ["Coming Soon", "Coming Soon", "Coming Soon", "Coming Soon"], active: false },
-        "Aug": { title: "August: Summer Lab 2", wiki: "Developing content...", weeks: ["Coming Soon", "Coming Soon", "Coming Soon", "Coming Soon"], active: false }
+        // Заглушки для будущих месяцев
+        "Mar": { title: "March: Family Fun", wiki: "Content coming soon...", weeks: ["Family Photos", "My Toys", "Story Time", "Roleplay"], active: false },
+        "Apr": { title: "April: Body Review", wiki: "Content coming soon...", weeks: ["Body Game", "The Bee", "Hide the Face", "Making Masks"], active: false },
+        "May": { title: "May: Revision 1", wiki: "Content coming soon...", weeks: ["Hello Song", "Who is this?", "Phonics B & D", "Action Game"], active: false },
+        "Jun": { title: "June: Revision 2", wiki: "Content coming soon...", weeks: ["Find a Friend", "Face Match", "Phonics G & M", "Stop and Go"], active: false },
+        "Jul": { title: "July: Summer Lab 1", wiki: "Content coming soon...", weeks: ["I Can Jump", "Animal Moves", "Summer Song", "Water Play"], active: false },
+        "Aug": { title: "August: Summer Lab 2", wiki: "Content coming soon...", weeks: ["ABC Song", "Phonics Hunt 1", "Phonics Hunt 2", "Graduation"], active: false }
     };
 
     const monthListEl = document.getElementById('month-list');
     const contentAreaEl = document.getElementById('content-area');
 
     function init() {
-        // Create buttons for ALL months (Sep - Aug)
         const months = ["Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"];
         
         months.forEach((m, index) => {
@@ -180,7 +205,6 @@
             btn.className = 'month-btn';
             btn.innerText = m;
             
-            // Set first button (Sep) as active
             if (index === 0) {
                 btn.classList.add('active');
                 loadMonth(m, btn);
@@ -200,14 +224,13 @@
 
         let html = `
             <div class="wiki-box">
-                <div class="wiki-title">🔍 Parent's Corner</div>
+                <div class="wiki-title">Parent's Corner</div>
                 <div class="wiki-content">${data.wiki}</div>
             </div>
             <div class="week-grid">
         `;
 
         data.weeks.forEach((weekTitle, index) => {
-            // Если месяц в разработке, не даем кликать
             const cardClass = isComingSoon ? "week-card coming-soon" : "week-card";
             const link = isComingSoon ? "#" : `lesson.html?m=${monthKey}&w=${index}`;
             
