@@ -17,7 +17,6 @@
       --bg: #f8fafc;
       --radius: 24px;
       --primary-light: rgba(34, 211, 238, .16);
-      --c1:#e0f2fe; --c2:#dcfce7; --c3:#fef3c7; --c4:#fee2e2;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,24 +32,28 @@
     .nav-logo { height: 50px; }
     .nav-title { font-size: 24px; font-weight: 800; color: var(--navy); }
     .navbar-right a { color: var(--navy); font-weight: 600; text-decoration: none; font-size: 14px; margin-left: 20px; }
-    .footer{
-      background:#0f172a;
-      color:#94a3b8;
-      padding:40px 8%;
-      text-align:center;
-      font-size: 13px;
+    footer { background: #0f172a; color: #94a3b8; padding: 40px 8%; text-align: center; }
+
     }
     /* COMPACT HERO */
-    .hero-compact {
-      padding: 60px 8% 140px; text-align: center;
-      background: linear-gradient(135deg, #22d3ee, #a78bfa); color: #fff;
+    .hero-compact{
+      position: relative;
+      overflow: hidden;
+      padding: 64px 8% 150px;
+      text-align: center;
+      color: #fff;
+      background: var(--hero-grad);
     }
+    
     .hero-compact h1 { font-size: 42px; font-weight: 800; margin-bottom: 10px; }
-    .hero-info { display: flex; justify-content: center; align-items: center; gap: 20px; font-size: 18px; }
-
-    .tree-badge {
-      background: rgba(255, 255, 255, 0.2); padding: 6px 18px; border-radius: 999px;
-      backdrop-filter: blur(5px); border: 1px solid rgba(255, 255, 255, 0.3); font-weight: 700;
+    
+    .hero-info{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap: 20px;
+      font-size: 18px;
+      opacity: .95;
     }
 
     /* CONTENT WRAPPER */
@@ -62,30 +65,26 @@
       display:flex;
       justify-content:center;
       align-items:center;
-      gap:10px;
-      flex-wrap:nowrap;          /* ВСЕ в одну строку */
+      gap:12px;
+      flex-wrap:nowrap;      /* одна строка */
       white-space:nowrap;
-      margin: 14px auto 4px;
-      padding: 6px 10px;
+      margin: 18px auto 10px;
+      padding: 10px 12px;
       max-width: 1100px;
-      overflow-x:auto;           /* если экран узкий — просто прокрутка, но строка одна */
+      overflow-x:auto;
       -webkit-overflow-scrolling: touch;
-    }
-    
-    .month-container::-webkit-scrollbar{ height: 10px; }
-    .month-container::-webkit-scrollbar-thumb{
-      background: rgba(15,23,42,.10);
-      border-radius: 999px;
     }
     
     .month-btn{
       flex: 0 0 auto;
       border-radius: 999px;
       border: 1px solid rgba(15,23,42,.10);
-      box-shadow: 0 6px 18px rgba(2,6,23,.05);
-      padding: 10px 14px;
+      box-shadow: 0 10px 24px rgba(2,6,23,.06);
+      padding: 14px 20px;      /* ⬅️ крупнее */
+      min-height: 48px;        /* ⬅️ крупнее */
+      font-size: 15px;         /* ⬅️ крупнее */
       font-weight: 800;
-      letter-spacing: .2px;
+      letter-spacing: .25px;
     }
     
     /* пастель по кругу (1-4 цвета повторяются) */
@@ -94,10 +93,6 @@
     .month-btn:nth-child(4n+3){ background: var(--c3); }
     .month-btn:nth-child(4n){   background: var(--c4); }
     
-    .month-btn:hover{
-      transform: none; /* без “прыжков” */
-      filter: brightness(.98);
-    }
     
     .month-btn.active,
     .month-btn[aria-selected="true"]{
@@ -108,32 +103,43 @@
 
 
         /* --- PARENT WIKI --- */
-      :root{
-      --surface: #ffffff;
-      --text: #0f172a;
-      --muted: #64748b;
-      --line: rgba(15,23,42,.10);
-    
-      --c1:#e0f2fe; --c2:#dcfce7; --c3:#fef3c7; --c4:#fee2e2;
-    }
-    
-    .wiki-box{
-      background: rgba(255,255,255,.88);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      box-shadow: 0 18px 40px rgba(2,6,23,.10);
-      padding: 22px;
-      max-width: 980px;
-      margin: 18px auto;
-    }
-    
-    .wiki-box h1, .wiki-box h2, .wiki-box h3{
-      color: var(--text);
-      letter-spacing: -0.2px;
-      line-height: 1.15;
-      margin: 0 0 10px;
-    }
-    
+
+      .wiki-box{
+  background: rgba(255,255,255,.92);
+  border: 1px solid rgba(15,23,42,.10);
+  border-radius: 22px;
+  box-shadow: 0 18px 44px rgba(2,6,23,.10);
+  padding: 28px 26px;     /* ⬅️ крупнее */
+  max-width: 1100px;      /* ⬅️ шире */
+  margin: 18px auto 22px;
+}
+
+.wiki-title{
+  font-weight: 900;
+  color: #c2410c;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  font-size: 14px;         /* ⬅️ крупнее */
+  letter-spacing: 1.2px;
+}
+
+.wiki-content{
+  font-size: 17px;         /* ⬅️ крупнее */
+  line-height: 1.75;
+  color: #334155;          /* более “премиум”, чем коричневый */
+}
+
+.wiki-content b{
+  color:#0f172a;
+}
+      
+        .wiki-box h1, .wiki-box h2, .wiki-box h3{
+          color: var(--text);
+          letter-spacing: -0.2px;
+          line-height: 1.15;
+          margin: 0 0 10px;
+        }
+        
     .wiki-box p{
       color: var(--muted);
       line-height: 1.7;
@@ -193,12 +199,6 @@
       color: var(--text);
       line-height: 1.6;
     }
-        }
-        .wiki-title { 
-            font-weight: 800; color: #c2410c; margin-bottom: 8px; 
-            text-transform: uppercase; font-size: 13px; letter-spacing: 1px;
-        }
-        .wiki-content { font-size: 16px; line-height: 1.6; color: #431407; }
 
         /* --- WEEK GRID --- */
         .week-grid { 
