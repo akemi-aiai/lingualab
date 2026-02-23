@@ -4,110 +4,116 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homework — LinguaLab</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+
     <style>
-        :root { 
-            --primary: #22d3ee; 
+        :root {
+            --primary: #22d3ee;
             --primary-light: #ecfeff;
-            --navy: #1f4e79; 
-            --bg: #f8fafc; 
-            --white: #ffffff; 
-            --text: #0f172a;
             --accent: #f97316;
+            --navy: #1f4e79;
+            --bg: #f8fafc;
             --radius: 24px;
+            --c1: #e0f2fe; --c2: #dcfce7; --c3: #fef3c7; --c4: #fee2e2;
         }
-        
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); padding-top: 80px; }
         
-        /* NAVBAR */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: #0f172a;
+            line-height: 1.6;
+            padding-top: 80px;
+        }
+
         .navbar {
             position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
             display: flex; align-items: center; justify-content: space-between;
-            padding: 12px 40px; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,.05);
+            padding: 15px 40px;
+            background: #fff; 
+            box-shadow: 0 4px 20px rgba(0,0,0,.05);
+            height: 80px; 
         }
         .navbar-left { display: flex; align-items: center; gap: 12px; }
-        .nav-logo { height: 40px; width: auto; display: block; } 
-        .nav-title { font-size: 22px; font-weight: 800; color: var(--navy); }
+        .nav-logo { height: 50px; width: auto; display: block; }
+        .nav-title { font-size: 24px; font-weight: 800; color: var(--navy); }
         
-        .navbar-right { display: flex; gap: 20px; }
+        .navbar-right { display: flex; align-items: center; gap: 20px; }
         .navbar-right a { 
             color: var(--navy); font-weight: 600; text-decoration: none; 
-            font-size: 14px; transition: 0.3s;
+            font-size: 14px; transition: 0.3s; 
         }
         .navbar-right a:hover { color: var(--primary); }
 
-        /* HERO */
         .hero-compact {
-            width: 100%;
-            padding: 80px 0 160px;
+            padding: 60px 20px 140px;
             text-align: center;
             background: linear-gradient(135deg, #22d3ee, #a78bfa);
             color: #fff;
             position: relative;
+            width: 100%;
         }
         .hero-compact h1 { font-size: 42px; font-weight: 800; margin-bottom: 10px; }
-        .hero-info { font-size: 18px; opacity: 0.95; }
+        .hero-info { 
+            display: flex; justify-content: center; align-items: center; 
+            gap: 20px; font-size: 18px; opacity: 0.95;
+        }
 
-        /* CONTENT CONTAINER */
         .content-wrapper {
-            max-width: 1200px;
-            margin: -110px auto 50px;
+            max-width: 1100px;
+            margin: -100px auto 50px;
             position: relative;
             z-index: 10;
             padding: 0 20px;
         }
 
-        /* MONTH SCROLLER */
-        .month-scroller { 
-            background: white; padding: 25px; border-radius: var(--radius);
+        .month-container { 
+            background: #fff;
+            padding: 25px;
+            border-radius: var(--radius);
             box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-            
-            display: flex; 
-            flex-wrap: nowrap;
-            overflow-x: auto;
-            justify-content: flex-start;
-            align-items: center;
-            gap: 10px; 
             margin-bottom: 40px;
             border: 1px solid #e2e8f0;
             
-            scrollbar-width: none; 
-            -ms-overflow-style: none;
+
+            display: flex;
+            flex-wrap: wrap; 
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
         }
-        .month-scroller::-webkit-scrollbar { display: none; }
-        
-        /* Кнопки месяцев */
+
         .month-btn { 
-            background: transparent;
+            flex: 0 0 auto;
             border: none; 
-            padding: 10px 15px; 
-            border-radius: 12px; 
+            padding: 12px 20px; 
+            border-radius: 99px;
             cursor: pointer; 
-            font-weight: 700; 
-            color: #94a3b8;
-            transition: 0.3s; 
-            white-space: nowrap; 
-            font-size: 16px;
+            font-weight: 800; 
+            color: #475569; 
+            transition: 0.2s; 
+            font-size: 15px;
+            min-width: 70px;
+            text-align: center;
+            background: #f1f5f9;
         }
-        .month-btn:hover { color: var(--navy); background: #f8fafc; }
+
+        .month-btn:hover { transform: translateY(-2px); filter: brightness(0.95); }
         
         .month-btn.active { 
             background: var(--navy); 
             color: #fff; 
             box-shadow: 0 4px 15px rgba(31, 78, 121, 0.3); 
-            padding: 12px 25px;
+            transform: scale(1.05);
         }
 
-
-        @media (min-width: 1000px) {
-            .month-scroller { justify-content: center; }
-        }
-
-        /* PARENT WIKI */
         .wiki-box { 
             background: #fff7ed; border-left: 5px solid var(--accent); 
-            padding: 30px; border-radius: 16px; margin-bottom: 40px; 
+            padding: 30px; border-radius: 16px; margin-bottom: 30px; 
             box-shadow: 0 4px 15px rgba(0,0,0,0.03);
         }
         .wiki-title { 
@@ -115,73 +121,93 @@
             text-transform: uppercase; font-size: 13px; letter-spacing: 1px;
         }
         .wiki-content { font-size: 16px; line-height: 1.6; color: #431407; }
-
-        /* WEEK GRID */
+        
         .week-grid { 
-            display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; 
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 20px; 
         }
+        
         .week-card { 
-            background: white; border-radius: var(--radius); padding: 30px 20px; text-align: center; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: 0.3s; 
-            cursor: pointer; text-decoration: none; color: inherit; 
-            border: 2px solid transparent; display: flex; flex-direction: column; align-items: center;
+            background: #fff; 
+            border-radius: var(--radius); 
+            padding: 30px 20px; 
+            text-align: center; 
+            cursor: pointer; 
+            border: 2px solid transparent; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04); 
+            transition: 0.3s;
+            text-decoration: none; 
+            color: inherit; 
+            display: flex; flex-direction: column; align-items: center;
         }
         .week-card:hover { 
-            transform: translateY(-5px); border-color: var(--primary); 
+            transform: translateY(-5px); 
+            border-color: var(--primary); 
             box-shadow: 0 20px 40px rgba(34, 211, 238, 0.15);
         }
         
         .week-number { 
             font-size: 20px; font-weight: 800; color: var(--primary);
-            background: var(--primary-light); width: 60px; height: 60px;
+            background: var(--primary-light); width: 50px; height: 50px;
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
-        .week-title { font-weight: 800; color: var(--navy); font-size: 18px; margin-bottom: 8px; }
-        .week-desc { font-size: 14px; color: #64748b; font-weight: 500; }
+        .week-title { font-size: 18px; margin-bottom: 5px; font-weight: 700; color: var(--navy); }
+        .week-desc { font-size: 14px; opacity: 0.7; font-weight: 500; }
 
         .coming-soon { opacity: 0.5; pointer-events: none; border: 1px dashed #cbd5e1; background: #f8fafc; }
 
-        /* MOBILE RESPONSIVE */
+        footer { background: #0f172a; color: #94a3b8; padding: 40px 8%; text-align: center; margin-top: 50px; }
+
+        /* --- MOBILE --- */
         @media (max-width: 900px) {
             .week-grid { grid-template-columns: repeat(2, 1fr); }
             .hero-compact { padding-bottom: 160px; }
         }
 
         @media (max-width: 600px) {
-            .navbar { padding: 10px 20px; flex-direction: column; gap: 10px; }
-            .navbar-right { width: 100%; justify-content: center; gap: 15px; flex-wrap: wrap; border-top: 1px solid #f1f5f9; padding-top: 10px; }
-            .content-wrapper { margin-top: -90px; }
+            .navbar { padding: 10px 20px; flex-direction: column; gap: 10px; height: auto; }
+            .navbar-left { width: 100%; justify-content: center; }
+            .navbar-right { width: 100%; justify-content: center; flex-wrap: wrap; border-top: 1px solid #f1f5f9; padding-top: 10px; }
+            .hero-compact h1 { font-size: 32px; }
+            .content-wrapper { margin-top: -80px; }
             .week-grid { grid-template-columns: 1fr; }
-            .month-scroller { padding: 15px; justify-content: flex-start; } /* На телефоне скролл слева */
+            .month-btn { padding: 8px 12px; font-size: 13px; flex-grow: 1; }
         }
     </style>
 </head>
 <body>
 
-<nav class="navbar">
+<header class="navbar">
     <div class="navbar-left">
-        <img src="assets/img/logo.png" alt="Logo" class="nav-logo" onerror="this.style.display='none'">
+        <img src="assets/img/logo.png" alt="LL" class="nav-logo" onerror="this.style.display='none'">
         <span class="nav-title">LinguaLab</span>
     </div>
-    <div class="navbar-right">
+    <nav class="navbar-right">
         <a href="grammar.html">Grammar Magic</a>
         <a href="vocabulary.html">Word Bank</a>
         <a href="index.html">Main Page</a>
         <a href="parents.html">Wiki Parents</a>
-    </div>
-</nav>
+    </nav>
+</header>
 
 <section class="hero-compact">
     <h1>Fun Homework</h1>
-    <div class="hero-info">Select a month to start your mission</div>
+    <div class="hero-info">
+        <span>Select a month to start your mission</span>
+    </div>
 </section>
 
 <div class="content-wrapper">
-    <div class="month-scroller" id="month-list"></div>
+    <div class="month-container" id="month-list"></div>
 
     <div id="content-area"></div>
 </div>
+
+<footer class="footer">
+  © <span id="year">2026</span> LinguaLab • Small lessons. Real progress. All rights reserved.
+</footer>
 
 <script>
     // DATA BASE
@@ -193,7 +219,7 @@
         },
         "Oct": { 
             title: "October: My Friends", 
-            wiki: "<b>Educational Goal:</b> Understanding gender (boy/girl) and friendship. Learning rules like 'Line up'.<br><b>教學目標：</b>理解性別 (Boy/Girl) 和朋友。學習排隊 (Line up) 和字母 G。", 
+            wiki: "<b>Educational Goal:</b> Understanding gender (boy/girl) and friendship.<br><b>教學目標：</b>理解性別 (Boy/Girl) 和朋友。學習排隊 (Line up) 和字母 G。", 
             weeks: ["Boy or Girl?", "My Friend", "Phonics Gg", "Messy Family"] 
         },
         "Nov": { 
@@ -217,12 +243,12 @@
             weeks: ["Transport", "Oops! My Bike", "Phonics Cc", "Traffic Lights"] 
         },
         
-        "Mar": { title: "March", wiki: "Content coming soon...", weeks: ["Coming Soon", "Coming Soon", "Coming Soon", "Coming Soon"], active: false },
-        "Apr": { title: "April", wiki: "Content coming soon...", weeks: ["Coming Soon", "Coming Soon", "Coming Soon", "Coming Soon"], active: false },
-        "May": { title: "May", wiki: "Content coming soon...", weeks: ["Coming Soon", "Coming Soon", "Coming Soon", "Coming Soon"], active: false },
-        "Jun": { title: "June", wiki: "Content coming soon...", weeks: ["Coming Soon", "Coming Soon", "Coming Soon", "Coming Soon"], active: false },
-        "Jul": { title: "July", wiki: "Content coming soon...", weeks: ["Coming Soon", "Coming Soon", "Coming Soon", "Coming Soon"], active: false },
-        "Aug": { title: "August", wiki: "Content coming soon...", weeks: ["Coming Soon", "Coming Soon", "Coming Soon", "Coming Soon"], active: false }
+        "Mar": { title: "March", wiki: "Content under development...", weeks: ["Coming Soon", "Coming Soon", "Coming Soon", "Coming Soon"], active: false },
+        "Apr": { title: "April", wiki: "Content under development...", weeks: ["Coming Soon", "Coming Soon", "Coming Soon", "Coming Soon"], active: false },
+        "May": { title: "May", wiki: "Content under development...", weeks: ["Coming Soon", "Coming Soon", "Coming Soon", "Coming Soon"], active: false },
+        "Jun": { title: "June", wiki: "Content under development...", weeks: ["Coming Soon", "Coming Soon", "Coming Soon", "Coming Soon"], active: false },
+        "Jul": { title: "July", wiki: "Content under development...", weeks: ["Coming Soon", "Coming Soon", "Coming Soon", "Coming Soon"], active: false },
+        "Aug": { title: "August", wiki: "Content under development...", weeks: ["Coming Soon", "Coming Soon", "Coming Soon", "Coming Soon"], active: false }
     };
 
     const monthListEl = document.getElementById('month-list');
