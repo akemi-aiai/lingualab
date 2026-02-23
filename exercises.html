@@ -14,32 +14,33 @@
             --white: #ffffff; 
             --text: #0f172a;
             --accent: #f97316;
-            --radius: 20px;
+            --radius: 24px;
         }
         
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); padding-top: 80px; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); padding-top: 70px; }
         
-        /* NAVBAR (Точная копия Grammar Magic) */
+        /* NAVBAR (Исправленные размеры) */
         .navbar {
             position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
             display: flex; align-items: center; justify-content: space-between;
             padding: 12px 40px; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,.05);
         }
-        .navbar-left { display: flex; align-items: center; gap: 10px; }
-        .nav-logo { height: 50px; width: auto; display: block; }
+        .navbar-left { display: flex; align-items: center; gap: 12px; }
+        /* Логотип чуть меньше, чтобы ровно стоял с текстом */
+        .nav-logo { height: 40px; width: auto; display: block; } 
         .nav-title { font-size: 22px; font-weight: 800; color: var(--navy); }
         
-        .navbar-right { display: flex; gap: 10px; }
+        .navbar-right { display: flex; gap: 20px; align-items: center; }
         .navbar-right a { 
             color: var(--navy); font-weight: 600; text-decoration: none; 
-            padding: 8px 12px; font-size: 14px; transition: 0.3s; border-radius: 8px;
+            font-size: 14px; transition: 0.3s;
         }
-        .navbar-right a:hover { background: var(--navy); color: #fff; }
+        .navbar-right a:hover { color: var(--primary); }
 
-        /* HERO COMPACT (Градиент как в Grammar) */
+        /* HERO (Увеличенный размер как в Grammar) */
         .hero-compact {
-            padding: 60px 8% 140px;
+            padding: 80px 20px 160px; /* Больше отступ снизу для наплыва */
             text-align: center;
             background: linear-gradient(135deg, #22d3ee, #a78bfa);
             color: #fff;
@@ -48,27 +49,28 @@
         .hero-compact h1 { font-size: 42px; font-weight: 800; margin-bottom: 10px; }
         .hero-info { font-size: 18px; opacity: 0.95; }
 
-        /* CONTENT CONTAINER (Наплыв) */
+        /* CONTENT CONTAINER */
         .content-wrapper {
-            max-width: 1000px;
-            margin: -100px auto 50px;
+            max-width: 1100px; /* Шире для красивой плашки */
+            margin: -110px auto 50px; /* Сильнее наплывает на градиент */
             position: relative;
             z-index: 10;
             padding: 0 20px;
         }
 
-        /* MONTH SCROLLER */
+        /* MONTH SCROLLER (На всю ширину) */
         .month-scroller { 
-            background: white; padding: 15px; border-radius: var(--radius);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            display: flex; overflow-x: auto; gap: 10px; margin-bottom: 30px;
-            scrollbar-width: none; justify-content: flex-start;
+            background: white; padding: 25px; border-radius: var(--radius);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08); /* Глубокая тень */
+            display: flex; overflow-x: auto; gap: 15px; margin-bottom: 40px;
+            scrollbar-width: none; 
+            width: 100%; /* Растягиваем на всю ширину */
             border: 1px solid #e2e8f0;
         }
         .month-scroller::-webkit-scrollbar { display: none; }
         
         .month-btn { 
-            background: #f1f5f9; border: none; padding: 12px 24px; 
+            background: #f1f5f9; border: none; padding: 12px 28px; 
             border-radius: 99px; cursor: pointer; font-weight: 700; 
             color: #64748b; transition: 0.3s; white-space: nowrap; font-size: 14px;
         }
@@ -81,7 +83,7 @@
         /* PARENT WIKI */
         .wiki-box { 
             background: #fff7ed; border-left: 5px solid var(--accent); 
-            padding: 30px; border-radius: 16px; margin-bottom: 30px; 
+            padding: 30px; border-radius: 16px; margin-bottom: 40px; 
             box-shadow: 0 4px 15px rgba(0,0,0,0.03);
         }
         .wiki-title { 
@@ -92,36 +94,35 @@
 
         /* WEEK GRID */
         .week-grid { 
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; 
         }
         .week-card { 
-            background: white; border-radius: var(--radius); padding: 30px 20px; text-align: center; 
+            background: white; border-radius: var(--radius); padding: 35px 25px; text-align: center; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: 0.3s; 
             cursor: pointer; text-decoration: none; color: inherit; 
             border: 2px solid transparent; display: flex; flex-direction: column; align-items: center;
         }
         .week-card:hover { 
-            transform: translateY(-5px); border-color: var(--primary); 
-            box-shadow: 0 20px 40px rgba(34, 211, 238, 0.15);
+            transform: translateY(-8px); border-color: var(--primary); 
+            box-shadow: 0 25px 50px rgba(34, 211, 238, 0.15);
         }
         
         .week-number { 
             font-size: 20px; font-weight: 800; color: var(--primary);
-            background: var(--primary-light); width: 54px; height: 54px;
+            background: var(--primary-light); width: 60px; height: 60px;
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
-        .week-title { font-weight: 800; color: var(--navy); font-size: 18px; margin-bottom: 6px; }
+        .week-title { font-weight: 800; color: var(--navy); font-size: 18px; margin-bottom: 8px; }
         .week-desc { font-size: 14px; color: #64748b; font-weight: 500; }
 
         /* Coming Soon State */
         .coming-soon { opacity: 0.5; pointer-events: none; border: 1px dashed #cbd5e1; background: #f8fafc; }
 
         @media (max-width: 800px) {
-            .navbar { justify-content: center; padding: 10px; }
-            .navbar-left { margin-bottom: 0; }
-            .navbar-right { display: none; } /* Скрываем меню на мобильном для простоты */
-            .month-scroller { justify-content: flex-start; }
+            .navbar { padding: 15px; }
+            .navbar-right { display: none; }
+            .content-wrapper { padding: 0 15px; }
         }
     </style>
 </head>
@@ -142,7 +143,7 @@
 
 <section class="hero-compact">
     <h1>Homework Dashboard</h1>
-    <div class="hero-info">Select a month to start your mission</div>
+    <div class="hero-info">Select a month to start your mission 🚀</div>
 </section>
 
 <div class="content-wrapper">
