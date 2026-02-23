@@ -9,64 +9,44 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
 
-    <style>
-        :root {
-            --primary: #22d3ee;
-            --primary-light: #ecfeff;
-            --accent: #f97316;
-            --navy: #1f4e79;
-            --bg: #f8fafc;
-            --radius: 24px;
-        }
+  <style>
+    :root {
+      --primary: #22d3ee;
+      --accent: #f97316;
+      --navy: #1f4e79;
+      --bg: #f8fafc;
+      --radius: 24px;
+    }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg);
-            color: #0f172a;
-            line-height: 1.6;
-            padding-top: 80px;
-        }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: #0f172a; padding-top: 80px; }
 
-        /* --- NAVBAR --- */
-        .navbar {
-            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 15px 40px; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,.05);
-        }
-        .navbar-left { display: flex; align-items: center; gap: 12px; }
-        .nav-logo { height: 50px; width: auto; }
-        .nav-title { font-size: 24px; font-weight: 800; color: var(--navy); }
-        
-        .navbar-right { display: flex; align-items: center; gap: 20px; }
-        .navbar-right a { 
-            color: var(--navy); font-weight: 600; text-decoration: none; 
-            font-size: 14px; transition: 0.3s; 
-        }
-        .navbar-right a:hover { color: var(--primary); }
+    /* NAVBAR */
+    .navbar {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 15px 40px; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,.05);
+    }
+    .navbar-left { display: flex; align-items: center; gap: 12px; }
+    .nav-logo { height: 50px; }
+    .nav-title { font-size: 24px; font-weight: 800; color: var(--navy); }
+    .navbar-right a { color: var(--navy); font-weight: 600; text-decoration: none; font-size: 14px; margin-left: 20px; }
 
-        /* --- HERO --- */
-        .hero-compact {
-            padding: 60px 8% 140px;
-            text-align: center;
-            background: linear-gradient(135deg, #22d3ee, #a78bfa);
-            color: #fff;
-            position: relative;
-        }
-        .hero-compact h1 { font-size: 42px; font-weight: 800; margin-bottom: 10px; }
-        .hero-info { 
-            display: flex; justify-content: center; align-items: center; 
-            gap: 20px; font-size: 18px; opacity: 0.95;
-        }
+    /* COMPACT HERO */
+    .hero-compact {
+      padding: 60px 8% 140px; text-align: center;
+      background: linear-gradient(135deg, #22d3ee, #a78bfa); color: #fff;
+    }
+    .hero-compact h1 { font-size: 42px; font-weight: 800; margin-bottom: 10px; }
+    .hero-info { display: flex; justify-content: center; align-items: center; gap: 20px; font-size: 18px; }
 
-        /* --- CONTENT CONTAINER --- */
-        .content-wrapper {
-            max-width: 1100px;
-            margin: -100px auto 50px;
-            position: relative;
-            z-index: 10;
-            padding: 0 20px;
-        }
+    .tree-badge {
+      background: rgba(255, 255, 255, 0.2); padding: 6px 18px; border-radius: 999px;
+      backdrop-filter: blur(5px); border: 1px solid rgba(255, 255, 255, 0.3); font-weight: 700;
+    }
+
+    /* CONTENT WRAPPER */
+    .content-wrapper { max-width: 1100px; margin: -100px auto 50px; position: relative; z-index: 10; padding: 0 20px; }
 
         /* --- MONTH SELECTOR (GRID VIEW) --- */
         .month-container { 
@@ -76,12 +56,7 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.08);
             margin-bottom: 40px;
             border: 1px solid #e2e8f0;
-            
-            /* Сетка: выстраиваем вдоль, переносим если не влезают */
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
+        
         }
 
         .month-btn { 
@@ -185,15 +160,15 @@
         <span class="nav-title">LinguaLab</span>
     </div>
     <nav class="navbar-right">
-        <a href="index.html">Main Page</a>
         <a href="grammar.html">Grammar Magic</a>
         <a href="vocabulary.html">Word Bank</a>
-        <a href="parents.html">Parents Wiki</a>
+        <a href="index.html">Main Page</a>
+        <a href="parents.html">Wiki Parents</a>
     </nav>
 </header>
 
 <section class="hero-compact">
-    <h1>Homework Dashboard</h1>
+    <h1>Fun Homework</h1>
     <div class="hero-info">
         <span>Select a month to start your mission</span>
     </div>
@@ -204,9 +179,12 @@
 
     <div id="content-area"></div>
 </div>
+  <footer class="footer">
+  © <span id="year">2026</span> LinguaLab • Small lessons. Real progress. All rights reserved.
+</footer>
 
 <script>
-    // DATA BASE (NO EMOJIS)
+    // DATA BASE
     const curriculum = {
         "Sep": { 
             title: "September: My School", 
