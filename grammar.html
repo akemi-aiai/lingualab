@@ -143,7 +143,9 @@
     </div>
   </div>
 
-  <footer><p>© 2026 LinguaLab. Making Education Magical.</p></footer>
+  <footer class="footer">
+  © <span id="year">2026</span> LinguaLab • Small lessons. Real progress. All rights reserved.
+</footer>
 
   <script>
     const gameData = {
@@ -180,8 +182,8 @@
         {q:"The guy is swimming. ___ is in the pool.", a:"He", options:["He","She"]}
       ],
       plural: [
-        {q:"One cat, two ___?", a:"Cats", options:["Cat","Cats"]},
-        {q:"One dog, three ___?", a:"Dogs", options:["Dog","Dogs"]},
+        {q:"One cat, two ___.", a:"Cats", options:["Cat","Cats"]},
+        {q:"One dog, three ___.", a:"Dogs", options:["Dog","Dogs"]},
         {q:"One apple, many ___.", a:"Apples", options:["Apple","Apples"]},
         {q:"One star, five ___.", a:"Stars", options:["Star","Stars"]},
         {q:"One tree, four ___.", a:"Trees", options:["Tree","Trees"]},
@@ -199,24 +201,24 @@
         {q:"One boat, many ___.", a:"Boats", options:["Boat","Boats"]},
         {q:"One egg, six ___.", a:"Eggs", options:["Egg","Eggs"]},
         {q:"One bee, three ___.", a:"Bees", options:["Bee","Bees"]},
-        {q:"One hat, two ___.", a:"Hats", options:["Hat","Hats"]},
-        {q:"One pig, many ___.", a:"Pigs", options:["Pig","Pigs"]},
-        {q:"One pear, four ___.", a:"Pears", options:["Pear","Pears"]},
-        {q:"One duck, seven ___.", a:"Ducks", options:["Duck","Ducks"]},
-        {q:"One ship, three ___.", a:"Ships", options:["Ship","Ships"]},
-        {q:"One spoon, two ___.", a:"Spoons", options:["Spoon","Spoons"]},
-        {q:"One train, many ___.", a:"Trains", options:["Train","Trains"]},
-        {q:"One kite, five ___.", a:"Kites", options:["Kite","Kites"]},
-        {q:"One ant, many ___.", a:"Ants", options:["Ant","Ants"]},
-        {q:"One lamp, two ___.", a:"Lamps", options:["Lamp","Lamps"]},
-        {q:"One ring, four ___.", a:"Rings", options:["Ring","Rings"]}
+        {q:"One ___, two hats.", a:"Hat", options:["Hat","Hats"]},
+        {q:"One ___, many pigs.", a:"Pig", options:["Pig","Pigs"]},
+        {q:"One ___, four pears.", a:"Pear", options:["Pear","Pears"]},
+        {q:"One ___, seven ducks.", a:"Duck", options:["Duck","Ducks"]},
+        {q:"One ___, three ships.", a:"Ship", options:["Ship","Ships"]},
+        {q:"One foot, two ___.", a:"Feet", options:["Feet","Feets"]}, 
+        {q:"One man, many ___.", a:"Men", options:["Men","Mans"]}, 
+        {q:"One leaf, five ___.", a:"Leaves", options:["Leaves","Leafs"]},
+        {q:"One ___, many wolves.", a:"Wolf", options:["Wolf","Wolfs"]},
+        {q:"One ___, two foxes.", a:"Fox", options:["Fox","Foxs"]}, 
+        {q:"One deer, four ___.", a:"Deer", options:["Deer","Deers"]}
       ],
       secret_places: [
         {q:"The cat is ___ the box.", a:"In", options:["In","On","Under"]},
         {q:"The apple is ___ the table.", a:"On", options:["In","On","Under"]},
         {q:"The dog is ___ the bed.", a:"Under", options:["In","On","Under"]},
         {q:"The fish is ___ the water.", a:"In", options:["In","On","Under"]},
-        {q:"The bird is ___ the tree.", a:"On", options:["In","On","Under"]},
+        {q:"The bird is ___ the tree.", a:"In", options:["In","On","Under"]},
         {q:"The shoes are ___ the chair.", a:"Under", options:["In","On","Under"]},
         {q:"The pencil is ___ the cup.", a:"In", options:["In","On","Under"]},
         {q:"The lamp is ___ the desk.", a:"On", options:["In","On","Under"]},
@@ -231,7 +233,6 @@
         {q:"The sun is ___ the sky.", a:"In", options:["In","On","Under"]},
         {q:"The butter is ___ the bread.", a:"On", options:["In","On","Under"]},
         {q:"The treasure is ___ the sand.", a:"Under", options:["In","On","Under"]},
-        {q:"A star is ___ the top.", a:"On", options:["In","On","Under"]},
         {q:"The candy is ___ the jar.", a:"In", options:["In","On","Under"]},
         {q:"The plate is ___ the table.", a:"On", options:["In","On","Under"]},
         {q:"The monster is ___ the bed!", a:"Under", options:["In","On","Under"]},
@@ -241,7 +242,6 @@
         {q:"The worm is ___ the apple.", a:"In", options:["In","On","Under"]},
         {q:"The book is ___ the shelf.", a:"On", options:["In","On","Under"]},
         {q:"The ring is ___ the finger.", a:"On", options:["In","On","Under"]},
-        {q:"The bone is ___ the dog.", a:"Under", options:["In","On","Under"]}
       ],
       can: [
         {q:"A bird ___ fly.", a:"Can", options:["Can","Can't"]},
@@ -262,18 +262,17 @@
         {q:"A pig ___ read.", a:"Can't", options:["Can","Can't"]},
         {q:"A rabbit ___ run fast.", a:"Can", options:["Can","Can't"]},
         {q:"A tree ___ walk.", a:"Can't", options:["Can","Can't"]},
-        {q:"A bee ___ make honey.", a:"Can", options:["Can","Can't"]},
+        {q:"Honeybees ___ make honey.", a:"Can", options:["Can","Can't"]},
         {q:"A turtle ___ run fast.", a:"Can't", options:["Can","Can't"]},
-        {q:"A cow ___ say 'Moo'.", a:"Can", options:["Can","Can't"]},
+        {q:"A cow ___ say 'moo'.", a:"Can", options:["Can","Can't"]},
         {q:"A car ___ talk.", a:"Can't", options:["Can","Can't"]},
         {q:"A horse ___ run.", a:"Can", options:["Can","Can't"]},
         {q:"A fire ___ be cold.", a:"Can't", options:["Can","Can't"]},
         {q:"A chef ___ cook.", a:"Can", options:["Can","Can't"]},
         {q:"A stone ___ eat.", a:"Can't", options:["Can","Can't"]},
         {q:"A parrot ___ talk.", a:"Can", options:["Can","Can't"]},
-        {q:"A ball ___ jump.", a:"Can't", options:["Can","Can't"]},
+        {q:"A ball ___ bounce.", a:"Can", options:["Can","Can't"]},
         {q:"A superhero ___ help.", a:"Can", options:["Can","Can't"]},
-        {q:"A ghost ___ be seen.", a:"Can't", options:["Can","Can't"]}
       ]
     };
 
@@ -313,11 +312,37 @@
         grid.appendChild(btn);
       });
     }
+    function playSound() {
+    try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        // Настройка "волшебного" звука
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(1046.50, audioCtx.currentTime + 0.1);
+
+        gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.3);
+    } catch (e) {
+        console.log("Audio not supported or blocked by browser");
+    }
+}
+
 
     function checkResult(choice, btn) {
       if (choice === activeTask.a) {
-        btn.classList.add('correct');
-        awardPoint();
+          btn.classList.add('correct');
+        
+          playSound(); 
+          awardPoint();
         
         // Полоска прогресса (от 30 вопросов)
         const progress = (usedIndexes.length / 30) * 100;
@@ -325,11 +350,11 @@
 
         document.getElementById('question').innerText = "Correct! +1 Point! 🌟";
         setTimeout(loadTask, 1000);
-      } else {
+    } else {
         btn.classList.add('wrong');
         setTimeout(() => btn.classList.remove('wrong'), 500);
-      }
     }
+}
 
     function awardPoint() {
       let score = parseInt(localStorage.getItem('ll_score')) || 0;
@@ -338,9 +363,13 @@
       document.getElementById('header-score').innerText = score;
     }
 
-    window.onload = () => {
+    window.addEventListener('DOMContentLoaded', () => {
       document.getElementById('header-score').innerText = localStorage.getItem('ll_score') || 0;
-    };
+    
+      const y = document.getElementById('year');
+      if (y) y.textContent = String(new Date().getFullYear());
+    });
+
   </script>
 </body>
 </html>
