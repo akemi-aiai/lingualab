@@ -16,6 +16,8 @@
       --navy: #1f4e79;
       --bg: #f8fafc;
       --radius: 24px;
+      --primary-light: rgba(34, 211, 238, .16);
+      --c1:#e0f2fe; --c2:#dcfce7; --c3:#fef3c7; --c4:#fee2e2;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -31,7 +33,13 @@
     .nav-logo { height: 50px; }
     .nav-title { font-size: 24px; font-weight: 800; color: var(--navy); }
     .navbar-right a { color: var(--navy); font-weight: 600; text-decoration: none; font-size: 14px; margin-left: 20px; }
-
+    .footer{
+      background:#0f172a;
+      color:#94a3b8;
+      padding:40px 8%;
+      text-align:center;
+      font-size: 13px;
+    }
     /* COMPACT HERO */
     .hero-compact {
       padding: 60px 8% 140px; text-align: center;
@@ -48,43 +56,143 @@
     /* CONTENT WRAPPER */
     .content-wrapper { max-width: 1100px; margin: -100px auto 50px; position: relative; z-index: 10; padding: 0 20px; }
 
-        /* --- MONTH SELECTOR (GRID VIEW) --- */
-        .month-container { 
-            background: #fff;
-            padding: 30px;
-            border-radius: var(--radius);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-            margin-bottom: 40px;
-            border: 1px solid #e2e8f0;
-        
-        }
+    /* --- MONTH SELECTOR (GRID VIEW) --- */
 
-        .month-btn { 
-            background: #f1f5f9; 
-            border: none; 
-            padding: 14px 28px; 
-            border-radius: 12px; /* Чуть менее круглые, более "плиточные" */
-            cursor: pointer; 
-            font-weight: 700; 
-            color: #64748b; 
-            transition: 0.2s; 
-            font-size: 14px;
-            min-width: 80px;
-            text-align: center;
-        }
-        .month-btn:hover { background: #e2e8f0; color: var(--navy); transform: translateY(-2px); }
-        .month-btn.active { 
-            background: var(--navy); 
-            color: #fff; 
-            box-shadow: 0 4px 15px rgba(31, 78, 121, 0.3); 
-            transform: scale(1.05);
-        }
+    .month-container{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:10px;
+      flex-wrap:nowrap;          /* ВСЕ в одну строку */
+      white-space:nowrap;
+      margin: 14px auto 4px;
+      padding: 6px 10px;
+      max-width: 1100px;
+      overflow-x:auto;           /* если экран узкий — просто прокрутка, но строка одна */
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    .month-container::-webkit-scrollbar{ height: 10px; }
+    .month-container::-webkit-scrollbar-thumb{
+      background: rgba(15,23,42,.10);
+      border-radius: 999px;
+    }
+    
+    .month-btn{
+      flex: 0 0 auto;
+      border-radius: 999px;
+      border: 1px solid rgba(15,23,42,.10);
+      box-shadow: 0 6px 18px rgba(2,6,23,.05);
+      padding: 10px 14px;
+      font-weight: 800;
+      letter-spacing: .2px;
+    }
+    
+    /* пастель по кругу (1-4 цвета повторяются) */
+    .month-btn:nth-child(4n+1){ background: var(--c1); }
+    .month-btn:nth-child(4n+2){ background: var(--c2); }
+    .month-btn:nth-child(4n+3){ background: var(--c3); }
+    .month-btn:nth-child(4n){   background: var(--c4); }
+    
+    .month-btn:hover{
+      transform: none; /* без “прыжков” */
+      filter: brightness(.98);
+    }
+    
+    .month-btn.active,
+    .month-btn[aria-selected="true"]{
+      outline: none;
+      border-color: rgba(34,211,238,.55);
+      box-shadow: 0 0 0 4px var(--primary-light), 0 10px 26px rgba(2,6,23,.08);
+    }
+
 
         /* --- PARENT WIKI --- */
-        .wiki-box { 
-            background: #fff7ed; border-left: 5px solid var(--accent); 
-            padding: 25px; border-radius: 16px; margin-bottom: 30px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      :root{
+      --surface: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --line: rgba(15,23,42,.10);
+    
+      --c1:#e0f2fe; --c2:#dcfce7; --c3:#fef3c7; --c4:#fee2e2;
+    }
+    
+    .wiki-box{
+      background: rgba(255,255,255,.88);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 18px 40px rgba(2,6,23,.10);
+      padding: 22px;
+      max-width: 980px;
+      margin: 18px auto;
+    }
+    
+    .wiki-box h1, .wiki-box h2, .wiki-box h3{
+      color: var(--text);
+      letter-spacing: -0.2px;
+      line-height: 1.15;
+      margin: 0 0 10px;
+    }
+    
+    .wiki-box p{
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 10px 0;
+      font-size: 15px;
+    }
+    
+    .wiki-box ul{
+      list-style: none;
+      padding: 0;
+      margin: 12px 0 0;
+      display: grid;
+      gap: 10px;
+    }
+    
+    .wiki-box li{
+      margin: 0;
+    }
+    
+    /* ссылки-ресурсы как “плитки” */
+    .wiki-box li a{
+      display: block;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(15,23,42,.08);
+      background: rgba(183,156,255,.10);
+      color: var(--text);
+      text-decoration: none;
+      box-shadow: 0 8px 18px rgba(2,6,23,.06);
+    }
+    
+    .wiki-box li a:hover{
+      transform: none;
+      filter: brightness(.99);
+    }
+    
+    /* мягкая подсветка секций (если у тебя секции разбиты блоками внутри wiki-box) */
+    .wiki-box .section:nth-of-type(4n+1){ background: var(--c1); }
+    .wiki-box .section:nth-of-type(4n+2){ background: var(--c2); }
+    .wiki-box .section:nth-of-type(4n+3){ background: var(--c3); }
+    .wiki-box .section:nth-of-type(4n){   background: var(--c4); }
+    
+    .wiki-box .section{
+      border-radius: 18px;
+      padding: 16px;
+      border: 1px solid rgba(15,23,42,.08);
+    }
+    
+    /* длинные списки “скручиваем” в удобный ритм */
+    .wiki-box ol{
+      padding-left: 18px;
+      margin: 12px 0;
+    }
+    
+    .wiki-box ol li{
+      margin: 8px 0;
+      color: var(--text);
+      line-height: 1.6;
+    }
         }
         .wiki-title { 
             font-weight: 800; color: #c2410c; margin-bottom: 8px; 
@@ -132,12 +240,8 @@
         .coming-soon { opacity: 0.5; pointer-events: none; border: 1px dashed #cbd5e1; background: #f8fafc; }
 
         /* --- MOBILE --- */
-        @media (max-width: 900px) {
-            .week-grid { grid-template-columns: repeat(2, 1fr); }
-            .hero-compact { padding-bottom: 160px; }
-        }
 
-        @media (max-width: 600px) {
+        @media (max-width: 520px) {
             .navbar { padding: 10px 20px; flex-direction: column; gap: 10px; }
             .navbar-left { width: 100%; justify-content: center; }
             .navbar-right { 
@@ -146,9 +250,9 @@
             }
             .hero-compact h1 { font-size: 32px; }
             .content-wrapper { margin-top: -80px; }
-            .month-container { padding: 15px; gap: 8px; }
-            .month-btn { padding: 8px 12px; font-size: 12px; width: 30%; text-align: center; }
             .week-grid { grid-template-columns: 1fr; }
+            .month-container{ gap:8px; padding: 6px 8px; }
+            .month-btn{ padding: 9px 12px; font-size: 13px; }
         }
     </style>
 </head>
