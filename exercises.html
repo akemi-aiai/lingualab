@@ -25,10 +25,10 @@
             background: var(--bg);
             color: #0f172a;
             line-height: 1.6;
-            padding-top: 80px; /* Отступ под фиксированное меню */
+            padding-top: 80px;
         }
 
-        /* --- NAVBAR (Идентично Grammar Magic) --- */
+        /* --- NAVBAR --- */
         .navbar {
             position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
             display: flex; align-items: center; justify-content: space-between;
@@ -45,9 +45,9 @@
         }
         .navbar-right a:hover { color: var(--primary); }
 
-        /* --- HERO (Идентично Grammar Magic) --- */
+        /* --- HERO --- */
         .hero-compact {
-            padding: 60px 8% 140px; /* Большой отступ снизу для наплыва карточек */
+            padding: 60px 8% 140px;
             text-align: center;
             background: linear-gradient(135deg, #22d3ee, #a78bfa);
             color: #fff;
@@ -59,16 +59,16 @@
             gap: 20px; font-size: 18px; opacity: 0.95;
         }
 
-        /* --- CONTENT CONTAINER (Наплыв на градиент) --- */
+        /* --- CONTENT CONTAINER --- */
         .content-wrapper {
             max-width: 1100px;
-            margin: -100px auto 50px; /* Отрицательный отступ поднимает блок вверх */
+            margin: -100px auto 50px;
             position: relative;
             z-index: 10;
             padding: 0 20px;
         }
 
-        /* --- MONTH SELECTOR (Без прокрутки, все сразу) --- */
+        /* --- MONTH SELECTOR (GRID VIEW) --- */
         .month-container { 
             background: #fff;
             padding: 30px;
@@ -77,24 +77,25 @@
             margin-bottom: 40px;
             border: 1px solid #e2e8f0;
             
-            /* Сетка для месяцев */
+            /* Сетка: выстраиваем вдоль, переносим если не влезают */
             display: flex;
-            flex-wrap: wrap; /* Перенос на новую строку */
+            flex-wrap: wrap;
             justify-content: center;
-            gap: 12px;
+            gap: 15px;
         }
 
         .month-btn { 
             background: #f1f5f9; 
             border: none; 
-            padding: 12px 24px; 
-            border-radius: 99px; 
+            padding: 14px 28px; 
+            border-radius: 12px; /* Чуть менее круглые, более "плиточные" */
             cursor: pointer; 
             font-weight: 700; 
             color: #64748b; 
-            transition: 0.3s; 
+            transition: 0.2s; 
             font-size: 14px;
-            min-width: 60px;
+            min-width: 80px;
+            text-align: center;
         }
         .month-btn:hover { background: #e2e8f0; color: var(--navy); transform: translateY(-2px); }
         .month-btn.active { 
@@ -113,14 +114,13 @@
         .wiki-title { 
             font-weight: 800; color: #c2410c; margin-bottom: 8px; 
             text-transform: uppercase; font-size: 13px; letter-spacing: 1px;
-            display: flex; align-items: center; gap: 8px;
         }
         .wiki-content { font-size: 16px; line-height: 1.6; color: #431407; }
 
         /* --- WEEK GRID --- */
         .week-grid { 
             display: grid; 
-            grid-template-columns: repeat(4, 1fr); /* 4 колонки на десктопе */
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px; 
         }
         
@@ -156,7 +156,7 @@
 
         .coming-soon { opacity: 0.5; pointer-events: none; border: 1px dashed #cbd5e1; background: #f8fafc; }
 
-        /* --- MOBILE RESPONSIVE (Версия для телефона) --- */
+        /* --- MOBILE --- */
         @media (max-width: 900px) {
             .week-grid { grid-template-columns: repeat(2, 1fr); }
             .hero-compact { padding-bottom: 160px; }
@@ -169,16 +169,11 @@
                 width: 100%; justify-content: center; gap: 15px; flex-wrap: wrap; 
                 border-top: 1px solid #f1f5f9; padding-top: 10px;
             }
-            .navbar-right a { font-size: 13px; padding: 5px; }
-            
             .hero-compact h1 { font-size: 32px; }
-            .hero-info { font-size: 16px; flex-direction: column; gap: 5px; }
-            
             .content-wrapper { margin-top: -80px; }
             .month-container { padding: 15px; gap: 8px; }
-            .month-btn { padding: 8px 16px; font-size: 12px; flex-grow: 1; text-align: center; }
-            
-            .week-grid { grid-template-columns: 1fr; } /* Одна колонка на телефоне */
+            .month-btn { padding: 8px 12px; font-size: 12px; width: 30%; text-align: center; }
+            .week-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -200,20 +195,18 @@
 <section class="hero-compact">
     <h1>Homework Dashboard</h1>
     <div class="hero-info">
-        <span>Select a month to start your mission! 🚀</span>
+        <span>Select a month to start your mission</span>
     </div>
 </section>
 
 <div class="content-wrapper">
-    <div class="month-container" id="month-list">
-        </div>
+    <div class="month-container" id="month-list"></div>
 
-    <div id="content-area">
-        </div>
+    <div id="content-area"></div>
 </div>
 
 <script>
-    // DATA BASE
+    // DATA BASE (NO EMOJIS)
     const curriculum = {
         "Sep": { 
             title: "September: My School", 
@@ -245,14 +238,13 @@
             wiki: "<b>Educational Goal:</b> Transport names and traffic safety (Stop/Go).<br><b>教學目標：</b>認識交通工具 (Bus, Car) 和交通規則。學習字母 C。", 
             weeks: ["Transport", "Oops! My Bike", "Phonics Cc", "Traffic Lights"] 
         },
-        
         // Placeholders
-        "Mar": { title: "March", wiki: "Content coming soon...", weeks: ["Coming Soon", "Coming Soon", "Coming Soon", "Coming Soon"], active: false },
-        "Apr": { title: "April", wiki: "Content coming soon...", weeks: ["Coming Soon", "Coming Soon", "Coming Soon", "Coming Soon"], active: false },
-        "May": { title: "May", wiki: "Content coming soon...", weeks: ["Coming Soon", "Coming Soon", "Coming Soon", "Coming Soon"], active: false },
-        "Jun": { title: "June", wiki: "Content coming soon...", weeks: ["Coming Soon", "Coming Soon", "Coming Soon", "Coming Soon"], active: false },
-        "Jul": { title: "July", wiki: "Content coming soon...", weeks: ["Coming Soon", "Coming Soon", "Coming Soon", "Coming Soon"], active: false },
-        "Aug": { title: "August", wiki: "Content coming soon...", weeks: ["Coming Soon", "Coming Soon", "Coming Soon", "Coming Soon"], active: false }
+        "Mar": { title: "March", wiki: "Content under development...", weeks: ["Coming Soon", "Coming Soon", "Coming Soon", "Coming Soon"], active: false },
+        "Apr": { title: "April", wiki: "Content under development...", weeks: ["Coming Soon", "Coming Soon", "Coming Soon", "Coming Soon"], active: false },
+        "May": { title: "May", wiki: "Content under development...", weeks: ["Coming Soon", "Coming Soon", "Coming Soon", "Coming Soon"], active: false },
+        "Jun": { title: "June", wiki: "Content under development...", weeks: ["Coming Soon", "Coming Soon", "Coming Soon", "Coming Soon"], active: false },
+        "Jul": { title: "July", wiki: "Content under development...", weeks: ["Coming Soon", "Coming Soon", "Coming Soon", "Coming Soon"], active: false },
+        "Aug": { title: "August", wiki: "Content under development...", weeks: ["Coming Soon", "Coming Soon", "Coming Soon", "Coming Soon"], active: false }
     };
 
     const monthListEl = document.getElementById('month-list');
@@ -285,7 +277,7 @@
 
         let html = `
             <div class="wiki-box">
-                <div class="wiki-title">🔍 Parent's Corner</div>
+                <div class="wiki-title">Parent's Corner</div>
                 <div class="wiki-content">${data.wiki}</div>
             </div>
             <div class="week-grid">
