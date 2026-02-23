@@ -13,91 +13,90 @@
     :root {
       --primary: #22d3ee;
       --accent: #f97316;
-      --bg: #f8fafc;
       --navy: #1f4e79;
-      --radius: 20px;
+      --bg: #f8fafc;
+      --radius: 24px;
+      /* Пастельные цвета юнитов */
+      --c1: #e0f2fe; --c2: #dcfce7; --c3: #fef3c7; --c4: #fee2e2;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: #0f172a;
-      line-height: 1.6;
-      padding-top: 80px;
-    }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: #0f172a; padding-top: 80px; }
 
-    /* NAV (Копия с главной для единообразия) */
+    /* NAVBAR */
     .navbar {
       position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 12px 40px; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,.05);
+      padding: 15px 40px; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,.05);
     }
-    .navbar-left { display: flex; align-items: center; gap: 10px; }
-    .nav-logo { height: 50px; width: auto; }
-    .nav-title { font-size: 22px; font-weight: 800; color: var(--navy); }
-    .navbar-right a { color: var(--navy); font-weight: 600; text-decoration: none; padding: 8px 12px; font-size: 14px; transition: 0.3s; }
-    .navbar-right a:hover { color: var(--primary); }
+    .navbar-left { display: flex; align-items: center; gap: 12px; }
+    .nav-logo { height: 50px; }
+    .nav-title { font-size: 24px; font-weight: 800; color: var(--navy); }
+    .navbar-right a { color: var(--navy); font-weight: 600; text-decoration: none; font-size: 14px; margin-left: 20px; }
 
-    /* HERO - Теперь совпадает с главной */
-    .hero { 
-      padding: 80px 8%; 
-      text-align: center; 
-      background: linear-gradient(135deg, #22d3ee, #a78bfa); 
-      color: #fff; 
+    /* COMPACT HERO */
+    .hero-compact {
+      padding: 60px 8% 140px; text-align: center;
+      background: linear-gradient(135deg, #22d3ee, #a78bfa); color: #fff;
     }
-    .hero h1 { font-size: clamp(32px, 5vw, 48px); margin-bottom: 10px; font-weight: 800; }
-    .hero p { opacity: 0.9; font-size: 18px; }
+    .hero-compact h1 { font-size: 42px; font-weight: 800; margin-bottom: 10px; }
+    .hero-info { display: flex; justify-content: center; align-items: center; gap: 20px; font-size: 18px; }
 
-    /* GAME AREA */
-    .main-container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+    .tree-badge {
+      background: rgba(255, 255, 255, 0.2); padding: 6px 18px; border-radius: 999px;
+      backdrop-filter: blur(5px); border: 1px solid rgba(255, 255, 255, 0.3); font-weight: 700;
+    }
 
+    /* CONTENT WRAPPER */
+    .content-wrapper { max-width: 1100px; margin: -100px auto 50px; position: relative; z-index: 10; padding: 0 20px; }
+
+    /* TASK CARD */
     .task-card {
-      background: #fff; border-radius: var(--radius);
-      padding: 40px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,.05);
-      margin-bottom: 40px; min-height: 280px; display: flex; flex-direction: column; 
-      justify-content: center; border: 1px solid #e2e8f0;
+      background: #fff; border-radius: var(--radius); padding: 50px 40px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08); margin-bottom: 40px;
+      border: 1px solid #e2e8f0; text-align: center; position: relative; overflow: hidden;
+      min-height: 280px; display: flex; flex-direction: column; justify-content: center;
     }
+
+    .pb-container { position: absolute; top: 0; left: 0; width: 100%; height: 8px; background: #f1f5f9; }
+    .pb-fill { height: 100%; width: 0%; background: var(--primary); transition: 0.4s; }
 
     #question { font-size: 26px; font-weight: 800; color: var(--navy); margin-bottom: 30px; }
-
     .answers-grid { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
     .answer-btn {
-      padding: 18px 45px; border-radius: 999px; border: 3px solid var(--primary);
-      background: #fff; color: var(--primary); font-size: 20px; font-weight: 800;
-      cursor: pointer; transition: 0.3s; min-width: 160px;
+      padding: 16px 40px; border-radius: 999px; border: 3px solid var(--primary);
+      background: #fff; color: var(--primary); font-size: 18px; font-weight: 800; cursor: pointer; transition: 0.3s;
     }
-    .answer-btn:hover { background: var(--primary); color: #fff; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(34,211,238,0.2); }
+    .answer-btn:hover { background: var(--primary); color: #fff; transform: translateY(-3px); }
     .answer-btn.correct { background: #10b981; border-color: #10b981; color: #fff; }
     .answer-btn.wrong { background: #ef4444; border-color: #ef4444; color: #fff; animation: shake 0.4s; }
 
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-5px); }
-      75% { transform: translateX(5px); }
-    }
+    @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
 
-    /* UNITS SELECTION */
-    .topic-title { text-align: center; margin-bottom: 30px; font-weight: 800; color: var(--navy); font-size: 28px; }
-    .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
-    
+    /* UNITS */
+    .topic-title { text-align: center; margin-bottom: 25px; font-weight: 800; color: var(--navy); font-size: 28px; }
+    .units-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
     .card-item {
-      background: #fff; padding: 25px; border-radius: var(--radius);
-      text-align: center; cursor: pointer; border: 2px solid transparent;
-      box-shadow: 0 4px 15px rgba(0,0,0,.04); transition: 0.3s;
+      background: #fff; padding: 25px; border-radius: var(--radius); text-align: center; cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.04); transition: 0.3s; border: 2px solid transparent;
     }
-    .card-item:hover { transform: translateY(-5px); border-color: var(--primary); background: #f0fdfa; }
-    .card-item.active { background: var(--navy); border-color: var(--navy); color: #fff; }
-    .card-item.active p { color: rgba(255,255,255,0.8); }
+    .card-item:nth-child(1) { background: var(--c1); } .card-item:nth-child(2) { background: var(--c2); }
+    .card-item:nth-child(3) { background: var(--c3); } .card-item:nth-child(4) { background: var(--c4); }
+    .card-item:hover { transform: translateY(-5px); filter: brightness(0.95); }
+    .card-item.active { border-color: var(--navy); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+    .card-item h3 { font-size: 18px; margin-bottom: 5px; font-weight: 700; color: var(--navy); }
+    .card-item p { font-size: 14px; color: #64748b; }
 
-    footer { background: #0f172a; color: #94a3b8; padding: 40px 8%; text-align: center; font-size: 14px; margin-top: 50px; }
+    footer { background: #0f172a; color: #94a3b8; padding: 40px 8%; text-align: center; }
+
+    @media (max-width: 900px) { .units-grid { grid-template-columns: repeat(2, 1fr); } }
   </style>
 </head>
 <body>
 
   <header class="navbar">
     <div class="navbar-left">
-      <img src="assets/img/logo.png" alt="LL" class="nav-logo" />
+      <img src="assets/img/logo.png" alt="LL" class="nav-logo">
       <span class="nav-title">LinguaLab</span>
     </div>
     <nav class="navbar-right">
@@ -108,101 +107,202 @@
     </nav>
   </header>
 
-  <main>
-    <section class="hero">
-      <h1>Grammar Magic</h1>
-      <p>Play games and grow your Knowledge Tree!</p>
-    </section>
+  <section class="hero-compact">
+    <h1>Grammar Magic</h1>
+    <div class="hero-info">
+      <span>Play games and grow your Knowledge Tree! Select a Unit below to start!</span>
+      <div class="tree-badge">Points: <span id="header-score">0</span></div>
+    </div>
+  </section>
 
-    <div class="main-container">
-      <div class="task-card" id="task-card">
-        <div id="question">Select a Unit below to start! 🚀</div>
-        <div class="answers-grid" id="answer-grid"></div>
+  <div class="content-wrapper">
+    <div class="task-card" id="task-card">
+      <div class="pb-container"><div class="pb-fill" id="pb-fill"></div></div>
+      <div id="question">Ready to study? Choose a Unit!</div>
+      <div class="answers-grid" id="answer-grid"></div>
+    </div>
+
+    <h2 class="topic-title">Our Units</h2>
+    <div class="units-grid">
+      <div class="card-item" onclick="selectTopic('he_she', this)">
+        <h3>Friends & Family</h3>
+        <p>He / She</p>
       </div>
-
-      <h2 class="topic-title">Our Units</h2>
-      <div class="cards-grid">
-        <div class="card-item" onclick="selectTopic('he_she', this)">
-          <h3>Friends & Family</h3>
-          <p>He / She</p>
-        </div>
-        <div class="card-item" onclick="selectTopic('plural', this)">
-          <h3>Counting World</h3>
-          <p>Plural nouns</p>
-        </div>
-        <div class="card-item" onclick="selectTopic('prepositions', this)">
-          <h3>Secret Places</h3>
-          <p>In / On / Under</p>
-        </div>
-        <div class="card-item" onclick="selectTopic('can', this)">
-          <h3>I can...</h3>
-          <p>Abilities</p>
-        </div>
+      <div class="card-item" onclick="selectTopic('plural', this)">
+        <h3>Counting World</h3>
+        <p>Plural nouns</p>
+      </div>
+      <div class="card-item" onclick="selectTopic('secret_places', this)">
+        <h3>Secret Places</h3>
+        <p>In / On / Under</p>
+      </div>
+      <div class="card-item" onclick="selectTopic('can', this)">
+        <h3>I can...</h3>
+        <p>Abilities</p>
       </div>
     </div>
-  </main>
+  </div>
 
-  <footer>
-    <p>© 2026 LinguaLab. Making Education Magical.</p>
-  </footer>
+  <footer><p>© 2026 LinguaLab. Making Education Magical.</p></footer>
 
   <script>
     const gameData = {
       he_she: [
-        { q: "This is a girl. ___ is happy.", a: "She", options: ["He", "She"] },
-        { q: "This is a boy. ___ has a ball.", a: "He", options: ["He", "She"] },
-        { q: "Mother is nice. ___ loves me.", a: "She", options: ["He", "She"] },
-        { q: "Father is big. ___ is strong.", a: "He", options: ["He", "She"] }
+        {q:"This is a girl. ___ is happy.", a:"She", options:["He","She"]},
+        {q:"This is a boy. ___ has a ball.", a:"He", options:["He","She"]},
+        {q:"Mom is nice. ___ loves me.", a:"She", options:["He","She"]},
+        {q:"Dad is big. ___ is strong.", a:"He", options:["He","She"]},
+        {q:"The Queen is here. ___ has a crown.", a:"She", options:["He","She"]},
+        {q:"The King is old. ___ is on a horse.", a:"He", options:["He","She"]},
+        {q:"My sister sings. ___ is loud.", a:"She", options:["He","She"]},
+        {q:"My brother runs. ___ is fast.", a:"He", options:["He","She"]},
+        {q:"Grandma is kind. ___ cooks cake.", a:"She", options:["He","She"]},
+        {q:"Grandpa is wise. ___ reads books.", a:"He", options:["He","She"]},
+        {q:"The doctor is a lady. ___ helps me.", a:"She", options:["He","She"]},
+        {q:"The pilot is a man. ___ flies a plane.", a:"He", options:["He","She"]},
+        {q:"A ballerina is pretty. ___ is dancing.", a:"She", options:["He","She"]},
+        {q:"A fireman is brave. ___ puts out fire.", a:"He", options:["He","She"]},
+        {q:"My aunt is tall. ___ lives in London.", a:"She", options:["He","She"]},
+        {q:"My uncle is funny. ___ tells jokes.", a:"He", options:["He","She"]},
+        {q:"The princess is sleeping. ___ is in bed.", a:"She", options:["He","She"]},
+        {q:"The prince is young. ___ has a sword.", a:"He", options:["He","She"]},
+        {q:"This woman is a teacher. ___ is smart.", a:"She", options:["He","She"]},
+        {q:"This man is a baker. ___ makes bread.", a:"He", options:["He","She"]},
+        {q:"A nurse is helpful. ___ is in a hospital.", a:"She", options:["He","She"]},
+        {q:"An astronaut is a man. ___ is in space.", a:"He", options:["He","She"]},
+        {q:"The girl has a doll. ___ is playing.", a:"She", options:["He","She"]},
+        {q:"The boy has a car. ___ is racing.", a:"He", options:["He","She"]},
+        {q:"Mommy is pretty. ___ wears a dress.", a:"She", options:["He","She"]},
+        {q:"Daddy is cool. ___ wears a hat.", a:"He", options:["He","She"]},
+        {q:"My friend Anna is 5. ___ is small.", a:"She", options:["He","She"]},
+        {q:"My friend Tom is 6. ___ is tall.", a:"He", options:["He","She"]},
+        {q:"The lady is singing. ___ is a star.", a:"She", options:["He","She"]},
+        {q:"The guy is swimming. ___ is in the pool.", a:"He", options:["He","She"]}
       ],
       plural: [
-        { q: "One cat, two ___?", a: "Cats", options: ["Cat", "Cats"] },
-        { q: "One apple, three ___?", a: "Apples", options: ["Apple", "Apples"] },
-        { q: "One dog, many ___.", a: "Dogs", options: ["Dog", "Dogs"] }
+        {q:"One cat, two ___?", a:"Cats", options:["Cat","Cats"]},
+        {q:"One dog, three ___?", a:"Dogs", options:["Dog","Dogs"]},
+        {q:"One apple, many ___.", a:"Apples", options:["Apple","Apples"]},
+        {q:"One star, five ___.", a:"Stars", options:["Star","Stars"]},
+        {q:"One tree, four ___.", a:"Trees", options:["Tree","Trees"]},
+        {q:"One car, two ___.", a:"Cars", options:["Car","Cars"]},
+        {q:"One bird, ten ___.", a:"Birds", options:["Bird","Birds"]},
+        {q:"One book, many ___.", a:"Books", options:["Book","Books"]},
+        {q:"One ball, six ___.", a:"Balls", options:["Ball","Balls"]},
+        {q:"One flower, three ___.", a:"Flowers", options:["Flower","Flowers"]},
+        {q:"One boy, two ___.", a:"Boys", options:["Boy","Boys"]},
+        {q:"One girl, many ___.", a:"Girls", options:["Girl","Girls"]},
+        {q:"One cup, four ___.", a:"Cups", options:["Cup","Cups"]},
+        {q:"One doll, eight ___.", a:"Dolls", options:["Doll","Dolls"]},
+        {q:"One frog, five ___.", a:"Frogs", options:["Frog","Frogs"]},
+        {q:"One cake, two ___.", a:"Cakes", options:["Cake","Cakes"]},
+        {q:"One boat, many ___.", a:"Boats", options:["Boat","Boats"]},
+        {q:"One egg, six ___.", a:"Eggs", options:["Egg","Eggs"]},
+        {q:"One bee, three ___.", a:"Bees", options:["Bee","Bees"]},
+        {q:"One hat, two ___.", a:"Hats", options:["Hat","Hats"]},
+        {q:"One pig, many ___.", a:"Pigs", options:["Pig","Pigs"]},
+        {q:"One pear, four ___.", a:"Pears", options:["Pear","Pears"]},
+        {q:"One duck, seven ___.", a:"Ducks", options:["Duck","Ducks"]},
+        {q:"One ship, three ___.", a:"Ships", options:["Ship","Ships"]},
+        {q:"One spoon, two ___.", a:"Spoons", options:["Spoon","Spoons"]},
+        {q:"One train, many ___.", a:"Trains", options:["Train","Trains"]},
+        {q:"One kite, five ___.", a:"Kites", options:["Kite","Kites"]},
+        {q:"One ant, many ___.", a:"Ants", options:["Ant","Ants"]},
+        {q:"One lamp, two ___.", a:"Lamps", options:["Lamp","Lamps"]},
+        {q:"One ring, four ___.", a:"Rings", options:["Ring","Rings"]}
       ],
-      prepositions: [
-        { q: "The ball is ___ the box.", a: "In", options: ["In", "On", "Under"] },
-        { q: "The cat is ___ the table.", a: "On", options: ["In", "On", "Under"] },
-        { q: "The toy is ___ the bed.", a: "Under", options: ["In", "On", "Under"] }
+      secret_places: [
+        {q:"The cat is ___ the box.", a:"In", options:["In","On","Under"]},
+        {q:"The apple is ___ the table.", a:"On", options:["In","On","Under"]},
+        {q:"The dog is ___ the bed.", a:"Under", options:["In","On","Under"]},
+        {q:"The fish is ___ the water.", a:"In", options:["In","On","Under"]},
+        {q:"The bird is ___ the tree.", a:"On", options:["In","On","Under"]},
+        {q:"The shoes are ___ the chair.", a:"Under", options:["In","On","Under"]},
+        {q:"The pencil is ___ the cup.", a:"In", options:["In","On","Under"]},
+        {q:"The lamp is ___ the desk.", a:"On", options:["In","On","Under"]},
+        {q:"The toy is ___ the car.", a:"Under", options:["In","On","Under"]},
+        {q:"The milk is ___ the fridge.", a:"In", options:["In","On","Under"]},
+        {q:"The hat is ___ the head.", a:"On", options:["In","On","Under"]},
+        {q:"The rug is ___ the floor.", a:"On", options:["In","On","Under"]},
+        {q:"The ball is ___ the grass.", a:"On", options:["In","On","Under"]},
+        {q:"The money is ___ the bag.", a:"In", options:["In","On","Under"]},
+        {q:"The rabbit is ___ the ground.", a:"Under", options:["In","On","Under"]},
+        {q:"The socks are ___ the boots.", a:"In", options:["In","On","Under"]},
+        {q:"The sun is ___ the sky.", a:"In", options:["In","On","Under"]},
+        {q:"The butter is ___ the bread.", a:"On", options:["In","On","Under"]},
+        {q:"The treasure is ___ the sand.", a:"Under", options:["In","On","Under"]},
+        {q:"A star is ___ the top.", a:"On", options:["In","On","Under"]},
+        {q:"The candy is ___ the jar.", a:"In", options:["In","On","Under"]},
+        {q:"The plate is ___ the table.", a:"On", options:["In","On","Under"]},
+        {q:"The monster is ___ the bed!", a:"Under", options:["In","On","Under"]},
+        {q:"The spider is ___ the wall.", a:"On", options:["In","On","Under"]},
+        {q:"The keys are ___ the pocket.", a:"In", options:["In","On","Under"]},
+        {q:"The boat is ___ the sea.", a:"On", options:["In","On","Under"]},
+        {q:"The worm is ___ the apple.", a:"In", options:["In","On","Under"]},
+        {q:"The book is ___ the shelf.", a:"On", options:["In","On","Under"]},
+        {q:"The ring is ___ the finger.", a:"On", options:["In","On","Under"]},
+        {q:"The bone is ___ the dog.", a:"Under", options:["In","On","Under"]}
       ],
       can: [
-        { q: "A bird ___ fly.", a: "Can", options: ["Can", "Can't"] },
-        { q: "A fish ___ walk.", a: "Can't", options: ["Can", "Can't"] },
-        { q: "A frog ___ jump.", a: "Can", options: ["Can", "Can't"] }
+        {q:"A bird ___ fly.", a:"Can", options:["Can","Can't"]},
+        {q:"A fish ___ walk.", a:"Can't", options:["Can","Can't"]},
+        {q:"A frog ___ jump.", a:"Can", options:["Can","Can't"]},
+        {q:"A baby ___ drive.", a:"Can't", options:["Can","Can't"]},
+        {q:"A monkey ___ climb.", a:"Can", options:["Can","Can't"]},
+        {q:"A cat ___ fly.", a:"Can't", options:["Can","Can't"]},
+        {q:"A kangaroo ___ hop.", a:"Can", options:["Can","Can't"]},
+        {q:"A dog ___ sing.", a:"Can't", options:["Can","Can't"]},
+        {q:"A dolphin ___ swim.", a:"Can", options:["Can","Can't"]},
+        {q:"A snake ___ run.", a:"Can't", options:["Can","Can't"]},
+        {q:"I ___ clap my hands.", a:"Can", options:["Can","Can't"]},
+        {q:"An elephant ___ fly.", a:"Can't", options:["Can","Can't"]},
+        {q:"A lion ___ roar.", a:"Can", options:["Can","Can't"]},
+        {q:"A penguin ___ fly.", a:"Can't", options:["Can","Can't"]},
+        {q:"A spider ___ spin a web.", a:"Can", options:["Can","Can't"]},
+        {q:"A pig ___ read.", a:"Can't", options:["Can","Can't"]},
+        {q:"A rabbit ___ run fast.", a:"Can", options:["Can","Can't"]},
+        {q:"A tree ___ walk.", a:"Can't", options:["Can","Can't"]},
+        {q:"A bee ___ make honey.", a:"Can", options:["Can","Can't"]},
+        {q:"A turtle ___ run fast.", a:"Can't", options:["Can","Can't"]},
+        {q:"A cow ___ say 'Moo'.", a:"Can", options:["Can","Can't"]},
+        {q:"A car ___ talk.", a:"Can't", options:["Can","Can't"]},
+        {q:"A horse ___ run.", a:"Can", options:["Can","Can't"]},
+        {q:"A fire ___ be cold.", a:"Can't", options:["Can","Can't"]},
+        {q:"A chef ___ cook.", a:"Can", options:["Can","Can't"]},
+        {q:"A stone ___ eat.", a:"Can't", options:["Can","Can't"]},
+        {q:"A parrot ___ talk.", a:"Can", options:["Can","Can't"]},
+        {q:"A ball ___ jump.", a:"Can't", options:["Can","Can't"]},
+        {q:"A superhero ___ help.", a:"Can", options:["Can","Can't"]},
+        {q:"A ghost ___ be seen.", a:"Can't", options:["Can","Can't"]}
       ]
     };
 
     let activeTopic = '';
     let activeTask = null;
+    let usedIndexes = [];
 
     function selectTopic(topic, element) {
       activeTopic = topic;
+      usedIndexes = [];
       document.querySelectorAll('.card-item').forEach(c => c.classList.remove('active'));
       element.classList.add('active');
+      document.getElementById('pb-fill').style.width = '0%';
       loadTask();
-    }
-
-    function awardPoint() {
-      // КЛЮЧЕВАЯ ФУНКЦИЯ: Связь с главной страницей
-      let score = parseInt(localStorage.getItem('ll_score')) || 0;
-      score++; 
-      localStorage.setItem('ll_score', score);
-      
-      // Мини-эффект звука
-      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      const osc = audioCtx.createOscillator();
-      osc.connect(audioCtx.destination);
-      osc.frequency.setValueAtTime(880, audioCtx.currentTime);
-      osc.start(); osc.stop(audioCtx.currentTime + 0.1);
     }
 
     function loadTask() {
       const tasks = gameData[activeTopic];
-      activeTask = tasks[Math.floor(Math.random() * tasks.length)];
+      if (usedIndexes.length >= tasks.length) usedIndexes = [];
+
+      let index;
+      do { index = Math.floor(Math.random() * tasks.length); } 
+      while (usedIndexes.includes(index));
       
-      const qDiv = document.getElementById('question');
+      usedIndexes.push(index);
+      activeTask = tasks[index];
+
+      document.getElementById('question').innerText = activeTask.q;
       const grid = document.getElementById('answer-grid');
-      
-      qDiv.innerText = activeTask.q;
       grid.innerHTML = '';
 
       activeTask.options.forEach(opt => {
@@ -217,14 +317,30 @@
     function checkResult(choice, btn) {
       if (choice === activeTask.a) {
         btn.classList.add('correct');
-        awardPoint(); // НАЧИСЛЯЕМ ОЧКО!
-        document.getElementById('question').innerText = "Correct! +1 Knowledge Point! 🌟";
-        setTimeout(loadTask, 1200);
+        awardPoint();
+        
+        // Полоска прогресса (от 30 вопросов)
+        const progress = (usedIndexes.length / 30) * 100;
+        document.getElementById('pb-fill').style.width = progress + '%';
+
+        document.getElementById('question').innerText = "Correct! +1 Point! 🌟";
+        setTimeout(loadTask, 1000);
       } else {
         btn.classList.add('wrong');
         setTimeout(() => btn.classList.remove('wrong'), 500);
       }
     }
+
+    function awardPoint() {
+      let score = parseInt(localStorage.getItem('ll_score')) || 0;
+      score++; 
+      localStorage.setItem('ll_score', score);
+      document.getElementById('header-score').innerText = score;
+    }
+
+    window.onload = () => {
+      document.getElementById('header-score').innerText = localStorage.getItem('ll_score') || 0;
+    };
   </script>
 </body>
 </html>
