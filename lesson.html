@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson — LinguaLab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #22d3ee; --navy: #1f4e79; --bg: #f8fafc; --white: #ffffff; --orange: #f97316; --green: #10b981; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; padding: 20px; color: #334155; padding-bottom: 100px; }
+        
+        .container { max-width: 800px; margin: 0 auto; }
+        
+        /* Nav */
+        .back-btn { display: inline-flex; align-items: center; text-decoration: none; color: var(--navy); font-weight: 700; margin-bottom: 20px; background: white; padding: 10px 20px; border-radius: 99px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .back-btn span { margin-right: 8px; font-size: 18px; }
+
+        /* Header */
+        .lesson-header { 
+            background: linear-gradient(135deg, var(--navy), #3b82f6); color: white; 
+            border-radius: 24px; padding: 30px; margin-bottom: 30px; text-align: center;
+            box-shadow: 0 10px 25px rgba(31, 78, 121, 0.2);
+        }
+        .lesson-tag { background: rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 20px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+        .lesson-title { font-size: 28px; font-weight: 800; margin: 15px 0 5px; }
+        .lesson-subtitle { opacity: 0.9; font-size: 16px; }
+
+        /* Step Cards */
+        .step-card { 
+            background: white; border-radius: 20px; padding: 25px; margin-bottom: 25px; 
+            border: 1px solid #e2e8f0; position: relative; overflow: hidden;
+        }
+        .step-number { 
+            background: var(--primary); color: var(--navy); width: 30px; height: 30px; 
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; 
+            font-weight: 800; margin-bottom: 15px; font-size: 14px;
+        }
+        .step-title { font-weight: 800; color: var(--navy); font-size: 18px; margin-bottom: 5px; }
+        .step-desc-en { font-size: 18px; color: #0f172a; margin-bottom: 8px; font-weight: 600; }
+        .step-desc-zh { font-size: 15px; color: #64748b; line-height: 1.6; border-left: 3px solid #cbd5e1; padding-left: 10px; margin-bottom: 15px; }
+
+        /* Interactive Elements */
+        .flashcard-box { 
+            background: #f0f9ff; border: 2px dashed #bae6fd; border-radius: 12px; 
+            padding: 20px; text-align: center; margin: 15px 0; 
+        }
+        .vocab-word { font-size: 24px; font-weight: 800; color: #0284c7; display: block; }
+        
+        .action-btn {
+            background: var(--orange); color: white; border: none; padding: 10px 20px; 
+            border-radius: 10px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
+        }
+
+        /* Audio Recorder */
+        .audio-box { background: #f8fafc; padding: 20px; border-radius: 16px; display: flex; align-items: center; gap: 15px; border: 1px solid #e2e8f0; }
+        .rec-btn { 
+            width: 50px; height: 50px; border-radius: 50%; border: none; 
+            background: #ef4444; color: white; cursor: pointer; 
+            display: flex; justify-content: center; align-items: center; transition: 0.2s;
+            box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
+        }
+        .rec-btn.recording { animation: pulse 1.5s infinite; background: #991b1b; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6); } 70% { box-shadow: 0 0 0 15px rgba(239, 68, 68, 0); } }
+
+        /* Floating Footer */
+        .floating-footer {
+            position: fixed; bottom: 0; left: 0; width: 100%; background: white;
+            padding: 15px; box-shadow: 0 -5px 20px rgba(0,0,0,0.05); text-align: center;
+        }
+        .complete-btn { 
+            background: var(--navy); color: white; border: none; padding: 15px 40px; 
+            border-radius: 14px; font-size: 18px; font-weight: 800; cursor: pointer; 
+            transition: 0.3s; width: 100%; max-width: 600px;
+        }
+        .complete-btn:hover { transform: translateY(-3px); background: #334155; }
+
+        /* Sticker Modal */
+        .sticker-modal { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); 
+            display: none; justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(5px);
+        }
+        .sticker-content { background: white; padding: 40px; border-radius: 30px; text-align: center; animation: pop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        @keyframes pop { 0% { transform: scale(0); } 100% { transform: scale(1); } }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="exercises.html" class="back-btn"><span>←</span> Back to Dashboard</a>
+
+    <div id="lesson-container">
+        </div>
+    <div style="height: 60px;"></div> </div>
+
+<div class="floating-footer">
+    <button class="complete-btn" onclick="finishLesson()">
+        🎉 I finished everything!
+    </button>
+</div>
+
+<div class="sticker-modal" id="modal" onclick="this.style.display='none'">
+    <div class="sticker-content">
+        <img src="https://cdn-icons-png.flaticon.com/512/3084/3084530.png" width="140" style="margin-bottom: 20px;">
+        <h2 style="color: var(--navy); margin: 0;">Super Star!</h2>
+        <p>You completed this week's mission!</p>
+    </div>
+</div>
+
+<script>
+    // ===========================================
+    // 📚 EXPANDED DATABASE (Based on Units 2-7 PDFs)
+    // ===========================================
+    const db = {
+        "Sep": [
+            // Week 1
+            {
+                title: "Greetings & Song",
+                tag: "Unit 2: My School",
+                steps: [
+                    [cite_start]{ type: "warmup", title: "Sing Along", en: "Play the 'Hello' song. Wave your hand!", zh: "播放 'Hello' 歌 (課本第10頁)。一邊唱一邊揮手打招呼！ [cite: 32]" },
+                    [cite_start]{ type: "learn", title: "Practice Speaking", en: "Say: 'Hello, I'm (Name).'", zh: "練習自我介紹：'Hello, I'm... (加上孩子的名字)' [cite: 4]。", vocab: ["Hello", "I'm..."] },
+                    [cite_start]{ type: "action", title: "Game Time", en: "When I say 'Hello', you stand up!", zh: "遊戲：當家長說 'Hello' 時，孩子要快速站起來 (Stand up) [cite: 35]。" },
+                    { type: "speak", title: "Record Voice", en: "Record: 'Good morning, teacher.'", zh: "錄音挑戰：'Good morning, teacher.'", phrase: "Good morning, teacher." }
+                ]
+            },
+            // Week 2
+            {
+                title: "School Objects Hunt",
+                tag: "Unit 2: My School",
+                steps: [
+                    { type: "warmup", title: "Look & Find", en: "Watch the story. [cite_start]Can you see a bag?", zh: "觀看故事動畫。你能找到書包 (Bag) 嗎？ [cite: 53]" },
+                    [cite_start]{ type: "learn", title: "New Words", en: "Learn: Bag, Book, Teacher.", zh: "學習單詞：Bag (書包), Book (書), Teacher (老師) [cite: 8]。", vocab: ["Bag", "Book"] },
+                    { type: "action", title: "Hide & Seek", en: "Hide a book. Ask: 'Where is the book?'", zh: "尋寶遊戲：把書藏起來。問 'Where is the book?' [cite_start]讓孩子找出來 [cite: 57]。" },
+                    { type: "speak", title: "Record Voice", en: "Record: 'It is a book.'", zh: "錄音挑戰：'It is a book.'", phrase: "It is a book." }
+                ]
+            },
+            // Week 3
+            {
+                title: "The Magic 'B' & TPR",
+                tag: "Unit 2: Phonics",
+                steps: [
+                    { type: "warmup", title: "Chant", en: "Chant: 'Book, book, book. Bag, bag, bag.'", zh: "唸謠：Book, book, book. [cite_start]Bag, bag, bag. [cite: 206]" },
+                    [cite_start]{ type: "learn", title: "Phonics Sound", en: "The letter B makes the /b/ sound.", zh: "字母 B 發出 /b/ 的聲音。像 'Ball' 和 'Baby' [cite: 184]。", vocab: ["Bb", "/b/"] },
+                    { type: "action", title: "Commands", en: "Do the action: 'Open your book'. [cite_start]'Show me your book'.", zh: "聽指令做動作：Open your book (打開書)，Show me your book (給我看書) [cite: 16]。" },
+                    { type: "speak", title: "Record Voice", en: "Record: 'Open your book.'", zh: "錄音挑戰：'Open your book.'", phrase: "Open your book." }
+                ]
+            },
+            // Week 4
+            {
+                title: "Review: First Day",
+                tag: "Unit 2: Revision",
+                steps: [
+                    { type: "warmup", title: "Who is this?", en: "Look at the picture. [cite_start]Point to Mike and Kelly.", zh: "看圖片。指出誰是 Mike，誰是 Kelly [cite: 234]。" },
+                    [cite_start]{ type: "learn", title: "Sticker Fun", en: "Stick the 'Book' sticker on the correct page.", zh: "貼紙活動：把 'Book' 的貼紙貼在課本正確的位置 [cite: 101]。", vocab: ["Mike", "Kelly"] },
+                    { type: "action", title: "Simon Says", en: "Simon says: 'Touch your bag'.", zh: "老師說：摸摸你的書包 (Touch your bag)。" },
+                    { type: "speak", title: "Record Voice", en: "Record: 'Hello, I'm Mike.'", zh: "錄音挑戰：'Hello, I'm Mike.'", phrase: "Hello, I'm Mike." }
+                ]
+            }
+        ],
+        "Oct": [
+            // Week 1 (Unit 3)
+            {
+                title: "Boy or Girl?",
+                tag: "Unit 3: My Friends",
+                steps: [
+                    [cite_start]{ type: "warmup", title: "Song Time", en: "Sing: 'You're a boy / You're a girl'.", zh: "唱歌：'You're a boy' (你是男孩)，'You're a girl' (你是女孩) [cite: 423]。" },
+                    [cite_start]{ type: "learn", title: "Gender Words", en: "Learn: Boy, Girl.", zh: "學習單詞：Boy (男孩), Girl (女孩) [cite: 390]。", vocab: ["Boy", "Girl"] },
+                    { type: "action", title: "Line Up", en: "Game: Boys stand here. [cite_start]Girls stand there.", zh: "遊戲：男孩站這邊，女孩站那邊 (Please stand here/there) [cite: 418]。" },
+                    { type: "speak", title: "Record Voice", en: "Record: 'I am a girl.' (or Boy)", zh: "錄音挑戰：'I am a girl/boy.'", phrase: "I am a girl." }
+                ]
+            },
+            // Week 2
+            {
+                title: "My Best Friend",
+                tag: "Unit 3: My Friends",
+                steps: [
+                    [cite_start]{ type: "warmup", title: "Show a Photo", en: "Show a photo of a friend.", zh: "展示一張朋友的照片 [cite: 470]。" },
+                    [cite_start]{ type: "learn", title: "Phrase", en: "Say: 'This is my friend'.", zh: "練習說：'This is my friend' (這是我的朋友) [cite: 470]。", vocab: ["My Friend"] },
+                    [cite_start]{ type: "action", title: "Drawing", en: "Draw your friend's face.", zh: "畫出你好朋友的樣子 [cite: 473]。" },
+                    { type: "speak", title: "Record Voice", en: "Record: 'This is my friend.'", zh: "錄音挑戰：'This is my friend.'", phrase: "This is my friend." }
+                ]
+            },
+            // Week 3
+            {
+                title: "Phonics Gg & TPR",
+                tag: "Unit 3: Phonics",
+                steps: [
+                    { type: "warmup", title: "Listen", en: "Listen to the sound /g/. [cite_start]'Girls' and 'Game'.", zh: "聽 /g/ 的發音。單詞：Girls (女孩們), Game (遊戲) [cite: 545]。", vocab: ["Gg", "/g/"] },
+                    { type: "action", title: "Commands", en: "Do the action: 'Stand up'. [cite_start]'Sit down'.", zh: "聽指令做動作：Stand up (起立), Sit down (坐下) [cite: 397]。" },
+                    { type: "action", title: "Game", en: "Play Musical Chairs.", zh: "玩搶椅子遊戲 (練習 Sit down)。" },
+                    { type: "speak", title: "Record Voice", en: "Record: 'Stand up, please.'", zh: "錄音挑戰：'Stand up, please.'", phrase: "Stand up, please." }
+                ]
+            },
+            // Week 4
+            {
+                title: "Story: Messy Family",
+                tag: "Reader 1",
+                steps: [
+                    { type: "warmup", title: "Story Time", en: "Read 'A Messy Family'. [cite_start]Look at the messy room!", zh: "閱讀故事：'A Messy Family'。看看房間多亂！ [cite: 303]" },
+                    [cite_start]{ type: "learn", title: "Family Words", en: "Find Daddy and Mommy in the picture.", zh: "在圖中找出 Daddy (爸爸) 和 Mommy (媽媽) [cite: 288]。", vocab: ["Daddy", "Mommy"] },
+                    [cite_start]{ type: "action", title: "Bean Bag Toss", en: "Throw a bean bag on 'Daddy' picture.", zh: "丟沙包遊戲：丟到爸爸的圖片上並說 'My Daddy' [cite: 322]。" },
+                    { type: "speak", title: "Record Voice", en: "Record: 'This is my Daddy.'", zh: "錄音挑戰：'This is my Daddy.'", phrase: "This is my Daddy." }
+                ]
+            }
+        ],
+        "Nov": [
+            // Week 1 (Unit 4)
+            {
+                title: "My Face Song",
+                tag: "Unit 4: My Face",
+                steps: [
+                    { type: "warmup", title: "Sing & Touch", en: "Sing: 'Eyes, ears, nose and mouth'. [cite_start]Touch parts.", zh: "唱歌並觸摸部位：Eyes (眼), Ears (耳), Nose (鼻), Mouth (口) [cite: 620]。" },
+                    [cite_start]{ type: "learn", title: "Vocabulary", en: "Flashcards: Eye, Ear, Mouth, Nose.", zh: "單詞卡：Eye, Ear, Mouth, Nose [cite: 589]。", vocab: ["Eye", "Nose"] },
+                    { type: "action", title: "Fast Touch", en: "Parent says 'Nose!' Child touches nose quickly.", zh: "反應遊戲：家長說 'Nose!' [cite_start]孩子快速摸鼻子 [cite: 671]。" },
+                    { type: "speak", title: "Record Voice", en: "Record: 'My nose.'", zh: "錄音挑戰：'My nose.'", phrase: "My nose." }
+                ]
+            },
+            // Week 2
+            {
+                title: "Funny Fruit Face",
+                tag: "Unit 4: My Face",
+                steps: [
+                    [cite_start]{ type: "warmup", title: "Watch Story", en: "Watch Mike and Kelly make fruit faces.", zh: "看 Mike 和 Kelly 用水果拼臉譜的故事 [cite: 643]。" },
+                    [cite_start]{ type: "learn", title: "Sentence", en: "Say: 'This is my mouth'.", zh: "練習句子：'This is my mouth' (這是我的嘴巴) [cite: 587]。", vocab: ["This is..."] },
+                    [cite_start]{ type: "action", title: "Make a Face", en: "Use real fruit to make a face on a plate!", zh: "動手做：在盤子裡用水果片拼出一張臉 [cite: 634]。" },
+                    { type: "speak", title: "Record Voice", en: "Record: 'This is my mouth.'", zh: "錄音挑戰：'This is my mouth.'", phrase: "This is my mouth." }
+                ]
+            },
+            // Week 3
+            {
+                title: "Phonics Mm & Eyes",
+                tag: "Unit 4: Phonics",
+                steps: [
+                    [cite_start]{ type: "warmup", title: "Sound Check", en: "The sound /m/ is for Monkey and Mouth.", zh: "/m/ 是 Monkey (猴子) 和 Mouth (嘴巴) 的發音 [cite: 750]。", vocab: ["Mm", "/m/"] },
+                    { type: "action", title: "Commands", en: "Close your eyes. [cite_start]Open your eyes.", zh: "聽指令：Close your eyes (閉眼)，Open your eyes (睜眼) [cite: 596]。" },
+                    { type: "action", title: "Peek-a-boo", en: "Play Peek-a-boo!", zh: "玩躲貓貓遊戲！" },
+                    { type: "speak", title: "Record Voice", en: "Record: 'Close your eyes.'", zh: "錄音挑戰：'Close your eyes.'", phrase: "Close your eyes." }
+                ]
+            },
+            // Week 4
+            {
+                title: "Reader: Buzz! Buzz!",
+                tag: "Reader 2",
+                steps: [
+                    { type: "warmup", title: "Bee Story", en: "Read 'Buzz! Buzz!'. A bee is coming!", zh: "閱讀故事：Buzz! Buzz! [cite_start]蜜蜂來了！ [cite: 831]" },
+                    { type: "learn", title: "New Word", en: "Learn: Hair. [cite_start]The bee is on the hair.", zh: "新單詞：Hair (頭髮)。蜜蜂停在頭髮上 [cite: 842]。", vocab: ["Hair"] },
+                    { type: "action", title: "Bee Game", en: "Parent pretends to be a bee. [cite_start]Child covers nose/ear.", zh: "蜜蜂遊戲：家長扮蜜蜂。孩子要趕快捂住被點到的部位並喊 'My Ear!' [cite: 860]。" },
+                    { type: "speak", title: "Record Voice", en: "Record: 'Oh, my hair!'", zh: "錄音挑戰：'Oh, my hair!'", phrase: "Oh, my hair!" }
+                ]
+            }
+        ],
+        "Dec": [
+            // Week 1 (Unit 5)
+            {
+                title: "Farm Animals",
+                tag: "Unit 5: On the Farm",
+                steps: [
+                    { type: "warmup", title: "Animal Sounds", en: "What does a Cow say? [cite_start]Moo!", zh: "動物叫聲：Cow (牛) 怎麼叫？ Moo! [cite: 960]。", vocab: ["Cow", "Pig"] },
+                    [cite_start]{ type: "learn", title: "Vocabulary", en: "Learn: Cow, Pig, Hen, Duck.", zh: "學習單詞：Cow (牛), Pig (豬), Hen (母雞), Duck (鴨子) [cite: 940]。" },
+                    { type: "action", title: "Act it out", en: "Walk like a duck!", zh: "模仿動作：像鴨子一樣走路 (Waddle like a duck)。" },
+                    { type: "speak", title: "Record Voice", en: "Record: 'It is a duck.'", zh: "錄音挑戰：'It is a duck.'", phrase: "It is a duck." }
+                ]
+            },
+            // Week 2
+            {
+                title: "Counting 1-2-3",
+                tag: "Unit 5: On the Farm",
+                steps: [
+                    { type: "warmup", title: "Song", en: "Sing: 'Cows! Cows! 1, 2, 3.'", zh: "唱歌：'Cows! Cows! [cite_start]1, 2, 3.' [cite: 979]" },
+                    [cite_start]{ type: "learn", title: "Numbers", en: "Count: One, Two, Three.", zh: "數數：One (1), Two (2), Three (3) [cite: 941]。", vocab: ["1", "2", "3"] },
+                    { type: "action", title: "Finger Play", en: "Show me your fingers. [cite_start]Show me 2.", zh: "手指遊戲：Show me your fingers (給我看手指)。Show me 2 [cite: 948]。" },
+                    { type: "speak", title: "Record Voice", en: "Record: 'One, two, three.'", zh: "錄音挑戰：'One, two, three.'", phrase: "One, two, three." }
+                ]
+            },
+            // Week 3
+            {
+                title: "Phonics Pp & Pink",
+                tag: "Unit 5: Phonics",
+                steps: [
+                    { type: "warmup", title: "Chant", en: "Chant: 'Pig, pig, pig. Pink, pink, pink.'", zh: "唸謠：Pig, pig, pig. [cite_start]Pink, pink, pink [cite: 1137]。", vocab: ["Pp", "/p/"] },
+                    [cite_start]{ type: "action", title: "Color Hunt", en: "Find something Pink in your room.", zh: "尋找顏色：在房間裡找一個粉紅色 (Pink) 的東西 [cite: 1115]。" },
+                    [cite_start]{ type: "action", title: "Count Ducks", en: "Count the ducks in the book.", zh: "指令：Count the ducks (數數鴨子) [cite: 948]。" },
+                    { type: "speak", title: "Record Voice", en: "Record: 'A pink pig.'", zh: "錄音挑戰：'A pink pig.'", phrase: "A pink pig." }
+                ]
+            },
+            // Week 4
+            {
+                title: "Winter Review",
+                tag: "Unit 5: Revision",
+                steps: [
+                    { type: "warmup", title: "Missing Animal", en: "Cover a toy. [cite_start]Guess what animal it is.", zh: "猜猜看：蓋住一個動物玩具。猜猜是哪一個？ [cite: 1084]" },
+                    [cite_start]{ type: "learn", title: "Math Fun", en: "One plus one equals two.", zh: "數學樂趣：One plus one equals two (1+1=2) [cite: 1086]。", vocab: ["1+1=2"] },
+                    { type: "action", title: "Toss Game", en: "Toss a box. [cite_start]Say the number and animal.", zh: "拋盒子遊戲：拋出盒子，說出上面的動物和數量 [cite: 1065]。" },
+                    { type: "speak", title: "Record Voice", en: "Record: 'I see two pigs.'", zh: "錄音挑戰：'I see two pigs.'", phrase: "I see two pigs." }
+                ]
+            }
+        ],
+        "Jan": [
+            // Week 1 (Unit 6)
+            {
+                title: "Zoo Animals",
+                tag: "Unit 6: At the Zoo",
+                steps: [
+                    [cite_start]{ type: "warmup", title: "Song", en: "Sing: 'A monkey at the zoo'.", zh: "唱歌：'A monkey at the zoo' [cite: 1194]。", vocab: ["Zoo"] },
+                    [cite_start]{ type: "learn", title: "New Animals", en: "Learn: Bear, Panda, Tiger, Monkey.", zh: "新動物：Bear (熊), Panda (熊貓), Tiger (老虎), Monkey (猴子) [cite: 1164]。" },
+                    { type: "action", title: "Count to 5", en: "Count: Four Pandas. [cite_start]Five Monkeys.", zh: "數數：Four (4) 隻熊貓，Five (5) 隻猴子 [cite: 1159]。" },
+                    { type: "speak", title: "Record Voice", en: "Record: 'Four pandas.'", zh: "錄音挑戰：'Four pandas.'", phrase: "Four pandas." }
+                ]
+            },
+            // Week 2
+            {
+                title: "Take a Photo",
+                tag: "Unit 6: At the Zoo",
+                steps: [
+                    [cite_start]{ type: "warmup", title: "Look!", en: "Point and say: 'Look at the panda'.", zh: "指著說：Look at the panda (看那隻熊貓) [cite: 1171]。" },
+                    [cite_start]{ type: "learn", title: "Action Word", en: "Learn: Take a photo.", zh: "動作詞彙：Take a photo (拍照) [cite: 1171]。", vocab: ["Photo"] },
+                    { type: "action", title: "Photographer", en: "Pretend to use a camera. Click!", zh: "小小攝影師：假裝拿相機給動物拍照。" },
+                    { type: "speak", title: "Record Voice", en: "Record: 'Take a photo.'", zh: "錄音挑戰：'Take a photo.'", phrase: "Take a photo." }
+                ]
+            },
+            // Week 3
+            {
+                title: "Phonics Tt & Tea",
+                tag: "Unit 6: Phonics",
+                steps: [
+                    [cite_start]{ type: "warmup", title: "Chant", en: "Chant: 'Two tigers having tea'.", zh: "唸謠：Two tigers having tea (兩隻老虎喝茶) [cite: 1357]。", vocab: ["Tt", "/t/"] },
+                    [cite_start]{ type: "learn", title: "Tea Party", en: "T is for Tiger and Tea.", zh: "T 是 Tiger (老虎) 和 Tea (茶) [cite: 1334]。" },
+                    { type: "action", title: "Roleplay", en: "Pretend to drink tea. [cite_start]Say 'Thank you'.", zh: "角色扮演：假裝喝茶，說 'Thank you' [cite: 1348]。" },
+                    { type: "speak", title: "Record Voice", en: "Record: 'Tea, please.'", zh: "錄音挑戰：'Tea, please.'", phrase: "Tea, please." }
+                ]
+            }
+        ],
+        "Feb": [
+            // Week 1 (Unit 7)
+            {
+                title: "Transport Sounds",
+                tag: "Unit 7: On the Road",
+                steps: [
+                    { type: "warmup", title: "Beep Beep", en: "Song: 'It's a car! Beep! Beep!'", zh: "唱歌：It's a car! Beep! [cite_start]Beep! [cite: 1411]", vocab: ["Car", "Bus"] },
+                    [cite_start]{ type: "learn", title: "Vehicles", en: "Learn: Car, Bus, Bike, Taxi.", zh: "學習交通工具：Car (車), Bus (巴士), Bike (單車), Taxi (的士) [cite: 1380]。" },
+                    [cite_start]{ type: "action", title: "Drive", en: "Pretend to drive a bus.", zh: "動作：假裝開巴士，轉動方向盤 [cite: 1403]。" },
+                    { type: "speak", title: "Record Voice", en: "Record: 'It is a bus.'", zh: "錄音挑戰：'It is a bus.'", phrase: "It is a bus." }
+                ]
+            },
+            // Week 2
+            {
+                title: "Oops! My Bike",
+                tag: "Unit 7: On the Road",
+                steps: [
+                    { type: "warmup", title: "Story", en: "The wheel is off the bus! [cite_start]Oh no!", zh: "故事：巴士的輪子掉了！Oh no! [cite: 1441]" },
+                    { type: "learn", title: "Phrase", en: "Say: 'Oh, my bike!'", zh: "練習短語：'Oh, my bike!' (噢，我的單車) [cite_start][cite: 1379]。", vocab: ["Oh my..."] },
+                    { type: "action", title: "Drop Toy", en: "Drop a toy. Say 'Oh, my (toy)!'.", zh: "情景模擬：假裝玩具掉了，說 'Oh, my...!'。" },
+                    { type: "speak", title: "Record Voice", en: "Record: 'Oh, my bike!'", zh: "錄音挑戰：'Oh, my bike!'", phrase: "Oh, my bike!" }
+                ]
+            },
+            // Week 3
+            {
+                title: "Traffic Lights (Phonics Cc)",
+                tag: "Unit 7: Phonics",
+                steps: [
+                    [cite_start]{ type: "warmup", title: "Sound", en: "C is for Cat and Car.", zh: "C 是 Cat (貓) 和 Car (車) [cite: 1548]。", vocab: ["Cc", "/k/"] },
+                    { type: "learn", title: "Rules", en: "Red means Stop. [cite_start]Green means Go.", zh: "規則：紅燈停 (Stop)，綠燈行 (Go) [cite: 1526]。" },
+                    { type: "action", title: "Red Light Game", en: "Teacher says 'Red Light'. You Stop!", zh: "紅綠燈遊戲：聽到 'Red Light' 就停下！" },
+                    { type: "speak", title: "Record Voice", en: "Record: 'Stop and Go.'", zh: "錄音挑戰：'Stop and Go.'", phrase: "Stop and Go." }
+                ]
+            }
+        ]
+    };
+
+    // ===========================================
+    // ⚙️ LOGIC (RENDERER)
+    // ===========================================
+    function loadLesson() {
+        // 1. Get Params URL (?m=Sep&w=0)
+        const params = new URLSearchParams(window.location.search);
+        const month = params.get('m') || 'Sep';
+        const weekIndex = parseInt(params.get('w') || '0');
+
+        // 2. Data Check
+        if (!db[month] || !db[month][weekIndex]) {
+            document.getElementById('lesson-container').innerHTML = "<h2 style='text-align:center'>Coming Soon!</h2>";
+            return;
+        }
+
+        const lesson = db[month][weekIndex];
+
+        // 3. Render Header
+        let html = `
+            <div class="lesson-header">
+                <span class="lesson-tag">${lesson.tag}</span>
+                <h1 class="lesson-title">${lesson.title}</h1>
+                <div class="lesson-subtitle">${month} • Week ${weekIndex + 1}</div>
+            </div>
+        `;
+
+        // 4. Render Steps
+        lesson.steps.forEach((step, index) => {
+            html += `
+                <div class="step-card">
+                    <div class="step-number">${index + 1}</div>
+                    <div class="step-title">${step.title}</div>
+                    <div class="step-desc-en">${step.en}</div>
+                    <div class="step-desc-zh">${step.zh}</div>
+            `;
+
+            // If Vocabulary exists
+            if (step.vocab) {
+                html += `<div class="flashcard-box">`;
+                step.vocab.forEach(word => {
+                    html += `<span class="vocab-word">${word}</span>`;
+                });
+                html += `</div>`;
+            }
+
+            // If Audio Recorder exists
+            if (step.type === 'speak') {
+                html += `
+                    <div class="audio-box">
+                        <button class="rec-btn" onclick="toggleRecord(this)">🎤</button>
+                        <div style="flex-grow:1">
+                            <strong>Tap mic to record:</strong><br>
+                            <span style="color:#64748b">"${step.phrase}"</span>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // If Action Button (for TPR)
+            if (step.type === 'action') {
+                 html += `
+                    <button class="action-btn" onclick="playSuccessSound()">
+                        <span>▶ I did it!</span>
+                    </button>
+                `;
+            }
+
+            html += `</div>`; // Close card
+        });
+
+        document.getElementById('lesson-container').innerHTML = html;
+    }
+
+    // Audio Logic
+    let mediaRecorder;
+    async function toggleRecord(btn) {
+        if (btn.classList.contains('recording')) {
+            mediaRecorder.stop();
+            btn.classList.remove('recording');
+            // Play success sound
+            playSuccessSound();
+        } else {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                mediaRecorder = new MediaRecorder(stream);
+                mediaRecorder.start();
+                btn.classList.add('recording');
+            } catch(e) {
+                alert("Allow microphone access to record.");
+            }
+        }
+    }
+
+    function playSuccessSound() {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(500, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(1000, ctx.currentTime + 0.1);
+        
+        gain.gain.setValueAtTime(0.1, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+        
+        osc.start();
+        osc.stop(ctx.currentTime + 0.3);
+    }
+
+    function finishLesson() {
+        document.getElementById('modal').style.display = 'flex';
+        // Play celebratory sound
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        osc.connect(ctx.destination);
+        osc.frequency.setValueAtTime(400, ctx.currentTime);
+        osc.frequency.linearRampToValueAtTime(600, ctx.currentTime + 0.1);
+        osc.frequency.linearRampToValueAtTime(800, ctx.currentTime + 0.2);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.4);
+    }
+
+    // Run
+    loadLesson();
+</script>
+
+</body>
+</html>
