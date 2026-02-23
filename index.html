@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LinguaLab — Education is Magical</title>
+  <title>LinguaLab — Small Lessons for Big Progress</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -39,7 +39,6 @@
     .navbar-right a { color: var(--navy); font-weight: 600; text-decoration: none; font-size: 14px; margin-left: 20px; transition: 0.3s; }
     .navbar-right a:hover { color: var(--primary); }
 
-    /* HERO - НОРМАЛЬНЫЙ РАЗМЕР */
     .hero {
       padding: 120px 10%;
       text-align: center;
@@ -130,7 +129,6 @@
   <header class="navbar">
     <div class="navbar-left">
       <img src="assets/img/logo.png" alt="Logo" class="nav-logo">
-      <span class="nav-title">LinguaLab</span>
     </div>
     <nav class="navbar-right">
       <a href="grammar.html">Grammar Magic</a>
@@ -141,8 +139,8 @@
   </header>
 
   <section class="hero">
-    <h1>Education is Magical</h1>
-    <p>Discover a bilingual adventure for preschool explorers and their parents. Making English and Chinese simple, fun, and interactive.</p>
+    <h1>LinguaLab</h1>
+    <p>Bilingual mini-lessons with audio, games, and weekly practice — designed for families.</p>
   </section>
 
   <section class="features">
@@ -198,8 +196,8 @@
     </div>
   </section>
 
-  <footer>
-    <p>© 2026 LinguaLab. Making Education Magical.</p>
+  <footer class="footer">
+  © <span id="year">2026</span> LinguaLab • Small lessons. Real progress. All rights reserved.
   </footer>
 
   <script>
@@ -211,10 +209,10 @@
       const fruitsContainer = document.getElementById('tree-fruits');
       const statusText = document.getElementById('status-text');
 
-      // Обновление текста статуса
-      if (score >= 40) statusText.innerHTML = "Level: <strong style='color:#10b981'>Magic Oak 🌳</strong>";
-      else if (score >= 20) statusText.innerHTML = "Level: <strong style='color:#10b981'>Strong Sapling 🌿</strong>";
-      else if (score > 0) statusText.innerHTML = "Level: <strong style='color:#10b981'>Young Sprout 🌱</strong>";
+
+      if (score >= 40) statusText.innerHTML = "Level: <strong style='color:#10b981'>Magic Oak</strong>";
+      else if (score >= 20) statusText.innerHTML = "Level: <strong style='color:#10b981'>Strong Sapling</strong>";
+      else if (score > 0) statusText.innerHTML = "Level: <strong style='color:#10b981'>Young Sprout</strong>";
 
       leavesContainer.innerHTML = '';
       fruitsContainer.innerHTML = '';
@@ -232,7 +230,7 @@
         leaf.setAttribute("fill", i % 3 === 0 ? "#4ade80" : (i % 3 === 1 ? "#22c55e" : "#16a34a"));
         leavesContainer.appendChild(leaf);
 
-        // Плоды (яблоки), если очков > 20
+        // яблоки, если очков > 20
         if (score >= 20 && i % 6 === 0) {
           const fruit = document.createElementNS("http://www.w3.org/2000/svg", "circle");
           fruit.setAttribute("cx", x + 1.2); fruit.setAttribute("cy", y + 1.2); fruit.setAttribute("r", "1.5");
