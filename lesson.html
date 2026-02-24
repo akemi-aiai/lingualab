@@ -204,19 +204,19 @@
         <div class="card">
             <div class="trust-badges">
                 <span class="badge">Ages 3–6</span>
-                <span class="badge">7 Minutes</span>
-                <span class="badge">Zero Prep</span>
+                <span class="badge">Talk, not scroll</span>
+                <span class="badge">One-click lesson</span>
             </div>
-            <h2 style="font-size:32px; color:var(--navy); margin-bottom:10px;">7 Minutes.<br>Just press Play.</h2>
-            <p style="color:#64748b; margin-bottom:20px;">No teacher needed. We guide you step-by-step.</p>
+            <h2 style="font-size:32px; color:var(--navy); margin-bottom:10px;">7 minutes.<br>Press Play.<br> No prep, no teacher. </h2>
+            <p style="color:#64748b; margin-bottom:20px;">We guide you step-by-step.</p>
             
             <div class="promise-box">
                 <div class="promise-item"><span class="check-icon">✓</span> <b>Today:</b> 6 words + 1 phrase + 1 game</div>
-                <div class="promise-item"><span class="check-icon">✓</span> <b>Anxiety Relief:</b> Child tired? Use "2-min mode"</div>
-                <div class="promise-item"><span class="check-icon">✓</span> <b>Result:</b> Visible progress today</div>
+                <div class="promise-item"><span class="check-icon">✓</span> <b>No battles:</b> tired day? use “2-min mode”</div>
+                <div class="promise-item"><span class="check-icon">✓</span> <b>Progress:</b> you’ll see it today</div>
             </div>
 
-            <button class="nav-btn" onclick="startLesson()">Start Lesson ▶</button>
+            <button class="nav-btn" onclick="startLesson()">Play</button>
         </div>
     </div>
 
@@ -234,7 +234,7 @@
         <div class="card" style="border-top: 6px solid var(--green);">
             <div style="font-size:60px; margin-bottom:10px;">🏆</div>
             <h2 style="color:var(--navy); margin-bottom:5px;">You did it!</h2>
-            <p style="color:#64748b;">You are a Tiny Hero.</p>
+            <p style="color:#64748b;">You showed up — that’s a win.</p>
 
             <div class="report-list">
                 <div style="font-weight:800; color:var(--navy); margin-bottom:15px; text-transform:uppercase; font-size:12px;">Parent Report</div>
@@ -252,7 +252,7 @@
                 </div>
             </div>
 
-            <button class="nav-btn" onclick="window.location.href='exercises.html'">Back to Dashboard</button>
+            <button class="nav-btn" onclick="window.location.href='exercises.html'">Back to Fun Homework</button>
         </div>
     </div>
 
@@ -310,42 +310,244 @@
         ],
         "Oct": [
             {
-                unit: "Unit 3: Friends", vocab: "Boy, Girl", phrase: "I am a girl",
+                // Week 1: Unit 3 - Gender
+                meta: { unit: "Unit 3: Friends", vocab: "Boy, Girl", phrase: "You are a boy" },
+                tips: "Use family photos to help your child understand 'He' (Boy) and 'She' (Girl).",
                 steps: [
-                    { type: 'warmup', tag: 'A. Warm Up', title: "High Five", text: "High five!", action: "High five!", phrase: "High five!" },
+                    { type: 'warmup', tag: 'A. Warm Up', title: "High Five", text: "High five Mommy!", action: "Say: 'Hello!'", phrase: "Hello!" },
                     { type: 'words', tag: 'B. Words', title: "Gender", items: [{w:"Boy", i:"👦"},{w:"Girl", i:"👧"},{w:"Friend", i:"🤝"}] },
-                    { type: 'phrase', tag: 'C. Phrase', title: "Phrase", text: "I am a girl/boy.", script: "Ask: Are you a boy?", parentTip: "Use family photos to show he/she." },
-                    { type: 'game', tag: 'D. Game', title: "Stand Up", text: "Boys stand up! Girls sit down!", sub: "Listen carefully." },
-                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Count boys in your family.", icon: "👨‍👩‍👦" }
+                    { type: 'phrase', tag: 'C. Phrase', title: "Identity", text: "You are a boy/girl.", script: "Point to your child and say the phrase.", parentTip: "Point to yourself (I am) and the child (You are)." },
+                    { type: 'game', tag: 'D. Game', title: "Stand Up", text: "Boys stand up! Girls sit down!", sub: "Listen and move fast." },
+                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Count how many boys are in your family.", icon: "👨‍👩‍👦" }
                 ]
             },
             {
-                unit: "Unit 3: Phonics", vocab: "Gg /g/", phrase: "Stand up",
+                // Week 2: Unit 3 - Friendship
+                meta: { unit: "Unit 3: Social", vocab: "My Friend", phrase: "This is my friend" },
+                tips: "Teach your child to introduce others politely.",
                 steps: [
-                    { type: 'warmup', tag: 'A. Warm Up', title: "Wiggle", text: "Wiggle fingers.", action: "Wiggle!", phrase: "Wiggle" },
+                    { type: 'warmup', tag: 'A. Warm Up', title: "Handshake", text: "Shake hands.", action: "Nice to meet you.", phrase: "Hello friend." },
+                    { type: 'words', tag: 'B. Words', title: "Friendship", items: [{w:"Friend", i:"👫"},{w:"Play", i:"🧸"},{w:"Nice", i:"❤️"}] },
+                    { type: 'phrase', tag: 'C. Phrase', title: "Intro", text: "This is my friend.", script: "Introduce a toy to Mommy.", parentTip: "Use a teddy bear to practice introductions." },
+                    { type: 'game', tag: 'D. Game', title: "Draw", text: "Draw your best friend's face.", sub: "Quick sketch!" },
+                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Hug your friend (or a toy).", icon: "🤗" }
+                ]
+            },
+            {
+                // Week 3: Unit 3 - Phonics G & TPR
+                meta: { unit: "Unit 3: Phonics", vocab: "Gg /g/", phrase: "Stand up please" },
+                tips: "Letter G makes the /g/ sound (hard G), not /j/.",
+                steps: [
+                    { type: 'warmup', tag: 'A. Warm Up', title: "Wiggle", text: "Wiggle your fingers.", action: "Wiggle wiggle!", phrase: "Wiggle!" },
                     { type: 'words', tag: 'B. Words', title: "G Sound", items: [{w:"Gg", i:"🔤"},{w:"Girl", i:"👧"},{w:"Game", i:"🎲"}] },
-                    { type: 'phrase', tag: 'C. Phrase', title: "Command", text: "Stand up, please.", script: "Be polite.", parentTip: "G sounds like 'guh'." },
-                    { type: 'game', tag: 'D. Game', title: "Simon Says", text: "Simon says: Sit down.", sub: "Don't get tricked." },
-                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Play a quick game.", icon: "🏃" }
+                    { type: 'phrase', tag: 'C. Phrase', title: "Command", text: "Stand up, please.", script: "Give commands politely.", parentTip: "Add 'Please' to teach manners." },
+                    { type: 'game', tag: 'D. Game', title: "Simon Says", text: "Simon says: Sit down.", sub: "Don't get tricked!" },
+                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Play a quick game of Tag.", icon: "🏃" }
+                ]
+            },
+            {
+                // Week 4: Reader 1 - A Messy Family
+                meta: { unit: "Reader 1", vocab: "Family, Messy", phrase: "Who is this?" },
+                tips: "Reading week! Focus on the pictures in the story.",
+                steps: [
+                    { type: 'warmup', tag: 'A. Warm Up', title: "Look", text: "Open your eyes big!", action: "Look around.", phrase: "Look!" },
+                    { type: 'words', tag: 'B. Words', title: "Story Words", items: [{w:"Messy", i:"🧺"},{w:"Toy", i:"🤖"},{w:"Cat", i:"🐱"}] },
+                    { type: 'phrase', tag: 'C. Phrase', title: "Question", text: "Who is this?", script: "Point to a character in the book.", parentTip: "Encourage child to answer: 'This is Daddy'." },
+                    { type: 'game', tag: 'D. Game', title: "Clean Up", text: "The room is messy! Clean up!", sub: "Pick up 3 things." },
+                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Find a toy under the bed/chair.", icon: "🔍" }
                 ]
             }
         ],
+        
         "Nov": [
             {
-                unit: "Unit 4: Face", vocab: "Eyes, Nose", phrase: "My nose",
+                // Week 1: Unit 4 - My Face
+                meta: { unit: "Unit 4: My Face", vocab: "Eye, Nose, Mouth", phrase: "This is my nose" },
+                tips: "Use a mirror so your child can see their own face while learning.",
                 steps: [
-                    { type: 'warmup', tag: 'A. Warm Up', title: "Blink", text: "Blink your eyes.", action: "Blink!", phrase: "Blink" },
+                    { type: 'warmup', tag: 'A. Warm Up', title: "Touch Game", text: "Touch your nose!", action: "Do it fast!", phrase: "Touch your nose!" },
                     { type: 'words', tag: 'B. Words', title: "Face Parts", items: [{w:"Eye", i:"👁️"},{w:"Nose", i:"👃"},{w:"Mouth", i:"👄"}] },
-                    { type: 'phrase', tag: 'C. Phrase', title: "Phrase", text: "This is my nose.", script: "Touch your nose.", parentTip: "Touch your own face to demonstrate." },
-                    { type: 'game', tag: 'D. Game', title: "Touch", text: "Touch your... Mouth!", sub: "Fast!" },
-                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Look in a mirror.", icon: "🪞" }
+                    { type: 'phrase', tag: 'C. Phrase', title: "Identity", text: "This is my nose.", script: "Point to your nose and say it.", parentTip: "Model the sentence first: 'This is *my* nose'." },
+                    { type: 'game', tag: 'D. Game', title: "Simon Says", text: "Simon says: Touch your ear!", sub: "Don't touch if I don't say Simon Says." },
+                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Look in a mirror and name 3 face parts.", icon: "🪞" }
+                ]
+            },
+            {
+                // Week 2: Unit 4 - Funny Faces
+                meta: { unit: "Unit 4: Creativity", vocab: "Ear, Hair", phrase: "My mouth is big" },
+                tips: "Make learning fun by making silly faces together!",
+                steps: [
+                    { type: 'warmup', tag: 'A. Warm Up', title: "Smile", text: "Big Smile! Sad face.", action: "Show me emotions.", phrase: "Smile!" },
+                    { type: 'words', tag: 'B. Words', title: "More Parts", items: [{w:"Ear", i:"👂"},{w:"Hair", i:"💇"},{w:"Face", i:"😀"}] },
+                    { type: 'phrase', tag: 'C. Phrase', title: "Description", text: "This is my mouth.", script: "Open your mouth wide!", parentTip: "Make it a game: Big mouth vs Small mouth." },
+                    { type: 'game', tag: 'D. Game', title: "Fruit Face", text: "Make a face using fruit slices (pretend).", sub: "Banana smile?" },
+                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Draw a funny face on paper.", icon: "🖍️" }
+                ]
+            },
+            {
+                // Week 3: Unit 4 - Phonics Mm
+                meta: { unit: "Unit 4: Phonics", vocab: "Mm /m/", phrase: "Close your eyes" },
+                tips: "The /m/ sound vibrates on your lips. Mmmmmm!",
+                steps: [
+                    { type: 'warmup', tag: 'A. Warm Up', title: "Yummy", text: "Rub your tummy.", action: "Say Mmmmmm!", phrase: "Mmmmmm!" },
+                    { type: 'words', tag: 'B. Words', title: "M Sound", items: [{w:"Mm", i:"Ⓜ️"},{w:"Monkey", i:"🐒"},{w:"Milk", i:"🥛"}] },
+                    { type: 'phrase', tag: 'C. Action', title: "TPR Command", text: "Close your eyes.", script: "Open... and Close.", parentTip: "Play Peek-a-boo to practice." },
+                    { type: 'game', tag: 'D. Game', title: "Monkey Act", text: "Act like a monkey!", sub: "Scratch your head and say Ooo-ooo." },
+                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Drink some milk (or water).", icon: "🥛" }
+                ]
+            },
+            {
+                // Week 4: Reader 2 - Buzz! Buzz!
+                meta: { unit: "Reader 2", vocab: "Bee, Hair", phrase: "Oh my hair!" },
+                tips: "Read the story 'Buzz! Buzz!'. It's about a bee landing on different face parts.",
+                steps: [
+                    { type: 'warmup', tag: 'A. Warm Up', title: "Buzz", text: "Buzz like a bee...", action: "Fly around!", phrase: "Buzzzzz." },
+                    { type: 'words', tag: 'B. Words', title: "Story Words", items: [{w:"Bee", i:"🐝"},{w:"Hair", i:"💇"},{w:"No", i:"🚫"}] },
+                    { type: 'phrase', tag: 'C. Phrase', title: "Reaction", text: "Oh, my hair!", script: "Pretend a bee is on your hair.", parentTip: "Use a dramatic voice: 'Oh no!'" },
+                    { type: 'game', tag: 'D. Game', title: "Bee Attack", text: "Parent is the bee. Touch child's nose.", sub: "Child says 'My nose!'" },
+                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Find something yellow (like a bee).", icon: "🟡" }
                 ]
             }
         ],
-        // Additional months would follow the same pattern...
-        "Dec": [{unit:"Unit 5", vocab:"Cow, Pig", phrase:"It is a cow", steps:[{type:'words', items:[{w:'Cow',i:'🐮'},{w:'Pig',i:'🐷'},{w:'Duck',i:'🦆'}]}]}],
-        "Jan": [{unit:"Unit 6", vocab:"Panda", phrase:"Look at panda", steps:[{type:'words', items:[{w:'Panda',i:'🐼'},{w:'Tiger',i:'🐯'},{w:'Bear',i:'🐻'}]}]}],
-        "Feb": [{unit:"Unit 7", vocab:"Car, Bus", phrase:"It is a bus", steps:[{type:'words', items:[{w:'Car',i:'🚗'},{w:'Bus',i:'🚌'},{w:'Bike',i:'🚲'}]}]}]
+        ],
+        "Dec": [
+            {
+                meta: { unit: "Unit 5: Farm", vocab: "Cow, Pig", phrase: "It is a cow" },
+                tips: "Animal sounds are fun! Don't be afraid to be loud.",
+                steps: [
+                    { type: 'warmup', tag: 'A. Warm Up', title: "Sounds", text: "Moo! Oink!", action: "Make animal sounds.", phrase: "Moo!" },
+                    { type: 'words', tag: 'B. Words', title: "Farm Animals", items: [{w:"Cow", i:"🐮"},{w:"Pig", i:"🐷"},{w:"Duck", i:"🦆"}] },
+                    { type: 'phrase', tag: 'C. Phrase', title: "Phrase", text: "It is a cow.", script: "Point to a picture. Ask: What is this?", parentTip: "Encourage pointing while speaking." },
+                    { type: 'game', tag: 'D. Game', title: "Sound Guess", text: "Close eyes. Parent says 'Oink'. Child guesses.", sub: "It is a pig!" },
+                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Walk like a duck around the room.", icon: "🦆" }
+                ]
+            },
+            {
+                meta: { unit: "Unit 5: Math", vocab: "1, 2, 3", phrase: "One pig" },
+                tips: "Count everything: fingers, toes, toys.",
+                steps: [
+                    { type: 'warmup', tag: 'A. Warm Up', title: "Fingers", text: "Show me 1 finger.", action: "Show me 2 fingers.", phrase: "One, two." },
+                    { type: 'words', tag: 'B. Words', title: "Numbers", items: [{w:"One", i:"1️⃣"},{w:"Two", i:"2️⃣"},{w:"Three", i:"3️⃣"}] },
+                    { type: 'phrase', tag: 'C. Phrase', title: "Counting", text: "Look! Two pigs.", script: "Count toys together.", parentTip: "Count slowly and clearly." },
+                    { type: 'game', tag: 'D. Game', title: "Count Toys", text: "Put 3 toys on the floor. Count them.", sub: "One, two, three." },
+                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Find 3 spoons in the kitchen.", icon: "🥄" }
+                ]
+            },
+            {
+                meta: { unit: "Unit 5: Phonics P", vocab: "Pp, Pink", phrase: "Pink pig" },
+                tips: "P is a 'popping' sound. Put hand in front of mouth to feel air.",
+                steps: [
+                    { type: 'warmup', tag: 'A. Warm Up', title: "Pop!", text: "Pop your cheeks!", action: "P-p-p-pop!", phrase: "Pop!" },
+                    { type: 'words', tag: 'B. Words', title: "P Words", items: [{w:"Pp", i:"🅿️"},{w:"Pink", i:"🩷"},{w:"Pig", i:"🐷"}] },
+                    { type: 'phrase', tag: 'C. Phrase', title: "Color Phrase", text: "A pink pig.", script: "Find pink things.", parentTip: "Emphasize the 'P' sound." },
+                    { type: 'game', tag: 'D. Game', title: "Pink Hunt", text: "Find something PINK in the room.", sub: "Go!" },
+                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Touch something pink.", icon: "🩷" }
+                ]
+            },
+            {
+                meta: { unit: "Unit 5: Review", vocab: "Animals", phrase: "I like animals" },
+                tips: "Review week! Sing the song together.",
+                steps: [
+                    { type: 'warmup', tag: 'A. Warm Up', title: "Clap", text: "Clap 3 times.", action: "1, 2, 3!", phrase: "One, two, three." },
+                    { type: 'words', tag: 'B. Words', title: "Review", items: [{w:"Hen", i:"🐔"},{w:"Cow", i:"🐮"},{w:"Pig", i:"🐷"}] },
+                    { type: 'phrase', tag: 'C. Phrase', title: "Expression", text: "I like animals.", script: "Hug a toy animal.", parentTip: "Ask: Do you like pigs?" },
+                    { type: 'game', tag: 'D. Game', title: "Act it out", text: "Act like a Hen (Cluck cluck).", sub: "Child guesses." },
+                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Sing 'Old McDonald' together.", icon: "🎶" }
+                ]
+            }
+        ],
+        "Jan": [
+            {
+                meta: { unit: "Unit 6: Zoo", vocab: "Panda, Tiger", phrase: "Look at..." },
+                tips: "Use a deep voice for big animals, high voice for small ones.",
+                steps: [
+                    { type: 'warmup', tag: 'A. Warm Up', title: "Roar!", text: "Roar like a tiger!", action: "Roar!", phrase: "Roar!" },
+                    { type: 'words', tag: 'B. Words', title: "Wild Animals", items: [{w:"Panda", i:"🐼"},{w:"Tiger", i:"🐯"},{w:"Bear", i:"🐻"}] },
+                    { type: 'phrase', tag: 'C. Phrase', title: "Pointing", text: "Look at the panda.", script: "Point to the screen.", parentTip: "Use your finger to point." },
+                    { type: 'game', tag: 'D. Game', title: "Walk like...", text: "Walk like a heavy bear.", sub: "Stomp stomp!" },
+                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Find a teddy bear.", icon: "🧸" }
+                ]
+            },
+            {
+                meta: { unit: "Unit 6: Photo", vocab: "Camera", phrase: "Take a photo" },
+                tips: "Pretend your hands are a camera.",
+                steps: [
+                    { type: 'warmup', tag: 'A. Warm Up', title: "Smile", text: "Cheese! Smile big.", action: "Smile!", phrase: "Cheese!" },
+                    { type: 'words', tag: 'B. Words', title: "Zoo Words", items: [{w:"Monkey", i:"🐒"},{w:"Photo", i:"📷"},{w:"Zoo", i:"🦁"}] },
+                    { type: 'phrase', tag: 'C. Phrase', title: "Action", text: "Take a photo.", script: "Click! Pretend to take a picture.", parentTip: "Make the 'Click' sound." },
+                    { type: 'game', tag: 'D. Game', title: "Freeze", text: "Dance... and FREEZE for a photo!", sub: "Don't move!" },
+                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Take a pretend photo of Mom.", icon: "📸" }
+                ]
+            },
+            {
+                meta: { unit: "Unit 6: Phonics T", vocab: "Tt, Tiger", phrase: "Two tigers" },
+                tips: "T is a ticking sound. T-t-t-tiger.",
+                steps: [
+                    { type: 'warmup', tag: 'A. Warm Up', title: "Tap", text: "Tap your toe.", action: "Tap tap tap.", phrase: "Tap!" },
+                    { type: 'words', tag: 'B. Words', title: "T Words", items: [{w:"Tt", i:"✝️"},{w:"Tea", i:"🍵"},{w:"Table", i:"🪑"}] },
+                    { type: 'phrase', tag: 'C. Phrase', title: "Phrase", text: "Two tigers.", script: "Show 2 fingers.", parentTip: "The tongue behind the teeth for T." },
+                    { type: 'game', tag: 'D. Game', title: "Tap Table", text: "Tap the table 3 times.", sub: "1, 2, 3." },
+                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Touch a table.", icon: "🪑" }
+                ]
+            },
+            {
+                meta: { unit: "Unit 6: Rules", vocab: "Quiet", phrase: "Be quiet" },
+                tips: "Practice whispering. It calms children down.",
+                steps: [
+                    { type: 'warmup', tag: 'A. Warm Up', title: "Shhh", text: "Put finger on lips.", action: "Shhh...", phrase: "Shhh." },
+                    { type: 'words', tag: 'B. Words', title: "Rules", items: [{w:"Quiet", i:"🤫"},{w:"Sleep", i:"😴"},{w:"Loud", i:"📢"}] },
+                    { type: 'phrase', tag: 'C. Phrase', title: "Polite", text: "Be quiet, please.", script: "The animals are sleeping.", parentTip: "Whisper this phrase." },
+                    { type: 'game', tag: 'D. Game', title: "Sleeping Lions", text: "Lie down and don't move!", sub: "Are you sleeping?" },
+                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Walk on tip-toes.", icon: "👣" }
+                ]
+            }
+        ],
+        "Feb": [
+            {
+                meta: { unit: "Unit 7: Cars", vocab: "Car, Bus", phrase: "It is a bus" },
+                tips: "Boys usually love this unit! Make engine noises.",
+                steps: [
+                    { type: 'warmup', tag: 'A. Warm Up', title: "Beep", text: "Beep Beep!", action: "Press the horn.", phrase: "Beep!" },
+                    { type: 'words', tag: 'B. Words', title: "Vehicles", items: [{w:"Car", i:"🚗"},{w:"Bus", i:"🚌"},{w:"Bike", i:"🚲"}] },
+                    { type: 'phrase', tag: 'C. Phrase', title: "Identification", text: "It is a bus.", script: "Show a toy car/bus.", parentTip: "Ask: What is it?" },
+                    { type: 'game', tag: 'D. Game', title: "Driving", text: "Drive your bus around the room.", sub: "Vroom!" },
+                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Find a wheel.", icon: "🛞" }
+                ]
+            },
+            {
+                meta: { unit: "Unit 7: Situations", vocab: "Taxi", phrase: "Oh my bike" },
+                tips: "Teach emotion: 'Oh no!'",
+                steps: [
+                    { type: 'warmup', tag: 'A. Warm Up', title: "Oh no!", text: "Hands on cheeks. Oh no!", action: "Make a sad face.", phrase: "Oh no!" },
+                    { type: 'words', tag: 'B. Words', title: "More Vehicles", items: [{w:"Taxi", i:"🚕"},{w:"Wheel", i:"🛞"},{w:"Broken", i:"💔"}] },
+                    { type: 'phrase', tag: 'C. Phrase', title: "Expression", text: "Oh, my bike!", script: "Pretend a toy is broken.", parentTip: "Use dramatic expression." },
+                    { type: 'game', tag: 'D. Game', title: "Fall down", text: "Spin and fall down gently.", sub: "Oops!" },
+                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Fix a broken toy.", icon: "🔧" }
+                ]
+            },
+            {
+                meta: { unit: "Unit 7: Phonics C", vocab: "Cc, Cat", phrase: "Stop and Go" },
+                tips: "C sounds like 'K' (Cat), not 'S'.",
+                steps: [
+                    { type: 'warmup', tag: 'A. Warm Up', title: "Meow", text: "Act like a cat.", action: "Meow!", phrase: "Meow." },
+                    { type: 'words', tag: 'B. Words', title: "C Words", items: [{w:"Cc", i:"©️"},{w:"Cat", i:"🐱"},{w:"Cup", i:"☕"}] },
+                    { type: 'phrase', tag: 'C. Phrase', title: "Traffic", text: "Stop and Go.", script: "Red light, Green light.", parentTip: "Use hand signals: Palm for Stop." },
+                    { type: 'game', tag: 'D. Game', title: "Red Light", text: "Run... STOP! Run... STOP!", sub: "Don't move." },
+                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Drink water from a cup.", icon: "🥤" }
+                ]
+            },
+            {
+                meta: { unit: "Review", vocab: "Colors", phrase: "Red light" },
+                tips: "Safety lesson: Red means Stop.",
+                steps: [
+                    { type: 'warmup', tag: 'A. Warm Up', title: "Stop", text: "Freeze!", action: "Don't move.", phrase: "Stop!" },
+                    { type: 'words', tag: 'B. Words', title: "Colors", items: [{w:"Red", i:"🔴"},{w:"Green", i:"🟢"},{w:"Yellow", i:"🟡"}] },
+                    { type: 'phrase', tag: 'C. Phrase', title: "Safety", text: "Red light, Stop.", script: "Look at traffic lights.", parentTip: "Practice this when crossing street." },
+                    { type: 'game', tag: 'D. Game', title: "Traffic Cop", text: "Parent says color, child acts.", sub: "Red=Stop, Green=Go." },
+                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Find something Red.", icon: "🟥" }
+                ]
+            }
+        ]
     };
 
     // --- LOGIC ---
