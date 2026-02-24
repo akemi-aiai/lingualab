@@ -409,7 +409,6 @@
                 ]
             }
         ],
-        ],
         "Dec": [
             {
                 meta: { unit: "Unit 5: Farm", vocab: "Cow, Pig", phrase: "It is a cow" },
@@ -556,17 +555,17 @@
     let isRecording = false;
 
     function init() {
-        const params = new URLSearchParams(window.location.search);
-        const m = params.get('m');
-        const w = parseInt(params.get('w')) || 0;
-
-        if (m && db[m] && db[m][w]) {
-            currentData = db[m][w];
-            document.getElementById('hero-date').innerText = currentData.unit;
-        } else {
-            // Fallback content if empty
-            currentData = db["Sep"][0]; 
-        }
+      const params = new URLSearchParams(window.location.search);
+      const m = params.get('m');
+      const w = parseInt(params.get('w')) || 0;
+    
+      if (m && db[m] && db[m][w]) {
+        currentData = db[m][w];
+      } else {
+        currentData = db["Sep"][0];
+      }
+          document.getElementById('hero-date').innerText =
+        currentData.unit || currentData.meta?.unit || "Ready to play?";
     }
 
     function toggleParentMode() {
