@@ -4,330 +4,490 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lesson — LinguaLab</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <style>
-        :root { 
-            --primary: #22d3ee; 
-            --navy: #1f4e79; 
-            --bg: #f8fafc; 
-            --white: #ffffff; 
-            --orange: #f97316; 
-            --gray: #94a3b8;
+        :root {
+            --primary: #22d3ee;
+            --primary-dark: #0ea5e9;
+            --navy: #1f4e79;
+            --bg: #f8fafc;
+            --white: #ffffff;
+            --orange: #f97316;
+            --green: #10b981;
             --radius: 24px;
+            --shadow: 0 12px 30px rgba(0,0,0,0.08);
         }
-        
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: #334155; padding-top: 80px; }
-        
-        /* ICONS */
-        .icon { width: 24px; height: 24px; fill: currentColor; }
 
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: #334155; padding-top: 70px; padding-bottom: 100px; }
+
+        /* --- UI COMPONENTS --- */
+        .icon { width: 24px; height: 24px; fill: currentColor; vertical-align: middle; }
+        
         /* NAVBAR */
         .navbar {
             position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
             display: flex; align-items: center; justify-content: space-between;
-            padding: 15px 40px; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,.05);
-            height: 80px;
+            padding: 10px 20px; background: rgba(255,255,255,0.95); 
+            backdrop-filter: blur(10px); box-shadow: 0 4px 20px rgba(0,0,0,.05);
+            height: 70px;
         }
-        .navbar-left { display: flex; align-items: center; gap: 12px; }
-        .nav-logo { height: 40px; width: auto; display: block; }
-        .nav-title { font-size: 22px; font-weight: 800; color: var(--navy); }
-        .navbar-right { display: flex; align-items: center; gap: 20px; }
-        .navbar-right a { 
-            color: var(--navy); font-weight: 600; text-decoration: none; 
-            font-size: 14px; transition: 0.3s;
-        }
-        .navbar-right a:hover { color: var(--primary); }
-
+        .nav-left { display: flex; align-items: center; gap: 10px; font-weight: 800; color: var(--navy); }
+        .nav-logo { height: 36px; }
+        
         /* PROGRESS BAR */
-        .progress-container { position: fixed; top: 80px; left: 0; width: 100%; height: 6px; background: #e2e8f0; z-index: 999; }
+        .progress-track { position: fixed; top: 70px; left: 0; width: 100%; height: 6px; background: #e2e8f0; z-index: 999; }
         .progress-fill { height: 100%; background: var(--orange); width: 0%; transition: width 0.5s ease; }
 
-        /* HERO */
-        .hero-compact {
-            width: 100%; padding: 60px 20px 140px; text-align: center;
-            background: linear-gradient(135deg, #22d3ee, #a78bfa); color: #fff; position: relative;
-        }
-        .hero-compact h1 { font-size: 38px; font-weight: 800; margin-bottom: 5px; }
-        .hero-date { opacity: 0.9; font-size: 16px; font-weight: 500; }
-
         /* CONTAINER */
-        .container { max-width: 800px; margin: -100px auto 40px; padding: 0 20px; position: relative; z-index: 10; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; position: relative; }
 
-        /* BACK BUTTON */
-        .back-btn-wrapper { text-align: center; margin-bottom: 30px; }
-        .back-btn { 
-            display: inline-flex; align-items: center; text-decoration: none; 
-            color: var(--navy); font-weight: 700; gap: 8px;
-            background: white; padding: 12px 30px; border-radius: 99px; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1); transition: 0.3s;
+        /* PARENT TOGGLE */
+        .parent-toggle-wrapper {
+            display: flex; justify-content: flex-end; margin-bottom: 10px;
         }
-        .back-btn:hover { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
+        .parent-toggle {
+            background: #e2e8f0; color: #64748b; padding: 6px 12px; 
+            border-radius: 20px; font-size: 12px; font-weight: 700; 
+            cursor: pointer; border: none; display: flex; align-items: center; gap: 5px;
+        }
+        .parent-toggle.active { background: var(--navy); color: white; }
 
-        /* LESSON HEADER (Updated: Grey accent instead of Teal border) */
-        .lesson-header-card { 
-            background: white; border-radius: var(--radius); padding: 40px 30px; 
-            margin-bottom: 30px; text-align: left; /* Align left for cleaner look */
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
-            border-left: 6px solid var(--gray); /* Grey accent */
+        /* PARENT TIPS BOX (Hidden by default) */
+        .parent-tips-box {
+            display: none; background: #fff7ed; border-left: 4px solid var(--orange);
+            padding: 15px; border-radius: 12px; margin-bottom: 20px; font-size: 14px;
+            color: #7c2d12; box-shadow: 0 4px 10px rgba(249, 115, 22, 0.1);
+            animation: slideDown 0.3s ease;
         }
-        .lesson-tag { 
-            background: #f1f5f9; color: var(--navy); padding: 6px 12px; 
-            border-radius: 8px; font-size: 12px; text-transform: uppercase; 
-            letter-spacing: 1px; font-weight: 700; display: inline-block; margin-bottom: 10px;
-        }
-        .lesson-title { font-size: 28px; font-weight: 800; color: var(--navy); margin: 0 0 5px 0; }
-        .lesson-subtitle { color: #64748b; font-size: 16px; font-weight: 500; }
-        .lesson-goal { margin-top: 15px; color: #475569; font-style: italic; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* STEP CARDS */
-        .step-card { 
-            background: white; border-radius: 20px; padding: 30px; margin-bottom: 25px; 
-            border: 1px solid #e2e8f0; position: relative; overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.02); transition: 0.3s;
-        }
-        .step-card:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        /* --- SCREENS --- */
+        .screen { display: none; animation: fadeIn 0.4s ease; }
+        .screen.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .step-badge {
-            display: inline-block; font-size: 11px; font-weight: 800; text-transform: uppercase; 
-            color: #fff; padding: 4px 10px; border-radius: 6px; margin-bottom: 15px; letter-spacing: 0.5px;
+        /* 1. START SCREEN (Hook) */
+        .start-card {
+            background: white; border-radius: var(--radius); padding: 30px;
+            text-align: center; box-shadow: var(--shadow);
         }
-        .badge-vocab { background: #3b82f6; }
-        .badge-phonics { background: #8b5cf6; }
-        .badge-tpr { background: #f59e0b; }
-        .badge-speak { background: #ef4444; }
-        .badge-mission { background: #10b981; } /* Green for Mission */
-        .badge-parent { background: #64748b; } /* Grey for Parent Tip */
-
-        .step-title { font-weight: 800; color: var(--navy); font-size: 20px; margin-bottom: 10px; }
-        .step-desc-en { font-size: 18px; color: #0f172a; font-weight: 600; margin-bottom: 5px; }
-        .step-desc-zh { font-size: 15px; color: #64748b; line-height: 1.6; }
-
-        /* FLASHCARDS */
-        .flashcards-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 15px; margin-top: 20px;
+        .trust-badge { 
+            display: inline-block; background: #ecfeff; color: var(--navy); 
+            padding: 4px 10px; border-radius: 6px; font-size: 11px; 
+            font-weight: 800; text-transform: uppercase; margin-bottom: 15px;
         }
+        .hero-title { font-size: 28px; font-weight: 900; color: var(--navy); line-height: 1.2; margin-bottom: 10px; }
+        .hero-promise { font-size: 16px; color: #475569; margin-bottom: 25px; }
+        .pain-points { text-align: left; background: #f8fafc; padding: 15px; border-radius: 16px; margin-bottom: 25px; }
+        .pain-item { display: flex; gap: 10px; margin-bottom: 10px; font-size: 13px; color: #64748b; align-items: center; }
+        .check { color: var(--green); font-weight: bold; }
+
+        /* 2. LESSON STEPS */
+        .step-card {
+            background: white; border-radius: var(--radius); padding: 30px 20px;
+            text-align: center; box-shadow: var(--shadow); min-height: 400px;
+            display: flex; flex-direction: column; justify-content: center;
+        }
+        .step-tag {
+            color: var(--primary-dark); font-weight: 800; text-transform: uppercase; 
+            font-size: 12px; letter-spacing: 1px; margin-bottom: 10px;
+        }
+        .step-main-text { font-size: 24px; font-weight: 800; color: var(--navy); margin-bottom: 20px; }
+        
+        /* Flashcards */
+        .flashcard-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; margin-bottom: 20px; }
         .flashcard {
-            background: #f0f9ff; border: 2px solid #bae6fd; border-radius: 16px;
-            padding: 20px; text-align: center; cursor: pointer; transition: 0.2s;
-            display: flex; flex-direction: column; align-items: center; justify-content: center; height: 120px;
+            border: 2px solid #e2e8f0; border-radius: 16px; padding: 15px;
+            cursor: pointer; transition: 0.2s;
         }
-        .flashcard:hover { background: #e0f2fe; transform: scale(1.03); border-color: var(--primary); }
-        .flashcard-word { font-weight: 800; color: var(--navy); font-size: 18px; margin-bottom: 5px; }
-        .flashcard-zh { font-size: 13px; color: #64748b; }
+        .flashcard.playing { border-color: var(--primary); background: #ecfeff; transform: scale(1.05); }
+        .fc-icon { font-size: 32px; display: block; margin-bottom: 5px; }
+        .fc-word { font-weight: 700; font-size: 14px; }
 
-        /* AUDIO */
-        .audio-box { 
-            background: #fff7ed; padding: 25px; border-radius: 20px; 
-            display: flex; align-items: center; gap: 20px; border: 1px solid #fed7aa; margin-top: 20px;
+        /* Interactive Buttons */
+        .action-btn {
+            background: var(--navy); color: white; border: none; 
+            padding: 18px; width: 100%; border-radius: 16px; 
+            font-size: 18px; font-weight: 700; cursor: pointer; 
+            box-shadow: 0 4px 15px rgba(31, 78, 121, 0.2);
+            display: flex; justify-content: center; align-items: center; gap: 10px;
+            transition: 0.2s; margin-top: auto;
         }
-        .rec-btn { 
-            width: 64px; height: 64px; border-radius: 50%; border: none; 
-            background: #ef4444; color: white; cursor: pointer; 
-            display: flex; justify-content: center; align-items: center; 
-            transition: 0.2s; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
-        }
-        .rec-btn:hover { transform: scale(1.05); }
-        .rec-btn.recording { animation: pulse 1.5s infinite; background: #991b1b; }
-        .listen-btn {
-            background: white; border: 2px solid var(--primary); color: var(--navy);
-            padding: 8px 16px; border-radius: 99px; font-weight: 700; cursor: pointer;
-            margin-top: 10px; font-size: 13px; display: inline-flex; align-items: center; gap: 6px;
-        }
+        .action-btn:active { transform: scale(0.98); }
+        .action-btn.secondary { background: white; color: var(--navy); border: 2px solid #e2e8f0; margin-top: 10px; }
 
-        /* MISSION & TIP BOXES */
-        .mission-box { background: #ecfdf5; border: 1px solid #a7f3d0; padding: 20px; border-radius: 12px; margin-top: 10px; color: #065f46; font-weight: 600; }
-        .tip-box { background: #f1f5f9; border-left: 4px solid #64748b; padding: 15px; margin-top: 10px; color: #475569; font-style: italic; }
-
-        /* FOOTER */
-        .complete-btn { 
-            background: var(--navy); color: white; border: none; padding: 22px; 
-            border-radius: 16px; font-size: 18px; font-weight: 800; cursor: pointer; 
-            transition: 0.3s; width: 100%; margin-top: 30px; display: flex; 
-            justify-content: center; align-items: center; gap: 10px;
-            box-shadow: 0 10px 20px rgba(31, 78, 121, 0.15);
+        /* 3. REPORT CARD */
+        .report-card {
+            background: white; border-radius: var(--radius); padding: 30px;
+            text-align: center; box-shadow: var(--shadow);
+            border-top: 8px solid var(--green);
         }
-        .complete-btn:hover { background: #334155; transform: translateY(-3px); }
+        .report-title { font-size: 22px; font-weight: 800; color: var(--navy); margin-bottom: 5px; }
+        .report-list { text-align: left; margin: 20px 0; border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px; }
+        .report-item { margin-bottom: 8px; font-size: 14px; color: #334155; }
 
-        /* MODAL */
-        .sticker-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 2000; backdrop-filter: blur(8px); }
-        .sticker-content { background: white; padding: 50px; border-radius: 30px; text-align: center; box-shadow: 0 25px 60px rgba(0,0,0,0.3); max-width: 400px; width: 90%; animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .sticker-icon { width: 80px; height: 80px; color: #eab308; margin-bottom: 20px; }
-        @keyframes pop { 0% { transform: scale(0); } 100% { transform: scale(1); } }
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6); } 70% { box-shadow: 0 0 0 20px rgba(239, 68, 68, 0); } }
-
-        @media (max-width: 600px) {
-            .navbar { padding: 10px 20px; flex-direction: column; gap: 10px; height: auto; }
-            .navbar-right { width: 100%; justify-content: center; flex-wrap: wrap; border-top: 1px solid #f1f5f9; padding-top: 10px; }
-            .hero-compact h1 { font-size: 32px; }
-            .content-wrapper { margin-top: -80px; }
-            .progress-container { top: 110px; }
-            .flashcards-grid { grid-template-columns: 1fr; }
+        /* BOTTOM NAV */
+        .bottom-nav {
+            position: fixed; bottom: 0; left: 0; width: 100%; 
+            background: white; padding: 15px 20px; 
+            border-top: 1px solid #e2e8f0; display: flex; gap: 10px; z-index: 1000;
         }
+        
     </style>
 </head>
 <body>
 
-<div class="progress-container"><div class="progress-fill" id="progress-bar"></div></div>
+<div class="progress-track"><div class="progress-fill" id="progress-bar"></div></div>
 
 <nav class="navbar">
-    <div class="navbar-left">
-        <img src="assets/img/logo.png" alt="LL" class="nav-logo" onerror="this.style.display='none'">
-        <span class="nav-title">LinguaLab</span>
-    </div>
-    <nav class="navbar-right">
-        <a href="grammar.html">Grammar Magic</a>
-        <a href="vocabulary.html">Word Bank</a>
-        <a href="index.html">Main Page</a>
-        <a href="parents.html">Wiki Parents</a>
-    </nav>
-</nav>
-
-<section class="hero-compact">
-    <h1>Lesson Time</h1>
-    <div class="hero-date" id="hero-subtitle">Ready to learn?</div>
-</section>
-
-<div class="container">
-    <div class="back-btn-wrapper">
-        <a href="exercises.html" class="back-btn">
+    <div class="nav-left">
+        <a href="exercises.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 8px;">
             <svg class="icon" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
-            Go Back
+            <span id="nav-month">Back</span>
         </a>
     </div>
-
-    <div id="lesson-container"></div>
-</div>
-
-<div class="sticker-modal" id="modal" onclick="this.style.display='none'">
-    <div class="sticker-content">
-        <svg class="sticker-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <h2 style="color: var(--navy); margin-bottom: 10px; font-size: 32px;">Excellent!</h2>
-        <p style="color: #64748b; font-size: 18px;">Lesson Complete!</p>
-        <button class="complete-btn" style="margin-top: 25px; width: 100%;" onclick="window.location.href='exercises.html'">Back to Menu</button>
+    <div class="parent-toggle-wrapper">
+        <button class="parent-toggle" onclick="toggleParentMode()">
+            <svg class="icon" style="width:16px;height:16px;" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
+            Parent Mode
+        </button>
     </div>
+</nav>
+
+<div class="container">
+
+    <div class="parent-tips-box" id="parent-box">
+        <strong>👨‍👩‍👧 Parent Tip:</strong> <span id="parent-text">Relax. Don't correct mistakes today. Just have fun!</span>
+    </div>
+
+    <div id="screen-start" class="screen active">
+        <div class="start-card">
+            <span class="trust-badge">Ages 3–6 • 7 Minutes</span>
+            <h1 class="hero-title">7 Minutes.<br>Zero Prep.<br>Just press Play.</h1>
+            <p class="hero-promise">No teacher needed. We guide you step-by-step.</p>
+            
+            <div class="pain-points">
+                <div class="pain-item"><span class="check">✓</span> <b>Today's Goal:</b> 6 words + 1 phrase</div>
+                <div class="pain-item"><span class="check">✓</span> <b>Anxiety Relief:</b> Child tired? Use "2-min mode"</div>
+                <div class="pain-item"><span class="check">✓</span> <b>Result:</b> Visible progress today</div>
+            </div>
+
+            <button class="action-btn" onclick="startLesson()">
+                Start Lesson ▶
+            </button>
+        </div>
+    </div>
+
+    <div id="screen-lesson" class="screen">
+        <div class="step-card" id="step-card">
+            </div>
+        
+        <div class="bottom-nav">
+            <button class="action-btn secondary" style="width: 30%" onclick="prevStep()">←</button>
+            <button class="action-btn" style="width: 70%" onclick="nextStep()" id="next-btn">Next Step →</button>
+        </div>
+    </div>
+
+    <div id="screen-report" class="screen">
+        <div class="report-card">
+            <div style="font-size: 60px; margin-bottom: 10px;">🏆</div>
+            <h2 class="report-title">Lesson Complete!</h2>
+            <p style="color: #64748b;">You are a Tiny Hero!</p>
+
+            <div class="report-list">
+                <div style="font-weight:700; margin-bottom:10px; color:var(--navy);">PARENT REPORT:</div>
+                <div class="report-item">✅ <b>Learned:</b> <span id="report-vocab"></span></div>
+                <div class="report-item">✅ <b>Spoke:</b> <span id="report-phrase"></span></div>
+                <div class="report-item">✅ <b>Next time:</b> Review & Play</div>
+            </div>
+
+            <button class="action-btn" onclick="window.location.href='exercises.html'">
+                Back to Dashboard
+            </button>
+        </div>
+    </div>
+
 </div>
 
 <script>
-    const ICONS = {
-        play: '<svg class="icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>',
-        mic: '<svg class="icon" viewBox="0 0 24 24"><path fill="white" d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path fill="white" d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>',
-        speaker: '<svg class="icon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>',
-        check: '<svg class="icon" viewBox="0 0 24 24"><path fill="white" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>'
-    };
-
+    // --- DATABASE (FULL CONTENT) ---
     const db = {
         "Sep": [
             {
-                title: "Greetings", tag: "Unit 1", goal: "Goal: Greetings & Family.",
+                // Week 1
+                meta: { unit: "Unit 2: Greetings", vocab: "Hello, Teacher", phrase: "Good morning" },
+                tips: "Goal: Don't correct pronunciation yet. Just encourage them to open their mouth.",
                 steps: [
-                    { label: "Vocabulary", badge: "badge-vocab", title: "Family", en: "Tap to listen", zh: "家庭成員", type: "flashcards", items: [{w:"Daddy", zh:"爸爸"}, {w:"Mommy", zh:"媽媽"}] },
-                    { label: "Action", badge: "badge-tpr", title: "TPR", en: "Hug Daddy! Kiss Mommy!", zh: "擁抱爸爸！親吻媽媽！", type: "simple", text: "Hug Daddy!" },
-                    { label: "Speaking", badge: "badge-speak", title: "Record", en: "Say: 'Good morning, Daddy.'", zh: "錄音", phrase: "Good morning, Daddy.", type: "speak" },
-                    { label: "Mission / 任務", badge: "badge-mission", title: "Home Mission", en: "Find a photo of your family.", zh: "找一張全家福照片。", type: "simple", text: "Show it and say 'This is my family'!" },
-                    { label: "For Parents / 給家長", badge: "badge-parent", title: "Tip", en: "Practice greetings in the morning.", zh: "早上練習問候。", type: "simple", text: "Say 'Good morning' every day!" }
+                    { type: 'warmup', title: "Warm Up", text: "Listen and Wave! 👋", action: "Say: 'Hello!'", audio: "Hello!" },
+                    { type: 'words', title: "3 Words", items: [{w:"Hello", i:"👋"}, {w:"Teacher", i:"👩‍🏫"}, {w:"Morning", i:"☀️"}] },
+                    { type: 'phrase', title: "Phrase of the Day", text: "Good morning, teacher.", script: "Ask child: Who do you see at school?" },
+                    { type: 'game', title: "Quick Game", text: "Touch your nose if you hear 'Hello'!", sub: "Parent: Say 'Hello' randomly." },
+                    { type: 'offscreen', title: "Mission 🏠", text: "Find a toy and say 'Hello' to it!", icon: "🧸" }
                 ]
             },
             {
-                title: "School Objects", tag: "Unit 2", goal: "Goal: Classroom objects.",
+                // Week 2
+                meta: { unit: "Unit 2: School", vocab: "Bag, Book, Pencil", phrase: "It is a book" },
+                tips: "If they point instead of speaking, that's okay! Say the word for them.",
                 steps: [
-                    { label: "Vocabulary", badge: "badge-vocab", title: "Objects", en: "Tap to listen", zh: "學校物品", type: "flashcards", items: [{w:"Bag", zh:"書包"}, {w:"Book", zh:"書本"}, {w:"Pencil", zh:"鉛筆"}] },
-                    { label: "Speaking", badge: "badge-speak", title: "Record", en: "Say: 'It is a book.'", zh: "錄音", phrase: "It is a book.", type: "speak" },
-                    { label: "Mission / 任務", badge: "badge-mission", title: "Pack Your Bag", en: "Put a book in your bag.", zh: "把書放進書包。", type: "simple", text: "Say 'Book in the bag'!" },
-                    { label: "For Parents / 給家長", badge: "badge-parent", title: "Tip", en: "Point to objects.", zh: "指物命名。", type: "simple", text: "Ask 'What is this?' when you see a bag." }
+                    { type: 'warmup', title: "Warm Up", text: "Stand up & Sit down!", action: "Do it 3 times.", audio: "Stand up!" },
+                    { type: 'words', title: "School Objects", items: [{w:"Bag", i:"🎒"}, {w:"Book", i:"📖"}, {w:"Pencil", i:"✏️"}] },
+                    { type: 'phrase', title: "Phrase of the Day", text: "It is a book.", script: "Point to a book and ask: What is this?" },
+                    { type: 'game', title: "Hide & Seek", text: "Hide a book. Ask 'Where is the book?'", sub: "Child finds it." },
+                    { type: 'offscreen', title: "Mission 🏠", text: "Put a book in a bag.", icon: "🎒" }
                 ]
             },
-            { title: "Phonics Bb", tag: "Unit 2", goal: "Goal: Letter B.", steps: [{ label: "Action", badge: "badge-tpr", title: "Open", en: "Open your book.", zh: "打開書", type: "simple", text: "Open!" }, { label: "Speaking", badge: "badge-speak", title: "Record", en: "Say: 'Open your book.'", zh: "錄音", phrase: "Open your book.", type: "speak" }, { label: "Mission", badge: "badge-mission", title: "Find B", en: "Find something Blue.", zh: "找藍色的東西", type: "simple", text: "Find a blue toy!" }, { label: "Tip", badge: "badge-parent", title: "Tip", en: "Sound /b/", zh: "發音 /b/", type: "simple", text: "B says /b/ like Ball." }] },
-            { title: "Review 1", tag: "Revision", goal: "Review.", steps: [{ label: "Speaking", badge: "badge-speak", title: "Roleplay", en: "Say: 'Hello.'", zh: "你好", phrase: "Hello.", type: "speak" }, { label: "Mission", badge: "badge-mission", title: "High Five", en: "High five your mom!", zh: "擊掌", type: "simple", text: "High Five!" }, { label: "Tip", badge: "badge-parent", title: "Tip", en: "Review", zh: "複習", type: "simple", text: "Review helps memory." }] }
+            {
+                // Week 3
+                meta: { unit: "Unit 2: Phonics", vocab: "Bb, Ball, Baby", phrase: "Open your book" },
+                tips: "Focus on the 'b' sound. buh-buh-book.",
+                steps: [
+                    { type: 'warmup', title: "Warm Up", text: "Clap your hands!", action: "Clap 1, 2, 3.", audio: "Clap!" },
+                    { type: 'words', title: "B Sound", items: [{w:"Bb", i:"🅱️"}, {w:"Ball", i:"⚽"}, {w:"Baby", i:"👶"}] },
+                    { type: 'phrase', title: "Action Phrase", text: "Open your book.", script: "Command: Open! Close!" },
+                    { type: 'game', title: "Blue Hunt", text: "Find something Blue (B is for Blue).", sub: "Go!" },
+                    { type: 'offscreen', title: "Mission 🏠", text: "Find a blue toy.", icon: "🔵" }
+                ]
+            },
+            {
+                // Week 4
+                meta: { unit: "Revision", vocab: "Mike, Kelly", phrase: "Hello I am..." },
+                tips: "Roleplay time! Pretend to be different characters.",
+                steps: [
+                    { type: 'warmup', title: "Warm Up", text: "Shake your body!", action: "Shake shake shake.", audio: "Shake!" },
+                    { type: 'words', title: "Characters", items: [{w:"Mike", i:"👦"}, {w:"Kelly", i:"👧"}, {w:"Miss Wang", i:"👩‍🏫"}] },
+                    { type: 'phrase', title: "Magic Phrase", text: "Hello, I am [Name].", script: "Practice with a puppet." },
+                    { type: 'game', title: "Who is it?", text: "Cover the picture. Guess: Mike or Kelly?", sub: "Peek-a-boo!" },
+                    { type: 'offscreen', title: "Mission 🏠", text: "Introduce yourself to a pet/toy.", icon: "🐶" }
+                ]
+            }
         ],
         "Oct": [
-            { title: "Boy or Girl?", tag: "Unit 3", goal: "Goal: Gender.", steps: [{ label: "Vocab", badge: "badge-vocab", title: "Gender", en: "Boy/Girl", zh: "男/女", type: "flashcards", items: [{w:"Boy", zh:"男"},{w:"Girl", zh:"女"}] }, { label: "Mission", badge: "badge-mission", title: "Count", en: "Count boys in family.", zh: "數數家裡的男生", type: "simple", text: "How many boys?" }, { label: "Tip", badge: "badge-parent", title: "Tip", en: "Gender", zh: "性別", type: "simple", text: "Explain he/she." }] },
-            { title: "Phonics Gg", tag: "Unit 3", goal: "Letter G.", steps: [{ label: "Phonics", badge: "badge-phonics", title: "Gg", en: "G is for...", zh: "G發音", type: "flashcards", items: [{w:"Game", zh:"遊戲"},{w:"Gift", zh:"禮物"}] }, { label: "Mission", badge: "badge-mission", title: "Game", en: "Play a game.", zh: "玩遊戲", type: "simple", text: "Play tag!" }, { label: "Tip", badge: "badge-parent", title: "Tip", en: "Sound /g/", zh: "發音", type: "simple", text: "G as in Go." }] }
+            {
+                // Week 1
+                meta: { unit: "Unit 3: Friends", vocab: "Boy, Girl", phrase: "I am a girl" },
+                tips: "Gender can be tricky. Use family members as examples.",
+                steps: [
+                    { type: 'warmup', title: "Warm Up", text: "High Five!", action: "High five Mommy/Daddy.", audio: "High Five!" },
+                    { type: 'words', title: "Words", items: [{w:"Boy", i:"👦"}, {w:"Girl", i:"👧"}, {w:"Friend", i:"🤝"}] },
+                    { type: 'phrase', title: "Phrase", text: "I am a girl / boy.", script: "Ask: Are you a boy?" },
+                    { type: 'game', title: "Stand Up", text: "Boys stand up! Girls sit down!", sub: "Switch!" },
+                    { type: 'offscreen', title: "Mission 🏠", text: "Count boys/girls in the house.", icon: "🏠" }
+                ]
+            },
+            {
+                // Week 2
+                meta: { unit: "Unit 3: Friendship", vocab: "My Friend", phrase: "This is my friend" },
+                tips: "Encourage sharing.",
+                steps: [
+                    { type: 'warmup', title: "Warm Up", text: "Jump!", action: "Jump 3 times.", audio: "Jump!" },
+                    { type: 'words', title: "Words", items: [{w:"Friend", i:"👫"}, {w:"Play", i:"🎮"}, {w:"Nice", i:"👍"}] },
+                    { type: 'phrase', title: "Phrase", text: "This is my friend.", script: "Show a photo of a friend." },
+                    { type: 'game', title: "Draw", text: "Draw your friend quickly!", sub: "1 minute." },
+                    { type: 'offscreen', title: "Mission 🏠", text: "Hug your friend (or toy).", icon: "🧸" }
+                ]
+            },
+            {
+                // Week 3
+                meta: { unit: "Unit 3: Phonics G", vocab: "Gg, Girl, Game", phrase: "Stand up please" },
+                tips: "G sounds like 'guh'.",
+                steps: [
+                    { type: 'warmup', title: "Warm Up", text: "Wiggle your fingers.", action: "Wiggle wiggle.", audio: "Wiggle" },
+                    { type: 'words', title: "G Sound", items: [{w:"Gg", i:"🔤"}, {w:"Girl", i:"👧"}, {w:"Game", i:"🎲"}] },
+                    { type: 'phrase', title: "Command", text: "Stand up, please.", script: "Be polite!" },
+                    { type: 'game', title: "Simon Says", text: "Simon says: Sit down.", sub: "Don't get tricked!" },
+                    { type: 'offscreen', title: "Mission 🏠", text: "Play a quick game.", icon: "🏃" }
+                ]
+            },
+            {
+                // Week 4
+                meta: { unit: "Reader", vocab: "Family", phrase: "My Daddy" },
+                tips: "Reading time. Point to the pictures.",
+                steps: [
+                    { type: 'warmup', title: "Story Time", text: "Look at the book cover.", action: "What do you see?", audio: "Look!" },
+                    { type: 'words', title: "Family", items: [{w:"Daddy", i:"👨"}, {w:"Mommy", i:"👩"}, {w:"Messy", i:"🗑️"}] },
+                    { type: 'phrase', title: "Phrase", text: "This is my Daddy.", script: "Point to Daddy." },
+                    { type: 'game', title: "Clean up", text: "Pretend to clean up the room.", sub: "Messy -> Clean." },
+                    { type: 'offscreen', title: "Mission 🏠", text: "Find Daddy's shoe.", icon: "👞" }
+                ]
+            }
         ],
         "Nov": [
-            { title: "My Face", tag: "Unit 4", goal: "Face parts.", steps: [{ label: "Vocab", badge: "badge-vocab", title: "Face", en: "Parts", zh: "五官", type: "flashcards", items: [{w:"Eye", zh:"眼"},{w:"Nose", zh:"鼻"}] }, { label: "Mission", badge: "badge-mission", title: "Mirror", en: "Look in mirror.", zh: "照鏡子", type: "simple", text: "Touch your nose in the mirror." }, { label: "Tip", badge: "badge-parent", title: "Tip", en: "Simon Says", zh: "遊戲", type: "simple", text: "Play Simon Says touch your..." }] },
-            { title: "Phonics Mm", tag: "Unit 4", goal: "Letter M.", steps: [{ label: "Action", badge: "badge-tpr", title: "Eyes", en: "Close eyes.", zh: "閉眼", type: "simple", text: "Close!" }, { label: "Mission", badge: "badge-mission", title: "Yummy", en: "Eat something.", zh: "吃東西", type: "simple", text: "Say 'Mmm'!" }, { label: "Tip", badge: "badge-parent", title: "Tip", en: "Sound /m/", zh: "發音", type: "simple", text: "Mmm... delicious." }] }
+            { meta: { unit: "Unit 4: Face", vocab: "Eyes, Nose", phrase: "My nose" }, tips: "Touch your own face to demonstrate.", steps: [{type:'warmup', text:'Blink your eyes!'}, {type:'words', items:[{w:'Eye', i:'👁️'},{w:'Nose', i:'👃'},{w:'Mouth', i:'👄'}]}, {type:'phrase', text:'This is my nose.'}, {type:'game', text:'Touch your... Nose!'}, {type:'offscreen', text:'Look in a mirror.'}] },
+            { meta: { unit: "Unit 4: Fun", vocab: "Funny Face", phrase: "My mouth" }, tips: "Make funny faces!", steps: [{type:'warmup', text:'Smile!'}, {type:'words', items:[{w:'Ear', i:'👂'},{w:'Face', i:'😀'},{w:'Hair', i:'💇'}]}, {type:'phrase', text:'My mouth is big.'}, {type:'game', text:'Make a fruit face (pretend).'}, {type:'offscreen', text:'Draw a face.'}] },
+            { meta: { unit: "Unit 4: Phonics M", vocab: "Mm, Monkey", phrase: "Close eyes" }, tips: "Mmmmmm delicious.", steps: [{type:'warmup', text:'Rub your tummy.'}, {type:'words', items:[{w:'Mm', i:'Ⓜ️'},{w:'Monkey', i:'🐒'},{w:'Milk', i:'🥛'}]}, {type:'phrase', text:'Close your eyes.'}, {type:'game', text:'Peek-a-boo!'}, {type:'offscreen', text:'Drink some milk/water.'}] },
+            { meta: { unit: "Reader 2", vocab: "Bee", phrase: "Oh my hair" }, tips: "Buzz like a bee!", steps: [{type:'warmup', text:'Buzz....'}, {type:'words', items:[{w:'Bee', i:'🐝'},{w:'Hair', i:'💇'},{w:'No', i:'🚫'}]}, {type:'phrase', text:'Oh, my hair!'}, {type:'game', text:'Bee is coming! Duck!'}, {type:'offscreen', text:'Touch your hair.'}] }
         ],
         "Dec": [
-            { title: "On the Farm", tag: "Unit 5", goal: "Animals.", steps: [{ label: "Vocab", badge: "badge-vocab", title: "Farm", en: "Animals", zh: "動物", type: "flashcards", items: [{w:"Cow", zh:"牛"},{w:"Pig", zh:"豬"}] }, { label: "Mission", badge: "badge-mission", title: "Draw", en: "Draw a pig.", zh: "畫豬", type: "simple", text: "Draw a pink pig." }, { label: "Tip", badge: "badge-parent", title: "Tip", en: "Sounds", zh: "叫聲", type: "simple", text: "Moo! Oink!" }] },
-            { title: "Counting", tag: "Unit 5", goal: "1-2-3.", steps: [{ label: "Vocab", badge: "badge-vocab", title: "1-2-3", en: "Count", zh: "數數", type: "flashcards", items: [{w:"One", zh:"1"},{w:"Two", zh:"2"}] }, { label: "Mission", badge: "badge-mission", title: "Toys", en: "Count 3 toys.", zh: "數3個玩具", type: "simple", text: "One, two, three toys." }, { label: "Tip", badge: "badge-parent", title: "Tip", en: "Daily Math", zh: "數學", type: "simple", text: "Count stairs." }] },
-            { title: "Phonics Pp", tag: "Unit 5", goal: "Letter P.", steps: [{ label: "Phonics", badge: "badge-phonics", title: "Pp", en: "P is for...", zh: "P發音", type: "flashcards", items: [{w:"Pig", zh:"豬"},{w:"Pen", zh:"筆"}] }, { label: "Mission", badge: "badge-mission", title: "Pink", en: "Find Pink.", zh: "找粉色", type: "simple", text: "Touch something pink." }, { label: "Tip", badge: "badge-parent", title: "Tip", en: "Pop", zh: "爆破音", type: "simple", text: "P is a popping sound." }] }
+            { meta: { unit: "Unit 5: Farm", vocab: "Cow, Pig", phrase: "It is a cow" }, tips: "Animal sounds are great fun.", steps: [{type:'warmup', text:'Moo!'}, {type:'words', items:[{w:'Cow', i:'🐮'},{w:'Pig', i:'🐷'},{w:'Duck', i:'🦆'}]}, {type:'phrase', text:'It is a cow.'}, {type:'game', text:'Guess the sound: Oink!'}, {type:'offscreen', text:'Walk like a duck.'}] },
+            { meta: { unit: "Unit 5: Math", vocab: "1, 2, 3", phrase: "One pig" }, tips: "Count on fingers.", steps: [{type:'warmup', text:'Show 1 finger.'}, {type:'words', items:[{w:'One', i:'1️⃣'},{w:'Two', i:'2️⃣'},{w:'Three', i:'3️⃣'}]}, {type:'phrase', text:'I see two pigs.'}, {type:'game', text:'Count your fingers.'}, {type:'offscreen', text:'Count 3 toys.'}] },
+            { meta: { unit: "Unit 5: Phonics P", vocab: "Pp, Pink", phrase: "Pink pig" }, tips: "P is a popping sound.", steps: [{type:'warmup', text:'Pop your cheeks.'}, {type:'words', items:[{w:'Pp', i:'🅿️'},{w:'Pink', i:'🩷'},{w:'Pen', i:'🖊️'}]}, {type:'phrase', text:'A pink pig.'}, {type:'game', text:'Find Pink!'}, {type:'offscreen', text:'Touch something pink.'}] },
+            { meta: { unit: "Review", vocab: "Animals", phrase: "I like animals" }, tips: "Review all animals.", steps: [{type:'warmup', text:'Clap 3 times.'}, {type:'words', items:[{w:'Hen', i:'🐔'},{w:'Pig', i:'🐷'},{w:'Cow', i:'🐮'}]}, {type:'phrase', text:'I like animals.'}, {type:'game', text:'Act like a cow.'}, {type:'offscreen', text:'Sing Old McDonald.'}] }
         ],
         "Jan": [
-            { title: "Zoo Animals", tag: "Unit 6", goal: "Wild.", steps: [{ label: "Vocab", badge: "badge-vocab", title: "Zoo", en: "Animals", zh: "野生動物", type: "flashcards", items: [{w:"Panda", zh:"熊貓"},{w:"Tiger", zh:"老虎"}] }, { label: "Mission", badge: "badge-mission", title: "Act", en: "Act like a tiger.", zh: "扮老虎", type: "simple", text: "Roar!" }, { label: "Tip", badge: "badge-parent", title: "Tip", en: "Zoo trip", zh: "動物園", type: "simple", text: "Visit a zoo if possible." }] },
-            { title: "Phonics Tt", tag: "Unit 6", goal: "Letter T.", steps: [{ label: "Action", badge: "badge-tpr", title: "Photo", en: "Take photo.", zh: "拍照", type: "simple", text: "Click!" }, { label: "Mission", badge: "badge-mission", title: "Tea", en: "Drink tea.", zh: "喝茶", type: "simple", text: "Pretend to drink tea." }, { label: "Tip", badge: "badge-parent", title: "Tip", en: "Sound /t/", zh: "發音", type: "simple", text: "T as in Top." }] }
+            { meta: { unit: "Unit 6: Zoo", vocab: "Panda, Tiger", phrase: "Look at..." }, tips: "Wild animals!", steps: [{type:'warmup', text:'Roar!'}, {type:'words', items:[{w:'Panda', i:'🐼'},{w:'Tiger', i:'🐯'},{w:'Bear', i:'🐻'}]}, {type:'phrase', text:'Look at the panda.'}, {type:'game', text:'Walk like a bear.'}, {type:'offscreen', text:'Find a teddy bear.'}] },
+            { meta: { unit: "Unit 6: Photo", vocab: "Camera", phrase: "Take a photo" }, tips: "Pretend to use a camera.", steps: [{type:'warmup', text:'Smile!'}, {type:'words', items:[{w:'Monkey', i:'🐒'},{w:'Photo', i:'📷'},{w:'Zoo', i:'🦁'}]}, {type:'phrase', text:'Take a photo.'}, {type:'game', text:'Freeze frame!'}, {type:'offscreen', text:'Take a pretend photo of Mom.'}] },
+            { meta: { unit: "Unit 6: Phonics T", vocab: "Tt, Tiger", phrase: "Two tigers" }, tips: "T-t-t sound.", steps: [{type:'warmup', text:'Tap your toe.'}, {type:'words', items:[{w:'Tt', i:'✝️'},{w:'Tea', i:'🍵'},{w:'Table', i:'🪑'}]}, {type:'phrase', text:'Two tigers.'}, {type:'game', text:'Tap the table.'}, {type:'offscreen', text:'Touch a table.'}] },
+            { meta: { unit: "Unit 6: Rules", vocab: "Quiet", phrase: "Be quiet" }, tips: "Shhh...", steps: [{type:'warmup', text:'Shhh...'}, {type:'words', items:[{w:'Quiet', i:'🤫'},{w:'Sleep', i:'😴'},{w:'Loud', i:'📢'}]}, {type:'phrase', text:'Be quiet, please.'}, {type:'game', text:'Sleeping Lions (don\'t move).'}, {type:'offscreen', text:'Tip-toe walk.'}] }
         ],
         "Feb": [
-            { title: "Transport", tag: "Unit 7", goal: "Vehicles.", steps: [{ label: "Vocab", badge: "badge-vocab", title: "Car", en: "Vehicles", zh: "車", type: "flashcards", items: [{w:"Car", zh:"車"},{w:"Bus", zh:"巴士"}] }, { label: "Mission", badge: "badge-mission", title: "Spot", en: "Spot a taxi.", zh: "找的士", type: "simple", text: "Look out the window." }, { label: "Tip", badge: "badge-parent", title: "Tip", en: "Safety", zh: "安全", type: "simple", text: "Teach road safety." }] },
-            { title: "Phonics Cc", tag: "Unit 7", goal: "Letter C.", steps: [{ label: "Phonics", badge: "badge-phonics", title: "Cc", en: "C is for...", zh: "C發音", type: "flashcards", items: [{w:"Cat", zh:"貓"},{w:"Cup", zh:"杯"}] }, { label: "Mission", badge: "badge-mission", title: "Stop", en: "Red light.", zh: "紅燈", type: "simple", text: "Stop moving!" }, { label: "Tip", badge: "badge-parent", title: "Tip", en: "Sound /k/", zh: "發音", type: "simple", text: "C as in Cat." }] }
+            { meta: { unit: "Unit 7: Cars", vocab: "Car, Bus", phrase: "It is a bus" }, tips: "Vroom vroom!", steps: [{type:'warmup', text:'Beep beep!'}, {type:'words', items:[{w:'Car', i:'🚗'},{w:'Bus', i:'🚌'},{w:'Bike', i:'🚲'}]}, {type:'phrase', text:'It is a bus.'}, {type:'game', text:'Drive the bus (steering wheel).'}, {type:'offscreen', text:'Find a wheel.'}] },
+            { meta: { unit: "Unit 7: Oops", vocab: "Taxi", phrase: "Oh my bike" }, tips: "Emotions: Oh no!", steps: [{type:'warmup', text:'Oh no!'}, {type:'words', items:[{w:'Taxi', i:'🚕'},{w:'Wheel', i:'🛞'},{w:'Broken', i:'💔'}]}, {type:'phrase', text:'Oh, my bike!'}, {type:'game', text:'Fall down gently.'}, {type:'offscreen', text:'Fix a toy.'}] },
+            { meta: { unit: "Unit 7: Phonics C", vocab: "Cc, Cat", phrase: "Stop and Go" }, tips: "C is for Cat /k/.", steps: [{type:'warmup', text:'Meow.'}, {type:'words', items:[{w:'Cc', i:'©️'},{w:'Cat', i:'🐱'},{w:'Cup', i:'☕'}]}, {type:'phrase', text:'Stop and Go.'}, {type:'game', text:'Red Light, Green Light.'}, {type:'offscreen', text:'Drink from a cup.'}] },
+            { meta: { unit: "Review", vocab: "Colors", phrase: "Red light" }, tips: "Safety first.", steps: [{type:'warmup', text:'Stop!'}, {type:'words', items:[{w:'Red', i:'🔴'},{w:'Green', i:'🟢'},{w:'Yellow', i:'🟡'}]}, {type:'phrase', text:'Red light, Stop.'}, {type:'game', text:'Freeze dance.'}, {type:'offscreen', text:'Find something Red.'}] }
         ]
     };
 
-    function loadLesson() {
+    // --- LOGIC ---
+    let currentData = null;
+    let currentStepIndex = 0;
+
+    function init() {
+        // Parse URL params
         const params = new URLSearchParams(window.location.search);
-        const month = params.get('m');
-        const weekIndex = parseInt(params.get('w'));
+        const m = params.get('m');
+        const w = parseInt(params.get('w'));
 
-        if (!month || !db[month] || !db[month][weekIndex]) {
-            document.getElementById('lesson-container').innerHTML = `<div style='text-align:center; padding:40px; background:white; border-radius:24px;'><h2>Coming Soon</h2><a href='exercises.html' class='back-btn' style='margin-top:20px;'>Back</a></div>`;
-            return;
+        if (m && db[m] && db[m][w]) {
+            currentData = db[m][w];
+            // Populate Start Screen Text
+            document.querySelector('.pain-points').innerHTML = `
+                <div class="pain-item"><span class="check">✓</span> <b>Goal:</b> ${currentData.meta.unit}</div>
+                <div class="pain-item"><span class="check">✓</span> <b>Vocab:</b> ${currentData.meta.vocab}</div>
+                <div class="pain-item"><span class="check">✓</span> <b>Speak:</b> "${currentData.meta.phrase}"</div>
+            `;
+            // Populate Parent Tip
+            document.getElementById('parent-text').innerText = currentData.tips;
+            // Update Title
+            document.getElementById('nav-month').innerText = "Back to " + m;
+        } else {
+            // Error state or default
+            alert("Lesson not found. Redirecting...");
+            window.location.href = 'exercises.html';
         }
-
-        const lesson = db[month][weekIndex];
-        let html = `
-            <div class="lesson-header-card">
-                <span class="lesson-tag">${lesson.tag}</span>
-                <h1 class="lesson-title">${lesson.title}</h1>
-                <div class="lesson-subtitle">${month} • Week ${weekIndex + 1}</div>
-                <div class="lesson-goal">${lesson.goal}</div>
-            </div>`;
-
-        lesson.steps.forEach(step => {
-            html += `<div class="step-card"><span class="step-badge ${step.badge}">${step.label}</span><div class="step-title">${step.title}</div><div class="step-desc-en">${step.en}</div><div class="step-desc-zh">${step.zh}</div>`;
-            
-            if (step.type === 'flashcards') {
-                html += `<div class="flashcards-grid">`;
-                step.items.forEach(item => {
-                    html += `<div class="flashcard" onclick="speakText('${item.w}')"><div class="flashcard-word">${item.w}</div><div class="flashcard-zh">${item.zh}</div>${ICONS.speaker}</div>`;
-                });
-                html += `</div>`;
-            }
-            if (step.type === 'simple') html += `<div class="mission-box">${step.text}</div>`;
-            if (step.type === 'speak') {
-                html += `<div class="audio-box"><button class="rec-btn" onclick="toggleRecord(this)">${ICONS.mic}</button><div style="flex:1"><strong style="color:var(--navy);">Tap mic:</strong><br><span style="font-size:18px; font-weight:700;">"${step.phrase}"</span><br><button class="listen-btn" onclick="speakText('${step.phrase}')">${ICONS.speaker} Listen</button></div></div>`;
-            }
-            html += `</div>`;
-        });
-
-        html += `<button class="complete-btn" onclick="finishLesson()">${ICONS.check} Complete Mission</button>`;
-        document.getElementById('lesson-container').innerHTML = html;
-        setTimeout(() => { document.getElementById('progress-bar').style.width = '20%'; }, 500);
     }
 
-    function speakText(text) {
+    function toggleParentMode() {
+        const box = document.getElementById('parent-box');
+        const btn = document.querySelector('.parent-toggle');
+        if (box.style.display === 'block') {
+            box.style.display = 'none';
+            btn.classList.remove('active');
+        } else {
+            box.style.display = 'block';
+            btn.classList.add('active');
+        }
+    }
+
+    function startLesson() {
+        document.getElementById('screen-start').classList.remove('active');
+        document.getElementById('screen-lesson').classList.add('active');
+        renderStep(0);
+    }
+
+    function renderStep(index) {
+        currentStepIndex = index;
+        const step = currentData.steps[index];
+        const card = document.getElementById('step-card');
+        const total = currentData.steps.length;
+        
+        // Update Progress Bar
+        const pct = ((index + 1) / total) * 100;
+        document.getElementById('progress-bar').style.width = pct + '%';
+
+        // Update Next Button Text
+        const nextBtn = document.getElementById('next-btn');
+        if (index === total - 1) {
+            nextBtn.innerText = "Finish Lesson 🎉";
+            nextBtn.onclick = showReport;
+        } else {
+            nextBtn.innerText = "Next Step →";
+            nextBtn.onclick = nextStep;
+        }
+
+        // Render Content based on Type
+        let html = `<div class="step-tag">Step ${index + 1}: ${step.title}</div>`;
+        html += `<div class="step-main-text">${step.text}</div>`;
+
+        // 1. WARMUP
+        if (step.type === 'warmup') {
+            html += `<button class="action-btn" onclick="speak('${step.text}'); this.style.background='#10b981'">▶ Listen & Do</button>`;
+        }
+
+        // 2. WORDS
+        else if (step.type === 'words') {
+            html += `<div class="flashcard-container">`;
+            step.items.forEach(item => {
+                html += `
+                    <div class="flashcard" onclick="speak('${item.w}'); this.classList.add('playing'); setTimeout(()=>this.classList.remove('playing'), 500)">
+                        <span class="fc-icon">${item.i}</span>
+                        <span class="fc-word">${item.w}</span>
+                    </div>`;
+            });
+            html += `</div><div style="font-size:13px; color:#64748b">Tap cards to listen</div>`;
+        }
+
+        // 3. PHRASE
+        else if (step.type === 'phrase') {
+            html += `
+                <div style="background:#ecfeff; padding:20px; border-radius:12px; margin-bottom:20px;">
+                    🗣️ <b>Parent ask:</b><br>"${step.script}"
+                </div>
+                <button class="action-btn secondary" onclick="speak('${step.text}')">🔊 Listen Answer</button>
+            `;
+        }
+
+        // 4. GAME
+        else if (step.type === 'game') {
+            html += `<div style="font-size:50px; margin:20px;">🎲</div>`;
+            html += `<p style="color:#64748b; margin-bottom:20px;">${step.sub}</p>`;
+        }
+
+        // 5. OFFSCREEN
+        else if (step.type === 'offscreen') {
+            html += `<div style="font-size:60px; margin:20px;">${step.icon}</div>`;
+            html += `<p style="color:#64748b">Put the phone down for 30 seconds!</p>`;
+        }
+
+        card.innerHTML = html;
+    }
+
+    function nextStep() {
+        renderStep(currentStepIndex + 1);
+    }
+
+    function prevStep() {
+        if (currentStepIndex > 0) renderStep(currentStepIndex - 1);
+    }
+
+    function showReport() {
+        document.getElementById('screen-lesson').classList.remove('active');
+        document.getElementById('screen-report').classList.add('active');
+        
+        // Fill Report
+        document.getElementById('report-vocab').innerText = currentData.meta.vocab;
+        document.getElementById('report-phrase').innerText = `"${currentData.meta.phrase}"`;
+        
+        // Confetti
+        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+    }
+
+    // TTS
+    function speak(txt) {
         if ('speechSynthesis' in window) {
-            const msg = new SpeechSynthesisUtterance(text);
+            const msg = new SpeechSynthesisUtterance(txt);
             msg.lang = 'en-US';
             window.speechSynthesis.speak(msg);
         }
     }
 
-    let isRecording = false;
-    function toggleRecord(btn) {
-        if (!isRecording) { btn.classList.add('recording'); isRecording = true; document.getElementById('progress-bar').style.width = '50%'; }
-        else { btn.classList.remove('recording'); isRecording = false; }
-    }
+    // Start
+    init();
 
-    function finishLesson() {
-        document.getElementById('progress-bar').style.width = '100%';
-        document.getElementById('modal').style.display = 'flex';
-        if (typeof confetti === 'function') confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-    }
-
-    loadLesson();
 </script>
+
 </body>
 </html>
