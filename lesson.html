@@ -736,8 +736,10 @@
         document.getElementById('screen-report').classList.add('active');
         
         // Populate Report
-        document.getElementById('report-vocab').innerText = currentData.vocab;
-        document.getElementById('report-phrase').innerText = `"${currentData.phrase}"`;
+       const vocab = currentData.vocab || currentData.meta?.vocab || "";
+       const phrase = currentData.phrase || currentData.meta?.phrase || ""; 
+       document.getElementById('report-vocab').innerText = vocab;
+       document.getElementById('report-phrase').innerText = phrase ? `"${phrase}"` : "";
 
         if (typeof confetti === 'function') {
             confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#22d3ee', '#f97316', '#a78bfa'] });
