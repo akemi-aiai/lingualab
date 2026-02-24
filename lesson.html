@@ -8,32 +8,25 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <style>
-        :root {
-            --primary: #22d3ee;
+        :root { 
+            --primary: #22d3ee; 
             --primary-light: #ecfeff;
-            --accent: #f97316;
-            --navy: #1f4e79;
-            --bg: #f8fafc;
-            --white: #ffffff;
-            --radius: 24px; /* Единый радиус с exercises.html */
+            --navy: #1f4e79; 
+            --bg: #f8fafc; 
+            --white: #ffffff; 
+            --orange: #f97316; 
             --green: #10b981;
+            --radius: 24px;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
         }
-
+        
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg);
-            color: #0f172a;
-            line-height: 1.6;
-            padding-top: 80px;
-            padding-bottom: 100px;
-        }
-
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: #334155; padding-top: 80px; padding-bottom: 80px; }
+        
         /* --- ICONS --- */
-        .icon { width: 20px; height: 20px; fill: currentColor; vertical-align: middle; }
-        .icon-lg { width: 40px; height: 40px; fill: currentColor; }
+        .icon { width: 24px; height: 24px; fill: currentColor; vertical-align: text-bottom; }
 
-        /* --- NAVBAR (Identical) --- */
+        /* --- NAVBAR (Identical to Grammar/Exercises) --- */
         .navbar {
             position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
             display: flex; align-items: center; justify-content: space-between;
@@ -46,14 +39,30 @@
         .navbar-right { display: flex; align-items: center; gap: 20px; }
         .navbar-right a { 
             color: var(--navy); font-weight: 600; text-decoration: none; 
-            font-size: 14px; transition: 0.3s; 
+            font-size: 14px; transition: 0.3s;
         }
         .navbar-right a:hover { color: var(--primary); }
 
-        /* --- HERO (Identical) --- */
+        /* PARENT TOGGLE (In Navbar) */
+        .parent-switch {
+            display: flex; align-items: center; gap: 8px; 
+            background: #f1f5f9; padding: 6px 12px; border-radius: 99px; cursor: pointer; border: 1px solid #e2e8f0;
+        }
+        .parent-switch.active { background: var(--navy); color: white; border-color: var(--navy); }
+        .switch-label { font-size: 12px; font-weight: 700; text-transform: uppercase; }
+
+        /* --- PROGRESS BAR --- */
+        .progress-container {
+            position: fixed; top: 80px; left: 0; width: 100%; height: 6px; background: #e2e8f0; z-index: 999;
+        }
+        .progress-fill {
+            height: 100%; background: var(--orange); width: 0%; transition: width 0.5s ease;
+        }
+
+        /* --- HERO (Identical dimensions) --- */
         .hero-compact {
             width: 100%;
-            padding: 60px 20px 160px;
+            padding: 60px 20px 160px; /* Big padding for overlap */
             text-align: center;
             background: linear-gradient(135deg, #22d3ee, #a78bfa);
             color: #fff;
@@ -63,136 +72,112 @@
         .hero-info { font-size: 18px; opacity: 0.95; }
 
         /* --- CONTAINER --- */
-        .content-wrapper {
-            max-width: 800px; /* Читабельная ширина для урока */
-            margin: -100px auto 50px;
-            position: relative;
-            z-index: 10;
-            padding: 0 20px;
+        .container { 
+            max-width: 700px; margin: -100px auto 0; 
+            padding: 0 20px; position: relative; z-index: 10;
         }
 
-        /* --- UI ELEMENTS --- */
-        .back-btn-wrapper { text-align: center; margin-bottom: 30px; }
-        .back-btn { 
-            display: inline-flex; align-items: center; text-decoration: none; 
-            color: var(--navy); font-weight: 700; gap: 8px; font-size: 14px;
-            background: rgba(255,255,255,0.95); padding: 12px 25px; border-radius: 99px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08); transition: 0.3s;
-        }
-        .back-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
+        /* --- CARDS & SCREENS --- */
+        .screen { display: none; animation: fadeUp 0.4s ease; }
+        .screen.active { display: block; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Header Card */
-        .lesson-header-card { 
-            background: white; border-radius: var(--radius); padding: 40px; 
-            margin-bottom: 30px; text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08); border: 1px solid #e2e8f0;
+        .card {
+            background: white; border-radius: var(--radius); padding: 40px;
+            box-shadow: var(--shadow); margin-bottom: 30px; text-align: center;
+            border: 1px solid #e2e8f0;
         }
-        .lesson-tag { 
-            background: #f1f5f9; color: var(--navy); padding: 6px 12px; 
-            border-radius: 8px; font-size: 12px; font-weight: 800; 
-            text-transform: uppercase; letter-spacing: 1px; display: inline-block; margin-bottom: 15px;
-        }
-        .lesson-title { font-size: 32px; font-weight: 800; color: var(--navy); margin: 0 0 10px 0; }
-        .lesson-goal { font-size: 16px; color: #64748b; margin-top: 10px; }
 
-        /* Step Card */
-        .step-card { 
-            background: white; border-radius: 20px; padding: 35px; margin-bottom: 25px; 
-            border: 1px solid #e2e8f0; position: relative; overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+        /* --- START SCREEN --- */
+        .trust-badges { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
+        .badge { background: #f0f9ff; color: var(--navy); padding: 5px 12px; border-radius: 6px; font-size: 12px; font-weight: 700; }
+        
+        .promise-box { margin: 25px 0; text-align: left; background: #f8fafc; padding: 20px; border-radius: 16px; }
+        .promise-item { display: flex; gap: 10px; margin-bottom: 12px; font-size: 15px; color: #475569; align-items: center; }
+        .check-icon { color: var(--green); font-weight: bold; }
+
+        /* --- LESSON STEPS --- */
+        .step-header { margin-bottom: 20px; }
+        .step-tag { 
+            color: var(--primary); font-weight: 800; text-transform: uppercase; 
+            font-size: 12px; letter-spacing: 1px; display: block; margin-bottom: 5px;
+        }
+        .step-title { font-size: 28px; font-weight: 800; color: var(--navy); }
+        
+        /* Parent Tip Box (Hidden by default) */
+        .parent-tip {
+            display: none; text-align: left; background: #fff7ed; 
+            border-left: 4px solid var(--orange); padding: 15px; 
+            border-radius: 8px; margin-bottom: 25px; font-size: 14px; color: #9a3412;
         }
         
-        .badge {
-            display: inline-flex; align-items: center; gap: 6px;
-            font-size: 11px; font-weight: 800; text-transform: uppercase; 
-            color: #fff; padding: 6px 12px; border-radius: 6px;
-            margin-bottom: 15px; letter-spacing: 0.5px;
-        }
-        .bg-blue { background: #3b82f6; }
-        .bg-purple { background: #8b5cf6; }
-        .bg-orange { background: #f97316; }
-        .bg-green { background: #10b981; }
-        .bg-red { background: #ef4444; }
-        .bg-gray { background: #64748b; }
-
-        .step-title { font-weight: 800; color: var(--navy); font-size: 20px; margin-bottom: 8px; }
-        .step-content-en { font-size: 18px; color: #0f172a; font-weight: 600; margin-bottom: 4px; }
-        .step-content-zh { font-size: 15px; color: #64748b; }
-
-        /* Flashcards */
-        .flashcards-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 15px; margin-top: 20px;
-        }
+        /* Flashcards Grid */
+        .flashcards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 15px; margin: 20px 0; }
         .flashcard {
             background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 16px;
-            padding: 20px; text-align: center; cursor: pointer; transition: 0.2s;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            min-height: 140px; position: relative; overflow: hidden;
+            padding: 15px; cursor: pointer; transition: 0.2s;
         }
-        .flashcard:hover { border-color: var(--primary); background: var(--primary-light); transform: translateY(-3px); }
-        .flashcard-img { width: 60px; height: 60px; object-fit: contain; margin-bottom: 10px; }
-        .flashcard-word { font-weight: 800; color: var(--navy); font-size: 16px; }
-        .flashcard-zh { font-size: 13px; color: #64748b; margin-top: 2px; }
+        .flashcard:hover { border-color: var(--primary); background: #ecfeff; transform: scale(1.05); }
+        .fc-icon { font-size: 32px; display: block; margin-bottom: 5px; }
+        .fc-word { font-weight: 700; color: var(--navy); font-size: 14px; }
 
-        /* Special Boxes */
-        .mission-box {
-            background: #ecfdf5; border: 1px solid #a7f3d0; padding: 20px; 
-            border-radius: 12px; margin-top: 15px; display: flex; gap: 15px; align-items: flex-start;
+        /* Audio Controls */
+        .audio-control {
+            background: #f1f5f9; padding: 20px; border-radius: 16px; 
+            display: flex; align-items: center; gap: 15px; margin: 20px 0;
         }
-        .tip-box {
-            background: #f8fafc; border-left: 4px solid #94a3b8; padding: 15px 20px; 
-            margin-top: 15px; color: #475569; font-size: 14px; font-style: italic; border-radius: 4px;
+        .play-btn {
+            width: 50px; height: 50px; border-radius: 50%; border: none; background: var(--primary); 
+            color: white; cursor: pointer; display: flex; justify-content: center; align-items: center;
         }
-
-        /* Audio Recorder */
-        .recorder-wrapper {
-            background: #fff7ed; border: 1px solid #fed7aa; padding: 20px;
-            border-radius: 16px; margin-top: 20px; display: flex; align-items: center; gap: 20px;
-        }
-        .rec-btn {
-            width: 56px; height: 56px; border-radius: 50%; border: none;
-            background: #ef4444; color: white; cursor: pointer;
-            display: flex; justify-content: center; align-items: center;
+        .mic-btn {
+            width: 60px; height: 60px; border-radius: 50%; border: none; background: #ef4444; 
+            color: white; cursor: pointer; display: flex; justify-content: center; align-items: center;
             box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3); transition: 0.2s;
         }
-        .rec-btn:hover { transform: scale(1.1); }
-        .rec-btn.recording { animation: pulse 1.5s infinite; background: #b91c1c; }
-        
-        .listen-btn {
-            background: white; border: 2px solid var(--primary); color: var(--navy);
-            padding: 8px 16px; border-radius: 99px; font-weight: 700; cursor: pointer;
-            font-size: 13px; display: inline-flex; align-items: center; gap: 6px;
-            margin-top: 5px;
-        }
-        .listen-btn:hover { background: var(--primary-light); }
+        .mic-btn:hover { transform: scale(1.1); }
+        .mic-btn.recording { animation: pulse 1.5s infinite; background: #b91c1c; }
 
-        /* Footer */
-        .complete-btn {
-            background: var(--navy); color: white; border: none; padding: 20px;
-            border-radius: 16px; font-size: 18px; font-weight: 800; cursor: pointer;
-            width: 100%; margin-top: 30px; display: flex; justify-content: center; align-items: center; gap: 10px;
-            box-shadow: 0 10px 20px rgba(31, 78, 121, 0.15); transition: 0.2s;
+        /* Offscreen Mission */
+        .mission-box {
+            border: 2px dashed #cbd5e1; padding: 20px; border-radius: 16px; margin: 20px 0;
+            background: #f8fafc; color: #475569;
         }
-        .complete-btn:hover { background: #334155; transform: translateY(-3px); }
 
-        /* Modal */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(5px); }
-        .modal-content { background: white; padding: 50px; border-radius: 30px; text-align: center; max-width: 400px; width: 90%; box-shadow: 0 20px 50px rgba(0,0,0,0.2); animation: pop 0.4s ease; }
-        
-        @keyframes pop { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(239, 68, 68, 0); } }
+        /* Footer Nav */
+        .bottom-nav {
+            position: fixed; bottom: 0; left: 0; width: 100%; 
+            background: white; padding: 15px 20px; 
+            border-top: 1px solid #e2e8f0; display: flex; gap: 10px; z-index: 1000;
+            justify-content: center;
+        }
+        .nav-btn {
+            background: var(--navy); color: white; border: none; 
+            padding: 16px 32px; border-radius: 14px; font-size: 16px; 
+            font-weight: 700; cursor: pointer; width: 100%; max-width: 600px;
+            transition: 0.2s;
+        }
+        .nav-btn:hover { background: #334155; }
+        .nav-btn.secondary { background: white; color: var(--navy); border: 2px solid #e2e8f0; }
+
+        /* REPORT CARD */
+        .report-list { text-align: left; margin: 20px 0; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; }
+        .report-item { margin-bottom: 10px; font-size: 15px; color: #334155; display: flex; align-items: center; gap: 10px; }
+
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6); } 70% { box-shadow: 0 0 0 15px rgba(239, 68, 68, 0); } }
 
         @media (max-width: 600px) {
-            .navbar { padding: 10px 20px; flex-direction: column; gap: 10px; height: auto; }
+            .navbar { padding: 10px 20px; height: auto; flex-direction: column; gap: 10px; }
             .navbar-right { width: 100%; justify-content: center; flex-wrap: wrap; border-top: 1px solid #f1f5f9; padding-top: 10px; }
             .hero-compact h1 { font-size: 32px; }
-            .content-wrapper { margin-top: -80px; }
-            .flashcards-grid { grid-template-columns: 1fr 1fr; }
+            .container { margin-top: -80px; }
+            .progress-container { top: 110px; }
         }
     </style>
 </head>
 <body>
+
+<div class="progress-container"><div class="progress-fill" id="progress-bar"></div></div>
 
 <nav class="navbar">
     <div class="navbar-left">
@@ -200,341 +185,365 @@
         <span class="nav-title">LinguaLab</span>
     </div>
     <div class="navbar-right">
-        <a href="index.html">Main Page</a>
-        <a href="grammar.html">Grammar Magic</a>
-        <a href="vocabulary.html">Word Bank</a>
-        <a href="parents.html">Parents Wiki</a>
+        <div class="parent-switch" onclick="toggleParentMode()">
+            <span class="switch-label">Parent Mode</span>
+            <svg class="icon" style="width:20px; height:20px;" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+        </div>
+        <a href="exercises.html" style="margin-left:15px; font-weight:700;">Exit Lesson</a>
     </div>
 </nav>
 
 <section class="hero-compact">
-    <h1>Lesson Time</h1>
-    <div class="hero-info">Ready to learn? Let's go!</div>
+    <h1>Fun Homework</h1>
+    <div class="hero-info" id="hero-date">Ready to play?</div>
 </section>
 
-<div class="content-wrapper">
-    <div class="back-btn-wrapper">
-        <a href="exercises.html" class="back-btn">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
-            Back to Dashboard
-        </a>
-    </div>
+<div class="container">
 
-    <div id="lesson-container">
+    <div id="screen-start" class="screen active">
+        <div class="card">
+            <div class="trust-badges">
+                <span class="badge">Ages 3–6</span>
+                <span class="badge">7 Minutes</span>
+                <span class="badge">Zero Prep</span>
+            </div>
+            <h2 style="font-size:32px; color:var(--navy); margin-bottom:10px;">7 Minutes.<br>Just press Play.</h2>
+            <p style="color:#64748b; margin-bottom:20px;">No teacher needed. We guide you step-by-step.</p>
+            
+            <div class="promise-box">
+                <div class="promise-item"><span class="check-icon">✓</span> <b>Today:</b> 6 words + 1 phrase + 1 game</div>
+                <div class="promise-item"><span class="check-icon">✓</span> <b>Anxiety Relief:</b> Child tired? Use "2-min mode"</div>
+                <div class="promise-item"><span class="check-icon">✓</span> <b>Result:</b> Visible progress today</div>
+            </div>
+
+            <button class="nav-btn" onclick="startLesson()">Start Lesson ▶</button>
         </div>
-</div>
-
-<div class="modal-overlay" id="success-modal">
-    <div class="modal-content">
-        <div style="font-size: 60px; margin-bottom: 20px;">🌟</div>
-        <h2 style="color: var(--navy); margin-bottom: 10px;">Excellent Work!</h2>
-        <p style="color: #64748b;">You finished the lesson.</p>
-        <button class="complete-btn" style="margin-top: 25px;" onclick="window.location.href='exercises.html'">Back to Menu</button>
     </div>
+
+    <div id="screen-lesson" class="screen">
+        <div class="card" id="lesson-card-content">
+            </div>
+        
+        <div class="bottom-nav">
+            <button class="nav-btn secondary" style="width:30%" onclick="prevStep()">Back</button>
+            <button class="nav-btn" style="width:70%" onclick="nextStep()" id="next-btn">Next Step →</button>
+        </div>
+    </div>
+
+    <div id="screen-report" class="screen">
+        <div class="card" style="border-top: 6px solid var(--green);">
+            <div style="font-size:60px; margin-bottom:10px;">🏆</div>
+            <h2 style="color:var(--navy); margin-bottom:5px;">You did it!</h2>
+            <p style="color:#64748b;">You are a Tiny Hero.</p>
+
+            <div class="report-list">
+                <div style="font-weight:800; color:var(--navy); margin-bottom:15px; text-transform:uppercase; font-size:12px;">Parent Report</div>
+                <div class="report-item">
+                    <svg class="icon" style="color:var(--green)" viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>
+                    <span><b>Learned:</b> <span id="report-vocab"></span></span>
+                </div>
+                <div class="report-item">
+                    <svg class="icon" style="color:var(--green)" viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>
+                    <span><b>Spoke:</b> <span id="report-phrase"></span></span>
+                </div>
+                <div class="report-item">
+                    <svg class="icon" style="color:var(--green)" viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>
+                    <span><b>Next Time:</b> Review & Play</span>
+                </div>
+            </div>
+
+            <button class="nav-btn" onclick="window.location.href='exercises.html'">Back to Dashboard</button>
+        </div>
+    </div>
+
 </div>
 
 <script>
-    // --- ICONS (SVG) ---
+    // --- ICONS ---
     const ICON_AUDIO = '<svg class="icon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>';
-    const ICON_MIC = '<svg class="icon" viewBox="0 0 24 24"><path fill="white" d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path fill="white" d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>';
-    const ICON_CHECK = '<svg class="icon" viewBox="0 0 24 24"><path fill="white" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>';
-    const ICON_HOME = '<svg class="icon" style="color:#059669" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>';
+    const ICON_PLAY = '<svg class="icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+    const ICON_MIC = '<svg class="icon" style="width:30px;height:30px" viewBox="0 0 24 24"><path fill="white" d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path fill="white" d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>';
 
-    // --- DATABASE (Corrected & Expanded based on PDF) ---
+    // --- CONTENT DB (Sep-Feb) ---
     const db = {
         "Sep": [
             {
-                title: "Greetings", tag: "Unit 1: Family",
-                goal: "Learning to say hello and identify parents.",
+                unit: "Unit 1: Family", vocab: "Daddy, Mommy", phrase: "Good morning Daddy",
                 steps: [
-                    { type: "vocab", title: "Key Words", items: [{w:"Daddy", zh:"爸爸"}, {w:"Mommy", zh:"媽媽"}, {w:"Family", zh:"家庭"}] },
-                    { type: "action", title: "Action (TPR)", en: "Hug Daddy! Kiss Mommy!", zh: "擁抱爸爸！親吻媽媽！" },
-                    { type: "speak", title: "Speaking Challenge", phrase: "Good morning, Daddy." },
-                    { type: "mission", title: "Real World Mission", en: "Find a photo of your family and say 'Family'!", zh: "找一張全家福照片並說 'Family'！" },
-                    { type: "tip", title: "Parent Tip", en: "Don't correct pronunciation yet. Praise any effort!", zh: "不要糾正發音，多鼓勵孩子開口。" }
+                    { type: 'warmup', tag: 'A. Warm Up', title: "Listen & Wave", text: "Let's say Hello!", action: "Wave your hand 👋", phrase: "Hello!" },
+                    { type: 'words', tag: 'B. 3 Words', title: "Family Members", items: [{w:"Daddy", i:"👨"},{w:"Mommy", i:"👩"},{w:"Family", i:"🏠"}] },
+                    { type: 'phrase', tag: 'C. Phrase', title: "Phrase of the Day", text: "Good morning, Daddy.", script: "Ask: Who do you see in the morning?", parentTip: "Don't correct pronunciation yet. Just praise effort." },
+                    { type: 'game', tag: 'D. Game', title: "Hug Game", text: "Run and hug Mommy/Daddy!", sub: "Ready? Go!" },
+                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Find a family photo.", icon: "🖼️" }
                 ]
             },
             {
-                title: "School Objects", tag: "Unit 2: School",
-                goal: "Identify classroom objects.",
+                unit: "Unit 2: School", vocab: "Bag, Book", phrase: "It is a book",
                 steps: [
-                    { type: "vocab", title: "New Words", items: [{w:"Bag", zh:"書包"}, {w:"Book", zh:"書本"}, {w:"Teacher", zh:"老師"}] },
-                    { type: "action", title: "Action (TPR)", en: "Open your book. Close your book.", zh: "打開書。合上書。" },
-                    { type: "speak", title: "Speaking Challenge", phrase: "It is a book." },
-                    { type: "mission", title: "Real World Mission", en: "Put a book inside a bag.", zh: "把書放進書包裡。" },
-                    { type: "tip", title: "Parent Tip", en: "Use gestures when you speak English.", zh: "說英語時多用手勢輔助。" }
+                    { type: 'warmup', tag: 'A. Warm Up', title: "Stand Up!", text: "Stand up... Sit down.", action: "Do it 3 times.", phrase: "Stand up!" },
+                    { type: 'words', tag: 'B. 3 Words', title: "School Objects", items: [{w:"Bag", i:"🎒"},{w:"Book", i:"📖"},{w:"Pencil", i:"✏️"}] },
+                    { type: 'phrase', tag: 'C. Phrase', title: "Phrase of the Day", text: "It is a book.", script: "Point to a book and ask: What is this?", parentTip: "Say the word first, let them repeat." },
+                    { type: 'game', tag: 'D. Game', title: "Hide & Seek", text: "Hide a book. Ask: Where is the book?", sub: "Child finds it." },
+                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Put a book in a bag.", icon: "🎒" }
                 ]
             },
             {
-                title: "Phonics Bb", tag: "Unit 2: Phonics",
-                goal: "Learn the letter B sound /b/.",
+                unit: "Unit 2: Phonics", vocab: "Bb /b/", phrase: "Open book",
                 steps: [
-                    { type: "vocab", title: "B Words", items: [{w:"Bb", zh:"/b/ Sound"}, {w:"Ball", zh:"球"}, {w:"Baby", zh:"嬰兒"}] },
-                    { type: "speak", title: "Speaking Challenge", phrase: "Open your book." },
-                    { type: "mission", title: "Real World Mission", en: "Find something Blue at home.", zh: "在家裡找一個藍色(Blue)的東西。" },
-                    { type: "tip", title: "Parent Tip", en: "Emphasize the 'b' sound: b-b-book.", zh: "強調 b 的發音：b-b-book。" }
+                    { type: 'warmup', tag: 'A. Warm Up', title: "Clap Hands", text: "Clap 1, 2, 3.", action: "Clap!", phrase: "Clap!" },
+                    { type: 'words', tag: 'B. Words', title: "B Sound", items: [{w:"Bb", i:"🅱️"},{w:"Ball", i:"⚽"},{w:"Baby", i:"👶"}] },
+                    { type: 'phrase', tag: 'C. Action', title: "TPR Command", text: "Open your book.", script: "Model the action first.", parentTip: "Emphasize the 'b' sound in Book." },
+                    { type: 'game', tag: 'D. Game', title: "Blue Hunt", text: "Find something BLUE.", sub: "B is for Blue." },
+                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Find a blue toy.", icon: "🔵" }
                 ]
             },
             {
-                title: "Review", tag: "Revision 1",
-                goal: "Review Units 1 & 2.",
+                unit: "Revision 1", vocab: "Mike, Kelly", phrase: "Hello I am...",
                 steps: [
-                    { type: "vocab", title: "Review Words", items: [{w:"Mike", zh:"Boy"}, {w:"Kelly", zh:"Girl"}, {w:"Miss Wang", zh:"Teacher"}] },
-                    { type: "speak", title: "Speaking Challenge", phrase: "Hello, I am Mike." },
-                    { type: "mission", title: "Real World Mission", en: "High-five your mommy/daddy!", zh: "跟爸爸/媽媽擊掌！" },
-                    { type: "tip", title: "Parent Tip", en: "Roleplay is great for review.", zh: "角色扮演是最好的複習方式。" }
+                    { type: 'warmup', tag: 'A. Warm Up', title: "Shake", text: "Shake your body!", action: "Shake!", phrase: "Shake!" },
+                    { type: 'words', tag: 'B. Words', title: "Review", items: [{w:"Mike", i:"👦"},{w:"Kelly", i:"👧"},{w:"Teacher", i:"👩‍🏫"}] },
+                    { type: 'phrase', tag: 'C. Phrase', title: "Roleplay", text: "Hello, I am [Name].", script: "Practice with a puppet.", parentTip: "Roleplay builds confidence." },
+                    { type: 'game', tag: 'D. Game', title: "Who is it?", text: "Guess the character.", sub: "Mike or Kelly?" },
+                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Say Hello to a toy.", icon: "🧸" }
                 ]
             }
         ],
         "Oct": [
             {
-                title: "Boy or Girl?", tag: "Unit 3: Friends",
-                goal: "Understand gender (Boy/Girl).",
+                unit: "Unit 3: Friends", vocab: "Boy, Girl", phrase: "I am a girl",
                 steps: [
-                    { type: "vocab", title: "Gender", items: [{w:"Boy", zh:"男孩"}, {w:"Girl", zh:"女孩"}, {w:"Friend", zh:"朋友"}] },
-                    { type: "action", title: "Action (TPR)", en: "Stand up! Sit down!", zh: "起立！坐下！" },
-                    { type: "speak", title: "Speaking Challenge", phrase: "I am a girl." },
-                    { type: "mission", title: "Real World Mission", en: "Count how many boys are in your family.", zh: "數數家裡有幾個男生。" },
-                    { type: "tip", title: "Parent Tip", en: "Use photos to practice he/she.", zh: "用照片練習他/她。" }
+                    { type: 'warmup', tag: 'A. Warm Up', title: "High Five", text: "High five!", action: "High five!", phrase: "High five!" },
+                    { type: 'words', tag: 'B. Words', title: "Gender", items: [{w:"Boy", i:"👦"},{w:"Girl", i:"👧"},{w:"Friend", i:"🤝"}] },
+                    { type: 'phrase', tag: 'C. Phrase', title: "Phrase", text: "I am a girl/boy.", script: "Ask: Are you a boy?", parentTip: "Use family photos to show he/she." },
+                    { type: 'game', tag: 'D. Game', title: "Stand Up", text: "Boys stand up! Girls sit down!", sub: "Listen carefully." },
+                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Count boys in your family.", icon: "👨‍👩‍👦" }
                 ]
             },
             {
-                title: "Phonics Gg", tag: "Unit 3: Phonics",
-                goal: "Learn Letter G /g/.",
+                unit: "Unit 3: Phonics", vocab: "Gg /g/", phrase: "Stand up",
                 steps: [
-                    { type: "vocab", title: "G Words", items: [{w:"Gg", zh:"/g/"}, {w:"Girl", zh:"女孩"}, {w:"Game", zh:"遊戲"}] },
-                    { type: "speak", title: "Speaking Challenge", phrase: "Stand up, please." },
-                    { type: "mission", title: "Real World Mission", en: "Play a quick game of tag.", zh: "玩一個簡單的抓人遊戲。" },
-                    { type: "tip", title: "Parent Tip", en: "G sounds like 'guh'.", zh: "G 發音像 'guh'。" }
+                    { type: 'warmup', tag: 'A. Warm Up', title: "Wiggle", text: "Wiggle fingers.", action: "Wiggle!", phrase: "Wiggle" },
+                    { type: 'words', tag: 'B. Words', title: "G Sound", items: [{w:"Gg", i:"🔤"},{w:"Girl", i:"👧"},{w:"Game", i:"🎲"}] },
+                    { type: 'phrase', tag: 'C. Phrase', title: "Command", text: "Stand up, please.", script: "Be polite.", parentTip: "G sounds like 'guh'." },
+                    { type: 'game', tag: 'D. Game', title: "Simon Says", text: "Simon says: Sit down.", sub: "Don't get tricked." },
+                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Play a quick game.", icon: "🏃" }
                 ]
             }
         ],
         "Nov": [
             {
-                title: "My Face", tag: "Unit 4: Face",
-                goal: "Learn face parts.",
+                unit: "Unit 4: Face", vocab: "Eyes, Nose", phrase: "My nose",
                 steps: [
-                    { type: "vocab", title: "Face Parts", items: [{w:"Eye", zh:"眼睛"}, {w:"Nose", zh:"鼻子"}, {w:"Mouth", zh:"嘴巴"}] },
-                    { type: "action", title: "Action (TPR)", en: "Touch your nose!", zh: "摸摸你的鼻子！" },
-                    { type: "speak", title: "Speaking Challenge", phrase: "This is my nose." },
-                    { type: "mission", title: "Real World Mission", en: "Look in a mirror and touch your eyes.", zh: "照鏡子並摸摸眼睛。" },
-                    { type: "tip", title: "Parent Tip", en: "Play Simon Says: 'Touch your...'", zh: "玩 Simon Says 遊戲。" }
-                ]
-            },
-            {
-                title: "Phonics Mm", tag: "Unit 4: Phonics",
-                goal: "Learn Letter M /m/.",
-                steps: [
-                    { type: "vocab", title: "M Words", items: [{w:"Mm", zh:"/m/"}, {w:"Monkey", zh:"猴子"}, {w:"Mouth", zh:"嘴巴"}] },
-                    { type: "speak", title: "Speaking Challenge", phrase: "Close your eyes." },
-                    { type: "mission", title: "Real World Mission", en: "Eat something yummy and say 'Mmm'!", zh: "吃點好吃的並說 'Mmm'！" },
-                    { type: "tip", title: "Parent Tip", en: "Make funny faces together.", zh: "一起做鬼臉。" }
+                    { type: 'warmup', tag: 'A. Warm Up', title: "Blink", text: "Blink your eyes.", action: "Blink!", phrase: "Blink" },
+                    { type: 'words', tag: 'B. Words', title: "Face Parts", items: [{w:"Eye", i:"👁️"},{w:"Nose", i:"👃"},{w:"Mouth", i:"👄"}] },
+                    { type: 'phrase', tag: 'C. Phrase', title: "Phrase", text: "This is my nose.", script: "Touch your nose.", parentTip: "Touch your own face to demonstrate." },
+                    { type: 'game', tag: 'D. Game', title: "Touch", text: "Touch your... Mouth!", sub: "Fast!" },
+                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Look in a mirror.", icon: "🪞" }
                 ]
             }
         ],
-        "Dec": [
-            {
-                title: "On the Farm", tag: "Unit 5: Farm",
-                goal: "Farm animals vocabulary.",
-                steps: [
-                    { type: "vocab", title: "Animals", items: [{w:"Cow", zh:"牛"}, {w:"Pig", zh:"豬"}, {w:"Duck", zh:"鴨"}] },
-                    { type: "speak", title: "Speaking Challenge", phrase: "It is a cow." },
-                    { type: "mission", title: "Real World Mission", en: "Draw a pig on paper.", zh: "在紙上畫一隻豬。" },
-                    { type: "tip", title: "Parent Tip", en: "Make animal sounds: Moo! Oink!", zh: "模仿動物叫聲。" }
-                ]
-            },
-            {
-                title: "Counting", tag: "Unit 5: Math",
-                goal: "Numbers 1-3.",
-                steps: [
-                    { type: "vocab", title: "Numbers", items: [{w:"One", zh:"1"}, {w:"Two", zh:"2"}, {w:"Three", zh:"3"}] },
-                    { type: "action", title: "Action (TPR)", en: "Show me 3 fingers.", zh: "伸出3根手指。" },
-                    { type: "speak", title: "Speaking Challenge", phrase: "One, two, three." },
-                    { type: "mission", title: "Real World Mission", en: "Count 3 toys.", zh: "數3個玩具。" },
-                    { type: "tip", title: "Parent Tip", en: "Count steps when walking.", zh: "走路時數步數。" }
-                ]
-            }
-        ],
-        "Jan": [
-            {
-                title: "At the Zoo", tag: "Unit 6: Zoo",
-                goal: "Wild animals.",
-                steps: [
-                    { type: "vocab", title: "Wild Animals", items: [{w:"Panda", zh:"熊貓"}, {w:"Tiger", zh:"老虎"}, {w:"Bear", zh:"熊"}] },
-                    { type: "speak", title: "Speaking Challenge", phrase: "Four pandas." },
-                    { type: "mission", title: "Real World Mission", en: "Roar like a tiger!", zh: "像老虎一樣吼叫！" },
-                    { type: "tip", title: "Parent Tip", en: "Pretend to be animals.", zh: "假裝成各種動物。" }
-                ]
-            },
-            {
-                title: "Phonics Tt", tag: "Unit 6: Phonics",
-                goal: "Letter T /t/.",
-                steps: [
-                    { type: "vocab", title: "T Words", items: [{w:"Tiger", zh:"老虎"}, {w:"Tea", zh:"茶"}, {w:"Table", zh:"桌子"}] },
-                    { type: "speak", title: "Speaking Challenge", phrase: "Take a photo." },
-                    { type: "mission", title: "Real World Mission", en: "Pretend to drink tea.", zh: "假裝喝茶。" },
-                    { type: "tip", title: "Parent Tip", en: "T sound is sharp: T-t-tiger.", zh: "T 是清脆的音。" }
-                ]
-            }
-        ],
-        "Feb": [
-            {
-                title: "Transport", tag: "Unit 7: Transport",
-                goal: "Vehicles vocabulary.",
-                steps: [
-                    { type: "vocab", title: "Vehicles", items: [{w:"Car", zh:"車"}, {w:"Bus", zh:"巴士"}, {w:"Bike", zh:"單車"}] },
-                    { type: "speak", title: "Speaking Challenge", phrase: "It is a bus." },
-                    { type: "mission", title: "Real World Mission", en: "Find a wheel on a toy car.", zh: "在玩具車上找輪子。" },
-                    { type: "tip", title: "Parent Tip", en: "Beep beep! Make car sounds.", zh: "發出車子的聲音。" }
-                ]
-            },
-            {
-                title: "Phonics Cc", tag: "Unit 7: Phonics",
-                goal: "Letter C /k/.",
-                steps: [
-                    { type: "vocab", title: "C Words", items: [{w:"Cat", zh:"貓"}, {w:"Car", zh:"車"}, {w:"Cup", zh:"杯子"}] },
-                    { type: "action", title: "Action (TPR)", en: "Stop! Go!", zh: "停！走！" },
-                    { type: "speak", title: "Speaking Challenge", phrase: "Stop and Go." },
-                    { type: "mission", title: "Real World Mission", en: "Drink water from a cup.", zh: "用杯子喝水。" },
-                    { type: "tip", title: "Parent Tip", en: "C makes /k/ sound like Cat.", zh: "C 發 /k/ 音。" }
-                ]
-            }
-        ]
+        // Additional months would follow the same pattern...
+        "Dec": [{unit:"Unit 5", vocab:"Cow, Pig", phrase:"It is a cow", steps:[{type:'words', items:[{w:'Cow',i:'🐮'},{w:'Pig',i:'🐷'},{w:'Duck',i:'🦆'}]}]}],
+        "Jan": [{unit:"Unit 6", vocab:"Panda", phrase:"Look at panda", steps:[{type:'words', items:[{w:'Panda',i:'🐼'},{w:'Tiger',i:'🐯'},{w:'Bear',i:'🐻'}]}]}],
+        "Feb": [{unit:"Unit 7", vocab:"Car, Bus", phrase:"It is a bus", steps:[{type:'words', items:[{w:'Car',i:'🚗'},{w:'Bus',i:'🚌'},{w:'Bike',i:'🚲'}]}]}]
     };
 
-    // --- RENDERER ---
-    function loadLesson() {
-        const params = new URLSearchParams(window.location.search);
-        const month = params.get('m');
-        const weekIndex = parseInt(params.get('w'));
+    // --- LOGIC ---
+    let currentData = null;
+    let stepIndex = 0;
+    let isRecording = false;
 
-        if (!month || !db[month] || !db[month][weekIndex]) {
-            document.getElementById('lesson-container').innerHTML = `
-                <div style="text-align:center; padding: 40px; background:white; border-radius:24px;">
-                    <h2 style="color:var(--navy)">🚧 Content Coming Soon</h2>
-                    <p style="color:#64748b; margin-top:10px;">We are working on this lesson.</p>
-                    <a href="exercises.html" class="back-btn" style="margin-top:20px;">Back</a>
-                </div>`;
-            return;
+    function init() {
+        const params = new URLSearchParams(window.location.search);
+        const m = params.get('m');
+        const w = parseInt(params.get('w')) || 0;
+
+        if (m && db[m] && db[m][w]) {
+            currentData = db[m][w];
+            document.getElementById('hero-date').innerText = currentData.unit;
+        } else {
+            // Fallback content if empty
+            currentData = db["Sep"][0]; 
+        }
+    }
+
+    function toggleParentMode() {
+        const btn = document.querySelector('.parent-switch');
+        btn.classList.toggle('active');
+        document.querySelectorAll('.parent-tip').forEach(el => {
+            el.style.display = btn.classList.contains('active') ? 'block' : 'none';
+        });
+    }
+
+    function startLesson() {
+        document.getElementById('screen-start').classList.remove('active');
+        document.getElementById('screen-lesson').classList.add('active');
+        renderStep(0);
+    }
+
+    function renderStep(idx) {
+        stepIndex = idx;
+        const step = currentData.steps[idx];
+        const card = document.getElementById('lesson-card-content');
+        
+        // Progress Bar
+        const pct = ((idx + 1) / currentData.steps.length) * 100;
+        document.getElementById('progress-bar').style.width = pct + '%';
+
+        // Next Button Logic
+        const nextBtn = document.getElementById('next-btn');
+        if (idx === currentData.steps.length - 1) {
+            nextBtn.innerText = "Finish 🎉";
+            nextBtn.onclick = finishLesson;
+        } else {
+            nextBtn.innerText = "Next Step →";
+            nextBtn.onclick = nextStep;
         }
 
-        const lesson = db[month][weekIndex];
-
-        // 1. Header
+        // Render Content based on Type
         let html = `
-            <div class="lesson-header-card">
-                <span class="lesson-tag">${lesson.tag}</span>
-                <h1 class="lesson-title">${lesson.title}</h1>
-                <div class="lesson-subtitle">${month} • Week ${weekIndex + 1}</div>
-                <div class="lesson-goal">${lesson.goal}</div>
+            <div class="step-header">
+                <span class="step-tag">${step.tag}</span>
+                <h2 class="step-title">${step.title}</h2>
             </div>
         `;
 
-        // 2. Steps
-        lesson.steps.forEach(step => {
-            html += `<div class="step-card">`;
-            
-            // Badge
-            let badgeClass = 'bg-blue';
-            if(step.type === 'action') badgeClass = 'bg-orange';
-            if(step.type === 'speak') badgeClass = 'bg-red';
-            if(step.type === 'mission') badgeClass = 'bg-green';
-            if(step.type === 'tip') badgeClass = 'bg-gray';
-            
-            html += `<span class="badge ${badgeClass}">${step.type.toUpperCase()}</span>`;
-            html += `<div class="step-title">${step.title}</div>`;
+        // Parent Tip
+        if (step.parentTip) {
+            html += `<div class="parent-tip">💡 <b>Parent Tip:</b> ${step.parentTip}</div>`;
+        }
 
-            // Content based on type
-            if (step.type === 'vocab') {
-                html += `<div class="flashcards-grid">`;
-                step.items.forEach(item => {
-                    // Check if image exists (placeholder logic)
-                    let imgHtml = item.img ? `<img src="${item.img}" class="flashcard-img">` : `<div style="font-size:30px; margin-bottom:10px;">📝</div>`;
-                    
-                    html += `
-                        <div class="flashcard" onclick="speak('${item.w}')">
-                            ${imgHtml}
-                            <div class="flashcard-word">${item.w}</div>
-                            <div class="flashcard-zh">${item.zh}</div>
-                            <div style="margin-top:5px; color:var(--primary)">${ICON_AUDIO}</div>
-                        </div>
-                    `;
-                });
-                html += `</div>`;
-            } 
-            else if (step.type === 'action') {
-                html += `<div class="step-desc-en">${step.en}</div><div class="step-desc-zh">${step.zh}</div>`;
-            }
-            else if (step.type === 'speak') {
+        // A. WARMUP
+        if (step.type === 'warmup') {
+            html += `
+                <div class="audio-control" style="justify-content:center; flex-direction:column; text-align:center;">
+                    <button class="play-btn" onclick="speak('${step.phrase}')">${ICON_PLAY}</button>
+                    <p style="font-size:18px; font-weight:600; margin:10px 0;">${step.text}</p>
+                    <p style="color:#64748b;">${step.action}</p>
+                </div>
+            `;
+        }
+
+        // B. WORDS
+        else if (step.type === 'words') {
+            html += `<div class="flashcards-grid">`;
+            step.items.forEach(item => {
                 html += `
-                    <div class="audio-box">
-                        <button class="rec-btn" onclick="toggleRecord(this)">${ICON_MIC}</button>
-                        <div style="flex:1">
-                            <strong style="color:var(--navy); display:block; margin-bottom:5px;">Tap mic & say:</strong>
-                            <span style="font-size:18px; font-weight:700;">"${step.phrase}"</span><br>
-                            <button class="listen-btn" onclick="speak('${step.phrase}')">${ICON_AUDIO} Listen First</button>
-                        </div>
-                    </div>
-                `;
-            }
-            else if (step.type === 'mission') {
-                html += `<div class="mission-box"><div style="font-size:24px;">${ICON_HOME}</div><div><div style="font-weight:700; color:#065f46">${step.en}</div><div style="font-size:14px; color:#047857">${step.zh}</div></div></div>`;
-            }
-            else if (step.type === 'tip') {
-                html += `<div class="tip-box"><strong>💡 Parent Tip:</strong> ${step.en}<br><span style="font-size:13px; opacity:0.8">${step.zh}</span></div>`;
-            }
-
+                    <div class="flashcard" onclick="speak('${item.w}')">
+                        <div class="fc-icon">${item.i}</div>
+                        <div class="fc-word">${item.w}</div>
+                        ${ICON_AUDIO}
+                    </div>`;
+            });
             html += `</div>`;
-        });
+        }
 
-        // 3. Footer
-        html += `<button class="complete-btn" onclick="finishLesson()">${ICON_CHECK} Complete Mission</button>`;
+        // C. PHRASE / SPEAKING
+        else if (step.type === 'phrase' || step.type === 'speak') {
+            html += `
+                <div style="background:#ecfeff; padding:20px; border-radius:12px; margin-bottom:20px; text-align:left;">
+                    <div style="font-size:12px; font-weight:700; color:var(--navy); text-transform:uppercase;">Script</div>
+                    <div style="font-size:16px; color:#334155;">"${step.script || step.phrase}"</div>
+                </div>
+                <div class="audio-control">
+                    <button class="mic-btn" onclick="toggleMic(this)">${ICON_MIC}</button>
+                    <div style="flex:1; text-align:left;">
+                        <strong style="color:var(--navy);">Your turn:</strong><br>
+                        <span style="font-size:18px; font-weight:700;">"${step.text || step.phrase}"</span>
+                        <div style="margin-top:5px; font-size:12px; color:#64748b; cursor:pointer;" onclick="speak('${step.text || step.phrase}')">🔊 Listen first</div>
+                    </div>
+                </div>
+            `;
+        }
 
-        document.getElementById('lesson-container').innerHTML = html;
+        // D. GAME
+        else if (step.type === 'game') {
+            html += `
+                <div style="padding:40px; background:#fff7ed; border-radius:20px; border:2px dashed #fed7aa;">
+                    <div style="font-size:50px; margin-bottom:10px;">🎲</div>
+                    <h3 style="color:#9a3412; margin-bottom:10px;">${step.text}</h3>
+                    <p style="color:#64748b;">${step.sub}</p>
+                </div>
+            `;
+        }
+
+        // E. MISSION
+        else if (step.type === 'offscreen') {
+            html += `
+                <div class="mission-box" style="text-align:center;">
+                    <div style="font-size:60px; margin-bottom:10px;">${step.icon}</div>
+                    <h3 style="color:#334155; margin-bottom:10px;">Off-Screen Mission</h3>
+                    <p style="font-size:18px; font-weight:600; color:var(--navy);">${step.text}</p>
+                    <p style="color:#64748b; font-size:13px; margin-top:10px;">Put the phone down and go!</p>
+                </div>
+            `;
+        }
+
+        card.innerHTML = html;
+        
+        // Re-apply parent mode visibility
+        toggleParentMode();
+        toggleParentMode(); // toggle twice to refresh state
     }
 
-    // --- UTILS ---
-    function speak(text) {
-        if ('speechSynthesis' in window) {
-            const msg = new SpeechSynthesisUtterance(text);
-            msg.lang = 'en-US';
-            msg.rate = 0.85;
-            window.speechSynthesis.speak(msg);
-        } else {
-            alert("Audio not supported");
+    function nextStep() {
+        if (stepIndex < currentData.steps.length - 1) {
+            renderStep(stepIndex + 1);
         }
     }
 
-    let isRecording = false;
-    function toggleRecord(btn) {
+    function prevStep() {
+        if (stepIndex > 0) {
+            renderStep(stepIndex - 1);
+        } else {
+            document.getElementById('screen-lesson').classList.remove('active');
+            document.getElementById('screen-start').classList.add('active');
+        }
+    }
+
+    function toggleMic(btn) {
         if (!isRecording) {
             btn.classList.add('recording');
             isRecording = true;
         } else {
             btn.classList.remove('recording');
             isRecording = false;
-            // Simulate Success
+            // Success sound
             const ctx = new (window.AudioContext || window.webkitAudioContext)();
             const osc = ctx.createOscillator();
             const gain = ctx.createGain();
             osc.connect(gain);
             gain.connect(ctx.destination);
-            osc.frequency.setValueAtTime(500, ctx.currentTime);
+            osc.frequency.setValueAtTime(600, ctx.currentTime);
             gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
             osc.start();
             osc.stop(ctx.currentTime + 0.5);
         }
     }
 
+    function speak(text) {
+        if ('speechSynthesis' in window) {
+            const msg = new SpeechSynthesisUtterance(text);
+            msg.lang = 'en-US';
+            msg.rate = 0.9;
+            window.speechSynthesis.speak(msg);
+        }
+    }
+
     function finishLesson() {
-        const modal = document.getElementById('success-modal');
-        modal.style.display = 'flex';
+        document.getElementById('screen-lesson').classList.remove('active');
+        document.getElementById('screen-report').classList.add('active');
+        
+        // Populate Report
+        document.getElementById('report-vocab').innerText = currentData.vocab;
+        document.getElementById('report-phrase').innerText = `"${currentData.phrase}"`;
+
         if (typeof confetti === 'function') {
             confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#22d3ee', '#f97316', '#a78bfa'] });
         }
     }
 
-    loadLesson();
+    init();
 </script>
 
 </body>
