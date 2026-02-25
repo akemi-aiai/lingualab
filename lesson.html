@@ -267,70 +267,112 @@
     // --- CONTENT DB (Sep-Feb) ---
     const db = {
         "Sep": [
-            {
-                unit: "Unit 1: Family", vocab: "Daddy, Mommy", phrase: "Good morning Daddy",
-                steps: [
-                    { type: 'warmup', tag: 'A. Warm Up', title: "Listen & Wave", text: "Let's say Hello!", action: "Wave your hand", phrase: "Hello!" },
-                    { type: 'words', tag: 'B. Key Words', title: "Family Members", items: [{w:"Daddy", zh: "爸爸", img:"assets/img/daddy.png"},{w:"Mommy", zh: "妈妈", img:"assets/img/mommy.png"},{w:"Family", zh: "家人", img:"assets/img/family.png"}] },
-                    { type: 'phrase', tag: 'C. Key Sentences', title: "Phrase of the Day", text: "Good morning, Daddy! Good morning, Mommy!", script: "Ask your child: 'Who do you see in the morning?'", parentTip: "Don't correct pronunciation yet. Just praise effort." },
-                    { type: 'game', tag: 'D. Game', title: "Hug Game", text: "Run and hug Mommy or Daddy!", sub: "Ready? Go!", img:"assets/img/hug.png" },
-                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Find a family photo.", img:"assets/img/photo.jpg" }
+          {
+            unit: "Unit 1: Family", vocab: "Daddy, Mommy", phrase: "Good morning Daddy",
+            steps: [
+              { type:'warmup', tag:'A. Warm Up', title:"Listen & Wave", text:"Let's say Hello!", action:"Wave your hand", phrase:"Hello!" },
+              { type:'words', tag:'B. Key Words', title:"Family Members",
+                items: [
+                  { w:"Daddy",  zh:"爸爸", img:"assets/img/daddy.png" },
+                  { w:"Mommy",  zh:"妈妈", img:"assets/img/mommy.png" },
+                  { w:"Family", zh:"家人", img:"assets/img/family.png" }
                 ]
-            },
-            {
-                unit: "Unit 2: School", vocab: "Bag, Book", phrase: "It is a book",
-                steps: [
-                    { type: 'warmup', tag: 'A. Warm Up', title: "Stand Up!", text: "Stand up... Sit down.", action: "Do it 3 times.", phrase: "Stand up!" },
-                    { type: 'words', tag: 'B. Key Words', title: "School Objects", items: [{w:"Bag", img:"assets/img/bag.png"},{w:"Book", img:"assets/img/book.png"},{w:"Pencil", img:"assets/img/pencil.png"}] },
-                    { type: 'phrase', tag: 'C. Key Sentences', title: "Phrase of the Day", text: "It is a book.", script: "Point to a book and ask: 'What is this?'", parentTip: "Say the word first, let them repeat." },
-                    { type: 'game', tag: 'D. Game', title: "Hide & Seek", text: "Hide a book. Ask: 'Where is the book?", sub: "Child finds it.", img:"assets/img/find.png" },
-                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Put a book in a bag.", img:"assets/img/book and bag.png" }
+              },
+              { type:'phrase', tag:'C. Key Sentences', title:"Phrase of the Day",
+                text:"Good morning, Daddy! Good morning, Mommy!",
+                script:"Ask your child: 'Who do you see in the morning?'",
+                parentTip:"Don't correct pronunciation yet. Just praise effort."
+              },
+              { type:'game', tag:'D. Game', title:"Hug Game", text:"Run and hug Mommy or Daddy!", sub:"Ready? Go!", img:"assets/img/hug.png" },
+              { type:'offscreen', tag:'E. Mission', title:"Real World", text:"Find a family photo.", img:"assets/img/photo.jpg" }
+            ]
+          },
+        
+          {
+            unit: "Unit 2: School", vocab: "Bag, Book", phrase: "It is a book",
+            steps: [
+              { type:'warmup', tag:'A. Warm Up', title:"Stand Up!", text:"Stand up... Sit down.", action:"Do it 3 times.", phrase:"Stand up!" },
+              { type:'words', tag:'B. Key Words', title:"School Objects",
+                items: [
+                  { w:"Bag",    zh:"书包", img:"assets/img/bag.png" },
+                  { w:"Book",   zh:"书",   img:"assets/img/book.png" },
+                  { w:"Pencil", zh:"铅笔", img:"assets/img/pencil.png" }
                 ]
-            },
-            {
-                unit: "Unit 2: Phonics", vocab: "Bb /b/", phrase: "Open book",
-                steps: [
-                    { type: 'warmup', tag: 'A. Warm Up', title: "Clap Hands", text: "Clap 1, 2, 3.", action: "Clap!", phrase: "Clap!" },
-                    { type: 'words', tag: 'B. Key Words', title: "B Sound", items: [{w:"Bb", img:"assets/img/bb.png"},{w:"Ball", img:"assets/img/ball.png"},{w:"Baby", img:"assets/img/baby.png"}] },
-                    { type: 'phrase', tag: 'C. Action', title: "TPR Command", text: "Open your book.", script: "Model the action first.", parentTip: "Emphasize the 'b' sound in Book." },
-                    { type: 'game', tag: 'D. Game', title: "Blue Hunt", text: "Find something BLUE.", sub: "B is for Blue." },
-                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Find a blue toy.", img:"assets/img/blue toy.png" }
+              },
+              { type:'phrase', tag:'C. Key Sentences', title:"Phrase of the Day", text:"It is a book.", script:"Point to a book and ask: 'What is this?'", parentTip:"Say the word first, let them repeat." },
+              { type:'game', tag:'D. Game', title:"Hide & Seek", text:"Hide a book. Ask: 'Where is the book?'", sub:"Child finds it.", img:"assets/img/find.png" },
+              { type:'offscreen', tag:'E. Mission', title:"Real World", text:"Put a book in a bag.", img:"assets/img/book and bag.png" }
+            ]
+          },
+        
+          {
+            unit: "Unit 2: Phonics", vocab: "Bb /b/", phrase: "Open book",
+            steps: [
+              { type:'warmup', tag:'A. Warm Up', title:"Clap Hands", text:"Clap 1, 2, 3.", action:"Clap!", phrase:"Clap!" },
+              { type:'words', tag:'B. Key Words', title:"B Sound",
+                items: [
+                  { w:"Bb",   zh:"字母B", img:"assets/img/bb.png" },
+                  { w:"Ball", zh:"球",     img:"assets/img/ball.png" },
+                  { w:"Baby", zh:"宝宝",   img:"assets/img/baby.png" }
                 ]
-            },
-            {
-                unit: "Revision 1", vocab: "Mike, Kelly", phrase: "Hello I am...",
-                steps: [
-                    { type: 'warmup', tag: 'A. Warm Up', title: "Shake", text: "Shake your body!", action: "Shake!", phrase: "Shake!" },
-                    { type: 'words', tag: 'B. Key Words', title: "Review", items: [{w:"What's your name?", img:"assets/img/name q.png"},{w:"My name is", img:"assets/img/name.png"},{w:"Teacher", img:"assets/img/teacher.png"}] },
-                    { type: 'phrase', tag: 'C. Key Sentences', title: "Roleplay", text: "Hello, I am [Name].", script: "Practice with a puppet.", parentTip: "Roleplay builds confidence." },
-                    { type: 'game', tag: 'D. Game', title: "Who is it?", text: "Guess the character.", sub: "Mike or Kelly?" },
-                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Say Hello to a toy.", icon: "🧸" }
+              },
+              { type:'phrase', tag:'C. Action', title:"TPR Command", text:"Open your book.", script:"Model the action first.", parentTip:"Emphasize the 'b' sound in Book." },
+              { type:'game', tag:'D. Game', title:"Blue Hunt", text:"Find something BLUE.", sub:"B is for Blue." },
+              { type:'offscreen', tag:'E. Mission', title:"Real World", text:"Find a blue toy.", img:"assets/img/blue toy.png" }
+            ]
+          },
+        
+          {
+            unit: "Revision 1", vocab: "Mike, Kelly", phrase: "Hello I am...",
+            steps: [
+              { type:'warmup', tag:'A. Warm Up', title:"Shake", text:"Shake your body!", action:"Shake!", phrase:"Shake!" },
+              { type:'words', tag:'B. Key Words', title:"Review",
+                items: [
+                  { w:"What's your name?", zh:"你叫什么名字？", img:"assets/img/name q.png" },
+                  { w:"My name is",       zh:"我叫…",          img:"assets/img/name.png" },
+                  { w:"Teacher",          zh:"老师",           img:"assets/img/teacher.png" }
                 ]
-            }
+              },
+              { type:'phrase', tag:'C. Key Sentences', title:"Roleplay", text:"Hello, I am [Name].", script:"Practice with a puppet.", parentTip:"Roleplay builds confidence." },
+              { type:'game', tag:'D. Game', title:"Who is it?", text:"He is Mike." },
+              { type:'offscreen', tag:'E. Mission', title:"Real World", text:"Say Hello to a toy.", img:"assets/img/hello toy.png" }
+            ]
+          }
         ],
-        "Oct": [
-            {
-                // Week 1: Unit 3 - Gender
-                meta: { unit: "Unit 3: Friends", vocab: "Boy, Girl", phrase: "You are a boy" },
-                tips: "Use family photos to help your child understand 'He' (Boy) and 'She' (Girl).",
-                steps: [
-                    { type: 'warmup', tag: 'A. Warm Up', title: "High Five", text: "High five Mommy!", action: "Say: 'Hello!'", phrase: "Hello!" },
-                    { type: 'words', tag: 'B. Key Words', title: "Gender", items: [{w:"Boy", i:"👦"},{w:"Girl", i:"👧"},{w:"Friend", i:"🤝"}] },
-                    { type: 'phrase', tag: 'C. Key Sentences', title: "Identity", text: "You are a boy/girl.", script: "Point to your child and say the phrase.", parentTip: "Point to yourself (I am) and the child (You are)." },
-                    { type: 'game', tag: 'D. Game', title: "Stand Up", text: "Boys stand up! Girls sit down!", sub: "Listen and move fast." },
-                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Count how many boys are in your family.", icon: "👨‍👩‍👦" }
+                "Oct": [
+          {
+            unit: "Unit 3: Friends", vocab: "Boy, Girl", phrase: "You are a boy",
+            tips: "Use family photos to help your child understand 'He' (Boy) and 'She' (Girl).",
+            steps: [
+              { type:'warmup', tag:'A. Warm Up', title:"High Five", text:"High five Mommy!", action:"Say: 'Hello!'", phrase:"Hello!" },
+              { type:'words', tag:'B. Key Words', title:"Gender",
+                items: [
+                  { w:"Boy",    zh:"男孩", img:"assets/img/boy.png" },
+                  { w:"Girl",   zh:"女孩", img:"assets/img/girl.png" },
+                  { w:"Friend", zh:"朋友", img:"assets/img/friend.png" }
                 ]
-            },
-            {
-                // Week 2: Unit 3 - Friendship
-                meta: { unit: "Unit 3: Social", vocab: "My Friend", phrase: "This is my friend" },
-                tips: "Teach your child to introduce others politely.",
-                steps: [
-                    { type: 'warmup', tag: 'A. Warm Up', title: "Handshake", text: "Shake hands.", action: "Nice to meet you.", phrase: "Hello friend." },
-                    { type: 'words', tag: 'B. Key Words', title: "Friendship", items: [{w:"Friend", i:"👫"},{w:"Play", i:"🧸"},{w:"Nice", i:"❤️"}] },
-                    { type: 'phrase', tag: 'C. Key Sentences', title: "Intro", text: "This is my friend.", script: "Introduce a toy to Mommy.", parentTip: "Use a teddy bear to practice introductions." },
-                    { type: 'game', tag: 'D. Game', title: "Draw", text: "Draw your best friend's face.", sub: "Quick sketch!" },
-                    { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Hug your friend (or a toy).", icon: "🤗" }
+              },
+              { type:'phrase', tag:'C. Key Sentences', title:"Identity", text:"You are a boy/girl.", script:"Point to your child and say the phrase.", parentTip:"Point to yourself (I am) and the child (You are)." },
+              { type:'game', tag:'D. Game', title:"Stand Up", text:"Boys stand up! Girls sit down!", sub:"Listen and do." },
+              { type:'offscreen', tag:'E. Mission', title:"Real World", text:"Count how many boys are in your family.", icon:"👨‍👩‍👦" }
+            ]
+          },
+        
+          {
+            unit: "Unit 3: Social", vocab: "My Friend", phrase: "This is my friend",
+            tips: "Teach your child to introduce others politely.",
+            steps: [
+              { type:'warmup', tag:'A. Warm Up', title:"Handshake", text:"Shake hands.", action:"Nice to meet you.", phrase:"Hello friend." },
+              { type:'words', tag:'B. Key Words', title:"Friendship",
+                items: [
+                  { w:"Friend",     zh:"朋友",     img:"assets/img/friend.png" },
+                  { w:"Play",       zh:"玩",       img:"assets/img/play.png" },
+                  { w:"Teddy Bear", zh:"泰迪熊",   img:"assets/img/teddy bear.png" }
+                ]
+              },
+              { type:'phrase', tag:'C. Key Sentences', title:"Intro", text:"This is my friend.", script:"Introduce a toy to Mommy.", parentTip:"Use a teddy bear to practice introductions." },
+              { type:'game', tag:'D. Game', title:"Draw", text:"Draw your best friend's face.", sub:"Quick sketch!" },
+              { type:'offscreen', tag:'E. Mission', title:"Real World", text:"Hug your friend (or a toy).", icon:"🤗" }
                 ]
             },
             {
@@ -626,23 +668,27 @@
         }
 
         // B. WORDS
-        else if (step.type === 'vocab' || step.type === 'words') { // Проверка типа шага
-                html += `<div class="flashcards-grid">`;
-                step.items.forEach(item => {
-            // Если есть item.img - ставим картинку, если нет - ставим item.i (эмодзи)
-                    let visual = item.img 
-                        ? `<img src="${item.img}" style="width:80px; height:80px; object-fit:contain; margin-bottom:10px;">` 
-                        : `<div class="fc-icon">${item.i}</div>`;
-                    
-                    html += `
-                        <div class="flashcard" onclick="speak('${item.w}')">
-                            ${visual}  <div class="fc-word">${item.w}</div>
-                            ${item.zh ? `<div class="flashcard-zh">${item.zh}</div>` : ''} 
-                            ${ICON_AUDIO}
-                        </div>`;
-                });
-                html += `</div>`;
-            }
+        else if (step.type === 'vocab' || step.type === 'words') {
+          html += `<div class="flashcards-grid">`;
+          step.items.forEach(item => {
+        
+            const wordSafe = (item.w || '').replace(/'/g, "\\'"); // чтобы speak не ломался на апострофах
+        
+            let visual = item.img
+              ? `<img src="${encodeURI(item.img)}" class="fc-img" alt="${item.w}"
+                      onerror="this.onerror=null; this.src='assets/img/book.png';">`
+              : `<div class="fc-icon">${item.i || ''}</div>`;
+        
+            html += `
+              <div class="flashcard" onclick="speak('${wordSafe}')">
+                ${visual}
+                <div class="fc-word">${item.w}</div>
+                ${item.zh ? `<div class="flashcard-zh">${item.zh}</div>` : ''}
+                ${ICON_AUDIO}
+              </div>`;
+          });
+          html += `</div>`;
+        }
 
         // C. PHRASE / SPEAKING
         else if (step.type === 'phrase' || step.type === 'speak') {
