@@ -111,15 +111,62 @@
             border-radius: 8px; margin-bottom: 25px; font-size: 14px; color: #9a3412;
         }
         
-        /* Flashcards Grid */
-        .flashcards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 15px; margin: 20px 0; }
-        .flashcard {
-            background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 16px;
-            padding: 15px; cursor: pointer; transition: 0.2s;
+        /* Flashcards Grid — квадраты */
+        .flashcards-grid{
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr)); /* ровные 3 колонки */
+          gap: 15px;
+          margin: 20px 0;
         }
-        .flashcard:hover { border-color: var(--primary); background: #ecfeff; transform: scale(1.05); }
-        .fc-icon { font-size: 32px; display: block; margin-bottom: 5px; }
-        .fc-word { font-weight: 700; color: var(--navy); font-size: 14px; }
+        
+        /* на телефоне — 2 колонки */
+        @media (max-width: 520px){
+          .flashcards-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        
+        .flashcard{
+          background: #f8fafc;
+          border: 2px solid #e2e8f0;
+          border-radius: 16px;
+          cursor: pointer;
+          transition: 0.2s;
+        
+          aspect-ratio: 1 / 1;       /* ключ: квадрат */
+          width: 100%;
+          padding: 12px;
+        
+          display: flex;             /* чтобы контент центрировался */
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+        
+          position: relative;
+          overflow: hidden;
+        }
+        
+        .flashcard:hover{
+          border-color: var(--primary);
+          background: #ecfeff;
+          transform: scale(1.03);    /* чуть меньше, чтобы сетку не “раздвигало” */
+        }
+        
+        /* если есть картинки */
+        .fc-img{
+          width: 68%;
+          height: 52%;
+          object-fit: contain;
+          display: block;
+          margin: 0 auto 10px;
+        }
+        
+        /* если эмодзи */
+        .fc-icon{
+          font-size: 34px;
+          display: block;
+          margin-bottom: 8px;
+        }
+        
 
         /* Audio Controls */
         .audio-control {
