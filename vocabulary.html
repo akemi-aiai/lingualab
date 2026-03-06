@@ -125,9 +125,7 @@
             perspective: 1000px;
             cursor: pointer;
         }
-        .flashcard-wrapper:hover .flashcard-inner {
-            box-shadow: 0 20px 40px rgba(34, 211, 238, 0.2);
-        }
+
         .flashcard-inner {
             position: relative; width: 100%; height: 100%;
             text-align: center; transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
@@ -182,10 +180,16 @@
             text-align: center; border-top: 6px solid var(--green);
             animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        #reward-popup .trophy { font-size: 60px; margin-bottom: 10px; }
+        #reward-popup .trophy { font-size: 60px; margin-bottom: 10px; animation: tada 1s ease-in-out infinite; }
         #reward-popup h2 { color: var(--navy); font-size: 32px; margin-bottom: 10px; }
         #reward-popup p { color: #64748b; font-size: 18px; font-weight: 600; }
-        
+
+        @keyframes tada {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-10deg) scale(1.1); }
+            50% { transform: rotate(10deg) scale(1.1); }
+            75% { transform: rotate(-10deg) scale(1.1); }
+        }
         @keyframes popIn {
             0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
             100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
@@ -233,7 +237,9 @@
 <section class="hero-compact">
     <h1>Word Bank</h1>
     <div class="hero-info">
-        <span>Tap, listen, and flip! 👆</span>
+        <div class="hero-info">
+        <span>Tap, listen, and flip! <br><span style="font-size: 16px; font-weight: 400; opacity: 0.9;">点一点，听一听，翻一翻！</span></span>
+        </div>
     </div>
 </section>
 
@@ -245,10 +251,12 @@
 
 <div id="overlay"></div>
 <div id="reward-popup">
-    <div class="trophy">🏆</div>
-    <h2>Молодец!</h2>
-    <p>Все слова в этой теме изучены!<br>太棒了！</p>
+    <div class="trophy">🌟</div>
+    <h2 style="color: var(--accent);">Mission Complete! <br><span style="font-size: 28px;">任务完成！</span></h2>
+    <p>You unlocked all the words!<br><span style="font-size: 15px; opacity: 0.8;">你解锁了所有单词！</span></p>
 </div>
+
+    
 
 <footer>
   © <span id="year">2026</span> LinguaLab • Small lessons. Real progress. All rights reserved.
@@ -256,10 +264,12 @@
 
 <script>
     // БАЗА ДАННЫХ: Слова разбиты по логическим топикам, предложения взяты из "phrase"
+<script>
+    // БАЗА ДАННЫХ: Обновлена структура "wiki" под формат Parent Cheat Sheet
     const dictionary = {
         "family": { 
             title: "Family & Friends", 
-            wiki: "<b>Educational Goal:</b> Learn family members and gender. Practice pointing and saying 'This is...'.<br><b>教學目標：</b>學習家庭成員和性別。練習說 'This is...'。", 
+            wiki: "<div><b>Focus (今日词汇):</b> Family members and 'This is...'.</div><div><b>Play (互动小贴士):</b> Point to real family photos and say the words together! (指着家里的全家福，一起大声练习吧！)</div>", 
             words: [
                 { id: "daddy", en: "Daddy", pinyin: "bà ba", zh: "爸爸", sentence: "Good morning Daddy", img: "assets/img/daddy.png" },
                 { id: "mommy", en: "Mommy", pinyin: "mā ma", zh: "妈妈", sentence: "Good morning Mommy", img: "assets/img/mommy.png" },
@@ -270,7 +280,7 @@
         },
         "school": { 
             title: "My School", 
-            wiki: "<b>Educational Goal:</b> Recognize school objects. Focus on the letter 'B'.<br><b>教學目標：</b>認識學校物品。重點學習字母 B。", 
+            wiki: "<div><b>Focus (今日词汇):</b> School objects and the letter 'B'.</div><div><b>Play (互动小贴士):</b> Put a real book in a bag and say 'It is a book!' (把书放进书包里，一起练习句子！)</div>", 
             words: [
                 { id: "bag", en: "Bag", pinyin: "shū bāo", zh: "书包", sentence: "Open your bag", img: "assets/img/bag.png" },
                 { id: "book", en: "Book", pinyin: "shū", zh: "书", sentence: "It is a book", img: "assets/img/book.png" },
@@ -279,7 +289,7 @@
         },
         "face": { 
             title: "My Face", 
-            wiki: "<b>Educational Goal:</b> Learn facial parts. Use a mirror to play with your child.<br><b>教學目標：</b>認識五官。和孩子一起照鏡子練習。", 
+            wiki: "<div><b>Focus (今日词汇):</b> Facial parts and 'This is my...'.</div><div><b>Play (互动小贴士):</b> Look in a mirror together and touch your nose/eyes! (一起照镜子，边摸五官边说单词！)</div>", 
             words: [
                 { id: "eye", en: "Eye", pinyin: "yǎn jing", zh: "眼睛", sentence: "Close your eyes", img: "assets/img/eye.png" },
                 { id: "nose", en: "Nose", pinyin: "bí zi", zh: "鼻子", sentence: "This is my nose", img: "assets/img/nose.png" },
@@ -290,7 +300,7 @@
         },
         "animals": { 
             title: "Animals", 
-            wiki: "<b>Educational Goal:</b> Farm and wild animals. Have fun making animal noises!<br><b>教學目標：</b>農場與野生動物。一起模仿動物叫聲！", 
+            wiki: "<div><b>Focus (今日词汇):</b> Farm and wild animals.</div><div><b>Play (互动小贴士):</b> Make funny animal noises together! (一起模仿小动物的叫声吧！)</div>", 
             words: [
                 { id: "cow", en: "Cow", pinyin: "niú", zh: "牛", sentence: "It is a cow", img: "assets/img/cow.png" },
                 { id: "pig", en: "Pig", pinyin: "zhū", zh: "猪", sentence: "One pig", img: "assets/img/pig.png" },
@@ -301,7 +311,7 @@
         },
         "transport": { 
             title: "Transport", 
-            wiki: "<b>Educational Goal:</b> Vehicles and traffic safety. Red means Stop!<br><b>教學目標：</b>交通工具與安全。紅燈停！", 
+            wiki: "<div> <b>Focus (今日词汇):</b> Vehicles and traffic safety.</div><div> <b>Play (互动小贴士):</b> Pretend to drive around the room. Red means Stop! (在房间里假装开车，记住红灯停哦！)</div>", 
             words: [
                 { id: "car", en: "Car", pinyin: "qì chē", zh: "汽车", sentence: "Look at the car", img: "assets/img/car.png" },
                 { id: "bus", en: "Bus", pinyin: "gōng jiāo chē", zh: "公交车", sentence: "It is a bus", img: "assets/img/bus.png" },
@@ -310,7 +320,7 @@
             ] 
         }
     };
-
+    
     let learnedCards = new Set();
     let currentCategoryWordsCount = 0;
 
@@ -348,15 +358,14 @@
         currentCategoryWordsCount = data.words.length;
 
         let html = `
-            <div class="wiki-box">
-                <div class="wiki-text-area">
-                    <div class="wiki-title">Parent's Corner</div>
-                    <div class="wiki-content">${data.wiki}</div>
-                </div>
-                <div class="progress-counter" id="progress-text">0 / ${currentCategoryWordsCount}</div>
-            </div>
-            <div class="flashcard-grid">
-        `;
+                    <div class="wiki-box">
+                        <div class="wiki-text-area">
+                            <div class="wiki-title">Parent Cheat Sheet (家长小抄)</div> <div class="wiki-content">${data.wiki}</div>
+                        </div>
+                        <div class="progress-counter" id="progress-text">0 / ${currentCategoryWordsCount}</div>
+                    </div>
+                    <div class="flashcard-grid">
+                `;
 
         data.words.forEach((word) => {
             html += `
