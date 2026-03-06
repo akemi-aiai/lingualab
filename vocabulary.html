@@ -255,14 +255,11 @@
     <p>You unlocked all the words!<br><span style="font-size: 15px; opacity: 0.8;">你解锁了所有单词！</span></p>
 </div>
 
-    
-
 <footer>
   © <span id="year">2026</span> LinguaLab • Small lessons. Real progress. All rights reserved.
 </footer>
 
 <script>
-    // БАЗА ДАННЫХ: Обновлена структура "wiki" под формат Parent Cheat Sheet
     const dictionary = {
         "family": { 
             title: "Family & Friends", 
@@ -331,9 +328,7 @@
             const btn = document.createElement('button');
             btn.className = 'category-btn';
             btn.innerText = dictionary[catKey].title;
-            
-            // Загружаем первую категорию по умолчанию
-            if (index === 0) {
+                        if (index === 0) {
                 btn.classList.add('active');
                 loadCategory(catKey, btn);
             }
@@ -343,26 +338,27 @@
         });
     }
 
+    let currentCatKey = ""; 
     function loadCategory(catKey, btn) {
-        // Убираем класс active у всех кнопок и добавляем текущей
         document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
         if(btn) btn.classList.add('active');
         
-        // Сброс прогресса при смене темы
         learnedCards.clear();
+        currentCatKey = catKey;
 
         const data = dictionary[catKey];
         currentCategoryWordsCount = data.words.length;
 
         let html = `
-                    <div class="wiki-box">
-                        <div class="wiki-text-area">
-                            <div class="wiki-title">Parent Cheat Sheet (家长小抄)</div> <div class="wiki-content">${data.wiki}</div>
-                        </div>
-                        <div class="progress-counter" id="progress-text">0 / ${currentCategoryWordsCount}</div>
-                    </div>
-                    <div class="flashcard-grid">
-                `;
+            <div class="wiki-box">
+                <div class="wiki-text-area">
+                    <div class="wiki-title">Parent Cheat Sheet (家长小抄)</div>
+                    <div class="wiki-content">${data.wiki}</div>
+                </div>
+                <div class="progress-counter" id="progress-text">0 / ${currentCategoryWordsCount}</div>
+            </div>
+            <div class="flashcard-grid">
+        `;
 
         data.words.forEach((word) => {
             html += `
@@ -388,13 +384,14 @@
 
     function flipCard(element, wordId) {
         element.classList.toggle('flipped');
+        let clicksData = JSON.parse(localStorage.getItem('category_clicks') || '{}');
+        clicksData[currentCatKey] = (clicksData[currentCatKey] || 0) + 1;
+        localStorage.setItem('category_clicks', JSON.stringify(clicksData));
 
-        // Подсчет уникальных кликов для геймификации
         if (!learnedCards.has(wordId)) {
             learnedCards.add(wordId);
             document.getElementById('progress-text').innerText = `${learnedCards.size} / ${currentCategoryWordsCount}`;
             
-            // Если все карточки открыты, показываем "Молодец!"
             if (learnedCards.size === currentCategoryWordsCount) {
                 setTimeout(showReward, 800);
             }
@@ -407,12 +404,22 @@
         popup.style.display = 'block';
         overlay.style.display = 'block';
         
-        // Скрываем окно через 3 секунды
+        let currentPoints = parseInt(localStorage.getItem('vocab_points') || '0');
+        localStorage.setItem('vocab_points', currentPoints + 10); // +10 очков за победу
+
+        let learnedTotal = parseInt(localStorage.getItem('learned_words_total') || '0');
+        localStorage.setItem('learned_words_total', learnedTotal + currentCategoryWordsCount);
+        
         setTimeout(() => {
             popup.style.display = 'none';
             overlay.style.display = 'none';
         }, 3000);
     }
+
+    setInterval(() => {
+        let timeSpent = parseInt(localStorage.getItem('time_spent_seconds') || '0');
+        localStorage.setItem('time_spent_seconds', timeSpent + 5);
+    }, 5000);
 
     init();
 </script>
