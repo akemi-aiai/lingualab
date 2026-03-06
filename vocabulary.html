@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +15,7 @@
             --primary-light: #ecfeff;
             --accent: #f97316;
             --navy: #1f4e79;
+            --green: #22c55e;
             --bg: #f8fafc;
             --radius: 24px;
         }
@@ -29,7 +30,7 @@
             padding-top: 80px;
         }
 
-        /* --- NAVBAR (Ваш стиль) --- */
+        /* --- NAVBAR --- */
         .navbar {
             position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
             display: flex; align-items: center; justify-content: space-between;
@@ -49,11 +50,11 @@
         }
         .navbar-right a:hover { color: var(--primary); }
 
-        /* --- HERO SECTION (Ваш стиль) --- */
+        /* --- HERO SECTION --- */
         .hero-compact {
             padding: 60px 20px 140px;
             text-align: center;
-            background: linear-gradient(135deg, #22d3ee, #a78bfa);
+            background: linear-gradient(135deg, var(--primary), #a78bfa);
             color: #fff;
             position: relative;
             width: 100%;
@@ -73,7 +74,7 @@
             padding: 0 20px;
         }
 
-        /* Кнопки категорий (На базе ваших month-btn) */
+        /* Кнопки категорий (Топики) */
         .category-container { 
             background: #fff; border-radius: var(--radius); padding: 30px 40px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.08); margin-bottom: 40px;
@@ -91,14 +92,14 @@
             box-shadow: 0 4px 15px rgba(31, 78, 121, 0.3); transform: scale(1.05);
         }
 
-        /* Блок для родителей (Ваш wiki-box) */
+        /* Блок для родителей */
         .wiki-box { 
             background: #fff7ed; border-left: 5px solid var(--accent); 
             padding: 30px; border-radius: 16px; margin-bottom: 30px; 
             box-shadow: 0 4px 15px rgba(0,0,0,0.03);
             display: flex; justify-content: space-between; align-items: center;
         }
-        .wiki-text-area { flex-grow: 1; }
+        .wiki-text-area { flex-grow: 1; padding-right: 20px; }
         .wiki-title { 
             font-weight: 800; color: #c2410c; margin-bottom: 10px; 
             text-transform: uppercase; font-size: 13px; letter-spacing: 1px;
@@ -109,10 +110,10 @@
         .progress-counter {
             background: #fff; color: var(--accent); font-weight: 800;
             padding: 10px 20px; border-radius: 99px; font-size: 18px;
-            box-shadow: 0 4px 10px rgba(249, 115, 22, 0.15);
+            box-shadow: 0 4px 10px rgba(249, 115, 22, 0.15); white-space: nowrap;
         }
 
-        /* --- FLASHCARDS (Адаптация ваших week-card) --- */
+        /* --- FLASHCARDS --- */
         .flashcard-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
@@ -155,7 +156,7 @@
             width: 100px; height: 100px; object-fit: contain; margin-bottom: 20px;
         }
         .flashcard-front h2 {
-            font-size: 24px; font-weight: 800; color: var(--navy); margin: 0;
+            font-size: 26px; font-weight: 800; color: var(--navy); margin: 0;
         }
 
         /* Обратная сторона (Родители) */
@@ -167,8 +168,11 @@
         }
         .flashcard-back h3 { font-size: 24px; margin-bottom: 5px; color: var(--primary-light); }
         .flashcard-back p.pinyin { font-size: 16px; opacity: 0.8; margin-bottom: 5px; }
-        .flashcard-back p.translation { font-size: 26px; font-weight: bold; margin-bottom: 15px; color: var(--primary); }
-        .flashcard-back p.sentence { font-size: 14px; line-height: 1.4; border-top: 1px dashed rgba(255,255,255,0.2); padding-top: 15px; }
+        .flashcard-back p.translation { font-size: 28px; font-weight: bold; margin-bottom: 15px; color: var(--primary); }
+        .flashcard-back p.sentence { 
+            font-size: 15px; line-height: 1.4; font-weight: 600;
+            border-top: 1px dashed rgba(255,255,255,0.2); padding-top: 15px; color: #fcd34d;
+        }
 
         /* --- ГЕЙМИФИКАЦИЯ (Popup) --- */
         #reward-popup {
@@ -176,11 +180,12 @@
             transform: translate(-50%, -50%); background: #fff;
             padding: 40px 60px; border-radius: var(--radius);
             box-shadow: 0 20px 60px rgba(0,0,0,0.2); z-index: 2000;
-            text-align: center; border: 4px solid var(--accent);
+            text-align: center; border-top: 6px solid var(--green);
             animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        #reward-popup h2 { color: var(--accent); font-size: 36px; margin-bottom: 10px; }
-        #reward-popup p { color: var(--navy); font-size: 18px; font-weight: 600; }
+        #reward-popup .trophy { font-size: 60px; margin-bottom: 10px; }
+        #reward-popup h2 { color: var(--navy); font-size: 32px; margin-bottom: 10px; }
+        #reward-popup p { color: #64748b; font-size: 18px; font-weight: 600; }
         
         @keyframes popIn {
             0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
@@ -203,10 +208,11 @@
             .flashcard-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
             .flashcard-wrapper { height: 240px; }
             .flashcard-front img { width: 70px; height: 70px; }
-            .flashcard-front h2 { font-size: 18px; }
-            .flashcard-back h3 { font-size: 18px; }
-            .flashcard-back p.translation { font-size: 20px; }
+            .flashcard-front h2 { font-size: 20px; }
+            .flashcard-back h3 { font-size: 20px; }
+            .flashcard-back p.translation { font-size: 24px; }
             .wiki-box { flex-direction: column; text-align: center; gap: 15px; }
+            .wiki-text-area { padding-right: 0; }
         }
     </style>
 </head>
@@ -228,7 +234,7 @@
 <section class="hero-compact">
     <h1>Word Bank</h1>
     <div class="hero-info">
-        <span>Tap, listen, and learn! 👆🎧</span>
+        <span>Tap, listen, and flip! 👆</span>
     </div>
 </section>
 
@@ -240,8 +246,9 @@
 
 <div id="overlay"></div>
 <div id="reward-popup">
-    <h2>🎉 太棒了!</h2>
-    <p>Все слова выучены!<br>All words learned!</p>
+    <div class="trophy">🏆</div>
+    <h2>Молодец!</h2>
+    <p>Все слова в этой теме изучены!<br>太棒了！</p>
 </div>
 
 <footer>
@@ -249,31 +256,58 @@
 </footer>
 
 <script>
-    // БАЗА ДАННЫХ СЛОВАРЯ
+    // БАЗА ДАННЫХ: Слова разбиты по логическим топикам, предложения взяты из "phrase"
     const dictionary = {
-        "animals": { 
-            title: "Animals (动物)", 
-            wiki: "<b>Educational Goal:</b> Learn basic animal names. Tap the cards to hear the sound and flip for translation!<br><b>教學目標：</b>學習基本動物名稱。點擊卡片聽發音並查看翻譯！", 
+        "family": { 
+            title: "Family & Friends", 
+            wiki: "<b>Educational Goal:</b> Learn family members and gender. Practice pointing and saying 'This is...'.<br><b>教學目標：</b>學習家庭成員和性別。練習說 'This is...'。", 
             words: [
-                { id: "dog", ru: "Собака", pinyin: "gǒu", zh: "狗", sentence: "Это собака. (这是一只狗。)", img: "https://cdn-icons-png.flaticon.com/512/616/616408.png" },
-                { id: "cat", ru: "Кошка", pinyin: "māo", zh: "猫", sentence: "У меня есть кошка. (我有一只猫。)", img: "https://cdn-icons-png.flaticon.com/512/616/616430.png" },
-                { id: "pig", ru: "Свинья", pinyin: "zhū", zh: "猪", sentence: "Свинья ест. (猪在吃东西。)", img: "https://cdn-icons-png.flaticon.com/512/616/616432.png" },
-                { id: "cow", ru: "Корова", pinyin: "niú", zh: "牛", sentence: "Корова дает молоко. (牛产奶。)", img: "https://cdn-icons-png.flaticon.com/512/616/616438.png" }
+                { id: "daddy", en: "Daddy", pinyin: "bà ba", zh: "爸爸", sentence: "Good morning Daddy", img: "assets/img/daddy.png" },
+                { id: "mommy", en: "Mommy", pinyin: "mā ma", zh: "妈妈", sentence: "Good morning Mommy", img: "assets/img/mommy.png" },
+                { id: "boy", en: "Boy", pinyin: "nán hái", zh: "男孩", sentence: "You are a boy", img: "assets/img/boy.png" },
+                { id: "girl", en: "Girl", pinyin: "nǚ hái", zh: "女孩", sentence: "You are a girl", img: "assets/img/girl.png" },
+                { id: "friend", en: "Friend", pinyin: "péng you", zh: "朋友", sentence: "This is my friend", img: "assets/img/friend.png" }
             ] 
         },
-        "food": { 
-            title: "Food (食物)", 
-            wiki: "<b>Educational Goal:</b> Recognize everyday food items.<br><b>教學目標：</b>認識日常食物。", 
+        "school": { 
+            title: "My School", 
+            wiki: "<b>Educational Goal:</b> Recognize school objects. Focus on the letter 'B'.<br><b>教學目標：</b>認識學校物品。重點學習字母 B。", 
             words: [
-                { id: "apple", ru: "Яблоко", pinyin: "píng guǒ", zh: "苹果", sentence: "Я люблю яблоки. (我喜欢苹果。)", img: "https://cdn-icons-png.flaticon.com/512/415/415682.png" },
-                { id: "bread", ru: "Хлеб", pinyin: "miàn bāo", zh: "面包", sentence: "Вкусный хлеб. (好吃的面包。)", img: "https://cdn-icons-png.flaticon.com/512/3014/3014498.png" }
+                { id: "bag", en: "Bag", pinyin: "shū bāo", zh: "书包", sentence: "Open your bag", img: "assets/img/bag.png" },
+                { id: "book", en: "Book", pinyin: "shū", zh: "书", sentence: "It is a book", img: "assets/img/book.png" },
+                { id: "pencil", en: "Pencil", pinyin: "qiān bǐ", zh: "铅笔", sentence: "This is a pencil", img: "assets/img/pencil.png" }
+            ] 
+        },
+        "face": { 
+            title: "My Face", 
+            wiki: "<b>Educational Goal:</b> Learn facial parts. Use a mirror to play with your child.<br><b>教學目標：</b>認識五官。和孩子一起照鏡子練習。", 
+            words: [
+                { id: "eye", en: "Eye", pinyin: "yǎn jing", zh: "眼睛", sentence: "Close your eyes", img: "assets/img/eye.png" },
+                { id: "nose", en: "Nose", pinyin: "bí zi", zh: "鼻子", sentence: "This is my nose", img: "assets/img/nose.png" },
+                { id: "mouth", en: "Mouth", pinyin: "zuǐ ba", zh: "嘴巴", sentence: "My mouth is big", img: "assets/img/mouth.png" },
+                { id: "ear", en: "Ear", pinyin: "ěr duo", zh: "耳朵", sentence: "Touch your ear", img: "assets/img/ear.png" },
+                { id: "hair", en: "Hair", pinyin: "tóu fa", zh: "头发", sentence: "Oh my hair!", img: "assets/img/hair.png" }
+            ] 
+        },
+        "animals": { 
+            title: "Animals", 
+            wiki: "<b>Educational Goal:</b> Farm and wild animals. Have fun making animal noises!<br><b>教學目標：</b>農場與野生動物。一起模仿動物叫聲！", 
+            words: [
+                { id: "cow", en: "Cow", pinyin: "niú", zh: "牛", sentence: "It is a cow", img: "assets/img/cow.png" },
+                { id: "pig", en: "Pig", pinyin: "zhū", zh: "猪", sentence: "One pig", img: "assets/img/pig.png" },
+                { id: "panda", en: "Panda", pinyin: "xióng māo", zh: "熊猫", sentence: "Look at the panda", img: "assets/img/panda.png" },
+                { id: "tiger", en: "Tiger", pinyin: "lǎo hǔ", zh: "老虎", sentence: "Two tigers", img: "assets/img/tiger.png" },
+                { id: "monkey", en: "Monkey", pinyin: "hóu zi", zh: "猴子", sentence: "Act like a monkey", img: "assets/img/monkey.png" }
             ] 
         },
         "transport": { 
-            title: "Transport (交通)", 
-            wiki: "<b>Educational Goal:</b> Vehicles and movement.<br><b>教學目標：</b>交通工具與移動。", 
+            title: "Transport", 
+            wiki: "<b>Educational Goal:</b> Vehicles and traffic safety. Red means Stop!<br><b>教學目標：</b>交通工具與安全。紅燈停！", 
             words: [
-                { id: "car", ru: "Машина", pinyin: "qì chē", zh: "汽车", sentence: "Красная машина. (红色的汽车。)", img: "https://cdn-icons-png.flaticon.com/512/3097/3097180.png" }
+                { id: "car", en: "Car", pinyin: "qì chē", zh: "汽车", sentence: "Look at the car", img: "assets/img/car.png" },
+                { id: "bus", en: "Bus", pinyin: "gōng jiāo chē", zh: "公交车", sentence: "It is a bus", img: "assets/img/bus.png" },
+                { id: "bike", en: "Bike", pinyin: "zì xíng chē", zh: "自行车", sentence: "Oh my bike", img: "assets/img/bike.png" },
+                { id: "taxi", en: "Taxi", pinyin: "chū zū chē", zh: "出租车", sentence: "Stop the taxi", img: "assets/img/taxi.png" }
             ] 
         }
     };
@@ -292,6 +326,7 @@
             btn.className = 'category-btn';
             btn.innerText = dictionary[catKey].title;
             
+            // Загружаем первую категорию по умолчанию
             if (index === 0) {
                 btn.classList.add('active');
                 loadCategory(catKey, btn);
@@ -303,15 +338,16 @@
     }
 
     function loadCategory(catKey, btn) {
-        // Сброс активных кнопок и прогресса
+        // Убираем класс active у всех кнопок и добавляем текущей
         document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
         if(btn) btn.classList.add('active');
+        
+        // Сброс прогресса при смене темы
         learnedCards.clear();
 
         const data = dictionary[catKey];
         currentCategoryWordsCount = data.words.length;
 
-        // Блок Wiki и счетчик прогресса
         let html = `
             <div class="wiki-box">
                 <div class="wiki-text-area">
@@ -323,20 +359,19 @@
             <div class="flashcard-grid">
         `;
 
-        // Генерация карточек
         data.words.forEach((word) => {
             html += `
                 <div class="flashcard-wrapper" onclick="flipCard(this, '${word.id}')">
                     <div class="flashcard-inner">
                         <div class="flashcard-front">
-                            <img src="${word.img}" alt="${word.ru}">
-                            <h2>${word.ru}</h2>
+                            <img src="${word.img}" alt="${word.en}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1006/1006657.png'">
+                            <h2>${word.en}</h2>
                         </div>
                         <div class="flashcard-back">
-                            <h3>${word.ru}</h3>
+                            <h3>${word.en}</h3>
                             <p class="pinyin">${word.pinyin}</p>
                             <p class="translation">${word.zh}</p>
-                            <p class="sentence">${word.sentence}</p>
+                            <p class="sentence">"${word.sentence}"</p>
                         </div>
                     </div>
                 </div>
@@ -348,16 +383,13 @@
 
     function flipCard(element, wordId) {
         element.classList.toggle('flipped');
-        
-        // Воспроизведение звука (раскомментируйте, когда добавите аудиофайлы)
-        // let audio = new Audio(`assets/audio/${wordId}.mp3`);
-        // audio.play();
 
-        // Логика прогресса
+        // Подсчет уникальных кликов для геймификации
         if (!learnedCards.has(wordId)) {
             learnedCards.add(wordId);
             document.getElementById('progress-text').innerText = `${learnedCards.size} / ${currentCategoryWordsCount}`;
             
+            // Если все карточки открыты, показываем "Молодец!"
             if (learnedCards.size === currentCategoryWordsCount) {
                 setTimeout(showReward, 800);
             }
@@ -370,10 +402,11 @@
         popup.style.display = 'block';
         overlay.style.display = 'block';
         
+        // Скрываем окно через 3 секунды
         setTimeout(() => {
             popup.style.display = 'none';
             overlay.style.display = 'none';
-        }, 3500);
+        }, 3000);
     }
 
     init();
