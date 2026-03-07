@@ -377,50 +377,47 @@
             </head>
             <body>
               <div class="diploma">
-                  <div class="corner corner-left"></div>
-                  <div class="corner corner-right"></div>
-              
-                  <div class="logo">LINGUALAB ACADEMY</div>
-                  <div class="diploma-kicker">Certificate of Achievement</div>
-              
-                  <h1>DIPLOMA</h1>
-                  <p class="award-text">Presented for excellent progress in bilingual learning</p>
-              
-                  <div class="rank-badge">${rank}</div>
-              
-                  <div class="stats-box">
-                      <div class="stat-item">
-                          <span class="stat-val">${score}</span>
-                          <span class="stat-label">Tasks Completed</span>
-                      </div>
-                      <div class="stat-item">
-                          <span class="stat-val">100%</span>
-                          <span class="stat-label">Effort</span>
-                      </div>
-                  </div>
-              
-                  <div class="detailed-analytics">
-                      <div class="analytics-title">Learning Highlights</div>
-                      <div class="analytic-line"><b>Focus Time:</b> ${timeMin} min</div>
-                      <div class="analytic-line"><b>Favorite Topic:</b> ${topicText}</div>
-                  </div>
-              
-                  <p class="closing-line">Your Knowledge Tree is blooming!</p>
-              
-                  <div class="diploma-footer">
-                      <div class="signature-block">
-                          <div class="signature-line"></div>
-                      </div>
-              
-                      <div class="certificate-meta">
-                          <span>Date: ${date}</span>
-                          <span>Certificate ID: LL-${Math.floor(Math.random()*10000)}</span>
-                      </div>
-                  </div>
-              
-                  <div class="seal">OFFICIAL<br>LinguaLab</div>
-              </div>
-        `);
+                <div class="corner corner-left"></div>
+                <div class="corner corner-right"></div>
+            
+                <div class="logo">LINGUALAB ACADEMY</div>
+                <h1>Diploma</h1>
+                <p class="award-text">Awarded for reaching the rank of</p>
+                <div class="rank-badge">${rank}</div>
+            
+                <div class="stats-box">
+                    <div class="stat-item">
+                        <span class="stat-val">${score}</span>
+                        <span class="stat-label">Tasks Completed</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-val">100%</span>
+                        <span class="stat-label">Effort</span>
+                    </div>
+                </div>
+            
+                <div class="detailed-analytics">
+                    <div class="analytics-title">Learning Highlights</div>
+                    <div class="analytic-line"><b>Focus Time:</b> ${timeMin} min</div>
+                    <div class="analytic-line"><b>Favorite Topic:</b> ${topicText}</div>
+                </div>
+            
+                <p class="closing-line">Your Knowledge Tree is blooming!</p>
+            
+                <div class="diploma-footer">
+                    <div class="signature-block">
+                        <div class="signature-line"></div>
+                        <div class="signature-label">LinguaLab Academy</div>
+                    </div>
+            
+                    <div class="certificate-meta">
+                        <span>Date: ${date}</span>
+                        <span>Certificate ID: LL-${Math.floor(Math.random()*10000)}</span>
+                    </div>
+                </div>
+            
+                <div class="seal">OFFICIAL<br>LinguaLab</div>
+            </div>
         reportWindow.document.close();
     }
 
