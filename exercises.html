@@ -9,200 +9,528 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
 
-    <style>
-        :root {
-            --primary: #22d3ee;
-            --primary-light: #ecfeff;
-            --accent: #f97316;
-            --navy: #1f4e79;
-            --bg: #f8fafc;
-            --radius: 24px;
-            --c1: #e0f2fe; --c2: #dcfce7; --c3: #fef3c7; --c4: #fee2e2;
-        }
+<style>
+  :root {
+    --primary: #22d3ee;
+    --primary-light: #ecfeff;
+    --accent: #f97316;
+    --navy: #1f4e79;
+    --bg: #f8fafc;
+    --radius: 24px;
+    --text: #0f172a;
+    --muted: #64748b;
+    --line: #e2e8f0;
+    --shadow-soft: 0 4px 15px rgba(0,0,0,0.04);
+    --shadow-card: 0 20px 40px rgba(0,0,0,0.08);
+    --c1: #e0f2fe;
+    --c2: #dcfce7;
+    --c3: #fef3c7;
+    --c4: #fee2e2;
+  }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg);
-            color: #0f172a;
-            line-height: 1.6;
-            padding-top: 80px;
-        }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
-        .navbar {
-            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 15px 40px;
-            background: #fff; 
-            box-shadow: 0 4px 20px rgba(0,0,0,.05);
-            height: 80px; 
-        }
-        .navbar-left { display: flex; align-items: center; gap: 12px; }
-        .nav-logo { height: 50px; width: auto; display: block; }
-        .nav-title { font-size: 24px; font-weight: 800; color: var(--navy); }
-        
-        .navbar-right { display: flex; align-items: center; gap: 20px; }
-        .navbar-right a { 
-            color: var(--navy); font-weight: 600; text-decoration: none; 
-            font-size: 14px; transition: 0.3s; 
-        }
-        .navbar-right a:hover { color: var(--accent); }
+  html,
+  body {
+    overflow-x: hidden;
+  }
 
-        .hero-compact {
-            padding: 60px 8% 140px;
-            text-align: center;
-            background: linear-gradient(135deg, #22d3ee, #a78bfa);
-            color: #fff;
-            width: 100%;
-        }
-        
-        .hero-compact h1 {
-            font-size: 42px;
-            font-weight: 800;
-            margin-bottom: 10px;
-        }
-        
-        .hero-info {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            font-size: 18px;
-            flex-wrap: wrap;
-        }
-        
-        .hero-copy {
-            max-width: 760px;
-            line-height: 1.5;
-        }
-        
-        .hero-copy .cn-line {
-            display: block;
-            font-size: 16px;
-            font-weight: 400;
-            opacity: 0.9;
-            margin-top: 4px;
-        }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding-top: 80px;
+  }
 
+  .navbar-left,
+  .navbar-right,
+  .hero-copy,
+  .content-wrapper,
+  .month-container,
+  .wiki-box,
+  .week-grid,
+  .week-card,
+  .footer-text {
+    min-width: 0;
+  }
 
-        .content-wrapper {
-            max-width: 1100px;
-            margin: -100px auto 50px;
-            position: relative;
-            z-index: 10;
-            padding: 0 20px;
-        }
+  .navbar-right a,
+  .hero-copy,
+  .hero-copy .cn-line,
+  .wiki-title,
+  .wiki-content,
+  .month-btn,
+  .week-title,
+  .week-desc,
+  .footer-text {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
 
-        .month-container { 
-            background: #fff; border-radius: var(--radius); padding: 50px 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08); margin-bottom: 40px;
-            border: 1px solid #e2e8f0; text-align: center; position: relative; overflow: hidden;
-            display: flex;
-            flex-wrap: wrap; 
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-        }
+  /* NAVBAR */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 40px;
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(0,0,0,.05);
+    height: 80px;
+  }
 
-        .month-btn { 
-            flex: 0 0 auto;
-            border: none; 
-            padding: 12px 20px; 
-            border-radius: 99px;
-            cursor: pointer; 
-            font-weight: 800; 
-            color: #475569; 
-            transition: 0.2s; 
-            font-size: 15px;
-            min-width: 70px;
-            text-align: center;
-            background: #f1f5f9;
-        }
+  .navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
 
-        .month-btn:hover { transform: translateY(-2px); filter: brightness(0.95); }
-        
-        .month-btn.active { 
-            background: var(--navy); 
-            color: #fff; 
-            box-shadow: 0 4px 15px rgba(31, 78, 121, 0.3); 
-            transform: scale(1.05);
-        }
+  .nav-logo {
+    height: 50px;
+    width: auto;
+    display: block;
+  }
 
-        .wiki-box { 
-            background: #fff7ed; border-left: 5px solid var(--accent); 
-            padding: 30px; border-radius: 16px; margin-bottom: 30px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-        }
-        .wiki-title { 
-            font-weight: 800; color: #c2410c; margin-bottom: 10px; 
-            text-transform: uppercase; font-size: 13px; letter-spacing: 1px;
-        }
-        .wiki-content { font-size: 16px; line-height: 1.6; color: #431407; }
-        
-        .week-grid { 
-            display: grid; 
-            grid-template-columns: repeat(4, 1fr); 
-            gap: 20px; 
-        }
-        
-        .week-card { 
-            background: #fff; 
-            border-radius: var(--radius); 
-            padding: 30px 20px; 
-            text-align: center; 
-            cursor: pointer; 
-            border: 2px solid transparent; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04); 
-            transition: 0.3s;
-            text-decoration: none; 
-            color: inherit; 
-            display: flex; flex-direction: column; align-items: center;
-        }
-        .week-card:hover { 
-            transform: translateY(-5px); 
-            border-color: var(--primary); 
-            box-shadow: 0 20px 40px rgba(34, 211, 238, 0.15);
-        }
-        
-        .week-number { 
-            font-size: 20px; font-weight: 800; color: var(--primary);
-            background: var(--primary-light); width: 50px; height: 50px;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            margin-bottom: 15px;
-        }
-        .week-title { font-size: 18px; margin-bottom: 5px; font-weight: 700; color: var(--navy); }
-        .week-desc { font-size: 14px; opacity: 0.7; font-weight: 500; }
+  .nav-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.1;
+  }
 
-        .coming-soon { opacity: 0.5; pointer-events: none; border: 1px dashed #cbd5e1; background: #f8fafc; }
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
 
-        footer {
-          background: #0f172a;
-          color: #94a3b8;
-          padding: 40px 8%;
-          text-align: center;
-          margin-top: 50px;
-        }
-        .footer-link {
-          color: #f97316;
-          text-decoration: none !important;
-        }
-        /* --- MOBILE --- */
-        @media (max-width: 900px) {
-            .week-grid { grid-template-columns: repeat(2, 1fr); }
-            .hero-compact { padding-bottom: 160px; }
-        }
+  .navbar-right a {
+    color: var(--navy);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+  }
 
-        @media (max-width: 600px) {
-            .navbar { padding: 10px 20px; flex-direction: column; gap: 10px; height: auto; }
-            .navbar-left { width: 100%; justify-content: center; }
-            .navbar-right { width: 100%; justify-content: center; flex-wrap: wrap; border-top: 1px solid #f1f5f9; padding-top: 10px; }
-            .hero-compact h1 { font-size: 32px; }
-            .content-wrapper { margin-top: -80px; }
-            .week-grid { grid-template-columns: 1fr; }
-            .month-btn { padding: 8px 12px; font-size: 13px; flex-grow: 1; }
-        }
-    </style>
+  .navbar-right a:hover {
+    color: var(--accent);
+  }
+
+  /* HERO */
+  .hero-compact {
+    padding: 60px 8% 140px;
+    text-align: center;
+    background: linear-gradient(135deg, var(--primary), #a78bfa);
+    color: #fff;
+    width: 100%;
+  }
+
+  .hero-compact h1 {
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    line-height: 1.15;
+  }
+
+  .hero-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-size: 18px;
+    flex-wrap: wrap;
+  }
+
+  .hero-copy {
+    max-width: 760px;
+    line-height: 1.6;
+    font-size: 17px;
+  }
+
+  .hero-copy .cn-line {
+    display: block;
+    font-size: 16px;
+    font-weight: 400;
+    opacity: 0.92;
+    margin-top: 6px;
+    line-height: 1.55;
+  }
+
+  /* CONTENT WRAPPER */
+  .content-wrapper {
+    max-width: 1100px;
+    margin: -100px auto 50px;
+    position: relative;
+    z-index: 10;
+    padding: 0 20px;
+  }
+
+  /* MONTH BUTTONS */
+  .month-container {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 30px 32px;
+    box-shadow: var(--shadow-card);
+    margin-bottom: 40px;
+    border: 1px solid var(--line);
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .month-btn {
+    flex: 0 0 auto;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: 800;
+    color: #475569;
+    transition: 0.2s;
+    font-size: 15px;
+    min-width: 72px;
+    text-align: center;
+    background: #f1f5f9;
+    line-height: 1.25;
+  }
+
+  .month-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(0.97);
+  }
+
+  .month-btn.active {
+    background: var(--navy);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(31, 78, 121, 0.3);
+    transform: scale(1.04);
+  }
+
+  /* WIKI BOX */
+  .wiki-box {
+    background: #fff7ed;
+    border-left: 5px solid var(--accent);
+    padding: 30px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .wiki-title {
+    font-weight: 800;
+    color: #c2410c;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 1px;
+    line-height: 1.35;
+  }
+
+  .wiki-content {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #431407;
+  }
+
+  /* WEEK GRID */
+  .week-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .week-card {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 30px 20px;
+    text-align: center;
+    cursor: pointer;
+    border: 2px solid transparent;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+    transition: 0.3s;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 220px;
+  }
+
+  .week-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+    box-shadow: 0 20px 40px rgba(34, 211, 238, 0.15);
+  }
+
+  .week-number {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--primary);
+    background: var(--primary-light);
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .week-title {
+    font-size: 18px;
+    margin-bottom: 8px;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.35;
+  }
+
+  .week-desc {
+    font-size: 15px;
+    opacity: 0.78;
+    font-weight: 600;
+    line-height: 1.55;
+  }
+
+  .coming-soon {
+    opacity: 0.5;
+    pointer-events: none;
+    border: 1px dashed #cbd5e1;
+    background: #f8fafc;
+    box-shadow: none;
+  }
+
+  /* FOOTER */
+  footer {
+    background: #0f172a;
+    color: #94a3b8;
+    padding: 40px 8%;
+    text-align: center;
+    margin-top: 50px;
+  }
+
+  .footer-link {
+    color: #f97316;
+    text-decoration: none !important;
+  }
+
+  .footer-text {
+    font-size: 14px;
+    line-height: 1.65;
+    margin-top: 8px;
+  }
+
+  /* TABLET */
+  @media (max-width: 1024px) {
+    .navbar {
+      padding: 12px 24px;
+    }
+
+    .nav-title {
+      font-size: 22px;
+    }
+
+    .navbar-right {
+      gap: 14px;
+    }
+
+    .navbar-right a {
+      font-size: 13px;
+    }
+
+    .hero-compact {
+      padding: 56px 6% 130px;
+    }
+
+    .hero-compact h1 {
+      font-size: 38px;
+    }
+
+    .hero-copy {
+      font-size: 16px;
+      line-height: 1.62;
+    }
+
+    .hero-copy .cn-line {
+      font-size: 15px;
+    }
+
+    .content-wrapper {
+      padding: 0 16px;
+    }
+
+    .month-container {
+      padding: 24px;
+    }
+
+    .wiki-box {
+      padding: 24px;
+    }
+
+    .wiki-content {
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .week-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .week-card {
+      min-height: 210px;
+      padding: 26px 18px;
+    }
+  }
+
+  /* MOBILE */
+  @media (max-width: 700px) {
+    body {
+      padding-top: 128px;
+    }
+
+    .navbar {
+      padding: 10px 16px;
+      flex-direction: column;
+      gap: 10px;
+      height: auto;
+    }
+
+    .navbar-left {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .navbar-right {
+      width: 100%;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px 12px;
+      border-top: 1px solid #f1f5f9;
+      padding-top: 10px;
+    }
+
+    .navbar-right a {
+      font-size: 13px;
+      text-align: center;
+      white-space: normal;
+    }
+
+    .nav-logo {
+      height: 40px;
+    }
+
+    .nav-title {
+      font-size: 20px;
+    }
+
+    .hero-compact {
+      padding: 46px 16px 110px;
+    }
+
+    .hero-compact h1 {
+      font-size: 30px;
+      line-height: 1.2;
+    }
+
+    .hero-copy {
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    .hero-copy .cn-line {
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .content-wrapper {
+      margin-top: -72px;
+      padding: 0 14px;
+    }
+
+    .month-container {
+      padding: 18px;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .month-btn {
+      width: calc(50% - 5px);
+      min-width: 0;
+      padding: 12px 14px;
+      font-size: 14px;
+      flex-grow: 0;
+    }
+
+    .wiki-box {
+      padding: 20px 18px;
+      border-radius: 18px;
+      margin-bottom: 24px;
+    }
+
+    .wiki-title {
+      font-size: 12px;
+    }
+
+    .wiki-content {
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .week-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .week-card {
+      min-height: 0;
+      padding: 24px 18px;
+    }
+
+    .week-number {
+      width: 48px;
+      height: 48px;
+      font-size: 18px;
+      margin-bottom: 14px;
+    }
+
+    .week-title {
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    .week-desc {
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .footer-text {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .month-btn {
+      width: 100%;
+    }
+  }
+</style>
 </head>
 <body>
 
