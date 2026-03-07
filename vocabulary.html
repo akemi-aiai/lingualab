@@ -9,449 +9,713 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
 
-  <style>
-    :root {
-      --primary: #22d3ee;
-      --primary-light: #ecfeff;
-      --accent: #f97316;
-      --navy: #1f4e79;
-      --green: #22c55e;
-      --bg: #f8fafc;
-      --radius: 24px;
-    }
+<style>
+  :root {
+    --primary: #22d3ee;
+    --primary-light: #ecfeff;
+    --accent: #f97316;
+    --navy: #1f4e79;
+    --green: #22c55e;
+    --bg: #f8fafc;
+    --radius: 24px;
+    --text: #0f172a;
+    --muted: #64748b;
+    --line: #e2e8f0;
+    --shadow-soft: 0 4px 15px rgba(0,0,0,0.04);
+    --shadow-card: 0 20px 40px rgba(0,0,0,0.08);
+  }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: #0f172a;
-      line-height: 1.6;
-      padding-top: 80px;
-    }
+  html,
+  body {
+    overflow-x: hidden;
+  }
 
-    /* --- NAVBAR --- */
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding-top: 80px;
+  }
+
+  .navbar-left,
+  .navbar-right,
+  .hero-copy,
+  .content-wrapper,
+  .category-container,
+  .wiki-box,
+  .wiki-text-area,
+  .flashcard-grid,
+  .flashcard-wrapper,
+  .flashcard-front,
+  .flashcard-back,
+  .footer-text {
+    min-width: 0;
+  }
+
+  .navbar-right a,
+  .hero-copy,
+  .hero-copy .cn-line,
+  .wiki-content,
+  .wiki-title,
+  .progress-counter,
+  .category-btn,
+  .flashcard-front h2,
+  .flashcard-back h3,
+  .flashcard-back p,
+  .footer-text {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  /* NAVBAR */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 40px;
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(0,0,0,.05);
+    height: 80px;
+  }
+
+  .navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .nav-logo {
+    height: 50px;
+    width: auto;
+    display: block;
+  }
+
+  .nav-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.1;
+  }
+
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .navbar-right a {
+    color: var(--navy);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+  }
+
+  .navbar-right a:hover {
+    color: var(--accent);
+  }
+
+  /* HERO */
+  .hero-compact {
+    padding: 60px 8% 140px;
+    text-align: center;
+    background: linear-gradient(135deg, var(--primary), #a78bfa);
+    color: #fff;
+    width: 100%;
+  }
+
+  .hero-compact h1 {
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    line-height: 1.15;
+  }
+
+  .hero-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-size: 18px;
+    flex-wrap: wrap;
+  }
+
+  .hero-copy {
+    max-width: 760px;
+    line-height: 1.6;
+    font-size: 17px;
+  }
+
+  .hero-copy .cn-line {
+    display: block;
+    font-size: 16px;
+    font-weight: 400;
+    opacity: 0.92;
+    margin-top: 6px;
+    line-height: 1.55;
+  }
+
+  .tree-badge {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 18px;
+    border-radius: 999px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    font-weight: 800;
+    white-space: nowrap;
+    font-size: 15px;
+    line-height: 1.2;
+  }
+
+  /* CONTENT WRAPPER */
+  .content-wrapper {
+    max-width: 1100px;
+    margin: -100px auto 50px;
+    position: relative;
+    z-index: 10;
+    padding: 0 20px;
+  }
+
+  /* CATEGORY */
+  .category-container {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 30px 40px;
+    box-shadow: var(--shadow-card);
+    margin-bottom: 40px;
+    border: 1px solid var(--line);
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .category-btn {
+    flex: 0 0 auto;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: 800;
+    color: #475569;
+    transition: 0.2s;
+    font-size: 15px;
+    line-height: 1.25;
+    background: #f1f5f9;
+  }
+
+  .category-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(0.97);
+  }
+
+  .category-btn.active {
+    background: var(--navy);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(31, 78, 121, 0.3);
+    transform: scale(1.04);
+  }
+
+  /* WIKI BOX */
+  .wiki-box {
+    background: #fff7ed;
+    border-left: 5px solid var(--accent);
+    padding: 30px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .wiki-text-area {
+    flex-grow: 1;
+    padding-right: 20px;
+  }
+
+  .wiki-title {
+    font-weight: 800;
+    color: #c2410c;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 1px;
+    line-height: 1.35;
+  }
+
+  .wiki-content {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #431407;
+  }
+
+  .wiki-content div + div {
+    margin-top: 8px;
+  }
+
+  .progress-counter {
+    background: #fff;
+    color: var(--accent);
+    font-weight: 800;
+    padding: 10px 20px;
+    border-radius: 999px;
+    font-size: 18px;
+    box-shadow: 0 4px 10px rgba(249, 115, 22, 0.15);
+    white-space: nowrap;
+    line-height: 1.2;
+    flex-shrink: 0;
+  }
+
+  /* FLASHCARDS */
+  .flashcard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 25px;
+  }
+
+  .flashcard-wrapper {
+    background: transparent;
+    height: 280px;
+    perspective: 1000px;
+    cursor: pointer;
+  }
+
+  .flashcard-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transform-style: preserve-3d;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+  }
+
+  .flashcard-wrapper.flipped .flashcard-inner {
+    transform: rotateY(180deg);
+  }
+
+  .flashcard-front,
+  .flashcard-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .flashcard-front {
+    background: #fff;
+    border: 2px solid transparent;
+    transition: 0.3s;
+  }
+
+  .flashcard-front img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 20px;
+  }
+
+  .flashcard-front h2 {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--navy);
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .flashcard-back {
+    background: var(--navy);
+    color: #fff;
+    transform: rotateY(180deg);
+    border: 2px solid var(--navy);
+  }
+
+  .flashcard-back h3 {
+    font-size: 24px;
+    margin-bottom: 5px;
+    color: var(--primary-light);
+    line-height: 1.2;
+  }
+
+  .flashcard-back p.pinyin {
+    font-size: 16px;
+    opacity: 0.8;
+    margin-bottom: 5px;
+    line-height: 1.4;
+  }
+
+  .flashcard-back p.translation {
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 15px;
+    color: var(--primary);
+    line-height: 1.2;
+  }
+
+  .flashcard-back p.sentence {
+    font-size: 15px;
+    line-height: 1.5;
+    font-weight: 600;
+    border-top: 1px dashed rgba(255,255,255,0.2);
+    padding-top: 15px;
+    color: #fcd34d;
+    width: 100%;
+  }
+
+  /* REWARD POPUP */
+  #reward-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 40px 60px;
+    border-radius: var(--radius);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    z-index: 2000;
+    text-align: center;
+    border-top: 6px solid var(--green);
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    max-width: calc(100vw - 32px);
+  }
+
+  #reward-popup .trophy {
+    font-size: 60px;
+    margin-bottom: 10px;
+    animation: tada 1s ease-in-out infinite;
+  }
+
+  #reward-popup h2 {
+    color: var(--navy);
+    font-size: 32px;
+    margin-bottom: 10px;
+    line-height: 1.25;
+  }
+
+  #reward-popup p {
+    color: #64748b;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.55;
+  }
+
+  @keyframes tada {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-10deg) scale(1.1); }
+    50% { transform: rotate(10deg) scale(1.1); }
+    75% { transform: rotate(-10deg) scale(1.1); }
+  }
+
+  @keyframes popIn {
+    0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  }
+
+  #overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.6);
+    z-index: 1999;
+    backdrop-filter: blur(3px);
+  }
+
+  /* FOOTER */
+  footer {
+    background: #0f172a;
+    color: #94a3b8;
+    padding: 40px 8%;
+    text-align: center;
+    margin-top: 50px;
+  }
+
+  .footer-link {
+    color: #f97316;
+    text-decoration: none !important;
+  }
+
+  .footer-text {
+    font-size: 14px;
+    line-height: 1.65;
+    margin-top: 8px;
+  }
+
+  /* TABLET */
+  @media (max-width: 1024px) {
     .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 15px 40px;
-      background: #fff;
-      box-shadow: 0 4px 20px rgba(0,0,0,.05);
-      height: 80px;
-    }
-
-    .navbar-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .nav-logo {
-      height: 50px;
-      width: auto;
-      display: block;
+      padding: 12px 24px;
     }
 
     .nav-title {
-      font-size: 24px;
-      font-weight: 800;
-      color: var(--navy);
+      font-size: 22px;
     }
 
     .navbar-right {
-      display: flex;
-      align-items: center;
-      gap: 20px;
+      gap: 14px;
     }
 
     .navbar-right a {
-      color: var(--navy);
-      font-weight: 600;
-      text-decoration: none;
-      font-size: 14px;
-      transition: 0.3s;
+      font-size: 13px;
     }
 
-    .navbar-right a:hover {
-      color: var(--accent);
-    }
-
-    /* --- HERO SECTION --- */
     .hero-compact {
-      padding: 60px 8% 140px;
-      text-align: center;
-      background: linear-gradient(135deg, #22d3ee, #a78bfa);
-      color: #fff;
-      width: 100%;
+      padding: 56px 6% 130px;
     }
 
     .hero-compact h1 {
-      font-size: 42px;
-      font-weight: 800;
-      margin-bottom: 10px;
-    }
-
-    .hero-info {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
-      font-size: 18px;
-      flex-wrap: wrap;
+      font-size: 38px;
     }
 
     .hero-copy {
-      max-width: 760px;
-      line-height: 1.5;
+      font-size: 16px;
+      line-height: 1.62;
     }
 
     .hero-copy .cn-line {
-      display: block;
-      font-size: 16px;
-      font-weight: 400;
-      opacity: 0.9;
-      margin-top: 4px;
-    }
-
-    .tree-badge {
-      background: rgba(255, 255, 255, 0.2);
-      padding: 6px 18px;
-      border-radius: 999px;
-      backdrop-filter: blur(5px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    /* --- CONTENT WRAPPER --- */
-    .content-wrapper {
-      max-width: 1100px;
-      margin: -100px auto 50px;
-      position: relative;
-      z-index: 10;
-      padding: 0 20px;
-    }
-
-    /* ДАЛЬШЕ НУЖНО ОСТАВИТЬ ТВОИ СТАРЫЕ СТИЛИ НИЖЕ */
-    .category-container {
-      background: #fff;
-      border-radius: var(--radius);
-      padding: 30px 40px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-      margin-bottom: 40px;
-      border: 1px solid #e2e8f0;
-      text-align: center;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-    }
-
-    .category-btn {
-      flex: 0 0 auto;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 99px;
-      cursor: pointer;
-      font-weight: 800;
-      color: #475569;
-      transition: 0.2s;
       font-size: 15px;
-      background: #f1f5f9;
     }
 
-    .category-btn:hover {
-      transform: translateY(-2px);
-      filter: brightness(0.95);
+    .content-wrapper {
+      padding: 0 16px;
     }
 
-    .category-btn.active {
-      background: var(--navy);
-      color: #fff;
-      box-shadow: 0 4px 15px rgba(31, 78, 121, 0.3);
-      transform: scale(1.05);
+    .category-container {
+      padding: 24px 24px;
     }
 
     .wiki-box {
-      background: #fff7ed;
-      border-left: 5px solid var(--accent);
-      padding: 30px;
-      border-radius: 16px;
-      margin-bottom: 30px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .wiki-text-area { flex-grow: 1; padding-right: 20px; }
-
-    .wiki-title {
-      font-weight: 800;
-      color: #c2410c;
-      margin-bottom: 10px;
-      text-transform: uppercase;
-      font-size: 13px;
-      letter-spacing: 1px;
+      padding: 24px;
     }
 
     .wiki-content {
       font-size: 15px;
-      line-height: 1.6;
-      color: #431407;
-    }
-
-    .progress-counter {
-      background: #fff;
-      color: var(--accent);
-      font-weight: 800;
-      padding: 10px 20px;
-      border-radius: 99px;
-      font-size: 18px;
-      box-shadow: 0 4px 10px rgba(249, 115, 22, 0.15);
-      white-space: nowrap;
+      line-height: 1.65;
     }
 
     .flashcard-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 25px;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
     }
 
     .flashcard-wrapper {
-      background: transparent;
-      height: 280px;
-      perspective: 1000px;
-      cursor: pointer;
+      height: 260px;
+    }
+  }
+
+  /* MOBILE */
+  @media (max-width: 700px) {
+    body {
+      padding-top: 128px;
     }
 
-    .flashcard-inner {
-      position: relative;
+    .navbar {
+      padding: 10px 16px;
+      flex-direction: column;
+      gap: 10px;
+      height: auto;
+    }
+
+    .navbar-left {
       width: 100%;
-      height: 100%;
-      text-align: center;
-      transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
-      transform-style: preserve-3d;
-      border-radius: var(--radius);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      justify-content: center;
     }
 
-    .flashcard-wrapper.flipped .flashcard-inner {
-      transform: rotateY(180deg);
+    .navbar-right {
+      width: 100%;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px 12px;
+      border-top: 1px solid #f1f5f9;
+      padding-top: 10px;
+    }
+
+    .navbar-right a {
+      font-size: 13px;
+      text-align: center;
+      white-space: normal;
+    }
+
+    .nav-logo {
+      height: 40px;
+    }
+
+    .nav-title {
+      font-size: 20px;
+    }
+
+    .hero-compact {
+      padding: 46px 16px 110px;
+    }
+
+    .hero-compact h1 {
+      font-size: 30px;
+      line-height: 1.2;
+    }
+
+    .hero-copy {
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    .hero-copy .cn-line {
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .tree-badge {
+      font-size: 14px;
+      padding: 8px 16px;
+    }
+
+    .content-wrapper {
+      margin-top: -72px;
+      padding: 0 14px;
+    }
+
+    .category-container {
+      padding: 18px;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .category-btn {
+      width: 100%;
+      max-width: 100%;
+      padding: 12px 16px;
+      font-size: 15px;
+      line-height: 1.35;
+    }
+
+    .wiki-box {
+      flex-direction: column;
+      text-align: center;
+      gap: 15px;
+      padding: 20px 18px;
+      border-radius: 18px;
+    }
+
+    .wiki-text-area {
+      padding-right: 0;
+    }
+
+    .wiki-title {
+      font-size: 12px;
+    }
+
+    .wiki-content {
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .progress-counter {
+      font-size: 17px;
+      padding: 10px 16px;
+      white-space: normal;
+    }
+
+    .flashcard-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .flashcard-wrapper {
+      height: 240px;
     }
 
     .flashcard-front,
     .flashcard-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      border-radius: var(--radius);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      box-sizing: border-box;
-    }
-
-    .flashcard-front {
-      background: #fff;
-      border: 2px solid transparent;
-      transition: 0.3s;
+      padding: 16px;
     }
 
     .flashcard-front img {
-      width: 100px;
-      height: 100px;
-      object-fit: contain;
-      margin-bottom: 20px;
+      width: 70px;
+      height: 70px;
+      margin-bottom: 16px;
     }
 
     .flashcard-front h2 {
-      font-size: 26px;
-      font-weight: 800;
-      color: var(--navy);
-      margin: 0;
-    }
-
-    .flashcard-back {
-      background: var(--navy);
-      color: #fff;
-      transform: rotateY(180deg);
-      border: 2px solid var(--navy);
+      font-size: 20px;
     }
 
     .flashcard-back h3 {
-      font-size: 24px;
-      margin-bottom: 5px;
-      color: var(--primary-light);
+      font-size: 20px;
     }
 
     .flashcard-back p.pinyin {
-      font-size: 16px;
-      opacity: 0.8;
-      margin-bottom: 5px;
+      font-size: 14px;
     }
 
     .flashcard-back p.translation {
-      font-size: 28px;
-      font-weight: bold;
-      margin-bottom: 15px;
-      color: var(--primary);
+      font-size: 24px;
     }
 
     .flashcard-back p.sentence {
-      font-size: 15px;
-      line-height: 1.4;
-      font-weight: 600;
-      border-top: 1px dashed rgba(255,255,255,0.2);
-      padding-top: 15px;
-      color: #fcd34d;
+      font-size: 14px;
+      line-height: 1.45;
+      padding-top: 12px;
     }
 
     #reward-popup {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: #fff;
-      padding: 40px 60px;
-      border-radius: var(--radius);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-      z-index: 2000;
-      text-align: center;
-      border-top: 6px solid var(--green);
-      animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      padding: 28px 20px;
+      width: calc(100vw - 24px);
     }
 
     #reward-popup .trophy {
-      font-size: 60px;
-      margin-bottom: 10px;
-      animation: tada 1s ease-in-out infinite;
+      font-size: 48px;
     }
 
     #reward-popup h2 {
-      color: var(--navy);
-      font-size: 32px;
-      margin-bottom: 10px;
+      font-size: 26px;
     }
 
     #reward-popup p {
-      color: #64748b;
-      font-size: 18px;
-      font-weight: 600;
+      font-size: 16px;
     }
 
-    @keyframes tada {
-      0%, 100% { transform: rotate(0deg); }
-      25% { transform: rotate(-10deg) scale(1.1); }
-      50% { transform: rotate(10deg) scale(1.1); }
-      75% { transform: rotate(-10deg) scale(1.1); }
+    .footer-text {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .flashcard-grid {
+      grid-template-columns: 1fr;
     }
 
-    @keyframes popIn {
-      0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
-      100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    .flashcard-wrapper {
+      height: 250px;
     }
-
-    #overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(15, 23, 42, 0.6);
-      z-index: 1999;
-      backdrop-filter: blur(3px);
-    }
-
-    footer {
-      background: #0f172a;
-      color: #94a3b8;
-      padding: 40px 8%;
-      text-align: center;
-      margin-top: 50px;
-    }
-    .footer-link {
-      color: #f97316;
-      text-decoration: none !important;
-    }
-
-    @media (max-width: 600px) {
-      .navbar {
-        padding: 10px 20px;
-        flex-direction: column;
-        gap: 10px;
-        height: auto;
-      }
-
-      .navbar-left {
-        width: 100%;
-        justify-content: center;
-      }
-
-      .navbar-right {
-        width: 100%;
-        justify-content: center;
-        flex-wrap: wrap;
-        border-top: 1px solid #f1f5f9;
-        padding-top: 10px;
-      }
-
-      .hero-compact h1 {
-        font-size: 32px;
-      }
-
-      .content-wrapper {
-        margin-top: -80px;
-      }
-
-      .flashcard-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-      }
-
-      .flashcard-wrapper {
-        height: 240px;
-      }
-
-      .flashcard-front img {
-        width: 70px;
-        height: 70px;
-      }
-
-      .flashcard-front h2 {
-        font-size: 20px;
-      }
-
-      .flashcard-back h3 {
-        font-size: 20px;
-      }
-
-      .flashcard-back p.translation {
-        font-size: 24px;
-      }
-
-      .wiki-box {
-        flex-direction: column;
-        text-align: center;
-        gap: 15px;
-      }
-
-      .wiki-text-area {
-        padding-right: 0;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
     <header class="navbar">
