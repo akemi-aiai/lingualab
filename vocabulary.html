@@ -54,13 +54,19 @@
 
         /* --- HERO SECTION --- */
         .hero-compact {
-            padding: 60px 20px 140px;
-            text-align: center;
-            background: linear-gradient(135deg, var(--primary), #a78bfa);
-            color: #fff;
-            position: relative;
-            width: 100%;
+          padding: 60px 8% 140px;
+          text-align: center;
+          background: linear-gradient(135deg, #22d3ee, #a78bfa);
+          color: #fff;
+          width: 100%;
         }
+        .hero-compact h1 {`
+          font-size: 42px;
+          font-weight: 800;
+          margin-bottom: 10px;
+        }
+    
+        
         .hero-info {
           display: flex;
           justify-content: center;
@@ -69,10 +75,12 @@
           font-size: 18px;
           flex-wrap: wrap;
         }
+        
         .hero-copy {
           max-width: 760px;
+          line-height: 1.5;
         }
-    
+        
         .hero-copy .cn-line {
           display: block;
           font-size: 16px;
@@ -80,13 +88,7 @@
           opacity: 0.9;
           margin-top: 4px;
         }
-        .hero-compact {
-          padding: 60px 8% 140px;
-          text-align: center;
-          background: linear-gradient(135deg, #22d3ee, #a78bfa);
-          color: #fff;
-        }
-
+        
         .tree-badge {
           background: rgba(255, 255, 255, 0.2);
           padding: 6px 18px;
@@ -260,15 +262,16 @@
     </nav>
   </header>
 
-<section class="hero-compact">
-    <h1>Word Bank</h1>
-    <div class="hero-info">
+    <section class="hero-compact">
+      <h1>Word Bank</h1>
+      <div class="hero-info">
         <div class="hero-copy">
-         Tap, listen, and flip! 
-         <span class="cn-line">点一点，听一听，翻一翻！</span>
-    </div>
-    <div class="tree-badge">Points: <span id="header-score">0</span></div>
-</section>
+          Tap, listen, and flip!
+          <span class="cn-line">点一点，听一听，翻一翻！</span>
+        </div>
+        <div class="tree-badge">Points: <span id="header-score">0</span></div>
+      </div>
+    </section>
 
 <div class="content-wrapper">
     <div class="category-container" id="category-list"></div>
