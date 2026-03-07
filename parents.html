@@ -917,6 +917,14 @@ footer {
           <div class="clil-instr"><b>Parental Action:</b> <span id="clil-instr"></span>
           </div>
           <p class="clil-safety"><b>Safety:</b> <span id="clil-safety"></span></p>
+          <p class="clil-title-zh" id="clil-title-zh"></p>
+          <p class="clil-desc-zh" id="clil-desc-zh"></p>
+          <p class="clil-goal-zh"><b>目标：</b> <span id="clil-goal-zh"></span></p>
+          <p class="clil-vocab"><b>Vocabulary:</b> <span id="clil-vocab"></span></p>
+          <p class="clil-vocab-zh"><b>词汇：</b> <span id="clil-vocab-zh"></span></p>
+          <p class="clil-materials-zh"><b>材料：</b> <span id="clil-materials-zh"></span></p>
+          <p class="clil-age"><b>Age:</b> <span id="clil-age"></span></p>
+          <p class="clil-safety-zh"><b>安全提示：</b> <span id="clil-safety-zh"></span></p>
           </div>
         </div>
 
@@ -1722,6 +1730,14 @@ footer {
       document.getElementById('clil-materials').innerText = act.materials.join(', ');
       document.getElementById('clil-instr').innerText = act.instr;
       document.getElementById('clil-safety').innerText = act.safety;
+      document.getElementById('clil-title-zh').innerText = act.titleZh;
+      document.getElementById('clil-desc-zh').innerText = act.descZh;
+      document.getElementById('clil-goal-zh').innerText = act.goalZh;
+      document.getElementById('clil-vocab').innerText = act.vocab.join(', ');
+      document.getElementById('clil-vocab-zh').innerText = act.vocabZh.join('、');
+      document.getElementById('clil-materials-zh').innerText = act.materialsZh.join('、');
+      document.getElementById('clil-age').innerText = act.age;
+      document.getElementById('clil-safety-zh').innerText = act.safetyZh;
 
       const shuffledTwisters = [...twisterBank].sort(() => 0.5 - Math.random()).slice(0, 5);
       const twisterList = document.getElementById('twister-list');
