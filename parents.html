@@ -414,24 +414,25 @@
       box-shadow: none;
     }
 
-    .report-output {
-      display: none;
-      margin: 18px 0 0;
-      padding: 16px;
-      background: #0f172a;
-      border-radius: 18px;
-      border: 1px solid #1e293b;
-      font-family: monospace;
-      font-size: 12px;
-      line-height: 1.6;
-      color: #cbd5e1;
-      white-space: pre-wrap;
-      word-break: break-word;
-      overflow-x: auto;
-      max-height: 320px;
-      overflow-y: auto;
-      text-align: left;
-    }
+  .report-output {
+    display: none;
+    width: 100%;
+    margin: 18px 0 0;
+    padding: 16px;
+    background: #0f172a;
+    border-radius: 18px;
+    border: 1px solid #1e293b;
+    font-family: monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #cbd5e1;
+    min-height: 220px;
+    max-height: 320px;
+    overflow-y: auto;
+    resize: vertical;
+    text-align: left;
+    outline: none;
+  }
 
     .research-actions {
       display: flex;
@@ -506,11 +507,10 @@
 
     footer {
       background: #0f172a;
-      color: #cbd5e1;
-      padding: 26px 20px;
+      color: #94a3b8;
+      padding: 40px 8%;
       text-align: center;
-      margin-top: 60px;
-      border-top: 1px solid #1e293b;
+      margin-top: 50px;
     }
 
     .footer-text {
@@ -734,17 +734,20 @@
           </div>
         </div>
 
-        <div id="report-output" class="report-output"></div>
+        <textarea id="report-output" class="report-output" readonly></textarea>
 
         <div class="research-actions">
-          <button id="report-btn" class="research-btn" onclick="generateWeeklyReport()">
+          <button id="report-btn" class="research-btn" type="button" onclick="generateWeeklyReport()">
+            Generate Weekly Report
+          </button>
+          <button class="research-btn" type="button" onclick="copyReportOutput()">
             Copy Weekly Code
           </button>
         </div>
       </div>
     </div>
   </div>
-
+  
   <footer>
     <div class="footer-text">
       © <span id="year">2026</span> LinguaLab • Small lessons. Real progress. All rights reserved.
@@ -1370,7 +1373,7 @@
     ];
     
 
-   function generateWeeklyReport() {
+     function generateWeeklyReport() {
       const researchData = JSON.parse(localStorage.getItem('ll_research_data') || 'null');
       const currentWords = parseInt(localStorage.getItem('learned_words_total')) || 0;
       const currentXP = (parseInt(localStorage.getItem('ll_score')) || 0) + (parseInt(localStorage.getItem('vocab_points')) || 0);
@@ -1388,33 +1391,40 @@
     
       const enjoyment = enjoymentInput.value;
       const activeDays = Object.keys(researchData.dailyActivity || {}).length;
-      const hasGoldStar = activeDays >= 5 ? 1 : 0;
+      const hasGoldStar = activeDays >= 5;
     
-      const shortDate = (researchData.startDate || "").slice(0, 10);
+      const report = {
+        id: researchData.studentId,
+        start: researchData.startDate,
+        newW: currentWords - (researchData.totalWordsAtStart || 0),
+        newXP: currentXP - (researchData.totalXPAtStart || 0),
+        log: researchData.dailyActivity,
+        diff: researchData.wordDifficulty || {},
+        star: hasGoldStar,
+        rate: enjoyment
+      };
     
-      const shortCode = [
-        "LL-REPORT",
-        researchData.studentId || "UNKNOWN",
-        shortDate,
-        currentWords - (researchData.totalWordsAtStart || 0),
-        currentXP - (researchData.totalXPAtStart || 0),
-        enjoyment,
-        hasGoldStar
-      ].join("|");
-    
+      const jsonText = JSON.stringify(report, null, 2);
       const output = document.getElementById("report-output");
-      output.innerText = shortCode;
+      output.value = jsonText;
       output.style.display = "block";
-    
-      navigator.clipboard.writeText(shortCode)
-        .then(() => {
-          alert("Weekly code copied. Please paste it into WeChat.");
-        })
-        .catch(() => {
-          alert("Weekly code is ready. Please copy it manually.");
-        });
     }
-
+    
+    function copyReportOutput() {
+      const output = document.getElementById("report-output");
+    
+      if (!output.value.trim()) {
+        alert("Generate the JSON first.");
+        return;
+      }
+    
+      output.select();
+      output.setSelectionRange(0, 99999);
+    
+      navigator.clipboard.writeText(output.value)
+        .then(() => alert("JSON copied."))
+        .catch(() => alert("Copy failed. Please copy it manually."));
+    }
     function updateStats() {
       const vocabScore = parseInt(localStorage.getItem('vocab_points')) || 0;
       const grammarScore = parseInt(localStorage.getItem('ll_score')) || 0;
