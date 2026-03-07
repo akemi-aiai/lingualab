@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Grammar Magic — LinguaLab</title>
-  
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
@@ -12,156 +12,383 @@
   <style>
     :root {
       --primary: #22d3ee;
+      --primary-light: #ecfeff;
       --accent: #f97316;
       --navy: #1f4e79;
+      --green: #22c55e;
       --bg: #f8fafc;
       --radius: 24px;
-      /* Пастельные цвета юнитов */
-      --c1: #e0f2fe; --c2: #dcfce7; --c3: #fef3c7; --c4: #fee2e2;
+      --c1: #e0f2fe;
+      --c2: #dcfce7;
+      --c3: #fef3c7;
+      --c4: #fee2e2;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Inter', sans-serif; background: var(--bg); color: #0f172a; padding-top: 80px; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: #0f172a;
+      line-height: 1.6;
+      padding-top: 80px;
+    }
 
     /* NAVBAR */
     .navbar {
-      position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 15px 40px; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,.05);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 40px;
+      background: #fff;
+      box-shadow: 0 4px 20px rgba(0,0,0,.05);
+      height: 80px;
     }
-    .navbar-left { display: flex; align-items: center; gap: 12px; }
-    .nav-logo { height: 50px; }
-    .nav-title { font-size: 24px; font-weight: 800; color: var(--navy); }
-    .navbar-right a { color: var(--navy); font-weight: 600; text-decoration: none; font-size: 14px; margin-left: 20px; }
-    .navbar-right a:hover { color: var(--accent); }
 
-    /* COMPACT HERO */
-    .hero-compact {
-      padding: 60px 8% 140px; text-align: center;
-      background: linear-gradient(135deg, #22d3ee, #a78bfa); color: #fff;
+    .navbar-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
-    .hero-compact h1 { font-size: 42px; font-weight: 800; margin-bottom: 10px; }
+
+    .nav-logo {
+      height: 50px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+    .navbar-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .navbar-right a {
+      color: var(--navy);
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    .navbar-right a:hover {
+      color: var(--accent);
+    }
+
+    /* HERO */
+    .hero-compact {
+      padding: 60px 8% 140px;
+      text-align: center;
+      background: linear-gradient(135deg, var(--primary), #a78bfa);
+      color: #fff;
+      width: 100%;
+    }
+
+    .hero-compact h1 {
+      font-size: 42px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
     .hero-info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      font-size: 18px;
+      flex-wrap: wrap;
+    }
+
+    .hero-copy {
+      max-width: 760px;
+    }
+
+    .hero-copy .cn-line {
+      display: block;
+      font-size: 16px;
+      font-weight: 400;
+      opacity: 0.9;
+      margin-top: 4px;
+    }
+
+    .tree-badge {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 6px 18px;
+      border-radius: 999px;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    /* CONTENT */
+    .content-wrapper {
+      max-width: 1100px;
+      margin: -100px auto 50px;
+      position: relative;
+      z-index: 10;
+      padding: 0 20px;
+    }
+
+    .task-card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 50px 40px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+      margin-bottom: 40px;
+      border: 1px solid #e2e8f0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      min-height: 280px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 12px;
-      font-size: 18px;
     }
-    
-    .hero-copy {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
+
+    .pb-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 8px;
+      background: #f1f5f9;
+    }
+
+    .pb-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--primary);
+      transition: 0.4s;
+    }
+
+    #question {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 28px;
+      line-height: 1.4;
       max-width: 820px;
-      text-align: center;
-      line-height: 1.5;
     }
-    
-    .subtitle-cn {
-      font-size: 16px;
-      opacity: 0.95;
-    }
-    
-    .ready-text-cn {
-      margin-top: 10px;
-      font-size: 16px;
+
+    #question .cn-line {
+      display: block;
+      margin-top: 6px;
+      font-size: 18px;
+      font-weight: 600;
       color: #64748b;
-      line-height: 1.5;
     }
-    
-    .topic-title-wrap {
+
+    .answers-grid {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+      min-height: 58px;
+      width: 100%;
+    }
+
+    .answer-btn {
+      padding: 16px 40px;
+      border-radius: 999px;
+      border: 3px solid var(--primary);
+      background: #fff;
+      color: var(--primary);
+      font-size: 18px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .answer-btn:hover {
+      background: var(--primary);
+      color: #fff;
+      transform: translateY(-3px);
+    }
+
+    .answer-btn.correct {
+      background: #10b981;
+      border-color: #10b981;
+      color: #fff;
+    }
+
+    .answer-btn.wrong {
+      background: #ef4444;
+      border-color: #ef4444;
+      color: #fff;
+      animation: shake 0.4s;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+
+    .topic-title {
       text-align: center;
       margin-bottom: 25px;
+      font-weight: 800;
+      color: var(--navy);
+      font-size: 28px;
+      line-height: 1.35;
     }
-    
-    .topic-title {
-      margin-bottom: 6px;
-    }
-    
-    .topic-title-cn {
-      font-size: 15px;
+
+    .topic-title .cn-line {
+      display: block;
+      margin-top: 4px;
+      font-size: 16px;
+      font-weight: 600;
       color: #64748b;
-      line-height: 1.4;
     }
-    
+
+    .units-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .card-item {
+      background: #fff;
+      padding: 25px;
+      border-radius: var(--radius);
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+      transition: 0.3s;
+      border: 2px solid transparent;
+    }
+
+    .card-item:nth-child(1) { background: var(--c1); }
+    .card-item:nth-child(2) { background: var(--c2); }
+    .card-item:nth-child(3) { background: var(--c3); }
+    .card-item:nth-child(4) { background: var(--c4); }
+
+    .card-item:hover {
+      transform: translateY(-5px);
+      filter: brightness(0.95);
+    }
+
+    .card-item.active {
+      border-color: var(--navy);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
     .card-item h3 {
       font-size: 18px;
-      margin-bottom: 5px;
+      margin-bottom: 8px;
       font-weight: 700;
       color: var(--navy);
+      line-height: 1.4;
     }
-    
-    .unit-cn {
+
+    .card-item h3 .cn-line {
       display: block;
       margin-top: 4px;
       font-size: 14px;
       font-weight: 600;
       color: #475569;
     }
-    
-    .unit-sub-cn {
+
+    .card-item p {
+      font-size: 14px;
+      color: #64748b;
+      line-height: 1.5;
+    }
+
+    .card-item p .cn-line {
+      display: block;
       margin-top: 4px;
       font-size: 13px;
       color: #64748b;
     }
-    .tree-badge {
-      background: rgba(255, 255, 255, 0.2); padding: 6px 18px; border-radius: 999px;
-      backdrop-filter: blur(5px); border: 1px solid rgba(255, 255, 255, 0.3); font-weight: 700;
+
+    footer {
+      background: #0f172a;
+      color: #94a3b8;
+      padding: 40px 8%;
+      text-align: center;
+      margin-top: 50px;
     }
 
-    /* CONTENT WRAPPER */
-    .content-wrapper { max-width: 1100px; margin: -100px auto 50px; position: relative; z-index: 10; padding: 0 20px; }
-
-    /* TASK CARD */
-    .task-card {
-      background: #fff; border-radius: var(--radius); padding: 50px 40px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.08); margin-bottom: 40px;
-      border: 1px solid #e2e8f0; text-align: center; position: relative; overflow: hidden;
-      min-height: 280px; display: flex; flex-direction: column; justify-content: center;
+    @media (max-width: 900px) {
+      .units-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
 
-    .pb-container { position: absolute; top: 0; left: 0; width: 100%; height: 8px; background: #f1f5f9; }
-    .pb-fill { height: 100%; width: 0%; background: var(--primary); transition: 0.4s; }
+    @media (max-width: 600px) {
+      .navbar {
+        padding: 10px 20px;
+        flex-direction: column;
+        gap: 10px;
+        height: auto;
+      }
 
-    #question { font-size: 26px; font-weight: 800; color: var(--navy); margin-bottom: 30px; }
-    .answers-grid { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
-    .answer-btn {
-      padding: 16px 40px; border-radius: 999px; border: 3px solid var(--primary);
-      background: #fff; color: var(--primary); font-size: 18px; font-weight: 800; cursor: pointer; transition: 0.3s;
+      .navbar-left {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .navbar-right {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        border-top: 1px solid #f1f5f9;
+        padding-top: 10px;
+      }
+
+      .hero-compact h1 {
+        font-size: 32px;
+      }
+
+      .content-wrapper {
+        margin-top: -80px;
+      }
+
+      .units-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+
+      .task-card {
+        padding: 40px 20px;
+      }
+
+      #question {
+        font-size: 22px;
+      }
+
+      #question .cn-line {
+        font-size: 16px;
+      }
+
+      .answer-btn {
+        width: 100%;
+        max-width: 260px;
+        font-size: 17px;
+        padding: 14px 24px;
+      }
     }
-    .answer-btn:hover { background: var(--primary); color: #fff; transform: translateY(-3px); }
-    .answer-btn.correct { background: #10b981; border-color: #10b981; color: #fff; }
-    .answer-btn.wrong { background: #ef4444; border-color: #ef4444; color: #fff; animation: shake 0.4s; }
-
-    @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
-
-    /* UNITS */
-    .topic-title { text-align: center; margin-bottom: 25px; font-weight: 800; color: var(--navy); font-size: 28px; }
-    .units-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-    .card-item {
-      background: #fff; padding: 25px; border-radius: var(--radius); text-align: center; cursor: pointer;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.04); transition: 0.3s; border: 2px solid transparent;
-    }
-    .card-item:nth-child(1) { background: var(--c1); } .card-item:nth-child(2) { background: var(--c2); }
-    .card-item:nth-child(3) { background: var(--c3); } .card-item:nth-child(4) { background: var(--c4); }
-    .card-item:hover { transform: translateY(-5px); filter: brightness(0.95); }
-    .card-item.active { border-color: var(--navy); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-    .card-item h3 { font-size: 18px; margin-bottom: 5px; font-weight: 700; color: var(--navy); }
-    .card-item p { font-size: 14px; color: #64748b; }
-
-    footer { background: #0f172a; color: #94a3b8; padding: 40px 8%; text-align: center; }
-
-    @media (max-width: 900px) { .units-grid { grid-template-columns: repeat(2, 1fr); } }
   </style>
 </head>
 <body>
 
   <header class="navbar">
     <div class="navbar-left">
-      <img src="assets/img/logo.png" alt="LL" class="nav-logo">
+      <img src="assets/img/logo.png" alt="LL" class="nav-logo" onerror="this.style.display='none'">
       <span class="nav-title">LinguaLab</span>
     </div>
     <nav class="navbar-right">
@@ -176,8 +403,8 @@
     <h1>Grammar Magic</h1>
     <div class="hero-info">
       <div class="hero-copy">
-        <span>Play games and grow your Knowledge Tree! Select a Unit below to start!</span>
-        <p class="subtitle-cn">通过游戏学习语法，让你的知识树慢慢长大！请选择下面的单元开始吧！</p>
+        Play games and grow your Knowledge Tree! Select a Unit below to start!
+        <span class="cn-line">通过游戏学习语法，让你的知识树慢慢长大！请选择下面的单元开始吧！</span>
       </div>
       <div class="tree-badge">Points: <span id="header-score">0</span></div>
     </div>
@@ -186,61 +413,70 @@
   <div class="content-wrapper">
     <div class="task-card" id="task-card">
       <div class="pb-container"><div class="pb-fill" id="pb-fill"></div></div>
-    <div id="question"> Ready to study? Choose a Unit! <br><span style="font-size: 18px; font-weight: 600; color: #64748b;">准备好开始学习了吗？请选择一个单元！</span>
-</div>
 
-<h2 class="topic-title"> Our Units <br><span style="font-size: 16px; font-weight: 600; color: #64748b;">我们的学习单元</span>
-</h2>
+      <div id="question">
+        Ready to study? Choose a Unit!
+        <span class="cn-line">准备好开始学习了吗？请选择一个单元！</span>
+      </div>
+
+      <div class="answers-grid" id="answer-grid"></div>
+    </div>
+
+    <h2 class="topic-title">
+      Our Units
+      <span class="cn-line">我们的学习单元</span>
+    </h2>
 
     <div class="units-grid">
-    <div class="card-item" onclick="selectTopic('he_she', this)">
-      <h3>
-        Friends & Family
-        <br><span style="font-size: 14px; font-weight: 600; color: #475569;">朋友和家人</span>
-      </h3>
-      <p>
-        He / She
-        <br><span style="font-size: 13px;">他 / 她</span>
-      </p>
-    </div>
-  
-    <div class="card-item" onclick="selectTopic('plural', this)">
-      <h3>
-        Counting World
-        <br><span style="font-size: 14px; font-weight: 600; color: #475569;">数字世界</span>
-      </h3>
-      <p>
-        Plural nouns
-        <br><span style="font-size: 13px;">名词复数</span>
-      </p>
-    </div>
-  
-    <div class="card-item" onclick="selectTopic('secret_places', this)">
-      <h3>
-        Secret Places
-        <br><span style="font-size: 14px; font-weight: 600; color: #475569;">方位小天地</span>
-      </h3>
-      <p>
-        In / On / Under
-        <br><span style="font-size: 13px;">在……里面 / 在……上面 / 在……下面</span>
-      </p>
-    </div>
-  
-    <div class="card-item" onclick="selectTopic('can', this)">
-      <h3>
-        Super Powers
-        <br><span style="font-size: 14px; font-weight: 600; color: #475569;">超能力</span>
-      </h3>
-      <p>
-        I can do it!
-        <br><span style="font-size: 13px;">我会做！</span>
-      </p>
+      <div class="card-item" onclick="selectTopic('he_she', this)">
+        <h3>
+          Friends & Family
+          <span class="cn-line">朋友和家人</span>
+        </h3>
+        <p>
+          He / She
+          <span class="cn-line">他 / 她</span>
+        </p>
+      </div>
+
+      <div class="card-item" onclick="selectTopic('plural', this)">
+        <h3>
+          Counting World
+          <span class="cn-line">数字世界</span>
+        </h3>
+        <p>
+          Plural nouns
+          <span class="cn-line">名词复数</span>
+        </p>
+      </div>
+
+      <div class="card-item" onclick="selectTopic('secret_places', this)">
+        <h3>
+          Secret Places
+          <span class="cn-line">方位小天地</span>
+        </h3>
+        <p>
+          In / On / Under
+          <span class="cn-line">在……里面 / 在……上面 / 在……下面</span>
+        </p>
+      </div>
+
+      <div class="card-item" onclick="selectTopic('can', this)">
+        <h3>
+          Super Powers
+          <span class="cn-line">超能力</span>
+        </h3>
+        <p>
+          I can do it!
+          <span class="cn-line">我会做！</span>
+        </p>
+      </div>
     </div>
   </div>
 
-  <footer class="footer">
-  © <span id="year">2026</span> LinguaLab • Small lessons. Real progress. All rights reserved.
-</footer>
+  <footer>
+    © <span id="year">2026</span> LinguaLab • Small lessons. Real progress. All rights reserved.
+  </footer>
 
   <script>
     const gameData = {
@@ -301,12 +537,12 @@
         {q:"One ___, four pears.", a:"Pear", options:["Pear","Pears"]},
         {q:"One ___, seven ducks.", a:"Duck", options:["Duck","Ducks"]},
         {q:"One ___, three ships.", a:"Ship", options:["Ship","Ships"]},
-        {q:"One foot, two ___.", a:"Feet", options:["Feet","Feets"]}, 
-        {q:"One man, many ___.", a:"Men", options:["Men","Mans"]}, 
+        {q:"One foot, two ___.", a:"Feet", options:["Feet","Feets"]},
+        {q:"One man, many ___.", a:"Men", options:["Men","Mans"]},
         {q:"One leaf, five ___.", a:"Leaves", options:["Leaves","Leafs"]},
         {q:"One ___, many wolves.", a:"Wolf", options:["Wolf","Wolfs"]},
-        {q:"One ___, two foxes.", a:"Fox", options:["Fox","Foxs"]}, 
-        {q:"One deer, four ___.", a:"Deers", options:["Deer","Deers"]}
+        {q:"One ___, two foxes.", a:"Fox", options:["Fox","Foxs"]},
+        {q:"One deer, four ___.", a:"Deer", options:["Deer","Deers"]}
       ],
       secret_places: [
         {q:"The cat is ___ the box.", a:"In", options:["In","On","Under"]},
@@ -336,7 +572,7 @@
         {q:"The boat is ___ the sea.", a:"On", options:["In","On","Under"]},
         {q:"The worm is ___ the apple.", a:"In", options:["In","On","Under"]},
         {q:"The book is ___ the shelf.", a:"On", options:["In","On","Under"]},
-        {q:"The ring is ___ the finger.", a:"On", options:["In","On","Under"]},
+        {q:"The ring is ___ the finger.", a:"On", options:["In","On","Under"]}
       ],
       can: [
         {q:"A bird ___ fly.", a:"Can", options:["Can","Can't"]},
@@ -367,7 +603,7 @@
         {q:"A stone ___ eat.", a:"Can't", options:["Can","Can't"]},
         {q:"A parrot ___ talk.", a:"Can", options:["Can","Can't"]},
         {q:"A ball ___ bounce.", a:"Can", options:["Can","Can't"]},
-        {q:"A superhero ___ help.", a:"Can", options:["Can","Can't"]},
+        {q:"A superhero ___ help.", a:"Can", options:["Can","Can't"]}
       ]
     };
 
@@ -386,29 +622,34 @@
 
     function loadTask() {
       const tasks = gameData[activeTopic];
+      if (!tasks || tasks.length === 0) return;
+
       if (usedIndexes.length >= tasks.length) usedIndexes = [];
 
       let index;
-      do { index = Math.floor(Math.random() * tasks.length); } 
-      while (usedIndexes.includes(index));
-      
+      do {
+        index = Math.floor(Math.random() * tasks.length);
+      } while (usedIndexes.includes(index) && usedIndexes.length < tasks.length);
+
       usedIndexes.push(index);
       activeTask = tasks[index];
 
-      document.getElementById('question').innerText = activeTask.q;
+      document.getElementById('question').textContent = activeTask.q;
+
       const grid = document.getElementById('answer-grid');
       grid.innerHTML = '';
 
       activeTask.options.forEach(opt => {
         const btn = document.createElement('button');
         btn.className = 'answer-btn';
-        btn.innerText = opt;
+        btn.textContent = opt;
         btn.onclick = () => checkResult(opt, btn);
         grid.appendChild(btn);
       });
     }
+
     function playSound() {
-    try {
+      try {
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
@@ -416,7 +657,6 @@
         osc.connect(gain);
         gain.connect(audioCtx.destination);
 
-        // Настройка "волшебного" звука
         osc.type = 'sine';
         osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
         osc.frequency.exponentialRampToValueAtTime(1046.50, audioCtx.currentTime + 0.1);
@@ -426,45 +666,48 @@
 
         osc.start();
         osc.stop(audioCtx.currentTime + 0.3);
-    } catch (e) {
-        console.log("Audio not supported or blocked by browser");
+      } catch (e) {
+        console.log('Audio not supported or blocked by browser');
+      }
     }
-}
-
 
     function checkResult(choice, btn) {
+      if (!activeTask) return;
+
       if (choice === activeTask.a) {
-          btn.classList.add('correct');
-        
-          playSound(); 
-          awardPoint();
-        
-        // Полоска прогресса (от 30 вопросов)
-        const progress = (usedIndexes.length / 30) * 100;
+        btn.classList.add('correct');
+        document.querySelectorAll('.answer-btn').forEach(button => button.disabled = true);
+
+        playSound();
+        awardPoint();
+
+        const totalTasks = gameData[activeTopic].length;
+        const progress = (usedIndexes.length / totalTasks) * 100;
         document.getElementById('pb-fill').style.width = progress + '%';
 
-        document.getElementById('question').innerText = "Correct! +1 Point! 🌟";
+        document.getElementById('question').innerHTML =
+          'Correct! +1 Point! 🌟<span class="cn-line">答对了！+1分！</span>';
+
         setTimeout(loadTask, 1000);
-    } else {
+      } else {
         btn.classList.add('wrong');
         setTimeout(() => btn.classList.remove('wrong'), 500);
+      }
     }
-}
 
     function awardPoint() {
       let score = parseInt(localStorage.getItem('ll_score')) || 0;
-      score++; 
+      score++;
       localStorage.setItem('ll_score', score);
-      document.getElementById('header-score').innerText = score;
+      document.getElementById('header-score').textContent = score;
     }
 
     window.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('header-score').innerText = localStorage.getItem('ll_score') || 0;
-    
+      document.getElementById('header-score').textContent = localStorage.getItem('ll_score') || 0;
+
       const y = document.getElementById('year');
       if (y) y.textContent = String(new Date().getFullYear());
     });
-
   </script>
 </body>
 </html>
