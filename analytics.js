@@ -13,7 +13,7 @@ const Analytics = {
             studentId: id,
             startDate: new Date().toISOString(),
             dailyActivity: {}, 
-            wordDifficulty: {}, 
+            wordDifficulty: {}, // ТРЕКИНГ ТРУДНЫХ СЛОВ
             totalWordsAtStart: parseInt(localStorage.getItem('learned_words_total')) || 0,
             totalXPAtStart: (parseInt(localStorage.getItem('ll_score')) || 0) + (parseInt(localStorage.getItem('vocab_points')) || 0)
         }));
@@ -23,14 +23,15 @@ const Analytics = {
         return new Date().toISOString().split('T')[0];
     },
 
+    // Вызывать эту функцию в vocabulary.html при клике на карточку: Analytics.logWordClick('panda')
     logWordClick(wordId) {
         let data = JSON.parse(localStorage.getItem('ll_research_data'));
         let today = this.getCurrentDate();
         
-        // Запись сложности слова
+        // Считаем клики для оценки сложности
         data.wordDifficulty[wordId] = (data.wordDifficulty[wordId] || 0) + 1;
         
-        // Запись активности
+        // Считаем активность дня
         if (!data.dailyActivity[today]) data.dailyActivity[today] = { time: 0, clicks: 0 };
         data.dailyActivity[today].clicks++;
         
