@@ -1,150 +1,246 @@
----
-layout: default
-title: Wiki Parents
----
-{% raw %}
-<style>
-.nav-button {
-  display: inline-block;
-  padding: 10px 20px;
-  margin: 5px;
-  background-color: #6ca0dc; /* фон под Architect */
-  color: white;              /* текст всегда белый */
-  text-decoration: none;
-  border-radius: 5px;
-  font-weight: 500;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wiki Parents — LinguaLab</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
 
-.accordion {
-  background-color: #6ca0dc;
-  color: white;
-  cursor: pointer;
-  padding: 10px 15px;
-  width: 100%;
-  border: none;
-  text-align: left;
-  outline: none;
-  font-size: 16px;
-  border-radius:5px;
-  margin-bottom: 5px;
-  transition: background-color 0.3s;
-}
+  <style>
+    :root {
+      --primary: #22d3ee;
+      --accent: #f97316;
+      --navy: #1f4e79;
+      --bg: #f8fafc;
+      --radius: 20px;
+    }
 
-.accordion:hover {
-  background-color: #163857;
-}
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: #0f172a;
+      line-height: 1.6;
+      padding-top: 80px;
+    }
 
-.panel {
-  padding: 10px 15px;
-  display: none;
-  background-color: #f4f8fb;
-  border-left: 2px solid #6ca0dc;
-  border-right: 2px solid #6ca0dc;
-  border-bottom: 2px solid #6ca0dc;
-  border-radius: 0 0 5px 5px;
-  margin-bottom: 10px;
-}
+    /* NAVBAR */
+    .navbar {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 15px 40px; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,.05);
+    }
+    .navbar-left { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .nav-logo { height: 45px; }
+    .nav-title { font-size: 22px; font-weight: 800; color: var(--navy); }
+    .navbar-right a { color: var(--navy); font-weight: 600; text-decoration: none; font-size: 14px; margin-left: 20px; transition: 0.3s; }
+    .navbar-right a:hover { color: var(--accent); }
 
-  @media (max-width: 600px) {
-  .nav-container {
-    flex-direction: column; /* Кнопки в колонку */
-    align-items: center;
-  }
-}
-</style>
+    /* HERO */
+    .hero-parents {
+      padding: 80px 8% 120px;
+      text-align: center;
+      background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+      color: #fff;
+    }
+    .hero-parents h1 { font-size: 48px; font-weight: 800; margin-bottom: 15px; }
+    .hero-parents p { font-size: 20px; opacity: 0.9; max-width: 800px; margin: 0 auto; }
 
-# Reading Corner
-<div class="accordion">Academic Papers</div>
-<div class="panel">
-  <ul>
-    <li><a href="https://cyberleninka.ru/article/n/organizational-and-methodological-support-of-preschoolers-thinking-skills-development-during-problem-foreign-language-teaching/viewer"> Kartashova Valentina N., Volynkina Natalia V. (2021) ORGANIZATIONAL AND METHODOLOGICAL SUPPORT OF PRESCHOOLERS’ THINKING SKILLS DEVELOPMENT DURING PROBLEM FOREIGN LANGUAGE TEACHING</a></li>
-    <li><a href="https://cyberleninka.ru/article/n/comprehension-of-idiomatic-expressions-by-russian-speaking-typically-developing-children/viewer">Eliseeva Nadezda N (2017) Comprehension of idiomatic expressions by Russian speaking typically developing children</a></li>
-    <li><a href="https://srcd.onlinelibrary.wiley.com/doi/pdfdirect/10.1111/cdev.13575)">Philippine Courtier, Marie-Line Gardes (2021) Effects of Montessori Education on the Academic, Cognitive, and Social Development of Disadvantaged Preschoolers: A Randomized Controlled Study in the French Public‐School System</a></li>
-    <li><a href="https://cyberleninka.ru/article/n/constructing-a-russian-language-version-of-the-international-early-reading-assessment-tool/viewer">Alina Ivanova (2019) Constructing a Russian-Language Version of the International Early Reading Assessment Tool</a></li>
-    <li><a href="https://cyberleninka.ru/article/n/psihologicheskoe-razvitie-doshkolnikov-v-proektnoy-deyatelnosti-obzor-empiricheskih-issledovaniy/viewer">Плотникова В. А (2023) Психологическое развитие дошкольников в проектной деятельности: обзор эмпирических исследований</a></li>
-  </ul>
-</div>
+    .container { max-width: 1100px; margin: -60px auto 60px; padding: 0 20px; }
 
-<div class="accordion">Motivation & Engagement</div>
-<div class="panel">
-  <ul>
-    <li><a href="https://example.com/article3">Fun ways to practice English</a></li>
-    <li><a href="https://example.com/article4">Keeping children motivated</a></li>
-  </ul>
-</div>
+    /* PROGRESS DASHBOARD */
+    .dashboard-card {
+      background: #fff; border-radius: var(--radius); padding: 35px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1); border: 1px solid #e2e8f0;
+      display: flex; flex-wrap: wrap; gap: 30px; align-items: center;
+      margin-bottom: 50px;
+    }
+    .dash-info { flex: 1; min-width: 300px; }
+    .dash-info h2 { color: var(--navy); font-size: 24px; margin-bottom: 10px; }
+    .dash-stats { display: flex; gap: 20px; margin-top: 20px; }
+    .stat-pill { background: #f0f9ff; padding: 10px 20px; border-radius: 12px; border: 1px solid #bae6fd; }
+    .stat-pill span { display: block; font-size: 11px; color: #0369a1; font-weight: 800; text-transform: uppercase; margin-bottom: 4px; }
+    .stat-pill b { font-size: 20px; color: var(--navy); }
 
-<div class="accordion">Practicing Tongue Twisters  </div>
-<div class="panel">
-  <ul>
-    <b>Tongue twisters</b> are one of the most playful and effective tools for helping children (and even adults!) improve pronunciation and spelling. They turn learning into a game, and games are something every child understands.
-<p>What makes tongue twisters so special? They are silly, catchy, and full of surprises. You don’t need to convince a child to sit and study for a long time — just say one funny, tricky line, and they immediately want to hear more. When learning feels like play, children learn faster and enjoy the process much more.</p>
+    /* SECTION STYLES */
+    .section-title { font-size: 32px; font-weight: 800; color: var(--navy); margin: 50px 0 25px; display: flex; align-items: center; gap: 15px; }
 
-<div style="font-size:18px; max-width:600px; margin:0 auto; color: #2c5050;">
-  <ol>
-    <li> A big black bug bit a big black dog on his big black nose.</li> 
-      
-    <li> Give papa a cup of proper coffee in a copper coffee cup.</li> 
+    /* METHODOLOGY CARDS */
+    .method-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .method-card { background: #fff; padding: 30px; border-radius: var(--radius); border-bottom: 4px solid var(--primary); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+    .method-card h3 { color: var(--navy); margin-bottom: 10px; font-size: 18px; }
+    .method-card p { font-size: 14px; color: #64748b; }
 
-    <li> Fresh fried fish, fish fresh fried, fried fish fresh, fish fried fresh.</li> 
+    /* EXPERIMENT BOX */
+    .experiment-box {
+      background: #fff; border-radius: var(--radius); overflow: hidden;
+      display: flex; border: 1px solid #e2e8f0; margin-top: 30px;
+    }
+    .exp-image { width: 30%; background: #fee2e2; display: flex; align-items: center; justify-content: center; font-size: 60px; }
+    .exp-content { padding: 40px; flex: 1; }
+    .exp-tag { background: #ef4444; color: #fff; padding: 4px 12px; border-radius: 99px; font-size: 12px; font-weight: 800; }
 
-    <li> Eleven elves licked eleven little liquorice lollipops.</li> 
+    /* PHONICS GRID */
+    .phonics-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 15px; }
+    .phonics-btn {
+      background: #fff; border: 2px solid #e2e8f0; padding: 15px; border-radius: 15px;
+      font-size: 24px; font-weight: 800; color: var(--navy); cursor: pointer; transition: 0.2s;
+    }
+    .phonics-btn:hover { border-color: var(--primary); background: var(--bg); transform: scale(1.1); }
 
-    <li> Kitty caught the kitten in the kitchen.</li> 
+    /* TONGUE TWISTERS */
+    .twisters-box { background: #fff; border-radius: var(--radius); padding: 30px; border: 1px solid #e2e8f0; margin-top: 20px; }
+    .twister-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #f1f5f9; }
+    .twister-item:last-child { border-bottom: none; }
+    .twister-text { font-size: 16px; color: var(--navy); font-weight: 600; padding-right: 15px; }
+    .speak-mini-btn { background: #f1f5f9; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; transition: 0.3s; font-size: 18px; }
+    .speak-mini-btn:hover { background: var(--primary); color: #fff; }
 
-    <li> Red lorry, yellow lorry.</li> 
+    footer { background: #0f172a; color: #94a3b8; padding: 60px 8%; text-align: center; }
 
-    <li> Toy phone, toy phone, toy phone.</li> 
+    @media (max-width: 768px) {
+      .experiment-box { flex-direction: column; }
+      .exp-image { height: 150px; width: 100%; }
+      .dashboard-card { text-align: center; justify-content: center; }
+      .dash-stats { justify-content: center; flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
 
-    <li> Zebras zig and zebras zag.</li> 
+  <header class="navbar">
+    <a href="index.html" class="navbar-left">
+      <img src="assets/img/logo.png" alt="Logo" class="nav-logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3081/3081078.png'">
+      <span class="nav-title">LinguaLab</span>
+    </a>
+    <nav class="navbar-right">
+      <a href="grammar.html">Grammar</a>
+      <a href="vocabulary.html">Vocabulary</a>
+      <a href="exercises.html">Exercises</a>
+      <a href="parents.html" style="color: var(--accent)">Wiki Parents</a>
+    </nav>
+  </header>
 
-    <li> Whether the weather is warm, whether the weather is hot, we have to put up with the weather, whether we like it or not.</li> 
+  <section class="hero-parents">
+    <h1>Wiki Parents</h1>
+    <p>Everything you need to know about the science of bilingualism and fun ways to practice together.</p>
+  </section>
 
-    <li> I can think of six thin things, but I can think of six thick things too.</li> 
-
-    <li> I scream, you scream, we all scream for ice cream.</li> 
-
-    <li> Six sick sea-serpents swam the seven seas.</li> 
-  </ol>
-</div>
-
-<h2>Summing up</h2>
-English tongue twisters for kids is the best way to learn problematic sounds and root them in your memory. Most tongue twisters are easy, consisting of one or two sentences. There are more difficult ones, which consist of four or more lines. First, take on those that are easier, and gradually conquer the tasks more difficult. There are tongue twisters for the weather, food, study, housework, lifestyle, etc.
-Choose a topic that you like and go to new knowledge! And more importantly, tongue twisters should be pronounced with a pronunciation that is correct. If you notice that the language is confused, take a break, and then - back into battle.
-Good luck!
-
+  <div class="container">
     
-  </ul>
-</div>
+    <div class="dashboard-card">
+      <div class="dash-info">
+          <h2>📊 Student Progress Tracker</h2>
+          <p>Real-time data on your child's learning journey in LinguaLab.</p>
+          <div class="dash-stats">
+              <div class="stat-pill"><span>Focus Time</span><b id="p-time">0 min</b></div>
+              <div class="stat-pill"><span>Words Unlocked</span><b id="p-words">0</b></div>
+              <div class="stat-pill"><span>Total XP</span><b id="p-score">0</b></div>
+          </div>
+      </div>
+      <button onclick="window.location.href='index.html#growth'" style="background: var(--navy); color: #fff; padding: 15px 25px; border-radius: 15px; border: none; font-weight: 800; cursor: pointer;">View Knowledge Tree</button>
+    </div>
 
-<script>
-  var acc = document.getElementsByClassName("accordion");
-  for (let i = 0; i < acc.length; i++) {
-    acc[i].addEventListener("click", function () {
-      this.classList.toggle("active");
+    <h2 class="section-title"><span>🧬</span> The Science of LinguaLab</h2>
+    <div class="method-grid">
+        <div class="method-card">
+            <h3>Micro-Learning</h3>
+            <p>Lessons are limited to 5-10 minutes to match the natural concentration span of a 4-year-old child.</p>
+        </div>
+        <div class="method-card">
+            <h3>Visual Scaffolding</h3>
+            <p>Every word is paired with a specific high-quality image to trigger dual-coding memory pathways.</p>
+        </div>
+        <div class="method-card">
+            <h3>Dopamine Rewards</h3>
+            <p>The growing Knowledge Tree provides immediate visual rewards, reinforcing the habit of daily study.</p>
+        </div>
+    </div>
 
-      var panel = this.nextElementSibling;
-      if (panel.style.display === "block") {
-        panel.style.display = "none";
-      } else {
-        panel.style.display = "block";
-      }
+    <h2 class="section-title"><span>🧪</span> CLIL Activity of the Week</h2>
+    <div class="experiment-box">
+        <div class="exp-image">🎨</div>
+        <div class="exp-content">
+            <span class="exp-tag">Science + English</span>
+            <h3 style="margin: 15px 0 10px; font-size: 24px; color: var(--navy);">The Magic Color Mix</h3>
+            <p style="color: #64748b; margin-bottom: 20px;">Learn colors by mixing them! <b>Target words:</b> Blue, Yellow, Green.</p>
+            <p><b>Instructions:</b> Take two glasses of water. Add blue paint to one, yellow to the other. Ask: "What happens if we mix?" Pour them together and shout <b>"It's GREEN!"</b></p>
+        </div>
+    </div>
+
+    <h2 class="section-title"><span>🔊</span> Phonics Quick Guide</h2>
+    <p style="margin-bottom: 20px; color: #64748b;">Help your child master English sounds. Tap to hear the pronunciation:</p>
+    <div class="phonics-grid">
+        <button class="phonics-btn" onclick="speak('a, a, apple')">Aa</button>
+        <button class="phonics-btn" onclick="speak('b, b, ball')">Bb</button>
+        <button class="phonics-btn" onclick="speak('c, c, cat')">Cc</button>
+        <button class="phonics-btn" onclick="speak('d, d, dog')">Dd</button>
+        <button class="phonics-btn" onclick="speak('e, e, egg')">Ee</button>
+        <button class="phonics-btn" onclick="speak('f, f, fish')">Ff</button>
+        <button class="phonics-btn" onclick="speak('g, g, goat')">Gg</button>
+        <button class="phonics-btn" onclick="speak('h, h, hat')">Hh</button>
+    </div>
+
+    <h2 class="section-title"><span>👅</span> Playful Tongue Twisters</h2>
+    <div class="twisters-box" id="twister-list">
+        </div>
+
+  </div>
+
+  <footer>
+    <p><b>LinguaLab Academy</b> • Educational Project 2026</p>
+    <p style="font-size: 13px; margin-top: 10px; opacity: 0.7;">Developed for Academic Research on Early Bilingualism</p>
+  </footer>
+
+  <script>
+    // 1. ПОДТЯГИВАЕМ РЕАЛЬНУЮ СТАТИСТИКУ
+    function updateStats() {
+        const vocabScore = parseInt(localStorage.getItem('vocab_points')) || 0;
+        const grammarScore = parseInt(localStorage.getItem('ll_score')) || 0;
+        const totalScore = vocabScore + grammarScore;
+        
+        const words = localStorage.getItem('learned_words_total') || 0;
+        const timeSec = parseInt(localStorage.getItem('time_spent_seconds')) || 0;
+        const timeMin = Math.floor(timeSec / 60);
+
+        document.getElementById('p-score').innerText = totalScore + " XP";
+        document.getElementById('p-words').innerText = words;
+        document.getElementById('p-time').innerText = timeMin + " min";
+    }
+
+    // 2. ГЕНЕРИРУЕМ СКОРОГОВОРКИ
+    const twisters = [
+      "A big black bug bit a big black dog.",
+      "I scream, you scream, we all scream for ice cream.",
+      "Kitty caught the kitten in the kitchen.",
+      "Red lorry, yellow lorry, red lorry, yellow lorry.",
+      "Six sick sea-serpents swam the seven seas.",
+      "Fresh fried fish, fish fresh fried, fried fish fresh."
+    ];
+
+    const list = document.getElementById('twister-list');
+    twisters.forEach(t => {
+      const item = document.createElement('div');
+      item.className = 'twister-item';
+      item.innerHTML = `
+        <div class="twister-text">${t}</div>
+        <button class="speak-mini-btn" onclick="speak('${t.replace(/'/g, "\\'")}')">🔊</button>
+      `;
+      list.appendChild(item);
     });
-  }
-</script>
-{% endraw %}
 
-<!-- Кнопка назад -->
-<div style="text-align: center; margin-top: 20px;">
-  <a href="/lingualab/" style="
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #1f4e79;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-  " onmouseover="this.style.backgroundColor='#163857'" onmouseout="this.style.backgroundColor='#1f4e79'">
-    Back to the Lab
-  </a>
-</div>
+    // 3. ФУНКЦИЯ ОЗВУЧКИ (Использует встроенный голос браузера)
+    function speak(text) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.8;
+        window.speechSynthesis.speak(utterance);
+    }
+
+    window.onload = updateStats;
+  </script>
+</body>
+</html>
