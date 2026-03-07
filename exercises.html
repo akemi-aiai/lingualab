@@ -50,18 +50,41 @@
         .navbar-right a:hover { color: var(--accent); }
 
         .hero-compact {
-            padding: 60px 20px 140px;
+            padding: 60px 8% 140px;
             text-align: center;
             background: linear-gradient(135deg, #22d3ee, #a78bfa);
             color: #fff;
-            position: relative;
             width: 100%;
         }
-        .hero-compact h1 { font-size: 42px; font-weight: 800; margin-bottom: 10px; }
-        .hero-info { 
-            display: flex; justify-content: center; align-items: center; 
-            gap: 20px; font-size: 18px; opacity: 0.95;
+        
+        .hero-compact h1 {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 10px;
         }
+        
+        .hero-info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            font-size: 18px;
+            flex-wrap: wrap;
+        }
+        
+        .hero-copy {
+            max-width: 760px;
+            line-height: 1.5;
+        }
+        
+        .hero-copy .cn-line {
+            display: block;
+            font-size: 16px;
+            font-weight: 400;
+            opacity: 0.9;
+            margin-top: 4px;
+        }
+
 
         .content-wrapper {
             max-width: 1100px;
@@ -190,7 +213,10 @@
 <section class="hero-compact">
     <h1>Fun Homework</h1>
     <div class="hero-info">
-        <span>Select a month to start your mission</span>
+        <div class="hero-copy">
+            Select a month to start your mission
+            <span class="cn-line">选择一个月份，开始你的学习任务吧！</span>
+        </div>
     </div>
 </section>
 
@@ -248,6 +274,8 @@
 
     const monthListEl = document.getElementById('month-list');
     const contentAreaEl = document.getElementById('content-area');
+    const y = document.getElementById('year');
+    if (y) y.textContent = String(new Date().getFullYear());
 
     function init() {
         const months = ["Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"];
