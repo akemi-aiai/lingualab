@@ -297,87 +297,39 @@
     }
 
     /* RESEARCH */
+    
     .research-card {
       margin-top: 30px;
       overflow: hidden;
       position: relative;
     }
-
+    
     .research-card::before {
       content: "";
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at top right, rgba(34, 211, 238, 0.12), transparent 32%),
-        radial-gradient(circle at bottom left, rgba(167, 139, 250, 0.14), transparent 30%);
+        radial-gradient(circle at top right, rgba(34, 211, 238, 0.08), transparent 32%),
+        radial-gradient(circle at bottom left, rgba(167, 139, 250, 0.08), transparent 30%);
       pointer-events: none;
     }
-
+    
     .research-card .panel-header {
       position: relative;
       background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
     }
-
+    
     .research-card .panel-body {
       position: relative;
       padding: 28px;
     }
-
-    .research-steps {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-      margin-bottom: 24px;
-    }
-
-    .research-step {
-      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-      border: 1px solid #e8eef5;
-      border-radius: 20px;
-      padding: 18px 18px 18px 20px;
-      box-shadow: var(--shadow-soft);
-      font-size: 14px;
-      line-height: 1.75;
-      color: var(--muted);
-    }
-
-    .research-step strong {
-      color: var(--navy);
-    }
-
-    .research-rating {
-      background: #f8fafc;
-      border: 1px solid #eaf0f6;
-      border-radius: 22px;
-      padding: 22px;
-      margin-bottom: 22px;
-      text-align: center;
-    }
-
-    .research-question {
-      font-weight: 800;
-      color: var(--navy);
-      margin-bottom: 8px;
-      font-size: 18px;
-      line-height: 1.4;
-    }
-
-    .research-question-sub {
-      font-size: 14px;
-      color: var(--muted);
-      margin-bottom: 18px;
-    }
-
+    
     .research-tools {
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 14px;
-      margin-bottom: 22px;
-      padding: 14px 16px;
-      background: #f8fafc;
-      border: 1px solid #e8eef5;
-      border-radius: 18px;
+      margin-bottom: 18px;
       flex-wrap: wrap;
     }
     
@@ -388,7 +340,7 @@
     
     .mini-copy-btn {
       border: none;
-      background: #ffffff;
+      background: transparent;
       color: var(--navy);
       border: 1px solid var(--line);
       padding: 10px 14px;
@@ -402,7 +354,41 @@
       border-color: var(--accent);
       color: var(--accent);
     }
-
+    
+    .research-steps {
+      margin-bottom: 16px;
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+    
+    .research-steps p + p {
+      margin-top: 8px;
+    }
+    
+    .research-steps strong {
+      color: var(--navy);
+    }
+    
+    .research-rating {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    .research-question {
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 8px;
+      font-size: 18px;
+      line-height: 1.4;
+    }
+    
+    .research-question-sub {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+    
     .emoji-scale {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -410,55 +396,56 @@
       max-width: 720px;
       margin: 0 auto;
     }
-
+    
     .emoji-option {
       position: relative;
     }
-
+    
     .emoji-option input {
       position: absolute;
       opacity: 0;
       pointer-events: none;
     }
-
+    
     .emoji-option label {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      min-height: 92px;
-      border-radius: 20px;
-      border: 2px solid #e5edf5;
+      min-height: 88px;
+      border-radius: 18px;
+      border: 1px solid #e5edf5;
       background: #fff;
       cursor: pointer;
-      transition: 0.22s ease;
+      transition: 0.2s ease;
       color: var(--navy);
       padding: 12px 8px;
     }
-
+    
     .emoji-face {
       font-size: 28px;
       line-height: 1;
     }
-
+    
     .emoji-text {
       font-size: 12px;
       font-weight: 700;
       color: var(--muted);
     }
-
+    
     .emoji-option label:hover {
       transform: translateY(-2px);
-      border-color: #c7dffb;
-      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.06);
+      border-color: #d7e3ef;
+      box-shadow: none;
     }
+    
     .emoji-option input:checked + label {
       border-color: var(--navy);
       background: #ffffff;
       box-shadow: none;
     }
-
+    
     .report-output {
       display: none;
       margin: 18px 0 0;
@@ -471,14 +458,14 @@
       word-break: break-all;
       color: #cbd5e1;
     }
-
+    
     .research-actions {
       display: flex;
       gap: 14px;
-      margin-top: 20px;
+      margin-top: 18px;
       flex-wrap: wrap;
     }
-
+    
     .research-btn {
       flex: 1;
       min-width: 220px;
@@ -492,19 +479,18 @@
       transition: 0.25s;
       box-shadow: 0 10px 22px rgba(31, 78, 121, 0.22);
     }
-
+    
     .research-btn:hover {
       transform: translateY(-2px);
       background: linear-gradient(135deg, var(--accent), #fb923c);
       box-shadow: 0 12px 24px rgba(249, 115, 22, 0.24);
     }
-
+    
     .research-note {
       font-size: 13px;
       color: var(--muted);
       align-self: center;
     }
-
     /* MISSION */
     .mission-card {
       background: linear-gradient(135deg, #1e293b, #334155);
@@ -626,10 +612,6 @@
         padding: 20px;
       }
 
-      .research-rating {
-        padding: 18px;
-      }
-
       .emoji-scale {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -716,104 +698,83 @@
 
     </div>
 
-  <div class="panel-card research-card">
-  <div class="panel-header">
-    <div class="panel-kicker">Weekly Reflection</div>
-    <h3>Weekly Research Challenge</h3>
-  </div>
-
-  <div class="panel-body">
-    <div class="research-tools">
-      <div class="research-tool-text">After generating, copy the code and send it to your teacher in WeChat.</div>
-      <button type="button" class="mini-copy-btn" onclick="copyReportCode()">Copy code</button>
-    </div>
-
-    <div class="research-steps">
-      <div class="research-step">
-        <strong>Step 1:</strong> Rate your child’s engagement this week.<br>
-        <strong>Step 2:</strong> Generate the code and send it to your teacher.
+    <div class="panel-card research-card">
+      <div class="panel-header">
+        <div class="panel-kicker">Weekly Reflection</div>
+        <h3>Weekly Research Challenge</h3>
       </div>
-      <div class="research-step">
-        <strong>第一步：</strong> 评价孩子本周的学习兴趣。<br>
-        <strong>第二步：</strong> 生成代码并发送给老师。
+
+    <div class="panel-body">
+      <div class="research-tools">
+        <div class="research-tool-text">After generating, copy the code and send it to your teacher in WeChat.</div>
+        <button type="button" class="mini-copy-btn" onclick="copyReportCode()">Copy code</button>
       </div>
-    </div>
-
-    <div class="research-rating">
-      <p class="research-question">How much did your child enjoy LinguaLab this week?</p>
-      <p class="research-question-sub">Choose the face that feels closest to this week.</p>
-
-      <div class="emoji-scale">
-        <div class="emoji-option">
-          <input type="radio" id="enjoy-1" name="enjoyment" value="1">
-          <label for="enjoy-1">
-            <span class="emoji-face">🙁</span>
-            <span class="emoji-text">Low</span>
-          </label>
-        </div>
-
-        <div class="emoji-option">
-          <input type="radio" id="enjoy-2" name="enjoyment" value="2">
-          <label for="enjoy-2">
-            <span class="emoji-face">😐</span>
-            <span class="emoji-text">Okay</span>
-          </label>
-        </div>
-
-        <div class="emoji-option">
-          <input type="radio" id="enjoy-3" name="enjoyment" value="3" checked>
-          <label for="enjoy-3">
-            <span class="emoji-face">🙂</span>
-            <span class="emoji-text">Good</span>
-          </label>
-        </div>
-
-        <div class="emoji-option">
-          <input type="radio" id="enjoy-4" name="enjoyment" value="4">
-          <label for="enjoy-4">
-            <span class="emoji-face">😊</span>
-            <span class="emoji-text">Great</span>
-          </label>
-        </div>
-
-        <div class="emoji-option">
-          <input type="radio" id="enjoy-5" name="enjoyment" value="5">
-          <label for="enjoy-5">
-            <span class="emoji-face">🤩</span>
-            <span class="emoji-text">Amazing</span>
-          </label>
+    
+      <div class="research-steps">
+        <p><strong>Step 1:</strong> Rate your child’s engagement this week. <strong>Step 2:</strong> Generate the code and send it to your teacher.</p>
+        <p><strong>第一步：</strong> 评价孩子本周的学习兴趣。<strong>第二步：</strong> 生成代码并发送给老师。</p>
+      </div>
+    
+      <div class="research-rating">
+        <p class="research-question">How much did your child enjoy LinguaLab this week?</p>
+        <p class="research-question-sub">Choose the face that feels closest to this week.</p>
+    
+        <div class="emoji-scale">
+          <div class="emoji-option">
+            <input type="radio" id="enjoy-1" name="enjoyment" value="1">
+            <label for="enjoy-1">
+              <span class="emoji-face">🙁</span>
+              <span class="emoji-text">Low</span>
+            </label>
+          </div>
+    
+          <div class="emoji-option">
+            <input type="radio" id="enjoy-2" name="enjoyment" value="2">
+            <label for="enjoy-2">
+              <span class="emoji-face">😐</span>
+              <span class="emoji-text">Okay</span>
+            </label>
+          </div>
+    
+          <div class="emoji-option">
+            <input type="radio" id="enjoy-3" name="enjoyment" value="3" checked>
+            <label for="enjoy-3">
+              <span class="emoji-face">🙂</span>
+              <span class="emoji-text">Good</span>
+            </label>
+          </div>
+    
+          <div class="emoji-option">
+            <input type="radio" id="enjoy-4" name="enjoyment" value="4">
+            <label for="enjoy-4">
+              <span class="emoji-face">😊</span>
+              <span class="emoji-text">Great</span>
+            </label>
+          </div>
+    
+          <div class="emoji-option">
+            <input type="radio" id="enjoy-5" name="enjoyment" value="5">
+            <label for="enjoy-5">
+              <span class="emoji-face">🤩</span>
+              <span class="emoji-text">Amazing</span>
+            </label>
+          </div>
         </div>
       </div>
-    </div>
+    
+      <div id="report-output" class="report-output"></div>
 
-    <div id="report-output" class="report-output"></div>
-
-    <div class="research-actions">
-      <button id="report-btn" class="research-btn" onclick="generateWeeklyReport()">
-        Generate Weekly Code
-      </button>
-      <div class="research-note">Generate the code, then copy or send it in WeChat.</div>
-    </div>
-  </div>
-</div>
-        <div id="report-output" class="report-output"></div>
-
-        <div class="research-actions">
-          <button id="report-btn" class="research-btn" onclick="generateWeeklyReport()">
-            Generate Weekly Code
-          </button>
-          <div class="research-note">Your code is copied automatically after generation.</div>
-        </div>
+      <div class="research-actions">
+        <button id="report-btn" class="research-btn" onclick="generateWeeklyReport()">
+          Generate Weekly Code
+        </button>
       </div>
     </div>
-
   </div>
 
   <footer>
     © <span id="year">2026</span> LinguaLab • Small lessons. Real progress. All rights reserved.
   </footer>
-
-  <audio id="player"></audio>
 
   <script>
     const clilActivities = [
