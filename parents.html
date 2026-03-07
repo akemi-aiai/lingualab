@@ -747,17 +747,17 @@
     </div>
   </div>
 
-<div style="text-align: center; margin: 40px 0;">
-      <a href="privacy.html" style="font-size: 13px; color: var(--muted); text-decoration: none; border-bottom: 1px dashed #cbd5e1;">Privacy</a>
-  </div>
-
-  <footer>
+<footer>
+    <div class="footer-links">
+        <a href="privacy.html" class="footer-link">Policy</a>
+    </div>
     <div class="footer-text">
-      © <span id="year">2026</span> LinguaLab • Small lessons. Real progress. All rights reserved.
+      © 2026 LinguaLab • Small lessons. Real progress. All rights reserved.
     </div>
   </footer>
 
   <audio id="player"></audio>
+
 
   <script>
 
@@ -1435,18 +1435,18 @@
         });
     }
     
-    function updateStats() {
-        const vocabScore = parseInt(localStorage.getItem('vocab_points')) || 0;
-        const grammarScore = parseInt(localStorage.getItem('ll_score')) || 0;
-        const totalScore = vocabScore + grammarScore;
-        const words = localStorage.getItem('learned_words_total') || 0;
-        const timeSec = parseInt(localStorage.getItem('time_spent_seconds')) || 0;
-        const timeMin = Math.floor(timeSec / 60);
-    
-        document.getElementById('p-score').innerText = totalScore;
-        document.getElementById('p-words').innerText = words;
-        document.getElementById('p-time').innerText = timeMin + " min";
-    }
+  function updateStats() {
+    const vocabScore = parseInt(localStorage.getItem('vocab_points')) || 0;
+    const grammarScore = parseInt(localStorage.getItem('ll_score')) || 0;
+    const totalScore = vocabScore + grammarScore;
+    const words = localStorage.getItem('learned_words_total') || 0;
+    const timeSec = parseInt(localStorage.getItem('time_spent_seconds')) || 0;
+    const timeMin = Math.floor(timeSec / 60);
+
+    document.getElementById('p-score').innerText = totalScore;
+    document.getElementById('p-words').innerText = words;
+    document.getElementById('p-time').innerText = timeMin + " min";
+}
 
     function setRandomContent() {
       const act = clilActivities[Math.floor(Math.random() * clilActivities.length)];
