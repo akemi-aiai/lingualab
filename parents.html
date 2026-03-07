@@ -738,7 +738,7 @@
 
         <div class="research-actions">
           <button id="report-btn" class="research-btn" onclick="generateWeeklyReport()">
-            Generate Weekly Code
+            Copy Weekly Code
           </button>
         </div>
       </div>
@@ -1371,40 +1371,49 @@
     
 
    function generateWeeklyReport() {
-  const researchData = JSON.parse(localStorage.getItem('ll_research_data') || 'null');
-  const currentWords = parseInt(localStorage.getItem('learned_words_total')) || 0;
-  const currentXP = (parseInt(localStorage.getItem('ll_score')) || 0) + (parseInt(localStorage.getItem('vocab_points')) || 0);
-  const enjoymentInput = document.querySelector('input[name="enjoyment"]:checked');
-
-  if (!enjoymentInput) {
-    alert("Please choose a rating first.");
-    return;
-  }
-
-  if (!researchData || !researchData.dailyActivity) {
-    alert("No weekly research data found yet.");
-    return;
-  }
-
-  const enjoyment = enjoymentInput.value;
-  const activeDays = Object.keys(researchData.dailyActivity || {}).length;
-  const hasGoldStar = activeDays >= 5;
-
-  const report = {
-    id: researchData.studentId,
-    start: researchData.startDate,
-    newW: currentWords - (researchData.totalWordsAtStart || 0),
-    newXP: currentXP - (researchData.totalXPAtStart || 0),
-    log: researchData.dailyActivity,
-    diff: researchData.wordDifficulty || {},
-    star: hasGoldStar,
-    rate: enjoyment
-  };
-
-  const output = document.getElementById('report-output');
-  output.innerText = JSON.stringify(report, null, 2);
-  output.style.display = "block";
-}
+      const researchData = JSON.parse(localStorage.getItem('ll_research_data') || 'null');
+      const currentWords = parseInt(localStorage.getItem('learned_words_total')) || 0;
+      const currentXP = (parseInt(localStorage.getItem('ll_score')) || 0) + (parseInt(localStorage.getItem('vocab_points')) || 0);
+      const enjoymentInput = document.querySelector('input[name="enjoyment"]:checked');
+    
+      if (!enjoymentInput) {
+        alert("Please choose a rating first.");
+        return;
+      }
+    
+      if (!researchData || !researchData.dailyActivity) {
+        alert("No weekly research data found yet.");
+        return;
+      }
+    
+      const enjoyment = enjoymentInput.value;
+      const activeDays = Object.keys(researchData.dailyActivity || {}).length;
+      const hasGoldStar = activeDays >= 5 ? 1 : 0;
+    
+      const shortDate = (researchData.startDate || "").slice(0, 10);
+    
+      const shortCode = [
+        "LL-REPORT",
+        researchData.studentId || "UNKNOWN",
+        shortDate,
+        currentWords - (researchData.totalWordsAtStart || 0),
+        currentXP - (researchData.totalXPAtStart || 0),
+        enjoyment,
+        hasGoldStar
+      ].join("|");
+    
+      const output = document.getElementById("report-output");
+      output.innerText = shortCode;
+      output.style.display = "block";
+    
+      navigator.clipboard.writeText(shortCode)
+        .then(() => {
+          alert("Weekly code copied. Please paste it into WeChat.");
+        })
+        .catch(() => {
+          alert("Weekly code is ready. Please copy it manually.");
+        });
+    }
 
     function updateStats() {
       const vocabScore = parseInt(localStorage.getItem('vocab_points')) || 0;
