@@ -512,14 +512,6 @@
       text-align: center;
       margin-top: 50px;
     }
-
-    .footer-text {
-      font-size: 14px;
-      line-height: 1.7;
-      letter-spacing: 0.2px;
-      opacity: 0.95;
-    }
-
     @media (max-width: 1100px) {
       .parent-grid {
         grid-template-columns: 1fr;
@@ -631,6 +623,13 @@
         <span>Focus Time</span>
         <b id="p-time">0 min</b>
         <p>Total time spent</p>
+      </div>
+      <div id="tip-container" style="background: var(--primary-light); border: 1px solid var(--primary); border-radius: var(--radius); padding: 20px; margin-bottom: 35px; display: flex; align-items: center; gap: 15px;">
+            <div style="font-size: 24px;">💡</div>
+            <div>
+                <strong style="color: var(--navy); display: block; font-size: 14px; text-transform: uppercase;">Next Step Advice:</strong>
+                <p id="pedagogical-tip" style="font-size: 15px; color: var(--navy); margin: 0;">Loading your personal tip...</p>
+            </div>
       </div>
       <div class="stat-card">
         <span>Vocabulary</span>
@@ -747,6 +746,21 @@
       </div>
     </div>
   </div>
+
+<div style="max-width: 800px; margin: 40px auto; background: #fff; border: 1px solid var(--line); border-left: 4px solid var(--navy); padding: 25px; border-radius: 12px; box-shadow: var(--shadow-soft);">
+    <h4 style="color: var(--navy); margin-bottom: 10px; font-size: 16px; text-transform: uppercase; letter-spacing: 0.5px;">🛡️ Data Privacy & Ethics Statement</h4>
+    <div style="font-size: 13px; color: var(--muted); line-height: 1.7;">
+        <p>This application is part of an academic study on early childhood bilingualism. To protect our students:</p>
+        <ul style="margin: 10px 0 10px 20px;">
+            <li><strong>Zero-Cloud Storage:</strong> All learning progress stays on your device.</li>
+            <li><strong>Anonymized ID:</strong> Your child is identified only by a random code (e.g., STU-X12).</li>
+            <li><strong>Manual Control:</strong> Research data is only shared if you choose to copy and send the code.</li>
+        </ul>
+        <p style="font-style: italic; border-top: 1px solid #f1f5f9; pt: 10px; mt: 10px;">
+            本项目属于学术研究。所有数据本地存储，采用匿名 ID，数据传输完全由家长手动控制。
+        </p>
+    </div>
+</div>
   
   <footer>
     <div class="footer-text">
@@ -1371,60 +1385,70 @@
         promptZh: "可以这样玩：‘Dance... dance... STOP!’"
       }
     ];
+    function generateWeeklyReport() {
+    // Получаем свежие данные из аналитики
+    const researchData = JSON.parse(localStorage.getItem('ll_research_data') || '{}');
+    const currentWords = parseInt(localStorage.getItem('learned_words_total')) || 0;
+    const currentXP = (parseInt(localStorage.getItem('ll_score')) || 0) + (parseInt(localStorage.getItem('vocab_points')) || 0);
+    const enjoymentInput = document.querySelector('input[name="enjoyment"]:checked');
     
-
-     function generateWeeklyReport() {
-      const researchData = JSON.parse(localStorage.getItem('ll_research_data') || 'null');
-      const currentWords = parseInt(localStorage.getItem('learned_words_total')) || 0;
-      const currentXP = (parseInt(localStorage.getItem('ll_score')) || 0) + (parseInt(localStorage.getItem('vocab_points')) || 0);
-      const enjoymentInput = document.querySelector('input[name="enjoyment"]:checked');
-    
-      if (!enjoymentInput) {
+    if (!enjoymentInput) {
         alert("Please choose a rating first.");
         return;
-      }
-    
-      if (!researchData || !researchData.dailyActivity) {
-        alert("No weekly research data found yet.");
+    }
+
+    if (!researchData.studentId) {
+        alert("No research data found. Please play some games first!");
         return;
-      }
-    
-      const enjoyment = enjoymentInput.value;
-      const activeDays = Object.keys(researchData.dailyActivity || {}).length;
-      const hasGoldStar = activeDays >= 5;
-    
-      const report = {
+    }
+
+    const enjoyment = enjoymentInput.value;
+    const activeDays = Object.keys(researchData.dailyActivity || {}).length;
+    const hasGoldStar = activeDays >= 5;
+
+    // Формируем объект отчета
+    const report = {
         id: researchData.studentId,
         start: researchData.startDate,
         newW: currentWords - (researchData.totalWordsAtStart || 0),
         newXP: currentXP - (researchData.totalXPAtStart || 0),
-        log: researchData.dailyActivity,
+        log: researchData.dailyActivity || {},
         diff: researchData.wordDifficulty || {},
         star: hasGoldStar,
         rate: enjoyment
-      };
+    };
+
+    // Кодируем в Base64, чтобы код был одной строкой (удобно для WeChat)
+    const jsonString = JSON.stringify(report);
+    const encodedReport = btoa(unescape(encodeURIComponent(jsonString)));
     
-      const jsonText = JSON.stringify(report, null, 2);
-      const output = document.getElementById("report-output");
-      output.value = jsonText;
-      output.style.display = "block";
-    }
+    const output = document.getElementById("report-output");
+    output.value = "LL-REPORT:" + encodedReport; // Добавляем префикс для Декодера
+    output.style.display = "block";
+}
     
-    function copyReportOutput() {
-      const output = document.getElementById("report-output");
-    
-      if (!output.value.trim()) {
-        alert("Generate the JSON first.");
+function copyReportOutput() {
+    const output = document.getElementById("report-output");
+    if (!output.value.trim()) {
+        alert("Please generate the report first.");
         return;
-      }
-    
-      output.select();
-      output.setSelectionRange(0, 99999);
-    
-      navigator.clipboard.writeText(output.value)
-        .then(() => alert("JSON copied."))
-        .catch(() => alert("Copy failed. Please copy it manually."));
     }
+
+    output.select();
+    navigator.clipboard.writeText(output.value).then(() => {
+        alert("Code copied! Now you can send it via WeChat.");
+        
+        if(confirm("Tracker for a new week")) {
+            if (typeof Analytics !== 'undefined') {
+                Analytics.resetWeeklyData();
+                location.reload();
+            }
+        }
+    }).catch(err => {
+        alert("Copy failed. Please select the text and copy it manually.");
+    });
+}
+    
     function updateStats() {
       const vocabScore = parseInt(localStorage.getItem('vocab_points')) || 0;
       const grammarScore = parseInt(localStorage.getItem('ll_score')) || 0;
@@ -1436,7 +1460,15 @@
       document.getElementById('p-score').innerText = totalScore;
       document.getElementById('p-words').innerText = words;
       document.getElementById('p-time').innerText = timeMin + " min";
-    }
+      const tipBox = document.getElementById('pedagogical-tip');
+      if (words < 10) {
+          tipBox.innerText = "Tip: Focus on naming household objects together. Keep sessions under 5 minutes.";
+      } else if (words >= 10 && words < 50) {
+          tipBox.innerText = "Tip: Great progress! Start asking 'What is this?' instead of just naming objects.";
+      } else {
+          tipBox.innerText = "Tip: Challenge your child to use two words together, e.g., 'Big Panda' or 'Red Apple'.";
+      }
+      }
 
     function setRandomContent() {
       const act = clilActivities[Math.floor(Math.random() * clilActivities.length)];
@@ -1482,8 +1514,28 @@
       setRandomContent();
       document.getElementById('year').innerText = new Date().getFullYear();
     };
-  </script>
+    window.onload = () => {
+        updateStats();
+        setRandomContent();
+        document.getElementById('year').innerText = new Date().getFullYear();
+    };
 
+    // ВСТАВЛЯЙТЕ СЮДА
+    window.addEventListener('load', function() {
+        if (!localStorage.getItem('research_consent')) {
+            const consent = confirm(
+                "LINGUALAB RESEARCH NOTICE:\n\n" +
+                "To help our academic study, this app tracks learning progress locally. " +
+                "No personal data is collected. By continuing, you agree to participate in our bilingualism study.\n\n" +
+                "您是否同意匿名参与本项双语教育学术研究？点击“确定”表示同意。"
+            );
+            if (consent) {
+                localStorage.setItem('research_consent', 'true');
+            }
+        }
+    });
+
+  </script>
   <script src="analytics.js"></script>
 </body>
 </html>  
