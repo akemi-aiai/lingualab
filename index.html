@@ -60,9 +60,7 @@
             width: 100%;
         }
         .hero-compact h1 { font-size: 48px; font-weight: 800; margin-bottom: 15px; }
-        .hero-info { 
-            font-size: 20px; opacity: 0.95; max-width: 600px; margin: 0 auto;
-        }
+        .hero-info { font-size: 20px; opacity: 0.95; max-width: 600px; margin: 0 auto; }
 
         /* --- MAIN NAVIGATION CARDS --- */
         .content-wrapper {
@@ -88,50 +86,44 @@
             transform: translateY(-5px); border-color: var(--primary);
             box-shadow: 0 20px 40px rgba(34, 211, 238, 0.15);
         }
-        .nav-card img { width: 80px; height: 80px; margin-bottom: 15px; object-fit: contain; }
+        /* ИСПРАВЛЕНИЕ: Картинки снова большие и адаптируются под ширину */
+        .nav-card img { width: 100%; height: 160px; margin-bottom: 20px; object-fit: contain; }
         .nav-card h3 { font-size: 22px; color: var(--navy); margin-bottom: 10px; font-weight: 800; }
         .nav-card p { font-size: 14px; color: #64748b; font-weight: 500; }
 
-        /* --- ACADEMY GROWTH TRACKER (DASHBOARD) --- */
-        .tracker-card {
-            background: #fff; border-radius: var(--radius); padding: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08); margin: 0 auto 40px;
-            max-width: 600px; text-align: center; border: 2px solid #e2e8f0;
-            position: relative; overflow: hidden;
+        /* --- PROGRESS SECTION (Оригинальное дерево) --- */
+        .progress-section { margin-bottom: 40px; }
+        .progress-container {
+            display: flex; align-items: center; justify-content: center; gap: 40px;
+            background: #fff; border-radius: var(--radius); padding: 50px 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08); border: 1px solid #e2e8f0;
+            flex-wrap: wrap;
         }
-        .tracker-card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 8px;
-            background: linear-gradient(90deg, #22c55e, #22d3ee);
-        }
-        .tree-container { margin: 20px 0; }
-        .tree-img { width: 140px; height: 140px; object-fit: contain; transition: 0.5s transform; }
-        .tree-img:hover { transform: scale(1.1) rotate(5deg); }
+        .tree-box { width: 150px; height: 150px; }
+        .stats-content { text-align: left; }
+        .stat-val { font-size: 56px; font-weight: 800; color: var(--navy); line-height: 1; }
         
-        .points-display { font-size: 42px; font-weight: 800; color: var(--navy); margin-bottom: 5px; line-height: 1; }
-        .points-label { font-size: 14px; color: #64748b; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
-        
-        .report-btn {
-            background: var(--navy); color: #fff; border: none; padding: 15px 30px;
-            border-radius: 99px; font-size: 16px; font-weight: 800; cursor: pointer;
-            margin-top: 25px; transition: 0.3s; box-shadow: 0 10px 20px rgba(31, 78, 121, 0.2);
-            width: 100%; max-width: 300px;
+        .btn-outline {
+            background: transparent; border: 2px solid var(--primary); color: var(--primary);
+            padding: 12px 24px; border-radius: 99px; font-weight: 800; cursor: pointer;
+            transition: 0.3s; font-size: 16px; margin-top: 10px;
         }
-        .report-btn:hover { transform: translateY(-3px); background: var(--primary); }
+        .btn-outline:hover { background: var(--primary); color: #fff; transform: translateY(-2px); }
 
-        /* --- REPORT MODAL --- */
+        /* --- REPORT MODAL (Оригинальный дизайн репорта) --- */
         #report-modal {
             display: none; position: fixed; top: 50%; left: 50%;
             transform: translate(-50%, -50%); background: #fff;
             padding: 40px; border-radius: var(--radius); width: 90%; max-width: 400px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3); z-index: 2000;
-            border-top: 6px solid var(--primary);
+            border-top: 6px solid var(--green);
         }
-        .report-stat { 
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 15px 0; border-bottom: 1px dashed #e2e8f0; font-size: 18px; color: var(--navy); font-weight: 600;
+        .report-list { margin-top: 15px; text-align: left; }
+        .report-item {
+            display: flex; align-items: flex-start; margin-bottom: 15px; font-size: 16px; color: var(--navy);
         }
-        .report-stat:last-child { border-bottom: none; }
-        .stat-icon { font-size: 24px; margin-right: 15px; }
+        .stat-icon { font-size: 20px; margin-right: 10px; line-height: 1.2; }
+        
         .close-btn { 
             width: 100%; background: #f1f5f9; color: var(--navy); border: none; 
             padding: 15px; border-radius: 16px; font-weight: 800; font-size: 16px; 
@@ -145,6 +137,10 @@
 
         footer { background: #0f172a; color: #94a3b8; padding: 40px 8%; text-align: center; margin-top: 50px; font-size: 14px; }
 
+        @media (max-width: 800px) {
+            .progress-container { flex-direction: column; text-align: center; }
+            .stats-content { text-align: center; }
+        }
         @media (max-width: 600px) {
             .navbar { padding: 10px 20px; flex-direction: column; gap: 10px; height: auto; }
             .navbar-left { width: 100%; justify-content: center; }
@@ -200,41 +196,44 @@
         </a>
     </div>
 
-    <div class="tracker-card">
-        <h2 style="color: var(--navy); font-size: 26px; margin-bottom: 5px;">Academy Growth Tracker</h2>
-        <p style="color: #64748b; margin-bottom: 20px; font-weight: 500;">Watch your learning tree grow! 🌱</p>
-        
-        <div class="tree-container">
-            <img id="dashboard-tree" class="tree-img" src="https://cdn-icons-png.flaticon.com/512/2970/2970461.png" alt="Tree">
+    <section class="progress-section">
+        <div class="progress-container">
+            <div class="tree-box">
+                <svg viewBox="0 0 100 100" id="knowledge-tree">
+                    <path d="M50 85 L50 60" stroke="#5d4037" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M50 72 L42 58" stroke="#5d4037" stroke-width="3" stroke-linecap="round"/>
+                    <path d="M50 68 L60 55" stroke="#5d4037" stroke-width="3" stroke-linecap="round"/>
+                    <g id="tree-leaves"></g>
+                    <g id="tree-fruits"></g>
+                </svg>
+            </div>
+            <div class="stats-content">
+                <p style="text-transform: uppercase; font-weight: 700; color: var(--primary); letter-spacing: 1px;">Academy Growth Tracker</p>
+                <div class="stat-val" id="dashboard-points">0</div>
+                <button class="btn btn-outline" onclick="openReport()">Download Report</button>
+            </div>
         </div>
-        
-        <div class="points-display"><span id="dashboard-points">0</span></div>
-        <div class="points-label">Knowledge Points (XP)</div>
-        
-        <p id="dashboard-hint" style="margin-top: 20px; color: var(--accent); font-weight: 600;">
-            Go to "Word Bank" to grow your tree!
-        </p>
-
-        <button class="report-btn" onclick="openReport()">Download Parent Report 📊</button>
-    </div>
+    </section>
 </div>
 
 <div id="modal-overlay"></div>
 <div id="report-modal">
-    <h2 style="text-align: center; color: var(--navy); margin-bottom: 5px; font-size: 28px;">Weekly Report</h2>
-    <p style="text-align: center; color: #64748b; font-size: 14px; margin-bottom: 25px; font-weight: 500;">Learning analytics (Local Data)</p>
-    
-    <div class="report-stat">
-        <div><span class="stat-icon">⏳</span>Time Played:</div>
-        <div id="stat-time">0 min</div>
-    </div>
-    <div class="report-stat">
-        <div><span class="stat-icon">🧠</span>Words Learned:</div>
-        <div id="stat-words">0</div>
-    </div>
-    <div class="report-stat">
-        <div><span class="stat-icon">🏆</span>Favorite Topic:</div>
-        <div id="stat-topic" style="color: var(--accent);">None yet</div>
+    <div style="font-size:60px; margin-bottom:10px; text-align: center;">🏆</div>
+    <h2 style="color:var(--navy); margin-bottom:5px; text-align: center;">You did it!</h2>
+    <p style="color:#64748b; text-align: center;">Learning analytics (Local Data)</p>
+
+    <div class="report-list">
+        <div style="font-weight:800; color:var(--navy); margin-bottom:15px; text-transform:uppercase; font-size:12px;">Parent Report</div>
+        
+        <div class="report-item">
+            <span><b>Time Played:</b> <br><span id="stat-time" style="color: #64748b;">0 min</span></span>
+        </div>
+        <div class="report-item">
+            <span><b>Words Learned:</b> <br><span id="stat-words" style="color: #64748b;">0</span></span>
+        </div>
+        <div class="report-item">
+            <span><b>Favorite Topic:</b> <br><span id="stat-topic" style="color: var(--accent);">None yet</span></span>
+        </div>
     </div>
 
     <button class="close-btn" onclick="closeReport()">Awesome!</button>
@@ -245,7 +244,6 @@
 </footer>
 
 <script>
-    // Красивые названия тем для отчета
     const topicNames = {
         "family": "Family & Friends",
         "school": "My School",
@@ -255,39 +253,46 @@
     };
 
     function updateDashboard() {
-        // Читаем данные из локальной памяти устройства
         let points = parseInt(localStorage.getItem('vocab_points') || '0');
         document.getElementById('dashboard-points').innerText = points;
 
-        // Логика роста дерева (Тамагочи)
-        let treeImg = document.getElementById('dashboard-tree');
+        let leavesEl = document.getElementById('tree-leaves');
+        let fruitsEl = document.getElementById('tree-fruits');
         let hint = document.getElementById('dashboard-hint');
 
+        // Очищаем дерево перед обновлением
+        leavesEl.innerHTML = '';
+        fruitsEl.innerHTML = '';
+
+        // Логика роста SVG дерева
         if (points >= 100) {
-            // Большое дерево с плодами
-            treeImg.src = "https://cdn-icons-png.flaticon.com/512/2970/2970451.png"; 
             hint.innerText = "Wow! Your tree is fully grown! 🍎";
             hint.style.color = "var(--green)";
+            // Добавляем пышную крону
+            leavesEl.innerHTML = '<circle cx="50" cy="45" r="25" fill="#22c55e" opacity="0.9"/> <circle cx="35" cy="55" r="15" fill="#16a34a" opacity="0.9"/> <circle cx="65" cy="55" r="15" fill="#16a34a" opacity="0.9"/>';
+            // Добавляем яблоки
+            fruitsEl.innerHTML = '<circle cx="50" cy="35" r="4" fill="#ef4444"/> <circle cx="40" cy="45" r="4" fill="#ef4444"/> <circle cx="60" cy="48" r="4" fill="#ef4444"/>';
         } else if (points >= 40) {
-            // Среднее дерево
-            treeImg.src = "https://cdn-icons-png.flaticon.com/512/2970/2970430.png"; 
             hint.innerText = "Keep going! It's growing fast! 🌿";
             hint.style.color = "var(--navy)";
+            // Добавляем среднюю листву
+            leavesEl.innerHTML = '<circle cx="50" cy="50" r="20" fill="#4ade80" opacity="0.9"/> <circle cx="40" cy="60" r="10" fill="#22c55e" opacity="0.9"/>';
+        } else if (points > 0) {
+            hint.innerText = "You have your first leaves! 🌱";
+            hint.style.color = "var(--navy)";
+            // Добавляем первые листочки
+            leavesEl.innerHTML = '<circle cx="50" cy="55" r="10" fill="#86efac" opacity="0.9"/>';
         } else {
-            // Росток
-            treeImg.src = "https://cdn-icons-png.flaticon.com/512/2970/2970461.png"; 
-            hint.innerText = "Play in the Word Bank to grow your tree!";
+            hint.innerText = "Go to 'Word Bank' to grow your tree!";
             hint.style.color = "var(--accent)";
         }
     }
 
     function openReport() {
-        // Читаем аналитику
         let timeSeconds = parseInt(localStorage.getItem('time_spent_seconds') || '0');
         let wordsTotal = parseInt(localStorage.getItem('learned_words_total') || '0');
         let clicksData = JSON.parse(localStorage.getItem('category_clicks') || '{}');
 
-        // Вычисляем любимую тему
         let favoriteTopic = "None yet";
         let maxClicks = 0;
         for (const [topic, clicks] of Object.entries(clicksData)) {
@@ -297,12 +302,11 @@
             }
         }
 
-        // Заполняем интерфейс отчета
+        // Заполняем репорт с переносами (как вы просили)
         document.getElementById('stat-time').innerText = Math.floor(timeSeconds / 60) + " min";
         document.getElementById('stat-words').innerText = wordsTotal;
         document.getElementById('stat-topic').innerText = favoriteTopic + (maxClicks > 0 ? ` (${maxClicks} clicks)` : '');
 
-        // Показываем окно
         document.getElementById('report-modal').style.display = 'block';
         document.getElementById('modal-overlay').style.display = 'block';
     }
@@ -312,7 +316,6 @@
         document.getElementById('modal-overlay').style.display = 'none';
     }
 
-    // Запускаем обновление при загрузке страницы
     window.onload = () => {
         updateDashboard();
         document.getElementById('year').innerText = new Date().getFullYear();
