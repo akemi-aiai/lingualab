@@ -239,7 +239,7 @@
       background: #f8fafc;
       border-radius: 18px;
       border-left: 4px solid var(--primary);
-      color: #f97316;
+      color: #64748b;
       font-size: 14px;
       line-height: 1.6;
     }
@@ -1117,7 +1117,7 @@
       const timeSec = parseInt(localStorage.getItem('time_spent_seconds')) || 0;
       const timeMin = Math.floor(timeSec / 60);
 
-      document.getElementById('p-score').innerText = totalScore + " XP";
+      document.getElementById('p-score').innerText = totalScore;
       document.getElementById('p-words').innerText = words;
       document.getElementById('p-time').innerText = timeMin + " min";
     }
