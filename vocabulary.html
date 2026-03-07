@@ -1,280 +1,485 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Word Bank — LinguaLab</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Word Bank — LinguaLab</title>
 
-    <style>
-        :root {
-            --primary: #22d3ee;
-            --primary-light: #ecfeff;
-            --accent: #f97316;
-            --navy: #1f4e79;
-            --green: #22c55e;
-            --bg: #f8fafc;
-            --radius: 24px;
-        }
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg);
-            color: #0f172a;
-            line-height: 1.6;
-            padding-top: 80px;
-        }
+  <style>
+    :root {
+      --primary: #22d3ee;
+      --primary-light: #ecfeff;
+      --accent: #f97316;
+      --navy: #1f4e79;
+      --green: #22c55e;
+      --bg: #f8fafc;
+      --radius: 24px;
+    }
 
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        /* --- NAVBAR --- */
-        .navbar {
-            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 15px 40px;
-            background: #fff; 
-            box-shadow: 0 4px 20px rgba(0,0,0,.05);
-            height: 80px; 
-        }
-        .navbar-left { display: flex; align-items: center; gap: 12px; }
-        .nav-logo { height: 50px; width: auto; display: block; }
-        .nav-title { font-size: 24px; font-weight: 800; color: var(--navy); }
-        
-        .navbar-right { display: flex; align-items: center; gap: 20px; }
-        .navbar-right a { 
-            color: var(--navy); font-weight: 600; text-decoration: none; 
-            font-size: 14px; transition: 0.3s; 
-        }
-        .navbar-right a:hover { color: var(--accent); }
-        
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: #0f172a;
+      line-height: 1.6;
+      padding-top: 80px;
+    }
 
-        /* --- HERO SECTION --- */
-        .hero-compact {
-          padding: 60px 8% 140px;
-          text-align: center;
-          background: linear-gradient(135deg, #22d3ee, #a78bfa);
-          color: #fff;
-          width: 100%;
-        }
-        .hero-compact h1 {`
-          font-size: 42px;
-          font-weight: 800;
-          margin-bottom: 10px;
-        }
-    
-        
-        .hero-info {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 20px;
-          font-size: 18px;
-          flex-wrap: wrap;
-        }
-        
-        .hero-copy {
-          max-width: 760px;
-          line-height: 1.5;
-        }
-        
-        .hero-copy .cn-line {
-          display: block;
-          font-size: 16px;
-          font-weight: 400;
-          opacity: 0.9;
-          margin-top: 4px;
-        }
-        
-        .tree-badge {
-          background: rgba(255, 255, 255, 0.2);
-          padding: 6px 18px;
-          border-radius: 999px;
-          backdrop-filter: blur(5px);
-          border: 1px solid rgba(255, 255, 255, 0.3);
-          font-weight: 700;
-          white-space: nowrap;
-        }
+    /* --- NAVBAR --- */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 40px;
+      background: #fff;
+      box-shadow: 0 4px 20px rgba(0,0,0,.05);
+      height: 80px;
+    }
 
-        /* --- КОНТЕНТ --- */
-        .content-wrapper {
-            max-width: 1100px;
-            margin: -100px auto 50px;
-            position: relative;
-            z-index: 10;
-            padding: 0 20px;
-        }
+    .navbar-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-        .category-container { 
-            background: #fff; border-radius: var(--radius); padding: 30px 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08); margin-bottom: 40px;
-            border: 1px solid #e2e8f0; text-align: center; 
-            display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
-        }
-        .category-btn { 
-            flex: 0 0 auto; border: none; padding: 12px 24px; border-radius: 99px;
-            cursor: pointer; font-weight: 800; color: #475569; 
-            transition: 0.2s; font-size: 15px; background: #f1f5f9;
-        }
-        .category-btn:hover { transform: translateY(-2px); filter: brightness(0.95); }
-        .category-btn.active { 
-            background: var(--navy); color: #fff; 
-            box-shadow: 0 4px 15px rgba(31, 78, 121, 0.3); transform: scale(1.05);
-        }
+    .nav-logo {
+      height: 50px;
+      width: auto;
+      display: block;
+    }
 
-        .wiki-box { 
-            background: #fff7ed; border-left: 5px solid var(--accent); 
-            padding: 30px; border-radius: 16px; margin-bottom: 30px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .wiki-text-area { flex-grow: 1; padding-right: 20px; }
-        .wiki-title { 
-            font-weight: 800; color: #c2410c; margin-bottom: 10px; 
-            text-transform: uppercase; font-size: 13px; letter-spacing: 1px;
-        }
-        .wiki-content { font-size: 15px; line-height: 1.6; color: #431407; }
-        
-        .progress-counter {
-            background: #fff; color: var(--accent); font-weight: 800;
-            padding: 10px 20px; border-radius: 99px; font-size: 18px;
-            box-shadow: 0 4px 10px rgba(249, 115, 22, 0.15); white-space: nowrap;
-        }
+    .nav-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--navy);
+    }
 
-        .flashcard-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
-            gap: 25px; 
-        }
-        
-        .flashcard-wrapper {
-            background: transparent;
-            height: 280px;
-            perspective: 1000px;
-            cursor: pointer;
-        }
+    .navbar-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
 
-        .flashcard-inner {
-            position: relative; width: 100%; height: 100%;
-            text-align: center; transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
-            transform-style: preserve-3d; border-radius: var(--radius);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-        }
-        .flashcard-wrapper.flipped .flashcard-inner {
-            transform: rotateY(180deg);
-        }
+    .navbar-right a {
+      color: var(--navy);
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 14px;
+      transition: 0.3s;
+    }
 
-        .flashcard-front, .flashcard-back {
-            position: absolute; width: 100%; height: 100%;
-            backface-visibility: hidden; border-radius: var(--radius);
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            padding: 20px; box-sizing: border-box;
-        }
+    .navbar-right a:hover {
+      color: var(--accent);
+    }
 
-        .flashcard-front {
-            background: #fff;
-            border: 2px solid transparent;
-            transition: 0.3s;
-        }
-        .flashcard-front img {
-            width: 100px; height: 100px; object-fit: contain; margin-bottom: 20px;
-        }
-        .flashcard-front h2 {
-            font-size: 26px; font-weight: 800; color: var(--navy); margin: 0;
-        }
+    /* --- HERO SECTION --- */
+    .hero-compact {
+      padding: 60px 8% 140px;
+      text-align: center;
+      background: linear-gradient(135deg, #22d3ee, #a78bfa);
+      color: #fff;
+      width: 100%;
+    }
 
-        .flashcard-back {
-            background: var(--navy);
-            color: #fff;
-            transform: rotateY(180deg);
-            border: 2px solid var(--navy);
-        }
-        .flashcard-back h3 { font-size: 24px; margin-bottom: 5px; color: var(--primary-light); }
-        .flashcard-back p.pinyin { font-size: 16px; opacity: 0.8; margin-bottom: 5px; }
-        .flashcard-back p.translation { font-size: 28px; font-weight: bold; margin-bottom: 15px; color: var(--primary); }
-        .flashcard-back p.sentence { 
-            font-size: 15px; line-height: 1.4; font-weight: 600;
-            border-top: 1px dashed rgba(255,255,255,0.2); padding-top: 15px; color: #fcd34d;
-        }
+    .hero-compact h1 {
+      font-size: 42px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
 
-        #reward-popup {
-            display: none; position: fixed; top: 50%; left: 50%;
-            transform: translate(-50%, -50%); background: #fff;
-            padding: 40px 60px; border-radius: var(--radius);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.2); z-index: 2000;
-            text-align: center; border-top: 6px solid var(--green);
-            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        #reward-popup .trophy { font-size: 60px; margin-bottom: 10px; animation: tada 1s ease-in-out infinite; }
-        #reward-popup h2 { color: var(--navy); font-size: 32px; margin-bottom: 10px; }
-        #reward-popup p { color: #64748b; font-size: 18px; font-weight: 600; }
+    .hero-info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      font-size: 18px;
+      flex-wrap: wrap;
+    }
 
-        @keyframes tada {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(-10deg) scale(1.1); }
-            50% { transform: rotate(10deg) scale(1.1); }
-            75% { transform: rotate(-10deg) scale(1.1); }
-        }
-        @keyframes popIn {
-            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
-            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-        }
-        
-        #overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.6); z-index: 1999; backdrop-filter: blur(3px);
-        }
+    .hero-copy {
+      max-width: 760px;
+      line-height: 1.5;
+    }
 
-        footer { background: #0f172a; color: #94a3b8; padding: 40px 8%; text-align: center; margin-top: 50px; }
+    .hero-copy .cn-line {
+      display: block;
+      font-size: 16px;
+      font-weight: 400;
+      opacity: 0.9;
+      margin-top: 4px;
+    }
 
-        @media (max-width: 600px) {
-            .navbar { padding: 10px 20px; flex-direction: column; gap: 10px; height: auto; }
-            .navbar-left { width: 100%; justify-content: center; }
-            .navbar-right { width: 100%; justify-content: center; flex-wrap: wrap; border-top: 1px solid #f1f5f9; padding-top: 10px; }
-            .hero-compact h1 { font-size: 32px; }
-            .content-wrapper { margin-top: -80px; }
-            .flashcard-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
-            .flashcard-wrapper { height: 240px; }
-            .flashcard-front img { width: 70px; height: 70px; }
-            .flashcard-front h2 { font-size: 20px; }
-            .flashcard-back h3 { font-size: 20px; }
-            .flashcard-back p.translation { font-size: 24px; }
-            .wiki-box { flex-direction: column; text-align: center; gap: 15px; }
-            .wiki-text-area { padding-right: 0; }
-        }
-    </style>
+    .tree-badge {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 6px 18px;
+      border-radius: 999px;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    /* --- CONTENT WRAPPER --- */
+    .content-wrapper {
+      max-width: 1100px;
+      margin: -100px auto 50px;
+      position: relative;
+      z-index: 10;
+      padding: 0 20px;
+    }
+
+    /* ДАЛЬШЕ НУЖНО ОСТАВИТЬ ТВОИ СТАРЫЕ СТИЛИ НИЖЕ */
+    .category-container {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 30px 40px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+      margin-bottom: 40px;
+      border: 1px solid #e2e8f0;
+      text-align: center;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .category-btn {
+      flex: 0 0 auto;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 99px;
+      cursor: pointer;
+      font-weight: 800;
+      color: #475569;
+      transition: 0.2s;
+      font-size: 15px;
+      background: #f1f5f9;
+    }
+
+    .category-btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(0.95);
+    }
+
+    .category-btn.active {
+      background: var(--navy);
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(31, 78, 121, 0.3);
+      transform: scale(1.05);
+    }
+
+    .wiki-box {
+      background: #fff7ed;
+      border-left: 5px solid var(--accent);
+      padding: 30px;
+      border-radius: 16px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .wiki-text-area { flex-grow: 1; padding-right: 20px; }
+
+    .wiki-title {
+      font-weight: 800;
+      color: #c2410c;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
+
+    .wiki-content {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #431407;
+    }
+
+    .progress-counter {
+      background: #fff;
+      color: var(--accent);
+      font-weight: 800;
+      padding: 10px 20px;
+      border-radius: 99px;
+      font-size: 18px;
+      box-shadow: 0 4px 10px rgba(249, 115, 22, 0.15);
+      white-space: nowrap;
+    }
+
+    .flashcard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 25px;
+    }
+
+    .flashcard-wrapper {
+      background: transparent;
+      height: 280px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .flashcard-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+      transform-style: preserve-3d;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    }
+
+    .flashcard-wrapper.flipped .flashcard-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flashcard-front,
+    .flashcard-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: var(--radius);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .flashcard-front {
+      background: #fff;
+      border: 2px solid transparent;
+      transition: 0.3s;
+    }
+
+    .flashcard-front img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      margin-bottom: 20px;
+    }
+
+    .flashcard-front h2 {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--navy);
+      margin: 0;
+    }
+
+    .flashcard-back {
+      background: var(--navy);
+      color: #fff;
+      transform: rotateY(180deg);
+      border: 2px solid var(--navy);
+    }
+
+    .flashcard-back h3 {
+      font-size: 24px;
+      margin-bottom: 5px;
+      color: var(--primary-light);
+    }
+
+    .flashcard-back p.pinyin {
+      font-size: 16px;
+      opacity: 0.8;
+      margin-bottom: 5px;
+    }
+
+    .flashcard-back p.translation {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: var(--primary);
+    }
+
+    .flashcard-back p.sentence {
+      font-size: 15px;
+      line-height: 1.4;
+      font-weight: 600;
+      border-top: 1px dashed rgba(255,255,255,0.2);
+      padding-top: 15px;
+      color: #fcd34d;
+    }
+
+    #reward-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      padding: 40px 60px;
+      border-radius: var(--radius);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+      z-index: 2000;
+      text-align: center;
+      border-top: 6px solid var(--green);
+      animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    #reward-popup .trophy {
+      font-size: 60px;
+      margin-bottom: 10px;
+      animation: tada 1s ease-in-out infinite;
+    }
+
+    #reward-popup h2 {
+      color: var(--navy);
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    #reward-popup p {
+      color: #64748b;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    @keyframes tada {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-10deg) scale(1.1); }
+      50% { transform: rotate(10deg) scale(1.1); }
+      75% { transform: rotate(-10deg) scale(1.1); }
+    }
+
+    @keyframes popIn {
+      0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+      100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    }
+
+    #overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.6);
+      z-index: 1999;
+      backdrop-filter: blur(3px);
+    }
+
+    footer {
+      background: #0f172a;
+      color: #94a3b8;
+      padding: 40px 8%;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 600px) {
+      .navbar {
+        padding: 10px 20px;
+        flex-direction: column;
+        gap: 10px;
+        height: auto;
+      }
+
+      .navbar-left {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .navbar-right {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        border-top: 1px solid #f1f5f9;
+        padding-top: 10px;
+      }
+
+      .hero-compact h1 {
+        font-size: 32px;
+      }
+
+      .content-wrapper {
+        margin-top: -80px;
+      }
+
+      .flashcard-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+
+      .flashcard-wrapper {
+        height: 240px;
+      }
+
+      .flashcard-front img {
+        width: 70px;
+        height: 70px;
+      }
+
+      .flashcard-front h2 {
+        font-size: 20px;
+      }
+
+      .flashcard-back h3 {
+        font-size: 20px;
+      }
+
+      .flashcard-back p.translation {
+        font-size: 24px;
+      }
+
+      .wiki-box {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+      }
+
+      .wiki-text-area {
+        padding-right: 0;
+      }
+    }
+  </style>
 </head>
 <body>
-
-<header class="navbar">
-    <div class="navbar-left">
+    <header class="navbar">
+      <div class="navbar-left">
         <img src="assets/img/logo.png" alt="LL" class="nav-logo" onerror="this.style.display='none'">
         <span class="nav-title">LinguaLab</span>
-    </div>
-    <nav class="navbar-right">
-      <a href="grammar.html">Grammar Magic</a>
-      <a href="index.html">Main Page</a>
-      <a href="exercises.html">Fun Homework</a>
-      <a href="parents.html">Wiki Parents</a>
-    </nav>
-  </header>
-
-   
+      </div>
+    
+      <nav class="navbar-right">
+        <a href="grammar.html">Grammar Magic</a>
+        <a href="index.html">Main Page</a>
+        <a href="exercises.html">Fun Homework</a>
+        <a href="parents.html">Wiki Parents</a>
+      </nav>
+    </header>
+    
     <section class="hero-compact">
-        <h1>Word Bank</h1>
-    <div class="hero-info">
-            <span>Tap, listen, and flip! <br><span style="font-size: 16px; font-weight: 400; opacity: 0.9;">点一点，听一听，翻一翻！</span>
-            <div class="tree-badge">Points: <span id="header-score">0</span></div>
+      <h1>Word Bank</h1>
+      <div class="hero-info">
+        <div class="hero-copy">
+          Tap, listen, and flip!
+          <span class="cn-line">点一点，听一听，翻一翻！</span>
+        </div>
+        <div class="tree-badge">Points: <span id="header-score">0</span></div>
+      </div>
     </section>
+    
+    <div class="content-wrapper">
+      <div class="category-container" id="category-list"></div>
+      <div id="content-area"></div>
+    </div>  
 
-<div class="content-wrapper">
-    <div class="category-container" id="category-list"></div>
-
-    <div id="content-area"></div>
-</div>
 
 <div id="overlay"></div>
 <div id="reward-popup">
@@ -348,6 +553,8 @@
 
     const categoryListEl = document.getElementById('category-list');
     const contentAreaEl = document.getElementById('content-area');
+    const y = document.getElementById('year');
+    if (y) y.textContent = String(new Date().getFullYear());
 
     function init() {
         const categories = Object.keys(dictionary);
@@ -367,12 +574,12 @@
     }
 
     function updateVocabPointsDisplay() {
-        let vocabScore = parseInt(localStorage.getItem('vocab_points')) || 0;
-        
-        let pointsEl = document.getElementById('header-points');
-        if(pointsEl) {
-            pointsEl.innerText = 'Points: ' + vocabScore;
-        }
+      let vocabScore = parseInt(localStorage.getItem('vocab_points')) || 0;
+    
+      let pointsEl = document.getElementById('header-score');
+      if (pointsEl) {
+        pointsEl.innerText = vocabScore;
+      }
     }
 
     let currentCatKey = ""; 
@@ -436,26 +643,30 @@
     }
 
 function showReward() {
-        const popup = document.getElementById('reward-popup');
-        const overlay = document.getElementById('overlay');
-        popup.style.display = 'block';
-        overlay.style.display = 'block';
-        
-        // Начисляем очки (+2 очка за топик)
+    const popup = document.getElementById('reward-popup');
+    const overlay = document.getElementById('overlay');
+    popup.style.display = 'block';
+    overlay.style.display = 'block';
+
+    const rewardKey = `rewarded_${currentCatKey}`;
+    const alreadyRewarded = localStorage.getItem(rewardKey);
+
+    if (!alreadyRewarded) {
         let currentPoints = parseInt(localStorage.getItem('vocab_points') || '0');
         localStorage.setItem('vocab_points', currentPoints + 2);
 
         let learnedTotal = parseInt(localStorage.getItem('learned_words_total') || '0');
         localStorage.setItem('learned_words_total', learnedTotal + currentCategoryWordsCount);
-        
+
+        localStorage.setItem(rewardKey, '1');
         updateVocabPointsDisplay();
-        
-        // Скрываем окно через 3 секунды
-        setTimeout(() => {
-            popup.style.display = 'none';
-            overlay.style.display = 'none';
-        }, 3000);
     }
+
+    setTimeout(() => {
+        popup.style.display = 'none';
+        overlay.style.display = 'none';
+    }, 3000);
+}
 
     setInterval(() => {
         let timeSpent = parseInt(localStorage.getItem('time_spent_seconds') || '0');
