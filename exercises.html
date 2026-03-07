@@ -176,8 +176,17 @@
 
         .coming-soon { opacity: 0.5; pointer-events: none; border: 1px dashed #cbd5e1; background: #f8fafc; }
 
-        footer { background: #0f172a; color: #94a3b8; padding: 40px 8%; text-align: center; margin-top: 50px; }
-
+        footer {
+          background: #0f172a;
+          color: #94a3b8;
+          padding: 40px 8%;
+          text-align: center;
+          margin-top: 50px;
+        }
+        .footer-link {
+          color: #f97316;
+          text-decoration: none !important;
+        }
         /* --- MOBILE --- */
         @media (max-width: 900px) {
             .week-grid { grid-template-columns: repeat(2, 1fr); }
@@ -226,9 +235,15 @@
     <div id="content-area"></div>
 </div>
 
-<footer class="footer">
-  © <span id="year">2026</span> LinguaLab • Small lessons. Real progress. All rights reserved.
-</footer>
+<footer>
+    <div class="footer-links">
+        <a href="privacy.html" class="footer-link">Privacy Policy</a>
+    </div>
+  
+    <div class="footer-text">
+      © 2026 LinguaLab • Small lessons. Real progress. All rights reserved.
+    </div>
+  </footer>
 
 <script>
     // DATA BASE
