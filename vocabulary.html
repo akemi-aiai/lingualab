@@ -628,6 +628,9 @@
 
     function flipCard(element, wordId) {
         element.classList.toggle('flipped');
+        if (typeof Analytics !== 'undefined') {
+          Analytics.logWordClick(wordId);
+        }
         let clicksData = JSON.parse(localStorage.getItem('category_clicks') || '{}');
         clicksData[currentCatKey] = (clicksData[currentCatKey] || 0) + 1;
         localStorage.setItem('category_clicks', JSON.stringify(clicksData));
