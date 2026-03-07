@@ -41,8 +41,72 @@
       background: linear-gradient(135deg, #22d3ee, #a78bfa); color: #fff;
     }
     .hero-compact h1 { font-size: 42px; font-weight: 800; margin-bottom: 10px; }
-    .hero-info { display: flex; justify-content: center; align-items: center; gap: 20px; font-size: 18px; }
-
+    .hero-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      font-size: 18px;
+    }
+    
+    .hero-copy {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      max-width: 820px;
+      text-align: center;
+      line-height: 1.5;
+    }
+    
+    .subtitle-cn {
+      font-size: 16px;
+      opacity: 0.95;
+    }
+    
+    .ready-text-cn {
+      margin-top: 10px;
+      font-size: 16px;
+      color: #64748b;
+      line-height: 1.5;
+    }
+    
+    .topic-title-wrap {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    
+    .topic-title {
+      margin-bottom: 6px;
+    }
+    
+    .topic-title-cn {
+      font-size: 15px;
+      color: #64748b;
+      line-height: 1.4;
+    }
+    
+    .card-item h3 {
+      font-size: 18px;
+      margin-bottom: 5px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+    
+    .unit-cn {
+      display: block;
+      margin-top: 4px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #475569;
+    }
+    
+    .unit-sub-cn {
+      margin-top: 4px;
+      font-size: 13px;
+      color: #64748b;
+    }
     .tree-badge {
       background: rgba(255, 255, 255, 0.2); padding: 6px 18px; border-radius: 999px;
       backdrop-filter: blur(5px); border: 1px solid rgba(255, 255, 255, 0.3); font-weight: 700;
@@ -111,8 +175,10 @@
   <section class="hero-compact">
     <h1>Grammar Magic</h1>
     <div class="hero-info">
-      <span>Play games and grow your Knowledge Tree! Select a Unit below to start!</span>
-      <p class="subtitle-cn">通过游戏学习语法，让你的知识树慢慢长大！请选择下面的单元开始吧！</p>
+      <div class="hero-copy">
+        <span>Play games and grow your Knowledge Tree! Select a Unit below to start!</span>
+        <p class="subtitle-cn">通过游戏学习语法，让你的知识树慢慢长大！请选择下面的单元开始吧！</p>
+      </div>
       <div class="tree-badge">Points: <span id="header-score">0</span></div>
     </div>
   </section>
@@ -121,30 +187,43 @@
     <div class="task-card" id="task-card">
       <div class="pb-container"><div class="pb-fill" id="pb-fill"></div></div>
       <div id="question">Ready to study? Choose a Unit!</div>
-      <p class="ready-text-cn">准备开始学习了吗？请选择一个单元！</p>
+      <p class="ready-text-cn">准备好开始学习了吗？请选择一个单元！</p>
       <div class="answers-grid" id="answer-grid"></div>
     </div>
 
-    <h2 class="topic-title">Our Units</h2>
-    <div class="units-grid">
-      <div class="card-item" onclick="selectTopic('he_she', this)">
-        <h3>Friends & Family (朋友和家人)</h3>
-        <p>He / She</p>
-      </div>
-      <div class="card-item" onclick="selectTopic('plural', this)">
-        <h3>Counting World (数字世界)</h3>
-        <p>Plural nouns</p>
-      </div>
-      <div class="card-item" onclick="selectTopic('secret_places', this)">
-        <h3>Secret Places (方位小天地)</h3>
-        <p>In / On / Under</p>
-      </div>
-      <div class="card-item" onclick="selectTopic('can', this)">
-        <h3>Super Powers (超能力)</h3>
-        <p>I can do it!</p>
-      </div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">Our Units</h2>
+      <p class="topic-title-cn">我们的学习单元</p>
     </div>
+<div class="units-grid">
+  <div class="card-item" onclick="selectTopic('he_she', this)">
+    <h3>Friends & Family</h3>
+    <span class="unit-cn">朋友和家人</span>
+    <p>He / She</p>
+    <p class="unit-sub-cn">他 / 她</p>
   </div>
+
+  <div class="card-item" onclick="selectTopic('plural', this)">
+    <h3>Counting World</h3>
+    <span class="unit-cn">数字世界</span>
+    <p>Plural nouns</p>
+    <p class="unit-sub-cn">名词复数</p>
+  </div>
+
+  <div class="card-item" onclick="selectTopic('secret_places', this)">
+    <h3>Secret Places</h3>
+    <span class="unit-cn">方位小天地</span>
+    <p>In / On / Under</p>
+    <p class="unit-sub-cn">在……里面 / 在……上面 / 在……下面</p>
+  </div>
+
+  <div class="card-item" onclick="selectTopic('can', this)">
+    <h3>Super Powers</h3>
+    <span class="unit-cn">超能力</span>
+    <p>I can do it!</p>
+    <p class="unit-sub-cn">我会做！</p>
+  </div>
+</div>
 
   <footer class="footer">
   © <span id="year">2026</span> LinguaLab • Small lessons. Real progress. All rights reserved.
