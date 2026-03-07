@@ -323,35 +323,6 @@
       padding: 28px;
     }
 
-    .research-topline {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 22px;
-      flex-wrap: wrap;
-    }
-
-    .research-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: linear-gradient(135deg, var(--primary-light), #f5f3ff);
-      color: var(--navy);
-      border: 1px solid #dbeafe;
-      padding: 8px 14px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.4px;
-      text-transform: uppercase;
-    }
-
-    .research-helper {
-      font-size: 14px;
-      color: var(--muted);
-    }
-
     .research-steps {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -395,6 +366,41 @@
       font-size: 14px;
       color: var(--muted);
       margin-bottom: 18px;
+    }
+
+    .research-tools {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 22px;
+      padding: 14px 16px;
+      background: #f8fafc;
+      border: 1px solid #e8eef5;
+      border-radius: 18px;
+      flex-wrap: wrap;
+    }
+    
+    .research-tool-text {
+      font-size: 14px;
+      color: var(--muted);
+    }
+    
+    .mini-copy-btn {
+      border: none;
+      background: #ffffff;
+      color: var(--navy);
+      border: 1px solid var(--line);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    
+    .mini-copy-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
     }
 
     .emoji-scale {
@@ -447,11 +453,10 @@
       border-color: #c7dffb;
       box-shadow: 0 10px 20px rgba(15, 23, 42, 0.06);
     }
-
     .emoji-option input:checked + label {
-      border-color: var(--primary);
-      background: linear-gradient(180deg, #ffffff 0%, #eefcff 100%);
-      box-shadow: 0 12px 24px rgba(34, 211, 238, 0.14);
+      border-color: var(--navy);
+      background: #ffffff;
+      box-shadow: none;
     }
 
     .report-output {
@@ -711,76 +716,86 @@
 
     </div>
 
-    <div class="panel-card research-card">
-      <div class="panel-header">
-        <div class="panel-kicker">Weekly Reflection</div>
-        <h3>Weekly Research Challenge</h3>
+  <div class="panel-card research-card">
+  <div class="panel-header">
+    <div class="panel-kicker">Weekly Reflection</div>
+    <h3>Weekly Research Challenge</h3>
+  </div>
+
+  <div class="panel-body">
+    <div class="research-tools">
+      <div class="research-tool-text">After generating, copy the code and send it to your teacher in WeChat.</div>
+      <button type="button" class="mini-copy-btn" onclick="copyReportCode()">Copy code</button>
+    </div>
+
+    <div class="research-steps">
+      <div class="research-step">
+        <strong>Step 1:</strong> Rate your child’s engagement this week.<br>
+        <strong>Step 2:</strong> Generate the code and send it to your teacher.
       </div>
+      <div class="research-step">
+        <strong>第一步：</strong> 评价孩子本周的学习兴趣。<br>
+        <strong>第二步：</strong> 生成代码并发送给老师。
+      </div>
+    </div>
 
-      <div class="panel-body">
-        <div class="research-topline">
-          <div class="research-badge">✨ Parent Feedback Snapshot</div>
-          <div class="research-helper">Takes less than 30 seconds</div>
+    <div class="research-rating">
+      <p class="research-question">How much did your child enjoy LinguaLab this week?</p>
+      <p class="research-question-sub">Choose the face that feels closest to this week.</p>
+
+      <div class="emoji-scale">
+        <div class="emoji-option">
+          <input type="radio" id="enjoy-1" name="enjoyment" value="1">
+          <label for="enjoy-1">
+            <span class="emoji-face">🙁</span>
+            <span class="emoji-text">Low</span>
+          </label>
         </div>
 
-        <div class="research-steps">
-          <div class="research-step">
-            <strong>Step 1:</strong> Rate your child’s engagement this week.<br>
-            <strong>Step 2:</strong> Generate the code and send it to your teacher.
-          </div>
-          <div class="research-step">
-            <strong>第一步：</strong> 评价孩子本周的学习兴趣。<br>
-            <strong>第二步：</strong> 生成代码并发送给老师。
-          </div>
+        <div class="emoji-option">
+          <input type="radio" id="enjoy-2" name="enjoyment" value="2">
+          <label for="enjoy-2">
+            <span class="emoji-face">😐</span>
+            <span class="emoji-text">Okay</span>
+          </label>
         </div>
 
-        <div class="research-rating">
-          <p class="research-question">How much did your child enjoy LinguaLab this week?</p>
-          <p class="research-question-sub">Choose the face that feels closest to this week.</p>
-
-          <div class="emoji-scale">
-            <div class="emoji-option">
-              <input type="radio" id="enjoy-1" name="enjoyment" value="1">
-              <label for="enjoy-1">
-                <span class="emoji-face">🙁</span>
-                <span class="emoji-text">Low</span>
-              </label>
-            </div>
-
-            <div class="emoji-option">
-              <input type="radio" id="enjoy-2" name="enjoyment" value="2">
-              <label for="enjoy-2">
-                <span class="emoji-face">😐</span>
-                <span class="emoji-text">Okay</span>
-              </label>
-            </div>
-
-            <div class="emoji-option">
-              <input type="radio" id="enjoy-3" name="enjoyment" value="3" checked>
-              <label for="enjoy-3">
-                <span class="emoji-face">🙂</span>
-                <span class="emoji-text">Good</span>
-              </label>
-            </div>
-
-            <div class="emoji-option">
-              <input type="radio" id="enjoy-4" name="enjoyment" value="4">
-              <label for="enjoy-4">
-                <span class="emoji-face">😊</span>
-                <span class="emoji-text">Great</span>
-              </label>
-            </div>
-
-            <div class="emoji-option">
-              <input type="radio" id="enjoy-5" name="enjoyment" value="5">
-              <label for="enjoy-5">
-                <span class="emoji-face">🤩</span>
-                <span class="emoji-text">Amazing</span>
-              </label>
-            </div>
-          </div>
+        <div class="emoji-option">
+          <input type="radio" id="enjoy-3" name="enjoyment" value="3" checked>
+          <label for="enjoy-3">
+            <span class="emoji-face">🙂</span>
+            <span class="emoji-text">Good</span>
+          </label>
         </div>
 
+        <div class="emoji-option">
+          <input type="radio" id="enjoy-4" name="enjoyment" value="4">
+          <label for="enjoy-4">
+            <span class="emoji-face">😊</span>
+            <span class="emoji-text">Great</span>
+          </label>
+        </div>
+
+        <div class="emoji-option">
+          <input type="radio" id="enjoy-5" name="enjoyment" value="5">
+          <label for="enjoy-5">
+            <span class="emoji-face">🤩</span>
+            <span class="emoji-text">Amazing</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div id="report-output" class="report-output"></div>
+
+    <div class="research-actions">
+      <button id="report-btn" class="research-btn" onclick="generateWeeklyReport()">
+        Generate Weekly Code
+      </button>
+      <div class="research-note">Generate the code, then copy or send it in WeChat.</div>
+    </div>
+  </div>
+</div>
         <div id="report-output" class="report-output"></div>
 
         <div class="research-actions">
@@ -1452,7 +1467,7 @@
       output.style.display = "block";
 
       navigator.clipboard.writeText(output.innerText)
-        .then(() => alert("Code copied! Please send it to the teacher via WeChat."))
+        .then(() => alert("Code generated! It has also been copied. You can now send it in WeChat."))
         .catch(() => alert("Code generated. Please copy it manually."));
 
       if (confirm("Reset weekly tracker for a new week?")) {
@@ -1512,6 +1527,19 @@
       player.src = 'assets/audio/' + filename;
       player.play().catch(() => console.log("Audio file not found in assets/audio/"));
     }
+    function copyReportCode() {
+      const output = document.getElementById('report-output');
+    
+      if (!output || !output.innerText.trim()) {
+        alert("Generate the code first.");
+        return;
+      }
+    
+      navigator.clipboard.writeText(output.innerText)
+        .then(() => alert("Code copied! Now send it in WeChat."))
+        .catch(() => alert("Copy failed. Please copy it manually."));
+    }
+    
 
     window.onload = () => {
       updateStats();
