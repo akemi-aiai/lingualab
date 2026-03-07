@@ -61,22 +61,27 @@
             position: relative;
             width: 100%;
         }
-        .hero-compact h1 { font-size: 42px; font-weight: 800; margin-bottom: 10px; }
-        .hero-info { 
-            display: flex; justify-content: center; align-items: center; 
-            gap: 15px; font-size: 18px; opacity: 0.95; flex-wrap: wrap;
+        .hero-info {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 20px;
+          font-size: 18px;
+        }
+        .hero-compact {
+          padding: 60px 8% 140px;
+          text-align: center;
+          background: linear-gradient(135deg, #22d3ee, #a78bfa);
+          color: #fff;
         }
 
-        .points-badge {
-            background: #fff;
-            color: var(--accent);
-            display: inline-block;
-            padding: 8px 20px;
-            border-radius: 99px;
-            font-weight: 800;
-            font-size: 18px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            white-space: nowrap; 
+        .tree-badge {
+          background: rgba(255, 255, 255, 0.2);
+          padding: 6px 18px;
+          border-radius: 999px;
+          backdrop-filter: blur(5px);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          font-weight: 700;
         }
 
         /* --- КОНТЕНТ --- */
@@ -245,9 +250,8 @@
 <section class="hero-compact">
     <h1>Word Bank</h1>
 <div class="hero-info">
-        <span>Tap, listen, and flip! <br><span style="font-size: 16px; font-weight: 400; opacity: 0.9;">点一点，听一听，翻一翻！</span></span>
-        <div class="points-badge" id="header-points">Points: 0</div>
-    </div>
+        <span>Tap, listen, and flip! <br><span style="font-size: 16px; font-weight: 400; opacity: 0.9;">点一点，听一听，翻一翻！</span>
+        <div class="tree-badge">Points: <span id="header-score">0</span></div>
 </section>
 
 <div class="content-wrapper">
