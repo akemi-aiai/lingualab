@@ -48,27 +48,28 @@
     .hero h1 { font-size: clamp(36px, 6vw, 56px); font-weight: 800; margin-bottom: 20px; }
     .hero p { font-size: 20px; opacity: 0.9; max-width: 800px; margin: 0 auto; }
 
-    /* КАРТОЧКИ В ОДНУ СТРОКУ (С темной тенью, без синего свечения) */
+    /* КАРТОЧКИ В ОДНУ СТРОКУ (Оригинальные стили) */
     .features { padding: 60px 5%; text-align: center; }
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 25px;
-      max-width: 1200px;
-      margin: 0 auto;
     }
     .card {
       background: #fff; border-radius: var(--radius); overflow: hidden;
       text-decoration: none; border: 1px solid #e2e8f0; transition: 0.3s;
       display: flex; flex-direction: column; height: 100%;
     }
-    .card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); border-color: transparent; }
-    .card-img { width: 100%; height: 180px; object-fit: contain; margin-top: 20px; }
+    /* Только темная тень при наведении */
+    .card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+    /* Оригинальный размер картинок: сплющенные */
+    .card-img { width: 100%; height: 160px; object-fit: cover; }
     .card-content { padding: 20px; text-align: left; flex-grow: 1; }
-    .card-content h3 { color: var(--navy); font-size: 20px; margin-bottom: 10px; font-weight: 800; }
+    .card-content h3 { color: var(--navy); font-size: 18px; margin-bottom: 10px; }
     .card-content p { color: #64748b; font-size: 14px; }
 
-    /* ДЕРЕВО НА ВСЮ СТРАНИЦУ */
+
+    /* ДЕРЕВО НА ВСЮ СТРАНИЦУ (Оригинальная широкая плашка) */
     .progress-section { 
       width: 100%; 
       padding: 80px 5%; 
@@ -76,21 +77,24 @@
     }
     .progress-container {
       width: 100%; 
-      max-width: 1000px; 
+      max-width: 1200px; 
       margin: 0 auto; 
       background: #fff;
-      padding: 60px 50px; 
+      padding: 50px; 
       border-radius: 40px;
       display: flex; 
       align-items: center; 
       justify-content: center; 
       flex-wrap: wrap; 
-      gap: 80px;
+      gap: 60px;
       box-shadow: 0 20px 50px rgba(0,0,0,0.05);
     }
+    /* Оригинальный зеленый круг-фон для дерева */
     .tree-box { 
-      flex: 0 0 250px; 
-      height: 250px; 
+      flex: 0 0 320px; 
+      height: 320px; 
+      background: #f0fdfa; 
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -108,22 +112,19 @@
     }
     
     .stats-content { flex: 1; min-width: 300px; text-align: left; }
-    .stat-val { font-size: 80px; font-weight: 800; color: var(--navy); line-height: 1; margin: 10px 0; }
-    
-    .btn { padding: 14px 32px; border-radius: 999px; border: none; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: inherit; }
-    /* Кнопка как на скриншоте: бирюзовая обводка */
-    .btn-outline { background: transparent; color: var(--primary); border: 2px solid var(--primary); font-size: 16px; }
-    .btn-outline:hover { background: var(--primary); color: #fff; }
+    .stat-val { font-size: 64px; font-weight: 800; color: var(--navy); line-height: 1; }
+    .btn { padding: 16px 32px; border-radius: 999px; border: none; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: inherit; }
+    .btn-outline { background: transparent; color: var(--navy); border: 2px solid var(--navy); font-size: 16px; }
+    .btn-outline:hover { background: var(--navy); color: #fff; }
 
     footer { background: #0f172a; color: #94a3b8; padding: 40px 8%; text-align: center; }
 
     @media (max-width: 1100px) {
       .cards-grid { grid-template-columns: repeat(2, 1fr); }
     }
-    @media (max-width: 768px) {
-      .progress-container { flex-direction: column; text-align: center; gap: 40px; padding: 40px 20px;}
-      .stats-content { text-align: center; }
+    @media (max-width: 650px) {
       .cards-grid { grid-template-columns: 1fr; }
+      .progress-container { padding: 30px; text-align: center; }
     }
   </style>
 </head>
@@ -131,7 +132,7 @@
 
   <header class="navbar">
     <div class="navbar-left">
-      <img src="assets/img/logo.png" alt="Logo" class="nav-logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3081/3081078.png'">
+      <img src="assets/img/logo.png" alt="Logo" class="nav-logo">
       <span class="nav-title">LinguaLab</span>
     </div>
     <nav class="navbar-right">
@@ -150,28 +151,28 @@
   <section class="features">
     <div class="cards-grid">
       <a href="grammar.html" class="card">
-        <img src="assets/img/grammar.png" alt="Grammar" class="card-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2000/2000922.png'">
+        <img src="assets/img/grammar.png" alt="Grammar" class="card-img">
         <div class="card-content">
           <h3>Grammar Magic</h3>
           <p>Complex rules turned into simple, playful patterns for young explorers to master effortlessly.</p>
         </div>
       </a>
       <a href="vocabulary.html" class="card">
-        <img src="assets/img/word.png" alt="Vocabulary" class="card-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3004/3004529.png'">
+        <img src="assets/img/word.png" alt="Vocabulary" class="card-img">
         <div class="card-content">
           <h3>Word Bank</h3>
           <p>Build a massive vocabulary using visual memory techniques and interactive matching games.</p>
         </div>
       </a>
       <a href="exercises.html" class="card">
-        <img src="assets/img/hw.png" alt="Exercises" class="card-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3074/3074033.png'">
+        <img src="assets/img/hw.png" alt="Exercises" class="card-img">
         <div class="card-content">
           <h3>Fun Homework</h3>
           <p>Daily creative challenges that keep the brain sharp and turn learning into a habit.</p>
         </div>
       </a>
       <a href="parents.html" class="card">
-        <img src="assets/img/parents.png" alt="Parents" class="card-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png'">
+        <img src="assets/img/parents.png" alt="Parents" class="card-img">
         <div class="card-content">
           <h3>Wiki Parents</h3>
           <p>Comprehensive resources and guides to help you support your child's bilingual journey.</p>
@@ -184,16 +185,17 @@
     <div class="progress-container">
       <div class="tree-box">
         <svg viewBox="0 0 100 100" id="knowledge-tree">
-          <path d="M50 95 L50 60" stroke="#5d4037" stroke-width="6" stroke-linecap="round"/>
-          <path d="M50 75 L38 55" stroke="#5d4037" stroke-width="4" stroke-linecap="round"/>
-          <path d="M50 70 L62 50" stroke="#5d4037" stroke-width="4" stroke-linecap="round"/>
+          <path d="M50 85 L50 60" stroke="#5d4037" stroke-width="5" stroke-linecap="round"/>
+          <path d="M50 72 L42 58" stroke="#5d4037" stroke-width="3" stroke-linecap="round"/>
+          <path d="M50 68 L60 55" stroke="#5d4037" stroke-width="3" stroke-linecap="round"/>
           <g id="tree-leaves"></g>
           <g id="tree-fruits"></g>
         </svg>
       </div>
       <div class="stats-content">
-        <p style="text-transform: uppercase; font-weight: 800; color: var(--primary); letter-spacing: 1px; font-size: 16px;">Academy Growth Tracker</p>
+        <p style="text-transform: uppercase; font-weight: 700; color: var(--primary); letter-spacing: 1px;">Academy Growth Tracker</p>
         <div class="stat-val" id="words-count">0</div>
+        <p style="font-size: 20px; color: #64748b; margin: 10px 0 25px;" id="status-text">Go to "Grammar Magic" to grow your tree!</p>
         <button class="btn btn-outline" onclick="downloadReport()">Download Report</button>
       </div>
     </div>
@@ -204,38 +206,42 @@
   </footer>
 
   <script>
-      
-    // Правильно подхватываем и СКЛАДЫВАЕМ баллы из всех разделов
-    let vocabScore = parseInt(localStorage.getItem('vocab_points')) || 0;
-    let grammarScore = parseInt(localStorage.getItem('ll_score')) || 0;
-    let score = vocabScore + grammarScore;
+    // Правильный подсчет суммы всех очков
+    let score = (parseInt(localStorage.getItem('ll_score')) || 0) + (parseInt(localStorage.getItem('vocab_points')) || 0);
 
     function updateDisplay() {
       document.getElementById('words-count').innerText = score;
       const leavesContainer = document.getElementById('tree-leaves');
       const fruitsContainer = document.getElementById('tree-fruits');
+      const statusText = document.getElementById('status-text');
+
+      // ЕДИНАЯ СИСТЕМА УРОВНЕЙ ДЛЯ ДАШБОРДА
+      if (score >= 100) statusText.innerHTML = "Level: <strong style='color:#10b981'>Master of Magic 🧙‍♂️</strong>";
+      else if (score >= 50) statusText.innerHTML = "Level: <strong style='color:#10b981'>Knowledge Hero 🦸‍♂️</strong>";
+      else if (score >= 20) statusText.innerHTML = "Level: <strong style='color:#10b981'>Bright Sprout 🌱</strong>";
+      else if (score > 0) statusText.innerHTML = "Level: <strong style='color:#10b981'>Beginner Explorer 🎒</strong>";
+      else statusText.innerHTML = "Go to 'Word Bank' or 'Grammar Magic' to grow your tree!";
 
       leavesContainer.innerHTML = '';
       fruitsContainer.innerHTML = '';
 
-      // Логика роста дерева SVG 
       for (let i = 0; i < score; i++) {
-        if (i >= 150) break; 
+        if (i >= 100) break;
         const angle = (i * 137.5) % 360; 
-        const radius = Math.sqrt(i) * 3.8;
+        const radius = Math.sqrt(i) * 4.2;
         const x = 50 + radius * Math.cos(angle * Math.PI / 180);
-        const y = 50 + radius * Math.sin(angle * Math.PI / 180); 
+        const y = 55 + radius * Math.sin(angle * Math.PI / 180);
         
         // Листья
         const leaf = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-        leaf.setAttribute("cx", x); leaf.setAttribute("cy", y); leaf.setAttribute("r", "3.5");
+        leaf.setAttribute("cx", x); leaf.setAttribute("cy", y); leaf.setAttribute("r", "2.5");
         leaf.setAttribute("fill", i % 3 === 0 ? "#4ade80" : (i % 3 === 1 ? "#22c55e" : "#16a34a"));
         leavesContainer.appendChild(leaf);
 
-        // Яблоки
-        if (score >= 20 && i % 8 === 0) {
+        // Яблоки, если очков > 20
+        if (score >= 20 && i % 6 === 0) {
           const fruit = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-          fruit.setAttribute("cx", x + 1.5); fruit.setAttribute("cy", y + 1.5); fruit.setAttribute("r", "2.5");
+          fruit.setAttribute("cx", x + 1.2); fruit.setAttribute("cy", y + 1.2); fruit.setAttribute("r", "1.5");
           fruit.setAttribute("fill", "#ef4444");
           fruitsContainer.appendChild(fruit);
         }
@@ -245,9 +251,9 @@
     function downloadReport() {
         const date = new Date().toLocaleDateString();
         
-        // --- ЧТЕНИЕ ЛОКАЛЬНОЙ АНАЛИТИКИ ---
-        let timeSeconds = parseInt(localStorage.getItem('time_spent_seconds') || '0');
-        let wordsTotal = parseInt(localStorage.getItem('learned_words_total') || '0');
+        // Сбор аналитики из Word Bank
+        let timeSeconds = parseInt(localStorage.getItem('time_spent_seconds')) || 0;
+        let wordsTotal = parseInt(localStorage.getItem('learned_words_total')) || 0;
         let clicksData = JSON.parse(localStorage.getItem('category_clicks') || '{}');
         let timeMin = Math.floor(timeSeconds / 60);
 
@@ -264,15 +270,14 @@
                 favoriteTopic = topicNames[topic] || topic;
             }
         }
-        let topicText = favoriteTopic + (maxClicks > 0 ? ` (${maxClicks} clicks)` : '');
+        let topicText = maxClicks > 0 ? `${favoriteTopic} (${maxClicks} clicks)` : 'None yet';
 
-        // Ранги
+        // ЕДИНАЯ СИСТЕМА УРОВНЕЙ ДЛЯ ДИПЛОМА
         let rank = "Beginner Explorer";
         if (score >= 100) rank = "Master of Magic";
         else if (score >= 50) rank = "Knowledge Hero";
         else if (score >= 20) rank = "Bright Sprout";
     
-        // ОТКРЫВАЕМ ОКНО ДИПЛОМА С ОРИГИНАЛЬНЫМ ДИЗАЙНОМ И НОВЫМИ ДАННЫМИ
         const reportWindow = window.open('', '_blank');
         reportWindow.document.write(`
             <html>
@@ -286,44 +291,57 @@
                         font-family: 'Inter', sans-serif; 
                         display: flex; justify-content: center; align-items: center; min-height: 100vh;
                     }
+                    /* СТАНДАРТНЫЙ РАЗМЕР А4 (Альбомный) */
                     .diploma {
-                        width: 800px; padding: 60px; background: #fff;
-                        border: 15px solid transparent; 
-                        border-image: linear-gradient(135deg, #22d3ee, #8b5cf6) 1;
-                        text-align: center; position: relative; box-shadow: 0 40px 60px rgba(0,0,0,0.1);
+                        width: 297mm;
+                        min-height: 210mm;
+                        padding: 60px;
+                        box-sizing: border-box;
+                        background: #fff;
+                        border: 15px solid transparent;
+                        border-image: linear-gradient(135deg, #22d3ee, #a78bfa) 1;
+                        text-align: center;
+                        position: relative;
+                        box-shadow: 0 40px 60px rgba(0,0,0,0.1);
+                        display: flex; flex-direction: column; justify-content: center;
                     }
-                    .logo { font-size: 22px; font-weight: 800; color: #1f4e79; margin-bottom: 30px; }
-                    h1 { font-size: 64px; margin: 0; color: #1f4e79; font-weight: 800; letter-spacing: 2px; }
-                    .award-text { font-size: 22px; color: #64748b; margin: 20px 0; }
+                    .logo { font-size: 28px; font-weight: 800; color: #1f4e79; margin-bottom: 20px; }
+                    h1 { font-size: 72px; margin: 0; color: #1f4e79; text-transform: uppercase; letter-spacing: 2px; }
+                    .award-text { font-size: 24px; color: #64748b; margin: 20px 0; }
                     .rank-badge { 
-                        display: inline-block; padding: 12px 35px; background: #f97316; 
-                        color: #fff; border-radius: 999px; font-size: 32px; font-weight: 800; margin-bottom: 40px;
+                        display: inline-block; padding: 15px 40px; background: #f97316; 
+                        color: #fff; border-radius: 999px; font-size: 36px; font-weight: 800; margin-bottom: 30px;
                     }
+                    
+                    /* Основная статистика (Очки и Эффорт) */
                     .stats-box {
-                        display: flex; justify-content: center; gap: 60px; margin-bottom: 30px;
+                        display: flex; justify-content: center; gap: 60px; margin-bottom: 20px;
                     }
                     .stat-item { text-align: center; }
-                    .stat-val { font-size: 64px; font-weight: 800; color: #22d3ee; display: block; line-height: 1; margin-bottom: 5px; }
+                    .stat-val { font-size: 72px; font-weight: 800; color: #22d3ee; display: block; line-height: 1; }
                     .stat-label { font-size: 16px; color: #94a3b8; text-transform: uppercase; font-weight: 600; }
                     
-                    /* НОВЫЙ БЛОК С АНАЛИТИКОЙ */
-                    .detailed-stats {
-                        background: #f8fafc; border-radius: 16px; padding: 25px 40px;
-                        display: inline-block; text-align: left; margin-bottom: 30px;
-                        border: 1px dashed #cbd5e1;
+                    /* НОВАЯ АНАЛИТИКА (Время, Слова, Топик) */
+                    .detailed-analytics {
+                        margin: 20px auto 40px;
+                        font-size: 20px; color: #1f4e79; text-align: center;
+                        background: #f8fafc; padding: 20px 40px; border-radius: 16px; display: inline-block;
                     }
-                    .detail-item { font-size: 18px; color: #1f4e79; line-height: 1.8; }
-                    .detail-item b { font-weight: 800; }
+                    .analytic-line { margin: 10px 0; }
+                    .analytic-line b { color: #64748b; }
 
                     .seal {
-                        position: absolute; bottom: 40px; right: 40px; width: 130px; height: 130px;
+                        position: absolute; bottom: 50px; right: 50px; width: 140px; height: 140px;
                         background: #fbbf24; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-                        border: 4px dashed #fff; box-shadow: 0 0 0 8px #fbbf24; color: #fff; font-weight: 800; 
-                        font-size: 18px; line-height: 1.2; transform: rotate(-15deg);
+                        border: 5px dashed #fff; box-shadow: 0 0 0 10px #fbbf24; color: #fff; font-weight: 800; 
+                        font-size: 20px; line-height: 1.2; transform: rotate(-15deg);
                     }
                     @media print {
-                        body { background: #fff; }
-                        .diploma { box-shadow: none; border: 15px solid #22d3ee; }
+                        body { background: #fff; display: block; }
+                        .diploma { 
+                            width: 100%; height: 100%; box-shadow: none; 
+                            border: 20px solid #22d3ee; page-break-after: avoid; 
+                        }
                     }
                 </style>
             </head>
@@ -337,24 +355,22 @@
                     <div class="stats-box">
                         <div class="stat-item">
                             <span class="stat-val">${score}</span>
-                            <span class="stat-label">TASKS COMPLETED</span>
+                            <span class="stat-label">Tasks Completed</span>
                         </div>
                         <div class="stat-item">
                             <span class="stat-val">100%</span>
-                            <span class="stat-label">EFFORT</span>
+                            <span class="stat-label">Effort</span>
                         </div>
                     </div>
                     
-                    <div class="detailed-stats">
-                        <div class="detail-item"><b>Time Played:</b> ${timeMin} min</div>
-                        <div class="detail-item"><b>Words Learned:</b> ${wordsTotal}</div>
-                        <div class="detail-item"><b>Favorite Topic:</b> ${topicText}</div>
+                    <div class="detailed-analytics">
+                        <div class="analytic-line"><b>⏳ Time Played:</b> ${timeMin} min</div>
+                        <div class="analytic-line"><b>🧠 Words Learned:</b> ${wordsTotal}</div>
+                        <div class="analytic-line"><b>🏆 Favorite Topic:</b> ${topicText}</div>
                     </div>
 
-                    <p style="font-size: 20px; color: #1f4e79; font-weight: 800;">Your Knowledge Tree is blooming!</p>
-                    <div style="margin-top: 30px; font-size: 14px; color: #cbd5e1; font-weight: 600;">
-                        Date: ${date} &bull; Certificate ID: LL-${Math.floor(Math.random()*10000)}
-                    </div>
+                    <p style="font-size: 22px; color: #1f4e79; font-weight: 600;">Your Knowledge Tree is blooming!</p>
+                    <div style="margin-top: 30px; font-size: 16px; color: #cbd5e1;">Date: ${date} &bull; Certificate ID: LL-${Math.floor(Math.random()*10000)}</div>
                     
                     <div class="seal">OFFICIAL<br>LinguaLab</div>
                 </div>
@@ -367,12 +383,9 @@
         reportWindow.document.close();
     }
 
-    // Авто-обновление дерева в реальном времени
+    // Авто-обновление дерева и сложение очков
     setInterval(() => {
-      let currentVocab = parseInt(localStorage.getItem('vocab_points')) || 0;
-      let currentGrammar = parseInt(localStorage.getItem('ll_score')) || 0;
-      let currentScore = currentVocab + currentGrammar;
-      
+      let currentScore = (parseInt(localStorage.getItem('ll_score')) || 0) + (parseInt(localStorage.getItem('vocab_points')) || 0);
       if (currentScore !== score) {
         score = currentScore;
         updateDisplay();
