@@ -296,6 +296,99 @@
       transform: scale(1.08);
     }
 
+    .research-card {
+      margin-top: 28px;
+    }
+    
+    .research-steps {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+    
+    .research-step {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--muted);
+      background: #f8fafc;
+      border: 1px solid #eaf0f6;
+      border-radius: 18px;
+      padding: 18px;
+    }
+    
+    .research-step strong {
+      color: var(--navy);
+    }
+    
+    .research-rating {
+      margin-bottom: 22px;
+      text-align: center;
+    }
+    
+    .research-question {
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 12px;
+      font-size: 16px;
+    }
+    
+    .emoji-scale {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    
+    .emoji-scale label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 20px;
+      color: var(--navy);
+      cursor: pointer;
+    }
+    
+    .emoji-scale input[type="radio"] {
+      accent-color: var(--accent);
+    }
+    
+    .report-output {
+      display: none;
+      margin: 20px 0;
+      padding: 16px;
+      background: #f8fafc;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      font-family: monospace;
+      font-size: 11px;
+      word-break: break-all;
+      color: var(--navy);
+    }
+    
+    .research-btn {
+      background: var(--navy);
+      color: #fff;
+      padding: 16px 30px;
+      border-radius: 99px;
+      border: none;
+      font-weight: 800;
+      cursor: pointer;
+      width: 100%;
+      transition: 0.25s;
+    }
+    
+    .research-btn:hover {
+      background: var(--accent);
+      transform: translateY(-2px);
+    }
+    
+    @media (max-width: 900px) {
+      .research-steps {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* MISSION */
     .mission-card {
       background: linear-gradient(135deg, #1e293b, #334155);
@@ -494,36 +587,41 @@
 
   <audio id="player"></audio>
 
-  <div class="dashboard-card" style="background: #f0fdf4; border: 2px solid #22c55e; padding: 30px;">
-    <h3 style="color: #166534; margin-bottom: 15px;">Weekly Research Challenge</h3>
-    
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: left; margin-bottom: 25px;">
-        <div style="font-size: 13px; color: #15803d;">
-            <strong>Step 1:</strong> Rate your child's engagement this week. <br>
-            <strong>Step 2:</strong> Generate the code and send it to your teacher.
-        </div>
-        <div style="font-size: 13px; color: #15803d; border-left: 1px solid #bbf7d0; padding-left: 20px;">
-            <strong>第一步：</strong> 评价孩子本周的学习兴趣。<br>
-            <strong>第二步：</strong> 生成代码并发送给老师。
-        </div>
+<div class="panel-card research-card">
+  <div class="panel-header">
+    <div class="panel-kicker">Weekly Reflection</div>
+    <h3>Weekly Research Challenge</h3>
+  </div>
+
+  <div class="panel-body">
+    <div class="research-steps">
+      <div class="research-step">
+        <strong>Step 1:</strong> Rate your child's engagement this week.<br>
+        <strong>Step 2:</strong> Generate the code and send it to your teacher.
+      </div>
+      <div class="research-step">
+        <strong>第一步：</strong> 评价孩子本周的学习兴趣。<br>
+        <strong>第二步：</strong> 生成代码并发送给老师。
+      </div>
     </div>
 
-    <div style="margin-bottom: 25px; text-align: center;">
-        <p style="font-weight: 700; color: #166534; margin-bottom: 10px;">How much did your child enjoy LinguaLab this week?</p>
-        <div style="display: flex; justify-content: center; gap: 15px;">
-            <label><input type="radio" name="enjoyment" value="1"> 🙁</label>
-            <label><input type="radio" name="enjoyment" value="2"> 😐</label>
-            <label><input type="radio" name="enjoyment" value="3" checked> 🙂</label>
-            <label><input type="radio" name="enjoyment" value="4"> 😊</label>
-            <label><input type="radio" name="enjoyment" value="5"> 🤩</label>
-        </div>
+    <div class="research-rating">
+      <p class="research-question">How much did your child enjoy LinguaLab this week?</p>
+      <div class="emoji-scale">
+        <label><input type="radio" name="enjoyment" value="1"> 🙁</label>
+        <label><input type="radio" name="enjoyment" value="2"> 😐</label>
+        <label><input type="radio" name="enjoyment" value="3" checked> 🙂</label>
+        <label><input type="radio" name="enjoyment" value="4"> 😊</label>
+        <label><input type="radio" name="enjoyment" value="5"> 🤩</label>
+      </div>
     </div>
 
-    <div id="report-output" style="display:none; margin: 20px 0; padding: 15px; background: #fff; border-radius: 12px; border: 1px solid #22c55e; font-family: monospace; font-size: 10px; word-break: break-all; color: #166534;"></div>
-    
-    <button id="report-btn" onclick="generateWeeklyReport()" style="background: #22c55e; color: #fff; padding: 16px 30px; border-radius: 99px; border: none; font-weight: 800; cursor: pointer; width: 100%;">
-        Generate Weekly Code
+    <div id="report-output" class="report-output"></div>
+
+    <button id="report-btn" class="research-btn" onclick="generateWeeklyReport()">
+      Generate Weekly Code
     </button>
+  </div>
 </div>
 
   <script>
