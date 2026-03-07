@@ -422,9 +422,15 @@
       border-radius: 18px;
       border: 1px solid #1e293b;
       font-family: monospace;
-      font-size: 11px;
-      word-break: break-all;
+      font-size: 12px;
+      line-height: 1.6;
       color: #cbd5e1;
+      white-space: pre-wrap;
+      word-break: break-word;
+      overflow-x: auto;
+      max-height: 320px;
+      overflow-y: auto;
+      text-align: left;
     }
 
     .research-actions {
@@ -1364,49 +1370,41 @@
     ];
     
 
-    function generateWeeklyReport() {
-      const researchData = JSON.parse(localStorage.getItem('ll_research_data') || 'null');
-      const currentWords = parseInt(localStorage.getItem('learned_words_total')) || 0;
-      const currentXP = (parseInt(localStorage.getItem('ll_score')) || 0) + (parseInt(localStorage.getItem('vocab_points')) || 0);
-      const enjoymentInput = document.querySelector('input[name="enjoyment"]:checked');
+   function generateWeeklyReport() {
+  const researchData = JSON.parse(localStorage.getItem('ll_research_data') || 'null');
+  const currentWords = parseInt(localStorage.getItem('learned_words_total')) || 0;
+  const currentXP = (parseInt(localStorage.getItem('ll_score')) || 0) + (parseInt(localStorage.getItem('vocab_points')) || 0);
+  const enjoymentInput = document.querySelector('input[name="enjoyment"]:checked');
 
-      if (!enjoymentInput) {
-        alert("Please choose a rating first.");
-        return;
-      }
+  if (!enjoymentInput) {
+    alert("Please choose a rating first.");
+    return;
+  }
 
-      if (!researchData || !researchData.dailyActivity) {
-        alert("No weekly research data found yet.");
-        return;
-      }
+  if (!researchData || !researchData.dailyActivity) {
+    alert("No weekly research data found yet.");
+    return;
+  }
 
-      const enjoyment = enjoymentInput.value;
-      const activeDays = Object.keys(researchData.dailyActivity || {}).length;
-      const hasGoldStar = activeDays >= 5;
+  const enjoyment = enjoymentInput.value;
+  const activeDays = Object.keys(researchData.dailyActivity || {}).length;
+  const hasGoldStar = activeDays >= 5;
 
-      const report = {
-        id: researchData.studentId,
-        start: researchData.startDate,
-        newW: currentWords - (researchData.totalWordsAtStart || 0),
-        newXP: currentXP - (researchData.totalXPAtStart || 0),
-        log: researchData.dailyActivity,
-        diff: researchData.wordDifficulty || {},
-        star: hasGoldStar,
-        rate: enjoyment
-      };
+  const report = {
+    id: researchData.studentId,
+    start: researchData.startDate,
+    newW: currentWords - (researchData.totalWordsAtStart || 0),
+    newXP: currentXP - (researchData.totalXPAtStart || 0),
+    log: researchData.dailyActivity,
+    diff: researchData.wordDifficulty || {},
+    star: hasGoldStar,
+    rate: enjoyment
+  };
 
-      const code = btoa(unescape(encodeURIComponent(JSON.stringify(report))));
-      const output = document.getElementById('report-output');
-      output.innerText = "LL-REPORT:" + code;
-      output.style.display = "block";
-
-      if (confirm("Reset weekly tracker for a new week?")) {
-        if (window.Analytics && typeof Analytics.resetWeeklyData === "function") {
-          Analytics.resetWeeklyData();
-        }
-        location.reload();
-      }
-    }
+  const output = document.getElementById('report-output');
+  output.innerText = JSON.stringify(report, null, 2);
+  output.style.display = "block";
+}
 
     function updateStats() {
       const vocabScore = parseInt(localStorage.getItem('vocab_points')) || 0;
