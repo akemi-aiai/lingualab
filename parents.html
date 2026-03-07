@@ -310,6 +310,16 @@ body {
 .clil-instr b {
   color: var(--navy);
 }
+.clil-vocab {
+  font-size: 15px;
+  color: var(--muted);
+  margin: 12px 0;
+  line-height: 1.7;
+}
+
+.clil-vocab b {
+  color: var(--navy);
+}
 
 /* TWISTERS */
 .twisters-card .panel-body {
@@ -913,18 +923,11 @@ footer {
         <div class="panel-body">
           <p class="clil-desc" id="clil-desc"></p>
           <p class="clil-goal"><b>Goal:</b> <span id="clil-goal"></span></p>
+          <p class="clil-vocab"><b>Vocabulary:</b> <span id="clil-vocab"></span></p>
           <p class="clil-materials"><b>Materials:</b> <span id="clil-materials"></span></p>
           <div class="clil-instr"><b>Parental Action:</b> <span id="clil-instr"></span>
           </div>
           <p class="clil-safety"><b>Safety:</b> <span id="clil-safety"></span></p>
-          <p class="clil-title-zh" id="clil-title-zh"></p>
-          <p class="clil-desc-zh" id="clil-desc-zh"></p>
-          <p class="clil-goal-zh"><b>目标：</b> <span id="clil-goal-zh"></span></p>
-          <p class="clil-vocab"><b>Vocabulary:</b> <span id="clil-vocab"></span></p>
-          <p class="clil-vocab-zh"><b>词汇：</b> <span id="clil-vocab-zh"></span></p>
-          <p class="clil-materials-zh"><b>材料：</b> <span id="clil-materials-zh"></span></p>
-          <p class="clil-age"><b>Age:</b> <span id="clil-age"></span></p>
-          <p class="clil-safety-zh"><b>安全提示：</b> <span id="clil-safety-zh"></span></p>
           </div>
         </div>
 
@@ -1030,624 +1033,360 @@ footer {
 
   <audio id="player"></audio>
 
-
+  <script src="analytics.js"></script>
   <script>
 
     const clilActivities = [
-  {
-        type: "Science",
-        typeZh: "科学小实验",
-        title: "Milk Rainbow",
-        titleZh: "牛奶彩虹",
-        desc: "Watch food colors move across milk with just a drop of soap.",
-        descZh: "只要一滴洗洁精，就能看到色彩在牛奶中慢慢散开，像彩虹一样流动。",
-        goal: "Explore movement in liquid and notice how colors spread.",
-        goalZh: "引导孩子观察液体中的流动变化，感受颜色扩散的奇妙过程。",
-        vocab: ["milk", "soap", "red", "blue", "move", "fast", "slow"],
-        vocabZh: ["牛奶", "洗洁精", "红色", "蓝色", "移动", "快", "慢"],
+      {
+        type: "Science 科学小实验",
+        title: "Milk Rainbow 牛奶彩虹",
+        desc: "Watch food colors move across milk with just a drop of soap. 只要一滴洗洁精，就能看到色彩在牛奶中慢慢散开，像彩虹一样流动。",
+        goal: "Explore movement in liquid and notice how colors spread. 引导孩子观察液体中的流动变化，感受颜色扩散的奇妙过程。",
+        vocab: "milk, soap, red, blue, move, fast, slow, 牛奶, 洗洁精, 红色, 蓝色, 移动, 快, 慢",
         instr: "Say: 'Look! The colors are moving! Blue is fast! Red is slow!'",
-        instrZh: "可以这样引导：‘快看，颜色在动呢！蓝色跑得好快，红色慢慢地走。’",
-        materials: ["milk", "plate", "food coloring", "dish soap", "cotton swab"],
-        materialsZh: ["牛奶", "盘子", "食用色素", "洗洁精", "棉签"],
-        age: "3–6",
-        safety: "Adult supervision needed.",
-        safetyZh: "建议在家长陪同下进行。"
+        materials: "milk, plate, food coloring, dish soap, cotton swab, 牛奶, 盘子, 食用色素, 洗洁精, 棉签",
+        safety: "Adult supervision needed. 建议在家长陪同下进行。"
       },
       {
-        type: "Science",
-        typeZh: "科学小实验",
-        title: "Lemon Volcano",
-        titleZh: "柠檬火山",
-        desc: "Make a fizzy lemon eruption with baking soda and lemon juice.",
-        descZh: "把小苏打和柠檬汁放在一起，做一个会咕噜咕噜冒泡的“柠檬火山”。",
-        goal: "Learn simple cause and effect through a hands-on reaction.",
-        goalZh: "通过有趣的化学反应，让孩子初步感受“混合之后会发生变化”的因果关系。",
-        vocab: ["lemon", "yellow", "bubble", "mix", "big", "small"],
-        vocabZh: ["柠檬", "黄色", "气泡", "混合", "大", "小"],
+        type: "Science 科学小实验",
+        title: "Lemon Volcano 柠檬火山",
+        desc: "Make a fizzy lemon eruption with baking soda and lemon juice. 把小苏打和柠檬汁放在一起，做一个会咕噜咕噜冒泡的“柠檬火山”。",
+        goal: "Learn simple cause and effect through a hands-on reaction. 通过有趣的化学反应，让孩子初步感受“混合之后会发生变化”的因果关系。",
+        vocab: "lemon, yellow, bubble, mix, big, small, 柠檬, 黄色, 气泡, 混合, 大, 小",
         instr: "Say: 'It is bubbling! The lemon is yellow! Wow, a big fizz!'",
-        instrZh: "可以这样说：‘哇，开始冒泡泡了！这是黄色的柠檬，好多好多小泡泡呀！’",
-        materials: ["lemon", "baking soda", "spoon", "tray"],
-        materialsZh: ["柠檬", "小苏打", "勺子", "托盘"],
-        age: "3–6",
-        safety: "Adult supervision needed. Do not taste the mixture.",
-        safetyZh: "建议在家长陪同下进行，请勿入口。"
+        materials: "lemon, baking soda, spoon, tray, 柠檬, 小苏打, 勺子, 托盘",
+        safety: "Adult supervision needed. Do not taste the mixture. 建议在家长陪同下进行，请勿入口。"
       },
       {
-        type: "Art",
-        typeZh: "创意艺术",
-        title: "Magic Ink",
-        titleZh: "神奇隐形墨水",
-        desc: "Write a secret message with lemon juice and reveal it with heat.",
-        descZh: "用柠檬汁写下秘密信息，再通过加热让文字慢慢显现出来。",
-        goal: "Discover invisible writing and practice letter awareness.",
-        goalZh: "让孩子体验“隐形书写”的惊喜，同时自然接触字母和文字。",
-        vocab: ["secret", "letter", "message", "see", "write", "paper"],
-        vocabZh: ["秘密", "字母", "信息", "看见", "写", "纸"],
+        type: "Art 创意艺术",
+        title: "Magic Ink 神奇隐形墨水",
+        desc: "Write a secret message with lemon juice and reveal it with heat. 用柠檬汁写下秘密信息，再通过加热让文字慢慢显现出来。",
+        goal: "Discover invisible writing and practice letter awareness. 让孩子体验“隐形书写”的惊喜，同时自然接触字母和文字。",
+        vocab: "secret, letter, message, see, write, paper, 秘密, 字母, 信息, 看见, 写, 纸",
         instr: "Say: 'Where is the secret message? Look! I can see the letters now!'",
-        instrZh: "可以这样引导：‘秘密藏在哪里呢？看，现在字慢慢出现了！’",
-        materials: ["lemon juice", "cotton swab", "paper", "adult-used heat source"],
-        materialsZh: ["柠檬汁", "棉签", "纸", "由家长操作的加热工具"],
-        age: "4–6",
-        safety: "Adult help required for the heat step.",
-        safetyZh: "加热步骤请务必由家长完成。"
+        materials: "lemon juice, cotton swab, paper, adult-used heat source, 柠檬汁, 棉签, 纸, 由家长操作的加热工具",
+        safety: "Adult help required for the heat step. 加热步骤请务必由家长完成。"
       },
       {
-        type: "Science",
-        typeZh: "科学小实验",
-        title: "Dancing Rice",
-        titleZh: "会跳舞的米粒",
-        desc: "Make rice move up and down in bubbly water.",
-        descZh: "让小米粒在冒着气泡的水里一上一下，像在跳舞一样。",
-        goal: "Observe gas bubbles and movement in a simple experiment.",
-        goalZh: "通过简单实验观察气泡带动物体运动的现象。",
-        vocab: ["rice", "jump", "dance", "up", "down", "bubble"],
-        vocabZh: ["米粒", "跳", "跳舞", "上", "下", "气泡"],
+        type: "Science 科学小实验",
+        title: "Dancing Rice 会跳舞的米粒",
+        desc: "Make rice move up and down in bubbly water. 让小米粒在冒着气泡的水里一上一下，像在跳舞一样。",
+        goal: "Observe gas bubbles and movement in a simple experiment. 通过简单实验观察气泡带动物体运动的现象。",
+        vocab: "rice, jump, dance, up, down, bubble, 米粒, 跳, 跳舞, 上, 下, 气泡",
         instr: "Say: 'Look at the rice! It is dancing! Up, down, up, down!'",
-        instrZh: "可以这样说：‘快看，米粒在跳舞呢！一会儿上去，一会儿下来。’",
-        materials: ["clear jar", "water", "baking soda", "vinegar", "uncooked rice"],
-        materialsZh: ["透明杯", "水", "小苏打", "白醋", "生米"],
-        age: "3–6",
-        safety: "Adult supervision needed.",
-        safetyZh: "建议在家长陪同下进行。"
+        materials: "clear jar, water, baking soda, vinegar, uncooked rice, 透明杯, 水, 小苏打, 白醋, 生米",
+        safety: "Adult supervision needed. 建议在家长陪同下进行。"
       },
       {
-        type: "Art",
-        typeZh: "创意艺术",
-        title: "Shadow Drawing",
-        titleZh: "影子描描画",
-        desc: "Place toys in the sun and trace the shapes of their shadows.",
-        descZh: "把玩具放在阳光下，沿着它们的影子轻轻描出轮廓。",
-        goal: "Notice shape, outline, and light in the environment.",
-        goalZh: "帮助孩子感受光影、轮廓和形状的变化。",
-        vocab: ["shadow", "sun", "long", "short", "toy", "shape"],
-        vocabZh: ["影子", "太阳", "长", "短", "玩具", "形状"],
+        type: "Art 创意艺术",
+        title: "Shadow Drawing 影子描描画",
+        desc: "Place toys in the sun and trace the shapes of their shadows. 把玩具放在阳光下，沿着它们的影子轻轻描出轮廓。",
+        goal: "Notice shape, outline, and light in the environment. 帮助孩子感受光影、轮廓和形状的变化。",
+        vocab: "shadow, sun, long, short, toy, shape, 影子, 太阳, 长, 短, 玩具, 形状",
         instr: "Say: 'This is a long shadow. This is a short shadow. It is a tiger!'",
-        instrZh: "可以这样引导：‘这个影子长长的，这个短短的。它看起来像一只小老虎！’",
-        materials: ["paper", "pencil", "small toys", "sunlight"],
-        materialsZh: ["纸", "铅笔", "小玩具", "阳光"],
-        age: "3–6",
-        safety: "Use sun-safe outdoor supervision.",
-        safetyZh: "户外活动请注意防晒，并在家长陪同下进行。"
+        materials: "paper, pencil, small toys, sunlight, 纸, 铅笔, 小玩具, 阳光",
+        safety: "Use sun-safe outdoor supervision. 户外活动请注意防晒，并在家长陪同下进行。"
       },
       {
-        type: "Science",
-        typeZh: "科学小实验",
-        title: "Walking Water",
-        titleZh: "会走路的水",
-        desc: "Watch colored water travel from one cup to another through paper towels.",
-        descZh: "观察彩色水顺着纸巾慢慢“走”到另一个杯子里。",
-        goal: "Explore absorption and simple color mixing.",
-        goalZh: "帮助孩子理解吸水现象，并感受颜色混合带来的变化。",
-        vocab: ["water", "walk", "cup", "blue", "yellow", "green"],
-        vocabZh: ["水", "走", "杯子", "蓝色", "黄色", "绿色"],
+        type: "Science 科学小实验",
+        title: "Walking Water 会走路的水",
+        desc: "Watch colored water travel from one cup to another through paper towels. 观察彩色水顺着纸巾慢慢“走”到另一个杯子里。",
+        goal: "Explore absorption and simple color mixing. 帮助孩子理解吸水现象，并感受颜色混合带来的变化。",
+        vocab: "water, walk, cup, blue, yellow, green, 水, 走, 杯子, 蓝色, 黄色, 绿色",
         instr: "Say: 'The water is walking. Look! Blue and yellow make green!'",
-        instrZh: "可以这样说：‘你看，水在走路呢！蓝色和黄色碰在一起，变成绿色啦！’",
-        materials: ["3 cups", "water", "food coloring", "paper towels"],
-        materialsZh: ["3个杯子", "水", "食用色素", "纸巾"],
-        age: "3–6",
-        safety: "Adult supervision needed.",
-        safetyZh: "建议在家长陪同下进行。"
+        materials: "3 cups, water, food coloring, paper towels, 3个杯子, 水, 食用色素, 纸巾",
+        safety: "Adult supervision needed. 建议在家长陪同下进行。"
       },
       {
-        type: "Cooking",
-        typeZh: "趣味烹饪",
-        title: "Fruit Pizza",
-        titleZh: "水果小披萨",
-        desc: "Make a colorful fruit pizza with yogurt and sliced fruit.",
-        descZh: "用酸奶和水果片一起做一个颜色丰富、造型可爱的“水果小披萨”。",
-        goal: "Practice food words, colors, and shape language.",
-        goalZh: "在亲子制作中练习食物词汇、颜色表达和形状描述。",
-        vocab: ["strawberry", "banana", "kiwi", "circle", "star", "sweet"],
-        vocabZh: ["草莓", "香蕉", "猕猴桃", "圆形", "星星", "甜"],
+        type: "Cooking 趣味烹饪",
+        title: "Fruit Pizza 水果小披萨",
+        desc: "Make a colorful fruit pizza with yogurt and sliced fruit. 用酸奶和水果片一起做一个颜色丰富、造型可爱的“水果小披萨”。",
+        goal: "Practice food words, colors, and shape language. 在亲子制作中练习食物词汇、颜色表达和形状描述。",
+        vocab: "strawberry, banana, kiwi, circle, star, sweet, 草莓, 香蕉, 猕猴桃, 圆形, 星星, 甜",
         instr: "Say: 'I want a strawberry circle and a kiwi star!'",
-        instrZh: "可以这样引导：‘我想要一个草莓圆圆圈，还有一个猕猴桃小星星。’",
-        materials: ["flat bread or tortilla", "yogurt", "sliced fruit"],
-        materialsZh: ["薄饼", "酸奶", "切好的水果"],
-        age: "3–6",
-        safety: "Cut fruit safely with adult help.",
-        safetyZh: "切水果请由家长协助完成。"
+        materials: "flat bread or tortilla, yogurt, sliced fruit, 薄饼, 酸奶, 切好的水果",
+        safety: "Cut fruit safely with adult help. 切水果请由家长协助完成。"
       },
       {
-        type: "Nature Study",
-        typeZh: "自然探索",
-        title: "Ice Rescue",
-        titleZh: "冰块救援行动",
-        desc: "Freeze tiny toys in ice and help them escape with warm water.",
-        descZh: "把小玩具冻进冰块里，再用温水把它们“救出来”。",
-        goal: "Notice melting and temperature differences.",
-        goalZh: "让孩子在游戏中感受冰的融化和冷热变化。",
-        vocab: ["ice", "cold", "melt", "help", "toy", "water"],
-        vocabZh: ["冰", "冷", "融化", "帮助", "玩具", "水"],
+        type: "Nature Study 自然探索",
+        title: "Ice Rescue 冰块救援行动",
+        desc: "Freeze tiny toys in ice and help them escape with warm water. 把小玩具冻进冰块里，再用温水把它们“救出来”。",
+        goal: "Notice melting and temperature differences. 让孩子在游戏中感受冰的融化和冷热变化。",
+        vocab: "ice, cold, melt, help, toy, water, 冰, 冷, 融化, 帮助, 玩具, 水",
         instr: "Say: 'The dino is cold! Help him! The ice is melting!'",
-        instrZh: "可以这样说：‘小恐龙被冻住啦，快来救救它！你看，冰在慢慢化开。’",
-        materials: ["small toys", "ice tray or bowl", "water", "warm water", "dropper"],
-        materialsZh: ["小玩具", "制冰盒或碗", "水", "温水", "滴管"],
-        age: "3–6",
-        safety: "Use large toys only. Adult supervision needed.",
-        safetyZh: "请使用较大的玩具，避免误吞，并在家长陪同下进行。"
+        materials: "small toys, ice tray or bowl, water, warm water, dropper, 小玩具, 制冰盒或碗, 水, 温水, 滴管",
+        safety: "Use large toys only. Adult supervision needed. 请使用较大的玩具，避免误吞，并在家长陪同下进行。"
       },
       {
-        type: "Science",
-        typeZh: "科学小实验",
-        title: "Egg Float Test",
-        titleZh: "鸡蛋浮起来了",
-        desc: "See how salt water can make an egg float.",
-        descZh: "试试看，为什么在盐水里鸡蛋会慢慢浮起来。",
-        goal: "Compare sinking and floating in different liquids.",
-        goalZh: "帮助孩子观察“沉下去”和“浮起来”的不同现象。",
-        vocab: ["egg", "float", "sink", "salt", "water", "top"],
-        vocabZh: ["鸡蛋", "漂浮", "下沉", "盐", "水", "上面"],
+        type: "Science 科学小实验",
+        title: "Egg Float Test 鸡蛋浮起来了",
+        desc: "See how salt water can make an egg float. 试试看，为什么在盐水里鸡蛋会慢慢浮起来。",
+        goal: "Compare sinking and floating in different liquids. 帮助孩子观察“沉下去”和“浮起来”的不同现象。",
+        vocab: "egg, float, sink, salt, water, top, 鸡蛋, 漂浮, 下沉, 盐, 水, 上面",
         instr: "Say: 'The egg is floating! Now it is on top!'",
-        instrZh: "可以这样说：‘鸡蛋浮起来了！现在它跑到上面来了。’",
-        materials: ["2 clear glasses", "water", "salt", "egg", "spoon"],
-        materialsZh: ["2个透明杯", "水", "盐", "鸡蛋", "勺子"],
-        age: "4–6",
-        safety: "Adult supervision needed.",
-        safetyZh: "建议在家长陪同下进行。"
+        materials: "2 clear glasses, water, salt, egg, spoon, 2个透明杯, 水, 盐, 鸡蛋, 勺子",
+        safety: "Adult supervision needed. 建议在家长陪同下进行。"
       },
       {
-        type: "Art",
-        typeZh: "创意艺术",
-        title: "Ice Painting",
-        titleZh: "冰块画画",
-        desc: "Paint with frozen colored ice as it slowly melts on paper.",
-        descZh: "用带颜色的冰块在纸上涂涂画画，边玩边观察冰慢慢融化。",
-        goal: "Explore color, melting, and mark-making.",
-        goalZh: "让孩子在创作中感受颜色变化、融化过程和绘画痕迹。",
-        vocab: ["ice", "cold", "melt", "wet", "paint", "color"],
-        vocabZh: ["冰", "冷", "融化", "湿", "画", "颜色"],
+        type: "Art 创意艺术",
+        title: "Ice Painting 冰块画画",
+        desc: "Paint with frozen colored ice as it slowly melts on paper. 用带颜色的冰块在纸上涂涂画画，边玩边观察冰慢慢融化。",
+        goal: "Explore color, melting, and mark-making. 让孩子在创作中感受颜色变化、融化过程和绘画痕迹。",
+        vocab: "ice, cold, melt, wet, paint, color, 冰, 冷, 融化, 湿, 画, 颜色",
         instr: "Say: 'The ice is melting. Now the paper is wet. Let's paint with blue!'",
-        instrZh: "可以这样引导：‘冰在慢慢化开，纸也变湿了。我们来用蓝色画一画吧！’",
-        materials: ["colored ice cubes or ice sticks", "paper", "tray"],
-        materialsZh: ["彩色冰块", "纸", "托盘"],
-        age: "3–6",
-        safety: "Adult supervision needed.",
-        safetyZh: "建议在家长陪同下进行。"
+        materials: "colored ice cubes or ice sticks, paper, tray, 彩色冰块, 纸, 托盘",
+        safety: "Adult supervision needed. 建议在家长陪同下进行。"
       },
       {
-        type: "Math",
-        typeZh: "数学启蒙",
-        title: "Lego Tower",
-        titleZh: "乐高高塔",
-        desc: "Build a tall tower and count the blocks as you stack them.",
-        descZh: "一边搭高高的积木塔，一边数一数用了多少块。",
-        goal: "Practice counting, colors, and simple size comparison.",
-        goalZh: "在搭建游戏中练习数数、颜色表达和高矮比较。",
-        vocab: ["red", "blue", "tall", "short", "one", "two", "three"],
-        vocabZh: ["红色", "蓝色", "高", "矮", "一", "二", "三"],
+        type: "Math 数学启蒙",
+        title: "Lego Tower 乐高高塔",
+        desc: "Build a tall tower and count the blocks as you stack them. 一边搭高高的积木塔，一边数一数用了多少块。",
+        goal: "Practice counting, colors, and simple size comparison. 在搭建游戏中练习数数、颜色表达和高矮比较。",
+        vocab: "red, blue, tall, short, one, two, three, 红色, 蓝色, 高, 矮, 一, 二, 三",
         instr: "Say: 'Red on blue. One, two, three! My tower is tall!'",
-        instrZh: "可以这样说：‘红色放在蓝色上面，一、二、三！我的塔好高呀！’",
-        materials: ["Lego or building blocks"],
-        materialsZh: ["乐高或积木"],
-        age: "3–6",
-        safety: "Use age-appropriate large blocks.",
-        safetyZh: "请使用适合幼儿年龄的大颗粒积木。"
+        materials: "Lego or building blocks, 乐高或积木",
+        safety: "Use age-appropriate large blocks. 请使用适合幼儿年龄的大颗粒积木。"
       },
       {
-        type: "Science",
-        typeZh: "科学小实验",
-        title: "Static Balloon",
-        titleZh: "静电小气球",
-        desc: "Rub a balloon and watch it pick up tiny paper pieces.",
-        descZh: "给气球摩擦起电，看看它怎么把小纸片吸起来。",
-        goal: "Notice static electricity through a playful experiment.",
-        goalZh: "通过轻松有趣的小实验，让孩子初步感受静电现象。",
-        vocab: ["balloon", "paper", "jump", "pull", "up", "touch"],
-        vocabZh: ["气球", "纸", "跳", "吸起来", "上面", "碰一碰"],
+        type: "Science 科学小实验",
+        title: "Static Balloon 静电小气球",
+        desc: "Rub a balloon and watch it pick up tiny paper pieces. 给气球摩擦起电，看看它怎么把小纸片吸起来。",
+        goal: "Notice static electricity through a playful experiment. 通过轻松有趣的小实验，让孩子初步感受静电现象。",
+        vocab: "balloon, paper, jump, pull, up, touch, 气球, 纸, 跳, 吸起来, 上面, 碰一碰",
         instr: "Say: 'Look! The balloon pulls the paper up! The paper is jumping!'",
-        instrZh: "可以这样说：‘快看，气球把纸片吸起来啦！小纸片像在跳舞一样。’",
-        materials: ["balloon", "small paper pieces", "wool cloth or hair"],
-        materialsZh: ["气球", "小纸片", "毛绒布或头发"],
-        age: "3–6",
-        safety: "Adult supervision needed.",
-        safetyZh: "建议在家长陪同下进行。"
+        materials: "balloon, small paper pieces, wool cloth or hair, 气球, 小纸片, 毛绒布或头发",
+        safety: "Adult supervision needed. 建议在家长陪同下进行。"
       },
       {
-        type: "Nature Study",
-        typeZh: "自然探索",
-        title: "Bean Diary",
-        titleZh: "豆子成长日记",
-        desc: "Grow a bean in a wet napkin and watch roots and shoots appear.",
-        descZh: "把豆子放在湿纸巾里，静静观察它长出小根和嫩芽。",
-        goal: "Observe how a seed changes as it grows.",
-        goalZh: "帮助孩子用连续观察的方式，感受种子一点点长大的过程。",
-        vocab: ["seed", "bean", "root", "grow", "leaf", "water"],
-        vocabZh: ["种子", "豆子", "根", "长大", "叶子", "水"],
+        type: "Nature Study 自然探索",
+        title: "Bean Diary 豆子成长日记",
+        desc: "Grow a bean in a wet napkin and watch roots and shoots appear. 把豆子放在湿纸巾里，静静观察它长出小根和嫩芽。",
+        goal: "Observe how a seed changes as it grows. 帮助孩子用连续观察的方式，感受种子一点点长大的过程。",
+        vocab: "seed, bean, root, grow, leaf, water, 种子, 豆子, 根, 长大, 叶子, 水",
         instr: "Say: 'Look at the seed. It has a tiny root! It is growing!'",
-        instrZh: "可以这样引导：‘快看，这颗小种子长出细细的根了，它正在慢慢长大。’",
-        materials: ["bean", "clear cup or jar", "wet napkin or cotton"],
-        materialsZh: ["豆子", "透明杯子或瓶子", "湿纸巾或棉花"],
-        age: "3–6",
-        safety: "Adult supervision needed.",
-        safetyZh: "建议在家长陪同下进行。"
+        materials: "bean, clear cup or jar, wet napkin or cotton, 豆子, 透明杯子或瓶子, 湿纸巾或棉花",
+        safety: "Adult supervision needed. 建议在家长陪同下进行。"
       },
       {
-        type: "Cooking",
-        typeZh: "趣味烹饪",
-        title: "Bread Art",
-        titleZh: "面包创意小脸",
-        desc: "Make a funny face on bread with colorful vegetables.",
-        descZh: "用彩色蔬菜在面包上拼出一个有趣又可爱的小脸。",
-        goal: "Practice face words, food words, and describing shapes.",
-        goalZh: "在动手拼贴中练习五官词汇、食物词汇和简单描述。",
-        vocab: ["eyes", "mouth", "nose", "cucumber", "tomato", "circle"],
-        vocabZh: ["眼睛", "嘴巴", "鼻子", "黄瓜", "番茄", "圆形"],
+        type: "Cooking 趣味烹饪",
+        title: "Bread Art 面包创意小脸",
+        desc: "Make a funny face on bread with colorful vegetables. 用彩色蔬菜在面包上拼出一个有趣又可爱的小脸。",
+        goal: "Practice face words, food words, and describing shapes. 在动手拼贴中练习五官词汇、食物词汇和简单描述。",
+        vocab: "eyes, mouth, nose, cucumber, tomato, circle, 眼睛, 嘴巴, 鼻子, 黄瓜, 番茄, 圆形",
         instr: "Say: 'Two cucumber eyes and a tomato mouth!'",
-        instrZh: "可以这样说：‘两只黄瓜眼睛，一个番茄嘴巴，好可爱的小脸呀！’",
-        materials: ["bread", "soft cheese or spread", "vegetable slices"],
-        materialsZh: ["面包", "抹酱或软奶酪", "蔬菜片"],
-        age: "3–6",
-        safety: "Prepare ingredients safely with adult help.",
-        safetyZh: "食材处理请由家长协助完成。"
-      },
-      {
-        type: "Science",
-        typeZh: "科学小实验",
-        title: "Rain Cloud",
-        titleZh: "云朵下雨了",
-        desc: "Use a soft foam cloud and blue drops to show how rain falls.",
-        descZh: "用泡沫做一朵云，再滴入蓝色水珠，模拟云朵下雨的过程。",
-        goal: "Visualize how clouds release rain when they get full.",
-        goalZh: "帮助孩子更直观地理解：云里装满水以后，雨就会落下来。",
-        vocab: ["cloud", "rain", "drop", "blue", "full", "fall"],
-        vocabZh: ["云朵", "下雨", "水滴", "蓝色", "满满的", "落下来"],
-        instr: "Say: 'The cloud is full. Here comes the rain! Drop, drop, drop!'",
-        instrZh: "可以这样引导：‘云朵装满水啦，开始下雨了。滴答、滴答、滴答。’",
-        materials: ["clear jar", "water", "shaving foam", "blue food coloring", "dropper"],
-        materialsZh: ["透明杯", "水", "泡沫", "蓝色色素", "滴管"],
-        age: "4–6",
-        safety: "Adult supervision needed. Do not touch eyes after handling foam or dye.",
-        safetyZh: "建议在家长陪同下进行，接触泡沫或色素后请及时洗手，不要揉眼睛。"
+        materials: "bread, soft cheese or spread, vegetable slices, 面包, 抹酱或软奶酪, 蔬菜片",
+        safety: "Prepare ingredients safely with adult help. 食材处理请由家长协助完成。"
       }
+     
     ];
     
-    const twisterBank = [
-      "A big black bug bit a big black dog.",
-      "I scream, you scream, we all scream for ice cream.",
-      "Kitty caught the kitten in the kitchen.",
-      "Red lorry, yellow lorry, red lorry, yellow lorry.",
-      "Six sick sea-serpents swam the seven seas.",
-      "Fresh fried fish, fish fresh fried.",
-      "Give papa a cup of proper coffee.",
-      "Double bubble gum, bubbles double.",
-      "She sells sea shells by the sea shore.",
-      "Ice cream, nice cream, we all love ice cream.",
-      "Blue bluebird blinks below the bridge.",
-      "Eleven elves licked eleven lollipops.",
-      "Toy phone, toy phone, toy phone.",
-      "Zebras zig and zebras zag.",
-      "Green glass globes glow greenly.",
-      "Fat frogs flying past fast.",
-      "Cooks cook cupcakes quickly.",
-      "Strict striped sharks swim swiftly.",
-      "Which witch is which?",
-      "Happy hippos hop happily."
-    ];
+   const twisterBank = [
+    { text: "A big black bug bit a big black dog.", audio: "big-black-bug.mp3" },
+    { text: "I scream, you scream, we all scream for ice cream.", audio: "ice-cream.mp3" },
+    { text: "Kitty caught the kitten in the kitchen.", audio: "kitten-kitchen.mp3" },
+    { text: "Red lorry, yellow lorry, red lorry, yellow lorry.", audio: "red-lorry.mp3" },
+    { text: "Six sick sea-serpents swam the seven seas.", audio: "sea-serpents.mp3" },
+    { text: "Fresh fried fish, fish fresh fried.", audio: "fresh-fried-fish.mp3" },
+    { text: "Give papa a cup of proper coffee.", audio: "proper-coffee.mp3" },
+    { text: "Double bubble gum, bubbles double.", audio: "double-bubble.mp3" },
+    { text: "She sells sea shells by the sea shore.", audio: "sea-shells.mp3" },
+    { text: "Ice cream, nice cream, we all love ice cream.", audio: "nice-cream.mp3" },
+    { text: "Blue bluebird blinks below the bridge.", audio: "bluebird-bridge.mp3" },
+    { text: "Eleven elves licked eleven lollipops.", audio: "eleven-elves.mp3" },
+    { text: "Toy phone, toy phone, toy phone.", audio: "toy-phone.mp3" },
+    { text: "Zebras zig and zebras zag.", audio: "zebras-zig-zag.mp3" },
+    { text: "Green glass globes glow greenly.", audio: "green-glass.mp3" },
+    { text: "Fat frogs flying past fast.", audio: "fat-frogs.mp3" },
+    { text: "Cooks cook cupcakes quickly.", audio: "cook-cupcakes.mp3" },
+    { text: "Strict striped sharks swim swiftly.", audio: "striped-sharks.mp3" },
+    { text: "Which witch is which?", audio: "which-witch.mp3" },
+    { text: "Happy hippos hop happily.", audio: "happy-hippos.mp3" }
+  ];
     
     const missionBank = [
       {
-        category: "Home Routine",
-        categoryZh: "居家日常",
-        title: "Sticker Hunt",
-        titleZh: "贴纸寻物",
-        desc: "Label 5 kitchen items with sticky notes and invite your child to find them in English.",
-        descZh: "给厨房里的 5 样物品贴上小标签，用英文邀请孩子去找一找、摸一摸。",
-        prompt: "Touch the cup! Where is the plate?",
-        promptZh: "可以这样引导：‘Touch the cup! 杯子在哪里？Plate 呢？’"
+        category: "Home Routine 居家日常",
+        title: "Sticker Hunt 贴纸寻物",
+        desc: "Label 5 kitchen items with sticky notes and invite your child to find them in English. 给厨房里的 5 样物品贴上小标签，用英文邀请孩子去找一找、摸一摸。",
+        prompt: "Touch the cup! Where is the plate? 可以这样引导：Touch the cup! 杯子在哪里？Plate 呢"
       },
       {
-        category: "Listening",
-        categoryZh: "英语磨耳朵",
-        title: "Breakfast Songs",
-        titleZh: "早餐英文歌",
-        desc: "Play one short English nursery rhyme during breakfast for easy, natural exposure.",
-        descZh: "早餐时播放一首简短的英文儿歌，让英语自然融入一天的开始。",
-        prompt: "Can you hear the song? Clap with me!",
-        promptZh: "可以这样引导：‘听到歌曲了吗？和我一起拍拍手吧！’"
+        category: "Listening 英语磨耳朵",
+        title: "Breakfast Songs 早餐英文歌",
+        desc: "Play one short English nursery rhyme during breakfast for easy, natural exposure. 早餐时播放一首简短的英文儿歌，让英语自然融入一天的开始。",
+        prompt: "Can you hear the song? Clap with me! 可以这样引导：听到歌曲了吗？和我一起拍拍手吧！"
       },
       {
-        category: "Bath Time",
-        categoryZh: "洗澡时间",
-        title: "Bath Time Story",
-        titleZh: "洗澡小故事",
-        desc: "Use bath toys to describe simple actions, colors, and movement.",
-        descZh: "用洗澡玩具边玩边说动作、颜色和移动，让语言输入更自然。",
-        prompt: "The duck is swimming. The boat is blue.",
-        promptZh: "可以这样说：‘The duck is swimming. 小鸭子在游泳。The boat is blue. 小船是蓝色的。’"
+        category: "Bath Time 洗澡时间",
+        title: "Bath Time Story 洗澡小故事",
+        desc: "Use bath toys to describe simple actions, colors, and movement. 用洗澡玩具边玩边说动作、颜色和移动，让语言输入更自然。",
+        prompt: "The duck is swimming. The boat is blue. 可以这样说：The duck is swimming. 小鸭子在游泳。The boat is blue. 小船是蓝色的。"
       },
       {
-        category: "Bedtime",
-        categoryZh: "睡前时光",
-        title: "Toy Roll Call",
-        titleZh: "玩具点名晚安",
-        desc: "Say goodnight to favorite toys before bed and name them one by one.",
-        descZh: "睡前和孩子喜欢的玩具一个个说晚安，在温柔的仪式感里重复英文词汇。",
-        prompt: "Goodnight, Teddy! Goodnight, Car!",
-        promptZh: "可以这样说：‘Goodnight, Teddy! Goodnight, Car! 跟小熊和小汽车说晚安吧。’"
+        category: "Bedtime 睡前时光",
+        title: "Toy Roll Call 玩具点名晚安",
+        desc: "Say goodnight to favorite toys before bed and name them one by one. 睡前和孩子喜欢的玩具一个个说晚安，在温柔的仪式感里重复英文词汇。",
+        prompt: "Goodnight, Teddy! Goodnight, Car! 可以这样说：Goodnight, Teddy! Goodnight, Car! 跟小熊和小汽车说晚安吧。"
       },
       {
-        category: "Cooking",
-        categoryZh: "厨房互动",
-        title: "Color Chef",
-        titleZh: "颜色小厨师",
-        desc: "While cooking, ask your child to find or pass ingredients by color.",
-        descZh: "做饭时请孩子按颜色帮忙拿食材，把颜色词自然带进生活里。",
-        prompt: "Can you give me a green apple? Where is the red tomato?",
-        promptZh: "可以这样引导：‘Can you give me a green apple? 红色的番茄在哪里？’"
+        category: "Cooking 厨房互动",
+        title: "Color Chef 颜色小厨师",
+        desc: "While cooking, ask your child to find or pass ingredients by color. 做饭时请孩子按颜色帮忙拿食材，把颜色词自然带进生活里。",
+        prompt: "Can you give me a green apple? Where is the red tomato? 可以这样引导：Can you give me a green apple? 红色的番茄在哪里？"
       },
       {
-        category: "Greetings",
-        categoryZh: "礼貌表达",
-        title: "Knock-Knock Hello",
-        titleZh: "敲门问好",
-        desc: "Turn every door into a mini greeting game with simple question-and-answer practice.",
-        descZh: "把每一扇门都变成小游戏，练习最基础的问候和回应。",
-        prompt: "Knock-knock! Who is it? It's me!",
-        promptZh: "可以这样玩：‘Knock-knock! Who is it? It’s me!’"
+        category: "Greetings 礼貌表达",
+        title: "Knock-Knock Hello 敲门问好",
+        desc: "Turn every door into a mini greeting game with simple question-and-answer practice. 把每一扇门都变成小游戏，练习最基础的问候和回应。",
+        prompt: "Knock-knock! Who is it? It's me! 可以这样玩：Knock-knock! Who is it? It’s me!"
       },
       {
-        category: "Dressing",
-        categoryZh: "穿衣时间",
-        title: "Dress-Up Race",
-        titleZh: "穿衣小比赛",
-        desc: "Name clothes, colors, and left-right words as your child gets dressed.",
-        descZh: "穿衣时顺便练习衣物名称、颜色和左右概念。",
-        prompt: "Left sock, right sock, yellow T-shirt!",
-        promptZh: "可以这样说：‘Left sock, right sock, yellow T-shirt! 左袜子、右袜子、黄色T恤。’"
+        category: "Dressing 穿衣时间",
+        title: "Dress-Up Race 穿衣小比赛",
+        desc: "Name clothes, colors, and left-right words as your child gets dressed. 穿衣时顺便练习衣物名称、颜色和左右概念。",
+        prompt: "Left sock, right sock, yellow T-shirt! 可以这样说：Left sock, right sock, yellow T-shirt! 左袜子、右袜子、黄色T恤。"
       },
       {
-        category: "Self-Care",
-        categoryZh: "生活习惯",
-        title: "Brushing Beats",
-        titleZh: "刷牙节奏歌",
-        desc: "Sing a short English song while brushing teeth to make the routine fun and familiar.",
-        descZh: "刷牙时唱一首简短的英文歌，让日常习惯更轻松，也更有英语氛围。",
-        prompt: "Brush, brush, brush your teeth!",
-        promptZh: "可以这样唱：‘Brush, brush, brush your teeth!’"
+        category: "Self-Care 生活习惯",
+        title: "Brushing Beats 刷牙节奏歌",
+        desc: "Sing a short English song while brushing teeth to make the routine fun and familiar. 刷牙时唱一首简短的英文歌，让日常习惯更轻松，也更有英语氛围。",
+        prompt: "Brush, brush, brush your teeth! 可以这样唱：Brush, brush, brush your teeth!"
       },
       {
-        category: "Sorting",
-        categoryZh: "分类配对",
-        title: "Shoe Match",
-        titleZh: "鞋子配对",
-        desc: "Ask your child to find matching shoes and name their colors.",
-        descZh: "请孩子帮忙找一双鞋、配成对，同时练习颜色表达。",
-        prompt: "Where is the blue shoe? Can you find the other one?",
-        promptZh: "可以这样引导：‘Where is the blue shoe? 另一只在哪里？’"
+        category: "Sorting 分类配对",
+        title: "Shoe Match 鞋子配对",
+        desc: "Ask your child to find matching shoes and name their colors. 请孩子帮忙找一双鞋、配成对，同时练习颜色表达。",
+        prompt: "Where is the blue shoe? Can you find the other one? 可以这样引导：Where is the blue shoe? 另一只在哪里？"
       },
       {
-        category: "Art Talk",
-        categoryZh: "看画说话",
-        title: "Mini Art Gallery",
-        titleZh: "迷你画廊",
-        desc: "Display one drawing and invite your child to talk about it in simple English.",
-        descZh: "把孩子的一幅画贴出来，像小画廊一样，一起用简单英文聊一聊。",
-        prompt: "What is this? Is it a cat or a dog?",
-        promptZh: "可以这样问：‘What is this? Is it a cat or a dog?’"
+        category: "Art Talk 看画说话",
+        title: "Mini Art Gallery 迷你画廊",
+        desc: "Display one drawing and invite your child to talk about it in simple English. 把孩子的一幅画贴出来，像小画廊一样，一起用简单英文聊一聊。",
+        prompt: "What is this? Is it a cat or a dog? 可以这样问：What is this? Is it a cat or a dog?"
       },
       {
-        category: "Weather",
-        categoryZh: "天气观察",
-        title: "Window Weather",
-        titleZh: "窗边看天气",
-        desc: "Look out the window each morning and describe the weather in one short sentence.",
-        descZh: "每天早上看看窗外，用一句简单英文说说今天的天气。",
-        prompt: "Is it sunny? Is it rainy?",
-        promptZh: "可以这样问：‘Is it sunny? Is it rainy?’"
+        category: "Weather 天气观察",
+        title: "Window Weather 窗边看天气",
+        desc: "Look out the window each morning and describe the weather in one short sentence. 每天早上看看窗外，用一句简单英文说说今天的天气。",
+        prompt: "Is it sunny? Is it rainy? 可以这样问：Is it sunny? Is it rainy?"
       },
       {
-        category: "Guessing Game",
-        categoryZh: "猜一猜游戏",
-        title: "Mystery Box",
-        titleZh: "神秘盒子",
-        desc: "Hide a toy in a box and let your child guess by touching it.",
-        descZh: "把一个小玩具藏进盒子里，让孩子用摸一摸的方式来猜。",
-        prompt: "Is it a ball? Is it soft or hard?",
-        promptZh: "可以这样引导：‘Is it a ball? 它是软软的还是硬硬的？’"
+        category: "Guessing Game 猜一猜游戏",
+        title: "Mystery Box 神秘盒子",
+        desc: "Hide a toy in a box and let your child guess by touching it. 把一个小玩具藏进盒子里，让孩子用摸一摸的方式来猜。",
+        prompt: "Is it a ball? Is it soft or hard? 可以这样引导：Is it a ball? 它是软软的还是硬硬的？"
       },
       {
-        category: "Movement",
-        categoryZh: "动作游戏",
-        title: "Animal Walk",
-        titleZh: "动物走走乐",
-        desc: "Move across the room like different animals and copy their actions.",
-        descZh: "学小动物走路、跳一跳、跺一跺，在动作里输入英语。",
-        prompt: "Jump like a frog! Stomp like an elephant!",
-        promptZh: "可以这样玩：‘Jump like a frog! Stomp like an elephant!’"
+        category: "Movement 动作游戏",
+        title: "Animal Walk 动物走走乐",
+        desc: "Move across the room like different animals and copy their actions. 学小动物走路、跳一跳、跺一跺，在动作里输入英语。",
+        prompt: "Jump like a frog! Stomp like an elephant! 可以这样玩：Jump like a frog! Stomp like an elephant!"
       },
       {
-        category: "Speaking",
-        categoryZh: "开口练习",
-        title: "Secret Whisper",
-        titleZh: "悄悄话英语",
-        desc: "Whisper one easy English word and let your child whisper it back.",
-        descZh: "轻轻说一个简单英文词，让孩子也小声重复回来。",
-        prompt: "Apple... Can you whisper it back?",
-        promptZh: "可以这样说：‘Apple... 你也悄悄说一遍好吗？’"
+        category: "Speaking 开口练习",
+        title: "Secret Whisper 悄悄话英语",
+        desc: "Whisper one easy English word and let your child whisper it back. 轻轻说一个简单英文词，让孩子也小声重复回来。",
+        prompt: "Apple... Can you whisper it back? 可以这样说：Apple... 你也悄悄说一遍好吗？"
       },
       {
-        category: "Sorting",
-        categoryZh: "分类整理",
-        title: "Laundry Sort",
-        titleZh: "衣服分类小帮手",
-        desc: "Sort laundry by color together and name each group aloud.",
-        descZh: "一起按颜色分类衣服，在整理中自然复现颜色词。",
-        prompt: "This is white. This is black.",
-        promptZh: "可以这样说：‘This is white. This is black.’"
+        category: "Sorting 分类整理",
+        title: "Laundry Sort 衣服分类小帮手",
+        desc: "Sort laundry by color together and name each group aloud. 一起按颜色分类衣服，在整理中自然复现颜色词。",
+        prompt: "This is white. This is black. 可以这样说：This is white. This is black."
       },
       {
-        category: "Puzzles",
-        categoryZh: "拼图时间",
-        title: "Puzzle Helper",
-        titleZh: "拼图小帮手",
-        desc: "Pass puzzle pieces one by one and describe their color or shape.",
-        descZh: "一块一块递拼图，同时说颜色和形状，让互动更有语言感。",
-        prompt: "Here is a blue piece. Thank you!",
-        promptZh: "可以这样说：‘Here is a blue piece. Thank you!’"
+        category: "Puzzles 拼图时间",
+        title: "Puzzle Helper 拼图小帮手",
+        desc: "Pass puzzle pieces one by one and describe their color or shape. 一块一块递拼图，同时说颜色和形状，让互动更有语言感。",
+        prompt: "Here is a blue piece. Thank you! 可以这样说：Here is a blue piece. Thank you!"
       },
       {
-        category: "Counting",
-        categoryZh: "数字启蒙",
-        title: "High-Five Count",
-        titleZh: "击掌数一数",
-        desc: "Give five high-fives and count them together in English.",
-        descZh: "和孩子开心击掌，一边数数，一边把数字说出来。",
-        prompt: "One, two, three, four, five!",
-        promptZh: "可以这样数：‘One, two, three, four, five!’"
+        category: "Counting 数字启蒙",
+        title: "High-Five Count 击掌数一数",
+        desc: "Give five high-fives and count them together in English. 和孩子开心击掌，一边数数，一边把数字说出来。",
+        prompt: "One, two, three, four, five! 可以这样数：One, two, three, four, five!"
       },
       {
-        category: "Observation",
-        categoryZh: "观察发现",
-        title: "Flashlight Search",
-        titleZh: "手电筒寻宝",
-        desc: "Use a flashlight to find objects in a dark room and name what you see.",
-        descZh: "关掉灯，用手电筒找东西，一边照一边说出看到了什么。",
-        prompt: "I see a chair! I see a book!",
-        promptZh: "可以这样说：‘I see a chair! I see a book!’"
+        category: "Observation 观察发现",
+        title: "Flashlight Search 手电筒寻宝",
+        desc: "Use a flashlight to find objects in a dark room and name what you see. 关掉灯，用手电筒找东西，一边照一边说出看到了什么。",
+        prompt: "I see a chair! I see a book! 可以这样说：I see a chair! I see a book!"
       },
       {
-        category: "Helping",
-        categoryZh: "生活任务",
-        title: "Little Helper",
-        titleZh: "小帮手任务",
-        desc: "Give simple real-life tasks and turn them into easy English practice.",
-        descZh: "把生活里的小任务变成自然的英文指令练习。",
-        prompt: "Please pick up the ball. Close the door, please.",
-        promptZh: "可以这样引导：‘Please pick up the ball. Close the door, please.’"
+        category: "Helping 生活任务",
+        title: "Little Helper 小帮手任务",
+        desc: "Give simple real-life tasks and turn them into easy English practice. 把生活里的小任务变成自然的英文指令练习。",
+        prompt: "Please pick up the ball. Close the door, please. 可以这样引导：Please pick up the ball. Close the door, please."
       },
       {
-        category: "Food Shapes",
-        categoryZh: "食物形状",
-        title: "Shape Sandwich",
-        titleZh: "形状小三明治",
-        desc: "Cut food into simple shapes and let your child choose what they want.",
-        descZh: "把食物切成简单形状，让孩子边选边说，边吃边学。",
-        prompt: "Do you want a circle or a triangle?",
-        promptZh: "可以这样问：‘Do you want a circle or a triangle?’"
+        category: "Food Shapes 食物形状",
+        title: "Shape Sandwich 形状小三明治",
+        desc: "Cut food into simple shapes and let your child choose what they want. 把食物切成简单形状，让孩子边选边说，边吃边学。",
+        prompt: "Do you want a circle or a triangle? 可以这样问：Do you want a circle or a triangle?"
       },
       {
-        category: "Nature",
-        categoryZh: "自然观察",
-        title: "Bug Explorer",
-        titleZh: "小小自然观察员",
-        desc: "In the park, look for tiny things and describe them with simple adjectives.",
-        descZh: "在公园里找一找小小的东西，用简单形容词来观察和表达。",
-        prompt: "Look! A small ant! A small leaf!",
-        promptZh: "可以这样说：‘Look! A small ant! A small leaf!’"
+        category: "Nature 自然观察",
+        title: "Bug Explorer 小小自然观察员",
+        desc: "In the park, look for tiny things and describe them with simple adjectives. 在公园里找一找小小的东西，用简单形容词来观察和表达。",
+        prompt: "Look! A small ant! A small leaf! 可以这样说：Look! A small ant! A small leaf!"
       },
       {
-        category: "Movement",
-        categoryZh: "动作游戏",
-        title: "Balloon Up",
-        titleZh: "气球不落地",
-        desc: "Keep a balloon in the air and count each hit in English.",
-        descZh: "和孩子一起让气球不落地，每拍一下就数一个数字。",
-        prompt: "One! Two! Three! Keep it up!",
-        promptZh: "可以这样说：‘One! Two! Three! 不要让它掉下来！’"
+        category: "Movement 动作游戏",
+        title: "Balloon Up 气球不落地",
+        desc: "Keep a balloon in the air and count each hit in English. 和孩子一起让气球不落地，每拍一下就数一个数字。",
+        prompt: "One! Two! Three! Keep it up! 可以这样说：One! Two! Three! 不要让它掉下来！"
       },
       {
-        category: "Body Talk",
-        categoryZh: "身体认知",
-        title: "Mirror Face",
-        titleZh: "镜子里的我",
-        desc: "Look in the mirror and name body parts and feelings together.",
-        descZh: "照镜子时一起说五官和情绪，让孩子更自然地开口。",
-        prompt: "I have two eyes. I have one nose. I am happy!",
-        promptZh: "可以这样说：‘I have two eyes. I have one nose. I am happy!’"
+        category: "Body Talk 身体认知",
+        title: "Mirror Face 镜子里的我",
+        desc: "Look in the mirror and name body parts and feelings together. 照镜子时一起说五官和情绪，让孩子更自然地开口。",
+        prompt: "I have two eyes. I have one nose. I am happy! 可以这样说：I have two eyes. I have one nose. I am happy!"
       },
       {
-        category: "Shopping",
-        categoryZh: "外出英语",
-        title: "Supermarket Spy",
-        titleZh: "超市小侦探",
-        desc: "At the store, ask your child to find items by color or category.",
-        descZh: "逛超市时让孩子按颜色或类别找东西，把购物变成小游戏。",
-        prompt: "Find me something yellow!",
-        promptZh: "可以这样说：‘Find me something yellow!’"
+        category: "Shopping 外出英语",
+        title: "Supermarket Spy 超市小侦探",
+        desc: "At the store, ask your child to find items by color or category. 逛超市时让孩子按颜色或类别找东西，把购物变成小游戏。",
+        prompt: "Find me something yellow! 可以这样说：Find me something yellow!"
       },
       {
-        category: "Nature",
-        categoryZh: "自然互动",
-        title: "Hello, Tree!",
-        titleZh: "你好，大树",
-        desc: "Touch natural things outside and describe them with simple words.",
-        descZh: "摸摸树、花和叶子，用简单英文说出它们的特点。",
-        prompt: "The tree is big. The flower is beautiful.",
-        promptZh: "可以这样说：‘The tree is big. The flower is beautiful.’"
+        category: "Nature 自然互动",
+        title: "Hello, Tree! 你好，大树",
+        desc: "Touch natural things outside and describe them with simple words. 摸摸树、花和叶子，用简单英文说出它们的特点。",
+        prompt: "The tree is big. The flower is beautiful. 可以这样说：The tree is big. The flower is beautiful."
       },
       {
-        category: "Bedtime",
-        categoryZh: "睡前时光",
-        title: "Bedtime Train",
-        titleZh: "开往睡觉的小火车",
-        desc: "Turn the walk to bed into a pretend train ride with playful language.",
-        descZh: "把去睡觉的路变成一趟想象中的小火车，让睡前更轻松。",
-        prompt: "Choo-choo! The train is going to bed!",
-        promptZh: "可以这样玩：‘Choo-choo! 小火车要去睡觉啦！’"
+        category: "Bedtime 睡前时光",
+        title: "Bedtime Train 开往睡觉的小火车",
+        desc: "Turn the walk to bed into a pretend train ride with playful language. 把去睡觉的路变成一趟想象中的小火车，让睡前更轻松。",
+        prompt: "Choo-choo! The train is going to bed! 可以这样玩：Choo-choo! 小火车要去睡觉啦！"
       },
       {
-        category: "Polite Phrases",
-        categoryZh: "礼貌表达",
-        title: "Water, Please",
-        titleZh: "请给我水",
-        desc: "Practice one useful daily phrase when your child wants a drink.",
-        descZh: "孩子想喝水时，顺手练习一句最实用的日常英文表达。",
-        prompt: "Can I have some water, please?",
-        promptZh: "可以这样练习：‘Can I have some water, please?’"
+        category: "Polite Phrases 礼貌表达",
+        title: "Water, Please 请给我水",
+        desc: "Practice one useful daily phrase when your child wants a drink. 孩子想喝水时，顺手练习一句最实用的日常英文表达。",
+        prompt: "Can I have some water, please? 可以这样练习：Can I have some water, please?"
       },
       {
-        category: "Surprise Game",
-        categoryZh: "惊喜小游戏",
-        title: "Unwrap Joy",
-        titleZh: "拆开小惊喜",
-        desc: "Wrap a small snack or toy and let your child open it while guessing what's inside.",
-        descZh: "把小零食或小玩具包起来，让孩子一边拆一边猜里面是什么。",
-        prompt: "Open it! What is inside?",
-        promptZh: "可以这样引导：‘Open it! What is inside?’"
+        category: "Surprise Game 惊喜小游戏",
+        title: "Unwrap Joy 拆开小惊喜",
+        desc: "Wrap a small snack or toy and let your child open it while guessing what's inside. 把小零食或小玩具包起来，让孩子一边拆一边猜里面是什么。",
+        prompt: "Open it! What is inside? 可以这样引导：Open it! What is inside?"
       },
       {
-        category: "Family Talk",
-        categoryZh: "家庭互动",
-        title: "Photo Hunt",
-        titleZh: "照片找一找",
-        desc: "Look at family photos and ask your child to find familiar people or pets.",
-        descZh: "看看手机里的家庭照片，请孩子找一找熟悉的人或小动物。",
-        prompt: "Where is Mommy? Where is the dog?",
-        promptZh: "可以这样问：‘Where is Mommy? Where is the dog?’"
+        category: "Family Talk 家庭互动",
+        title: "Photo Hunt 照片找一找",
+        desc: "Look at family photos and ask your child to find familiar people or pets. 看看手机里的家庭照片，请孩子找一找熟悉的人或小动物。",
+        prompt: "Where is Mommy? Where is the dog? 可以这样问：Where is Mommy? Where is the dog?"
       },
       {
-        category: "Movement",
-        categoryZh: "动作游戏",
-        title: "Freeze Dance",
-        titleZh: "定格舞蹈",
-        desc: "Play music, dance together, and freeze when the music stops.",
-        descZh: "放音乐一起跳舞，音乐一停就马上定住，是孩子很喜欢的互动游戏。",
-        prompt: "Dance... dance... STOP!",
-        promptZh: "可以这样玩：‘Dance... dance... STOP!’"
+        category: "Movement 动作游戏",
+        title: "Freeze Dance 定格舞蹈",
+        desc: "Play music, dance together, and freeze when the music stops. 放音乐一起跳舞，音乐一停就马上定住，是孩子很喜欢的互动游戏。",
+        prompt: "Dance... dance... STOP! 可以这样玩：Dance... dance... STOP!"
       }
+
     ];
     function generateWeeklyReport() {
-    // Получаем свежие данные из аналитики
     const researchData = JSON.parse(localStorage.getItem('ll_research_data') || '{}');
     const currentWords = parseInt(localStorage.getItem('learned_words_total')) || 0;
     const currentXP = (parseInt(localStorage.getItem('ll_score')) || 0) + (parseInt(localStorage.getItem('vocab_points')) || 0);
@@ -1679,33 +1418,55 @@ footer {
         rate: enjoyment
     };
 
-    // Кодируем в Base64, чтобы код был одной строкой (удобно для WeChat)
     const jsonString = JSON.stringify(report);
     const encodedReport = btoa(unescape(encodeURIComponent(jsonString)));
     
     const output = document.getElementById("report-output");
-    output.value = "LL-REPORT:" + encodedReport; // Добавляем префикс для Декодера
+    output.value = "LL-REPORT:" + encodedReport;
     output.style.display = "block";
 }
     
 
-    function copyReportOutput() {
-        const output = document.getElementById("report-output");
-        if (!output.value.trim()) {
-            alert("Please generate the report first.");
-            return;
-        }
-    
-        output.select();
+function copyReportOutput() {
+    const output = document.getElementById("report-output");
+    if (!output.value.trim()) {
+        alert("Please generate the report first.");
+        return;
+    }
+
+    output.style.display = "block";
+    output.select();
+    output.setSelectionRange(0, 99999);
+
+    if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(output.value).then(() => {
             alert("Code copied! Now you can send it via WeChat.");
-                        if (typeof Analytics !== 'undefined') {
+            if (typeof Analytics !== 'undefined') {
                 Analytics.resetWeeklyData();
             }
-        }).catch(err => {
-            alert("Copy failed. Please copy it manually.");
+        }).catch(() => {
+            try {
+                document.execCommand("copy");
+                alert("Code copied! Now you can send it via WeChat.");
+                if (typeof Analytics !== 'undefined') {
+                    Analytics.resetWeeklyData();
+                }
+            } catch {
+                alert("Copy failed. Please copy it manually.");
+            }
         });
+    } else {
+        try {
+            document.execCommand("copy");
+            alert("Code copied! Now you can send it via WeChat.");
+            if (typeof Analytics !== 'undefined') {
+                Analytics.resetWeeklyData();
+            }
+        } catch {
+            alert("Copy failed. Please copy it manually.");
+        }
     }
+}
     
   function updateStats() {
     const vocabScore = parseInt(localStorage.getItem('vocab_points')) || 0;
@@ -1727,26 +1488,22 @@ footer {
       document.getElementById('clil-title').innerText = act.title;
       document.getElementById('clil-desc').innerText = act.desc;
       document.getElementById('clil-goal').innerText = act.goal;
-      document.getElementById('clil-materials').innerText = act.materials.join(', ');
+      document.getElementById('clil-vocab').innerText = act.vocab;
+      document.getElementById('clil-materials').innerText = act.materials;
       document.getElementById('clil-instr').innerText = act.instr;
       document.getElementById('clil-safety').innerText = act.safety;
-      document.getElementById('clil-title-zh').innerText = act.titleZh;
-      document.getElementById('clil-desc-zh').innerText = act.descZh;
-      document.getElementById('clil-goal-zh').innerText = act.goalZh;
-      document.getElementById('clil-vocab').innerText = act.vocab.join(', ');
-      document.getElementById('clil-vocab-zh').innerText = act.vocabZh.join('、');
-      document.getElementById('clil-materials-zh').innerText = act.materialsZh.join('、');
-      document.getElementById('clil-age').innerText = act.age;
-      document.getElementById('clil-safety-zh').innerText = act.safetyZh;
 
       const shuffledTwisters = [...twisterBank].sort(() => 0.5 - Math.random()).slice(0, 5);
       const twisterList = document.getElementById('twister-list');
       twisterList.innerHTML = '';
-
-      shuffledTwisters.forEach((text, index) => {
+      
+      shuffledTwisters.forEach((item) => {
         const row = document.createElement('div');
         row.className = 'twister-row';
-        row.innerHTML = `<div class="twister-text">${text}</div><button class="audio-btn" onclick="playAudio('twister${index}.mp3')">▶</button>`;
+        row.innerHTML = `
+          <div class="twister-text">${item.text}</div>
+          <button class="audio-btn" type="button" onclick="playAudio('${item.audio}')">▶</button>
+        `;
         twisterList.appendChild(row);
       });
 
@@ -1759,7 +1516,13 @@ footer {
       shuffledMissions.forEach(m => {
         const div = document.createElement('div');
         div.className = 'mission-item';
-        div.innerHTML = `<div class="mission-text"><b>${m.title}</b><p>${m.desc}</p></div>`;
+        div.innerHTML = `
+          <div class="mission-text">
+            <b>${m.title}</b>
+            <p>${m.desc}</p>
+            <p><strong>Try saying:</strong> ${m.prompt}</p>
+          </div>
+        `;
         missionContainer.appendChild(div);
       });
     }
@@ -1771,15 +1534,14 @@ footer {
       player.play().catch(() => console.log("Audio file not found in assets/audio/"));
     }
 
-    window.onload = () => {
+    window.addEventListener('load', () => {
         updateStats();
         setRandomContent();
         document.getElementById('year').innerText = new Date().getFullYear();
-    };
-    window.addEventListener('load', function() {
+    
         if (!localStorage.getItem('research_consent')) {
             const consent = confirm(
-                "LINGUALAB RESEARCH NOTICE:\n\n" +
+                "NOTICE:\n\n" +
                 "To help our academic study, this app tracks learning progress locally. " +
                 "No personal data is collected. By continuing, you agree to participate in our bilingualism study.\n\n" +
                 "您是否同意匿名参与本项双语教育学术研究？点击“确定”表示同意。"
@@ -1791,6 +1553,5 @@ footer {
     });
 
   </script>
-  <script src="analytics.js"></script>
 </body>
 </html>  
