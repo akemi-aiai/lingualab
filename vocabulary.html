@@ -30,7 +30,7 @@
             padding-top: 80px;
         }
 
-        /* --- СЧЕТЧИК ОЧКОВ В ШАПКЕ --- */
+/* --- СЧЕТЧИК ОЧКОВ ТОЛЬКО ДЛЯ СЛОВАРЯ --- */
         .points-badge {
             background: rgba(255, 255, 255, 0.2);
             display: inline-block;
@@ -38,10 +38,10 @@
             border-radius: 99px;
             font-weight: 800;
             font-size: 20px;
-            margin-top: 15px;
             backdrop-filter: blur(5px);
             border: 2px solid rgba(255, 255, 255, 0.5);
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            white-space: nowrap; 
         }
 
         /* --- NAVBAR --- */
@@ -247,8 +247,9 @@
     <h1>Word Bank</h1>
     <div class="hero-info">
         <span>Tap, listen, and flip! <br><span style="font-size: 16px; font-weight: 400; opacity: 0.9;">点一点，听一听，翻一翻！</span></span>
+        
+        <div class="points-badge" id="header-points">Points: 0</div>
     </div>
-    <div class="points-badge" id="header-points">Points: 0</div>
 </section>
 
 <div class="content-wrapper">
@@ -347,14 +348,12 @@
         });
     }
 
-    function updateTotalPointsDisplay() {
+    function updateVocabPointsDisplay() {
         let vocabScore = parseInt(localStorage.getItem('vocab_points')) || 0;
-        let grammarScore = parseInt(localStorage.getItem('ll_score')) || 0;
-        let totalScore = vocabScore + grammarScore;
         
         let pointsEl = document.getElementById('header-points');
         if(pointsEl) {
-            pointsEl.innerText = 'Points: ' + totalScore;
+            pointsEl.innerText = 'Points: ' + vocabScore;
         }
     }
 
@@ -431,8 +430,7 @@ function showReward() {
         let learnedTotal = parseInt(localStorage.getItem('learned_words_total') || '0');
         localStorage.setItem('learned_words_total', learnedTotal + currentCategoryWordsCount);
         
-        // ОБНОВЛЯЕМ ЦИФРУ В ШАПКЕ
-        updateTotalPointsDisplay();
+        updateVocabPointsDisplay();
         
         // Скрываем окно через 3 секунды
         setTimeout(() => {
@@ -447,7 +445,7 @@ function showReward() {
     }, 5000);
 
     init();
-    updateTotalPointsDisplay(); // Показывает очки сразу при загрузке
+    updateVocabPointsDisplay();
 </script>
 </body>
 </html>
