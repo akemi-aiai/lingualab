@@ -51,7 +51,7 @@
 
     .container { max-width: 1200px; margin: -60px auto 60px; padding: 0 20px; }
 
-    /* 📊 IMPROVED PROGRESS TRACKER */
+    /* 📊 STUDENT PROGRESS TRACKER */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -63,13 +63,9 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #e2e8f0;
       text-align: center; transition: 0.3s;
     }
-    .stat-card:hover { transform: translateY(-5px); border-color: var(--primary); }
     .stat-card span { display: block; font-size: 12px; color: #64748b; font-weight: 800; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
     .stat-card b { font-size: 42px; color: var(--navy); font-weight: 800; line-height: 1; }
     .stat-card p { font-size: 14px; color: #94a3b8; margin-top: 5px; }
-
-    /* SECTION TITLES */
-    .section-title { font-size: 30px; font-weight: 800; color: var(--navy); margin: 60px 0 30px; text-align: center; }
 
     /* MASONRY LAYOUT */
     .parent-grid {
@@ -83,7 +79,7 @@
       background: #fff; border-radius: var(--radius); overflow: hidden;
       border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.02);
     }
-    .clil-header { background: #e0f2fe; padding: 30px; text-align: center; font-size: 50px; }
+    .clil-header { background: #e0f2fe; padding: 25px; text-align: center; font-weight: 800; color: #0369a1; text-transform: uppercase; letter-spacing: 1px; }
     .clil-body { padding: 30px; }
     .clil-tag { background: #0ea5e9; color: #fff; padding: 4px 12px; border-radius: 99px; font-size: 11px; font-weight: 800; text-transform: uppercase; }
     .clil-body h3 { margin: 15px 0 10px; color: var(--navy); font-size: 24px; }
@@ -102,20 +98,19 @@
     .twister-text { font-size: 15px; font-weight: 600; color: var(--navy); flex: 1; padding-right: 15px; }
     .audio-btn {
       background: var(--navy); color: #fff; border: none; width: 42px; height: 42px;
-      border-radius: 50%; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; font-size: 14px;
+      border-radius: 50%; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center;
     }
     .audio-btn:hover { background: var(--accent); transform: scale(1.1); }
 
-    /* HOME MISSION CONTROL (NEW BLOCK) */
+    /* HOME MISSION CONTROL */
     .mission-card {
       background: linear-gradient(135deg, #1e293b, #334155);
       color: #fff; border-radius: var(--radius); padding: 35px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);
     }
-    .mission-card h3 { color: var(--primary); margin-bottom: 25px; font-size: 24px; display: flex; align-items: center; gap: 10px; }
-    .mission-item { margin-bottom: 20px; display: flex; gap: 15px; align-items: flex-start; }
-    .mission-icon { font-size: 20px; }
-    .mission-text b { display: block; color: var(--primary); margin-bottom: 2px; font-size: 16px; }
-    .mission-text p { font-size: 14px; opacity: 0.8; line-height: 1.4; }
+    .mission-card h3 { color: var(--primary); margin-bottom: 25px; font-size: 24px; text-transform: uppercase; letter-spacing: 1px; }
+    .mission-item { margin-bottom: 25px; display: flex; gap: 15px; align-items: flex-start; }
+    .mission-text b { display: block; color: var(--primary); margin-bottom: 4px; font-size: 16px; font-weight: 800; }
+    .mission-text p { font-size: 14px; opacity: 0.8; line-height: 1.5; }
 
     footer { background: #0f172a; color: #94a3b8; padding: 60px 8%; text-align: center; }
 
@@ -133,16 +128,16 @@
       <span class="nav-title">LinguaLab</span>
     </a>
     <nav class="navbar-right">
-      <a href="grammar.html">Grammar</a>
-      <a href="vocabulary.html">Vocabulary</a>
-      <a href="exercises.html">Exercises</a>
+      <a href="grammar.html">Grammar Magic</a>
+      <a href="vocabulary.html">Word Bank</a>
+      <a href="exercises.html">Fun Homework</a>
       <a href="parents.html" style="color: var(--accent)">Wiki Parents</a>
     </nav>
   </header>
 
   <section class="hero-parents">
     <h1>Wiki Parents</h1>
-    <p>Data-driven insights and interactive experiments for home bilingual education.</p>
+    <p>Scientific insights and daily activities for home bilingual education.</p>
   </section>
 
   <div class="container">
@@ -151,66 +146,44 @@
         <div class="stat-card">
             <span>Focus Time</span>
             <b id="p-time">0 min</b>
-            <p>Active learning</p>
+            <p>Total learning session</p>
         </div>
         <div class="stat-card">
             <span>Words Unlocked</span>
             <b id="p-words">0</b>
-            <p>Vocabulary size</p>
+            <p>Active vocabulary</p>
         </div>
         <div class="stat-card">
             <span>Total XP</span>
             <b id="p-score">0</b>
-            <p>Academy points</p>
+            <p>Academy Growth points</p>
         </div>
     </div>
 
     <div class="parent-grid">
         
         <div class="clil-card">
-            <div class="clil-header" id="clil-emoji">⚗️</div>
+            <div class="clil-header">Current CLIL Task</div>
             <div class="clil-body">
-                <span class="clil-tag" id="clil-type">Science Lab</span>
-                <h3 id="clil-title">Loading...</h3>
+                <span class="clil-tag" id="clil-type">Experiment</span>
+                <h3 id="clil-title">Loading Activity...</h3>
                 <p id="clil-desc"></p>
                 <div class="clil-instr">
-                    <b>Action:</b> <span id="clil-instr"></span>
+                    <b>Parental Action:</b> <span id="clil-instr"></span>
                 </div>
             </div>
         </div>
 
         <div class="twisters-card">
-            <h3 style="color: var(--navy); margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
-                👅 Today's Twisters 
-                <span style="font-size: 12px; color: #94a3b8; font-weight: 400;">(5 random picks)</span>
+            <h3 style="color: var(--navy); margin-bottom: 20px; font-weight: 800; text-transform: uppercase; font-size: 18px; letter-spacing: 1px;">
+                Today's Twisters 
             </h3>
             <div id="twister-list"></div>
         </div>
 
-        <div class="mission-card">
-            <h3>🚀 Home Mission Control</h3>
-            <div class="mission-item">
-                <div class="mission-icon">🏷️</div>
-                <div class="mission-text">
-                    <b>Sticker Hunt</b>
-                    <p>Label 5 items in your kitchen. Ask your child to "Touch the Door" or "Touch the Chair".</p>
-                </div>
+        <div class="mission-card" id="mission-container">
+            <h3>Home Mission Control</h3>
             </div>
-            <div class="mission-item">
-                <div class="mission-icon">📻</div>
-                <div class="mission-text">
-                    <b>Radio Breakfast</b>
-                    <p>Play English nursery rhymes during breakfast. No study, just background immersion.</p>
-                </div>
-            </div>
-            <div class="mission-item">
-                <div class="mission-icon">🛁</div>
-                <div class="mission-text">
-                    <b>Bath Time Story</b>
-                    <p>Use waterproof toys to describe actions: "The duck is swimming", "The boat is under water".</p>
-                </div>
-            </div>
-        </div>
 
     </div>
   </div>
@@ -222,26 +195,26 @@
   <audio id="player"></audio>
 
   <script>
-    // 1. DATA: 15 IMPROVED CHILD-FRIENDLY CLIL EXPERIMENTS
+    // 1. DATA: 15 CLIL EXPERIMENTS
     const clilActivities = [
-        {type: "Science", title: "Milk Rainbow", emoji: "🌈", desc: "Watch colors dance in a plate of milk using just a drop of soap.", instr: "Say: 'Look! Blue is moving! Red is fast!'"},
-        {type: "Science", title: "Lemon Volcano", emoji: "🌋", desc: "Make a fizzy, colorful eruption using lemon juice and baking soda.", instr: "Say: 'It is hot! (Pretend). It is bubbling!'"},
-        {type: "Art", title: "Magic Ink", emoji: "✉️", desc: "Write a secret message with lemon juice and reveal it with heat.", instr: "Say: 'It is a secret! Can you see the letter A?'"},
-        {type: "Science", title: "Dancing Rice", emoji: "🌾", desc: "Make rice 'jump' in a jar using baking soda and vinegar.", instr: "Say: 'Look at the rice! It is dancing!'"},
-        {type: "Art", title: "Shadow Drawing", emoji: "👤", desc: "Place toys on paper under the sun and trace their shadows.", instr: "Say: 'This is a long shadow. It is a tiger!'"},
-        {type: "Science", title: "Walking Water", emoji: "🧪", desc: "Watch water travel between cups using paper towels.", instr: "Say: 'The water is walking. Blue meets Yellow!'"},
-        {type: "Cooking", title: "Fruit Pizza", emoji: "🍕", desc: "Design a healthy pizza using yogurt and sliced fruits.", instr: "Say: 'I want a strawberry circle and a kiwi star!'"},
-        {type: "Nature", title: "Ice Rescue", emoji: "🧊", desc: "Freeze small toys in ice and help them 'escape' with warm water.", instr: "Say: 'The dino is cold! Help him!'"},
-        {type: "Science", title: "Egg Float Test", emoji: "🥚", desc: "Discover how salt makes things float in water.", instr: "Say: 'The egg is swimming! It is on top!'"},
-        {type: "Art", title: "Ice Painting", emoji: "🎨", desc: "Freeze colored water into sticks and paint as they melt.", instr: "Say: 'The ice is melting. Now it is wet!'"},
-        {type: "Math", title: "Lego Tower", emoji: "🧱", desc: "Build a tower and name the colors as you stack them.", instr: "Say: 'Red on Blue. How many? One, two, three!'"},
-        {type: "Science", title: "Static Balloon", emoji: "🎈", desc: "Rub a balloon to pick up small pieces of paper.", instr: "Say: 'It is magic! The paper is jumping!'"},
-        {type: "Nature", title: "Bean Diary", emoji: "🌱", desc: "Grow a bean in a wet napkin and watch the roots appear.", instr: "Say: 'Look at the seed. It has a tiny tail!'"},
-        {type: "Cooking", title: "Bread Art", emoji: "🍞", desc: "Use veggies to make a face on a slice of bread.", instr: "Say: 'Two cucumber eyes and a tomato mouth!'"},
-        {type: "Science", title: "Rain Cloud", emoji: "☁️", desc: "Use shaving cream and blue dye to show how rain falls.", instr: "Say: 'The cloud is heavy. Here comes the rain!'" }
+        {type: "Science", title: "Milk Rainbow", desc: "Watch colors move in a plate of milk using just a drop of soap.", instr: "Point and say: 'Look! Blue is moving! Red is fast!'"},
+        {type: "Science", title: "Lemon Volcano", desc: "Make a fizzy eruption using lemon juice and baking soda.", instr: "Say: 'It is bubbling! It is yellow!'"},
+        {type: "Art", title: "Magic Ink", desc: "Write a secret message with lemon juice and reveal it with heat.", instr: "Ask: 'Where is the secret? Can you see the letter?'"},
+        {type: "Science", title: "Dancing Rice", desc: "Make rice 'jump' in a jar using baking soda and vinegar.", instr: "Say: 'Look at the rice! It is dancing!'"},
+        {type: "Art", title: "Shadow Drawing", desc: "Place toys on paper under the sun and trace their shadows.", instr: "Say: 'This is a long shadow. It is a tiger!'"},
+        {type: "Science", title: "Walking Water", desc: "Watch water travel between cups using paper towels.", instr: "Say: 'The water is walking. Blue meets Yellow!'"},
+        {type: "Cooking", title: "Fruit Pizza", desc: "Design a healthy pizza using yogurt and sliced fruits.", instr: "Say: 'I want a strawberry circle and a kiwi star!'"},
+        {type: "Nature", title: "Ice Rescue", desc: "Freeze small toys in ice and help them 'escape' with warm water.", instr: "Say: 'The dino is cold! Help him!'"},
+        {type: "Science", title: "Egg Float Test", desc: "Discover how salt makes things float in water.", instr: "Say: 'The egg is swimming! It is on top!'"},
+        {type: "Art", title: "Ice Painting", desc: "Freeze colored water into sticks and paint as they melt.", instr: "Say: 'The ice is melting. Now it is wet!'"},
+        {type: "Math", title: "Lego Tower", desc: "Build a tower and name the colors as you stack them.", instr: "Say: 'Red on Blue. One, two, three!'"},
+        {type: "Science", title: "Static Balloon", desc: "Rub a balloon to pick up small pieces of paper.", instr: "Say: 'It is magic! The paper is jumping!'"},
+        {type: "Nature", title: "Bean Diary", desc: "Grow a bean in a wet napkin and watch the roots appear.", instr: "Say: 'Look at the seed. It has a tiny tail!'"},
+        {type: "Cooking", title: "Bread Art", desc: "Use veggies to make a face on a slice of bread.", instr: "Say: 'Two cucumber eyes and a tomato mouth!'"},
+        {type: "Science", title: "Rain Cloud", desc: "Use shaving cream and blue dye to show how rain falls.", instr: "Say: 'The cloud is heavy. Here comes the rain!'" }
     ];
 
-    // 2. DATA: 20 TONGUE TWISTERS BANK
+    // 2. DATA: 20 TONGUE TWISTERS
     const twisterBank = [
       "A big black bug bit a big black dog.",
       "I scream, you scream, we all scream for ice cream.",
@@ -265,7 +238,41 @@
       "Happy hippos hop happily."
     ];
 
-    // 3. LOGIC: Update Stats
+    // 3. DATA: 30 HOME MISSIONS
+    const missionBank = [
+        { title: "Sticker Hunt", desc: "Label 5 items in the kitchen (cup, plate, table). Ask your child to 'Touch the cup!'" },
+        { title: "Radio Breakfast", desc: "Play English nursery rhymes during breakfast for background immersion." },
+        { title: "Bath Time Story", desc: "Use bath toys to describe actions: 'The duck is swimming', 'The boat is blue'." },
+        { title: "Toy Roll Call", desc: "Before bed, say goodnight to toys: 'Goodnight, Teddy! Goodnight, Car!'" },
+        { title: "Color Chef", desc: "While cooking, ask for ingredients by color: 'Give me a Green apple' or 'Red tomato'." },
+        { title: "Knock-Knock", desc: "Practice greetings at every door: 'Knock-knock! Who is it? It's me!'" },
+        { title: "Dress Up Race", desc: "Name clothes as you put them on: 'Left sock, right sock, yellow T-shirt!'" },
+        { title: "Brushing Beats", desc: "Sing a simple 2-minute song in English while brushing teeth." },
+        { title: "Shoe Matcher", desc: "Ask the child to find pairs: 'Where is the blue shoe? Where is the red one?'" },
+        { title: "Art Gallery", desc: "Hang a drawing and ask: 'What is this? Is it a cat or a dog?'" },
+        { title: "Window Weather", desc: "Look out the window every morning: 'Is it sunny? Is it rainy?'" },
+        { title: "Mystery Box", desc: "Hide a toy in a box. Let the child touch it and guess: 'Is it a ball?'" },
+        { title: "Animal Walk", desc: "Cross the room like an animal: 'Jump like a frog! Stomp like an elephant!'" },
+        { title: "Secret Whisper", desc: "Whisper an English word (e.g., 'Apple'). Let the child whisper it back." },
+        { title: "Laundry Sort", desc: "Sort clothes by color together: 'This is white. This is black.'" },
+        { title: "Puzzle Piece", desc: "Give pieces one by one: 'Here is a blue piece. Thank you!'" },
+        { title: "High-Five Five", desc: "Give five high-fives and count: 'One, two, three, four, five!'" },
+        { title: "Flashlight Search", desc: "Turn off lights, shine a light on things: 'I see a chair! I see a book!'" },
+        { title: "Little Helper", desc: "Give simple tasks: 'Please, pick up the ball' or 'Close the door, please'." },
+        { title: "Shape Sandwich", desc: "Cut food into shapes: 'Do you want a circle or a triangle?'" },
+        { title: "Bug Explorer", desc: "In the park, find 'Small' things: 'Look, a small ant! A small leaf!'" },
+        { title: "Balloon Up", desc: "Keep a balloon in the air and count every hit in English." },
+        { title: "Mirror Face", desc: "Look in the mirror: 'I have two eyes. I have one nose. I am happy!'" },
+        { title: "Supermarket Spy", desc: "In the shop, find 3 things from a category: 'Find me something yellow!'" },
+        { title: "Tree Hugger", desc: "Touch nature: 'The tree is big. The flower is beautiful.'" },
+        { title: "Sleepy Train", desc: "Make a 'train' to the bed: 'Choo-choo! The train is going to Sleepy-town!'" },
+        { title: "Thirsty Dragon", desc: "Ask for water: 'Can I have some water, please?' Encourage the child to repeat." },
+        { title: "Unwrap Joy", desc: "Wrap a simple snack in paper: 'Open it! What is inside?'" },
+        { title: "Photo Hunt", desc: "Look at photos on phone: 'Where is Mommy? Where is the dog?'" },
+        { title: "Freeze Dance", desc: "Play music. When it stops, shout 'STOP!' and freeze." }
+    ];
+
+    // LOGIC: Update Stats
     function updateStats() {
         const vocabScore = parseInt(localStorage.getItem('vocab_points')) || 0;
         const grammarScore = parseInt(localStorage.getItem('ll_score')) || 0;
@@ -274,48 +281,55 @@
         const timeSec = parseInt(localStorage.getItem('time_spent_seconds')) || 0;
         const timeMin = Math.floor(timeSec / 60);
 
-        document.getElementById('p-score').innerText = totalScore;
+        document.getElementById('p-score').innerText = totalScore + " XP";
         document.getElementById('p-words').innerText = words;
         document.getElementById('p-time').innerText = timeMin + " min";
     }
 
-    // 4. LOGIC: Random CLIL
-    function setRandomCLIL() {
+    // LOGIC: Random Content
+    function setRandomContent() {
+        // Random CLIL
         const act = clilActivities[Math.floor(Math.random() * clilActivities.length)];
-        document.getElementById('clil-emoji').innerText = act.emoji;
         document.getElementById('clil-type').innerText = act.type + " Experiment";
         document.getElementById('clil-title').innerText = act.title;
         document.getElementById('clil-desc').innerText = act.desc;
         document.getElementById('clil-instr').innerText = act.instr;
-    }
 
-    // 5. LOGIC: Random 5 Twisters
-    function setRandomTwisters() {
-        const shuffled = twisterBank.sort(() => 0.5 - Math.random());
-        const selected = shuffled.slice(0, 5);
-        const list = document.getElementById('twister-list');
-        list.innerHTML = '';
-        selected.forEach((text, index) => {
+        // Random 5 Twisters
+        const shuffledTwisters = twisterBank.sort(() => 0.5 - Math.random()).slice(0, 5);
+        const twisterList = document.getElementById('twister-list');
+        twisterList.innerHTML = '';
+        shuffledTwisters.forEach((text, index) => {
             const row = document.createElement('div');
             row.className = 'twister-row';
-            row.innerHTML = `
-                <div class="twister-text">${text}</div>
-                <button class="audio-btn" onclick="playAudio('twister${index}.mp3')">▶</button>
-            `;
-            list.appendChild(row);
+            row.innerHTML = `<div class="twister-text">${text}</div><button class="audio-btn" onclick="playAudio('twister${index}.mp3')">▶</button>`;
+            twisterList.appendChild(row);
+        });
+
+        // Random 3 Missions
+        const shuffledMissions = missionBank.sort(() => 0.5 - Math.random()).slice(0, 3);
+        const missionContainer = document.getElementById('mission-container');
+        const missionTitle = missionContainer.querySelector('h3');
+        missionContainer.innerHTML = '';
+        missionContainer.appendChild(missionTitle);
+        shuffledMissions.forEach(m => {
+            const div = document.createElement('div');
+            div.className = 'mission-item';
+            div.innerHTML = `<div class="mission-text"><b>${m.title}</b><p>${m.desc}</p></div>`;
+            missionContainer.appendChild(div);
         });
     }
 
     function playAudio(filename) {
         const player = document.getElementById('player');
         player.src = 'assets/audio/' + filename; 
-        player.play().catch(e => console.log("Audio file not found, please upload to assets/audio/"));
+        player.play().catch(e => console.log("Audio file not found in assets/audio/"));
     }
 
     window.onload = () => {
         updateStats();
-        setRandomCLIL();
-        setRandomTwisters();
+        setRandomContent();
+        document.getElementById('year').innerText = new Date().getFullYear();
     };
   </script>
 </body>
