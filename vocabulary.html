@@ -73,7 +73,6 @@
             padding: 0 20px;
         }
 
-        /* Кнопки категорий (Топики) */
         .category-container { 
             background: #fff; border-radius: var(--radius); padding: 30px 40px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.08); margin-bottom: 40px;
@@ -91,7 +90,6 @@
             box-shadow: 0 4px 15px rgba(31, 78, 121, 0.3); transform: scale(1.05);
         }
 
-        /* Блок для родителей */
         .wiki-box { 
             background: #fff7ed; border-left: 5px solid var(--accent); 
             padding: 30px; border-radius: 16px; margin-bottom: 30px; 
@@ -105,14 +103,12 @@
         }
         .wiki-content { font-size: 15px; line-height: 1.6; color: #431407; }
         
-        /* Счетчик прогресса */
         .progress-counter {
             background: #fff; color: var(--accent); font-weight: 800;
             padding: 10px 20px; border-radius: 99px; font-size: 18px;
             box-shadow: 0 4px 10px rgba(249, 115, 22, 0.15); white-space: nowrap;
         }
 
-        /* --- FLASHCARDS --- */
         .flashcard-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
@@ -143,7 +139,6 @@
             padding: 20px; box-sizing: border-box;
         }
 
-        /* Лицевая сторона (Дети) */
         .flashcard-front {
             background: #fff;
             border: 2px solid transparent;
@@ -156,7 +151,6 @@
             font-size: 26px; font-weight: 800; color: var(--navy); margin: 0;
         }
 
-        /* Обратная сторона (Родители) */
         .flashcard-back {
             background: var(--navy);
             color: #fff;
@@ -171,7 +165,6 @@
             border-top: 1px dashed rgba(255,255,255,0.2); padding-top: 15px; color: #fcd34d;
         }
 
-        /* --- ГЕЙМИФИКАЦИЯ (Popup) --- */
         #reward-popup {
             display: none; position: fixed; top: 50%; left: 50%;
             transform: translate(-50%, -50%); background: #fff;
@@ -405,7 +398,7 @@
         overlay.style.display = 'block';
         
         let currentPoints = parseInt(localStorage.getItem('vocab_points') || '0');
-        localStorage.setItem('vocab_points', currentPoints + 10); // +10 очков за победу
+        localStorage.setItem('vocab_points', currentPoints + 2); // +2 за победу
 
         let learnedTotal = parseInt(localStorage.getItem('learned_words_total') || '0');
         localStorage.setItem('learned_words_total', learnedTotal + currentCategoryWordsCount);
