@@ -747,21 +747,10 @@
     </div>
   </div>
 
-<div style="max-width: 800px; margin: 40px auto; background: #fff; border: 1px solid var(--line); border-left: 4px solid var(--navy); padding: 25px; border-radius: 12px; box-shadow: var(--shadow-soft);">
-    <h4 style="color: var(--navy); margin-bottom: 10px; font-size: 16px; text-transform: uppercase; letter-spacing: 0.5px;">🛡️ Data Privacy & Ethics Statement</h4>
-    <div style="font-size: 13px; color: var(--muted); line-height: 1.7;">
-        <p>This application is part of an academic study on early childhood bilingualism. To protect our students:</p>
-        <ul style="margin: 10px 0 10px 20px;">
-            <li><strong>Zero-Cloud Storage:</strong> All learning progress stays on your device.</li>
-            <li><strong>Anonymized ID:</strong> Your child is identified only by a random code (e.g., STU-X12).</li>
-            <li><strong>Manual Control:</strong> Research data is only shared if you choose to copy and send the code.</li>
-        </ul>
-        <p style="font-style: italic; border-top: 1px solid #f1f5f9; pt: 10px; mt: 10px;">
-            本项目属于学术研究。所有数据本地存储，采用匿名 ID，数据传输完全由家长手动控制。
-        </p>
-    </div>
-</div>
-  
+<div style="text-align: center; margin: 40px 0;">
+      <a href="privacy.html" style="font-size: 13px; color: var(--muted); text-decoration: none; border-bottom: 1px dashed #cbd5e1;">Privacy</a>
+  </div>
+
   <footer>
     <div class="footer-text">
       © <span id="year">2026</span> LinguaLab • Small lessons. Real progress. All rights reserved.
@@ -1427,48 +1416,37 @@
     output.style.display = "block";
 }
     
-function copyReportOutput() {
-    const output = document.getElementById("report-output");
-    if (!output.value.trim()) {
-        alert("Please generate the report first.");
-        return;
-    }
 
-    output.select();
-    navigator.clipboard.writeText(output.value).then(() => {
-        alert("Code copied! Now you can send it via WeChat.");
-        
-        if(confirm("Tracker for a new week")) {
-            if (typeof Analytics !== 'undefined') {
-                Analytics.resetWeeklyData();
-                location.reload();
-            }
+    function copyReportOutput() {
+        const output = document.getElementById("report-output");
+        if (!output.value.trim()) {
+            alert("Please generate the report first.");
+            return;
         }
-    }).catch(err => {
-        alert("Copy failed. Please select the text and copy it manually.");
-    });
-}
+    
+        output.select();
+        navigator.clipboard.writeText(output.value).then(() => {
+            alert("Code copied! Now you can send it via WeChat.");
+                        if (typeof Analytics !== 'undefined') {
+                Analytics.resetWeeklyData();
+            }
+        }).catch(err => {
+            alert("Copy failed. Please copy it manually.");
+        });
+    }
     
     function updateStats() {
-      const vocabScore = parseInt(localStorage.getItem('vocab_points')) || 0;
-      const grammarScore = parseInt(localStorage.getItem('ll_score')) || 0;
-      const totalScore = vocabScore + grammarScore;
-      const words = localStorage.getItem('learned_words_total') || 0;
-      const timeSec = parseInt(localStorage.getItem('time_spent_seconds')) || 0;
-      const timeMin = Math.floor(timeSec / 60);
-
-      document.getElementById('p-score').innerText = totalScore;
-      document.getElementById('p-words').innerText = words;
-      document.getElementById('p-time').innerText = timeMin + " min";
-      const tipBox = document.getElementById('pedagogical-tip');
-      if (words < 10) {
-          tipBox.innerText = "Tip: Focus on naming household objects together. Keep sessions under 5 minutes.";
-      } else if (words >= 10 && words < 50) {
-          tipBox.innerText = "Tip: Great progress! Start asking 'What is this?' instead of just naming objects.";
-      } else {
-          tipBox.innerText = "Tip: Challenge your child to use two words together, e.g., 'Big Panda' or 'Red Apple'.";
-      }
-      }
+        const vocabScore = parseInt(localStorage.getItem('vocab_points')) || 0;
+        const grammarScore = parseInt(localStorage.getItem('ll_score')) || 0;
+        const totalScore = vocabScore + grammarScore;
+        const words = localStorage.getItem('learned_words_total') || 0;
+        const timeSec = parseInt(localStorage.getItem('time_spent_seconds')) || 0;
+        const timeMin = Math.floor(timeSec / 60);
+    
+        document.getElementById('p-score').innerText = totalScore;
+        document.getElementById('p-words').innerText = words;
+        document.getElementById('p-time').innerText = timeMin + " min";
+    }
 
     function setRandomContent() {
       const act = clilActivities[Math.floor(Math.random() * clilActivities.length)];
