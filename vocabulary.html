@@ -30,6 +30,20 @@
             padding-top: 80px;
         }
 
+        /* --- СЧЕТЧИК ОЧКОВ В ШАПКЕ --- */
+        .points-badge {
+            background: rgba(255, 255, 255, 0.2);
+            display: inline-block;
+            padding: 8px 24px;
+            border-radius: 99px;
+            font-weight: 800;
+            font-size: 20px;
+            margin-top: 15px;
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
         /* --- NAVBAR --- */
         .navbar {
             position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
@@ -49,6 +63,7 @@
             font-size: 14px; transition: 0.3s; 
         }
         .navbar-right a:hover { color: var(--accent); }
+        
 
         /* --- HERO SECTION --- */
         .hero-compact {
@@ -232,8 +247,8 @@
     <h1>Word Bank</h1>
     <div class="hero-info">
         <span>Tap, listen, and flip! <br><span style="font-size: 16px; font-weight: 400; opacity: 0.9;">点一点，听一听，翻一翻！</span></span>
-        </div>
     </div>
+    <div class="points-badge" id="header-points">Points: 0</div>
 </section>
 
 <div class="content-wrapper">
@@ -332,6 +347,17 @@
         });
     }
 
+    function updateTotalPointsDisplay() {
+        let vocabScore = parseInt(localStorage.getItem('vocab_points')) || 0;
+        let grammarScore = parseInt(localStorage.getItem('ll_score')) || 0;
+        let totalScore = vocabScore + grammarScore;
+        
+        let pointsEl = document.getElementById('header-points');
+        if(pointsEl) {
+            pointsEl.innerText = 'Points: ' + totalScore;
+        }
+    }
+
     let currentCatKey = ""; 
     function loadCategory(catKey, btn) {
         document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
@@ -392,18 +418,23 @@
         }
     }
 
-    function showReward() {
+function showReward() {
         const popup = document.getElementById('reward-popup');
         const overlay = document.getElementById('overlay');
         popup.style.display = 'block';
         overlay.style.display = 'block';
         
+        // Начисляем очки (+2 очка за топик)
         let currentPoints = parseInt(localStorage.getItem('vocab_points') || '0');
-        localStorage.setItem('vocab_points', currentPoints + 2); // +2 за победу
+        localStorage.setItem('vocab_points', currentPoints + 2);
 
         let learnedTotal = parseInt(localStorage.getItem('learned_words_total') || '0');
         localStorage.setItem('learned_words_total', learnedTotal + currentCategoryWordsCount);
         
+        // ОБНОВЛЯЕМ ЦИФРУ В ШАПКЕ
+        updateTotalPointsDisplay();
+        
+        // Скрываем окно через 3 секунды
         setTimeout(() => {
             popup.style.display = 'none';
             overlay.style.display = 'none';
@@ -416,6 +447,7 @@
     }, 5000);
 
     init();
+    updateTotalPointsDisplay(); // Показывает очки сразу при загрузке
 </script>
 </body>
 </html>
