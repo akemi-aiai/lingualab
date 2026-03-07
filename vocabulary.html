@@ -381,6 +381,10 @@
       text-align: center;
       margin-top: 50px;
     }
+    .footer-link {
+      color: #f97316;
+      text-decoration: none !important;
+    }
 
     @media (max-width: 600px) {
       .navbar {
@@ -489,8 +493,14 @@
 </div>
 
 <footer>
-  © <span id="year">2026</span> LinguaLab • Small lessons. Real progress. All rights reserved.
-</footer>
+    <div class="footer-links">
+        <a href="privacy.html" class="footer-link">Privacy Policy</a>
+    </div>
+  
+    <div class="footer-text">
+      © 2026 LinguaLab • Small lessons. Real progress. All rights reserved.
+    </div>
+  </footer>
 
 <script>
     const dictionary = {
@@ -627,23 +637,36 @@
     }
 
     function flipCard(element, wordId) {
-        element.classList.toggle('flipped');
-        if (typeof Analytics !== 'undefined') {
+      // 1. Визуальный эффект
+      element.classList.toggle('flipped');
+  
+      // 2. Логирование для исследования (analytics.js)
+      if (typeof Analytics !== 'undefined') {
           Analytics.logWordClick(wordId);
-        }
-        let clicksData = JSON.parse(localStorage.getItem('category_clicks') || '{}');
-        clicksData[currentCatKey] = (clicksData[currentCatKey] || 0) + 1;
-        localStorage.setItem('category_clicks', JSON.stringify(clicksData));
-
-        if (!learnedCards.has(wordId)) {
-            learnedCards.add(wordId);
-            document.getElementById('progress-text').innerText = `${learnedCards.size} / ${currentCategoryWordsCount}`;
-            
-            if (learnedCards.size === currentCategoryWordsCount) {
-                setTimeout(showReward, 800);
-            }
-        }
-    }
+      }
+  
+      // 3. Сбор статистики по популярности категорий
+      if (typeof currentCatKey !== 'undefined') {
+          let clicksData = JSON.parse(localStorage.getItem('category_clicks') || '{}');
+          clicksData[currentCatKey] = (clicksData[currentCatKey] || 0) + 1;
+          localStorage.setItem('category_clicks', JSON.stringify(clicksData));
+      }
+  
+      // 4. Логика прогресса обучения
+      if (!learnedCards.has(wordId)) {
+          learnedCards.add(wordId);
+          
+          const progressEl = document.getElementById('progress-text');
+          if (progressEl) {
+              progressEl.innerText = `${learnedCards.size} / ${currentCategoryWordsCount}`;
+          }
+          
+          // Проверка завершения темы
+          if (learnedCards.size === currentCategoryWordsCount) {
+              setTimeout(showReward, 800);
+          }
+      }
+  }
 
 function showReward() {
     const popup = document.getElementById('reward-popup');
