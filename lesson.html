@@ -320,17 +320,17 @@ const db = {
         { type:'warmup', tag:'A. Warm Up', title:"Listen & Wave", text:"Let's say Hello!", action:"Wave your hand", phrase:"Hello!" },
         { type:'words', tag:'B. Key Words', title:"Family Members",
           items: [
-            { w:"Daddy",  zh:"爸爸", img:"assets/img/daddy.png" },
-            { w:"Mommy",  zh:"妈妈", img:"assets/img/mommy.png" },
-            { w:"Family", zh:"家人", img:"assets/img/family.png" }
+            { w:"Daddy",  zh:"爸爸", img:"assets/img/daddy.png", audio:"assets/audio/daddy.mp3" },
+            { w:"Mommy",  zh:"妈妈", img:"assets/img/mommy.png", audio:"assets/audio/mommy.mp3" },
+            { w:"Family", zh:"家人", img:"assets/img/family.png", audio:"assets/audio/family.mp3" }
           ]
         },
         { type:'phrase', tag:'C. Key Sentences', title:"Phrase of the Day",
-          text:"Good morning, Daddy! Good morning, Mommy!",
+          text:"Good morning, Daddy! Good morning, Mommy!", audio:"assets/audio/GoodMorningDaddy.mp3",
           script:"Ask your child: 'Who do you see in the morning?'",
           parentTip:"Don't correct pronunciation yet. Just praise effort."
         },
-        { type:'game', tag:'D. Game', title:"Hug Game", text:"Run and hug Mommy or Daddy!", sub:"Ready? Go!", img:"assets/img/hug.png" },
+        { type:'game', tag:'D. Game', title:"Hug Game", text:"Hug Daddy and Mommy!", sub:"Ready? Go!", img:"assets/img/hug.png", audio:"assets/audio/HugDaddy.mp3" },
         { type:'offscreen', tag:'E. Mission', title:"Real World", text:"Find a family photo.", image:"assets/img/photo.jpg" }
       ]
     },
@@ -340,9 +340,9 @@ const db = {
         { type:'warmup', tag:'A. Warm Up', title:"Stand Up!", text:"Stand up... Sit down.", action:"Do it 3 times.", phrase:"Stand up!" },
         { type:'words', tag:'B. Key Words', title:"School Objects",
           items: [
-            { w:"Bag",    zh:"书包", img:"assets/img/bag.png" },
-            { w:"Book",   zh:"书",   img:"assets/img/book.png" },
-            { w:"Pencil", zh:"铅笔", img:"assets/img/pencil.png" }
+            { w:"Bag",    zh:"书包", img:"assets/img/bag.png", audio:"assets/audio/bag.mp3" },
+            { w:"Book",   zh:"书",   img:"assets/img/book.png", audio:"assets/audio/book.mp3" },
+            { w:"Pencil", zh:"铅笔", img:"assets/img/pencil.png", audio:"assets/audio/pencil.mp3" }
           ]
         },
         { type:'phrase', tag:'C. Key Sentences', title:"Phrase of the Day", text:"It is a book.", script:"Point to a book and ask: 'What is this?'", parentTip:"Say the word first, let them repeat." },
@@ -356,7 +356,7 @@ const db = {
         { type:'warmup', tag:'A. Warm Up', title:"Clap Hands", text:"Clap 1, 2, 3.", action:"Clap!", phrase:"Clap!" },
         { type:'words', tag:'B. Key Words', title:"B Sound",
           items: [
-            { w:"Bb",   zh:"字母B", img:"assets/img/bb.png" },
+            { w:"Bb",   zh:"字母B", img:"assets/img/bb.png", audio:"assets/audio/b.mp3"  },
             { w:"Ball", zh:"球",     img:"assets/img/ball.png" },
             { w:"Baby", zh:"宝宝",   img:"assets/img/baby.png" }
           ]
@@ -373,8 +373,8 @@ const db = {
         { type:'words', tag:'B. Key Words', title:"Review",
           items: [
             { w:"What's your name?", zh:"你叫什么名字？", img:"assets/img/name_q.png" },
-            { w:"My name is",        zh:"我叫…",          img:"assets/img/name.png" },
-            { w:"Teacher",           zh:"老师",            img:"assets/img/teacher.png" }
+            { w:"My name is", zh:"我叫…", img:"assets/img/name.png" },
+            { w:"Teacher", zh:"老师", img:"assets/img/teacher.png", audio:"assets/audio/aTeacher.mp3"  }
           ]
         },
         { type:'phrase', tag:'C. Key Sentences', title:"Roleplay", text:"Hello, I am [Name].", script:"Practice with a puppet.", parentTip:"Roleplay builds confidence." },
@@ -392,9 +392,9 @@ const db = {
         { type:'warmup', tag:'A. Warm Up', title:"High Five", text:"High five Mommy!", action:"Say: 'Hello!'", phrase:"Hello!" },
         { type:'words', tag:'B. Key Words', title:"Gender",
           items: [
-            { w:"Boy",    zh:"男孩", img:"assets/img/boy.png" },
-            { w:"Girl",   zh:"女孩", img:"assets/img/girl.png" },
-            { w:"Friend", zh:"朋友", img:"assets/img/friend.png" }
+            { w:"Boy",    zh:"男孩", img:"assets/img/boy.png", audio:"assets/audio/boy.mp3" },
+            { w:"Girl",   zh:"女孩", img:"assets/img/girl.png", audio:"assets/audio/girl.mp3" },
+            { w:"My Friend", zh:"我的朋友", img:"assets/img/friend.png", audio:"assets/audio/myfriend.mp3" }
           ]
         },
         { type:'phrase', tag:'C. Key Sentences', title:"Identity", text:"You are a boy. You are a girl", script:"Point to your child and say the phrase.", parentTip:"Point to yourself (I am) and the child (You are)." },
@@ -409,7 +409,7 @@ const db = {
         { type:'warmup', tag:'A. Warm Up', title:"Handshake", text:"Shake hands.", action:"Nice to meet you.", phrase:"Hello friend." },
         { type:'words', tag:'B. Key Words', title:"Friendship",
           items: [
-            { w:"Friend",     zh:"朋友",     img:"assets/img/friend.png" },
+            { w:"My Friend",     zh:"我的朋友",     img:"assets/img/friend.png", audio:"assets/audio/myfriend.mp3" },
             { w:"Play",       zh:"玩",       img:"assets/img/play.png" },
             { w:"Teddy Bear", zh:"泰迪熊",   img:"assets/img/teddy_bear.png" }
           ]
@@ -426,9 +426,9 @@ const db = {
         { type: 'warmup', tag: 'A. Warm Up', title: "Wiggle", text: "Wiggle your fingers.", action: "Wiggle wiggle!", phrase: "Wiggle!" },
         { type: 'words', tag: 'B. Key Words', title: "G Sound", 
           items: [
-            { w: "Gg",   zh: "字母G", img: "assets/img/gg.png" },
-            { w: "Girl", zh: "女孩",   img: "assets/img/girl.jpg" },
-            { w: "Game", zh: "游戏",   img: "assets/img/game.png" }
+            { w: "Gg",   zh: "字母G", img: "assets/img/gg.png", audio:"assets/audio/g.mp3" },
+            { w: "Girl", zh: "女孩",   img: "assets/img/girl.jpg", audio:"assets/audio/girl.mp3" },
+            { w: "Game", zh: "游戏",   img: "assets/img/game.png", audio:"assets/audio/game.mp3" }
           ] 
         },
         { type: 'phrase', tag: 'C. Action', title: "TPR Command", text: "Stand up, please.", script: "Give commands politely.", parentTip: "Add 'Please' to teach manners." },
@@ -443,7 +443,7 @@ const db = {
         { type: 'warmup', tag: 'A. Warm Up', title: "Look", text: "Open your eyes big!", action: "Look around.", phrase: "Look!" },
         { type: 'words', tag: 'B. Key Words', title: "Story Words", 
           items: [
-            { w: "Family", zh: "家人", img: "assets/img/family.png" },
+            { w: "Family", zh: "家人", img: "assets/img/family.png", audio:"assets/audio/family.mp3" },
             { w: "Messy",  zh: "凌乱", img: "assets/img/messy.png" }
           ]
         },
@@ -462,9 +462,9 @@ const db = {
         { type: 'warmup', tag: 'A. Warm Up', title: "Touch Game", text: "Touch your nose!", action: "Do it fast!", phrase: "Touch your nose!" },
         { type: 'words', tag: 'B. Key Words', title: "Face Parts", 
           items: [
-            { w:"Eye",   zh:"眼睛", img:"assets/img/eye.png" },
-            { w:"Nose",  zh:"鼻子", img:"assets/img/nose.png" },
-            { w:"Mouth", zh:"嘴巴", img:"assets/img/mouth.png" }
+            { w:"Eye",   zh:"眼睛", img:"assets/img/eye.png", audio:"assets/audio/eye.mp3" },
+            { w:"Nose",  zh:"鼻子", img:"assets/img/nose.png", audio:"assets/audio/nose.mp3" },
+            { w:"Mouth", zh:"嘴巴", img:"assets/img/mouth.png", audio:"assets/audio/mouth.mp3" }
           ] 
         },
         { type: 'phrase', tag: 'C. Key Sentences', title: "Identity", text: "This is my nose.", script: "Point to your nose and say it.", parentTip: "Model the sentence first: 'This is *my* nose'." },
@@ -479,8 +479,8 @@ const db = {
         { type: 'warmup', tag: 'A. Warm Up', title: "Smile", text: "Big Smile! Sad face.", action: "Show me emotions.", phrase: "Smile!" },
         { type: 'words', tag: 'B. Key Words', title: "More Parts", 
           items: [
-            { w:"Ear",  zh:"耳朵", img:"assets/img/ear.png" },
-            { w:"Hair", zh:"头发", img:"assets/img/hair.png" },
+            { w:"Ear",  zh:"耳朵", img:"assets/img/ear.png", audio:"assets/audio/ear.mp3" },
+            { w:"Hair", zh:"头发", img:"assets/img/hair.png", audio:"assets/audio/hair.mp3" },
             { w:"Face", zh:"脸",   img:"assets/img/face.png" }
           ] 
         },
@@ -496,8 +496,8 @@ const db = {
         { type: 'warmup', tag: 'A. Warm Up', title: "Yummy", text: "Rub your tummy.", action: "Say Mmmmmm!", phrase: "Mmmmmm!" },
         { type: 'words', tag: 'B. Key Words', title: "M Sound", 
           items: [
-            { w:"Mm",     zh:"字母M", img:"assets/img/mm.png" },
-            { w:"Monkey", zh:"猴子",  img:"assets/img/monkey.png" },
+            { w:"Mm",     zh:"字母M", img:"assets/img/mm.png", audio:"assets/audio/m.mp3" },
+            { w:"Monkey", zh:"猴子",  img:"assets/img/monkey.png", audio:"assets/audio/monkey.mp3" },
             { w:"Milk",   zh:"牛奶",  img:"assets/img/milk.png" }
           ] 
         },
@@ -514,7 +514,7 @@ const db = {
         { type: 'words', tag: 'B. Key Words', title: "Story Words", 
           items: [
             { w:"Bee",  zh:"蜜蜂", img:"assets/img/bee.png" },
-            { w:"Hair", zh:"头发", img:"assets/img/hair.png" },
+            { w:"Hair", zh:"头发", img:"assets/img/hair.png", audio:"assets/audio/hair.mp3"  },
             { w:"No",   zh:"不",   img:"assets/img/no.png" }
           ] 
         },
@@ -533,9 +533,9 @@ const db = {
         { type: 'warmup', tag: 'A. Warm Up', title: "Sounds", text: "Moo! Oink!", action: "Make animal sounds.", phrase: "Moo!" },
         { type: 'words', tag: 'B. Key Words', title: "Farm Animals", 
           items: [
-            { w:"Cow",  zh:"牛",   img:"assets/img/cow.png" },
-            { w:"Pig",  zh:"猪",   img:"assets/img/pig.png" },
-            { w:"Duck", zh:"鸭子", img:"assets/img/duck.png" }
+            { w:"Cow",  zh:"牛",   img:"assets/img/cow.png",  audio:"assets/audio/cow.mp3" },
+            { w:"Pig",  zh:"猪",   img:"assets/img/pig.png", audio:"assets/audio/pig.mp3" },
+            { w:"Duck", zh:"鸭子", img:"assets/img/duck.png",  audio:"assets/audio/duck.mp3" }
           ] 
         },
         { type: 'phrase', tag: 'C. Key Sentences', title: "Phrase", text: "It is a cow.", script: "Point to a picture. Ask: What is this?", parentTip: "Encourage pointing while speaking." },
@@ -550,9 +550,9 @@ const db = {
         { type: 'warmup', tag: 'A. Warm Up', title: "Fingers", text: "Show me 1 finger.", action: "Show me 2 fingers.", phrase: "One, two." },
         { type: 'words', tag: 'B. Key Words', title: "Numbers", 
           items: [
-            { w:"One",   zh:"一", img:"assets/img/one.png" },
-            { w:"Two",   zh:"二", img:"assets/img/two.png" },
-            { w:"Three", zh:"三", img:"assets/img/three.png" }
+            { w:"One",   zh:"一", img:"assets/img/one.png",  audio:"assets/audio/one.mp3" },
+            { w:"Two",   zh:"二", img:"assets/img/two.png",  audio:"assets/audio/two.mp3" },
+            { w:"Three", zh:"三", img:"assets/img/three.png",  audio:"assets/audio/three.mp3" }
           ] 
         },
         { type: 'phrase', tag: 'C. Key Sentences', title: "Counting", text: "Look! Two pigs.", script: "Count toys together.", parentTip: "Count slowly and clearly." },
@@ -567,9 +567,9 @@ const db = {
         { type: 'warmup', tag: 'A. Warm Up', title: "Pop!", text: "Pop your cheeks!", action: "P-p-p-pop!", phrase: "Pop!" },
         { type: 'words', tag: 'B. Key Words', title: "P Words", 
           items: [
-            { w:"Pp",   zh:"字母P", img:"assets/img/pp.png" },
-            { w:"Pink", zh:"粉色",  img:"assets/img/pink.png" },
-            { w:"Pig",  zh:"猪",    img:"assets/img/pig.png" }
+            { w:"Pp",   zh:"字母P", img:"assets/img/pp.png", audio:"assets/audio/p.mp3" },
+            { w:"Pink", zh:"粉色",  img:"assets/img/pink.png",  audio:"assets/audio/p-pink.mp3" },
+            { w:"Pig",  zh:"猪",    img:"assets/img/pig.png",  audio:"assets/audio/p-pig.mp3" }
           ] 
         },
         { type: 'phrase', tag: 'C. Key Sentences', title: "Color Phrase", text: "A pink pig.", script: "Find pink things.", parentTip: "Emphasize the 'P' sound." },
@@ -584,9 +584,9 @@ const db = {
         { type: 'warmup', tag: 'A. Warm Up', title: "Clap", text: "Clap 3 times.", action: "1, 2, 3!", phrase: "One, two, three." },
         { type: 'words', tag: 'B. Key Words', title: "Review", 
           items: [
-            { w:"Hen", zh:"母鸡", img:"assets/img/hen.png" },
-            { w:"Cow", zh:"牛",   img:"assets/img/cow.png" },
-            { w:"Pig", zh:"猪",   img:"assets/img/pig.png" }
+            { w:"Hen", zh:"母鸡", img:"assets/img/hen.png",  audio:"assets/audio/hen.mp3"  },
+            { w:"Cow", zh:"牛",   img:"assets/img/cow.png",  audio:"assets/audio/cow.mp3"  },
+            { w:"Pig", zh:"猪",   img:"assets/img/pig.png",  audio:"assets/audio/pig.mp3"  }
           ] 
         },
         { type: 'phrase', tag: 'C. Key Sentences', title: "Expression", text: "I like animals.", script: "Hug a toy animal.", parentTip: "Ask: Do you like pigs?" },
@@ -604,9 +604,9 @@ const db = {
         { type: 'warmup', tag: 'A. Warm Up', title: "Roar!", text: "Roar like a tiger!", action: "Roar!", phrase: "Roar!" },
         { type: 'words', tag: 'B. Key Words', title: "Wild Animals", 
           items: [
-            { w:"Panda", zh:"熊猫", img:"assets/img/panda.png" },
-            { w:"Tiger", zh:"老虎", img:"assets/img/tiger.png" },
-            { w:"Bear",  zh:"熊",   img:"assets/img/bear.png" }
+            { w:"Panda", zh:"熊猫", img:"assets/img/panda.png",  audio:"assets/audio/panda.mp3" },
+            { w:"Tiger", zh:"老虎", img:"assets/img/tiger.png",  audio:"assets/audio/tiger.mp3" },
+            { w:"Bear",  zh:"熊",   img:"assets/img/bear.png",  audio:"assets/audio/bear.mp3" }
           ] 
         },
         { type: 'phrase', tag: 'C. Key Sentences', title: "Pointing", text: "Look at the panda.", script: "Point to the screen.", parentTip: "Use your finger to point." },
@@ -621,7 +621,7 @@ const db = {
         { type: 'warmup', tag: 'A. Warm Up', title: "Smile", text: "Cheese! Smile big.", action: "Smile!", phrase: "Cheese!" },
         { type: 'words', tag: 'B. Key Words', title: "Zoo Words", 
           items: [
-            { w:"Monkey", zh:"猴子",   img:"assets/img/monkey.png" },
+            { w:"Monkey", zh:"猴子",   img:"assets/img/monkey.png",  audio:"assets/audio/monkey.mp3" },
             { w:"Photo",  zh:"照片",   img:"assets/img/photo.png" },
             { w:"Zoo",    zh:"动物园", img:"assets/img/zoo.png" }
           ] 
@@ -638,9 +638,9 @@ const db = {
         { type: 'warmup', tag: 'A. Warm Up', title: "Tap", text: "Tap your toe.", action: "Tap tap tap.", phrase: "Tap!" },
         { type: 'words', tag: 'B. Key Words', title: "T Words", 
           items: [
-            { w:"Tt",    zh:"字母T", img:"assets/img/Tt.png" },
-            { w:"Tea",   zh:"茶",    img:"assets/img/tea.png" },
-            { w:"Table", zh:"桌子",  img:"assets/img/table.png" }
+            { w:"Tt",    zh:"字母T", img:"assets/img/Tt.png",  audio:"assets/audio/t.mp3" },
+            { w:"Tea",   zh:"茶",    img:"assets/img/tea.png",  audio:"assets/audio/tea.mp3" },
+            { w:"Table", zh:"桌子",  img:"assets/img/table.png",  audio:"assets/audio/table.mp3" }
           ] 
         },
         { type: 'phrase', tag: 'C. Key Sentences', title: "Phrase", text: "Two tigers.", script: "Show 2 fingers.", parentTip: "The tongue behind the teeth for T." },
@@ -675,9 +675,9 @@ const db = {
         { type: 'warmup', tag: 'A. Warm Up', title: "Beep", text: "Beep Beep!", action: "Press the horn.", phrase: "Beep!" },
         { type: 'words', tag: 'B. Key Words', title: "Vehicles", 
           items: [
-            { w:"Car",  zh:"汽车",   img:"assets/img/car.png" },
-            { w:"Bus",  zh:"公交车", img:"assets/img/bus.png" },
-            { w:"Bike", zh:"自行车", img:"assets/img/bike.png" }
+            { w:"Car",  zh:"汽车",   img:"assets/img/car.png",  audio:"assets/audio/car.mp3" },
+            { w:"Bus",  zh:"公交车", img:"assets/img/bus.png",  audio:"assets/audio/bus.mp3" },
+            { w:"Bike", zh:"自行车", img:"assets/img/bike.png",  audio:"assets/audio/bike.mp3" }
           ] 
         },
         { type: 'phrase', tag: 'C. Key Sentences', title: "Identification", text: "It is a bus.", script: "Show a toy car/bus.", parentTip: "Ask: What is it?" },
@@ -692,7 +692,7 @@ const db = {
         { type: 'warmup', tag: 'A. Warm Up', title: "Oh no!", text: "Hands on cheeks. Oh no!", action: "Make a sad face.", phrase: "Oh no!" },
         { type: 'words', tag: 'B. Key Words', title: "More Vehicles", 
           items: [
-            { w:"Taxi",   zh:"出租车", img:"assets/img/taxi.png" },
+            { w:"Taxi",   zh:"出租车", img:"assets/img/taxi.png",  audio:"assets/audio/taxi.mp3" },
             { w:"Wheel",  zh:"轮子",   img:"assets/img/wheel.png" },
             { w:"Broken", zh:"坏了",   img:"assets/img/broken.png" }
           ] 
@@ -709,8 +709,8 @@ const db = {
         { type: 'warmup', tag: 'A. Warm Up', title: "Meow", text: "Act like a cat.", action: "Meow!", phrase: "Meow." },
         { type: 'words', tag: 'B. Key Words', title: "C Words", 
           items: [
-            { w:"Cc",  zh:"字母C", img:"assets/img/cc.png" },
-            { w:"Cat", zh:"猫",    img:"assets/img/cat.png" },
+            { w:"Cc",  zh:"字母C", img:"assets/img/cc.png",  audio:"assets/audio/c.mp3" },
+            { w:"Cat", zh:"猫",    img:"assets/img/cat.png",  audio:"assets/audio/c-cat.mp3" },
             { w:"Cup", zh:"杯子",  img:"assets/img/cup.png" }
           ] 
         },
@@ -758,14 +758,6 @@ const db = {
         currentData.unit || currentData.meta?.unit || "Ready to play?";
     }
 
-    function toggleParentMode() {
-        const btn = document.querySelector('.parent-switch');
-        btn.classList.toggle('active');
-        document.querySelectorAll('.parent-tip').forEach(el => {
-            el.style.display = btn.classList.contains('active') ? 'block' : 'none';
-        });
-    }
-
     function startLesson() {
         document.getElementById('screen-start').classList.remove('active');
         document.getElementById('screen-lesson').classList.add('active');
@@ -808,9 +800,12 @@ const db = {
         if (step.type === 'warmup') {
             html += `
                 <div class="audio-control" style="justify-content:center; flex-direction:column; text-align:center;">
-                    <button class="play-btn" onclick="speak('${step.phrase}')">${ICON_PLAY}</button>
+                    <button class="play-btn" onclick="playStepAudio()">${ICON_PLAY}</button>
                     <p style="font-size:18px; font-weight:600; margin:10px 0;">${step.text}</p>
                     <p style="color:#64748b;">${step.action}</p>
+                    ${step.audio ? `
+                        <div style="margin-top:10px; font-size:12px; color:#64748b;">Custom audio added</div>
+                    ` : ''}
                 </div>
             `;
         }
@@ -820,7 +815,8 @@ const db = {
           html += `<div class="flashcards-grid">`;
           step.items.forEach(item => {
         
-            const wordSafe = (item.w || '').replace(/'/g, "\\'"); // чтобы speak не ломался на апострофах
+            const wordSafe = (item.w || '').replace(/'/g, "\\'");
+            const audioSafe = (item.audio || '').replace(/'/g, "\\'");
         
             let visual = item.img
               ? `<img src="${encodeURI(item.img)}" class="fc-img" alt="${item.w}"
@@ -828,7 +824,7 @@ const db = {
               : `<div class="fc-icon">${item.i || ''}</div>`;
         
             html += `
-              <div class="flashcard" onclick="speak('${wordSafe}')">
+              <div class="flashcard" onclick="playWordAudio('${audioSafe}', '${wordSafe}')">
                 ${visual}
                 <div class="fc-word">${item.w}</div>
                 ${item.zh ? `<div class="flashcard-zh">${item.zh}</div>` : ''}
@@ -843,14 +839,14 @@ const db = {
             html += `
                 <div style="background:#ecfeff; padding:20px; border-radius:12px; margin-bottom:20px; text-align:left;">
                     <div style="font-size:12px; font-weight:700; color:var(--navy); text-transform:uppercase;">Script</div>
-                    <div style="font-size:16px; color:#334155;">"${step.script || step.phrase}"</div>
+                    <div style="font-size:16px; color:#334155;">"${step.script || step.phrase || ''}"</div>
                 </div>
                 <div class="audio-control">
                     <button class="mic-btn" onclick="toggleMic(this)">${ICON_MIC}</button>
                     <div style="flex:1; text-align:left;">
                         <strong style="color:var(--navy);">Your turn:</strong><br>
-                        <span style="font-size:18px; font-weight:700;">"${step.text || step.phrase}"</span>
-                        <div style="margin-top:5px; font-size:12px; color:#64748b; cursor:pointer;" onclick="speak('${step.text || step.phrase}')">🔊 Listen first</div>
+                        <span style="font-size:18px; font-weight:700;">"${step.text || step.phrase || ''}"</span>
+                        <div style="margin-top:5px; font-size:12px; color:#64748b; cursor:pointer;" onclick="playStepAudio()">🔊 Listen first</div>
                     </div>
                 </div>
             `;
@@ -868,22 +864,28 @@ const db = {
         }
 
         // E. MISSION
-        else if (step.type === 'offscreen') {
-            html += `
-                <div class="mission-box" style="text-align:center;">
-                    <div style="font-size:60px; margin-bottom:10px;">${step.icon}</div>
-                    <h3 style="color:#334155; margin-bottom:10px;">Off-Screen Mission</h3>
-                    <p style="font-size:18px; font-weight:600; color:var(--navy);">${step.text}</p>
-                    <p style="color:#64748b; font-size:13px; margin-top:10px;">Put the phone down and go!</p>
-                </div>
-            `;
-        }
+            else if (step.type === 'offscreen') {
+                html += `
+                    <div class="mission-box" style="text-align:center;">
+                        ${step.image ? `
+                            <img 
+                                src="${encodeURI(step.image)}" 
+                                alt="${step.title || 'Mission image'}"
+                                style="max-width:220px; width:100%; height:auto; border-radius:16px; margin-bottom:15px;"
+                                onerror="this.style.display='none'"
+                            >
+                        ` : ''}
+            
+                        <h3 style="color:#334155; margin-bottom:10px;">Off-Screen Mission</h3>
+                        <p style="font-size:18px; font-weight:600; color:var(--navy);">${step.text}</p>
+                        <p style="color:#64748b; font-size:13px; margin-top:10px;">Put the phone down and go!</p>
+                    </div>
+                `;
+            }
 
         card.innerHTML = html;
         
-        // Re-apply parent mode visibility
-        toggleParentMode();
-        toggleParentMode(); // toggle twice to refresh state
+        applyParentModeVisibility();
     }
 
     function nextStep() {
@@ -921,6 +923,49 @@ const db = {
         }
     }
 
+     function toggleParentMode() {
+        const btn = document.querySelector('.parent-switch');
+        btn.classList.toggle('active');
+        applyParentModeVisibility();
+    }
+    
+    function applyParentModeVisibility() {
+        const btn = document.querySelector('.parent-switch');
+        const isActive = btn.classList.contains('active');
+        document.querySelectorAll('.parent-tip').forEach(el => {
+            el.style.display = isActive ? 'block' : 'none';
+        });
+    }
+    
+    function playAudio(src) {
+        if (!src) return;
+        const audio = new Audio(src);
+        audio.play().catch(err => {
+            console.log('Audio play error:', err);
+        });
+    }
+    
+    function playWordAudio(audio, word) {
+        if (audio) {
+            playAudio(audio);
+        } else {
+            speak(word);
+        }
+    }
+    
+    function playStepAudio() {
+        const step = currentData.steps[stepIndex];
+        if (!step) return;
+    
+        if (step.audio) {
+            playAudio(step.audio);
+        } else if (step.phrase) {
+            speak(step.phrase);
+        } else if (step.text) {
+            speak(step.text);
+        }
+    }
+    
     function speak(text) {
         if ('speechSynthesis' in window) {
             const msg = new SpeechSynthesisUtterance(text);
@@ -929,7 +974,6 @@ const db = {
             window.speechSynthesis.speak(msg);
         }
     }
-
     function finishLesson() {
         document.getElementById('screen-lesson').classList.remove('active');
         document.getElementById('screen-report').classList.add('active');
