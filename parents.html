@@ -435,7 +435,7 @@ body {
 .emoji-scale {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 12px;
+  gap: 14px;
   max-width: 720px;
   margin: 0 auto;
 }
@@ -455,15 +455,15 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  min-height: 88px;
+  gap: 10px;
+  min-height: 100px;
   border-radius: 18px;
-  border: 1px solid #e5edf5;
+  border: 2px solid #e5edf5;
   background: #fff;
   cursor: pointer;
   transition: 0.2s ease;
   color: var(--navy);
-  padding: 12px 8px;
+  padding: 14px 10px;
 }
 
 .emoji-face {
@@ -473,8 +473,8 @@ body {
 }
 
 .emoji-img {
-  width: 48px;
-  height: 48px;
+  width: 58px;
+  height: 58px;
   object-fit: contain;
   display: block;
 }
@@ -489,14 +489,19 @@ body {
 
 .emoji-option label:hover {
   transform: translateY(-2px);
-  border-color: #d7e3ef;
-  box-shadow: none;
+  border-color: #cbd5e1;
+  background: #f8fbff;
 }
 
 .emoji-option input:checked + label {
   border-color: var(--navy);
-  background: #ffffff;
-  box-shadow: none;
+  background: #eef6ff;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(31, 78, 121, 0.14);
+}
+
+.emoji-option input:checked + label .emoji-text {
+  color: var(--navy);
 }
 
 .report-output {
