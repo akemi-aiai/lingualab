@@ -85,8 +85,6 @@
         }
         .hero-compact h1 { font-size: 42px; font-weight: 800; margin-bottom: 10px; line-height: 1.15; }
         .hero-info { display: flex; justify-content: center; align-items: center; gap: 20px; font-size: 18px; opacity: 0.95; }
-
-        /* --- HERO TEXT --- */
         .hero-copy {
             display: flex;
             flex-direction: column;
@@ -98,8 +96,6 @@
             font-size: 15px;
             opacity: 0.9;
         }
-        
-        /* --- MAIN CONTENT --- */
         .content-wrapper {
             max-width: 1100px;
             margin: -90px auto 0;
@@ -107,60 +103,37 @@
             position: relative;
             z-index: 10;
         }
-        
         .month-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 10px;
-            margin-bottom: 25px;
+            gap: 12px;
+            margin-bottom: 28px;
         }
         
         .month-btn {
-            border: 1px solid var(--line);
             background: white;
             color: var(--navy);
-            padding: 10px 18px;
+            border: 2px solid #e2e8f0;
             border-radius: 999px;
+            padding: 10px 18px;
+            font-size: 14px;
             font-weight: 700;
             cursor: pointer;
-            transition: 0.2s;
-            box-shadow: var(--shadow-soft);
+            transition: 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
         }
         
         .month-btn:hover {
-            background: #f8fafc;
             border-color: var(--primary);
+            background: #ecfeff;
+            transform: translateY(-1px);
         }
         
         .month-btn.active {
             background: var(--navy);
             color: white;
             border-color: var(--navy);
-        }
-        
-        .wiki-box {
-            background: white;
-            border: 1px solid var(--line);
-            border-radius: 20px;
-            padding: 22px;
-            margin-bottom: 24px;
-            box-shadow: var(--shadow-soft);
-        }
-        
-        .wiki-title {
-            font-size: 13px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 10px;
-        }
-        
-        .wiki-content {
-            color: var(--text);
-            line-height: 1.7;
-            font-size: 15px;
         }
         
         .week-grid {
@@ -170,34 +143,47 @@
         }
         
         .week-card {
+            position: relative;
             display: block;
             text-decoration: none;
             background: white;
-            border: 1px solid var(--line);
+            border: 1px solid #e2e8f0;
             border-radius: 22px;
-            padding: 22px;
-            box-shadow: var(--shadow-soft);
-            transition: 0.2s;
+            padding: 22px 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            transition: 0.22s ease;
             color: inherit;
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        .week-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary), #a78bfa);
         }
         
         .week-card:hover {
             transform: translateY(-3px);
-            box-shadow: var(--shadow-card);
             border-color: var(--primary);
+            box-shadow: 0 14px 28px rgba(0,0,0,0.08);
+            background: #fcfdff;
         }
         
         .week-number {
-            width: 42px;
-            height: 42px;
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 14px;
             border-radius: 50%;
-            background: var(--primary-light);
+            background: linear-gradient(135deg, var(--primary-light), #dbeafe);
             color: var(--navy);
+            font-size: 18px;
+            font-weight: 800;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 800;
-            margin: 0 auto 14px;
         }
         
         .week-title {
@@ -205,81 +191,76 @@
             font-size: 13px;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
             color: var(--accent);
             margin-bottom: 6px;
         }
         
         .week-desc {
             display: block;
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 700;
             color: var(--navy);
             line-height: 1.35;
         }
         
         .week-card.coming-soon {
-            opacity: 0.6;
+            opacity: 0.55;
             pointer-events: none;
         }
-        
-        /* --- FOOTER --- */
-        footer {
-            margin-top: 50px;
-            padding: 30px 20px 20px;
-            text-align: center;
-            color: var(--muted);
-        }
-        
-        .footer-links {
-            margin-bottom: 10px;
-        }
-        
-        .footer-link {
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 600;
-        }
-        
-        .footer-link:hover {
-            text-decoration: underline;
-        }
-        
-        .footer-text {
-            font-size: 14px;
-        }
-        
-        /* --- MOBILE --- */
-        @media (max-width: 700px) {
-            .content-wrapper {
-                margin-top: -70px;
-                padding: 0 14px 30px;
-            }
-        
-            .week-grid {
-                grid-template-columns: 1fr;
-            }
-        
-            .month-btn {
-                padding: 9px 14px;
-                font-size: 14px;
-            }
-        
-            .week-card {
-                padding: 18px;
-            }
-        
-            .week-desc {
-                font-size: 16px;
-            }
-        
-            .hero-copy {
-                font-size: 16px;
-            }
-        
-            .cn-line {
-                font-size: 13px;
-            }
+                
+      .wiki-box {
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        padding: 22px;
+        margin-bottom: 24px;
+        box-shadow: var(--shadow-soft);
+    }
+    
+    .wiki-title {
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 10px;
+    }
+    
+    .wiki-content {
+        font-size: 15px;
+        line-height: 1.7;
+        color: var(--text);
+    }
+    
+    /* --- FOOTER BLACK BAR --- */
+    footer {
+        margin-top: 50px;
+        background: #0f172a;
+        color: rgba(255,255,255,0.88);
+        text-align: center;
+        padding: 22px 16px 26px;
+    }
+    
+    .footer-links {
+        margin-bottom: 8px;
+    }
+    
+    .footer-link {
+        color: #f97316;
+        text-decoration: none;
+        font-weight: 600;
+    }
+    
+    .footer-link:hover {
+        text-decoration: underline;
+    }
+    
+    .footer-text {
+        font-size: 14px;
+        color: rgba(255,255,255,0.8);
+    }       
+
 
         /* --- CONTAINER --- */
         .container { 
@@ -416,6 +397,40 @@
             
             .bottom-nav { padding: 12px 15px; }
             .nav-btn { padding: 14px 20px; font-size: 15px; }
+            .week-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+        
+            .month-container {
+                gap: 10px;
+                margin-bottom: 22px;
+            }
+        
+            .month-btn {
+                padding: 9px 14px;
+                font-size: 13px;
+            }
+        
+            .week-card {
+                padding: 18px 16px;
+                border-radius: 18px;
+            }
+        
+            .week-number {
+                width: 42px;
+                height: 42px;
+                font-size: 16px;
+                margin-bottom: 12px;
+            }
+        
+            .week-title {
+                font-size: 12px;
+            }
+        
+            .week-desc {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
