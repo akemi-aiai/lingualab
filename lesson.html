@@ -7,43 +7,59 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-    <style>
+<style>
         :root { 
             --primary: #22d3ee; 
             --primary-light: #ecfeff;
+            --accent: #f97316;
             --navy: #1f4e79; 
             --bg: #f8fafc; 
             --white: #ffffff; 
             --orange: #f97316; 
             --green: #10b981;
             --radius: 24px;
+            --text: #0f172a;
+            --muted: #64748b;
+            --line: #e2e8f0;
             --shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --shadow-soft: 0 4px 15px rgba(0,0,0,0.04);
+            --shadow-card: 0 20px 40px rgba(0,0,0,0.08);
         }
         
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: #334155; padding-top: 80px; padding-bottom: 80px; }
+        
+        html, body { overflow-x: hidden; }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: var(--bg); 
+            color: var(--text); 
+            line-height: 1.6; 
+            padding-top: 80px; 
+            padding-bottom: 90px; /* Место для нижней панели */
+        }
+
+        .navbar-left, .navbar-right, .hero-info { min-width: 0; }
+        .navbar-right a, .hero-info { overflow-wrap: anywhere; word-break: break-word; }
         
         /* --- ICONS --- */
         .icon { width: 24px; height: 24px; fill: currentColor; vertical-align: text-bottom; }
 
-        /* --- NAVBAR (Identical to Grammar/Exercises) --- */
+        /* --- NAVBAR --- */
         .navbar {
             position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
             display: flex; align-items: center; justify-content: space-between;
             padding: 15px 40px; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,.05);
             height: 80px;
         }
-        .navbar-left { display: flex; align-items: center; gap: 12px; }
+        .navbar-left { display: flex; align-items: center; gap: 12px; text-decoration: none; }
         .nav-logo { height: 40px; width: auto; display: block; }
-        .nav-title { font-size: 24px; font-weight: 800; color: var(--navy); }
+        .nav-title { font-size: 24px; font-weight: 800; color: var(--navy); line-height: 1.1; }
         .navbar-right { display: flex; align-items: center; gap: 20px; }
-        .navbar-right a { 
-            color: var(--navy); font-weight: 600; text-decoration: none; 
-            font-size: 14px; transition: 0.3s;
-        }
-        .navbar-right a:hover { color: var(--primary); }
+        .navbar-right a { color: var(--navy); font-weight: 600; text-decoration: none; font-size: 14px; transition: 0.3s; }
+        .navbar-right a:hover { color: var(--accent); }
 
-        /* PARENT TOGGLE (In Navbar) */
+        /* PARENT TOGGLE */
         .parent-switch {
             display: flex; align-items: center; gap: 8px; 
             background: #f1f5f9; padding: 6px 12px; border-radius: 99px; cursor: pointer; border: 1px solid #e2e8f0;
@@ -55,21 +71,18 @@
         .progress-container {
             position: fixed; top: 80px; left: 0; width: 100%; height: 6px; background: #e2e8f0; z-index: 999;
         }
-        .progress-fill {
-            height: 100%; background: var(--orange); width: 0%; transition: width 0.5s ease;
-        }
+        .progress-fill { height: 100%; background: var(--orange); width: 0%; transition: width 0.5s ease; }
 
-        /* --- HERO (Identical dimensions) --- */
+        /* --- HERO COMPACT --- */
         .hero-compact {
-            width: 100%;
-            padding: 60px 20px 160px; /* Big padding for overlap */
+            padding: 60px 8% 140px;
             text-align: center;
-            background: linear-gradient(135deg, #22d3ee, #a78bfa);
+            background: linear-gradient(135deg, var(--primary), #a78bfa);
             color: #fff;
-            position: relative;
+            width: 100%;
         }
-        .hero-compact h1 { font-size: 42px; font-weight: 800; margin-bottom: 10px; }
-        .hero-info { font-size: 18px; opacity: 0.95; }
+        .hero-compact h1 { font-size: 42px; font-weight: 800; margin-bottom: 10px; line-height: 1.15; }
+        .hero-info { display: flex; justify-content: center; align-items: center; gap: 20px; font-size: 18px; opacity: 0.95; }
 
         /* --- CONTAINER --- */
         .container { 
@@ -84,13 +97,13 @@
 
         .card {
             background: white; border-radius: var(--radius); padding: 40px;
-            box-shadow: var(--shadow); margin-bottom: 30px; text-align: center;
-            border: 1px solid #e2e8f0;
+            box-shadow: var(--shadow-card); margin-bottom: 30px; text-align: center;
+            border: 1px solid var(--line);
         }
 
         /* --- START SCREEN --- */
-        .trust-badges { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
-        .badge { background: #f0f9ff; color: var(--navy); padding: 5px 12px; border-radius: 6px; font-size: 12px; font-weight: 700; }
+        .trust-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 20px; }
+        .badge { background: #f0f9ff; color: var(--navy); padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 700; }
         
         .promise-box { margin: 25px 0; text-align: left; background: #f8fafc; padding: 20px; border-radius: 16px; }
         .promise-item { display: flex; gap: 10px; margin-bottom: 12px; font-size: 15px; color: #475569; align-items: center; }
@@ -102,71 +115,27 @@
             color: var(--primary); font-weight: 800; text-transform: uppercase; 
             font-size: 12px; letter-spacing: 1px; display: block; margin-bottom: 5px;
         }
-        .step-title { font-size: 28px; font-weight: 800; color: var(--navy); }
+        .step-title { font-size: 28px; font-weight: 800; color: var(--navy); line-height: 1.3; }
         
-        /* Parent Tip Box (Hidden by default) */
         .parent-tip {
             display: none; text-align: left; background: #fff7ed; 
             border-left: 4px solid var(--orange); padding: 15px; 
             border-radius: 8px; margin-bottom: 25px; font-size: 14px; color: #9a3412;
         }
         
-        /* Flashcards Grid — квадраты */
-        .flashcards-grid{
-          display: grid;
-          grid-template-columns: repeat(3, minmax(0, 1fr)); /* ровные 3 колонки */
-          gap: 15px;
-          margin: 20px 0;
-        }
-        
-        /* на телефоне — 2 колонки */
-        @media (max-width: 520px){
-          .flashcards-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
-        }
-        
+        /* Flashcards Grid */
+        .flashcards-grid{ display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 15px; margin: 20px 0; }
         .flashcard{
-          background: #f8fafc;
-          border: 2px solid #e2e8f0;
-          border-radius: 16px;
-          cursor: pointer;
-          transition: 0.2s;
-        
-          aspect-ratio: 1 / 1;       /* ключ: квадрат */
-          width: 100%;
-          padding: 12px;
-        
-          display: flex;             /* чтобы контент центрировался */
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-        
-          position: relative;
-          overflow: hidden;
+            background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 16px;
+            cursor: pointer; transition: 0.2s; aspect-ratio: 1 / 1; width: 100%; padding: 12px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; position: relative; overflow: hidden;
         }
-        
-        .flashcard:hover{
-          border-color: var(--primary);
-          background: #ecfeff;
-          transform: scale(1.03);    /* чуть меньше, чтобы сетку не “раздвигало” */
-        }
-        
-        /* если есть картинки */
-        .fc-img{
-          width: 68%;
-          height: 52%;
-          object-fit: contain;
-          display: block;
-          margin: 0 auto 10px;
-        }
-        
-        /* если эмодзи */
-        .fc-icon{
-          font-size: 34px;
-          display: block;
-          margin-bottom: 8px;
-        }
-        
+        .flashcard:hover{ border-color: var(--primary); background: #ecfeff; transform: scale(1.03); }
+        .fc-img{ width: 68%; height: 52%; object-fit: contain; display: block; margin: 0 auto 10px; }
+        .fc-icon{ font-size: 34px; display: block; margin-bottom: 8px; }
+        .fc-word{ font-weight: 700; color: var(--navy); font-size: 14px; }
+        .flashcard-zh{ font-size: 12px; color: #64748b; margin-bottom: 5px; }
 
         /* Audio Controls */
         .audio-control {
@@ -175,12 +144,12 @@
         }
         .play-btn {
             width: 50px; height: 50px; border-radius: 50%; border: none; background: var(--primary); 
-            color: white; cursor: pointer; display: flex; justify-content: center; align-items: center;
+            color: white; cursor: pointer; display: flex; justify-content: center; align-items: center; flex-shrink: 0;
         }
         .mic-btn {
             width: 60px; height: 60px; border-radius: 50%; border: none; background: #ef4444; 
             color: white; cursor: pointer; display: flex; justify-content: center; align-items: center;
-            box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3); transition: 0.2s;
+            box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3); transition: 0.2s; flex-shrink: 0;
         }
         .mic-btn:hover { transform: scale(1.1); }
         .mic-btn.recording { animation: pulse 1.5s infinite; background: #b91c1c; }
@@ -191,18 +160,17 @@
             background: #f8fafc; color: #475569;
         }
 
-        /* Footer Nav */
+        /* Footer Nav (Bottom Bar) */
         .bottom-nav {
             position: fixed; bottom: 0; left: 0; width: 100%; 
             background: white; padding: 15px 20px; 
             border-top: 1px solid #e2e8f0; display: flex; gap: 10px; z-index: 1000;
-            justify-content: center;
+            justify-content: center; box-shadow: 0 -4px 15px rgba(0,0,0,0.03);
         }
         .nav-btn {
             background: var(--navy); color: white; border: none; 
             padding: 16px 32px; border-radius: 14px; font-size: 16px; 
-            font-weight: 700; cursor: pointer; width: 100%; max-width: 600px;
-            transition: 0.2s;
+            font-weight: 700; cursor: pointer; width: 100%; max-width: 600px; transition: 0.2s;
         }
         .nav-btn:hover { background: #334155; }
         .nav-btn.secondary { background: white; color: var(--navy); border: 2px solid #e2e8f0; }
@@ -213,12 +181,44 @@
 
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6); } 70% { box-shadow: 0 0 0 15px rgba(239, 68, 68, 0); } }
 
-        @media (max-width: 600px) {
-            .navbar { padding: 10px 20px; height: auto; flex-direction: column; gap: 10px; }
-            .navbar-right { width: 100%; justify-content: center; flex-wrap: wrap; border-top: 1px solid #f1f5f9; padding-top: 10px; }
-            .hero-compact h1 { font-size: 32px; }
-            .container { margin-top: -80px; }
+        /* --- RESPONSIVE TABLET --- */
+        @media (max-width: 1024px) {
+            .navbar { padding: 12px 24px; }
+            .nav-title { font-size: 22px; }
+            .navbar-right { gap: 14px; }
+            .navbar-right a { font-size: 13px; }
+            .hero-compact { padding: 56px 6% 130px; }
+            .hero-compact h1 { font-size: 38px; }
+        }
+
+        /* --- RESPONSIVE MOBILE --- */
+        @media (max-width: 700px) {
+            body { padding-top: 128px; }
+            
+            .navbar { padding: 10px 16px; flex-direction: column; gap: 10px; height: auto; }
+            .navbar-left { width: 100%; justify-content: center; }
+            .navbar-right { width: 100%; justify-content: center; flex-wrap: wrap; gap: 10px 12px; border-top: 1px solid #f1f5f9; padding-top: 10px; }
+            .navbar-right a { font-size: 13px; text-align: center; white-space: normal; }
+            
+            .nav-logo { height: 40px; }
+            .nav-title { font-size: 20px; }
+            
             .progress-container { top: 110px; }
+            
+            .hero-compact { padding: 46px 16px 110px; }
+            .hero-compact h1 { font-size: 30px; line-height: 1.2; }
+            
+            .container { margin-top: -72px; padding: 0 14px; }
+            
+            .card { padding: 25px 20px; }
+            .step-title { font-size: 24px; }
+            
+            .flashcards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+            
+            .audio-control { flex-direction: column; text-align: center; padding: 15px; }
+            
+            .bottom-nav { padding: 12px 15px; }
+            .nav-btn { padding: 14px 20px; font-size: 15px; }
         }
     </style>
 </head>
@@ -311,7 +311,7 @@
     const ICON_PLAY = '<svg class="icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
     const ICON_MIC = '<svg class="icon" style="width:30px;height:30px" viewBox="0 0 24 24"><path fill="white" d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path fill="white" d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>';
 
-   // --- CONTENT DB (Sep-Feb) ---
+   // --- CONTENT ---
 const db = {
   "Sep": [
     {
@@ -736,10 +736,434 @@ const db = {
         { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Find something Red.", image: "assets/img/find_red.png" }
       ]
     }
-  ]
+  ],
+    "Mar": [
+    {
+      unit: "Unit 1: A Visit", vocab: "Grandma, Grandpa", phrase: "How are you?",
+      tips: "Use real family photos to practice these words with your child.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Wave Hello", text: "Wave your hand and smile.", action: "Say hello loudly!", phrase: "Hello!" },
+        { type: 'words', tag: 'B. Key Words', title: "Family", 
+          items: [
+            { w:"Grandma", zh:"奶奶/外婆", img:"assets/img/grandma.png", audio:"assets/audio/grandma.mp3" },
+            { w:"Grandpa", zh:"爷爷/外公", img:"assets/img/grandpa.png", audio:"assets/audio/grandpa.mp3" },
+            { w:"Family",  zh:"家人", img:"assets/img/family.png", audio:"assets/audio/family.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Greeting", text: "How are you?", script: "Wave to a toy. Ask: How are you?", parentTip: "Practice this phrase when waking up." },
+        { type: 'game', tag: 'D. Game', title: "Photo Point", text: "Show a family photo. Parent says 'Grandma'. Child points.", sub: "Who is this?" },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Hug your real family members today.", image: "assets/img/hug.png" }
+      ]
+    },
+    {
+      unit: "Unit 1: Family", vocab: "Aunt, Uncle", phrase: "I'm fine. Thank you.",
+      tips: "Role-play knocking on a door and greeting a guest.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Knock Knock", text: "Knock on the table 3 times.", action: "Knock knock knock!", phrase: "Who is it?" },
+        { type: 'words', tag: 'B. Key Words', title: "More Family", 
+          items: [
+            { w:"Aunt",  zh:"阿姨/姑姑", img:"assets/img/aunt.png",  audio:"assets/audio/aunt.mp3" },
+            { w:"Uncle", zh:"叔叔/舅舅", img:"assets/img/uncle.png", audio:"assets/audio/uncle.mp3" },
+            { w:"House", zh:"房子", img:"assets/img/house.png", audio:"assets/audio/house.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Replying", text: "I'm fine. Thank you.", script: "Pretend to be an Aunt answering.", parentTip: "Nod and smile when saying 'Thank you'." },
+        { type: 'game', tag: 'D. Game', title: "Door Game", text: "Hide behind a door. Open and say 'I'm fine!'", sub: "Surprise!" },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Call an Aunt or Uncle and say Hello.", image: "assets/img/phone.png" }
+      ]
+    },
+    {
+      unit: "Unit 1: Phonics U", vocab: "Uu, Umbrella", phrase: "Up, up, up!",
+      tips: "The 'U' sound is like opening an umbrella: uh, uh, up!",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Point Up", text: "Point your fingers to the ceiling.", action: "Reach up high!", phrase: "Up!" },
+        { type: 'words', tag: 'B. Key Words', title: "U Words", 
+          items: [
+            { w:"Uu",       zh:"字母U", img:"assets/img/uu.png", audio:"assets/audio/u.mp3" },
+            { w:"Umbrella", zh:"雨伞",   img:"assets/img/umbrella.png", audio:"assets/audio/u-umbrella.mp3" },
+            { w:"Uncle",    zh:"叔叔",   img:"assets/img/uncle.png", audio:"assets/audio/u-uncle.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Phonics", text: "U is for Umbrella.", script: "Pretend to hold an umbrella.", parentTip: "Emphasize the short 'uh' sound." },
+        { type: 'game', tag: 'D. Game', title: "Umbrella Jump", text: "When parent says 'Umbrella', child jumps UP.", sub: "Uh-uh-up!" },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Find an umbrella in your house.", image: "assets/img/find_umbrella.png" }
+      ]
+    },
+    {
+      unit: "Unit 1: Review", vocab: "Family & U", phrase: "How are you, Grandpa?",
+      tips: "Review week! Combine greetings and family words.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "High Five", text: "Give mom or dad a high five.", action: "Clap hands!", phrase: "Hello!" },
+        { type: 'words', tag: 'B. Key Words', title: "Review", 
+          items: [
+            { w:"Grandpa", zh:"爷爷", img:"assets/img/grandpa.png", audio:"assets/audio/grandpa.mp3" },
+            { w:"Aunt",    zh:"阿姨", img:"assets/img/aunt.png", audio:"assets/audio/aunt.mp3" },
+            { w:"Umbrella",zh:"雨伞", img:"assets/img/umbrella.png", audio:"assets/audio/umbrella.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Expression", text: "I'm fine. Thank you.", script: "Practice the full dialogue together.", parentTip: "Use different funny voices." },
+        { type: 'game', tag: 'D. Game', title: "Voice Play", text: "Say 'How are you?' in a deep Grandpa voice.", sub: "Child answers in a tiny voice." },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Draw a picture of your family.", image: "assets/img/draw_family.png" }
+      ]
+    }
+  ],
+
+  "Apr": [
+    {
+      unit: "Unit 2: My Pets", vocab: "Bird, Fish", phrase: "I have a bird.",
+      tips: "Act like the animals to make learning memorable.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Fly & Swim", text: "Flap arms like a bird.", action: "Make fish lips.", phrase: "Fly! Swim!" },
+        { type: 'words', tag: 'B. Key Words', title: "Pets", 
+          items: [
+            { w:"Bird", zh:"鸟", img:"assets/img/bird.png", audio:"assets/audio/bird.mp3" },
+            { w:"Fish", zh:"鱼", img:"assets/img/fish.png", audio:"assets/audio/fish.mp3" },
+            { w:"Pet",  zh:"宠物", img:"assets/img/pet.png", audio:"assets/audio/pet.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Having Pets", text: "I have a bird.", script: "Hold a toy bird.", parentTip: "Point to yourself when saying 'I have'." },
+        { type: 'game', tag: 'D. Game', title: "Animal Charades", text: "Parent acts like a fish. Child guesses the word.", sub: "It is a fish!" },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Flap your arms and run like a bird outside.", image: "assets/img/bird_fly.png" }
+      ]
+    },
+    {
+      unit: "Unit 2: More Pets", vocab: "Rabbit, Turtle", phrase: "I have a turtle.",
+      tips: "Compare fast (rabbit) and slow (turtle).",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Fast & Slow", text: "Hop fast! Crawl slow!", action: "Hop hop hop!", phrase: "Fast and slow." },
+        { type: 'words', tag: 'B. Key Words', title: "Pets", 
+          items: [
+            { w:"Rabbit", zh:"兔子", img:"assets/img/rabbit.png", audio:"assets/audio/rabbit.mp3" },
+            { w:"Turtle", zh:"乌龟", img:"assets/img/turtle.png", audio:"assets/audio/turtle.mp3" },
+            { w:"Dog",    zh:"狗",   img:"assets/img/dog.png", audio:"assets/audio/dog.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Having Pets", text: "I have a rabbit.", script: "Hop like a rabbit while saying it.", parentTip: "Make bunny ears with your hands." },
+        { type: 'game', tag: 'D. Game', title: "Freeze Dance", text: "Hop like a rabbit. When mom says 'Stop', freeze like a turtle!", sub: "Stop!" },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Crawl on the floor slowly like a turtle.", image: "assets/img/turtle_crawl.png" }
+      ]
+    },
+    {
+      unit: "Unit 2: Phonics R", vocab: "Rr, Rabbit", phrase: "Run, rabbit, run!",
+      tips: "R sounds like an engine: rrrrrrrr.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Engine", text: "Pretend to drive a car.", action: "Rrrrrr!", phrase: "Vroom!" },
+        { type: 'words', tag: 'B. Key Words', title: "R Words", 
+          items: [
+            { w:"Rr",     zh:"字母R", img:"assets/img/rr.png", audio:"assets/audio/r.mp3" },
+            { w:"Rabbit", zh:"兔子",   img:"assets/img/rabbit.png", audio:"assets/audio/r-rabbit.mp3" },
+            { w:"Run",    zh:"跑",     img:"assets/img/run.png", audio:"assets/audio/r-run.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Phonics", text: "R is for Rabbit.", script: "Make the 'r-r-r' sound.", parentTip: "Let the child feel the vibration in their throat." },
+        { type: 'game', tag: 'D. Game', title: "Run and Stop", text: "When you hear an 'R' word, run in place!", sub: "Rabbit! Run!" },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Run from the bedroom to the living room.", image: "assets/img/run_room.png" }
+      ]
+    },
+    {
+      unit: "Unit 2: Review", vocab: "Pets", phrase: "I have a rabbit and a fish.",
+      tips: "Can your child name all 4 pets from this unit?",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Animal Sounds", text: "Make 3 different animal noises.", action: "Tweet! Blub! Hop!", phrase: "Listen!" },
+        { type: 'words', tag: 'B. Key Words', title: "Review", 
+          items: [
+            { w:"Bird",   zh:"鸟",   img:"assets/img/bird.png", audio:"assets/audio/bird.mp3" },
+            { w:"Turtle", zh:"乌龟", img:"assets/img/turtle.png", audio:"assets/audio/turtle.mp3" },
+            { w:"Rabbit", zh:"兔子", img:"assets/img/rabbit.png", audio:"assets/audio/rabbit.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Expression", text: "I have a turtle.", script: "Use toy animals to practice.", parentTip: "Ask: Do you have a bird?" },
+        { type: 'game', tag: 'D. Game', title: "Pet Shop", text: "Put toy animals on the table. Pretend to buy a pet.", sub: "I have a bird." },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Draw your favorite pet on a paper.", image: "assets/img/draw_pet.png" }
+      ]
+    }
+  ],
+
+  "May": [
+    {
+      unit: "Unit 3: Color Fun", vocab: "Red, Blue, Yellow", phrase: "What color is it?",
+      tips: "Point to objects around the house to practice colors.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Touch Colors", text: "Touch something red. Touch something blue.", action: "Go fast!", phrase: "Red! Blue!" },
+        { type: 'words', tag: 'B. Key Words', title: "Colors", 
+          items: [
+            { w:"Red",    zh:"红色", img:"assets/img/red.png", audio:"assets/audio/red.mp3" },
+            { w:"Blue",   zh:"蓝色", img:"assets/img/blue.png", audio:"assets/audio/blue.mp3" },
+            { w:"Yellow", zh:"黄色", img:"assets/img/yellow.png", audio:"assets/audio/yellow.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Asking", text: "What color is it?", script: "Hold up a red block. Ask the question.", parentTip: "Shrug your shoulders when asking." },
+        { type: 'game', tag: 'D. Game', title: "Color Tap", text: "Put red, blue, and yellow blocks down. Say a color, child taps it.", sub: "Tap blue!" },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Find 3 yellow things in your toy box.", image: "assets/img/yellow_toys.png" }
+      ]
+    },
+    {
+      unit: "Unit 3: More Colors", vocab: "Green, Orange", phrase: "It's green.",
+      tips: "Mix yellow and blue paint to make green!",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Show me", text: "Show me a green crayon.", action: "Hold it up!", phrase: "It's green." },
+        { type: 'words', tag: 'B. Key Words', title: "Colors", 
+          items: [
+            { w:"Green",  zh:"绿色", img:"assets/img/green.png", audio:"assets/audio/green.mp3" },
+            { w:"Orange", zh:"橙色", img:"assets/img/orange_color.png", audio:"assets/audio/orange_color.mp3" },
+            { w:"Color",  zh:"颜色", img:"assets/img/color.png", audio:"assets/audio/color.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Answering", text: "It's orange.", script: "Point to an orange object and answer.", parentTip: "Always use the full sentence 'It's...'." },
+        { type: 'game', tag: 'D. Game', title: "Magic Bag", text: "Pull a crayon from a bag. Ask: What color is it?", sub: "It's green!" },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Look at the trees outside. Are they green?", image: "assets/img/green_tree.png" }
+      ]
+    },
+    {
+      unit: "Unit 3: Phonics O", vocab: "Oo, Orange", phrase: "An orange.",
+      tips: "Make your mouth into an 'O' shape.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Mouth Shape", text: "Make a big 'O' with your lips.", action: "O-o-o!", phrase: "O!" },
+        { type: 'words', tag: 'B. Key Words', title: "O Words", 
+          items: [
+            { w:"Oo",     zh:"字母O", img:"assets/img/oo.png", audio:"assets/audio/o.mp3" },
+            { w:"Orange", zh:"橙色/橙子", img:"assets/img/orange.png", audio:"assets/audio/o-orange.mp3" },
+            { w:"Octopus",zh:"章鱼", img:"assets/img/octopus.png", audio:"assets/audio/o-octopus.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Phonics", text: "O is for Orange.", script: "Draw an O in the air.", parentTip: "Exaggerate the 'ah' or 'oh' sound." },
+        { type: 'game', tag: 'D. Game', title: "Air Drawing", text: "Parent draws an O in the air. Child guesses what it is.", sub: "It's an O!" },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Eat an orange or drink orange juice.", image: "assets/img/eat_orange.png" }
+      ]
+    },
+    {
+      unit: "Unit 3: Review", vocab: "All Colors", phrase: "What color is it? It's blue.",
+      tips: "Time for a colorful review! Play with building blocks.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Rainbow Dance", text: "Wave colorful scarves or ribbons.", action: "Dance!", phrase: "Colors!" },
+        { type: 'words', tag: 'B. Key Words', title: "Review", 
+          items: [
+            { w:"Red",    zh:"红色", img:"assets/img/red.png", audio:"assets/audio/red.mp3" },
+            { w:"Blue",   zh:"蓝色", img:"assets/img/blue.png", audio:"assets/audio/blue.mp3" },
+            { w:"Green",  zh:"绿色", img:"assets/img/green.png", audio:"assets/audio/green.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Dialogue", text: "What color is it? It's red.", script: "Have a mini conversation.", parentTip: "Take turns asking and answering." },
+        { type: 'game', tag: 'D. Game', title: "Color Spy", text: "Say 'I spy something green'. Child finds it.", sub: "I spy..." },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Sort your blocks by color.", image: "assets/img/sort_blocks.png" }
+      ]
+    }
+  ],
+
+  "Jun": [
+    {
+      unit: "Unit 4: In the Park", vocab: "Flower, Grass", phrase: "It's a flower.",
+      tips: "Go for a real walk in the park and point these out.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Sniff", text: "Pretend to smell a flower.", action: "Sniff deeply.", phrase: "Ahhh!" },
+        { type: 'words', tag: 'B. Key Words', title: "Nature", 
+          items: [
+            { w:"Flower", zh:"花", img:"assets/img/flower.png", audio:"assets/audio/flower.mp3" },
+            { w:"Grass",  zh:"草", img:"assets/img/grass.png", audio:"assets/audio/grass.mp3" },
+            { w:"Park",   zh:"公园", img:"assets/img/park.png", audio:"assets/audio/park.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Naming", text: "It's a flower.", script: "Point to a picture of a park.", parentTip: "Connect the words with outside nature." },
+        { type: 'game', tag: 'D. Game', title: "Smell or Touch", text: "Parent says 'Flower'. Child pretends to smell. 'Grass' -> touch ground.", sub: "Smell the flower!" },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Go outside and touch the green grass.", image: "assets/img/touch_grass.png" }
+      ]
+    },
+    {
+      unit: "Unit 4: Park Fun", vocab: "Insect, Kite", phrase: "It's yellow.",
+      tips: "Combine nature words with colors from Unit 3!",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Buzz & Fly", text: "Buzz like a bee, fly like a kite.", action: "Bzzzz!", phrase: "Fly high." },
+        { type: 'words', tag: 'B. Key Words', title: "Things in Park", 
+          items: [
+            { w:"Insect", zh:"昆虫", img:"assets/img/insect.png", audio:"assets/audio/insect.mp3" },
+            { w:"Kite",   zh:"风筝", img:"assets/img/kite.png", audio:"assets/audio/kite.mp3" },
+            { w:"Tree",   zh:"树",   img:"assets/img/tree.png", audio:"assets/audio/tree.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Describing", text: "It's a kite. It's red.", script: "Describe toys using two sentences.", parentTip: "First name the object, then its color." },
+        { type: 'game', tag: 'D. Game', title: "Color Match", text: "Find a toy insect. Ask: What color is it?", sub: "It is green." },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Look for a small insect outside (don't touch!).", image: "assets/img/find_insect.png" }
+      ]
+    },
+    {
+      unit: "Unit 4: Phonics I", vocab: "Ii, Insect", phrase: "I is for insect.",
+      tips: "The short 'i' sound is like 'ih-ih-ih'.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Tickle", text: "Pretend an insect is walking on your arm.", action: "Tickle tickle!", phrase: "Ih-ih-insect!" },
+        { type: 'words', tag: 'B. Key Words', title: "I Words", 
+          items: [
+            { w:"Ii",     zh:"字母I", img:"assets/img/ii.png", audio:"assets/audio/i.mp3" },
+            { w:"Insect", zh:"昆虫", img:"assets/img/insect.png", audio:"assets/audio/i-insect.mp3" },
+            { w:"Igloo",  zh:"冰屋", img:"assets/img/igloo.png", audio:"assets/audio/i-igloo.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Phonics", text: "I is for Insect.", script: "Make your fingers crawl like a bug.", parentTip: "Keep the 'ih' sound very short." },
+        { type: 'game', tag: 'D. Game', title: "Bug Catch", text: "Parent makes a bug with hands. Child tries to catch it.", sub: "Got it!" },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Draw a little insect on a leaf.", image: "assets/img/draw_bug.png" }
+      ]
+    },
+    {
+      unit: "Unit 4: Review", vocab: "Park words", phrase: "It's a flower. It's yellow.",
+      tips: "Review week! Build sentences with nouns and colors.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Park Walk", text: "Walk in place. Pretend you are in the park.", action: "Look around!", phrase: "A beautiful park." },
+        { type: 'words', tag: 'B. Key Words', title: "Review", 
+          items: [
+            { w:"Kite",   zh:"风筝", img:"assets/img/kite.png", audio:"assets/audio/kite.mp3" },
+            { w:"Grass",  zh:"草", img:"assets/img/grass.png", audio:"assets/audio/grass.mp3" },
+            { w:"Flower", zh:"花", img:"assets/img/flower.png", audio:"assets/audio/flower.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Combo Sentences", text: "It's a kite. It's blue.", script: "Draw a blue kite and say the sentence.", parentTip: "Praise your child for using two sentences." },
+        { type: 'game', tag: 'D. Game', title: "Yes or No", text: "Hold a red flower. Say 'It is green.' Child says NO!", sub: "No, it's red!" },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Make a paper kite and fly it.", image: "assets/img/make_kite.png" }
+      ]
+    }
+  ],
+
+  "Jul": [
+    {
+      unit: "Unit 5: Yummy", vocab: "Bread, Cake", phrase: "I like cake.",
+      tips: "Use meal times to practice 'I like...'.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Rub Tummy", text: "Rub your tummy and smile.", action: "Mmmm!", phrase: "Yummy!" },
+        { type: 'words', tag: 'B. Key Words', title: "Food", 
+          items: [
+            { w:"Bread", zh:"面包", img:"assets/img/bread.png", audio:"assets/audio/bread.mp3" },
+            { w:"Cake",  zh:"蛋糕", img:"assets/img/cake.png", audio:"assets/audio/cake.mp3" },
+            { w:"Food",  zh:"食物", img:"assets/img/food.png", audio:"assets/audio/food.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Preferences", text: "I like cake.", script: "Pretend to eat and say the phrase.", parentTip: "Exaggerate how much you like it." },
+        { type: 'game', tag: 'D. Game', title: "Yummy/Yucky", text: "Show a shoe -> Yucky! Show bread -> Yummy!", sub: "I like bread." },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Have a piece of bread for a snack.", image: "assets/img/eat_bread.png" }
+      ]
+    },
+    {
+      unit: "Unit 5: Drinks", vocab: "Juice, Milk", phrase: "I like milk.",
+      tips: "Practice these words at breakfast.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Drink Up", text: "Pretend to hold a cup and drink.", action: "Glug glug!", phrase: "Drink it all." },
+        { type: 'words', tag: 'B. Key Words', title: "Drinks", 
+          items: [
+            { w:"Juice", zh:"果汁", img:"assets/img/juice.png", audio:"assets/audio/juice.mp3" },
+            { w:"Milk",  zh:"牛奶", img:"assets/img/milk.png", audio:"assets/audio/milk.mp3" },
+            { w:"Water", zh:"水",   img:"assets/img/water.png", audio:"assets/audio/water.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Preferences", text: "I like juice.", script: "Pour imaginary juice.", parentTip: "Ask: Do you like juice?" },
+        { type: 'game', tag: 'D. Game', title: "Cheers!", text: "Clink your cups together and say 'I like milk!'", sub: "Cheers!" },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Pour a glass of milk together.", image: "assets/img/pour_milk.png" }
+      ]
+    },
+    {
+      unit: "Unit 5: Phonics J", vocab: "Jj, Jam", phrase: "J is for Jam.",
+      tips: "J is a fun, bouncy sound. Jump when you say it!",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Jump", text: "Jump up and down 3 times.", action: "Jump!", phrase: "J-j-jump!" },
+        { type: 'words', tag: 'B. Key Words', title: "J Words", 
+          items: [
+            { w:"Jj",    zh:"字母J", img:"assets/img/jj.png", audio:"assets/audio/j.mp3" },
+            { w:"Jam",   zh:"果酱", img:"assets/img/jam.png", audio:"assets/audio/j-jam.mp3" },
+            { w:"Juice", zh:"果汁", img:"assets/img/juice.png", audio:"assets/audio/j-juice.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Phonics", text: "J is for Juice.", script: "Say the 'j-j-j' sound clearly.", parentTip: "Put some jam on bread and say the word." },
+        { type: 'game', tag: 'D. Game', title: "Spread the Jam", text: "Pretend to spread jam on child's hand. Say 'Jam!'", sub: "Sticky jam." },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Eat some bread with sweet jam.", image: "assets/img/eat_jam.png" }
+      ]
+    },
+    {
+      unit: "Unit 5: Review", vocab: "Yummy Food", phrase: "I like bread and milk.",
+      tips: "Review week! Set up a pretend restaurant.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Hungry", text: "Pat your belly. Say 'I am hungry'.", action: "Pat pat.", phrase: "Hungry!" },
+        { type: 'words', tag: 'B. Key Words', title: "Review", 
+          items: [
+            { w:"Cake",  zh:"蛋糕", img:"assets/img/cake.png", audio:"assets/audio/cake.mp3" },
+            { w:"Milk",  zh:"牛奶", img:"assets/img/milk.png", audio:"assets/audio/milk.mp3" },
+            { w:"Jam",   zh:"果酱", img:"assets/img/jam.png", audio:"assets/audio/jam.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Restaurant", text: "I like cake.", script: "Ask child: What do you like?", parentTip: "Use real snacks as props." },
+        { type: 'game', tag: 'D. Game', title: "Waiter Game", text: "Parent is waiter. Child orders: 'I like juice, please.'", sub: "Here you go!" },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Help set the table for dinner.", image: "assets/img/set_table.png" }
+      ]
+    }
+  ],
+
+  "Aug": [
+    {
+      unit: "Unit 6: I like fruit", vocab: "Apple, Banana", phrase: "I have six apples.",
+      tips: "Combine fruit words with numbers you learned earlier.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Count 6", text: "Clap your hands 6 times.", action: "1..2..3..4..5..6!", phrase: "Six." },
+        { type: 'words', tag: 'B. Key Words', title: "Fruit", 
+          items: [
+            { w:"Apple",  zh:"苹果", img:"assets/img/apple.png", audio:"assets/audio/apple.mp3" },
+            { w:"Banana", zh:"香蕉", img:"assets/img/banana.png", audio:"assets/audio/banana.mp3" },
+            { w:"Fruit",  zh:"水果", img:"assets/img/fruit.png", audio:"assets/audio/fruit.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Quantity", text: "I have six apples.", script: "Count 6 real or toy apples.", parentTip: "Point to each item while counting." },
+        { type: 'game', tag: 'D. Game', title: "Monkey Eat", text: "Pretend to be a monkey peeling a banana.", sub: "I like bananas." },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Wash a real apple and eat it.", image: "assets/img/wash_apple.png" }
+      ]
+    },
+    {
+      unit: "Unit 6: More Fruit", vocab: "Pear, Orange", phrase: "I have seven oranges.",
+      tips: "Practice plural 's' at the end of words (pears, oranges).",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Count 7", text: "Stomp your feet 7 times.", action: "Stomp stomp!", phrase: "Seven." },
+        { type: 'words', tag: 'B. Key Words', title: "Fruit", 
+          items: [
+            { w:"Pear",   zh:"梨",   img:"assets/img/pear.png", audio:"assets/audio/pear.mp3" },
+            { w:"Orange", zh:"橙子", img:"assets/img/orange_fruit.png", audio:"assets/audio/orange_fruit.mp3" },
+            { w:"Seven",  zh:"七",   img:"assets/img/seven.png", audio:"assets/audio/seven.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Quantity", text: "I have seven pears.", script: "Hold up 7 fingers.", parentTip: "Emphasize the 's' in pears." },
+        { type: 'game', tag: 'D. Game', title: "Fruit Basket", text: "Put toy fruits in a basket and count them together.", sub: "One, two, three..." },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Peel an orange with mom or dad.", image: "assets/img/peel_orange.png" }
+      ]
+    },
+    {
+      unit: "Unit 6: Phonics A", vocab: "Aa, Ant", phrase: "A is for Apple.",
+      tips: "A is a wide-mouth sound. Ah, ah, apple!",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Big Bite", text: "Open mouth wide to bite an apple.", action: "Crunch!", phrase: "Ah!" },
+        { type: 'words', tag: 'B. Key Words', title: "A Words", 
+          items: [
+            { w:"Aa",    zh:"字母A", img:"assets/img/aa.png", audio:"assets/audio/a.mp3" },
+            { w:"Apple", zh:"苹果",   img:"assets/img/apple.png", audio:"assets/audio/a-apple.mp3" },
+            { w:"Ant",   zh:"蚂蚁",   img:"assets/img/ant.png", audio:"assets/audio/a-ant.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Phonics", text: "A is for Ant.", script: "Pretend an ant is crawling on you.", parentTip: "Make the 'a-a-a' sound clearly." },
+        { type: 'game', tag: 'D. Game', title: "Ant Crawl", text: "Crawl your fingers up your child's arm saying 'a-a-ant'.", sub: "Tickle!" },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Draw a red apple with a tiny ant on it.", image: "assets/img/draw_ant.png" }
+      ]
+    },
+    {
+      unit: "Unit 6: Review", vocab: "Fruit & Numbers", phrase: "I have fruit.",
+      tips: "Review week! Great time for a real fruit salad.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Mix it", text: "Pretend to stir a big bowl of fruit.", action: "Mix mix mix!", phrase: "Fruit salad." },
+        { type: 'words', tag: 'B. Key Words', title: "Review", 
+          items: [
+            { w:"Banana", zh:"香蕉", img:"assets/img/banana.png", audio:"assets/audio/banana.mp3" },
+            { w:"Pear",   zh:"梨",   img:"assets/img/pear.png", audio:"assets/audio/pear.mp3" },
+            { w:"Apple",  zh:"苹果", img:"assets/img/apple.png", audio:"assets/audio/apple.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Expression", text: "I have six bananas.", script: "Review counting to 6 and 7.", parentTip: "Use blocks to represent fruit if needed." },
+        { type: 'game', tag: 'D. Game', title: "Market", text: "Play supermarket. Buy 6 apples and 7 pears.", sub: "Thank you!" },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Make a real fruit salad together.", image: "assets/img/fruit_salad.png" }
+      ]
+    }
+  ]    
 };
 
-    // --- LOGIC ---
     let currentData = null;
     let stepIndex = 0;
     let isRecording = false;
@@ -773,7 +1197,6 @@ const db = {
         const pct = ((idx + 1) / currentData.steps.length) * 100;
         document.getElementById('progress-bar').style.width = pct + '%';
 
-        // Next Button Logic
         const nextBtn = document.getElementById('next-btn');
         if (idx === currentData.steps.length - 1) {
             nextBtn.innerText = "Finish 🎉";
@@ -782,8 +1205,6 @@ const db = {
             nextBtn.innerText = "Next Step →";
             nextBtn.onclick = nextStep;
         }
-
-        // Render Content based on Type
         let html = `
             <div class="step-header">
                 <span class="step-tag">${step.tag}</span>
@@ -978,7 +1399,6 @@ const db = {
         document.getElementById('screen-lesson').classList.remove('active');
         document.getElementById('screen-report').classList.add('active');
         
-        // Populate Report
        const vocab = currentData.vocab || currentData.meta?.vocab || "";
        const phrase = currentData.phrase || currentData.meta?.phrase || ""; 
        document.getElementById('report-vocab').innerText = vocab;
