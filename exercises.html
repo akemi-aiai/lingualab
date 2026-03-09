@@ -9,528 +9,220 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
 
-<style>
-  :root {
-    --primary: #22d3ee;
-    --primary-light: #ecfeff;
-    --accent: #f97316;
-    --navy: #1f4e79;
-    --bg: #f8fafc;
-    --radius: 24px;
-    --text: #0f172a;
-    --muted: #64748b;
-    --line: #e2e8f0;
-    --shadow-soft: 0 4px 15px rgba(0,0,0,0.04);
-    --shadow-card: 0 20px 40px rgba(0,0,0,0.08);
-    --c1: #e0f2fe;
-    --c2: #dcfce7;
-    --c3: #fef3c7;
-    --c4: #fee2e2;
-  }
-
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
-  html,
-  body {
-    overflow-x: hidden;
-  }
-
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-    padding-top: 80px;
-  }
-
-  .navbar-left,
-  .navbar-right,
-  .hero-copy,
-  .content-wrapper,
-  .month-container,
-  .wiki-box,
-  .week-grid,
-  .week-card,
-  .footer-text {
-    min-width: 0;
-  }
-
-  .navbar-right a,
-  .hero-copy,
-  .hero-copy .cn-line,
-  .wiki-title,
-  .wiki-content,
-  .month-btn,
-  .week-title,
-  .week-desc,
-  .footer-text {
-    overflow-wrap: anywhere;
-    word-break: break-word;
-  }
-
-  /* NAVBAR */
-  .navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px 40px;
-    background: #fff;
-    box-shadow: 0 4px 20px rgba(0,0,0,.05);
-    height: 80px;
-  }
-
-  .navbar-left {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-  }
-
-  .nav-logo {
-    height: 50px;
-    width: auto;
-    display: block;
-  }
-
-  .nav-title {
-    font-size: 24px;
-    font-weight: 800;
-    color: var(--navy);
-    line-height: 1.1;
-  }
-
-  .navbar-right {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-
-  .navbar-right a {
-    color: var(--navy);
-    font-weight: 600;
-    text-decoration: none;
-    font-size: 14px;
-    transition: 0.3s;
-  }
-
-  .navbar-right a:hover {
-    color: var(--accent);
-  }
-
-  /* HERO */
-  .hero-compact {
-    padding: 60px 8% 140px;
-    text-align: center;
-    background: linear-gradient(135deg, var(--primary), #a78bfa);
-    color: #fff;
-    width: 100%;
-  }
-
-  .hero-compact h1 {
-    font-size: 42px;
-    font-weight: 800;
-    margin-bottom: 10px;
-    line-height: 1.15;
-  }
-
-  .hero-info {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    font-size: 18px;
-    flex-wrap: wrap;
-  }
-
-  .hero-copy {
-    max-width: 760px;
-    line-height: 1.6;
-    font-size: 17px;
-  }
-
-  .hero-copy .cn-line {
-    display: block;
-    font-size: 16px;
-    font-weight: 400;
-    opacity: 0.92;
-    margin-top: 6px;
-    line-height: 1.55;
-  }
-
-  /* CONTENT WRAPPER */
-  .content-wrapper {
-    max-width: 1100px;
-    margin: -100px auto 50px;
-    position: relative;
-    z-index: 10;
-    padding: 0 20px;
-  }
-
-  /* MONTH BUTTONS */
-  .month-container {
-    background: #fff;
-    border-radius: var(--radius);
-    padding: 30px 32px;
-    box-shadow: var(--shadow-card);
-    margin-bottom: 40px;
-    border: 1px solid var(--line);
-    text-align: center;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .month-btn {
-    flex: 0 0 auto;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 999px;
-    cursor: pointer;
-    font-weight: 800;
-    color: #475569;
-    transition: 0.2s;
-    font-size: 15px;
-    min-width: 72px;
-    text-align: center;
-    background: #f1f5f9;
-    line-height: 1.25;
-  }
-
-  .month-btn:hover {
-    transform: translateY(-2px);
-    filter: brightness(0.97);
-  }
-
-  .month-btn.active {
-    background: var(--navy);
-    color: #fff;
-    box-shadow: 0 4px 15px rgba(31, 78, 121, 0.3);
-    transform: scale(1.04);
-  }
-
-  /* WIKI BOX */
-  .wiki-box {
-    background: #fff7ed;
-    border-left: 5px solid var(--accent);
-    padding: 30px;
-    border-radius: 20px;
-    margin-bottom: 30px;
-    box-shadow: var(--shadow-soft);
-  }
-
-  .wiki-title {
-    font-weight: 800;
-    color: #c2410c;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-    font-size: 13px;
-    letter-spacing: 1px;
-    line-height: 1.35;
-  }
-
-  .wiki-content {
-    font-size: 16px;
-    line-height: 1.7;
-    color: #431407;
-  }
-
-  /* WEEK GRID */
-  .week-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 20px;
-  }
-
-  .week-card {
-    background: #fff;
-    border-radius: var(--radius);
-    padding: 30px 20px;
-    text-align: center;
-    cursor: pointer;
-    border: 2px solid transparent;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-    transition: 0.3s;
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    min-height: 220px;
-  }
-
-  .week-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--primary);
-    box-shadow: 0 20px 40px rgba(34, 211, 238, 0.15);
-  }
-
-  .week-number {
-    font-size: 20px;
-    font-weight: 800;
-    color: var(--primary);
-    background: var(--primary-light);
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 15px;
-    line-height: 1;
-    flex-shrink: 0;
-  }
-
-  .week-title {
-    font-size: 18px;
-    margin-bottom: 8px;
-    font-weight: 800;
-    color: var(--navy);
-    line-height: 1.35;
-  }
-
-  .week-desc {
-    font-size: 15px;
-    opacity: 0.78;
-    font-weight: 600;
-    line-height: 1.55;
-  }
-
-  .coming-soon {
-    opacity: 0.5;
-    pointer-events: none;
-    border: 1px dashed #cbd5e1;
-    background: #f8fafc;
-    box-shadow: none;
-  }
-
-  /* FOOTER */
-  footer {
-    background: #0f172a;
-    color: #94a3b8;
-    padding: 40px 8%;
-    text-align: center;
-    margin-top: 50px;
-  }
-
-  .footer-link {
-    color: #f97316;
-    text-decoration: none !important;
-  }
-
-  .footer-text {
-    font-size: 14px;
-    line-height: 1.65;
-    margin-top: 8px;
-  }
-
-  /* TABLET */
-  @media (max-width: 1024px) {
-    .navbar {
-      padding: 12px 24px;
-    }
-
-    .nav-title {
-      font-size: 22px;
-    }
-
-    .navbar-right {
-      gap: 14px;
-    }
-
-    .navbar-right a {
-      font-size: 13px;
-    }
-
-    .hero-compact {
-      padding: 56px 6% 130px;
-    }
-
-    .hero-compact h1 {
-      font-size: 38px;
-    }
-
-    .hero-copy {
-      font-size: 16px;
-      line-height: 1.62;
-    }
-
-    .hero-copy .cn-line {
-      font-size: 15px;
-    }
-
-    .content-wrapper {
-      padding: 0 16px;
-    }
-
-    .month-container {
-      padding: 24px;
-    }
-
-    .wiki-box {
-      padding: 24px;
-    }
-
-    .wiki-content {
-      font-size: 15px;
-      line-height: 1.65;
-    }
-
-    .week-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .week-card {
-      min-height: 210px;
-      padding: 26px 18px;
-    }
-  }
-
-  /* MOBILE */
-  @media (max-width: 700px) {
-    body {
-      padding-top: 128px;
-    }
-
-    .navbar {
-      padding: 10px 16px;
-      flex-direction: column;
-      gap: 10px;
-      height: auto;
-    }
-
-    .navbar-left {
-      width: 100%;
-      justify-content: center;
-    }
-
-    .navbar-right {
-      width: 100%;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px 12px;
-      border-top: 1px solid #f1f5f9;
-      padding-top: 10px;
-    }
-
-    .navbar-right a {
-      font-size: 13px;
-      text-align: center;
-      white-space: normal;
-    }
-
-    .nav-logo {
-      height: 40px;
-    }
-
-    .nav-title {
-      font-size: 20px;
-    }
-
-    .hero-compact {
-      padding: 46px 16px 110px;
-    }
-
-    .hero-compact h1 {
-      font-size: 30px;
-      line-height: 1.2;
-    }
-
-    .hero-copy {
-      font-size: 16px;
-      line-height: 1.65;
-    }
-
-    .hero-copy .cn-line {
-      font-size: 15px;
-      line-height: 1.55;
-    }
-
-    .content-wrapper {
-      margin-top: -72px;
-      padding: 0 14px;
-    }
-
-    .month-container {
-      padding: 18px;
-      gap: 10px;
-      margin-bottom: 24px;
-    }
-
-    .month-btn {
-      width: calc(50% - 5px);
-      min-width: 0;
-      padding: 12px 14px;
-      font-size: 14px;
-      flex-grow: 0;
-    }
-
-    .wiki-box {
-      padding: 20px 18px;
-      border-radius: 18px;
-      margin-bottom: 24px;
-    }
-
-    .wiki-title {
-      font-size: 12px;
-    }
-
-    .wiki-content {
-      font-size: 15px;
-      line-height: 1.7;
-    }
-
-    .week-grid {
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
-
-    .week-card {
-      min-height: 0;
-      padding: 24px 18px;
-    }
-
-    .week-number {
-      width: 48px;
-      height: 48px;
-      font-size: 18px;
-      margin-bottom: 14px;
-    }
-
-    .week-title {
-      font-size: 18px;
-      line-height: 1.35;
-    }
-
-    .week-desc {
-      font-size: 15px;
-      line-height: 1.6;
-    }
-
-    .footer-text {
-      font-size: 14px;
-      line-height: 1.6;
-    }
-  }
-
-  @media (max-width: 420px) {
-    .month-btn {
-      width: 100%;
-    }
-  }
-</style>
+    <style>
+        :root { 
+            --primary: #22d3ee; 
+            --primary-light: #ecfeff;
+            --accent: #f97316;
+            --navy: #1f4e79; 
+            --bg: #f8fafc; 
+            --white: #ffffff; 
+            --orange: #f97316; 
+            --green: #10b981;
+            --radius: 24px;
+            --text: #0f172a;
+            --muted: #64748b;
+            --line: #e2e8f0;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --shadow-soft: 0 4px 15px rgba(0,0,0,0.04);
+            --shadow-card: 0 20px 40px rgba(0,0,0,0.08);
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        html, body { overflow-x: hidden; }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: var(--bg); 
+            color: var(--text); 
+            line-height: 1.6; 
+            padding-top: 80px; 
+            padding-bottom: 90px; /* Место для нижней панели */
+        }
+
+        .navbar-left, .navbar-right, .hero-info { min-width: 0; }
+        .navbar-right a, .hero-info { overflow-wrap: anywhere; word-break: break-word; }
+        
+        /* --- ICONS --- */
+        .icon { width: 24px; height: 24px; fill: currentColor; vertical-align: text-bottom; }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 15px 40px; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,.05);
+            height: 80px;
+        }
+        .navbar-left { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .nav-logo { height: 40px; width: auto; display: block; }
+        .nav-title { font-size: 24px; font-weight: 800; color: var(--navy); line-height: 1.1; }
+        .navbar-right { display: flex; align-items: center; gap: 20px; }
+        .navbar-right a { color: var(--navy); font-weight: 600; text-decoration: none; font-size: 14px; transition: 0.3s; }
+        .navbar-right a:hover { color: var(--accent); }
+
+        /* PARENT TOGGLE */
+        .parent-switch {
+            display: flex; align-items: center; gap: 8px; 
+            background: #f1f5f9; padding: 6px 12px; border-radius: 99px; cursor: pointer; border: 1px solid #e2e8f0;
+        }
+        .parent-switch.active { background: var(--navy); color: white; border-color: var(--navy); }
+        .switch-label { font-size: 12px; font-weight: 700; text-transform: uppercase; }
+
+        /* --- PROGRESS BAR --- */
+        .progress-container {
+            position: fixed; top: 80px; left: 0; width: 100%; height: 6px; background: #e2e8f0; z-index: 999;
+        }
+        .progress-fill { height: 100%; background: var(--orange); width: 0%; transition: width 0.5s ease; }
+
+        /* --- HERO COMPACT --- */
+        .hero-compact {
+            padding: 60px 8% 140px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), #a78bfa);
+            color: #fff;
+            width: 100%;
+        }
+        .hero-compact h1 { font-size: 42px; font-weight: 800; margin-bottom: 10px; line-height: 1.15; }
+        .hero-info { display: flex; justify-content: center; align-items: center; gap: 20px; font-size: 18px; opacity: 0.95; }
+
+        /* --- CONTAINER --- */
+        .container { 
+            max-width: 700px; margin: -100px auto 0; 
+            padding: 0 20px; position: relative; z-index: 10;
+        }
+
+        /* --- CARDS & SCREENS --- */
+        .screen { display: none; animation: fadeUp 0.4s ease; }
+        .screen.active { display: block; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .card {
+            background: white; border-radius: var(--radius); padding: 40px;
+            box-shadow: var(--shadow-card); margin-bottom: 30px; text-align: center;
+            border: 1px solid var(--line);
+        }
+
+        /* --- START SCREEN --- */
+        .trust-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 20px; }
+        .badge { background: #f0f9ff; color: var(--navy); padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 700; }
+        
+        .promise-box { margin: 25px 0; text-align: left; background: #f8fafc; padding: 20px; border-radius: 16px; }
+        .promise-item { display: flex; gap: 10px; margin-bottom: 12px; font-size: 15px; color: #475569; align-items: center; }
+        .check-icon { color: var(--green); font-weight: bold; }
+
+        /* --- LESSON STEPS --- */
+        .step-header { margin-bottom: 20px; }
+        .step-tag { 
+            color: var(--primary); font-weight: 800; text-transform: uppercase; 
+            font-size: 12px; letter-spacing: 1px; display: block; margin-bottom: 5px;
+        }
+        .step-title { font-size: 28px; font-weight: 800; color: var(--navy); line-height: 1.3; }
+        
+        .parent-tip {
+            display: none; text-align: left; background: #fff7ed; 
+            border-left: 4px solid var(--orange); padding: 15px; 
+            border-radius: 8px; margin-bottom: 25px; font-size: 14px; color: #9a3412;
+        }
+        
+        /* Flashcards Grid */
+        .flashcards-grid{ display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 15px; margin: 20px 0; }
+        .flashcard{
+            background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 16px;
+            cursor: pointer; transition: 0.2s; aspect-ratio: 1 / 1; width: 100%; padding: 12px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; position: relative; overflow: hidden;
+        }
+        .flashcard:hover{ border-color: var(--primary); background: #ecfeff; transform: scale(1.03); }
+        .fc-img{ width: 68%; height: 52%; object-fit: contain; display: block; margin: 0 auto 10px; }
+        .fc-icon{ font-size: 34px; display: block; margin-bottom: 8px; }
+        .fc-word{ font-weight: 700; color: var(--navy); font-size: 14px; }
+        .flashcard-zh{ font-size: 12px; color: #64748b; margin-bottom: 5px; }
+
+        /* Audio Controls */
+        .audio-control {
+            background: #f1f5f9; padding: 20px; border-radius: 16px; 
+            display: flex; align-items: center; gap: 15px; margin: 20px 0;
+        }
+        .play-btn {
+            width: 50px; height: 50px; border-radius: 50%; border: none; background: var(--primary); 
+            color: white; cursor: pointer; display: flex; justify-content: center; align-items: center; flex-shrink: 0;
+        }
+        .mic-btn {
+            width: 60px; height: 60px; border-radius: 50%; border: none; background: #ef4444; 
+            color: white; cursor: pointer; display: flex; justify-content: center; align-items: center;
+            box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3); transition: 0.2s; flex-shrink: 0;
+        }
+        .mic-btn:hover { transform: scale(1.1); }
+        .mic-btn.recording { animation: pulse 1.5s infinite; background: #b91c1c; }
+
+        /* Offscreen Mission */
+        .mission-box {
+            border: 2px dashed #cbd5e1; padding: 20px; border-radius: 16px; margin: 20px 0;
+            background: #f8fafc; color: #475569;
+        }
+
+        /* Footer Nav (Bottom Bar) */
+        .bottom-nav {
+            position: fixed; bottom: 0; left: 0; width: 100%; 
+            background: white; padding: 15px 20px; 
+            border-top: 1px solid #e2e8f0; display: flex; gap: 10px; z-index: 1000;
+            justify-content: center; box-shadow: 0 -4px 15px rgba(0,0,0,0.03);
+        }
+        .nav-btn {
+            background: var(--navy); color: white; border: none; 
+            padding: 16px 32px; border-radius: 14px; font-size: 16px; 
+            font-weight: 700; cursor: pointer; width: 100%; max-width: 600px; transition: 0.2s;
+        }
+        .nav-btn:hover { background: #334155; }
+        .nav-btn.secondary { background: white; color: var(--navy); border: 2px solid #e2e8f0; }
+
+        /* REPORT CARD */
+        .report-list { text-align: left; margin: 20px 0; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; }
+        .report-item { margin-bottom: 10px; font-size: 15px; color: #334155; display: flex; align-items: center; gap: 10px; }
+
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6); } 70% { box-shadow: 0 0 0 15px rgba(239, 68, 68, 0); } }
+
+        /* --- RESPONSIVE TABLET --- */
+        @media (max-width: 1024px) {
+            .navbar { padding: 12px 24px; }
+            .nav-title { font-size: 22px; }
+            .navbar-right { gap: 14px; }
+            .navbar-right a { font-size: 13px; }
+            .hero-compact { padding: 56px 6% 130px; }
+            .hero-compact h1 { font-size: 38px; }
+        }
+
+        /* --- RESPONSIVE MOBILE --- */
+        @media (max-width: 700px) {
+            body { padding-top: 128px; }
+            
+            .navbar { padding: 10px 16px; flex-direction: column; gap: 10px; height: auto; }
+            .navbar-left { width: 100%; justify-content: center; }
+            .navbar-right { width: 100%; justify-content: center; flex-wrap: wrap; gap: 10px 12px; border-top: 1px solid #f1f5f9; padding-top: 10px; }
+            .navbar-right a { font-size: 13px; text-align: center; white-space: normal; }
+            
+            .nav-logo { height: 40px; }
+            .nav-title { font-size: 20px; }
+            
+            .progress-container { top: 110px; } /* Сдвигаем из-за высокой мобильной навигации */
+            
+            .hero-compact { padding: 46px 16px 110px; }
+            .hero-compact h1 { font-size: 30px; line-height: 1.2; }
+            
+            .container { margin-top: -72px; padding: 0 14px; }
+            
+            .card { padding: 25px 20px; } /* Меньше отступов внутри карточки на мобильном */
+            .step-title { font-size: 24px; }
+            
+            .flashcards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+            
+            .audio-control { flex-direction: column; text-align: center; padding: 15px; }
+            
+            .bottom-nav { padding: 12px 15px; }
+            .nav-btn { padding: 14px 20px; font-size: 15px; }
+        }
+    </style>
 </head>
 <body>
 
