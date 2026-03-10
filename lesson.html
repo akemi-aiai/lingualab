@@ -345,7 +345,7 @@ const db = {
             { w:"Pencil", zh:"铅笔", img:"assets/img/pencil.png", audio:"assets/audio/pencil.mp3" }
           ]
         },
-        { type:'phrase', tag:'C. Key Sentences', title:"Phrase of the Day", text:"It is a book.", script:"Point to a book and ask: 'What is this?'", parentTip:"Say the word first, let them repeat." },
+        { type:'phrase', tag:'C. Key Sentences', title:"Phrase of the Day", text:"It is a book.", script: "Point to a book and ask: 'What is this?'", parentTip:"Say the word first, let them repeat." },
         { type:'game', tag:'D. Game', title:"Hide & Seek", text:"Hide a book. Ask: 'Where is the book?'", sub:"Child finds it.", img:"assets/img/find.png" },
         { type:'offscreen', tag:'E. Mission', title:"Real World", text:"Put a book in a bag.", image:"assets/img/book_and_bag.png" }
       ]
@@ -1277,7 +1277,6 @@ const db = {
         else if (step.type === 'game') {
             html += `
                 <div style="padding:40px; background:#fff7ed; border-radius:20px; border:2px dashed #fed7aa;">
-                    <div style="font-size:50px; margin-bottom:10px;">🎲</div>
                     <h3 style="color:#9a3412; margin-bottom:10px;">${step.text}</h3>
                     <p style="color:#64748b;">${step.sub}</p>
                 </div>
@@ -1297,9 +1296,8 @@ const db = {
                             >
                         ` : ''}
             
-                        <h3 style="color:#334155; margin-bottom:10px;">Off-Screen Mission</h3>
+                        <h3 style="color:#334155; margin-bottom:10px;">Do it now</h3>
                         <p style="font-size:18px; font-weight:600; color:var(--navy);">${step.text}</p>
-                        <p style="color:#64748b; font-size:13px; margin-top:10px;">Put the phone down and go!</p>
                     </div>
                 `;
             }
