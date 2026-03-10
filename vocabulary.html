@@ -767,60 +767,145 @@
   </footer>
 
 <script>
-    const dictionary = {
-        "family": { 
-            title: "Family & Friends", 
-            wiki: "<div><b>Focus (今日词汇):</b> Family members and 'This is...'.</div><div><b>Play (互动小贴士):</b> Point to real family photos and say the words together! (指着家里的全家福，一起大声练习吧！)</div>", 
-            words: [
-                { id: "daddy", en: "Daddy", pinyin: "bà ba", zh: "爸爸", sentence: "Good morning Daddy", img: "assets/img/daddy.png" },
-                { id: "mommy", en: "Mommy", pinyin: "mā ma", zh: "妈妈", sentence: "Good morning Mommy", img: "assets/img/mommy.png" },
-                { id: "boy", en: "Boy", pinyin: "nán hái", zh: "男孩", sentence: "You are a boy", img: "assets/img/boy.png" },
-                { id: "girl", en: "Girl", pinyin: "nǚ hái", zh: "女孩", sentence: "You are a girl", img: "assets/img/girl.png" },
-                { id: "friend", en: "Friend", pinyin: "péng you", zh: "朋友", sentence: "This is my friend", img: "assets/img/friend.png" }
-            ] 
-        },
-        "school": { 
-            title: "My School", 
-            wiki: "<div><b>Focus (今日词汇):</b> School objects and the letter 'B'.</div><div><b>Play (互动小贴士):</b> Put a real book in a bag and say 'It is a book!' (把书放进书包里，一起练习句子！)</div>", 
-            words: [
-                { id: "bag", en: "Bag", pinyin: "shū bāo", zh: "书包", sentence: "Open your bag", img: "assets/img/bag.png" },
-                { id: "book", en: "Book", pinyin: "shū", zh: "书", sentence: "It is a book", img: "assets/img/book.png" },
-                { id: "pencil", en: "Pencil", pinyin: "qiān bǐ", zh: "铅笔", sentence: "This is a pencil", img: "assets/img/pencil.png" }
-            ] 
-        },
-        "face": { 
-            title: "My Face", 
-            wiki: "<div><b>Focus (今日词汇):</b> Facial parts and 'This is my...'.</div><div><b>Play (互动小贴士):</b> Look in a mirror together and touch your nose/eyes! (一起照镜子，边摸五官边说单词！)</div>", 
-            words: [
-                { id: "eye", en: "Eye", pinyin: "yǎn jing", zh: "眼睛", sentence: "Close your eyes", img: "assets/img/eye.png" },
-                { id: "nose", en: "Nose", pinyin: "bí zi", zh: "鼻子", sentence: "This is my nose", img: "assets/img/nose.png" },
-                { id: "mouth", en: "Mouth", pinyin: "zuǐ ba", zh: "嘴巴", sentence: "My mouth is big", img: "assets/img/mouth.png" },
-                { id: "ear", en: "Ear", pinyin: "ěr duo", zh: "耳朵", sentence: "Touch your ear", img: "assets/img/ear.png" },
-                { id: "hair", en: "Hair", pinyin: "tóu fa", zh: "头发", sentence: "Oh my hair!", img: "assets/img/hair.png" }
-            ] 
-        },
-        "animals": { 
-            title: "Animals", 
-            wiki: "<div><b>Focus (今日词汇):</b> Farm and wild animals.</div><div><b>Play (互动小贴士):</b> Make funny animal noises together! (一起模仿小动物的叫声吧！)</div>", 
-            words: [
-                { id: "cow", en: "Cow", pinyin: "niú", zh: "牛", sentence: "It is a cow", img: "assets/img/cow.png" },
-                { id: "pig", en: "Pig", pinyin: "zhū", zh: "猪", sentence: "One pig", img: "assets/img/pig.png" },
-                { id: "panda", en: "Panda", pinyin: "xióng māo", zh: "熊猫", sentence: "Look at the panda", img: "assets/img/panda.png" },
-                { id: "tiger", en: "Tiger", pinyin: "lǎo hǔ", zh: "老虎", sentence: "Two tigers", img: "assets/img/tiger.png" },
-                { id: "monkey", en: "Monkey", pinyin: "hóu zi", zh: "猴子", sentence: "Act like a monkey", img: "assets/img/monkey.png" }
-            ] 
-        },
-        "transport": { 
-            title: "Transport", 
-            wiki: "<div> <b>Focus (今日词汇):</b> Vehicles and traffic safety.</div><div> <b>Play (互动小贴士):</b> Pretend to drive around the room. Red means Stop! (在房间里假装开车，记住红灯停哦！)</div>", 
-            words: [
-                { id: "car", en: "Car", pinyin: "qì chē", zh: "汽车", sentence: "Look at the car", img: "assets/img/car.png" },
-                { id: "bus", en: "Bus", pinyin: "gōng jiāo chē", zh: "公交车", sentence: "It is a bus", img: "assets/img/bus.png" },
-                { id: "bike", en: "Bike", pinyin: "zì xíng chē", zh: "自行车", sentence: "Oh my bike", img: "assets/img/bike.png" },
-                { id: "taxi", en: "Taxi", pinyin: "chū zū chē", zh: "出租车", sentence: "Stop the taxi", img: "assets/img/taxi.png" }
-            ] 
-        }
-    };
+const dictionary = {
+    "family": { 
+        title: "Family & Friends", 
+        wiki: "<div><b>Focus (今日词汇):</b> Family members, greetings, and simple introductions.</div><div><b>Play (互动小贴士):</b> Point to real family photos and say: 'This is Grandma' / 'This is my friend.' (指着家里的照片，一起练习家庭成员和介绍句型。)</div>", 
+        words: [
+            { id: "daddy", en: "Daddy", pinyin: "bà ba", zh: "爸爸", sentence: "Good morning, Daddy.", img: "assets/img/daddy.png" },
+            { id: "mommy", en: "Mommy", pinyin: "mā ma", zh: "妈妈", sentence: "Good morning, Mommy.", img: "assets/img/mommy.png" },
+            { id: "grandma", en: "Grandma", pinyin: "nǎi nai / wài pó", zh: "奶奶 / 外婆", sentence: "How are you, Grandma?", img: "assets/img/grandma.png" },
+            { id: "grandpa", en: "Grandpa", pinyin: "yé ye / wài gōng", zh: "爷爷 / 外公", sentence: "How are you, Grandpa?", img: "assets/img/grandpa.png" },
+            { id: "aunt", en: "Aunt", pinyin: "ā yí / gū gu", zh: "阿姨 / 姑姑", sentence: "Hello, Aunt.", img: "assets/img/aunt.png" },
+            { id: "uncle", en: "Uncle", pinyin: "shū shu / jiù jiu", zh: "叔叔 / 舅舅", sentence: "Hello, Uncle.", img: "assets/img/uncle.png" },
+            { id: "boy", en: "Boy", pinyin: "nán hái", zh: "男孩", sentence: "I am a boy.", img: "assets/img/boy.png" },
+            { id: "girl", en: "Girl", pinyin: "nǚ hái", zh: "女孩", sentence: "I am a girl.", img: "assets/img/girl.png" },
+            { id: "friend", en: "Friend", pinyin: "péng you", zh: "朋友", sentence: "This is my friend.", img: "assets/img/friend.png" }
+        ] 
+    },
+
+    "school": { 
+        title: "My School", 
+        wiki: "<div><b>Focus (今日词汇):</b> School objects and simple classroom actions.</div><div><b>Play (互动小贴士):</b> Put a real book in a bag and say: 'It is a book!' (把书放进书包里，一起练习句子吧！)</div>", 
+        words: [
+            { id: "bag", en: "Bag", pinyin: "shū bāo", zh: "书包", sentence: "Open your bag.", img: "assets/img/bag.png" },
+            { id: "book", en: "Book", pinyin: "shū", zh: "书", sentence: "It is a book.", img: "assets/img/book.png" },
+            { id: "pencil", en: "Pencil", pinyin: "qiān bǐ", zh: "铅笔", sentence: "This is a pencil.", img: "assets/img/pencil.png" },
+            { id: "teacher", en: "Teacher", pinyin: "lǎo shī", zh: "老师", sentence: "Hello, Teacher.", img: "assets/img/teacher.png" }
+        ] 
+    },
+
+    "face": { 
+        title: "My Face", 
+        wiki: "<div><b>Focus (今日词汇):</b> Face parts and simple body sentences.</div><div><b>Play (互动小贴士):</b> Look in a mirror together and touch your nose, eyes, and ears. (一起照镜子，边摸五官边说单词！)</div>", 
+        words: [
+            { id: "eye", en: "Eye", pinyin: "yǎn jing", zh: "眼睛", sentence: "Close your eyes.", img: "assets/img/eye.png" },
+            { id: "nose", en: "Nose", pinyin: "bí zi", zh: "鼻子", sentence: "This is my nose.", img: "assets/img/nose.png" },
+            { id: "mouth", en: "Mouth", pinyin: "zuǐ ba", zh: "嘴巴", sentence: "This is my mouth.", img: "assets/img/mouth.png" },
+            { id: "ear", en: "Ear", pinyin: "ěr duo", zh: "耳朵", sentence: "Touch your ear.", img: "assets/img/ear.png" },
+            { id: "hair", en: "Hair", pinyin: "tóu fa", zh: "头发", sentence: "My hair!", img: "assets/img/hair.png" },
+            { id: "face", en: "Face", pinyin: "liǎn", zh: "脸", sentence: "This is my face.", img: "assets/img/face.png" }
+        ] 
+    },
+
+    "animals": { 
+        title: "Farm & Zoo Animals", 
+        wiki: "<div><b>Focus (今日词汇):</b> Farm animals and zoo animals.</div><div><b>Play (互动小贴士):</b> Make funny animal noises and act like each animal together! (一起模仿动物叫声和动作吧！)</div>", 
+        words: [
+            { id: "cow", en: "Cow", pinyin: "niú", zh: "牛", sentence: "It is a cow.", img: "assets/img/cow.png" },
+            { id: "pig", en: "Pig", pinyin: "zhū", zh: "猪", sentence: "One pig.", img: "assets/img/pig.png" },
+            { id: "duck", en: "Duck", pinyin: "yā zi", zh: "鸭子", sentence: "Walk like a duck.", img: "assets/img/duck.png" },
+            { id: "hen", en: "Hen", pinyin: "mǔ jī", zh: "母鸡", sentence: "It is a hen.", img: "assets/img/hen.png" },
+            { id: "panda", en: "Panda", pinyin: "xióng māo", zh: "熊猫", sentence: "Look at the panda.", img: "assets/img/panda.png" },
+            { id: "tiger", en: "Tiger", pinyin: "lǎo hǔ", zh: "老虎", sentence: "Two tigers.", img: "assets/img/tiger.png" },
+            { id: "bear", en: "Bear", pinyin: "xióng", zh: "熊", sentence: "It is a bear.", img: "assets/img/bear.png" },
+            { id: "monkey", en: "Monkey", pinyin: "hóu zi", zh: "猴子", sentence: "Act like a monkey.", img: "assets/img/monkey.png" }
+        ] 
+    },
+
+    "transport": { 
+        title: "Transport & Safety", 
+        wiki: "<div><b>Focus (今日词汇):</b> Vehicles and simple traffic language.</div><div><b>Play (互动小贴士):</b> Pretend to drive around the room. Red means stop, green means go! (在房间里假装开车，练习交通词汇吧！)</div>", 
+        words: [
+            { id: "car", en: "Car", pinyin: "qì chē", zh: "汽车", sentence: "Look at the car.", img: "assets/img/car.png" },
+            { id: "bus", en: "Bus", pinyin: "gōng jiāo chē", zh: "公交车", sentence: "It is a bus.", img: "assets/img/bus.png" },
+            { id: "bike", en: "Bike", pinyin: "zì xíng chē", zh: "自行车", sentence: "Oh, my bike!", img: "assets/img/bike.png" },
+            { id: "taxi", en: "Taxi", pinyin: "chū zū chē", zh: "出租车", sentence: "It is a taxi.", img: "assets/img/taxi.png" },
+            { id: "wheel", en: "Wheel", pinyin: "lún zi", zh: "轮子", sentence: "Find a wheel.", img: "assets/img/wheel.png" }
+        ] 
+    },
+
+    "pets": { 
+        title: "My Pets", 
+        wiki: "<div><b>Focus (今日词汇):</b> Pet animals and 'I have...'.</div><div><b>Play (互动小贴士):</b> Act like each pet and say the sentence together. (一边模仿小宠物，一边练习 'I have...' 句型！)</div>", 
+        words: [
+            { id: "bird", en: "Bird", pinyin: "niǎo", zh: "鸟", sentence: "I have a bird.", img: "assets/img/bird.png" },
+            { id: "fish", en: "Fish", pinyin: "yú", zh: "鱼", sentence: "It is a fish.", img: "assets/img/fish.png" },
+            { id: "rabbit", en: "Rabbit", pinyin: "tù zi", zh: "兔子", sentence: "I have a rabbit.", img: "assets/img/rabbit.png" },
+            { id: "turtle", en: "Turtle", pinyin: "wū guī", zh: "乌龟", sentence: "I have a turtle.", img: "assets/img/turtle.png" },
+            { id: "dog", en: "Dog", pinyin: "gǒu", zh: "狗", sentence: "I have a dog.", img: "assets/img/dog.png" },
+            { id: "pet", en: "Pet", pinyin: "chǒng wù", zh: "宠物", sentence: "It is my pet.", img: "assets/img/pet.png" }
+        ] 
+    },
+
+    "colors": { 
+        title: "Colors", 
+        wiki: "<div><b>Focus (今日词汇):</b> Basic colors and answering 'What color is it?'</div><div><b>Play (互动小贴士):</b> Point to toys or clothes and ask: 'What color is it?' (指着玩具或衣服，一起练习颜色问答！)</div>", 
+        words: [
+            { id: "red", en: "Red", pinyin: "hóng sè", zh: "红色", sentence: "It is red.", img: "assets/img/red.png" },
+            { id: "blue", en: "Blue", pinyin: "lán sè", zh: "蓝色", sentence: "It is blue.", img: "assets/img/blue.png" },
+            { id: "yellow", en: "Yellow", pinyin: "huáng sè", zh: "黄色", sentence: "It is yellow.", img: "assets/img/yellow.png" },
+            { id: "green", en: "Green", pinyin: "lǜ sè", zh: "绿色", sentence: "It is green.", img: "assets/img/green.png" },
+            { id: "orange_color", en: "Orange", pinyin: "chéng sè", zh: "橙色", sentence: "It is orange.", img: "assets/img/orange_color.png" },
+            { id: "color", en: "Color", pinyin: "yán sè", zh: "颜色", sentence: "What color is it?", img: "assets/img/color.png" }
+        ] 
+    },
+
+    "park": { 
+        title: "In the Park", 
+        wiki: "<div><b>Focus (今日词汇):</b> Nature words and simple describing sentences.</div><div><b>Play (互动小贴士):</b> Go outside, point to real things, and say the words together. (去户外指着真实的花草树木，一起说单词吧！)</div>", 
+        words: [
+            { id: "flower", en: "Flower", pinyin: "huā", zh: "花", sentence: "It's a flower.", img: "assets/img/flower.png" },
+            { id: "grass", en: "Grass", pinyin: "cǎo", zh: "草", sentence: "Touch the grass.", img: "assets/img/grass.png" },
+            { id: "park", en: "Park", pinyin: "gōng yuán", zh: "公园", sentence: "Let's go to the park.", img: "assets/img/park.png" },
+            { id: "insect", en: "Insect", pinyin: "kūn chóng", zh: "昆虫", sentence: "Look at the insect.", img: "assets/img/insect.png" },
+            { id: "kite", en: "Kite", pinyin: "fēng zheng", zh: "风筝", sentence: "It's a kite.", img: "assets/img/kite.png" },
+            { id: "tree", en: "Tree", pinyin: "shù", zh: "树", sentence: "It is a tree.", img: "assets/img/tree.png" }
+        ] 
+    },
+
+    "food": { 
+        title: "Yummy Food & Drinks", 
+        wiki: "<div><b>Focus (今日词汇):</b> Food, drinks, and 'I like...'.</div><div><b>Play (互动小贴士):</b> Use snack time to ask: 'Do you like milk?' / 'I like cake.' (吃点心的时候自然练习食物和饮料词汇！)</div>", 
+        words: [
+            { id: "bread", en: "Bread", pinyin: "miàn bāo", zh: "面包", sentence: "I like bread.", img: "assets/img/bread.png" },
+            { id: "cake", en: "Cake", pinyin: "dàn gāo", zh: "蛋糕", sentence: "I like cake.", img: "assets/img/cake.png" },
+            { id: "food", en: "Food", pinyin: "shí wù", zh: "食物", sentence: "Yummy food!", img: "assets/img/food.png" },
+            { id: "juice", en: "Juice", pinyin: "guǒ zhī", zh: "果汁", sentence: "I like juice.", img: "assets/img/juice.png" },
+            { id: "milk", en: "Milk", pinyin: "niú nǎi", zh: "牛奶", sentence: "I like milk.", img: "assets/img/milk.png" },
+            { id: "water", en: "Water", pinyin: "shuǐ", zh: "水", sentence: "Drink some water.", img: "assets/img/water.png" },
+            { id: "jam", en: "Jam", pinyin: "guǒ jiàng", zh: "果酱", sentence: "Jam on bread.", img: "assets/img/jam.png" }
+        ] 
+    },
+
+    "fruit": { 
+        title: "Fruit & Numbers", 
+        wiki: "<div><b>Focus (今日词汇):</b> Fruit words, counting, and quantity sentences.</div><div><b>Play (互动小贴士):</b> Count real fruit or toys and say: 'I have five apples.' (一边数水果，一边练习数量句型！)</div>", 
+        words: [
+            { id: "apple", en: "Apple", pinyin: "píng guǒ", zh: "苹果", sentence: "I have an apple.", img: "assets/img/apple.png" },
+            { id: "banana", en: "Banana", pinyin: "xiāng jiāo", zh: "香蕉", sentence: "I like bananas.", img: "assets/img/banana.png" },
+            { id: "pear", en: "Pear", pinyin: "lí", zh: "梨", sentence: "I have ten pears.", img: "assets/img/pear.png" },
+            { id: "orange_fruit", en: "Orange", pinyin: "chéng zi", zh: "橙子", sentence: "Peel an orange.", img: "assets/img/orange.png" },
+            { id: "four", en: "Four", pinyin: "sì", zh: "四", sentence: "Four apples.", img: "assets/img/four.png" },
+            { id: "five", en: "Five", pinyin: "wǔ", zh: "五", sentence: "Five apples.", img: "assets/img/five.png" },
+            { id: "six", en: "Six", pinyin: "liù", zh: "六", sentence: "Six bananas.", img: "assets/img/six.png" },
+            { id: "seven", en: "Seven", pinyin: "qī", zh: "七", sentence: "Seven pears.", img: "assets/img/seven.png" },
+            { id: "eight", en: "Eight", pinyin: "bā", zh: "八", sentence: "Eight bananas.", img: "assets/img/eight.png" },
+            { id: "nine", en: "Nine", pinyin: "jiǔ", zh: "九", sentence: "Nine pears.", img: "assets/img/nine.png" },
+            { id: "ten", en: "Ten", pinyin: "shí", zh: "十", sentence: "Ten pears.", img: "assets/img/ten.png" }
+        ] 
+    }
+};
     
     let learnedCards = new Set();
     let currentCategoryWordsCount = 0;
