@@ -1053,7 +1053,7 @@ const db = {
         },
         { type: 'phrase', tag: 'C. Key Sentences', title: "Preferences", text: "I like juice.", script: "Pour imaginary juice.", parentTip: "Ask: Do you like juice?" },
         { type: 'game', tag: 'D. Game', title: "Cheers!", text: "Clink your cups together and say 'I like milk!'", sub: "Cheers!" },
-        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Pour a glass of milk together.", image: "assets/img/pour_milk.png" }
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Pour a glass of milk.", image: "assets/img/pour_milk.png" }
       ]
     },
     {
@@ -1070,7 +1070,7 @@ const db = {
         },
         { type: 'phrase', tag: 'C. Key Sentences', title: "Phonics", text: "J is for Juice.", script: "Say the 'j-j-j' sound clearly.", parentTip: "Put some jam on bread and say the word." },
         { type: 'game', tag: 'D. Game', title: "Spread the Jam", text: "Pretend to spread jam on child's hand. Say 'Jam!'", sub: "Sticky jam." },
-        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Eat some bread with sweet jam.", image: "assets/img/eat_jam.png" }
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Make a jam sandwich", image: "assets/img/eat_jam.png" }
       ]
     },
     {
@@ -1094,32 +1094,32 @@ const db = {
 
   "Aug": [
     {
-      unit: "Unit 6: I like fruit", vocab: "Apple, Banana", phrase: "I have six apples.",
+      unit: "Unit 6: I like fruit", vocab: "Apple, Banana", phrase: "I have four apples.",
       tips: "Combine fruit words with numbers you learned earlier.",
       steps: [
-        { type: 'warmup', tag: 'A. Warm Up', title: "Count 6", text: "Clap your hands 6 times.", action: "1..2..3..4..5..6!", phrase: "Six." },
+        { type: 'warmup', tag: 'A. Warm Up', title: "Count 6", text: "Clap your hands five times.", action: "1..2..3..4..5!", phrase: "Five." },
         { type: 'words', tag: 'B. Key Words', title: "Fruit", 
           items: [
             { w:"Apple",  zh:"苹果", img:"assets/img/apple.png", audio:"assets/audio/apple.mp3" },
-            { w:"Banana", zh:"香蕉", img:"assets/img/banana.png", audio:"assets/audio/banana.mp3" },
-            { w:"Fruit",  zh:"水果", img:"assets/img/fruit.png", audio:"assets/audio/fruit.mp3" }
+            { w:"Four", zh:"四", img:"assets/img/four.png", audio:"assets/audio/four.mp3" },
+            { w:"Five",  zh:"五", img:"assets/img/five.png", audio:"assets/audio/five.mp3" }
           ] 
         },
-        { type: 'phrase', tag: 'C. Key Sentences', title: "Quantity", text: "I have six apples.", script: "Count 6 real or toy apples.", parentTip: "Point to each item while counting." },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Quantity", text: "I have five apples.", script: "Count 5 real or toy apples.", parentTip: "Point to each item while counting." },
         { type: 'game', tag: 'D. Game', title: "Monkey Eat", text: "Pretend to be a monkey peeling a banana.", sub: "I like bananas." },
         { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Wash a real apple and eat it.", image: "assets/img/wash_apple.png" }
       ]
     },
     {
-      unit: "Unit 6: More Fruit", vocab: "Pear, Orange", phrase: "I have seven oranges.",
+      unit: "Unit 6: More Fruit", vocab: "Pear, Orange", phrase: "I have eight bananas.",
       tips: "Practice plural 's' at the end of words (pears, oranges).",
       steps: [
-        { type: 'warmup', tag: 'A. Warm Up', title: "Count 7", text: "Stomp your feet 7 times.", action: "Stomp stomp!", phrase: "Seven." },
+        { type: 'warmup', tag: 'A. Warm Up', title: "Count 8", text: "Stomp your feet 8 times.", action: "Stomp stomp!", phrase: "Eight." },
         { type: 'words', tag: 'B. Key Words', title: "Fruit", 
           items: [
-            { w:"Pear",   zh:"梨",   img:"assets/img/pear.png", audio:"assets/audio/pear.mp3" },
-            { w:"Orange", zh:"橙子", img:"assets/img/orange_fruit.png", audio:"assets/audio/orange_fruit.mp3" },
-            { w:"Seven",  zh:"七",   img:"assets/img/seven.png", audio:"assets/audio/seven.mp3" }
+            { w:"Six",   zh:"六",   img:"assets/img/six.png", audio:"assets/audio/six.mp3" },
+            { w:"Seven", zh:"七", img:"assets/img/seven.png", audio:"assets/audio/seven.mp3" },
+            { w:"Eight",  zh:"八",   img:"assets/img/eight.png", audio:"assets/audio/eight.mp3" }
           ] 
         },
         { type: 'phrase', tag: 'C. Key Sentences', title: "Quantity", text: "I have seven pears.", script: "Hold up 7 fingers.", parentTip: "Emphasize the 's' in pears." },
@@ -1127,23 +1127,53 @@ const db = {
         { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Peel an orange with mom or dad.", image: "assets/img/peel_orange.png" }
       ]
     },
-    {
-      unit: "Unit 6: Phonics A", vocab: "Aa, Ant", phrase: "A is for Apple.",
-      tips: "A is a wide-mouth sound. Ah, ah, apple!",
+     {
+      unit: "Unit 6: Ten pears",
+      vocab: "Pear, nine, ten",
+      phrase: "I have ten pears.",
+      tips: "Count on fingers and stress the plural sound in 'pears'.",
       steps: [
-        { type: 'warmup', tag: 'A. Warm Up', title: "Big Bite", text: "Open mouth wide to bite an apple.", action: "Crunch!", phrase: "Ah!" },
-        { type: 'words', tag: 'B. Key Words', title: "A Words", 
+        { 
+          type: 'warmup',
+          tag: 'A. Warm Up',
+          title: "Big Bite",
+          text: "Pretend to hold a pear and take a big bite.",
+          action: "Munch munch!",
+          phrase: "Pear!"
+        },
+        { 
+          type: 'words',
+          tag: 'B. Key Words',
+          title: "Fruit & Numbers",
           items: [
-            { w:"Aa",    zh:"字母A", img:"assets/img/aa.png", audio:"assets/audio/a.mp3" },
-            { w:"Apple", zh:"苹果",   img:"assets/img/apple.png", audio:"assets/audio/a-apple.mp3" },
-            { w:"Ant",   zh:"蚂蚁",   img:"assets/img/ant.png", audio:"assets/audio/a-ant.mp3" }
+            { w:"Pear", zh:"梨", img:"assets/img/pear.png", audio:"assets/audio/pear.mp3" },
+            { w:"Nine", zh:"九", img:"assets/img/nine.png", audio:"assets/audio/nine.mp3" },
+            { w:"Ten", zh:"十", img:"assets/img/ten.png", audio:"assets/audio/ten.mp3" }
           ] 
         },
-        { type: 'phrase', tag: 'C. Key Sentences', title: "Phonics", text: "A is for Ant.", script: "Pretend an ant is crawling on you.", parentTip: "Make the 'a-a-a' sound clearly." },
-        { type: 'game', tag: 'D. Game', title: "Ant Crawl", text: "Crawl your fingers up your child's arm saying 'a-a-ant'.", sub: "Tickle!" },
-        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Draw a red apple with a tiny ant on it.", image: "assets/img/draw_ant.png" }
-      ]
-    },
+        { 
+          type: 'phrase',
+          tag: 'C. Key Sentences',
+          title: "Counting",
+          text: "I have ten pears.",
+          script: "Show 10 fingers, then pretend to hold many pears.",
+          parentTip: "Count slowly together and say 'pears' clearly at the end."
+        },
+        { 
+          type: 'game',
+          tag: 'D. Game',
+          title: "Count the Pears",
+          text: "Count to ten on fingers and pretend to put pears in a basket.",
+          sub: "One, two, three... ten!"
+        },
+        { 
+          type: 'offscreen',
+          tag: 'E. Mission',
+          title: "Real World",
+          text: "Draw ten pears or count 10 small toys at home.",
+          image: "assets/img/ten_pears.png"
+        }
+      ],
     {
       unit: "Unit 6: Review", vocab: "Fruit & Numbers", phrase: "I have fruit.",
       tips: "Review week! Great time for a real fruit salad.",
