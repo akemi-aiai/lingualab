@@ -479,37 +479,35 @@
         });
     }
 
-    function loadMonth(monthKey, btn) {
-        document.querySelectorAll('.month-btn').forEach(b => b.classList.remove('active'));
-        if(btn) btn.classList.add('active');
+function loadMonth(monthKey, btn) {
+    document.querySelectorAll('.month-btn').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
 
-        const data = curriculum[monthKey];
+    const data = curriculum[monthKey];
 
-        let html = `
-            <div class="wiki-box">
-                <div class="wiki-title">Parent's Corner</div>
-                <div class="wiki-content">${data.wiki}</div>
-            </div>
-            <div class="week-grid">
-        `;
+    let html = `
+        <div class="wiki-box">
+            <div class="wiki-title">Parent's Corner</div>
+            <div class="wiki-content">${data.wiki}</div>
+        </div>
+        <div class="week-grid">
+    `;
 
-        data.weeks.forEach((weekTitle, index) => {
-            const cardClass = isComingSoon ? "week-card coming-soon" : "week-card";
-            const link = isComingSoon ? "#" : `lesson.html?m=${monthKey}&w=${index}`;
-            
+    data.weeks.forEach((weekTitle, index) => {
         html += `
-            <a href="${link}" class="${cardClass}">
+            <a href="lesson.html?m=${monthKey}&w=${index}" class="week-card">
                 <div class="week-number">${index + 1}</div>
                 <div class="week-text">
                     <span class="week-title">Week ${index + 1}</span>
                     <span class="week-desc">${weekTitle}</span>
                 </div>
             </a>
-`;
-        });
-        html += `</div>`;
-        contentAreaEl.innerHTML = html;
-    }
+        `;
+    });
+
+    html += `</div>`;
+    contentAreaEl.innerHTML = html;
+}
 
     init();
 </script>
