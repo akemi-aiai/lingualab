@@ -69,11 +69,6 @@
         .parent-switch.active { background: var(--navy); color: white; border-color: var(--navy); }
         .switch-label { font-size: 12px; font-weight: 700; text-transform: uppercase; }
 
-        /* --- PROGRESS BAR --- */
-        .progress-container {
-            position: fixed; top: 80px; left: 0; width: 100%; height: 6px; background: #e2e8f0; z-index: 999;
-        }
-        .progress-fill { height: 100%; background: var(--orange); width: 0%; transition: width 0.5s ease; }
 
         /* --- HERO COMPACT --- */
         .hero-compact {
@@ -465,8 +460,6 @@
 
     const monthListEl = document.getElementById('month-list');
     const contentAreaEl = document.getElementById('content-area');
-    const y = document.getElementById('year');
-    if (y) y.textContent = String(new Date().getFullYear());
 
     function init() {
         const months = ["Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"];
@@ -491,7 +484,6 @@
         if(btn) btn.classList.add('active');
 
         const data = curriculum[monthKey];
-        const isComingSoon = data.active === false;
 
         let html = `
             <div class="wiki-box">
