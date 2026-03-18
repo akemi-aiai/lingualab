@@ -710,6 +710,82 @@
       line-height: 1.6;
     }
   }
+  /* MOBILE */
+  @media (max-width: 700px) {
+    body {
+      padding-top: 128px;
+    }
+
+    .navbar {
+      padding: 10px 16px;
+      flex-direction: column;
+      gap: 10px;
+      height: auto;
+    }
+
+    .navbar-left {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .navbar-right {
+      width: 100%;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px 12px;
+      border-top: 1px solid #f1f5f9;
+      padding-top: 10px;
+    }
+
+    .navbar-right a {
+      font-size: 13px;
+      text-align: center;
+      white-space: normal;
+    }
+
+    .nav-logo {
+      height: 40px;
+    }
+
+    .nav-title {
+      font-size: 20px;
+    }
+
+    .hero-compact {
+      padding: 46px 16px 110px;
+    }
+
+    .hero-compact h1 {
+      font-size: 30px;
+      line-height: 1.2;
+    }
+
+    .hero-copy {
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    .hero-copy .cn-line {
+      font-size: 15px;
+      line-height: 1.55;
+    }
+    
+    .flashcard-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+  
+    .flashcard-front img {
+      width: 108px;
+      height: 108px;
+      max-height: 52%;
+      margin-bottom: 14px;
+
+    .footer-text {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+  }
 
   @media (max-width: 560px) {
     .flashcard-grid {
