@@ -710,82 +710,6 @@
       line-height: 1.6;
     }
   }
-  /* MOBILE */
-  @media (max-width: 700px) {
-    body {
-      padding-top: 128px;
-    }
-
-    .navbar {
-      padding: 10px 16px;
-      flex-direction: column;
-      gap: 10px;
-      height: auto;
-    }
-
-    .navbar-left {
-      width: 100%;
-      justify-content: center;
-    }
-
-    .navbar-right {
-      width: 100%;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px 12px;
-      border-top: 1px solid #f1f5f9;
-      padding-top: 10px;
-    }
-
-    .navbar-right a {
-      font-size: 13px;
-      text-align: center;
-      white-space: normal;
-    }
-
-    .nav-logo {
-      height: 40px;
-    }
-
-    .nav-title {
-      font-size: 20px;
-    }
-
-    .hero-compact {
-      padding: 46px 16px 110px;
-    }
-
-    .hero-compact h1 {
-      font-size: 30px;
-      line-height: 1.2;
-    }
-
-    .hero-copy {
-      font-size: 16px;
-      line-height: 1.65;
-    }
-
-    .hero-copy .cn-line {
-      font-size: 15px;
-      line-height: 1.55;
-    }
-    
-    .flashcard-grid {
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
-  
-    .flashcard-front img {
-      width: 108px;
-      height: 108px;
-      max-height: 52%;
-      margin-bottom: 14px;
-
-    .footer-text {
-      font-size: 14px;
-      line-height: 1.6;
-    }
-  }
 
   @media (max-width: 560px) {
     .flashcard-grid {
@@ -827,6 +751,47 @@
     .flashcard-back h3 {
       font-size: 19px;
       line-height: 1.2;
+    }
+
+    .audio-btn {
+      margin-top: 10px;
+      border: none;
+      background: var(--primary-light);
+      color: var(--navy);
+      font-weight: 800;
+      font-size: 14px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: 0.2s ease;
+      min-height: 44px;
+      line-height: 1;
+      box-shadow: 0 4px 10px rgba(34, 211, 238, 0.15);
+    }
+    
+    .audio-btn:hover {
+      transform: translateY(-1px);
+      background: #cffafe;
+    }
+    
+    .audio-btn:active {
+      transform: scale(0.98);
+    }
+    
+    .flashcard-front .audio-btn {
+      margin-top: 12px;
+    }
+    
+    .flashcard-back .audio-btn {
+      margin-top: 12px;
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      box-shadow: none;
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+    
+    .flashcard-back .audio-btn:hover {
+      background: rgba(255,255,255,0.2);
     }
   
     .flashcard-back p.translation {
@@ -896,15 +861,15 @@ const dictionary = {
         title: "Family & Friends", 
         wiki: "<div><b>Focus (今日词汇):</b> Family members, greetings, and simple introductions.</div><div><b>Play (互动小贴士):</b> Point to real family photos and say: 'This is Grandma' / 'This is my friend.' (指着家里的照片，一起练习家庭成员和介绍句型。)</div>", 
         words: [
-            { id: "daddy", en: "Daddy", pinyin: "bà ba", zh: "爸爸", sentence: "Good morning, Daddy.", img: "assets/img/daddy.png" },
-            { id: "mommy", en: "Mommy", pinyin: "mā ma", zh: "妈妈", sentence: "Good morning, Mommy.", img: "assets/img/mommy.png" },
-            { id: "grandma", en: "Grandma", pinyin: "nǎi nai / wài pó", zh: "奶奶 / 外婆", sentence: "How are you, Grandma?", img: "assets/img/grandma.png" },
-            { id: "grandpa", en: "Grandpa", pinyin: "yé ye / wài gōng", zh: "爷爷 / 外公", sentence: "How are you, Grandpa?", img: "assets/img/grandpa.png" },
-            { id: "aunt", en: "Aunt", pinyin: "ā yí / gū gu", zh: "阿姨 / 姑姑", sentence: "Hello, Aunt.", img: "assets/img/aunt.png" },
-            { id: "uncle", en: "Uncle", pinyin: "shū shu / jiù jiu", zh: "叔叔 / 舅舅", sentence: "Hello, Uncle.", img: "assets/img/uncle.png" },
-            { id: "boy", en: "Boy", pinyin: "nán hái", zh: "男孩", sentence: "I am a boy.", img: "assets/img/boy.png" },
-            { id: "girl", en: "Girl", pinyin: "nǚ hái", zh: "女孩", sentence: "I am a girl.", img: "assets/img/girl.png" },
-            { id: "friend", en: "Friend", pinyin: "péng you", zh: "朋友", sentence: "This is my friend.", img: "assets/img/friend.png" }
+            { id: "daddy", en: "Daddy", pinyin: "bà ba", zh: "爸爸", sentence: "Good morning, Daddy.", img: "assets/img/daddy.png", audio: "assets/audio/daddy.mp3" },
+            { id: "mommy", en: "Mommy", pinyin: "mā ma", zh: "妈妈", sentence: "Good morning, Mommy.", img: "assets/img/mommy.png", audio: "assets/audio/mommy.mp3" },
+            { id: "grandma", en: "Grandma", pinyin: "nǎi nai / wài pó", zh: "奶奶 / 外婆", sentence: "How are you, Grandma?", img: "assets/img/grandma.png", audio: "assets/audio/grandma.mp3" },
+            { id: "grandpa", en: "Grandpa", pinyin: "yé ye / wài gōng", zh: "爷爷 / 外公", sentence: "How are you, Grandpa?", img: "assets/img/grandpa.png", audio: "assets/audio/grandpa.mp3" },
+            { id: "aunt", en: "Aunt", pinyin: "ā yí / gū gu", zh: "阿姨 / 姑姑", sentence: "Hello, Aunt.", img: "assets/img/aunt.png", audio: "assets/audio/aunt.mp3" },
+            { id: "uncle", en: "Uncle", pinyin: "shū shu / jiù jiu", zh: "叔叔 / 舅舅", sentence: "Hello, Uncle.", img: "assets/img/uncle.png", audio: "assets/audio/uncle.mp3" },
+            { id: "boy", en: "Boy", pinyin: "nán hái", zh: "男孩", sentence: "I am a boy.", img: "assets/img/boy.png", audio: "assets/audio/boy.mp3" },
+            { id: "girl", en: "Girl", pinyin: "nǚ hái", zh: "女孩", sentence: "I am a girl.", img: "assets/img/girl.png", audio: "assets/audio/girl.mp3" },
+            { id: "friend", en: "Friend", pinyin: "péng you", zh: "朋友", sentence: "This is my friend.", img: "assets/img/friend.png", audio: "assets/audio/friend.mp3" }
         ] 
     },
 
@@ -912,10 +877,10 @@ const dictionary = {
         title: "My School", 
         wiki: "<div><b>Focus (今日词汇):</b> School objects and simple classroom actions.</div><div><b>Play (互动小贴士):</b> Put a real book in a bag and say: 'It is a book!' (把书放进书包里，一起练习句子吧！)</div>", 
         words: [
-            { id: "bag", en: "Bag", pinyin: "shū bāo", zh: "书包", sentence: "Open your bag.", img: "assets/img/bag.png" },
-            { id: "book", en: "Book", pinyin: "shū", zh: "书", sentence: "It is a book.", img: "assets/img/book.png" },
-            { id: "pencil", en: "Pencil", pinyin: "qiān bǐ", zh: "铅笔", sentence: "This is a pencil.", img: "assets/img/pencil.png" },
-            { id: "teacher", en: "Teacher", pinyin: "lǎo shī", zh: "老师", sentence: "Hello, Teacher.", img: "assets/img/teacher.png" }
+            { id: "bag", en: "Bag", pinyin: "shū bāo", zh: "书包", sentence: "Open your bag.", img: "assets/img/bag.png", audio: "assets/audio/bag.mp3" },
+            { id: "book", en: "Book", pinyin: "shū", zh: "书", sentence: "It is a book.", img: "assets/img/book.png", audio: "assets/audio/book.mp3" },
+            { id: "pencil", en: "Pencil", pinyin: "qiān bǐ", zh: "铅笔", sentence: "This is a pencil.", img: "assets/img/pencil.png", audio: "assets/audio/pencil.mp3" },
+            { id: "teacher", en: "Teacher", pinyin: "lǎo shī", zh: "老师", sentence: "Hello, Teacher.", img: "assets/img/teacher.png", audio: "assets/audio/teacher.mp3" }
         ] 
     },
 
@@ -923,12 +888,12 @@ const dictionary = {
         title: "My Face", 
         wiki: "<div><b>Focus (今日词汇):</b> Face parts and simple body sentences.</div><div><b>Play (互动小贴士):</b> Look in a mirror together and touch your nose, eyes, and ears. (一起照镜子，边摸五官边说单词！)</div>", 
         words: [
-            { id: "eye", en: "Eye", pinyin: "yǎn jing", zh: "眼睛", sentence: "Close your eyes.", img: "assets/img/eye.png" },
-            { id: "nose", en: "Nose", pinyin: "bí zi", zh: "鼻子", sentence: "This is my nose.", img: "assets/img/nose.png" },
-            { id: "mouth", en: "Mouth", pinyin: "zuǐ ba", zh: "嘴巴", sentence: "This is my mouth.", img: "assets/img/mouth.png" },
-            { id: "ear", en: "Ear", pinyin: "ěr duo", zh: "耳朵", sentence: "Touch your ear.", img: "assets/img/ear.png" },
-            { id: "hair", en: "Hair", pinyin: "tóu fa", zh: "头发", sentence: "My hair!", img: "assets/img/hair.png" },
-            { id: "face", en: "Face", pinyin: "liǎn", zh: "脸", sentence: "This is my face.", img: "assets/img/face.png" }
+            { id: "eye", en: "Eye", pinyin: "yǎn jing", zh: "眼睛", sentence: "Close your eyes.", img: "assets/img/eye.png", audio: "assets/audio/eye.mp3" },
+            { id: "nose", en: "Nose", pinyin: "bí zi", zh: "鼻子", sentence: "This is my nose.", img: "assets/img/nose.png", audio: "assets/audio/nose.mp3" },
+            { id: "mouth", en: "Mouth", pinyin: "zuǐ ba", zh: "嘴巴", sentence: "This is my mouth.", img: "assets/img/mouth.png", audio: "assets/audio/mouth.mp3" },
+            { id: "ear", en: "Ear", pinyin: "ěr duo", zh: "耳朵", sentence: "Touch your ear.", img: "assets/img/ear.png", audio: "assets/audio/ear.mp3" },
+            { id: "hair", en: "Hair", pinyin: "tóu fa", zh: "头发", sentence: "My hair!", img: "assets/img/hair.png", audio: "assets/audio/hair.mp3" },
+            { id: "face", en: "Face", pinyin: "liǎn", zh: "脸", sentence: "This is my face.", img: "assets/img/face.png", audio: "assets/audio/face.mp3" }
         ] 
     },
 
@@ -936,14 +901,14 @@ const dictionary = {
         title: "Farm & Zoo Animals", 
         wiki: "<div><b>Focus (今日词汇):</b> Farm animals and zoo animals.</div><div><b>Play (互动小贴士):</b> Make funny animal noises and act like each animal together! (一起模仿动物叫声和动作吧！)</div>", 
         words: [
-            { id: "cow", en: "Cow", pinyin: "niú", zh: "牛", sentence: "It is a cow.", img: "assets/img/cow.png" },
-            { id: "pig", en: "Pig", pinyin: "zhū", zh: "猪", sentence: "One pig.", img: "assets/img/pig.png" },
-            { id: "duck", en: "Duck", pinyin: "yā zi", zh: "鸭子", sentence: "Walk like a duck.", img: "assets/img/duck.png" },
-            { id: "hen", en: "Hen", pinyin: "mǔ jī", zh: "母鸡", sentence: "It is a hen.", img: "assets/img/hen.png" },
-            { id: "panda", en: "Panda", pinyin: "xióng māo", zh: "熊猫", sentence: "Look at the panda.", img: "assets/img/panda.png" },
-            { id: "tiger", en: "Tiger", pinyin: "lǎo hǔ", zh: "老虎", sentence: "Two tigers.", img: "assets/img/tiger.png" },
-            { id: "bear", en: "Bear", pinyin: "xióng", zh: "熊", sentence: "It is a bear.", img: "assets/img/bear.png" },
-            { id: "monkey", en: "Monkey", pinyin: "hóu zi", zh: "猴子", sentence: "Act like a monkey.", img: "assets/img/monkey.png" }
+            { id: "cow", en: "Cow", pinyin: "niú", zh: "牛", sentence: "It is a cow.", img: "assets/img/cow.png", audio: "assets/audio/cow.mp3" },
+            { id: "pig", en: "Pig", pinyin: "zhū", zh: "猪", sentence: "One pig.", img: "assets/img/pig.png", audio: "assets/audio/pig.mp3" },
+            { id: "duck", en: "Duck", pinyin: "yā zi", zh: "鸭子", sentence: "Walk like a duck.", img: "assets/img/duck.png", audio: "assets/audio/duck.mp3" },
+            { id: "hen", en: "Hen", pinyin: "mǔ jī", zh: "母鸡", sentence: "It is a hen.", img: "assets/img/hen.png", audio: "assets/audio/hen.mp3" },
+            { id: "panda", en: "Panda", pinyin: "xióng māo", zh: "熊猫", sentence: "Look at the panda.", img: "assets/img/panda.png", audio: "assets/audio/panda.mp3" },
+            { id: "tiger", en: "Tiger", pinyin: "lǎo hǔ", zh: "老虎", sentence: "Two tigers.", img: "assets/img/tiger.png", audio: "assets/audio/tiger.mp3" },
+            { id: "bear", en: "Bear", pinyin: "xióng", zh: "熊", sentence: "It is a bear.", img: "assets/img/bear.png", audio: "assets/audio/bear.mp3" },
+            { id: "monkey", en: "Monkey", pinyin: "hóu zi", zh: "猴子", sentence: "Act like a monkey.", img: "assets/img/monkey.png", audio: "assets/audio/monkey.mp3" }
         ] 
     },
 
@@ -951,11 +916,11 @@ const dictionary = {
         title: "Transport & Safety", 
         wiki: "<div><b>Focus (今日词汇):</b> Vehicles and simple traffic language.</div><div><b>Play (互动小贴士):</b> Pretend to drive around the room. Red means stop, green means go! (在房间里假装开车，练习交通词汇吧！)</div>", 
         words: [
-            { id: "car", en: "Car", pinyin: "qì chē", zh: "汽车", sentence: "Look at the car.", img: "assets/img/car.png" },
-            { id: "bus", en: "Bus", pinyin: "gōng jiāo chē", zh: "公交车", sentence: "It is a bus.", img: "assets/img/bus.png" },
-            { id: "bike", en: "Bike", pinyin: "zì xíng chē", zh: "自行车", sentence: "Oh, my bike!", img: "assets/img/bike.png" },
-            { id: "taxi", en: "Taxi", pinyin: "chū zū chē", zh: "出租车", sentence: "It is a taxi.", img: "assets/img/taxi.png" },
-            { id: "wheel", en: "Wheel", pinyin: "lún zi", zh: "轮子", sentence: "Find a wheel.", img: "assets/img/wheel.png" }
+            { id: "car", en: "Car", pinyin: "qì chē", zh: "汽车", sentence: "Look at the car.", img: "assets/img/car.png", audio: "assets/audio/car.mp3" },
+            { id: "bus", en: "Bus", pinyin: "gōng jiāo chē", zh: "公交车", sentence: "It is a bus.", img: "assets/img/bus.png", audio: "assets/audio/bus.mp3" },
+            { id: "bike", en: "Bike", pinyin: "zì xíng chē", zh: "自行车", sentence: "Oh, my bike!", img: "assets/img/bike.png", audio: "assets/audio/bike.mp3" },
+            { id: "taxi", en: "Taxi", pinyin: "chū zū chē", zh: "出租车", sentence: "It is a taxi.", img: "assets/img/taxi.png", audio: "assets/audio/taxi.mp3" },
+            { id: "wheel", en: "Wheel", pinyin: "lún zi", zh: "轮子", sentence: "Find a wheel.", img: "assets/img/wheel.png", audio: "assets/audio/wheel.mp3" }
         ] 
     },
 
@@ -963,12 +928,12 @@ const dictionary = {
         title: "My Pets", 
         wiki: "<div><b>Focus (今日词汇):</b> Pet animals and 'I have...'.</div><div><b>Play (互动小贴士):</b> Act like each pet and say the sentence together. (一边模仿小宠物，一边练习 'I have...' 句型！)</div>", 
         words: [
-            { id: "bird", en: "Bird", pinyin: "niǎo", zh: "鸟", sentence: "I have a bird.", img: "assets/img/bird.png" },
-            { id: "fish", en: "Fish", pinyin: "yú", zh: "鱼", sentence: "It is a fish.", img: "assets/img/fish.png" },
-            { id: "rabbit", en: "Rabbit", pinyin: "tù zi", zh: "兔子", sentence: "I have a rabbit.", img: "assets/img/rabbit.png" },
-            { id: "turtle", en: "Turtle", pinyin: "wū guī", zh: "乌龟", sentence: "I have a turtle.", img: "assets/img/turtle.png" },
-            { id: "dog", en: "Dog", pinyin: "gǒu", zh: "狗", sentence: "I have a dog.", img: "assets/img/dog.png" },
-            { id: "pet", en: "Pet", pinyin: "chǒng wù", zh: "宠物", sentence: "It is my pet.", img: "assets/img/pet.png" }
+            { id: "bird", en: "Bird", pinyin: "niǎo", zh: "鸟", sentence: "I have a bird.", img: "assets/img/bird.png", audio: "assets/audio/bird.mp3" },
+            { id: "fish", en: "Fish", pinyin: "yú", zh: "鱼", sentence: "It is a fish.", img: "assets/img/fish.png", audio: "assets/audio/fish.mp3" },
+            { id: "rabbit", en: "Rabbit", pinyin: "tù zi", zh: "兔子", sentence: "I have a rabbit.", img: "assets/img/rabbit.png", audio: "assets/audio/rabbit.mp3" },
+            { id: "turtle", en: "Turtle", pinyin: "wū guī", zh: "乌龟", sentence: "I have a turtle.", img: "assets/img/turtle.png", audio: "assets/audio/turtle.mp3" },
+            { id: "dog", en: "Dog", pinyin: "gǒu", zh: "狗", sentence: "I have a dog.", img: "assets/img/dog.png", audio: "assets/audio/dog.mp3" },
+            { id: "pet", en: "Pet", pinyin: "chǒng wù", zh: "宠物", sentence: "It is my pet.", img: "assets/img/pet.png", audio: "assets/audio/pet.mp3" }
         ] 
     },
 
@@ -976,12 +941,12 @@ const dictionary = {
         title: "Colors", 
         wiki: "<div><b>Focus (今日词汇):</b> Basic colors and answering 'What color is it?'</div><div><b>Play (互动小贴士):</b> Point to toys or clothes and ask: 'What color is it?' (指着玩具或衣服，一起练习颜色问答！)</div>", 
         words: [
-            { id: "red", en: "Red", pinyin: "hóng sè", zh: "红色", sentence: "It is red.", img: "assets/img/red.png" },
-            { id: "blue", en: "Blue", pinyin: "lán sè", zh: "蓝色", sentence: "It is blue.", img: "assets/img/blue.png" },
-            { id: "yellow", en: "Yellow", pinyin: "huáng sè", zh: "黄色", sentence: "It is yellow.", img: "assets/img/yellow.png" },
-            { id: "green", en: "Green", pinyin: "lǜ sè", zh: "绿色", sentence: "It is green.", img: "assets/img/green.png" },
-            { id: "orange_color", en: "Orange", pinyin: "chéng sè", zh: "橙色", sentence: "It is orange.", img: "assets/img/orange_color.png" },
-            { id: "color", en: "Color", pinyin: "yán sè", zh: "颜色", sentence: "What color is it?", img: "assets/img/color.png" }
+            { id: "red", en: "Red", pinyin: "hóng sè", zh: "红色", sentence: "It is red.", img: "assets/img/red.png", audio: "assets/audio/red.mp3" },
+            { id: "blue", en: "Blue", pinyin: "lán sè", zh: "蓝色", sentence: "It is blue.", img: "assets/img/blue.png", audio: "assets/audio/blue.mp3" },
+            { id: "yellow", en: "Yellow", pinyin: "huáng sè", zh: "黄色", sentence: "It is yellow.", img: "assets/img/yellow.png", audio: "assets/audio/yellow.mp3" },
+            { id: "green", en: "Green", pinyin: "lǜ sè", zh: "绿色", sentence: "It is green.", img: "assets/img/green.png", audio: "assets/audio/green.mp3" },
+            { id: "orange_color", en: "Orange", pinyin: "chéng sè", zh: "橙色", sentence: "It is orange.", img: "assets/img/orange_color.png", audio: "assets/audio/orange_color.mp3" },
+            { id: "color", en: "Color", pinyin: "yán sè", zh: "颜色", sentence: "What color is it?", img: "assets/img/color.png", audio: "assets/audio/color.mp3" }
         ] 
     },
 
@@ -989,12 +954,12 @@ const dictionary = {
         title: "In the Park", 
         wiki: "<div><b>Focus (今日词汇):</b> Nature words and simple describing sentences.</div><div><b>Play (互动小贴士):</b> Go outside, point to real things, and say the words together. (去户外指着真实的花草树木，一起说单词吧！)</div>", 
         words: [
-            { id: "flower", en: "Flower", pinyin: "huā", zh: "花", sentence: "It's a flower.", img: "assets/img/flower.png" },
-            { id: "grass", en: "Grass", pinyin: "cǎo", zh: "草", sentence: "Touch the grass.", img: "assets/img/grass.png" },
-            { id: "park", en: "Park", pinyin: "gōng yuán", zh: "公园", sentence: "Let's go to the park.", img: "assets/img/park.png" },
-            { id: "insect", en: "Insect", pinyin: "kūn chóng", zh: "昆虫", sentence: "Look at the insect.", img: "assets/img/insect.png" },
-            { id: "kite", en: "Kite", pinyin: "fēng zheng", zh: "风筝", sentence: "It's a kite.", img: "assets/img/kite.png" },
-            { id: "tree", en: "Tree", pinyin: "shù", zh: "树", sentence: "It is a tree.", img: "assets/img/tree.png" }
+            { id: "flower", en: "Flower", pinyin: "huā", zh: "花", sentence: "It's a flower.", img: "assets/img/flower.png", audio: "assets/audio/flower.mp3" },
+            { id: "grass", en: "Grass", pinyin: "cǎo", zh: "草", sentence: "Touch the grass.", img: "assets/img/grass.png", audio: "assets/audio/grass.mp3" },
+            { id: "park", en: "Park", pinyin: "gōng yuán", zh: "公园", sentence: "Let's go to the park.", img: "assets/img/park.png", audio: "assets/audio/park.mp3" },
+            { id: "insect", en: "Insect", pinyin: "kūn chóng", zh: "昆虫", sentence: "Look at the insect.", img: "assets/img/insect.png", audio: "assets/audio/insect.mp3" },
+            { id: "kite", en: "Kite", pinyin: "fēng zheng", zh: "风筝", sentence: "It's a kite.", img: "assets/img/kite.png", audio: "assets/audio/kite.mp3" },
+            { id: "tree", en: "Tree", pinyin: "shù", zh: "树", sentence: "It is a tree.", img: "assets/img/tree.png", audio: "assets/audio/tree.mp3" }
         ] 
     },
 
@@ -1002,13 +967,13 @@ const dictionary = {
         title: "Yummy Food & Drinks", 
         wiki: "<div><b>Focus (今日词汇):</b> Food, drinks, and 'I like...'.</div><div><b>Play (互动小贴士):</b> Use snack time to ask: 'Do you like milk?' / 'I like cake.' (吃点心的时候自然练习食物和饮料词汇！)</div>", 
         words: [
-            { id: "bread", en: "Bread", pinyin: "miàn bāo", zh: "面包", sentence: "I like bread.", img: "assets/img/bread.png" },
-            { id: "cake", en: "Cake", pinyin: "dàn gāo", zh: "蛋糕", sentence: "I like cake.", img: "assets/img/cake.png" },
-            { id: "food", en: "Food", pinyin: "shí wù", zh: "食物", sentence: "Yummy food!", img: "assets/img/food.png" },
-            { id: "juice", en: "Juice", pinyin: "guǒ zhī", zh: "果汁", sentence: "I like juice.", img: "assets/img/juice.png" },
-            { id: "milk", en: "Milk", pinyin: "niú nǎi", zh: "牛奶", sentence: "I like milk.", img: "assets/img/milk.png" },
-            { id: "water", en: "Water", pinyin: "shuǐ", zh: "水", sentence: "Drink some water.", img: "assets/img/water.png" },
-            { id: "jam", en: "Jam", pinyin: "guǒ jiàng", zh: "果酱", sentence: "Jam on bread.", img: "assets/img/jam.png" }
+            { id: "bread", en: "Bread", pinyin: "miàn bāo", zh: "面包", sentence: "I like bread.", img: "assets/img/bread.png", audio: "assets/audio/bread.mp3" },
+            { id: "cake", en: "Cake", pinyin: "dàn gāo", zh: "蛋糕", sentence: "I like cake.", img: "assets/img/cake.png", audio: "assets/audio/cake.mp3" },
+            { id: "food", en: "Food", pinyin: "shí wù", zh: "食物", sentence: "Yummy food!", img: "assets/img/food.png", audio: "assets/audio/food.mp3" },
+            { id: "juice", en: "Juice", pinyin: "guǒ zhī", zh: "果汁", sentence: "I like juice.", img: "assets/img/juice.png", audio: "assets/audio/juice.mp3" },
+            { id: "milk", en: "Milk", pinyin: "niú nǎi", zh: "牛奶", sentence: "I like milk.", img: "assets/img/milk.png", audio: "assets/audio/milk.mp3" },
+            { id: "water", en: "Water", pinyin: "shuǐ", zh: "水", sentence: "Drink some water.", img: "assets/img/water.png", audio: "assets/audio/water.mp3" },
+            { id: "jam", en: "Jam", pinyin: "guǒ jiàng", zh: "果酱", sentence: "Jam on bread.", img: "assets/img/jam.png", audio: "assets/audio/jam.mp3" }
         ] 
     },
 
@@ -1016,17 +981,17 @@ const dictionary = {
         title: "Fruit & Numbers", 
         wiki: "<div><b>Focus (今日词汇):</b> Fruit words, counting, and quantity sentences.</div><div><b>Play (互动小贴士):</b> Count real fruit or toys and say: 'I have five apples.' (一边数水果，一边练习数量句型！)</div>", 
         words: [
-            { id: "apple", en: "Apple", pinyin: "píng guǒ", zh: "苹果", sentence: "I have an apple.", img: "assets/img/apple.png" },
-            { id: "banana", en: "Banana", pinyin: "xiāng jiāo", zh: "香蕉", sentence: "I like bananas.", img: "assets/img/banana.png" },
-            { id: "pear", en: "Pear", pinyin: "lí", zh: "梨", sentence: "I have ten pears.", img: "assets/img/pear.png" },
-            { id: "orange_fruit", en: "Orange", pinyin: "chéng zi", zh: "橙子", sentence: "Peel an orange.", img: "assets/img/orange.png" },
-            { id: "four", en: "Four", pinyin: "sì", zh: "四", sentence: "Four apples.", img: "assets/img/four.png" },
-            { id: "five", en: "Five", pinyin: "wǔ", zh: "五", sentence: "Five apples.", img: "assets/img/five.png" },
-            { id: "six", en: "Six", pinyin: "liù", zh: "六", sentence: "Six bananas.", img: "assets/img/six.png" },
-            { id: "seven", en: "Seven", pinyin: "qī", zh: "七", sentence: "Seven pears.", img: "assets/img/seven.png" },
-            { id: "eight", en: "Eight", pinyin: "bā", zh: "八", sentence: "Eight bananas.", img: "assets/img/eight.png" },
-            { id: "nine", en: "Nine", pinyin: "jiǔ", zh: "九", sentence: "Nine pears.", img: "assets/img/nine.png" },
-            { id: "ten", en: "Ten", pinyin: "shí", zh: "十", sentence: "Ten pears.", img: "assets/img/ten.png" }
+            { id: "apple", en: "Apple", pinyin: "píng guǒ", zh: "苹果", sentence: "I have an apple.", img: "assets/img/apple.png", audio: "assets/audio/apple.mp3" },
+            { id: "banana", en: "Banana", pinyin: "xiāng jiāo", zh: "香蕉", sentence: "I like bananas.", img: "assets/img/banana.png", audio: "assets/audio/banana.mp3" },
+            { id: "pear", en: "Pear", pinyin: "lí", zh: "梨", sentence: "I have ten pears.", img: "assets/img/pear.png", audio: "assets/audio/pear.mp3" },
+            { id: "orange_fruit", en: "Orange", pinyin: "chéng zi", zh: "橙子", sentence: "Peel an orange.", img: "assets/img/orange.png", audio: "assets/audio/orange.mp3" },
+            { id: "four", en: "Four", pinyin: "sì", zh: "四", sentence: "Four apples.", img: "assets/img/four.png", audio: "assets/audio/four.mp3" },
+            { id: "five", en: "Five", pinyin: "wǔ", zh: "五", sentence: "Five apples.", img: "assets/img/five.png", audio: "assets/audio/five.mp3" },
+            { id: "six", en: "Six", pinyin: "liù", zh: "六", sentence: "Six bananas.", img: "assets/img/six.png", audio: "assets/audio/six.mp3" },
+            { id: "seven", en: "Seven", pinyin: "qī", zh: "七", sentence: "Seven pears.", img: "assets/img/seven.png", audio: "assets/audio/seven.mp3" },
+            { id: "eight", en: "Eight", pinyin: "bā", zh: "八", sentence: "Eight bananas.", img: "assets/img/eight.png", audio: "assets/audio/eight.mp3" },
+            { id: "nine", en: "Nine", pinyin: "jiǔ", zh: "九", sentence: "Nine pears.", img: "assets/img/nine.png", audio: "assets/audio/nine.mp3" },
+            { id: "ten", en: "Ten", pinyin: "shí", zh: "十", sentence: "Ten pears.", img: "assets/img/ten.png", audio: "assets/audio/ten.mp3" }
         ] 
     }
 };
@@ -1038,6 +1003,20 @@ const dictionary = {
     const contentAreaEl = document.getElementById('content-area');
     const y = document.getElementById('year');
     if (y) y.textContent = String(new Date().getFullYear());
+
+    const audioPlayer = new Audio();
+  
+    function playWordAudio(src) {
+        if (!src) return;
+    
+        audioPlayer.pause();
+        audioPlayer.currentTime = 0;
+        audioPlayer.src = src;
+    
+        audioPlayer.play().catch(err => {
+            console.error("Audio play error:", err);
+        });
+    }
 
     function init() {
         const categories = Object.keys(dictionary);
@@ -1087,58 +1066,66 @@ const dictionary = {
             <div class="flashcard-grid">
         `;
 
-        data.words.forEach((word) => {
-            html += `
-                <div class="flashcard-wrapper" onclick="flipCard(this, '${word.id}')">
-                    <div class="flashcard-inner">
-                        <div class="flashcard-front">
-                            <img src="${word.img}" alt="${word.en}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1006/1006657.png'">
-                            <h2>${word.en}</h2>
-                        </div>
-                        <div class="flashcard-back">
-                            <h3>${word.en}</h3>
-                            <p class="pinyin">${word.pinyin}</p>
-                            <p class="translation">${word.zh}</p>
-                            <p class="sentence">"${word.sentence}"</p>
-                        </div>
+    data.words.forEach((word) => {
+        html += `
+            <div class="flashcard-wrapper" onclick="flipCard(this, '${word.id}')">
+                <div class="flashcard-inner">
+                    <div class="flashcard-front">
+                        <img src="${word.img}" alt="${word.en}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1006/1006657.png'">
+                        <h2>${word.en}</h2>
+                        <button class="audio-btn" onclick="event.stopPropagation(); playWordAudio('${word.audio}')">
+                            🔊 Listen
+                        </button>
+                    </div>
+                    <div class="flashcard-back">
+                        <h3>${word.en}</h3>
+                        <p class="pinyin">${word.pinyin}</p>
+                        <p class="translation">${word.zh}</p>
+                        <p class="sentence">"${word.sentence}"</p>
+                        <button class="audio-btn" onclick="event.stopPropagation(); playWordAudio('${word.audio}')">
+                            🔊 Play
+                        </button>
                     </div>
                 </div>
-            `;
-        });
+            </div>
+        `;
+    });
         html += `</div>`;
         contentAreaEl.innerHTML = html;
     }
 
-    function flipCard(element, wordId) {
-      // 1. Визуальный эффект
-      element.classList.toggle('flipped');
+  function flipCard(element, wordId) {
+    element.classList.toggle('flipped');
   
-      // 2. Логирование для исследования (analytics.js)
-      if (typeof Analytics !== 'undefined') {
-          Analytics.logWordClick(wordId);
-      }
+    const currentWords = dictionary[currentCatKey]?.words || [];
+    const currentWord = currentWords.find(w => w.id === wordId);
   
-      // 3. Сбор статистики по популярности категорий
-      if (typeof currentCatKey !== 'undefined') {
-          let clicksData = JSON.parse(localStorage.getItem('category_clicks') || '{}');
-          clicksData[currentCatKey] = (clicksData[currentCatKey] || 0) + 1;
-          localStorage.setItem('category_clicks', JSON.stringify(clicksData));
-      }
+    if (currentWord?.audio) {
+        playWordAudio(currentWord.audio);
+    }
   
-      // 4. Логика прогресса обучения
-      if (!learnedCards.has(wordId)) {
-          learnedCards.add(wordId);
-          
-          const progressEl = document.getElementById('progress-text');
-          if (progressEl) {
-              progressEl.innerText = `${learnedCards.size} / ${currentCategoryWordsCount}`;
-          }
-          
-          // Проверка завершения темы
-          if (learnedCards.size === currentCategoryWordsCount) {
-              setTimeout(showReward, 800);
-          }
-      }
+    if (typeof Analytics !== 'undefined') {
+        Analytics.logWordClick(wordId);
+    }
+  
+    if (typeof currentCatKey !== 'undefined') {
+        let clicksData = JSON.parse(localStorage.getItem('category_clicks') || '{}');
+        clicksData[currentCatKey] = (clicksData[currentCatKey] || 0) + 1;
+        localStorage.setItem('category_clicks', JSON.stringify(clicksData));
+    }
+  
+    if (!learnedCards.has(wordId)) {
+        learnedCards.add(wordId);
+  
+        const progressEl = document.getElementById('progress-text');
+        if (progressEl) {
+            progressEl.innerText = `${learnedCards.size} / ${currentCategoryWordsCount}`;
+        }
+  
+        if (learnedCards.size === currentCategoryWordsCount) {
+            setTimeout(showReward, 800);
+        }
+    }
   }
 
 function showReward() {
