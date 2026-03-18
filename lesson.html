@@ -367,7 +367,7 @@ const db = {
       ]
     },
     {
-      unit: "Revision 1", vocab: "Mike, Kelly", phrase: "Hello, I am [Name].",
+      unit: "Review", vocab: "Mike, Kelly", phrase: "Hello, I am [Name].",
       steps: [
         { type:'warmup', tag:'A. Warm Up', title:"Shake", text:"Shake your body!", action:"Shake!", phrase:"Shake!" },
         { type:'words', tag:'B. Key Words', title:"Review",
@@ -387,9 +387,9 @@ const db = {
   "Oct": [
     {
       unit: "Unit 3: Friends", vocab: "Boy, Girl", phrase: "I am a boy. I am a girl.",
-      tips: "Use family photos to help your child understand 'He' (Boy) and 'She' (Girl).",
+      tips: "Use family photos to help your child understand 'He' (for a boy) and 'She' (for a girl).",
       steps: [
-        { type:'warmup', tag:'A. Warm Up', title:"High Five", text:"High five Mommy!", action:"Say: 'Hello!'", phrase:"Hello!" },
+        { type:'warmup', tag:'A. Warm Up', title:"High Five", text:"High five Mommy!", action:"Give me a high five", phrase:"High five!" },
         { type:'words', tag:'B. Key Words', title:"Gender",
           items: [
             { w:"Boy",    zh:"男孩", img:"assets/img/boy.png", audio:"assets/audio/boy.mp3" },
@@ -406,7 +406,7 @@ const db = {
       unit: "Unit 3: Social", vocab: "My Friend", phrase: "This is my friend.",
       tips: "Teach your child to introduce others politely.",
       steps: [
-        { type:'warmup', tag:'A. Warm Up', title:"Handshake", text:"Shake hands.", action:"Nice to meet you.", phrase:"Hello friend." },
+        { type:'warmup', tag:'A. Warm Up', title:"Handshake", text:"Shake hands.", action:"Nice to meet you.", phrase:"Nice to meet you." },
         { type:'words', tag:'B. Key Words', title:"Friendship",
           items: [
             { w:"My Friend",     zh:"我的朋友",     img:"assets/img/friend.png", audio:"assets/audio/myfriend.mp3" },
@@ -427,24 +427,24 @@ const db = {
         { type: 'words', tag: 'B. Key Words', title: "G Sound", 
           items: [
             { w: "Gg",   zh: "字母G", img: "assets/img/gg.png", audio:"assets/audio/g.mp3" },
-            { w: "Girl", zh: "女孩",   img: "assets/img/girl.jpg", audio:"assets/audio/girl.mp3" },
+            { w: "Girl", zh: "女孩",   img: "assets/img/girl.png", audio:"assets/audio/girl.mp3" },
             { w: "Game", zh: "游戏",   img: "assets/img/game.png", audio:"assets/audio/game.mp3" }
           ] 
         },
         { type: 'phrase', tag: 'C. Action', title: "TPR Command", text: "Stand up, please.", script: "Give commands politely.", parentTip: "Add 'Please' to teach manners." },
-        { type: 'game', tag: 'D. Game', title: "Simon Says", text: "Simon says: Sit down.", sub: "Don't get tricked!" },
-        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Play a quick game of Tag.", image: "assets/img/tag_game.jpg" }
+        { type: 'game', tag: 'D. Game', title: "Simon Says", text: "Simon says: Sit down.", sub: "Don't do it unless I say 'Simon says'. Don't get tricked!" },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Play a quick game of Tag.", image: "assets/img/tag_game.png" }
       ]
     },
     {
       unit: "Reader 1", vocab: "Family, Messy", phrase: "Who is this?",
       tips: "Reading week! Focus on the pictures in the story.",
       steps: [
-        { type: 'warmup', tag: 'A. Warm Up', title: "Look", text: "Open your eyes big!", action: "Look around.", phrase: "Look!" },
+        { type: 'warmup', tag: 'A. Warm Up', title: "Look", text: "Open your eyes wide!", action: "Look around.", phrase: "Look around!" },
         { type: 'words', tag: 'B. Key Words', title: "Story Words", 
           items: [
             { w: "Family", zh: "家人", img: "assets/img/family.png", audio:"assets/audio/family.mp3" },
-            { w: "Messy",  zh: "凌乱", img: "assets/img/messy.png" }
+            { w: "Messy",  zh: "乱糟糟", img: "assets/img/messy.png" }
           ]
         },
         { type: 'phrase', tag: 'C. Key Sentences', title: "Question", text: "Who is this?", script: "Point to a character in the book.", parentTip: "Encourage child to answer: 'This is Daddy'." },
@@ -467,8 +467,8 @@ const db = {
             { w:"Mouth", zh:"嘴巴", img:"assets/img/mouth.png", audio:"assets/audio/mouth.mp3" }
           ] 
         },
-        { type: 'phrase', tag: 'C. Key Sentences', title: "Identity", text: "This is my nose.", script: "Point to your nose and say it.", parentTip: "Model the sentence first: 'This is *my* nose'." },
-        { type: 'game', tag: 'D. Game', title: "Simon Says", text: "Simon says: Touch your ear!", sub: "Don't touch if I don't say Simon Says." },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Identity", text: "This is my nose.", script: "Point to your nose and say: 'my nose'.", parentTip: "Model the sentence first: 'This is *my* nose'." },
+        { type: 'game', tag: 'D. Game', title: "Simon Says", text: "Simon says: Touch your ear!", sub: "Don't touch it unless I say 'Simon says'." },
         { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Look in a mirror and name 3 face parts.", image: "assets/img/mirror.png" }
       ]
     },
@@ -493,12 +493,12 @@ const db = {
       unit: "Unit 4: Phonics Mm", vocab: "Mm /m/", phrase: "Close your eyes",
       tips: "The /m/ sound vibrates on your lips. Mmmmmm!",
       steps: [
-        { type: 'warmup', tag: 'A. Warm Up', title: "Yummy", text: "Rub your tummy.", action: "Say Mmmmmm!", phrase: "Mmmmmm!" },
+        { type: 'warmup', tag: 'A. Warm Up', title: "Yummy", text: "Rub your tummy.", action: "Say Mmmmmm!", phrase: "Yummy!" },
         { type: 'words', tag: 'B. Key Words', title: "M Sound", 
           items: [
             { w:"Mm",     zh:"字母M", img:"assets/img/mm.png", audio:"assets/audio/m.mp3" },
             { w:"Monkey", zh:"猴子",  img:"assets/img/monkey.png", audio:"assets/audio/monkey.mp3" },
-            { w:"Milk",   zh:"牛奶",  img:"assets/img/milk.png" }
+            { w:"Milk",   zh:"牛奶",  img:"assets/img/milk.png", audio:"assets/audio/milk.mp3" }
           ] 
         },
         { type: 'phrase', tag: 'C. Action', title: "TPR Command", text: "Close your eyes.", script: "Open... and Close.", parentTip: "Play Peek-a-boo to practice." },
@@ -508,19 +508,19 @@ const db = {
     },
     {
       unit: "Reader 2", vocab: "Bee, Hair", phrase: "Oh, my hair!",
-      tips: "Read the story 'Buzz! Buzz!'. It's about a bee landing on different face parts.",
+      tips: "Read the story 'Buzz! Buzz!'. It's a story about a bee landing on your nose, ears, and mouth.",
       steps: [
         { type: 'warmup', tag: 'A. Warm Up', title: "Buzz", text: "Buzz like a bee...", action: "Fly around!", phrase: "Buzzzzz." },
         { type: 'words', tag: 'B. Key Words', title: "Story Words", 
           items: [
-            { w:"Bee",  zh:"蜜蜂", img:"assets/img/bee.png" },
+            { w:"Bee",  zh:"蜜蜂", img:"assets/img/bee.png", audio:"assets/audio/bee.mp3"  },
             { w:"Hair", zh:"头发", img:"assets/img/hair.png", audio:"assets/audio/hair.mp3"  },
             { w:"No",   zh:"不",   img:"assets/img/no.png" }
           ] 
         },
-        { type: 'phrase', tag: 'C. Key Sentences', title: "Reaction", text: "Oh, my hair!", script: "Pretend a bee is on your hair.", parentTip: "Use a dramatic voice: 'Oh no!'" },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Reaction", text: "Oh, my hair!", script: "Pretend there's a bee in your hair.", parentTip: "Use a dramatic voice: 'Oh no!'" },
         { type: 'game', tag: 'D. Game', title: "Bee Attack", text: "Parent is the bee. Touch child's nose.", sub: "Child says 'My nose!'" },
-        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Find something yellow (like a bee).", image: "assets/img/yellow.png" }
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Find something yellow.", image: "assets/img/yellow.png" }
       ]
     }
   ],
@@ -562,7 +562,7 @@ const db = {
     },
     {
       unit: "Unit 5: Phonics P", vocab: "Pp, Pink", phrase: "A pink pig.",
-      tips: "P is a 'popping' sound. Put hand in front of mouth to feel air.",
+      tips: "P is a 'popping' sound. Put a hand in front of your mouth to feel the air.",
       steps: [
         { type: 'warmup', tag: 'A. Warm Up', title: "Pop!", text: "Pop your cheeks!", action: "P-p-p-pop!", phrase: "Pop!" },
         { type: 'words', tag: 'B. Key Words', title: "P Words", 
@@ -610,7 +610,7 @@ const db = {
           ] 
         },
         { type: 'phrase', tag: 'C. Key Sentences', title: "Pointing", text: "Look at the panda.", script: "Point to the screen.", parentTip: "Use your finger to point." },
-        { type: 'game', tag: 'D. Game', title: "Walk like...", text: "Walk like a heavy bear.", sub: "Stomp stomp!" },
+        { type: 'game', tag: 'D. Game', title: "Walk like...", text: "Stomp like a big bear!", sub: "Stomp!" },
         { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Find a teddy bear.", image: "assets/img/teddy_bear_toy.png" }
       ]
     },
@@ -618,7 +618,7 @@ const db = {
       unit: "Unit 6: Photo", vocab: "Photo, Zoo", phrase: "Take a photo.",
       tips: "Pretend your hands are a camera.",
       steps: [
-        { type: 'warmup', tag: 'A. Warm Up', title: "Smile", text: "Cheese! Smile big.", action: "Smile!", phrase: "Cheese!" },
+        { type: 'warmup', tag: 'A. Warm Up', title: "Smile", text: "Say cheese! Smile big.", action: "Smile!", phrase: "Cheese!" },
         { type: 'words', tag: 'B. Key Words', title: "Zoo Words", 
           items: [
             { w:"Monkey", zh:"猴子",   img:"assets/img/monkey.png",  audio:"assets/audio/monkey.mp3" },
@@ -628,7 +628,7 @@ const db = {
         },
         { type: 'phrase', tag: 'C. Key Sentences', title: "Action", text: "Take a photo.", script: "Click! Pretend to take a picture.", parentTip: "Make the 'Click' sound." },
         { type: 'game', tag: 'D. Game', title: "Freeze", text: "Dance... and FREEZE for a photo!", sub: "Don't move!" },
-        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Take a pretend photo of Mom.", image: "assets/img/camera.png" }
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Pretend to take a photo of Mom", image: "assets/img/camera.png" }
       ]
     },
     {
@@ -657,7 +657,7 @@ const db = {
           items: [
             { w:"Quiet", zh:"安静", img:"assets/img/quiet.png" },
             { w:"Sleep", zh:"睡觉", img:"assets/img/sleep.png" },
-            { w:"Loud",  zh:"吵闹", img:"assets/img/loud.png" }
+            { w:"Loud",  zh:"大声", img:"assets/img/loud.png" }
           ] 
         },
         { type: 'phrase', tag: 'C. Key Sentences', title: "Polite", text: "Be quiet, please.", script: "The animals are sleeping.", parentTip: "Whisper this phrase." },
@@ -726,9 +726,9 @@ const db = {
         { type: 'warmup', tag: 'A. Warm Up', title: "Stop", text: "Freeze!", action: "Don't move.", phrase: "Stop!" },
         { type: 'words', tag: 'B. Key Words', title: "Colors", 
           items: [
-            { w:"Red",    zh:"红色", img:"assets/img/red.png" },
-            { w:"Green",  zh:"绿色", img:"assets/img/green.png" },
-            { w:"Yellow", zh:"黄色", img:"assets/img/yellow1.png" }
+            { w:"Red",    zh:"红色", img:"assets/img/red.png",  audio:"assets/audio/red.mp3" },
+            { w:"Green",  zh:"绿色", img:"assets/img/green.png",  audio:"assets/audio/green.mp3" },
+            { w:"Yellow", zh:"黄色", img:"assets/img/yellow1.png",  audio:"assets/audio/yellow.mp3" }
           ] 
         },
         { type: 'phrase', tag: 'C. Key Sentences', title: "Safety", text: "Red light. Stop.", script: "Look at traffic lights.", parentTip: "Practice this when crossing street." },
@@ -742,7 +742,7 @@ const db = {
       unit: "Unit 1: A Visit", vocab: "Grandma, Grandpa", phrase: "How are you?",
       tips: "Use real family photos to practice these words with your child.",
       steps: [
-        { type: 'warmup', tag: 'A. Warm Up', title: "Wave Hello", text: "Wave your hand and smile.", action: "Say hello loudly!", phrase: "Hello!" },
+        { type: 'warmup', tag: 'A. Warm Up', title: "Wave Hello", text: "Wave your hand and smile.", action: "Say hello!", phrase: "Hello!" },
         { type: 'words', tag: 'B. Key Words', title: "Family", 
           items: [
             { w:"Grandma", zh:"奶奶/外婆", img:"assets/img/grandma.png", audio:"assets/audio/grandma.mp3" },
@@ -752,7 +752,7 @@ const db = {
         },
         { type: 'phrase', tag: 'C. Key Sentences', title: "Greeting", text: "How are you?", script: "Wave to a toy. Ask: How are you?", parentTip: "Practice this phrase when waking up." },
         { type: 'game', tag: 'D. Game', title: "Photo Point", text: "Show a family photo. Parent says 'Grandma'. Child points.", sub: "Who is this?" },
-        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Hug your real family members today.", image: "assets/img/hug.png" }
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Hug your family.", image: "assets/img/hug.png" }
       ]
     },
     {
@@ -764,11 +764,11 @@ const db = {
           items: [
             { w:"Aunt",  zh:"阿姨/姑姑", img:"assets/img/aunt.png",  audio:"assets/audio/aunt.mp3" },
             { w:"Uncle", zh:"叔叔/舅舅", img:"assets/img/uncle.png", audio:"assets/audio/uncle.mp3" },
-            { w:"House", zh:"房子", img:"assets/img/house.png", audio:"assets/audio/house.mp3" }
+            { w:"Home", zh:"房子", img:"assets/img/home.png", audio:"assets/audio/home.mp3" }
           ] 
         },
-        { type: 'phrase', tag: 'C. Key Sentences', title: "Replying", text: "I'm fine. Thank you.", script: "Pretend to be an Aunt answering.", parentTip: "Nod and smile when saying 'Thank you'." },
-        { type: 'game', tag: 'D. Game', title: "Door Game", text: "Hide behind a door. Open and say 'I'm fine!'", sub: "Surprise!" },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Replying", text: "Who is it?", script: "Pretend to be Auntie answering the door.", parentTip: "Nod and smile when saying 'Thank you'." },
+        { type: 'game', tag: 'D. Game', title: "Door Game", text: "Pretend to knock on a door. Ask a kid 'Who is it?' and answer 'It is a...'", sub: "Surprise!" },
         { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Call an Aunt or Uncle and say Hello.", image: "assets/img/phone_aunt.png" }
       ]
     },
@@ -779,8 +779,8 @@ const db = {
         { type: 'warmup', tag: 'A. Warm Up', title: "Point Up", text: "Point your fingers to the ceiling.", action: "Reach up high!", phrase: "Up!" },
         { type: 'words', tag: 'B. Key Words', title: "U Words", 
           items: [
-            { w:"Uu",       zh:"字母U", img:"assets/img/uu.png", audio:"assets/audio/u-umbrella.mp3" },
-            { w:"Uncle",    zh:"叔叔",   img:"assets/img/uncle.png", audio:"assets/audio/u-uncle.mp3" },
+            { w:"Uu",       zh:"字母U", img:"assets/img/uu.png", audio:"assets/audio/u.mp3" },
+            { w:"Uncle",    zh:"叔叔",   img:"assets/img/uncle.png", audio:"assets/audio/uncle.mp3" },
               { w:"Umbrella",    zh:"雨伞",   img:"assets/img/umbrella.png", audio:"assets/audio/umbrella.mp3" }
           ] 
         },
@@ -793,7 +793,7 @@ const db = {
       unit: "Unit 1: Review", vocab: "Family & U", phrase: "How are you, Grandpa?",
       tips: "Review week! Combine greetings and family words.",
       steps: [
-        { type: 'warmup', tag: 'A. Warm Up', title: "High Five", text: "Give mom or dad a high five.", action: "Clap hands!", phrase: "Hello!" },
+        { type: 'warmup', tag: 'A. Warm Up', title: "High Five", text: "Give mom or dad a high five.", action: "Clap hands!", phrase: "Give me five!" },
         { type: 'words', tag: 'B. Key Words', title: "Review", 
           items: [
             { w:"Grandpa", zh:"爷爷", img:"assets/img/grandpa.png", audio:"assets/audio/grandpa.mp3" },
@@ -818,7 +818,7 @@ const db = {
           items: [
             { w:"Bird", zh:"鸟", img:"assets/img/bird.png", audio:"assets/audio/bird.mp3" },
             { w:"Fish", zh:"鱼", img:"assets/img/fish.png", audio:"assets/audio/fish.mp3" },
-            { w:"Pet",  zh:"宠物", img:"assets/img/pet.png", audio:"assets/audio/pet.mp3" }
+            { w:"Pet",  zh:"宠物", img:"assets/img/pet.png" }
           ] 
         },
         { type: 'phrase', tag: 'C. Key Sentences', title: "Having Pets", text: "I have a bird.", script: "Hold a toy bird.", parentTip: "Point to yourself when saying 'I have'." },
@@ -851,8 +851,8 @@ const db = {
         { type: 'words', tag: 'B. Key Words', title: "R Words", 
           items: [
             { w:"Rr",     zh:"字母R", img:"assets/img/rr.png", audio:"assets/audio/r.mp3" },
-            { w:"Rabbit", zh:"兔子",   img:"assets/img/rabbit.png", audio:"assets/audio/r-rabbit.mp3" },
-            { w:"Run",    zh:"跑",     img:"assets/img/run.png", audio:"assets/audio/r-run.mp3" }
+            { w:"Rabbit", zh:"兔子",   img:"assets/img/rabbit.png", audio:"assets/audio/rabbit.mp3" },
+            { w:"Run",    zh:"跑",     img:"assets/img/run.png", audio:"assets/audio/run.mp3" }
           ] 
         },
         { type: 'phrase', tag: 'C. Key Sentences', title: "Phonics", text: "R is for Rabbit.", script: "Make the 'r-r-r' sound.", parentTip: "Let the child feel the vibration in their throat." },
@@ -889,7 +889,7 @@ const db = {
           items: [
             { w:"Red",    zh:"红色", img:"assets/img/red.png", audio:"assets/audio/red.mp3" },
             { w:"Blue",   zh:"蓝色", img:"assets/img/blue.png", audio:"assets/audio/blue.mp3" },
-            { w:"Yellow", zh:"黄色", img:"assets/img/yellow.png", audio:"assets/audio/yellow.mp3" }
+            { w:"Yellow", zh:"黄色", img:"assets/img/yellow.png", audio:"assets/audio/yellow1.mp3" }
           ] 
         },
         { type: 'phrase', tag: 'C. Key Sentences', title: "Asking", text: "What color is it?", script: "Hold up a red block. Ask the question.", parentTip: "Shrug your shoulders when asking." },
@@ -906,7 +906,7 @@ const db = {
           items: [
             { w:"Green",  zh:"绿色", img:"assets/img/green.png", audio:"assets/audio/green.mp3" },
             { w:"Orange", zh:"橙色", img:"assets/img/orange_color.png", audio:"assets/audio/orange.mp3" },
-            { w:"Color",  zh:"颜色", img:"assets/img/color.png", audio:"assets/audio/color.mp3" }
+            { w:"Color",  zh:"颜色", img:"assets/img/color.png" }
           ] 
         },
         { type: 'phrase', tag: 'C. Key Sentences', title: "Answering", text: "It's orange.", script: "Point to an orange object and answer.", parentTip: "Always use the full sentence 'It's...'." },
@@ -922,8 +922,8 @@ const db = {
         { type: 'words', tag: 'B. Key Words', title: "O Words", 
           items: [
             { w:"Oo",     zh:"字母O", img:"assets/img/oo.png", audio:"assets/audio/o.mp3" },
-            { w:"Orange", zh:"橙色/橙子", img:"assets/img/orange.png", audio:"assets/audio/o-orange.mp3" },
-            { w:"Octopus",zh:"章鱼", img:"assets/img/octopus.png", audio:"assets/audio/o-octopus.mp3" }
+            { w:"Orange", zh:"橙色/橙子", img:"assets/img/orange.png", audio:"assets/audio/orange.mp3" },
+            { w:"Octopus",zh:"章鱼", img:"assets/img/octopus.png", audio:"assets/audio/octopus.mp3" }
           ] 
         },
         { type: 'phrase', tag: 'C. Key Sentences', title: "Phonics", text: "O is for Orange.", script: "Draw an O in the air.", parentTip: "Exaggerate the 'ah' or 'oh' sound." },
@@ -955,16 +955,16 @@ const db = {
       unit: "Unit 4: In the Park", vocab: "Flower, Grass", phrase: "It's a flower.",
       tips: "Go for a real walk in the park and point these out.",
       steps: [
-        { type: 'warmup', tag: 'A. Warm Up', title: "Sniff", text: "Pretend to smell a flower.", action: "Sniff deeply.", phrase: "Ahhh!" },
+        { type: 'warmup', tag: 'A. Warm Up', title: "Sniff", text: "Pretend to smell a flower.", action: "Sniff deeply.", phrase: "Flower!" },
         { type: 'words', tag: 'B. Key Words', title: "Nature", 
           items: [
             { w:"Flower", zh:"花", img:"assets/img/flower.png", audio:"assets/audio/flower.mp3" },
             { w:"Grass",  zh:"草", img:"assets/img/grass.png", audio:"assets/audio/grass.mp3" },
-            { w:"Park",   zh:"公园", img:"assets/img/park.png", audio:"assets/audio/park.mp3" }
+            { w:"Park",   zh:"公园", img:"assets/img/park.png" }
           ] 
         },
         { type: 'phrase', tag: 'C. Key Sentences', title: "Naming", text: "It's a flower.", script: "Point to a picture of a park.", parentTip: "Connect the words with outside nature." },
-        { type: 'game', tag: 'D. Game', title: "Smell or Touch", text: "Parent says 'Flower'. Child pretends to smell. 'Grass' -> touch ground.", sub: "Smell the flower!" },
+        { type: 'game', tag: 'D. Game', title: "Smell or Touch", text: "Parent says 'Flower', child pretends to smell. Parent says 'Grass', child touches the ground.", sub: "Smell the flower!" },
         { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Go outside and touch the green grass.", image: "assets/img/touch_grass.png" }
       ]
     },
@@ -972,7 +972,7 @@ const db = {
       unit: "Unit 4: Park Fun", vocab: "Insect, Kite", phrase: "It's a kite. It's red.",
       tips: "Combine nature words with colors from Unit 3!",
       steps: [
-        { type: 'warmup', tag: 'A. Warm Up', title: "Buzz & Fly", text: "Buzz like a bee, fly like a kite.", action: "Bzzzz!", phrase: "Fly high." },
+        { type: 'warmup', tag: 'A. Warm Up', title: "Buzz & Fly", text: "Buzz like a bee, fly like a kite.", action: "Bzzzz!", phrase: "Bzzzzz" },
         { type: 'words', tag: 'B. Key Words', title: "Things in Park", 
           items: [
             { w:"Insect", zh:"昆虫", img:"assets/img/insect.png", audio:"assets/audio/insect.mp3" },
@@ -989,12 +989,12 @@ const db = {
       unit: "Unit 4: Phonics I", vocab: "Ii, Insect", phrase: "I is for insect.",
       tips: "The short 'i' sound is like 'ih-ih-ih'.",
       steps: [
-        { type: 'warmup', tag: 'A. Warm Up', title: "Tickle", text: "Pretend an insect is walking on your arm.", action: "Tickle tickle!", phrase: "Ih-ih-insect!" },
+        { type: 'warmup', tag: 'A. Warm Up', title: "Tickle", text: "Pretend an insect is walking on your arm.", action: "Tickle tickle!", phrase: "Insect!" },
         { type: 'words', tag: 'B. Key Words', title: "I Words", 
           items: [
             { w:"Ii",     zh:"字母I", img:"assets/img/ii.png", audio:"assets/audio/i.mp3" },
-            { w:"Insect", zh:"昆虫", img:"assets/img/insect.png", audio:"assets/audio/i-insect.mp3" },
-            { w:"Igloo",  zh:"冰屋", img:"assets/img/igloo.png", audio:"assets/audio/i-igloo.mp3" }
+            { w:"Insect", zh:"昆虫", img:"assets/img/insect.png", audio:"assets/audio/insect.mp3" },
+            { w:"Igloo",  zh:"冰屋", img:"assets/img/igloo.png" }
           ] 
         },
         { type: 'phrase', tag: 'C. Key Sentences', title: "Phonics", text: "I is for Insect.", script: "Make your fingers crawl like a bug.", parentTip: "Keep the 'ih' sound very short." },
@@ -1031,11 +1031,11 @@ const db = {
           items: [
             { w:"Bread", zh:"面包", img:"assets/img/bread.png", audio:"assets/audio/bread.mp3" },
             { w:"Cake",  zh:"蛋糕", img:"assets/img/cake.png", audio:"assets/audio/cake.mp3" },
-            { w:"Food",  zh:"食物", img:"assets/img/food.png", audio:"assets/audio/food.mp3" }
+            { w:"Food",  zh:"食物", img:"assets/img/food.png" }
           ] 
         },
         { type: 'phrase', tag: 'C. Key Sentences', title: "Preferences", text: "I like cake.", script: "Pretend to eat and say the phrase.", parentTip: "Exaggerate how much you like it." },
-        { type: 'game', tag: 'D. Game', title: "Yummy/Yucky", text: "Show a shoe -> Yucky! Show bread -> Yummy!", sub: "I like bread." },
+        { type: 'game', tag: 'D. Game', title: "Yummy/Yucky", text: "Point to a shoe and say 'Yucky!'. Point to bread and say 'Yummy!'", sub: "I like bread." },
         { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Have a piece of bread for a snack.", image: "assets/img/eat_bread.png" }
       ]
     },
@@ -1048,7 +1048,7 @@ const db = {
           items: [
             { w:"Juice", zh:"果汁", img:"assets/img/juice.png", audio:"assets/audio/juice.mp3" },
             { w:"Milk",  zh:"牛奶", img:"assets/img/milk.png", audio:"assets/audio/milk.mp3" },
-            { w:"Water", zh:"水",   img:"assets/img/water.png", audio:"assets/audio/water.mp3" }
+            { w:"Water", zh:"水",   img:"assets/img/water.png" }
           ] 
         },
         { type: 'phrase', tag: 'C. Key Sentences', title: "Preferences", text: "I like juice.", script: "Pour imaginary juice.", parentTip: "Ask: Do you like juice?" },
@@ -1064,8 +1064,8 @@ const db = {
         { type: 'words', tag: 'B. Key Words', title: "J Words", 
           items: [
             { w:"Jj",    zh:"字母J", img:"assets/img/jj.png", audio:"assets/audio/j.mp3" },
-            { w:"Jam",   zh:"果酱", img:"assets/img/jam.png", audio:"assets/audio/j-jam.mp3" },
-            { w:"Juice", zh:"果汁", img:"assets/img/juice.png", audio:"assets/audio/j-juice.mp3" }
+            { w:"Jam",   zh:"果酱", img:"assets/img/jam.png", audio:"assets/audio/jam.mp3" },
+            { w:"Juice", zh:"果汁", img:"assets/img/juice.png", audio:"assets/audio/juice.mp3" }
           ] 
         },
         { type: 'phrase', tag: 'C. Key Sentences', title: "Phonics", text: "J is for Jam.", script: "Say the 'j-j-j' sound clearly.", parentTip: "Put some jam on bread and say the word." },
@@ -1086,7 +1086,7 @@ const db = {
           ] 
         },
         { type: 'phrase', tag: 'C. Key Sentences', title: "Restaurant", text: "I like cake.", script: "Ask child: What do you like?", parentTip: "Use real snacks as props." },
-        { type: 'game', tag: 'D. Game', title: "Waiter Game", text: "Parent is waiter. Child orders: 'I like juice, please.'", sub: "Here you go!" },
+        { type: 'game', tag: 'D. Game', title: "Waiter Game", text: "Parent plays the waiter. Child orders: 'I like juice, please.'", sub: "Here you go!" },
         { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Help set the table for dinner.", image: "assets/img/set_table.png" }
       ]
     }
