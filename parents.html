@@ -348,28 +348,6 @@ body {
   min-width: 0;
 }
 
-.audio-btn {
-  background: var(--navy);
-  color: #fff;
-  border: none;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: 0.25s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  font-size: 14px;
-  font-weight: 800;
-}
-
-.audio-btn:hover {
-  background: var(--accent);
-  transform: scale(1.08);
-}
-
 /* RESEARCH */
 .research-card {
   margin-top: 30px;
@@ -856,11 +834,6 @@ footer {
     line-height: 1.35;
   }
 
-  .audio-btn {
-    width: 38px;
-    height: 38px;
-  }
-
   .emoji-scale {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
@@ -1067,8 +1040,6 @@ footer {
     </div>
   </footer>
 
-  <audio id="player"></audio>
-
   <script src="analytics.js"></script>
   <script>
 
@@ -1217,26 +1188,26 @@ footer {
     ];
     
    const twisterBank = [
-    { text: "A big black bug bit a big black dog.", audio: "big-black-bug.mp3" },
-    { text: "I scream, you scream, we all scream for ice cream.", audio: "ice-cream.mp3" },
-    { text: "Kitty caught the kitten in the kitchen.", audio: "kitten-kitchen.mp3" },
-    { text: "Red lorry, yellow lorry, red lorry, yellow lorry.", audio: "red-lorry.mp3" },
-    { text: "Six sick sea-serpents swam the seven seas.", audio: "sea-serpents.mp3" },
-    { text: "Fresh fried fish, fish fresh fried.", audio: "fresh-fried-fish.mp3" },
-    { text: "Give papa a cup of proper coffee.", audio: "proper-coffee.mp3" },
-    { text: "Double bubble gum, bubbles double.", audio: "double-bubble.mp3" },
-    { text: "She sells sea shells by the sea shore.", audio: "sea-shells.mp3" },
-    { text: "Ice cream, nice cream, we all love ice cream.", audio: "nice-cream.mp3" },
-    { text: "Blue bluebird blinks below the bridge.", audio: "bluebird-bridge.mp3" },
-    { text: "Eleven elves licked eleven lollipops.", audio: "eleven-elves.mp3" },
-    { text: "Toy phone, toy phone, toy phone.", audio: "toy-phone.mp3" },
-    { text: "Zebras zig and zebras zag.", audio: "zebras-zig-zag.mp3" },
-    { text: "Green glass globes glow greenly.", audio: "green-glass.mp3" },
-    { text: "Fat frogs flying past fast.", audio: "fat-frogs.mp3" },
-    { text: "Cooks cook cupcakes quickly.", audio: "cook-cupcakes.mp3" },
-    { text: "Strict striped sharks swim swiftly.", audio: "striped-sharks.mp3" },
-    { text: "Which witch is which?", audio: "which-witch.mp3" },
-    { text: "Happy hippos hop happily.", audio: "happy-hippos.mp3" }
+    { text: "A big black bug bit a big black dog." },
+    { text: "I scream, you scream, we all scream for ice cream." },
+    { text: "Kitty caught the kitten in the kitchen." },
+    { text: "Red lorry, yellow lorry, red lorry, yellow lorry." },
+    { text: "Six sick sea-serpents swam the seven seas." },
+    { text: "Fresh fried fish, fish fresh fried." },
+    { text: "Give papa a cup of proper coffee." },
+    { text: "Double bubble gum, bubbles double." },
+    { text: "She sells sea shells by the sea shore." },
+    { text: "Ice cream, nice cream, we all love ice cream." },
+    { text: "Blue bluebird blinks below the bridge." },
+    { text: "Eleven elves licked eleven lollipops." },
+    { text: "Toy phone, toy phone, toy phone." },
+    { text: "Zebras zig and zebras zag." },
+    { text: "Green glass globes glow greenly." },
+    { text: "Fat frogs flying past fast." },
+    { text: "Cooks cook cupcakes quickly." },
+    { text: "Strict striped sharks swim swiftly." },
+    { text: "Which witch is which?" },
+    { text: "Happy hippos hop happily." }
   ];
     
     const missionBank = [
@@ -1538,11 +1509,9 @@ function copyReportOutput() {
         row.className = 'twister-row';
         row.innerHTML = `
           <div class="twister-text">${item.text}</div>
-          <button class="audio-btn" type="button" onclick="playAudio('${item.audio}')">▶</button>
         `;
         twisterList.appendChild(row);
       });
-
       const shuffledMissions = [...missionBank].sort(() => 0.5 - Math.random()).slice(0, 3);
       const missionContainer = document.getElementById('mission-container');
       const missionTitle = missionContainer.querySelector('h3');
@@ -1561,13 +1530,6 @@ function copyReportOutput() {
         `;
         missionContainer.appendChild(div);
       });
-    }
-
-    function playAudio(filename) {
-      const player = document.getElementById('player');
-      if (!player) return;
-      player.src = 'assets/audio/' + filename;
-      player.play().catch(() => console.log("Audio file not found in assets/audio/"));
     }
 
 window.addEventListener('load', () => {
