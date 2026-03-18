@@ -132,7 +132,7 @@
             text-align: center; position: relative; overflow: hidden;
         }
         .flashcard:hover{ border-color: var(--primary); background: #ecfeff; transform: scale(1.03); }
-        .fc-img{ width: 68%; height: 52%; object-fit: contain; display: block; margin: 0 auto 10px; }
+        .fc-img{ width: 82%; height: 64%; object-fit: contain; display: block; margin: 0 auto 8px; }
         .fc-icon{ font-size: 34px; display: block; margin-bottom: 8px; }
         .fc-word{ font-weight: 700; color: var(--navy); font-size: 14px; }
         .flashcard-zh{ font-size: 12px; color: #64748b; margin-bottom: 5px; }
@@ -331,7 +331,7 @@ const db = {
           parentTip:"Don't correct pronunciation yet. Just praise effort."
         },
         { type:'game', tag:'D. Game', title:"Hug Game", text:"Hug Daddy and Mommy!", sub:"Ready? Go!", img:"assets/img/hug.png", audio:"assets/audio/HugDaddy.mp3" },
-        { type:'offscreen', tag:'E. Mission', title:"Real World", text:"Find a family photo.", image:"assets/img/photo.jpg" }
+        { type:'offscreen', tag:'E. Mission', title:"Real World", text:"Find a family photo.", image:"assets/img/photo.png" }
       ]
     },
     {
@@ -378,7 +378,7 @@ const db = {
           ]
         },
         { type:'phrase', tag:'C. Key Sentences', title:"Roleplay", text:"Hello, I am [Name].", script:"Practice with a puppet.", parentTip:"Roleplay builds confidence." },
-        { type:'game', tag:'D. Game', title:"Who is it?", text:"He is Mike." },
+        { type:'game', tag:'D. Game', title:"Who is it?", text:"I am Mike.", sub:"This is me!" },
         { type:'offscreen', tag:'E. Mission', title:"Real World", text:"Say Hello to a toy.", image:"assets/img/hello_toy.png" }
       ]
     }
@@ -1304,7 +1304,6 @@ const db = {
                     <div style="flex:1; text-align:left;">
                         <strong style="color:var(--navy);">Your turn:</strong><br>
                         <span style="font-size:18px; font-weight:700;">"${step.text || step.phrase || ''}"</span>
-                        <div style="margin-top:5px; font-size:12px; color:#64748b; cursor:pointer;" onclick="playStepAudio()">🔊 Listen first</div>
                     </div>
                 </div>
             `;
