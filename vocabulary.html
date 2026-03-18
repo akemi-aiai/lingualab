@@ -310,6 +310,7 @@
   .flashcard-wrapper.flipped .flashcard-inner {
     transform: rotateY(180deg);
   }
+
   .flashcard-back {
     position: absolute;
     width: 100%;
@@ -1007,7 +1008,7 @@ const dictionary = {
             { id: "orange_fruit", en: "Orange", pinyin: "chéng zi", zh: "橙子", sentence: "Peel an orange.", img: "assets/img/orange.png", audio: "assets/audio/orange.mp3" },
             { id: "one", en:"One", pinyin: "yī", zh:"一", sentence: "One banana.", img:"assets/img/one.png",  audio:"assets/audio/one.mp3" },
             { id: "two", en:"Two",  pinyin: "èr", zh:"二", sentence: "Two oranges.", img:"assets/img/two.png",  audio:"assets/audio/two.mp3" },
-            { id: "three", en: "Three", pinyin: "sān", zh:"三", sentence: "Three grapes.", img:"assets/img/three.png",  audio:"assets/audio/three.mp3" }
+            { id: "three", en: "Three", pinyin: "sān", zh:"三", sentence: "Three grapes.", img:"assets/img/three.png",  audio:"assets/audio/three.mp3" },
             { id: "four", en: "Four", pinyin: "sì", zh: "四", sentence: "Four apples.", img: "assets/img/four.png", audio: "assets/audio/four.mp3" },
             { id: "five", en: "Five", pinyin: "wǔ", zh: "五", sentence: "Five apples.", img: "assets/img/five.png", audio: "assets/audio/five.mp3" },
             { id: "six", en: "Six", pinyin: "liù", zh: "六", sentence: "Six bananas.", img: "assets/img/six.png", audio: "assets/audio/six.mp3" },
@@ -1024,8 +1025,6 @@ const dictionary = {
 
     const categoryListEl = document.getElementById('category-list');
     const contentAreaEl = document.getElementById('content-area');
-    const y = document.getElementById('year');
-    if (y) y.textContent = String(new Date().getFullYear());
 
     const audioPlayer = new Audio();
   
