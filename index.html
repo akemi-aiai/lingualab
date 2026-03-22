@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JGY92EVDFQ"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-  
-    gtag('config', 'G-JGY92EVDFQ');
-  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LinguaLab</title>
@@ -148,9 +139,140 @@
       .stats-content { text-align: center; }
       .cards-grid { grid-template-columns: 1fr; }
     }
+
+
+    .site-shell.is-locked {
+      filter: blur(6px);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .consent-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 5000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(6px);
+    }
+
+    .consent-overlay.is-visible { display: flex; }
+
+    .consent-modal {
+      width: min(680px, 100%);
+      background: #fff;
+      border-radius: 28px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.25);
+      padding: 32px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .consent-kicker {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: #ecfeff;
+      color: var(--navy);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .consent-modal h2 {
+      color: var(--navy);
+      font-size: clamp(26px, 4vw, 34px);
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+
+    .consent-modal p {
+      color: #475569;
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+
+    .consent-list {
+      margin: 18px 0 10px;
+      padding-left: 20px;
+      color: #334155;
+    }
+
+    .consent-list li { margin-bottom: 8px; }
+
+    .consent-note {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      color: #475569;
+      font-size: 14px;
+    }
+
+    .consent-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .btn-solid {
+      background: var(--navy);
+      color: #fff;
+      border: 2px solid var(--navy);
+      font-size: 16px;
+    }
+
+    .btn-solid:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(31,78,121,0.22);
+    }
+
+    .btn-danger {
+      background: #fff;
+      color: #b91c1c;
+      border: 2px solid #fecaca;
+      font-size: 16px;
+    }
+
+    .btn-danger:hover {
+      transform: translateY(-2px);
+      background: #fef2f2;
+    }
+
+    .consent-inline-link {
+      color: var(--accent);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .consent-inline-link:hover { text-decoration: underline; }
+
   </style>
 </head>
 <body>
+  <div class="consent-overlay" id="consentOverlay" aria-hidden="true">
+    <div class="consent-modal" role="dialog" aria-modal="true" aria-labelledby="consentTitle">
+      <span class="consent-kicker">Privacy</span>
+      <h2 id="consentTitle">Please confirm your consent before using LinguaLab</h2>
+      <p>本服务所有操作均以用户自愿为前提，若您对此存在任何介意或异议，请立即停止使用相关服务。本条款谨此说明，感谢理解与配合。All use of this service is entirely voluntary. If you have any concerns, discomfort, or objections, please stop using the related services immediately. This statement is provided for clarification, and we sincerely appreciate your understanding and cooperation.</p>
+      <p>You can read more in our <a href="privacy.html" class="consent-inline-link">Privacy Policy</a>.</p>
+      <div class="consent-note" id="consentMessage">
+        如果您不同意，LinguaLab 将无法使用，学习模块也不会开启。If you do not agree, LinguaLab will stay locked and the learning blocks will not open. 
+      </div>
+      <div class="consent-actions">
+        <button class="btn btn-solid" id="consentAcceptBtn" type="button">我同意 I agree</button>
+        <button class="btn btn-danger" id="consentDeclineBtn" type="button">我不同意 I do not agree</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="siteShell" class="site-shell is-locked" aria-hidden="true">
 
   <header class="navbar">
     <div class="navbar-left">
@@ -232,6 +354,7 @@
    © <span id="year"></span> LinguaLab • Small lessons. Real progress. All rights reserved.
     </div>
   </footer>
+  </div>
 
   <script>
     // Подсчет суммы всех очков
@@ -442,11 +565,103 @@
       }
     }, 1500);
 
+    function getConsentState() {
+      try {
+        return localStorage.getItem('ll_parent_consent') || '';
+      } catch (e) {
+        return '';
+      }
+    }
+
+    function setConsentState(value) {
+      try {
+        localStorage.setItem('ll_parent_consent', value);
+        localStorage.setItem('ll_parent_consent_date', new Date().toISOString());
+      } catch (e) {
+        console.warn('Consent could not be saved:', e);
+      }
+    }
+
+    function loadScript(src, id) {
+      if (id && document.getElementById(id)) return;
+      const script = document.createElement('script');
+      if (id) script.id = id;
+      script.src = src;
+      script.async = true;
+      document.head.appendChild(script);
+    }
+
+    function enableAnalyticsAfterConsent() {
+      if (window.__llAnalyticsLoaded) return;
+      window.__llAnalyticsLoaded = true;
+
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function(){dataLayer.push(arguments);};
+      gtag('consent', 'default', {
+        analytics_storage: 'granted'
+      });
+      gtag('js', new Date());
+      gtag('config', 'G-JGY92EVDFQ');
+
+      loadScript('https://www.googletagmanager.com/gtag/js?id=G-JGY92EVDFQ', 'll-gtag');
+      loadScript('analytics.js', 'll-analytics-js');
+    }
+
+    function lockSite(message) {
+      const overlay = document.getElementById('consentOverlay');
+      const shell = document.getElementById('siteShell');
+      const note = document.getElementById('consentMessage');
+
+      overlay.classList.add('is-visible');
+      overlay.setAttribute('aria-hidden', 'false');
+      shell.classList.add('is-locked');
+      shell.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = 'hidden';
+
+      if (message) note.textContent = message;
+    }
+
+    function unlockSite() {
+      const overlay = document.getElementById('consentOverlay');
+      const shell = document.getElementById('siteShell');
+
+      overlay.classList.remove('is-visible');
+      overlay.setAttribute('aria-hidden', 'true');
+      shell.classList.remove('is-locked');
+      shell.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = '';
+      enableAnalyticsAfterConsent();
+    }
+
+    function initConsentGate() {
+      const acceptBtn = document.getElementById('consentAcceptBtn');
+      const declineBtn = document.getElementById('consentDeclineBtn');
+
+      acceptBtn.addEventListener('click', () => {
+        setConsentState('accepted');
+        unlockSite();
+      });
+
+      declineBtn.addEventListener('click', () => {
+        setConsentState('declined');
+        lockSite('You selected “I do not agree”. The website stays locked. You can change your choice at any time by pressing “I agree”.');
+      });
+
+      const state = getConsentState();
+      if (state === 'accepted') {
+        unlockSite();
+      } else if (state === 'declined') {
+        lockSite('You previously selected “I do not agree”. The website is unavailable until consent is given.');
+      } else {
+        lockSite('Please choose whether you agree. Until then, the website will remain unavailable.');
+      }
+    }
+
     window.onload = () => {
         updateDisplay();
         document.getElementById('year').innerText = new Date().getFullYear();
+        initConsentGate();
     };
   </script>
-<script src="analytics.js"></script>
 </body>
 </html>
