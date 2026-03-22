@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JGY92EVDFQ"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-  
-    gtag('config', 'G-JGY92EVDFQ');
-  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Word Bank — LinguaLab</title>
@@ -1156,19 +1147,13 @@ function showReward() {
     popup.style.display = 'block';
     overlay.style.display = 'block';
 
-    const rewardKey = `rewarded_${currentCatKey}`;
-    const alreadyRewarded = localStorage.getItem(rewardKey);
+    let currentPoints = parseInt(localStorage.getItem('vocab_points') || '0');
+    localStorage.setItem('vocab_points', currentPoints + 2);
 
-    if (!alreadyRewarded) {
-        let currentPoints = parseInt(localStorage.getItem('vocab_points') || '0');
-        localStorage.setItem('vocab_points', currentPoints + 2);
+    let learnedTotal = parseInt(localStorage.getItem('learned_words_total') || '0');
+    localStorage.setItem('learned_words_total', learnedTotal + currentCategoryWordsCount);
 
-        let learnedTotal = parseInt(localStorage.getItem('learned_words_total') || '0');
-        localStorage.setItem('learned_words_total', learnedTotal + currentCategoryWordsCount);
-
-        localStorage.setItem(rewardKey, '1');
-        updateVocabPointsDisplay();
-    }
+    updateVocabPointsDisplay();
 
     setTimeout(() => {
         popup.style.display = 'none';
