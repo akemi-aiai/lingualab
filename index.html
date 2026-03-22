@@ -261,7 +261,7 @@
       <span class="consent-kicker">Privacy</span>
       <h2 id="consentTitle">Please confirm your consent before using LinguaLab</h2>
       <p>本服务所有操作均以用户自愿为前提，若您对此存在任何介意或异议，请立即停止使用相关服务。本条款谨此说明，感谢理解与配合。All use of this service is entirely voluntary. If you have any concerns, discomfort, or objections, please stop using the related services immediately. This statement is provided for clarification, and we sincerely appreciate your understanding and cooperation.</p>
-      <p>You can read more in our <a href="privacy.html" class="consent-inline-link">Privacy Policy</a>.</p>
+      <p>您可以在我们的<a href="privacy.html" class="consent-inline-link">隐私政策</a>中了解更多信息。 You can read more in our <a href="privacy.html" class="consent-inline-link">Privacy Policy</a>.</p>
       <div class="consent-note" id="consentMessage">
         如果您不同意，LinguaLab 将无法使用，学习模块也不会开启。If you do not agree, LinguaLab will stay locked and the learning blocks will not open. 
       </div>
@@ -644,16 +644,16 @@
 
       declineBtn.addEventListener('click', () => {
         setConsentState('declined');
-        lockSite('You selected “I do not agree”. The website stays locked. You can change your choice at any time by pressing “I agree”.');
+        lockSite('您选择了“不同意”。网站将保持锁定状态。您可以随时点击“同意”，更改您的选择。You selected “I do not agree”. The website stays locked. You can change your choice at any time by pressing “I agree”.');
       });
 
       const state = getConsentState();
       if (state === 'accepted') {
         unlockSite();
       } else if (state === 'declined') {
-        lockSite('You previously selected “I do not agree”. The website is unavailable until consent is given.');
+        lockSite('您之前选择了“不同意”。在获得同意之前，网站将无法使用。You previously selected “I do not agree”. The website is unavailable until consent is given.');
       } else {
-        lockSite('Please choose whether you agree. Until then, the website will remain unavailable.');
+        lockSite('请先选择您是否同意。在此之前，网站将暂时无法使用。Please choose whether you agree. Until then, the website will remain unavailable.');
       }
     }
 
