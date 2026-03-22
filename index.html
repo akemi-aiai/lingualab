@@ -119,6 +119,133 @@
     /* При наведении заливается темно-синим */
     .btn-outline:hover { background: var(--navy); color: #fff; transform: translateY(-2px); }
 
+
+    .site-shell.is-locked {
+      filter: blur(6px);
+      pointer-events: none;
+      user-select: none;
+    }
+    
+    .consent-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 5000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding:
+        max(16px, env(safe-area-inset-top))
+        16px
+        max(16px, env(safe-area-inset-bottom));
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(6px);
+    
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+    }
+    
+    .consent-overlay.is-visible {
+      display: flex;
+    }
+    
+    .consent-modal {
+      width: min(680px, 100%);
+      background: #fff;
+      border-radius: 28px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.25);
+      padding: 32px;
+      border: 1px solid #e2e8f0;
+    
+      max-height: calc(100dvh - 32px);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    .consent-kicker {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: #ecfeff;
+      color: var(--navy);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    
+    .consent-modal h2 {
+      color: var(--navy);
+      font-size: clamp(26px, 4vw, 34px);
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+    
+    .consent-modal p {
+      color: #475569;
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+    
+    .consent-list {
+      margin: 18px 0 10px;
+      padding-left: 20px;
+      color: #334155;
+    }
+    
+    .consent-list li { margin-bottom: 8px; }
+    
+    .consent-note {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      color: #475569;
+      font-size: 14px;
+    }
+    
+    .consent-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    
+    .btn-solid {
+      background: var(--navy);
+      color: #fff;
+      border: 2px solid var(--navy);
+      font-size: 16px;
+    }
+    
+    .btn-solid:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(31,78,121,0.22);
+    }
+    
+    .btn-danger {
+      background: #fff;
+      color: #b91c1c;
+      border: 2px solid #fecaca;
+      font-size: 16px;
+    }
+    
+    .btn-danger:hover {
+      transform: translateY(-2px);
+      background: #fef2f2;
+    }
+    
+    .consent-inline-link {
+      color: var(--accent);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    
+    .consent-inline-link:hover { text-decoration: underline; }
+
    footer {
       background: #0f172a;
       color: #94a3b8;
@@ -140,6 +267,27 @@
       .cards-grid { grid-template-columns: 1fr; }
     }
 
+    .consent-overlay {
+      align-items: flex-start;
+      padding-top: max(12px, env(safe-area-inset-top));
+      padding-bottom: max(12px, env(safe-area-inset-bottom));
+    }
+  
+    .consent-modal {
+      width: 100%;
+      padding: 20px 16px;
+      border-radius: 20px;
+      max-height: calc(100dvh - 24px);
+    }
+  
+    .consent-actions {
+      flex-direction: column;
+    }
+  
+    .consent-actions .btn {
+      width: 100%;
+    }
+
 
     .site-shell.is-locked {
       filter: blur(6px);
@@ -147,111 +295,6 @@
       user-select: none;
     }
 
-    .consent-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 5000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      background: rgba(15, 23, 42, 0.7);
-      backdrop-filter: blur(6px);
-    }
-
-    .consent-overlay.is-visible { display: flex; }
-
-    .consent-modal {
-      width: min(680px, 100%);
-      background: #fff;
-      border-radius: 28px;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.25);
-      padding: 32px;
-      border: 1px solid #e2e8f0;
-    }
-
-    .consent-kicker {
-      display: inline-block;
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: #ecfeff;
-      color: var(--navy);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
-
-    .consent-modal h2 {
-      color: var(--navy);
-      font-size: clamp(26px, 4vw, 34px);
-      line-height: 1.2;
-      margin-bottom: 14px;
-    }
-
-    .consent-modal p {
-      color: #475569;
-      font-size: 16px;
-      margin-bottom: 12px;
-    }
-
-    .consent-list {
-      margin: 18px 0 10px;
-      padding-left: 20px;
-      color: #334155;
-    }
-
-    .consent-list li { margin-bottom: 8px; }
-
-    .consent-note {
-      margin-top: 18px;
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      color: #475569;
-      font-size: 14px;
-    }
-
-    .consent-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 24px;
-    }
-
-    .btn-solid {
-      background: var(--navy);
-      color: #fff;
-      border: 2px solid var(--navy);
-      font-size: 16px;
-    }
-
-    .btn-solid:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 24px rgba(31,78,121,0.22);
-    }
-
-    .btn-danger {
-      background: #fff;
-      color: #b91c1c;
-      border: 2px solid #fecaca;
-      font-size: 16px;
-    }
-
-    .btn-danger:hover {
-      transform: translateY(-2px);
-      background: #fef2f2;
-    }
-
-    .consent-inline-link {
-      color: var(--accent);
-      font-weight: 700;
-      text-decoration: none;
-    }
-
-    .consent-inline-link:hover { text-decoration: underline; }
 
   </style>
 </head>
@@ -565,22 +608,22 @@
       }
     }, 1500);
 
-    function getConsentState() {
-      try {
-        return localStorage.getItem('ll_parent_consent') || '';
-      } catch (e) {
-        return '';
-      }
+  function getConsentState() {
+    try {
+      return sessionStorage.getItem('ll_parent_consent') || '';
+    } catch (e) {
+      return '';
     }
-
-    function setConsentState(value) {
-      try {
-        localStorage.setItem('ll_parent_consent', value);
-        localStorage.setItem('ll_parent_consent_date', new Date().toISOString());
-      } catch (e) {
-        console.warn('Consent could not be saved:', e);
-      }
+  }
+  
+  function setConsentState(value) {
+    try {
+      sessionStorage.setItem('ll_parent_consent', value);
+      sessionStorage.setItem('ll_parent_consent_date', new Date().toISOString());
+    } catch (e) {
+      console.warn('Consent could not be saved:', e);
     }
+  }
 
     function loadScript(src, id) {
       if (id && document.getElementById(id)) return;
@@ -607,54 +650,65 @@
       loadScript('analytics.js', 'll-analytics-js');
     }
 
-    function lockSite(message) {
-      const overlay = document.getElementById('consentOverlay');
-      const shell = document.getElementById('siteShell');
-      const note = document.getElementById('consentMessage');
+   function lockSite(message) {
+    const overlay = document.getElementById('consentOverlay');
+    const shell = document.getElementById('siteShell');
+    const note = document.getElementById('consentMessage');
+  
+    overlay.classList.add('is-visible');
+    overlay.setAttribute('aria-hidden', 'false');
+    shell.classList.add('is-locked');
+    shell.setAttribute('aria-hidden', 'true');
+  
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+  
+    if (message) note.textContent = message;
+  }
+  
+  function unlockSite() {
+    const overlay = document.getElementById('consentOverlay');
+    const shell = document.getElementById('siteShell');
+  
+    overlay.classList.remove('is-visible');
+    overlay.setAttribute('aria-hidden', 'true');
+    shell.classList.remove('is-locked');
+    shell.setAttribute('aria-hidden', 'false');
+  
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
+  
+    enableAnalyticsAfterConsent();
+  }
 
-      overlay.classList.add('is-visible');
-      overlay.setAttribute('aria-hidden', 'false');
-      shell.classList.add('is-locked');
-      shell.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = 'hidden';
-
-      if (message) note.textContent = message;
+  function initConsentGate() {
+    const acceptBtn = document.getElementById('consentAcceptBtn');
+    const declineBtn = document.getElementById('consentDeclineBtn');
+  
+    acceptBtn.addEventListener('click', () => {
+      setConsentState('accepted');
+      unlockSite();
+    });
+  
+    declineBtn.addEventListener('click', () => {
+      setConsentState('declined');
+      lockSite('您选择了“不同意”。网站将保持锁定状态。您可以随时点击“同意”，更改您的选择。 You selected “I do not agree”. The website stays locked. You can change your choice at any time by pressing “I agree”.');
+    });
+  
+    const state = getConsentState();
+  
+    if (state === 'accepted') {
+      unlockSite();
+      return;
     }
-
-    function unlockSite() {
-      const overlay = document.getElementById('consentOverlay');
-      const shell = document.getElementById('siteShell');
-
-      overlay.classList.remove('is-visible');
-      overlay.setAttribute('aria-hidden', 'true');
-      shell.classList.remove('is-locked');
-      shell.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = '';
-      enableAnalyticsAfterConsent();
+  
+    if (state === 'declined') {
+      lockSite('您之前选择了“不同意”。在获得同意之前，网站将无法使用。 You previously selected “I do not agree”. The website is unavailable until consent is given.');
+      return;
     }
-
-    function initConsentGate() {
-      const acceptBtn = document.getElementById('consentAcceptBtn');
-      const declineBtn = document.getElementById('consentDeclineBtn');
-
-      acceptBtn.addEventListener('click', () => {
-        setConsentState('accepted');
-        unlockSite();
-      });
-
-      declineBtn.addEventListener('click', () => {
-        setConsentState('declined');
-        lockSite('您选择了“不同意”。网站将保持锁定状态。您可以随时点击“同意”，更改您的选择。You selected “I do not agree”. The website stays locked. You can change your choice at any time by pressing “I agree”.');
-      });
-
-      const state = getConsentState();
-      if (state === 'accepted') {
-        unlockSite();
-      } else if (state === 'declined') {
-        lockSite('您之前选择了“不同意”。在获得同意之前，网站将无法使用。You previously selected “I do not agree”. The website is unavailable until consent is given.');
-      } else {
-        lockSite('请先选择您是否同意。在此之前，网站将暂时无法使用。Please choose whether you agree. Until then, the website will remain unavailable.');
-      }
+  
+    lockSite('请先选择您是否同意。在此之前，网站将暂时无法使用。 Please choose whether you agree. Until then, the website will remain unavailable.');
+  }
     }
 
     window.onload = () => {
