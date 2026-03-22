@@ -119,7 +119,17 @@
     /* При наведении заливается темно-синим */
     .btn-outline:hover { background: var(--navy); color: #fff; transform: translateY(-2px); }
 
-
+   footer {
+      background: #0f172a;
+      color: #94a3b8;
+      padding: 40px 8%;
+      text-align: center;
+      margin-top: 50px;
+    }
+    .footer-link {
+      color: #f97316;
+      text-decoration: none !important;
+    }
     .site-shell.is-locked {
       filter: blur(6px);
       pointer-events: none;
@@ -131,36 +141,38 @@
       inset: 0;
       z-index: 5000;
       display: none;
-      align-items: center;
       justify-content: center;
+      align-items: flex-start;
       padding:
-        max(16px, env(safe-area-inset-top))
-        16px
-        max(16px, env(safe-area-inset-bottom));
+        max(12px, env(safe-area-inset-top))
+        12px
+        max(12px, env(safe-area-inset-bottom));
       background: rgba(15, 23, 42, 0.7);
       backdrop-filter: blur(6px);
     
+      height: 100dvh;
       overflow-y: auto;
       overflow-x: hidden;
       -webkit-overflow-scrolling: touch;
       overscroll-behavior: contain;
+      touch-action: pan-y;
     }
-    
+        
     .consent-overlay.is-visible {
       display: flex;
     }
     
     .consent-modal {
       width: min(680px, 100%);
+      margin: 0;
       background: #fff;
       border-radius: 28px;
       box-shadow: 0 30px 80px rgba(0,0,0,0.25);
       padding: 32px;
       border: 1px solid #e2e8f0;
-    
-      max-height: calc(100dvh - 32px);
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
+      max-height: none;
+      overflow: visible;
+      flex-shrink: 0;
     }
     
     .consent-kicker {
@@ -188,14 +200,6 @@
       font-size: 16px;
       margin-bottom: 12px;
     }
-    
-    .consent-list {
-      margin: 18px 0 10px;
-      padding-left: 20px;
-      color: #334155;
-    }
-    
-    .consent-list li { margin-bottom: 8px; }
     
     .consent-note {
       margin-top: 18px;
@@ -244,56 +248,54 @@
       text-decoration: none;
     }
     
-    .consent-inline-link:hover { text-decoration: underline; }
-
-   footer {
-      background: #0f172a;
-      color: #94a3b8;
-      padding: 40px 8%;
-      text-align: center;
-      margin-top: 50px;
+    .consent-inline-link:hover {
+      text-decoration: underline;
     }
-    .footer-link {
-      color: #f97316;
-      text-decoration: none !important;
-    }
-
     @media (max-width: 1100px) {
       .cards-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 768px) {
-      .progress-container { flex-direction: column; text-align: center; gap: 40px; padding: 40px 20px;}
-      .stats-content { text-align: center; }
-      .cards-grid { grid-template-columns: 1fr; }
-    }
+      .progress-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+        padding: 40px 20px;
+      }
+    
+      .stats-content {
+        text-align: center;
+      }
+    
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+    
+      .consent-modal {
+        width: 100%;
+        padding: 20px 16px;
+        border-radius: 20px;
+      }
+    
+      .consent-actions {
+        flex-direction: column;
+      }
+    
+      .consent-actions .btn {
+        width: 100%;
+      }
 
     .consent-overlay {
       align-items: flex-start;
       padding-top: max(12px, env(safe-area-inset-top));
       padding-bottom: max(12px, env(safe-area-inset-bottom));
     }
-  
-    .consent-modal {
-      width: 100%;
-      padding: 20px 16px;
-      border-radius: 20px;
-      max-height: calc(100dvh - 24px);
-    }
-  
-    .consent-actions {
-      flex-direction: column;
-    }
-  
-    .consent-actions .btn {
-      width: 100%;
-    }
-
 
     .site-shell.is-locked {
       filter: blur(6px);
       pointer-events: none;
       user-select: none;
     }
+   }
 
 
   </style>
@@ -608,108 +610,109 @@
       }
     }, 1500);
 
-  function getConsentState() {
-    try {
-      return sessionStorage.getItem('ll_parent_consent') || '';
-    } catch (e) {
-      return '';
-    }
-  }
-  
-  function setConsentState(value) {
-    try {
-      sessionStorage.setItem('ll_parent_consent', value);
-      sessionStorage.setItem('ll_parent_consent_date', new Date().toISOString());
-    } catch (e) {
-      console.warn('Consent could not be saved:', e);
-    }
-  }
 
+      function getConsentState() {
+      try {
+        return localStorage.getItem('ll_parent_consent') || '';
+      } catch (e) {
+        return '';
+      }
+    }
+    
+    function setConsentState(value) {
+      try {
+        localStorage.setItem('ll_parent_consent', value);
+        localStorage.setItem('ll_parent_consent_date', new Date().toISOString());
+      } catch (e) {
+        console.warn('Consent could not be saved:', e);
+      }
+    }
+    
     function loadScript(src, id) {
       if (id && document.getElementById(id)) return;
+    
       const script = document.createElement('script');
       if (id) script.id = id;
       script.src = src;
       script.async = true;
       document.head.appendChild(script);
     }
-
+    
     function enableAnalyticsAfterConsent() {
       if (window.__llAnalyticsLoaded) return;
       window.__llAnalyticsLoaded = true;
-
+    
       window.dataLayer = window.dataLayer || [];
-      window.gtag = window.gtag || function(){dataLayer.push(arguments);};
+      window.gtag = window.gtag || function () {
+        dataLayer.push(arguments);
+      };
+    
       gtag('consent', 'default', {
         analytics_storage: 'granted'
       });
+    
       gtag('js', new Date());
       gtag('config', 'G-JGY92EVDFQ');
-
+    
       loadScript('https://www.googletagmanager.com/gtag/js?id=G-JGY92EVDFQ', 'll-gtag');
       loadScript('analytics.js', 'll-analytics-js');
     }
+    
+    function lockSite(message) {
+      const overlay = document.getElementById('consentOverlay');
+      const shell = document.getElementById('siteShell');
+      const note = document.getElementById('consentMessage');
+    
+      overlay.classList.add('is-visible');
+      overlay.setAttribute('aria-hidden', 'false');
+    
+      shell.classList.add('is-locked');
+      shell.setAttribute('aria-hidden', 'true');
+    
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+    
+      if (message) note.textContent = message;
+    }
+    
+    function unlockSite() {
+      const overlay = document.getElementById('consentOverlay');
+      const shell = document.getElementById('siteShell');
+    
+      overlay.classList.remove('is-visible');
+      overlay.setAttribute('aria-hidden', 'true');
+    
+      shell.classList.remove('is-locked');
+      shell.setAttribute('aria-hidden', 'false');
+    
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+    
+      enableAnalyticsAfterConsent();
+    }
+    
+ function initConsentGate() {
+  const acceptBtn = document.getElementById('consentAcceptBtn');
+  const declineBtn = document.getElementById('consentDeclineBtn');
 
-   function lockSite(message) {
-    const overlay = document.getElementById('consentOverlay');
-    const shell = document.getElementById('siteShell');
-    const note = document.getElementById('consentMessage');
-  
-    overlay.classList.add('is-visible');
-    overlay.setAttribute('aria-hidden', 'false');
-    shell.classList.add('is-locked');
-    shell.setAttribute('aria-hidden', 'true');
-  
-    document.documentElement.style.overflow = 'hidden';
-    document.body.style.overflow = 'hidden';
-  
-    if (message) note.textContent = message;
-  }
-  
-  function unlockSite() {
-    const overlay = document.getElementById('consentOverlay');
-    const shell = document.getElementById('siteShell');
-  
-    overlay.classList.remove('is-visible');
-    overlay.setAttribute('aria-hidden', 'true');
-    shell.classList.remove('is-locked');
-    shell.setAttribute('aria-hidden', 'false');
-  
-    document.documentElement.style.overflow = '';
-    document.body.style.overflow = '';
-  
-    enableAnalyticsAfterConsent();
+  acceptBtn.addEventListener('click', () => {
+    setConsentState('accepted');
+    unlockSite();
+  });
+
+  declineBtn.addEventListener('click', () => {
+    lockSite('您选择了“不同意”。网站将保持锁定状态。您可以随时点击“同意”，更改您的选择。 You selected “I do not agree”. The website stays locked. You can change your choice at any time by pressing “I agree”.');
+  });
+
+  const state = getConsentState();
+
+  if (state === 'accepted') {
+    unlockSite();
+    return;
   }
 
-  function initConsentGate() {
-    const acceptBtn = document.getElementById('consentAcceptBtn');
-    const declineBtn = document.getElementById('consentDeclineBtn');
-  
-    acceptBtn.addEventListener('click', () => {
-      setConsentState('accepted');
-      unlockSite();
-    });
-  
-    declineBtn.addEventListener('click', () => {
-      setConsentState('declined');
-      lockSite('您选择了“不同意”。网站将保持锁定状态。您可以随时点击“同意”，更改您的选择。 You selected “I do not agree”. The website stays locked. You can change your choice at any time by pressing “I agree”.');
-    });
-  
-    const state = getConsentState();
-  
-    if (state === 'accepted') {
-      unlockSite();
-      return;
-    }
-  
-    if (state === 'declined') {
-      lockSite('您之前选择了“不同意”。在获得同意之前，网站将无法使用。 You previously selected “I do not agree”. The website is unavailable until consent is given.');
-      return;
-    }
-  
-    lockSite('请先选择您是否同意。在此之前，网站将暂时无法使用。 Please choose whether you agree. Until then, the website will remain unavailable.');
-  }
-    }
+  lockSite('请先选择您是否同意。在此之前，网站将暂时无法使用。 Please choose whether you agree. Until then, the website will remain unavailable.');
+}
 
     window.onload = () => {
         updateDisplay();
