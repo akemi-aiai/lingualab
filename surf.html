@@ -3,176 +3,231 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Surf Challenge — LinguaLab</title>
+  <title>Surf Challenge</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
   <style>
     :root {
       --primary: #22d3ee;
+      --primary-strong: #0ea5e9;
+      --primary-light: #ecfeff;
       --accent: #f97316;
       --navy: #1f4e79;
+      --green: #22c55e;
       --bg: #f8fafc;
-      --card: rgba(255,255,255,0.9);
       --text: #0f172a;
-      --muted: #475569;
-      --success: #16a34a;
+      --muted: #64748b;
+      --line: #e2e8f0;
+      --card: #ffffff;
+      --radius: 24px;
+      --shadow-soft: 0 4px 15px rgba(0,0,0,0.04);
+      --shadow-card: 0 20px 40px rgba(0,0,0,0.08);
       --danger: #ef4444;
-      --shadow: 0 18px 42px rgba(15, 23, 42, 0.12);
     }
 
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { overflow-x: hidden; }
+
     body {
-      margin: 0;
-      font-family: Inter, Arial, sans-serif;
-      color: var(--text);
+      font-family: 'Inter', sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(34, 211, 238, 0.18), transparent 28%),
-        linear-gradient(180deg, #ecfeff 0%, #f8fafc 55%, #eff6ff 100%);
-      min-height: 100vh;
+        radial-gradient(circle at top left, rgba(34, 211, 238, 0.15), transparent 28%),
+        linear-gradient(180deg, #f0f9ff 0%, #f8fafc 55%, #eff6ff 100%);
+      color: var(--text);
+      line-height: 1.6;
+      padding-top: 80px;
     }
 
-    .page {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    .topbar {
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
+      padding: 15px 40px;
+      background: #fff;
+      box-shadow: 0 4px 20px rgba(0,0,0,.05);
+      height: 80px;
+      gap: 18px;
     }
 
-    .brand {
-      color: var(--navy);
-      font-weight: 900;
-      letter-spacing: 0.2px;
-      font-size: 1.2rem;
-    }
-
-    .nav-links {
+    .navbar-left {
       display: flex;
-      gap: 10px;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      min-width: 0;
+    }
+
+    .nav-logo {
+      height: 50px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.1;
+      white-space: nowrap;
+    }
+
+    .navbar-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .navbar-right a {
+      text-decoration: none;
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 15px;
+      transition: color 0.18s ease;
+      white-space: nowrap;
+    }
+
+    .navbar-right a:hover,
+    .navbar-right a:focus-visible {
+      color: var(--primary-strong);
+      outline: none;
+    }
+
+    .page {
+      width: min(1200px, calc(100% - 28px));
+      margin: 18px auto 36px;
+    }
+
+    .hero-compact {
+      display: flex;
+      align-items: stretch;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 20px;
       flex-wrap: wrap;
     }
 
-    .nav-links a,
-    .btn {
-      text-decoration: none;
-      border: none;
-      background: white;
-      color: var(--navy);
-      font-weight: 800;
-      padding: 12px 16px;
-      border-radius: 14px;
-      cursor: pointer;
-      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
-      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
-    }
-
-    .btn.primary,
-    .nav-links a:hover {
-      background: var(--primary);
-      color: white;
-    }
-
-    .btn:hover,
-    .nav-links a:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 12px 22px rgba(15, 23, 42, 0.12);
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: 1.05fr 1.3fr;
-      gap: 20px;
-      align-items: start;
-    }
-
-    .panel {
+    .hero-card,
+    .hud-card,
+    .panel,
+    .result-card,
+    .prompt,
+    .mobile-controls {
       background: var(--card);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.7);
-      border-radius: 28px;
-      box-shadow: var(--shadow);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-card);
+    }
+
+    .hero-card {
+      flex: 1 1 420px;
       padding: 24px;
+      min-width: 0;
     }
 
-    .title {
-      font-size: clamp(1.8rem, 3vw, 2.8rem);
-      line-height: 1.05;
+    .hero-card h1 {
       color: var(--navy);
-      margin: 0 0 10px;
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.1;
+      margin-bottom: 8px;
     }
 
-    .subtitle {
+    .cn-line {
+      display: block;
       color: var(--muted);
-      line-height: 1.65;
-      margin: 0 0 18px;
+      font-size: 0.98rem;
+      margin-top: 6px;
+      font-weight: 600;
     }
 
-    .pill-row,
-    .stats-grid,
-    .modes {
+    .hero-copy {
+      color: var(--text);
+      font-size: 1.02rem;
+      margin-bottom: 16px;
+    }
+
+    .hero-copy .cn-line {
+      margin-top: 8px;
+    }
+
+    .badge-row,
+    .mode-grid,
+    .stats-grid {
       display: grid;
       gap: 12px;
     }
 
-    .pill-row {
+    .badge-row {
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      margin: 18px 0;
+      margin-bottom: 16px;
     }
 
-    .pill {
-      background: white;
-      border-radius: 18px;
-      padding: 14px 16px;
-      border: 1px solid #e2e8f0;
-    }
-
-    .pill-label {
-      color: var(--muted);
-      font-size: 0.85rem;
-      margin-bottom: 4px;
-    }
-
-    .pill-value {
-      color: var(--navy);
-      font-weight: 900;
-      font-size: 1.2rem;
-    }
-
-    .modes {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      margin: 14px 0 18px;
-    }
-
-    .mode-card {
-      border: 2px solid #dbeafe;
-      background: white;
+    .tree-badge {
+      background: linear-gradient(135deg, #ecfeff, #f8fafc);
+      border: 1px solid #d7f4fb;
       border-radius: 20px;
-      padding: 16px;
-      cursor: pointer;
-      text-align: left;
-      transition: 0.18s ease;
+      padding: 16px 18px;
+      box-shadow: var(--shadow-soft);
+      min-width: 0;
     }
 
-    .mode-card.active {
-      border-color: var(--primary);
-      box-shadow: 0 10px 20px rgba(34, 211, 238, 0.14);
-      transform: translateY(-1px);
-    }
-
-    .mode-title {
-      font-weight: 900;
-      color: var(--navy);
+    .tree-badge small {
+      display: block;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 700;
       margin-bottom: 6px;
     }
 
-    .mode-text {
+    .tree-badge strong {
+      color: var(--navy);
+      font-size: 1.35rem;
+      font-weight: 800;
+    }
+
+    .mode-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-bottom: 14px;
+    }
+
+    .mode-card {
+      border-radius: 22px;
+      border: 2px solid #dbeafe;
+      background: #fff;
+      padding: 16px;
+      cursor: pointer;
+      text-align: left;
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+      min-width: 0;
+    }
+
+    .mode-card:hover,
+    .mode-card:focus-visible,
+    .mode-card.active {
+      border-color: var(--primary);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(14,165,233,0.12);
+      outline: none;
+    }
+
+    .mode-card h3 {
+      color: var(--navy);
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+
+    .mode-card p {
       color: var(--muted);
-      font-size: 0.94rem;
+      font-size: 0.92rem;
       line-height: 1.45;
     }
 
@@ -180,77 +235,226 @@
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 6px;
+      margin-bottom: 14px;
     }
 
-    .game-wrap {
-      display: grid;
-      gap: 16px;
+    .btn,
+    .game-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 18px;
+      border-radius: 999px;
+      border: none;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 15px;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
     }
 
-    .hud {
+    .btn.primary,
+    .game-btn {
+      color: #fff;
+      background: linear-gradient(90deg, var(--primary), var(--primary-strong));
+      box-shadow: 0 10px 24px rgba(14, 165, 233, 0.25);
+    }
+
+    .btn.secondary {
+      background: #fff;
+      color: var(--navy);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .btn:hover,
+    .game-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .helper-note {
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.55;
+    }
+
+    .helper-note strong {
+      color: var(--navy);
+    }
+
+    .content-grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
+      grid-template-columns: minmax(320px, 420px) minmax(0, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .panel {
+      padding: 20px;
+      min-width: 0;
+    }
+
+    .panel h2 {
+      color: var(--navy);
+      font-size: 1.24rem;
+      margin-bottom: 4px;
+    }
+
+    .panel .section-subtitle {
+      color: var(--muted);
+      margin-bottom: 16px;
+      font-size: 0.95rem;
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-bottom: 14px;
     }
 
     .hud-card {
-      background: white;
-      border: 1px solid #e2e8f0;
-      border-radius: 18px;
       padding: 14px;
+      min-width: 0;
     }
 
     .hud-card small {
       display: block;
       color: var(--muted);
-      margin-bottom: 6px;
+      font-size: 0.78rem;
       font-weight: 700;
+      margin-bottom: 6px;
     }
 
     .hud-card strong {
-      font-size: 1.2rem;
+      display: block;
       color: var(--navy);
+      font-size: 1.28rem;
+      font-weight: 800;
+    }
+
+    .library-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .mini-word {
+      background: linear-gradient(180deg, #ffffff, #f8fafc);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 10px;
+      text-align: center;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .mini-word img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: contain;
+      background: #fff;
+      border-radius: 14px;
+      margin-bottom: 6px;
+    }
+
+    .mini-word span {
+      display: block;
+      color: var(--navy);
+      font-size: 0.82rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .mini-word em {
+      display: block;
+      font-style: normal;
+      color: var(--muted);
+      font-size: 0.74rem;
+    }
+
+    .game-wrap {
+      min-width: 0;
     }
 
     .prompt {
+      padding: 16px 18px;
+      margin-bottom: 14px;
       background: linear-gradient(90deg, rgba(34,211,238,0.12), rgba(249,115,22,0.10));
-      border: 1px solid rgba(34,211,238,0.18);
-      border-radius: 22px;
-      padding: 18px 20px;
-      min-height: 96px;
+      border-color: rgba(34,211,238,0.18);
     }
 
     .prompt small {
-      color: var(--muted);
       display: block;
+      color: var(--muted);
+      font-size: 0.82rem;
       font-weight: 700;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
+    }
+
+    .prompt-main {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-height: 88px;
+      min-width: 0;
+    }
+
+    .prompt-art {
+      width: 76px;
+      height: 76px;
+      border-radius: 18px;
+      background: #fff;
+      border: 1px solid rgba(255,255,255,0.9);
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      overflow: hidden;
+    }
+
+    .prompt-art img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 10px;
     }
 
     .prompt-text {
-      font-size: clamp(1.4rem, 2.4vw, 2rem);
+      min-width: 0;
+    }
+
+    .prompt-text strong {
+      display: block;
       color: var(--navy);
-      font-weight: 900;
-      line-height: 1.15;
+      font-size: clamp(1.2rem, 2.8vw, 1.8rem);
+      line-height: 1.12;
+    }
+
+    .prompt-text span {
+      display: block;
+      color: var(--muted);
+      margin-top: 4px;
+      font-size: 0.96rem;
+      font-weight: 600;
     }
 
     .arena {
       position: relative;
-      height: 520px;
+      height: 560px;
       overflow: hidden;
       border-radius: 28px;
-      border: 2px solid rgba(255,255,255,0.8);
+      border: 2px solid rgba(255,255,255,0.9);
       background:
-        linear-gradient(180deg, #bae6fd 0%, #7dd3fc 18%, #38bdf8 45%, #0ea5e9 100%);
-      box-shadow: var(--shadow);
+        linear-gradient(180deg, rgba(255,255,255,0.22) 0 20%, transparent 20%),
+        linear-gradient(180deg, #dbeafe 0%, #7dd3fc 18%, #38bdf8 44%, #0ea5e9 100%);
+      box-shadow: var(--shadow-card);
     }
 
+    .wave-deco,
     .cloud,
-    .foam,
     .lane-line,
-    .collectible,
     .surfer,
+    .collectible,
     .countdown,
     .overlay {
       position: absolute;
@@ -258,90 +462,73 @@
 
     .cloud {
       width: 120px;
-      height: 40px;
-      background: rgba(255,255,255,0.85);
+      height: 38px;
+      background: rgba(255,255,255,0.88);
       border-radius: 999px;
-      filter: blur(0.2px);
+      filter: blur(.2px);
     }
 
     .cloud::before,
     .cloud::after {
       content: "";
       position: absolute;
-      background: rgba(255,255,255,0.9);
+      background: rgba(255,255,255,0.92);
       border-radius: 50%;
     }
 
-    .cloud::before {
-      width: 48px;
-      height: 48px;
-      left: 14px;
-      top: -18px;
-    }
-
-    .cloud::after {
-      width: 60px;
-      height: 60px;
-      right: 10px;
-      top: -24px;
-    }
+    .cloud::before { width: 46px; height: 46px; left: 12px; top: -18px; }
+    .cloud::after { width: 58px; height: 58px; right: 12px; top: -24px; }
 
     .lane-line {
       top: 0;
       bottom: 0;
       width: 3px;
-      background: repeating-linear-gradient(
-        180deg,
-        rgba(255,255,255,0.42) 0 20px,
-        rgba(255,255,255,0.04) 20px 42px
-      );
-      opacity: 0.9;
+      background: repeating-linear-gradient(180deg, rgba(255,255,255,0.44) 0 20px, rgba(255,255,255,0.05) 20px 42px);
     }
 
-    .foam {
-      left: -10%;
-      right: -10%;
-      height: 90px;
+    .wave-deco {
+      left: -8%;
+      right: -8%;
       bottom: 0;
+      height: 98px;
       background:
-        radial-gradient(circle at 8% 35%, rgba(255,255,255,0.86) 0 18px, transparent 19px),
-        radial-gradient(circle at 18% 60%, rgba(255,255,255,0.74) 0 14px, transparent 15px),
-        radial-gradient(circle at 28% 40%, rgba(255,255,255,0.85) 0 17px, transparent 18px),
-        radial-gradient(circle at 44% 55%, rgba(255,255,255,0.76) 0 15px, transparent 16px),
-        radial-gradient(circle at 60% 38%, rgba(255,255,255,0.86) 0 18px, transparent 19px),
-        radial-gradient(circle at 72% 58%, rgba(255,255,255,0.76) 0 14px, transparent 15px),
-        radial-gradient(circle at 86% 42%, rgba(255,255,255,0.86) 0 18px, transparent 19px),
-        linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.58));
-      opacity: 0.95;
+        radial-gradient(circle at 10% 36%, rgba(255,255,255,0.86) 0 18px, transparent 19px),
+        radial-gradient(circle at 21% 58%, rgba(255,255,255,0.76) 0 14px, transparent 15px),
+        radial-gradient(circle at 34% 40%, rgba(255,255,255,0.85) 0 17px, transparent 18px),
+        radial-gradient(circle at 52% 55%, rgba(255,255,255,0.76) 0 15px, transparent 16px),
+        radial-gradient(circle at 68% 38%, rgba(255,255,255,0.86) 0 18px, transparent 19px),
+        radial-gradient(circle at 82% 58%, rgba(255,255,255,0.76) 0 14px, transparent 15px),
+        linear-gradient(180deg, rgba(255,255,255,0.20), rgba(255,255,255,0.62));
       pointer-events: none;
+      opacity: 0.95;
     }
 
     .surfer {
-      bottom: 44px;
-      width: 90px;
-      height: 110px;
+      bottom: 48px;
+      width: 94px;
+      height: 116px;
       transform: translateX(-50%);
       transition: left 0.18s ease;
-      z-index: 10;
+      z-index: 12;
     }
 
     .surfer .board {
       position: absolute;
-      left: 10px;
-      right: 10px;
+      left: 8px;
+      right: 8px;
       bottom: 0;
       height: 18px;
-      background: linear-gradient(90deg, #f97316, #fb923c);
+      background: linear-gradient(90deg, var(--accent), #fb923c);
       border-radius: 999px;
       box-shadow: 0 10px 18px rgba(249, 115, 22, 0.28);
     }
 
     .surfer .body {
       position: absolute;
-      left: 30px;
+      left: 31px;
       bottom: 18px;
-      width: 30px;
-      height: 56px;
+      width: 32px;
+      height: 58px;
       background: #ffffff;
       border-radius: 16px 16px 12px 12px;
       box-shadow: 0 6px 12px rgba(15,23,42,0.12);
@@ -349,10 +536,10 @@
 
     .surfer .head {
       position: absolute;
-      left: 28px;
-      bottom: 66px;
-      width: 34px;
-      height: 34px;
+      left: 29px;
+      bottom: 69px;
+      width: 36px;
+      height: 36px;
       background: #fde68a;
       border-radius: 50%;
       box-shadow: 0 4px 8px rgba(15,23,42,0.08);
@@ -361,7 +548,7 @@
     .surfer .arm {
       position: absolute;
       width: 12px;
-      height: 34px;
+      height: 35px;
       background: #ffffff;
       border-radius: 10px;
       top: 30px;
@@ -372,75 +559,92 @@
 
     .collectible {
       width: 30%;
-      min-width: 140px;
+      min-width: 145px;
       max-width: 220px;
-      padding: 14px 16px;
+      padding: 10px;
       transform: translateX(-50%);
-      border-radius: 18px;
-      background: rgba(255,255,255,0.95);
-      border: 2px solid rgba(255,255,255,0.75);
+      border-radius: 22px;
+      background: rgba(255,255,255,0.97);
+      border: 2px solid rgba(255,255,255,0.85);
       box-shadow: 0 16px 30px rgba(15,23,42,0.16);
+      z-index: 7;
       text-align: center;
-      font-weight: 900;
+    }
+
+    .collectible.correct { border-color: rgba(34,197,94,0.55); }
+    .collectible.wrong { border-color: rgba(239,68,68,0.45); }
+
+    .collectible-image {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 16px;
+      background: #fff;
+      border: 1px solid var(--line);
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+
+    .collectible-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 8px;
+    }
+
+    .collectible-label {
       color: var(--navy);
-      z-index: 6;
-    }
-
-    .collectible.correct {
-      border-color: rgba(34,197,94,0.65);
-    }
-
-    .collectible.wrong {
-      border-color: rgba(239,68,68,0.55);
-    }
-
-    .collectible .emoji {
-      display: block;
-      font-size: 1.6rem;
-      margin-bottom: 6px;
-    }
-
-    .collectible .label {
-      font-size: 1.06rem;
+      font-weight: 800;
+      font-size: 1rem;
       line-height: 1.15;
     }
 
-    .countdown {
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 5rem;
-      color: white;
-      text-shadow: 0 10px 28px rgba(15,23,42,0.35);
-      z-index: 20;
-      background: rgba(15, 23, 42, 0.16);
+    .collectible-zh {
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-top: 4px;
+      font-weight: 600;
+      line-height: 1.15;
     }
 
+    .countdown,
     .overlay {
       inset: 0;
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      padding: 16px;
       z-index: 25;
-      background: rgba(15, 23, 42, 0.34);
+    }
+
+    .countdown {
+      background: rgba(15,23,42,0.18);
+      font-weight: 800;
+      font-size: clamp(3rem, 8vw, 5rem);
+      color: #fff;
+      text-shadow: 0 10px 28px rgba(15,23,42,0.35);
+    }
+
+    .overlay {
+      background: rgba(15,23,42,0.34);
     }
 
     .result-card {
-      width: min(520px, 100%);
-      background: white;
-      border-radius: 28px;
+      width: min(560px, 100%);
       padding: 28px;
-      box-shadow: 0 22px 50px rgba(15,23,42,0.25);
       text-align: center;
     }
 
     .result-card h2 {
       color: var(--navy);
-      margin: 0 0 10px;
       font-size: 2rem;
+      margin-bottom: 10px;
+      line-height: 1.12;
+    }
+
+    .stars {
+      font-size: 2rem;
+      letter-spacing: 4px;
+      margin: 10px 0 14px;
     }
 
     .result-stats {
@@ -453,15 +657,16 @@
     .result-stat {
       background: #f8fafc;
       border-radius: 18px;
-      padding: 16px 10px;
-      border: 1px solid #e2e8f0;
+      padding: 14px 10px;
+      border: 1px solid var(--line);
     }
 
     .result-stat span {
       display: block;
-      font-size: 0.84rem;
       color: var(--muted);
+      font-size: 0.82rem;
       margin-bottom: 6px;
+      font-weight: 700;
     }
 
     .result-stat strong {
@@ -469,125 +674,248 @@
       font-size: 1.4rem;
     }
 
-    .stars {
-      font-size: 2rem;
-      letter-spacing: 4px;
-      margin: 12px 0 16px;
-    }
-
     .mini-note {
       color: var(--muted);
-      line-height: 1.55;
-      margin-top: 12px;
-      font-size: 0.94rem;
-    }
-
-    .help {
-      margin-top: 16px;
-      color: var(--muted);
-      line-height: 1.6;
       font-size: 0.95rem;
+      line-height: 1.6;
+      margin-top: 12px;
     }
 
-    .flash {
-      animation: flash 360ms ease;
+    .mobile-controls {
+      display: none;
+      gap: 12px;
+      padding: 12px;
+      margin-top: 14px;
     }
+
+    .mobile-controls button {
+      flex: 1;
+      min-height: 54px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--navy);
+      font-weight: 800;
+      font-size: 1.05rem;
+      box-shadow: var(--shadow-soft);
+      cursor: pointer;
+    }
+
+    .flash { animation: flash 360ms ease; }
 
     @keyframes flash {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.04); }
-      100% { transform: scale(1); }
+      0% { transform: translateX(-50%) scale(1); }
+      50% { transform: translateX(-50%) scale(1.04); }
+      100% { transform: translateX(-50%) scale(1); }
     }
 
-    @media (max-width: 980px) {
-      .hero { grid-template-columns: 1fr; }
-      .hud { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .modes, .pill-row, .result-stats { grid-template-columns: 1fr; }
-      .arena { height: 480px; }
-      .collectible { width: 28%; min-width: 110px; }
+    @media (max-width: 1080px) {
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid,
+      .badge-row,
+      .mode-grid,
+      .result-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .panel.side-panel {
+        order: 2;
+      }
+
+      .game-wrap {
+        order: 1;
+      }
     }
 
-    @media (max-width: 620px) {
-      .page { padding: 14px; }
-      .panel { padding: 18px; border-radius: 22px; }
-      .arena { height: 430px; }
-      .collectible { width: 31%; min-width: 96px; font-size: 0.92rem; padding: 12px 10px; }
-      .collectible .emoji { font-size: 1.35rem; }
-      .surfer { width: 76px; height: 100px; }
-      .hud { grid-template-columns: 1fr 1fr; }
-      .prompt-text { font-size: 1.28rem; }
+    @media (max-width: 820px) {
+      .navbar {
+        padding: 14px 18px;
+        height: auto;
+        min-height: 74px;
+      }
+
+      body { padding-top: 88px; }
+
+      .nav-title { font-size: 20px; }
+      .navbar-right { gap: 12px; }
+      .navbar-right a { font-size: 14px; }
+
+      .page { width: min(100%, calc(100% - 20px)); }
+      .hero-card { padding: 18px; }
+      .arena { height: 500px; }
+      .library-strip { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 640px) {
+      .hero-card,
+      .panel,
+      .result-card,
+      .prompt,
+      .mobile-controls { border-radius: 22px; }
+
+      .stats-grid,
+      .badge-row,
+      .mode-grid,
+      .result-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .controls {
+        flex-direction: column;
+      }
+
+      .btn,
+      .game-btn {
+        width: 100%;
+      }
+
+      .prompt-main {
+        align-items: flex-start;
+      }
+
+      .prompt-art {
+        width: 64px;
+        height: 64px;
+        border-radius: 16px;
+      }
+
+      .arena { height: 440px; }
+      .collectible {
+        width: 31%;
+        min-width: 98px;
+        padding: 8px;
+        border-radius: 18px;
+      }
+
+      .collectible-label {
+        font-size: 0.88rem;
+      }
+
+      .collectible-zh {
+        font-size: 0.72rem;
+      }
+
+      .surfer {
+        width: 80px;
+        height: 104px;
+      }
+
+      .mobile-controls {
+        display: flex;
+      }
+
+      .library-strip { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
   </style>
 </head>
 <body>
-  <div class="page">
-    <div class="topbar">
-      <div class="brand">LinguaLab • Surf Challenge</div>
-      <div class="nav-links">
-        <a href="index.html">Main Page</a>
-        <a href="vocabulary.html">Word Bank</a>
-      </div>
-    </div>
+  <header class="navbar">
+    <a class="navbar-left" href="index.html">
+      <img src="assets/img/logo.png" alt="LL" class="nav-logo" onerror="this.style.display='none'">
+      <span class="nav-title">LinguaLab</span>
+    </a>
 
-    <div class="hero">
-      <section class="panel">
-        <h1 class="title">Surf Challenge</h1>
-        <p class="subtitle">
-          A short vocabulary game for quick revision. The child surfs forward and catches the correct answer.
-          游戏化词汇巩固：小朋友沿着海浪前进，抓住正确答案！
+    <nav class="navbar-right">
+      <a href="index.html">Main Page</a>
+      <a href="vocabulary.html">Word Bank</a>
+      <a href="grammar.html">Grammar Magic</a>
+      <a href="exercises.html">Fun Homework</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <section class="hero-compact">
+      <div class="hero-card">
+        <h1>Surf Challenge <span class="cn-line">冲浪闯关</span></h1>
+        <p class="hero-copy">
+          A short surfing game for vocabulary revision. Catch the correct card with the real picture and audio from LinguaLab.
+          <span class="cn-line">一个简短的词汇复习游戏。孩子在海浪上前进，抓住来自 LinguaLab 词库的正确图片和音频卡片。</span>
         </p>
 
-        <div class="pill-row">
-          <div class="pill">
-            <div class="pill-label">Current vocabulary points</div>
-            <div class="pill-value" id="totalVocabPoints">0</div>
+        <div class="badge-row">
+          <div class="tree-badge">
+            <small>Vocabulary Points • 词汇积分</small>
+            <strong id="totalVocabPoints">0</strong>
           </div>
-          <div class="pill">
-            <div class="pill-label">Best Surf Score</div>
-            <div class="pill-value" id="bestSurfScore">0</div>
+          <div class="tree-badge">
+            <small>Best Surf Score • 最佳冲浪得分</small>
+            <strong id="bestSurfScore">0</strong>
           </div>
         </div>
 
-        <div class="modes">
-          <button class="mode-card active" type="button" data-mode="audio">
-            <div class="mode-title">Audio Surf</div>
-            <div class="mode-text">Hear the word and catch the matching card.</div>
+        <div class="mode-grid" role="tablist" aria-label="Game modes">
+          <button class="mode-card active" type="button" data-mode="audio" aria-selected="true">
+            <h3>Audio Surf <span class="cn-line">听音冲浪</span></h3>
+            <p>Listen to the real word audio and catch the matching picture card. <br>听真实单词音频，抓住对应图片卡片。</p>
           </button>
-          <button class="mode-card" type="button" data-mode="word">
-            <div class="mode-title">Word Surf</div>
-            <div class="mode-text">Read the prompt and catch the correct picture-word pair.</div>
+          <button class="mode-card" type="button" data-mode="word" aria-selected="false">
+            <h3>Word Surf <span class="cn-line">单词冲浪</span></h3>
+            <p>Read the prompt and catch the correct image-word pair. <br>看提示词，抓住正确的图片和单词卡片。</p>
           </button>
         </div>
 
         <div class="controls">
-          <button class="btn primary" id="startBtn">Start 75s Challenge</button>
-          <button class="btn" id="replayAudioBtn" type="button">Replay Audio</button>
+          <button class="btn primary" id="startBtn" type="button">Start 75s Challenge • 开始 75 秒挑战</button>
+          <button class="btn secondary" id="replayAudioBtn" type="button">Replay Audio • 重放音频</button>
         </div>
 
-        <p class="help">
-          Controls: use <strong>←</strong> and <strong>→</strong>, or tap the left and right side of the game area.
-          Each correct catch gives <strong>+2 vocabulary points</strong> and syncs to Word Bank through <code>localStorage</code>.
+        <p class="helper-note">
+          Every correct catch gives <strong>+1 vocabulary point</strong> and syncs to Word Bank automatically.
+          <br>每抓对一个单词，就会获得 <strong>+1 词汇积分</strong>，并自动同步到 Word Bank。
+          <br><strong>Controls • 操作：</strong> Use <strong>← →</strong>, tap left/right, or use swipe on phone and tablet.
         </p>
-      </section>
+      </div>
+    </section>
+
+    <section class="content-grid">
+      <aside class="panel side-panel">
+        <h2>Session Stats <span class="cn-line">本轮数据</span></h2>
+        <p class="section-subtitle">Short run, clear feedback, easy for preschoolers. <br>短时挑战，反馈清晰，更适合学龄前儿童。</p>
+
+        <div class="stats-grid">
+          <div class="hud-card">
+            <small>Time Left • 剩余时间</small>
+            <strong id="timeLeft">75</strong>
+          </div>
+          <div class="hud-card">
+            <small>Words Caught • 抓对单词</small>
+            <strong id="caughtCount">0</strong>
+          </div>
+          <div class="hud-card">
+            <small>Mistakes • 错误次数</small>
+            <strong id="mistakeCount">0</strong>
+          </div>
+          <div class="hud-card">
+            <small>Run Points • 本轮积分</small>
+            <strong id="runPoints">0</strong>
+          </div>
+        </div>
+
+        <h2 style="margin-top: 14px;">Word Library <span class="cn-line">词卡素材库</span></h2>
+        <p class="section-subtitle">These cards use the real site assets. <br>这些卡片直接使用站点中的真实图片素材。</p>
+        <div class="library-strip" id="libraryStrip"></div>
+      </aside>
 
       <section class="game-wrap">
-        <div class="hud">
-          <div class="hud-card"><small>Time Left</small><strong id="timeLeft">75</strong></div>
-          <div class="hud-card"><small>Words Caught</small><strong id="caughtCount">0</strong></div>
-          <div class="hud-card"><small>Mistakes</small><strong id="mistakeCount">0</strong></div>
-          <div class="hud-card"><small>Run Points</small><strong id="runPoints">0</strong></div>
-        </div>
-
         <div class="prompt" id="promptBox">
-          <small>Prompt</small>
-          <div class="prompt-text" id="promptText">Press Start to begin.</div>
+          <small>Prompt • 提示</small>
+          <div class="prompt-main">
+            <div class="prompt-art" id="promptArt"></div>
+            <div class="prompt-text">
+              <strong id="promptPrimary">Press Start to begin.</strong>
+              <span id="promptSecondary">点击开始，开始冲浪挑战。</span>
+            </div>
+          </div>
         </div>
 
         <div class="arena" id="arena" aria-label="Surf Challenge game area">
-          <div class="cloud" style="left:8%; top:38px;"></div>
-          <div class="cloud" style="left:66%; top:72px; transform: scale(0.8);"></div>
-          <div class="lane-line" style="left:33.333%;"></div>
-          <div class="lane-line" style="left:66.666%;"></div>
+          <div class="cloud" style="left: 8%; top: 34px;"></div>
+          <div class="cloud" style="left: 68%; top: 70px; transform: scale(0.82);"></div>
+          <div class="lane-line" style="left: 33.333%;"></div>
+          <div class="lane-line" style="left: 66.666%;"></div>
 
           <div class="surfer" id="surfer" style="left: 16.666%;">
             <div class="head"></div>
@@ -597,54 +925,83 @@
             <div class="board"></div>
           </div>
 
-          <div class="foam"></div>
+          <div class="wave-deco"></div>
           <div class="countdown" id="countdown"></div>
+
           <div class="overlay" id="overlay">
             <div class="result-card">
-              <h2>Ride Complete!</h2>
+              <h2>Ride Complete! <span class="cn-line" style="font-size: 1rem;">冲浪完成！</span></h2>
               <div class="stars" id="starsLine">⭐</div>
               <div class="result-stats">
-                <div class="result-stat"><span>Words Caught</span><strong id="finalCaught">0</strong></div>
-                <div class="result-stat"><span>Mistakes</span><strong id="finalMistakes">0</strong></div>
-                <div class="result-stat"><span>Points Earned</span><strong id="finalPoints">0</strong></div>
+                <div class="result-stat">
+                  <span>Words Caught • 抓对单词</span>
+                  <strong id="finalCaught">0</strong>
+                </div>
+                <div class="result-stat">
+                  <span>Mistakes • 错误次数</span>
+                  <strong id="finalMistakes">0</strong>
+                </div>
+                <div class="result-stat">
+                  <span>Points Earned • 获得积分</span>
+                  <strong id="finalPoints">0</strong>
+                </div>
               </div>
-              <button class="btn primary" id="playAgainBtn">Play Again</button>
+              <button class="btn primary" id="playAgainBtn" type="button">Play Again • 再玩一次</button>
               <p class="mini-note" id="resultNote"></p>
             </div>
           </div>
         </div>
+
+        <div class="mobile-controls" aria-hidden="false">
+          <button type="button" id="mobileLeftBtn">← Left • 左</button>
+          <button type="button" id="mobileRightBtn">Right • 右 →</button>
+        </div>
       </section>
-    </div>
-  </div>
+    </section>
+  </main>
 
   <script>
-    const VOCAB_POINTS_KEY = "vocab_points";
-    const SURF_BEST_KEY = "lingualab_surf_best";
-    const SURF_RUNS_KEY = "lingualab_surf_runs";
-    const SURF_LAST_RUN_KEY = "lingualab_surf_last_run";
+    const VOCAB_POINTS_KEY = 'vocab_points';
+    const SURF_BEST_KEY = 'lingualab_surf_best';
+    const SURF_RUNS_KEY = 'lingualab_surf_runs';
+    const SURF_LAST_RUN_KEY = 'lingualab_surf_last_run';
+
     const RUN_DURATION_SECONDS = 75;
     const LANES = [16.666, 50, 83.333];
-    const SPEED_BASE = 2.9;
-    const SPEED_INCREMENT = 0.0007;
-    const CATCH_REWARD = 2;
+    const SPEED_BASE = 2.6;
+    const SPEED_INCREMENT = 0.0011;
+    const CATCH_REWARD = 1;
 
     const WORD_BANK = [
-      { word: "apple", emoji: "🍎", zh: "苹果" },
-      { word: "banana", emoji: "🍌", zh: "香蕉" },
-      { word: "cat", emoji: "🐱", zh: "猫" },
-      { word: "dog", emoji: "🐶", zh: "狗" },
-      { word: "sun", emoji: "☀️", zh: "太阳" },
-      { word: "moon", emoji: "🌙", zh: "月亮" },
-      { word: "fish", emoji: "🐟", zh: "鱼" },
-      { word: "milk", emoji: "🥛", zh: "牛奶" },
-      { word: "book", emoji: "📘", zh: "书" },
-      { word: "ball", emoji: "⚽", zh: "球" },
-      { word: "car", emoji: "🚗", zh: "汽车" },
-      { word: "star", emoji: "⭐", zh: "星星" }
+      { id: 'apple', en: 'Apple', zh: '苹果', pinyin: 'píng guǒ', img: 'assets/img/apple.png', audio: 'assets/audio/apple.mp3' },
+      { id: 'banana', en: 'Banana', zh: '香蕉', pinyin: 'xiāng jiāo', img: 'assets/img/banana.png', audio: 'assets/audio/banana.mp3' },
+      { id: 'book', en: 'Book', zh: '书', pinyin: 'shū', img: 'assets/img/book.png', audio: 'assets/audio/book.mp3' },
+      { id: 'bag', en: 'Bag', zh: '书包', pinyin: 'shū bāo', img: 'assets/img/bag.png', audio: 'assets/audio/bag.mp3' },
+      { id: 'cat', en: 'Cat', zh: '猫', pinyin: 'māo', img: 'assets/img/cat.png', audio: 'assets/audio/cat.mp3' },
+      { id: 'dog', en: 'Dog', zh: '狗', pinyin: 'gǒu', img: 'assets/img/dog.png', audio: 'assets/audio/dog.mp3' },
+      { id: 'fish', en: 'Fish', zh: '鱼', pinyin: 'yú', img: 'assets/img/fish.png', audio: 'assets/audio/fish.mp3' },
+      { id: 'bird', en: 'Bird', zh: '鸟', pinyin: 'niǎo', img: 'assets/img/bird.png', audio: 'assets/audio/bird.mp3' },
+      { id: 'car', en: 'Car', zh: '汽车', pinyin: 'qì chē', img: 'assets/img/car.png', audio: 'assets/audio/car.mp3' },
+      { id: 'bus', en: 'Bus', zh: '公交车', pinyin: 'gōng jiāo chē', img: 'assets/img/bus.png', audio: 'assets/audio/bus.mp3' },
+      { id: 'cake', en: 'Cake', zh: '蛋糕', pinyin: 'dàn gāo', img: 'assets/img/cake.png', audio: 'assets/audio/cake.mp3' },
+      { id: 'juice', en: 'Juice', zh: '果汁', pinyin: 'guǒ zhī', img: 'assets/img/juice.png', audio: 'assets/audio/juice.mp3' },
+      { id: 'milk', en: 'Milk', zh: '牛奶', pinyin: 'niú nǎi', img: 'assets/img/milk.png', audio: 'assets/audio/milk.mp3' },
+      { id: 'bear', en: 'Bear', zh: '熊', pinyin: 'xióng', img: 'assets/img/bear.png', audio: 'assets/audio/bear.mp3' },
+      { id: 'duck', en: 'Duck', zh: '鸭子', pinyin: 'yā zi', img: 'assets/img/duck.png', audio: 'assets/audio/duck.mp3' },
+      { id: 'boy', en: 'Boy', zh: '男孩', pinyin: 'nán hái', img: 'assets/img/boy.png', audio: 'assets/audio/boy.mp3' },
+      { id: 'girl', en: 'Girl', zh: '女孩', pinyin: 'nǚ hái', img: 'assets/img/girl.png', audio: 'assets/audio/girl.mp3' },
+      { id: 'monkey', en: 'Monkey', zh: '猴子', pinyin: 'hóu zi', img: 'assets/img/monkey.png', audio: 'assets/audio/monkey.mp3' }
     ];
 
+    const audioCache = new Map();
+    WORD_BANK.forEach(item => {
+      const audio = new Audio(item.audio);
+      audio.preload = 'auto';
+      audioCache.set(item.id, audio);
+    });
+
     const state = {
-      mode: "audio",
+      mode: 'audio',
       playing: false,
       lane: 0,
       prompt: null,
@@ -653,30 +1010,31 @@
       timerSeconds: RUN_DURATION_SECONDS,
       elapsedMs: 0,
       lastFrame: 0,
-      spawnAccumulator: 0,
       animationId: null,
       timerId: null,
       run: { caught: 0, mistakes: 0, points: 0 },
-      speakingEnabled: "speechSynthesis" in window
+      touchStartX: null
     };
 
-    const arena = document.getElementById("arena");
-    const surferEl = document.getElementById("surfer");
-    const promptTextEl = document.getElementById("promptText");
-    const timeLeftEl = document.getElementById("timeLeft");
-    const caughtCountEl = document.getElementById("caughtCount");
-    const mistakeCountEl = document.getElementById("mistakeCount");
-    const runPointsEl = document.getElementById("runPoints");
-    const totalVocabPointsEl = document.getElementById("totalVocabPoints");
-    const bestSurfScoreEl = document.getElementById("bestSurfScore");
-    const countdownEl = document.getElementById("countdown");
-    const overlayEl = document.getElementById("overlay");
-    const finalCaughtEl = document.getElementById("finalCaught");
-    const finalMistakesEl = document.getElementById("finalMistakes");
-    const finalPointsEl = document.getElementById("finalPoints");
-    const resultNoteEl = document.getElementById("resultNote");
-    const starsLineEl = document.getElementById("starsLine");
-    const replayAudioBtn = document.getElementById("replayAudioBtn");
+    const arena = document.getElementById('arena');
+    const surferEl = document.getElementById('surfer');
+    const promptArtEl = document.getElementById('promptArt');
+    const promptPrimaryEl = document.getElementById('promptPrimary');
+    const promptSecondaryEl = document.getElementById('promptSecondary');
+    const timeLeftEl = document.getElementById('timeLeft');
+    const caughtCountEl = document.getElementById('caughtCount');
+    const mistakeCountEl = document.getElementById('mistakeCount');
+    const runPointsEl = document.getElementById('runPoints');
+    const totalVocabPointsEl = document.getElementById('totalVocabPoints');
+    const bestSurfScoreEl = document.getElementById('bestSurfScore');
+    const countdownEl = document.getElementById('countdown');
+    const overlayEl = document.getElementById('overlay');
+    const finalCaughtEl = document.getElementById('finalCaught');
+    const finalMistakesEl = document.getElementById('finalMistakes');
+    const finalPointsEl = document.getElementById('finalPoints');
+    const resultNoteEl = document.getElementById('resultNote');
+    const starsLineEl = document.getElementById('starsLine');
+    const libraryStripEl = document.getElementById('libraryStrip');
 
     function safeReadNumber(key) {
       const raw = localStorage.getItem(key);
@@ -694,10 +1052,11 @@
       const next = current + amount;
       localStorage.setItem(VOCAB_POINTS_KEY, String(next));
       totalVocabPointsEl.textContent = next;
-      window.dispatchEvent(new StorageEvent("storage", {
+
+      window.dispatchEvent(new StorageEvent('storage', {
         key: VOCAB_POINTS_KEY,
-        newValue: String(next),
         oldValue: String(current),
+        newValue: String(next),
         storageArea: localStorage
       }));
     }
@@ -708,17 +1067,29 @@
         localStorage.setItem(SURF_BEST_KEY, String(state.run.points));
       }
 
-      const history = JSON.parse(localStorage.getItem(SURF_RUNS_KEY) || "[]");
-      history.unshift({
+      const history = JSON.parse(localStorage.getItem(SURF_RUNS_KEY) || '[]');
+      const currentRun = {
         date: new Date().toISOString(),
         mode: state.mode,
         caught: state.run.caught,
         mistakes: state.run.mistakes,
         points: state.run.points
-      });
+      };
+      history.unshift(currentRun);
       localStorage.setItem(SURF_RUNS_KEY, JSON.stringify(history.slice(0, 20)));
-      localStorage.setItem(SURF_LAST_RUN_KEY, JSON.stringify(history[0]));
+      localStorage.setItem(SURF_LAST_RUN_KEY, JSON.stringify(currentRun));
       updateSyncedTotals();
+    }
+
+    function renderLibraryStrip() {
+      const previewWords = WORD_BANK.slice(0, 8);
+      libraryStripEl.innerHTML = previewWords.map(item => `
+        <div class="mini-word">
+          <img src="${item.img}" alt="${item.en}" loading="lazy">
+          <span>${item.en}</span>
+          <em>${item.zh}</em>
+        </div>
+      `).join('');
     }
 
     function shuffle(array) {
@@ -731,64 +1102,92 @@
     }
 
     function sampleOptions(correctWord) {
-      const wrong = shuffle(WORD_BANK.filter(item => item.word !== correctWord.word)).slice(0, 2);
+      const wrong = shuffle(WORD_BANK.filter(item => item.id !== correctWord.id)).slice(0, 2);
       return shuffle([correctWord, ...wrong]);
     }
 
     function choosePrompt() {
       const correct = WORD_BANK[Math.floor(Math.random() * WORD_BANK.length)];
-      const options = sampleOptions(correct);
       state.prompt = correct;
-      state.options = options;
-
-      if (state.mode === "audio") {
-        promptTextEl.textContent = `Listen and catch: ${correct.emoji}`;
-        speakWord(correct.word);
-      } else {
-        promptTextEl.textContent = `Catch: ${correct.word} • ${correct.zh}`;
+      state.options = sampleOptions(correct);
+      renderPrompt(correct);
+      if (state.mode === 'audio') {
+        playWordAudio(correct);
       }
     }
 
-    function speakWord(word) {
-      if (!state.speakingEnabled) return;
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(word);
-      utterance.lang = "en-US";
-      utterance.rate = 0.88;
-      utterance.pitch = 1.03;
-      window.speechSynthesis.speak(utterance);
+    function renderPrompt(word) {
+      if (state.mode === 'audio') {
+        promptArtEl.innerHTML = `
+          <img src="${word.img}" alt="${word.en}">
+        `;
+        promptPrimaryEl.textContent = 'Listen and catch the correct card.';
+        promptSecondaryEl.textContent = `听音频，抓住 ${word.zh} / ${word.en} 的正确图片卡片。`;
+      } else {
+        promptArtEl.innerHTML = `<img src="${word.img}" alt="${word.en}">`;
+        promptPrimaryEl.textContent = `Catch: ${word.en}`;
+        promptSecondaryEl.textContent = `抓住：${word.zh} • ${word.pinyin}`;
+      }
     }
 
-    function createCollectible() {
-      if (!state.prompt) return;
+    function playWordAudio(word) {
+      const audio = audioCache.get(word.id);
+      if (!audio) return;
+      try {
+        audio.pause();
+        audio.currentTime = 0;
+        const promise = audio.play();
+        if (promise && typeof promise.catch === 'function') {
+          promise.catch(() => {});
+        }
+      } catch (error) {
+        console.warn('Audio play failed:', error);
+      }
+    }
+
+    function createCollectible(option, laneIndex) {
       const arenaHeight = arena.clientHeight;
-      const option = state.options[Math.floor(Math.random() * state.options.length)];
-      const laneIndex = Math.floor(Math.random() * LANES.length);
-      const el = document.createElement("div");
-      const isCorrect = option.word === state.prompt.word;
-      el.className = `collectible ${isCorrect ? "correct" : "wrong"}`;
+      const el = document.createElement('div');
+      const isCorrect = option.id === state.prompt.id;
+      el.className = `collectible ${isCorrect ? 'correct' : 'wrong'}`;
       el.style.left = `${LANES[laneIndex]}%`;
-      el.style.top = "-88px";
-      el.innerHTML = `<span class="emoji">${option.emoji}</span><span class="label">${option.word}</span>`;
+      el.style.top = '-210px';
+      el.innerHTML = `
+        <div class="collectible-image">
+          <img src="${option.img}" alt="${option.en}" loading="lazy">
+        </div>
+        <div class="collectible-label">${option.en}</div>
+        <div class="collectible-zh">${option.zh}</div>
+      `;
       arena.appendChild(el);
 
       state.objects.push({
         el,
         laneIndex,
-        y: -88,
+        y: -210,
         option,
         isCorrect,
         counted: false,
-        bottomLimit: arenaHeight - 125
+        bottomLimit: arenaHeight - 150
       });
+    }
+
+    function spawnSet() {
+      const lanes = shuffle([0, 1, 2]);
+      state.options.forEach((option, index) => createCollectible(option, lanes[index]));
+    }
+
+    function clearArenaObjects() {
+      state.objects.forEach(obj => obj.el.remove());
+      state.objects = [];
     }
 
     function setLane(index) {
       state.lane = Math.max(0, Math.min(LANES.length - 1, index));
       surferEl.style.left = `${LANES[state.lane]}%`;
-      surferEl.classList.remove("flash");
+      surferEl.classList.remove('flash');
       void surferEl.offsetWidth;
-      surferEl.classList.add("flash");
+      surferEl.classList.add('flash');
     }
 
     function updateHUD() {
@@ -811,24 +1210,19 @@
     }
 
     function advancePrompt() {
-      state.objects.forEach(obj => obj.el.remove());
-      state.objects = [];
+      clearArenaObjects();
       choosePrompt();
-      createCollectible();
-      createCollectible();
-      createCollectible();
+      spawnSet();
     }
 
     function handleCollision(obj) {
       obj.counted = true;
-      obj.el.style.transform = "translateX(-50%) scale(1.08)";
-      obj.el.style.opacity = "0.1";
+      obj.el.style.transform = 'translateX(-50%) scale(1.07)';
+      obj.el.style.opacity = '0.18';
 
       if (obj.isCorrect) {
         awardCatch();
-        setTimeout(() => {
-          advancePrompt();
-        }, 120);
+        setTimeout(advancePrompt, 130);
       } else {
         recordMistake();
       }
@@ -841,21 +1235,20 @@
       const delta = timestamp - state.lastFrame;
       state.lastFrame = timestamp;
       state.elapsedMs += delta;
-      state.spawnAccumulator += delta;
-      const speed = SPEED_BASE + (state.elapsedMs * SPEED_INCREMENT / 10);
+      const speed = SPEED_BASE + (state.elapsedMs * SPEED_INCREMENT);
 
       state.objects.forEach(obj => {
-        obj.y += speed + (delta / 26);
+        obj.y += speed + (delta / 28);
         obj.el.style.top = `${obj.y}px`;
 
-        const withinCatchZone = obj.y >= obj.bottomLimit - 18 && obj.y <= obj.bottomLimit + 18;
+        const withinCatchZone = obj.y >= obj.bottomLimit - 22 && obj.y <= obj.bottomLimit + 22;
         if (!obj.counted && obj.laneIndex === state.lane && withinCatchZone) {
           handleCollision(obj);
         }
       });
 
       state.objects = state.objects.filter(obj => {
-        const isGone = obj.y > arena.clientHeight + 50;
+        const isGone = obj.y > arena.clientHeight + 60;
         if (isGone) {
           obj.el.remove();
           return false;
@@ -863,52 +1256,45 @@
         return true;
       });
 
-      if (state.objects.length < 3 && state.spawnAccumulator > 820) {
-        createCollectible();
-        state.spawnAccumulator = 0;
-      }
-
       state.animationId = requestAnimationFrame(animationLoop);
     }
 
     function getStars(points, mistakes) {
-      if (points >= 18 && mistakes <= 2) return "⭐⭐⭐";
-      if (points >= 10) return "⭐⭐";
-      return "⭐";
+      if (points >= 14 && mistakes <= 2) return '⭐⭐⭐';
+      if (points >= 8) return '⭐⭐';
+      return '⭐';
     }
 
     function finishGame() {
       state.playing = false;
       clearInterval(state.timerId);
       cancelAnimationFrame(state.animationId);
-      window.speechSynthesis?.cancel();
+      audioCache.forEach(audio => {
+        audio.pause();
+        audio.currentTime = 0;
+      });
       saveSurfRun();
 
       finalCaughtEl.textContent = state.run.caught;
       finalMistakesEl.textContent = state.run.mistakes;
       finalPointsEl.textContent = state.run.points;
       starsLineEl.textContent = getStars(state.run.points, state.run.mistakes);
-      resultNoteEl.textContent = `Great job! This run added ${state.run.points} synced vocabulary points to Word Bank.`;
-      overlayEl.style.display = "flex";
+      resultNoteEl.innerHTML = `This run added <strong>${state.run.points}</strong> synced vocabulary points to Word Bank.<br>本轮已同步 <strong>${state.run.points}</strong> 个词汇积分到 Word Bank。`;
+      overlayEl.style.display = 'flex';
       updateHUD();
     }
 
-    function clearArenaObjects() {
-      state.objects.forEach(obj => obj.el.remove());
-      state.objects = [];
-    }
-
     async function startCountdown() {
-      countdownEl.style.display = "flex";
-      for (const value of [3, 2, 1, "Go!"]) {
+      countdownEl.style.display = 'flex';
+      for (const value of [3, 2, 1, 'Go!']) {
         countdownEl.textContent = value;
-        await new Promise(resolve => setTimeout(resolve, 550));
+        await new Promise(resolve => setTimeout(resolve, 520));
       }
-      countdownEl.style.display = "none";
+      countdownEl.style.display = 'none';
     }
 
     async function startGame() {
-      overlayEl.style.display = "none";
+      overlayEl.style.display = 'none';
       clearArenaObjects();
       state.playing = false;
       state.prompt = null;
@@ -916,15 +1302,12 @@
       state.timerSeconds = RUN_DURATION_SECONDS;
       state.elapsedMs = 0;
       state.lastFrame = 0;
-      state.spawnAccumulator = 0;
       state.run = { caught: 0, mistakes: 0, points: 0 };
       setLane(0);
       updateHUD();
       await startCountdown();
       choosePrompt();
-      createCollectible();
-      createCollectible();
-      createCollectible();
+      spawnSet();
       state.playing = true;
       state.timerId = setInterval(() => {
         state.timerSeconds -= 1;
@@ -937,32 +1320,41 @@
     }
 
     function replayAudio() {
-      if (state.mode === "audio" && state.prompt) {
-        speakWord(state.prompt.word);
+      if (state.mode === 'audio' && state.prompt) {
+        playWordAudio(state.prompt);
       }
     }
 
-    document.querySelectorAll(".mode-card").forEach(btn => {
-      btn.addEventListener("click", () => {
-        document.querySelectorAll(".mode-card").forEach(item => item.classList.remove("active"));
-        btn.classList.add("active");
+    document.querySelectorAll('.mode-card').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.mode-card').forEach(item => {
+          item.classList.remove('active');
+          item.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
         state.mode = btn.dataset.mode;
-        if (!state.playing && state.prompt) {
-          choosePrompt();
+        if (state.prompt) {
+          renderPrompt(state.prompt);
+          if (state.mode === 'audio' && state.playing) {
+            playWordAudio(state.prompt);
+          }
         }
       });
     });
 
-    document.getElementById("startBtn").addEventListener("click", startGame);
-    document.getElementById("playAgainBtn").addEventListener("click", startGame);
-    replayAudioBtn.addEventListener("click", replayAudio);
+    document.getElementById('startBtn').addEventListener('click', startGame);
+    document.getElementById('playAgainBtn').addEventListener('click', startGame);
+    document.getElementById('replayAudioBtn').addEventListener('click', replayAudio);
+    document.getElementById('mobileLeftBtn').addEventListener('click', () => setLane(state.lane - 1));
+    document.getElementById('mobileRightBtn').addEventListener('click', () => setLane(state.lane + 1));
 
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowLeft") setLane(state.lane - 1);
-      if (e.key === "ArrowRight") setLane(state.lane + 1);
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') setLane(state.lane - 1);
+      if (e.key === 'ArrowRight') setLane(state.lane + 1);
     });
 
-    arena.addEventListener("click", (e) => {
+    arena.addEventListener('click', (e) => {
       const rect = arena.getBoundingClientRect();
       const clickX = e.clientX - rect.left;
       if (clickX < rect.width / 2) {
@@ -972,14 +1364,13 @@
       }
     });
 
-    let touchStartX = null;
-    arena.addEventListener("touchstart", (e) => {
-      touchStartX = e.changedTouches[0].clientX;
+    arena.addEventListener('touchstart', (e) => {
+      state.touchStartX = e.changedTouches[0].clientX;
     }, { passive: true });
 
-    arena.addEventListener("touchend", (e) => {
-      if (touchStartX === null) return;
-      const dx = e.changedTouches[0].clientX - touchStartX;
+    arena.addEventListener('touchend', (e) => {
+      if (state.touchStartX === null) return;
+      const dx = e.changedTouches[0].clientX - state.touchStartX;
       if (Math.abs(dx) > 18) {
         setLane(state.lane + (dx > 0 ? 1 : -1));
       } else {
@@ -987,15 +1378,16 @@
         const x = e.changedTouches[0].clientX - rect.left;
         setLane(state.lane + (x > rect.width / 2 ? 1 : -1));
       }
-      touchStartX = null;
+      state.touchStartX = null;
     }, { passive: true });
 
-    window.addEventListener("storage", (e) => {
+    window.addEventListener('storage', (e) => {
       if (e.key === VOCAB_POINTS_KEY || e.key === SURF_BEST_KEY) {
         updateSyncedTotals();
       }
     });
 
+    renderLibraryStrip();
     updateSyncedTotals();
     updateHUD();
   </script>
