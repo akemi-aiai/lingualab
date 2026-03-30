@@ -490,6 +490,39 @@
       box-shadow: var(--shadow-card);
     }
 
+
+    .score-window {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      z-index: 16;
+      min-width: 120px;
+      padding: 12px 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.96);
+      border: 1px solid rgba(255,255,255,0.88);
+      box-shadow: 0 12px 28px rgba(15,23,42,0.14);
+      text-align: center;
+      backdrop-filter: blur(8px);
+    }
+
+    .score-window small {
+      display: block;
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+      line-height: 1.2;
+    }
+
+    .score-window strong {
+      display: block;
+      color: var(--navy);
+      font-size: 1.55rem;
+      font-weight: 800;
+      line-height: 1.05;
+    }
+
     .wave-deco,
     .cloud,
     .lane-line,
@@ -722,6 +755,33 @@
       margin: 10px 0 14px;
     }
 
+    .result-score-box {
+      width: min(240px, 100%);
+      margin: 0 auto 18px;
+      padding: 16px 18px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #ecfeff, #ffffff);
+      border: 1px solid #d7f4fb;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .result-score-box span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.84rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .result-score-box strong {
+      display: block;
+      color: var(--navy);
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1.05;
+    }
+
     .result-stats {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -858,6 +918,18 @@
       }
 
       .arena { height: 380px; }
+
+      .score-window {
+        top: 12px;
+        right: 12px;
+        min-width: 102px;
+        padding: 10px 12px;
+      }
+
+      .score-window strong {
+        font-size: 1.35rem;
+      }
+
       .collectible {
         width: 30%;
         min-width: 90px;
@@ -1041,6 +1113,11 @@
             <div class="board"></div>
           </div>
 
+          <div class="score-window" id="scoreWindow" aria-live="polite">
+            <small>Score • 积分</small>
+            <strong id="scoreWindowValue">0</strong>
+          </div>
+
           <div class="wave-deco"></div>
           <div class="countdown" id="countdown"></div>
 
@@ -1048,6 +1125,10 @@
             <div class="result-card">
               <h2>Ride Complete! <span class="cn-line" style="font-size: 0.9rem;">冲浪完成！</span></h2>
               <div class="stars" id="starsLine">⭐</div>
+              <div class="result-score-box">
+                <span>Total Score • 总得分</span>
+                <strong id="finalScoreBox">0</strong>
+              </div>
               <div class="result-stats">
                 <div class="result-stat">
                   <span>Words Caught • 抓对单词</span>
@@ -1086,8 +1167,8 @@
     const RUN_DURATION_SECONDS = 35;
     const TARGET_VARIANTS_PER_RUN = 30;
     const LANES = [16.666, 50, 83.333];
-    const SPEED_BASE = 2.15;
-    const SPEED_INCREMENT = 0.00072;
+    const SPEED_BASE = 1.65;
+    const SPEED_INCREMENT = 0.00042;
     const CATCH_REWARD = 1;
     const SURF_MODULE_KEY = 'lingualab_surf_module';
 
@@ -1226,6 +1307,21 @@
     };
 
     const ALL_WORDS = Object.values(MODULE_SETS).flatMap(module => module.words);
+    const audioCache = new Map();
+
+    function preloadAudioLibrary() {
+      ALL_WORDS.forEach(word => {
+        if (!word.audio || audioCache.has(word.id)) return;
+        try {
+          const audio = new Audio(word.audio);
+          audio.preload = 'auto';
+          audioCache.set(word.id, audio);
+        } catch (error) {
+          console.warn('Audio preload failed:', word.audio, error);
+        }
+      });
+    }
+
     const state = {
       mode: 'audio',
 
@@ -1257,6 +1353,7 @@
     const caughtCountEl = document.getElementById('caughtCount');
     const mistakeCountEl = document.getElementById('mistakeCount');
     const runPointsEl = document.getElementById('runPoints');
+    const scoreWindowValueEl = document.getElementById('scoreWindowValue');
     const totalVocabPointsEl = document.getElementById('totalVocabPoints');
     const bestSurfScoreEl = document.getElementById('bestSurfScore');
     const countdownEl = document.getElementById('countdown');
@@ -1264,6 +1361,7 @@
     const finalCaughtEl = document.getElementById('finalCaught');
     const finalMistakesEl = document.getElementById('finalMistakes');
     const finalPointsEl = document.getElementById('finalPoints');
+    const finalScoreBoxEl = document.getElementById('finalScoreBox');
     const resultNoteEl = document.getElementById('resultNote');
     const starsLineEl = document.getElementById('starsLine');
     const libraryStripEl = document.getElementById('libraryStrip');
@@ -1527,6 +1625,7 @@
       caughtCountEl.textContent = state.run.caught;
       mistakeCountEl.textContent = state.run.mistakes;
       runPointsEl.textContent = state.run.points;
+      scoreWindowValueEl.textContent = state.run.points;
     }
 
     function awardCatch() {
@@ -1571,7 +1670,7 @@
       const speed = SPEED_BASE + (state.elapsedMs * SPEED_INCREMENT);
 
       state.objects.forEach(obj => {
-        obj.y += speed + (delta / 34);
+        obj.y += speed + (delta / 46);
         obj.el.style.top = `${obj.y}px`;
 
         const withinCatchZone = obj.y >= obj.bottomLimit - 20 && obj.y <= obj.bottomLimit + 20;
@@ -1617,6 +1716,7 @@
       finalCaughtEl.textContent = state.run.caught;
       finalMistakesEl.textContent = state.run.mistakes;
       finalPointsEl.textContent = state.run.points;
+      finalScoreBoxEl.textContent = state.run.points;
       starsLineEl.textContent = getStars(state.run.points, state.run.mistakes);
       resultNoteEl.innerHTML = `This run added <strong>${state.run.points}</strong> synced vocabulary points to Word Bank.<br>本轮已同步 <strong>${state.run.points}</strong> 个词汇积分到 Word Bank。`;
       overlayEl.style.display = 'flex';
@@ -1633,6 +1733,10 @@
     }
 
     async function startGame() {
+      clearInterval(state.timerId);
+      cancelAnimationFrame(state.animationId);
+      state.timerId = null;
+      state.animationId = null;
       overlayEl.style.display = 'none';
       clearArenaObjects();
       state.playing = false;
@@ -1746,6 +1850,7 @@
       }
     });
 
+    preloadAudioLibrary();
     renderLibraryStrip();
     updateSyncedTotals();
     updateHUD();
