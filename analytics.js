@@ -5,8 +5,27 @@ const Analytics = {
     init() {
         this.ensureDataset();
         this.ensureCurrentWeek();
+        this.lastActivityAt = Date.now();
+        this.bindActivityListeners();
         this.startTimer();
     },
+      bindActivityListeners() {
+        const markActive = () => {
+            this.lastActivityAt = Date.now();
+        };
+
+        ['click', 'touchstart', 'keydown', 'mousemove', 'scroll'].forEach(eventName => {
+            window.addEventListener(eventName, markActive, { passive: true });
+        });
+
+        document.addEventListener('visibilitychange', markActive);
+    },
+
+    isUserActive() {
+        const ACTIVE_WINDOW_MS = 30000;
+        return !document.hidden && (Date.now() - this.lastActivityAt < ACTIVE_WINDOW_MS);
+    },
+
 
     ensureDataset() {
         const raw = localStorage.getItem(this.STORAGE_KEY);
@@ -131,6 +150,8 @@ const Analytics = {
 
     startTimer() {
         setInterval(() => {
+            if (!this.isUserActive()) return;
+    
             const { data, today } = this.ensureTodayRecord();
             data.dailyActivity[today].time += 10;
             this.saveData(data);
@@ -182,6 +203,8 @@ const Analytics = {
             id: data.studentId,
             weekStart: data.weekStart,
             timezone: data.timezone,
+            reportDate: this.getResearchDateKey(),   // дата генерации/отправки кода
+            reportDateTime: new Date().toISOString(), // если потом понадобится точное время
             activeDays,
             newXP: Math.max(0, this.getTotalXP() - Number(data.totalXPAtStart || 0)),
             newW: uniqueWords.size,
