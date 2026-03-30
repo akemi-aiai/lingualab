@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Surf Challenge</title>
+  <title>Surf Challenge — LinguaLab</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -138,7 +138,7 @@
       color: var(--navy);
       font-size: clamp(28px, 4vw, 42px);
       line-height: 1.1;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .cn-line {
@@ -200,7 +200,7 @@
     }
 
     .mode-card {
-      border-radius: 22px;
+      border-radius: 18px;
       border: 2px solid #dbeafe;
       background: #fff;
       padding: 16px;
@@ -558,10 +558,10 @@
     .surfer .arm.right { right: 18px; transform: rotate(-28deg); }
 
     .collectible {
-      width: 30%;
-      min-width: 145px;
-      max-width: 220px;
-      padding: 10px;
+      width: 24%;
+      min-width: 112px;
+      max-width: 170px;
+      padding: 6px;
       transform: translateX(-50%);
       border-radius: 22px;
       background: rgba(255,255,255,0.97);
@@ -580,7 +580,7 @@
       border-radius: 16px;
       background: #fff;
       border: 1px solid var(--line);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       overflow: hidden;
     }
 
@@ -588,19 +588,19 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
-      padding: 8px;
+      padding: 6px;
     }
 
     .collectible-label {
       color: var(--navy);
       font-weight: 800;
-      font-size: 1rem;
+      font-size: 0.9rem;
       line-height: 1.15;
     }
 
     .collectible-zh {
       color: var(--muted);
-      font-size: 0.8rem;
+      font-size: 0.68rem;
       margin-top: 4px;
       font-weight: 600;
       line-height: 1.15;
@@ -786,16 +786,16 @@
       .collectible {
         width: 31%;
         min-width: 98px;
-        padding: 8px;
+        padding: 6px;
         border-radius: 18px;
       }
 
       .collectible-label {
-        font-size: 0.88rem;
+        font-size: 0.8rem;
       }
 
       .collectible-zh {
-        font-size: 0.72rem;
+        font-size: 0.68rem;
       }
 
       .surfer {
@@ -858,13 +858,13 @@
         </div>
 
         <div class="controls">
-          <button class="btn primary" id="startBtn" type="button">Start 75s Challenge • 开始 75 秒挑战</button>
+          <button class="btn primary" id="startBtn" type="button">Start 35s Challenge • 开始 35 秒挑战</button>
           <button class="btn secondary" id="replayAudioBtn" type="button">Replay Audio • 重放音频</button>
         </div>
 
         <p class="helper-note">
-          Every correct catch gives <strong>+1 vocabulary point</strong> and syncs to Word Bank automatically.
-          <br>每抓对一个单词，就会获得 <strong>+1 词汇积分</strong>，并自动同步到 Word Bank。
+          Every correct catch gives <strong>+1 vocabulary point</strong>. Cards rotate through the module word list and repeat after one full cycle.
+          <br>每抓对一个单词，就会获得 <strong>+1 词汇积分</strong>。卡片会按模块词库轮换，跑完一轮后再重复。
           <br><strong>Controls • 操作：</strong> Use <strong>← →</strong>, tap left/right, or use swipe on phone and tablet.
         </p>
       </div>
@@ -878,7 +878,7 @@
         <div class="stats-grid">
           <div class="hud-card">
             <small>Time Left • 剩余时间</small>
-            <strong id="timeLeft">75</strong>
+            <strong id="timeLeft">35</strong>
           </div>
           <div class="hud-card">
             <small>Words Caught • 抓对单词</small>
@@ -930,7 +930,7 @@
 
           <div class="overlay" id="overlay">
             <div class="result-card">
-              <h2>Ride Complete! <span class="cn-line" style="font-size: 1rem;">冲浪完成！</span></h2>
+              <h2>Ride Complete! <span class="cn-line" style="font-size: 0.9rem;">冲浪完成！</span></h2>
               <div class="stars" id="starsLine">⭐</div>
               <div class="result-stats">
                 <div class="result-stat">
@@ -966,7 +966,7 @@
     const SURF_RUNS_KEY = 'lingualab_surf_runs';
     const SURF_LAST_RUN_KEY = 'lingualab_surf_last_run';
 
-    const RUN_DURATION_SECONDS = 75;
+    const RUN_DURATION_SECONDS = 35;
     const LANES = [16.666, 50, 83.333];
     const SPEED_BASE = 2.6;
     const SPEED_INCREMENT = 0.0011;
@@ -1007,6 +1007,7 @@
       prompt: null,
       options: [],
       objects: [],
+      moduleQueue: [],
       timerSeconds: RUN_DURATION_SECONDS,
       elapsedMs: 0,
       lastFrame: 0,
@@ -1106,8 +1107,19 @@
       return shuffle([correctWord, ...wrong]);
     }
 
+    function refillModuleQueue() {
+      state.moduleQueue = shuffle([...WORD_BANK]);
+    }
+
+    function getNextModuleWord() {
+      if (!state.moduleQueue.length) {
+        refillModuleQueue();
+      }
+      return state.moduleQueue.shift();
+    }
+
     function choosePrompt() {
-      const correct = WORD_BANK[Math.floor(Math.random() * WORD_BANK.length)];
+      const correct = getNextModuleWord();
       state.prompt = correct;
       state.options = sampleOptions(correct);
       renderPrompt(correct);
@@ -1151,7 +1163,7 @@
       const isCorrect = option.id === state.prompt.id;
       el.className = `collectible ${isCorrect ? 'correct' : 'wrong'}`;
       el.style.left = `${LANES[laneIndex]}%`;
-      el.style.top = '-210px';
+      el.style.top = '-168px';
       el.innerHTML = `
         <div class="collectible-image">
           <img src="${option.img}" alt="${option.en}" loading="lazy">
@@ -1164,11 +1176,11 @@
       state.objects.push({
         el,
         laneIndex,
-        y: -210,
+        y: -168,
         option,
         isCorrect,
         counted: false,
-        bottomLimit: arenaHeight - 150
+        bottomLimit: arenaHeight - 136
       });
     }
 
@@ -1303,6 +1315,7 @@
       state.elapsedMs = 0;
       state.lastFrame = 0;
       state.run = { caught: 0, mistakes: 0, points: 0 };
+      refillModuleQueue();
       setLane(0);
       updateHUD();
       await startCountdown();
