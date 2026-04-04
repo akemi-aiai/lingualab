@@ -1167,8 +1167,9 @@
     const RUN_DURATION_SECONDS = 35;
     const TARGET_VARIANTS_PER_RUN = 30;
     const LANES = [16.666, 50, 83.333];
-    const SPEED_BASE = 1.65;
-    const SPEED_INCREMENT = 0.00042;
+    const SPEED_BASE = 110;   // px per second
+    const SPEED_RAMP = 6;     // how much speed increases each second
+    const SPEED_MAX = 180;    // maximum speed
     const CATCH_REWARD = 1;
     const SURF_MODULE_KEY = 'lingualab_surf_module';
 
@@ -1667,10 +1668,13 @@
       const delta = timestamp - state.lastFrame;
       state.lastFrame = timestamp;
       state.elapsedMs += delta;
-      const speed = SPEED_BASE + (state.elapsedMs * SPEED_INCREMENT);
-
+      
+      const deltaSeconds = delta / 1000;
+      const elapsedSeconds = state.elapsedMs / 1000;
+      const speed = Math.min(SPEED_BASE + elapsedSeconds * SPEED_RAMP, SPEED_MAX);
+      
       state.objects.forEach(obj => {
-        obj.y += speed + (delta / 46);
+        obj.y += speed * deltaSeconds;
         obj.el.style.top = `${obj.y}px`;
 
         const withinCatchZone = obj.y >= obj.bottomLimit - 20 && obj.y <= obj.bottomLimit + 20;
