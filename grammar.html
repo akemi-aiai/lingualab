@@ -917,29 +917,44 @@
       }
     }
 
-    function checkResult(choice, btn) {
+     function checkResult(choice, btn) {
       if (!activeTask) return;
-
-      if (choice === activeTask.a) {
+    
+      const isCorrect = choice === activeTask.a;
+    
+      if (window.Analytics && typeof Analytics.logGrammarAttempt === 'function') {
+        Analytics.logGrammarAttempt({
+          topic: activeTopic,
+          sentenceId: `${activeTopic}::${activeTask.q}`,
+          prompt: activeTask.q,
+          selected: choice,
+          correctAnswer: activeTask.a,
+          isCorrect
+        });
+      }
+    
+      if (isCorrect) {
         btn.classList.add('correct');
         document.querySelectorAll('.answer-btn').forEach(button => button.disabled = true);
-
+    
         playSound();
         awardPoint();
-
+    
         const totalTasks = gameData[activeTopic].length;
         const progress = (usedIndexes.length / totalTasks) * 100;
         document.getElementById('pb-fill').style.width = progress + '%';
-
+    
         document.getElementById('question').innerHTML =
           'Correct! +1 Point! 🌟<span class="cn-line">答对了！+1分！</span>';
-
+    
         setTimeout(loadTask, 1000);
       } else {
         btn.classList.add('wrong');
         setTimeout(() => btn.classList.remove('wrong'), 500);
       }
     }
+    
+
 
     function awardPoint() {
       let score = parseInt(localStorage.getItem('ll_score')) || 0;
