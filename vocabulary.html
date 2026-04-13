@@ -1041,16 +1041,20 @@ const dictionary = {
 
     const audioPlayer = new Audio();
   
-    function playWordAudio(src) {
-        if (!src) return;
+    function playWordAudio(src, wordId = '') {
+      if (!src) return;
     
-        audioPlayer.pause();
-        audioPlayer.currentTime = 0;
-        audioPlayer.src = src;
+      audioPlayer.pause();
+      audioPlayer.currentTime = 0;
+      audioPlayer.src = src;
     
-        audioPlayer.play().catch(err => {
-            console.error("Audio play error:", err);
-        });
+      audioPlayer.play().catch(err => {
+        console.error("Audio play error:", err);
+      });
+    
+      if (window.Analytics && typeof Analytics.logWordAudio === 'function' && wordId) {
+        Analytics.logWordAudio(wordId);
+      }
     }
 
     function init() {
@@ -1113,7 +1117,7 @@ const dictionary = {
                             type="button"
                             aria-label="Play audio"
                             title="Play audio"
-                            onclick="event.stopPropagation(); playWordAudio('${word.audio}')"
+                            onclick="event.stopPropagation(); playWordAudio('${word.audio}', '${word.id}')"
                           >
                             <svg viewBox="0 0 24 24" aria-hidden="true">
                               <path d="M14 3.23v17.54a1 1 0 0 1-1.64.77L7.91 18H4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h3.91l4.45-3.54A1 1 0 0 1 14 3.23Zm3.54 4.35a1 1 0 0 1 1.41 0 6 6 0 0 1 0 8.48 1 1 0 0 1-1.41-1.41 4 4 0 0 0 0-5.66 1 1 0 0 1 0-1.41Zm-2.83 2.82a1 1 0 0 1 1.41 0 2 2 0 0 1 0 2.83 1 1 0 0 1-1.41-1.41.01.01 0 0 0 0-.01.01.01 0 0 0 0-.01 1 1 0 0 1 0-1.4Z"/>
@@ -1134,40 +1138,42 @@ const dictionary = {
         contentAreaEl.innerHTML = html;
     }
 
-  function flipCard(element, wordId) {
-    element.classList.toggle('flipped');
-  
-    const currentWords = dictionary[currentCatKey]?.words || [];
-    const currentWord = currentWords.find(w => w.id === wordId);
-  
-    if (currentWord?.audio) {
-        playWordAudio(currentWord.audio);
-    }
-  
-    if (typeof Analytics !== 'undefined') {
-        Analytics.logWordClick(wordId);
-    }
-  
-    if (typeof currentCatKey !== 'undefined') {
-        let clicksData = JSON.parse(localStorage.getItem('category_clicks') || '{}');
-        clicksData[currentCatKey] = (clicksData[currentCatKey] || 0) + 1;
-        localStorage.setItem('category_clicks', JSON.stringify(clicksData));
-    }
-  
-    if (!learnedCards.has(wordId)) {
-        learnedCards.add(wordId);
-  
-        const progressEl = document.getElementById('progress-text');
-        if (progressEl) {
-            progressEl.innerText = `${learnedCards.size} / ${currentCategoryWordsCount}`;
-        }
-  
-        if (learnedCards.size === currentCategoryWordsCount) {
-            setTimeout(showReward, 800);
-        }
-    }
+function flipCard(element, wordId) {
+  element.classList.toggle('flipped');
+
+  const currentWords = dictionary[currentCatKey]?.words || [];
+  const currentWord = currentWords.find(w => w.id === wordId);
+
+  if (currentWord?.audio) {
+    playWordAudio(currentWord.audio, wordId);
   }
 
+  if (window.Analytics && typeof Analytics.logWordReview === 'function') {
+    Analytics.logWordReview(wordId, 'flip');
+  } else if (window.Analytics && typeof Analytics.logWordClick === 'function') {
+    Analytics.logWordClick(wordId);
+  }
+
+  if (typeof currentCatKey !== 'undefined') {
+    let clicksData = JSON.parse(localStorage.getItem('category_clicks') || '{}');
+    clicksData[currentCatKey] = (clicksData[currentCatKey] || 0) + 1;
+    localStorage.setItem('category_clicks', JSON.stringify(clicksData));
+  }
+
+  if (!learnedCards.has(wordId)) {
+    learnedCards.add(wordId);
+
+    const progressEl = document.getElementById('progress-text');
+    if (progressEl) {
+      progressEl.innerText = `${learnedCards.size} / ${currentCategoryWordsCount}`;
+    }
+
+    if (learnedCards.size === currentCategoryWordsCount) {
+      setTimeout(showReward, 800);
+    }
+  }
+}
+  
 function showReward() {
     const popup = document.getElementById('reward-popup');
     const overlay = document.getElementById('overlay');
