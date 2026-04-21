@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="analytics.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Word Bank — LinguaLab</title>
@@ -1073,7 +1074,11 @@ const dictionary = {
             categoryListEl.appendChild(btn);
         });
     }
-
+    function onWordFlip(word) {
+      if (window.Analytics && typeof Analytics.logWordReview === 'function') {
+        Analytics.logWordReview(word.id, 'flip');
+      }
+    }
     function updateVocabPointsDisplay() {
       let vocabScore = parseInt(localStorage.getItem('vocab_points')) || 0;
     
