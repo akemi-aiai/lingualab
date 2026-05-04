@@ -441,27 +441,28 @@
       }
     }
 
-    function downloadReport() {
-      const parentRate = Number(prompt('Parent rate (0-5):') || 0);
-    
-      if (!window.Analytics || typeof Analytics.encodeWeeklyReport !== 'function') {
-        alert('Analytics is not loaded.');
-        return;
-      }
-    
-      const code = Analytics.encodeWeeklyReport(parentRate);
-    
-      navigator.clipboard.writeText(code)
-        .then(() => alert('LL-REPORT copied to clipboard'))
-        .catch(() => {
-          const w = window.open('', '_blank');
-          w.document.write(`<pre style="white-space:pre-wrap;word-break:break-word;">${code}</pre>`);
-        });
-    }
+function downloadReport() {
+  const parentRate = Number(prompt('Parent rate (0-5):') || 0);
 
-    function downloadReport() {
+  if (!window.Analytics || typeof Analytics.encodeWeeklyReport !== 'function') {
+    alert('Analytics is not loaded.');
+    return;
+  }
+
+  const code = Analytics.encodeWeeklyReport(parentRate);
+
+  navigator.clipboard.writeText(code)
+    .then(() => alert('LL-REPORT copied to clipboard'))
+    .catch(() => {
+      const w = window.open('', '_blank');
+      w.document.write(
+        `<pre style="white-space:pre-wrap;word-break:break-word;">${code}</pre>`
+      );
+    });
+}
+
+   function downloadDiploma() {
         const date = new Date().toLocaleDateString();
-        
         let timeSeconds = parseInt(localStorage.getItem('time_spent_seconds')) || 0;
         let wordsTotal = parseInt(localStorage.getItem('learned_words_total')) || 0;
         let clicksData = JSON.parse(localStorage.getItem('category_clicks') || '{}');
