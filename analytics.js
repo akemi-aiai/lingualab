@@ -470,34 +470,29 @@ const Analytics = {
     const masteredWords = reviewedWords.size;
     const gainedXP = Math.max(0, this.getTotalXP() - this.safeNumber(data.totalXPAtStart));
 
+    const repeatedReviewedWords = Object.values(data.interactionHeatmap || {})
+      .filter(count => this.safeNumber(count) > 1)
+      .length;
+    
     return {
       id: data.studentId,
       studentId: data.studentId,
       dbVersion: data.dbVersion || this.DB_VERSION,
       weekStart: data.weekStart,
-      reportAnchorTuesday: data.reportAnchorTuesday || this.addDays(data.weekStart, 1),
-      timezone: data.timezone || this.RESEARCH_TIMEZONE,
-
-      reportDate: this.getResearchDateKey(now),
-      generatedAtRaw: String(now),
-      generatedAtUTC: now.toISOString(),
-      localDateKey: this.getResearchDateKey(now),
-
+      reportAnchorTuesday: data.reportAnchorTuesday,
+    
       activeDays,
       sessionsCount,
-      avgSessionLengthMinutes: sessionsCount ? Math.round((activeMinutes / sessionsCount) * 10) / 10 : 0,
       activeTimeMinutes: activeMinutes,
-
+    
       newXP: gainedXP,
       newW: exposedWords.size,
       reviewedWords: reviewedWords.size,
-      masteredWords,
-      pointsPerActiveMinute: activeMinutes ? Math.round((gainedXP / activeMinutes) * 100) / 100 : 0,
-      learningEfficiencyIndex: activeMinutes ? Math.round((masteredWords / activeMinutes) * 100) / 100 : 0,
-
+      repeatedReviewedWords,
+    
       rate: this.safeNumber(parentRate),
-      star: activeDays >= 5,
-
+      parentRate: this.safeNumber(parentRate),
+    
       interactionHeatmap: data.interactionHeatmap || {},
       diff: data.interactionHeatmap || {},
       grammar,
