@@ -1437,7 +1437,14 @@
     function updateHelperText() {
       const active = getActiveModuleSet();
       const activeBank = getActiveBank();
-      helperNoteEl.innerHTML = `Every correct catch gives <strong>+1 vocabulary point</strong>. This page load uses a shuffled set of <strong>${activeBank.length}</strong> cards from <strong>${active.title}</strong>.<br>每抓对一个单词，就会获得 <strong>+1 词汇积分</strong>。当前页面会从 <strong>${active.zhTitle}</strong> 随机刷新出 <strong>${activeBank.length}</strong> 张重新洗牌的卡片
+    
+      helperNoteEl.innerHTML = `
+        Every correct catch gives <strong>+1 vocabulary point</strong>.
+        This page load uses a shuffled set of <strong>${activeBank.length}</strong> cards from <strong>${active.title}</strong>.
+        <br>
+        每抓对一个单词，就会获得 <strong>+1 词汇积分</strong>。
+        当前页面会从 <strong>${active.zhTitle}</strong> 随机刷新出 <strong>${activeBank.length}</strong> 张重新洗牌的卡片。
+      `;
     }
 
     function renderLibraryStrip() {
