@@ -95,7 +95,6 @@
     word-break: break-word;
   }
 
-  /* NAVBAR */
   .navbar {
     position: fixed;
     top: 0;
@@ -149,7 +148,6 @@
     color: var(--accent);
   }
 
-  /* HERO */
   .hero-compact {
     padding: 60px 8% 140px;
     text-align: center;
@@ -201,7 +199,6 @@
     line-height: 1.2;
   }
 
-  /* CONTENT WRAPPER */
   .content-wrapper {
     max-width: 1100px;
     margin: -100px auto 50px;
@@ -210,7 +207,6 @@
     padding: 0 20px;
   }
 
-  /* CATEGORY */
   .category-container {
     background: #fff;
     border-radius: var(--radius);
@@ -251,7 +247,6 @@
     transform: scale(1.04);
   }
 
-  /* WIKI BOX */
   .wiki-box {
     background: #fff7ed;
     border-left: 5px solid var(--accent);
@@ -303,7 +298,6 @@
     flex-shrink: 0;
   }
 
-  /* FLASHCARDS */
   .flashcard-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -529,7 +523,7 @@
     margin-top: 8px;
   }
 
-  /* TABLET */
+
   @media (max-width: 1024px) {
     .navbar {
       padding: 12px 24px;
@@ -591,7 +585,6 @@
     }
   }
 
-  /* MOBILE */
   @media (max-width: 700px) {
     body {
       padding-top: 128px;
@@ -893,8 +886,15 @@
 const dictionary = {
     "family": { 
         title: "Family & Friends", 
-        wiki: "<div><b>Focus (今日词汇):</b> Family members, greetings, and simple introductions.</div><div><b>Play (互动小贴士):</b> Point to real family photos and say: 'This is Grandma' / 'This is my friend.' (指着家里的照片，一起练习家庭成员和介绍句型。)</div>", 
-        words: [
+wiki:
+  "<div><b>Focus (今日词汇):</b> Family members, greetings, and simple self-introduction: Daddy, Mommy, Grandma, Grandpa, Aunt, Uncle, Boy, Girl, Family.</div>
+  <div><b>Say (可以这样说):</b> “Good morning, Mommy.” / “Hello, Uncle.” / “This is my family.” / “I am a girl.”</div>
+  <div><b>Play (互动小贴士):</b> Use real family photos. Point to each person and say the word together. Then make one short sentence.</div>
+  <div><b>Ask (亲子提问):</b> “Who is this?” / “Is this Grandma?” / “Can you say hello to Daddy?”</div>
+  <div><b>Parent note (家长观察):</b> This unit is good for emotional connection. Let the child use real names or photos, not only flashcards.</div>
+  <div class="cn-line">重点：家庭成员和简单问候。建议用真实家庭照片练习，让孩子把英语和真实生活联系起来。</div>",
+
+      words: [
             { id: "daddy", en: "Daddy", pinyin: "bà ba", zh: "爸爸", sentence: "Good morning, Daddy.", img: "assets/img/daddy.png", audio: "assets/audio/daddy.mp3" },
             { id: "mommy", en: "Mommy", pinyin: "mā ma", zh: "妈妈", sentence: "Good morning, Mommy.", img: "assets/img/mommy.png", audio: "assets/audio/mommy.mp3" },
             { id: "grandma", en: "Grandma", pinyin: "nǎi nai / wài pó", zh: "奶奶 / 外婆", sentence: "How are you, Grandma?", img: "assets/img/grandma.png", audio: "assets/audio/grandma.mp3" },
@@ -986,7 +986,13 @@ const dictionary = {
 
     "park": { 
         title: "In the Park", 
-        wiki: "<div><b>Focus (今日词汇):</b> Nature words and simple describing sentences.</div><div><b>Play (互动小贴士):</b> Go outside, point to real things, and say the words together. (去户外指着真实的花草树木，一起说单词吧！)</div>", 
+        wiki: "<div><b>Focus (今日词汇):</b> Nature words: flower, grass, park, insect, kite, tree. Children also practice short describing sentences such as “It is a tree” and “Look at the insect.”</div>
+        <div><b>Say (可以这样说):</b> “It is a flower.” / “Touch the grass.” / “Look at the tree.” / “Let’s go to the park.”</div>
+        <div><b>Play (互动小贴士):</b> Go outside or look at pictures. Point to real objects and let the child say one word first, then repeat the full sentence together.</div>
+        <div><b>Ask (亲子提问):</b> “What is it?” / “Can you find a tree?” / “What do you see in the park?”</div>
+        <div><b>Parent note (家长观察):</b> Do not force long answers. If the child can point, repeat, or say one keyword, it already counts as useful practice.</div>
+        <div class="cn-line">重点词汇：flower, grass, park, insect, kite, tree。家长可以带孩子在户外指认真实物品，先说单词，再一起说完整句子。</div>",
+  
         words: [
             { id: "flower", en: "Flower", pinyin: "huā", zh: "花", sentence: "It's a flower.", img: "assets/img/flower.png", audio: "assets/audio/flower.mp3" },
             { id: "grass", en: "Grass", pinyin: "cǎo", zh: "草", sentence: "Touch the grass.", img: "assets/img/grass.png", audio: "assets/audio/grass.mp3" },
