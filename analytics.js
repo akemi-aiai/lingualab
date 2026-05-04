@@ -204,19 +204,22 @@ const Analytics = {
     const data = this.getData();
     const today = this.getResearchDateKey();
 
-    if (!data.dailyActivity[today]) {
-      data.dailyActivity[today] = {
-        time: 0,
-        clicks: 0,
-        words: [],
-        reviewedWords: [],
-        sessionsCount: 0,
-        grammar: {
-          attempts: 0,
-          incorrect: 0,
-          correct: 0
-        }
-      };
+
+    data.dailyActivity[today] = {
+      time: 0,
+      clicks: 0,
+      words: [],
+      reviewedWords: [],
+      wordsExposed: [],
+      categoriesVisited: [],
+      sessionsCount: 0,
+      grammar: {
+        attempts: 0,
+        incorrect: 0,
+        correct: 0
+      }
+    };
+
       this.saveData(data);
     }
 
@@ -292,7 +295,37 @@ const Analytics = {
     return this.logWordReview(wordId, 'audio');
   },
 
-  logGrammarAttempt({ topic, sentenceId, prompt, selected, correctAnswer, isCorrect }) {
+  logWordsExposed(words = [], category = '') {
+  const { data, today } = this.ensureTodayRecord();
+  const day = data.dailyActivity[today];
+
+  if (!day.wordsExposed) day.wordsExposed = [];
+  if (!day.categoriesVisited) day.categoriesVisited = [];
+
+  words.forEach((word) => {
+    const id = String(word.id || word.en || word);
+    if (!day.wordsExposed.includes(id)) {
+      day.wordsExposed.push(id);
+    }
+  });
+
+  if (category && !day.categoriesVisited.includes(category)) {
+    day.categoriesVisited.push(category);
+  }
+
+  this.saveData(data);
+},
+
+  logGrammarAttempt({
+      topic,
+      sentenceId,
+      prompt,
+      selected,
+      correctAnswer,
+      isCorrect,
+      attemptNo = 1,
+      isFirstAttempt = attemptNo === 1
+    }) {
     const dataTopic = String(topic || 'general');
     const dataPrompt = String(prompt || '');
     const key = String(sentenceId || `${dataTopic}::${dataPrompt}`);
@@ -317,8 +350,19 @@ const Analytics = {
       data.grammar.byTopic[dataTopic] = {
         attempts: 0,
         incorrect: 0,
+        firstAttemptTotal: 0,
+        firstAttemptCorrect: 0,
         correct: 0
       };
+    }
+    if (isFirstAttempt) {
+      data.grammar.bySentence[key].firstAttemptTotal += 1;
+      data.grammar.byTopic[dataTopic].firstAttemptTotal += 1;
+    
+      if (correct) {
+        data.grammar.bySentence[key].firstAttemptCorrect += 1;
+        data.grammar.byTopic[dataTopic].firstAttemptCorrect += 1;
+      }
     }
 
     data.grammar.bySentence[key].attempts += 1;
@@ -383,6 +427,8 @@ const Analytics = {
         attempts,
         incorrect,
         correct,
+        firstAttemptTotal: 0,
+        firstAttemptCorrect: 0,
         lastSelected: String(item?.lastSelected || ''),
         successRate: attempts ? Math.round((correct / attempts) * 100) : 0
       };
