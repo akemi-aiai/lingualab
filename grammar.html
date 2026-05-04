@@ -856,6 +856,7 @@
     let activeTopic = '';
     let activeTask = null;
     let usedIndexes = [];
+    let activeAttemptNo = 0;
 
     function selectTopic(topic, element) {
       activeTopic = topic;
@@ -879,6 +880,7 @@
 
       usedIndexes.push(index);
       activeTask = tasks[index];
+      activeAttemptNo = 0;
 
       document.getElementById('question').textContent = activeTask.q;
 
@@ -921,6 +923,7 @@
       if (!activeTask) return;
     
       const isCorrect = choice === activeTask.a;
+      activeAttemptNo += 1;
     
       if (window.Analytics && typeof Analytics.logGrammarAttempt === 'function') {
         Analytics.logGrammarAttempt({
@@ -929,7 +932,9 @@
           prompt: activeTask.q,
           selected: choice,
           correctAnswer: activeTask.a,
-          isCorrect
+          isCorrect,
+          attemptNo: activeAttemptNo,
+          isFirstAttempt: activeAttemptNo === 1
         });
       }
     
