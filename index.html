@@ -797,7 +797,7 @@ function downloadDiploma() {
 
         <div class="detailed-analytics">
           <div class="analytics-title">Learning Highlights</div>
-          <div class="analytic-line"><b>Time on Site:</b> ${timeMin} min</div>
+          <div class="analytic-line"><b>Time:</b> ${timeMin} min</div>
           <div class="analytic-line"><b>Favorite Topic:</b> ${topicText}</div>
           <div class="analytic-line"><b>Learning Rank:</b> ${rank}</div>
         </div>
@@ -819,14 +819,23 @@ function downloadDiploma() {
         <div class="seal">OFFICIAL<br>LinguaLab</div>
       </div>
 
-      <script>
-        window.onload = function () {
-          window.focus();
+    <script>
+      window.onload = function () {
+        window.focus();
+    
+        if (document.fonts && document.fonts.ready) {
+          document.fonts.ready.then(function () {
+            setTimeout(function () {
+              window.print();
+            }, 300);
+          });
+        } else {
           setTimeout(function () {
             window.print();
-          }, 500);
-        };
-      <\/script>
+          }, 800);
+        }
+      };
+    <\/script>
     </body>
     </html>
   `);
@@ -834,7 +843,6 @@ function downloadDiploma() {
   certificateWindow.document.close();
 }
 
-    // Авто-обновление
     setInterval(() => {
       let currentScore = (parseInt(localStorage.getItem('ll_score')) || 0) + (parseInt(localStorage.getItem('vocab_points')) || 0);
       if (currentScore !== score) {
