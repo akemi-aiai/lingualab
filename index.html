@@ -386,7 +386,7 @@
         <p style="text-transform: uppercase; font-weight: 800; color: var(--primary); letter-spacing: 1px; font-size: 16px;">Academy Growth Tracker</p>
         <div class="stat-val" id="words-count">0</div>
         <p style="font-size: 20px; color: #64748b; margin: 10px 0 25px;" id="status-text">Go to "Word Bank" to grow your tree!</p>
-        <button class="btn btn-outline" onclick="downloadReport()">Download Report</button>
+        <button class="btn btn-outline" onclick="downloadDiploma()">Download Diploma</button>
       </div>
     </div>
   </section>
@@ -442,25 +442,6 @@
       }
     }
 
-function downloadReport() {
-  const parentRate = Number(prompt('Parent rate (0-5):') || 0);
-
-  if (!window.Analytics || typeof Analytics.encodeWeeklyReport !== 'function') {
-    alert('Analytics is not loaded.');
-    return;
-  }
-
-  const code = Analytics.encodeWeeklyReport(parentRate);
-
-  navigator.clipboard.writeText(code)
-    .then(() => alert('LL-REPORT copied to clipboard'))
-    .catch(() => {
-      const w = window.open('', '_blank');
-      w.document.write(
-        `<pre style="white-space:pre-wrap;word-break:break-word;">${code}</pre>`
-      );
-    });
-}
 
 function downloadDiploma() {
   const date = new Date().toLocaleDateString();
