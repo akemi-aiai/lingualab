@@ -462,164 +462,396 @@ function downloadReport() {
     });
 }
 
-   function downloadDiploma() {
-        const date = new Date().toLocaleDateString();
-        let timeSeconds = parseInt(localStorage.getItem('time_spent_seconds')) || 0;
-        let wordsTotal = parseInt(localStorage.getItem('learned_words_total')) || 0;
-        let clicksData = JSON.parse(localStorage.getItem('category_clicks') || '{}');
-        let timeMin = Math.floor(timeSeconds / 60);
+function downloadDiploma() {
+  const date = new Date().toLocaleDateString();
 
-        const topicNames = {
-            "family": "Family & Friends", "school": "My School", "face": "My Face",
-            "animals": "Animals", "transport": "Transport"
-        };
+  const currentScore =
+    (parseInt(localStorage.getItem('ll_score'), 10) || 0) +
+    (parseInt(localStorage.getItem('vocab_points'), 10) || 0);
 
-        let favoriteTopic = "None yet";
-        let maxClicks = 0;
-        for (const [topic, clicks] of Object.entries(clicksData)) {
-            if (clicks > maxClicks) {
-                maxClicks = clicks;
-                favoriteTopic = topicNames[topic] || topic;
-            }
-        }
-        let topicText = maxClicks > 0 ? `${favoriteTopic} (${maxClicks} clicks)` : 'None yet';
+  const timeSeconds =
+    parseInt(localStorage.getItem('time_spent_seconds'), 10) || 0;
 
-        let rank = "Beginner";
-        if (score >= 100) rank = "Master of English";
-        else if (score >= 50) rank = "Knowledge Hero";
-        else if (score >= 20) rank = "Bright Sprout";
-    
-          const reportWindow = window.open('', '_blank');
-          reportWindow.document.write(`
-              <html>
-              <head>
-                  <title>LinguaLab Diploma</title>
-                  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-                  <style>
-                      /* Настройка страницы А4 альбомная для принтера */
-                      @page { size: A4 landscape; margin: 0; }
-                      
-                      body { 
-                          margin: 0; padding: 20px; 
-                          background: #cbd5e1; 
-                          font-family: 'Inter', sans-serif; 
-                          display: flex; justify-content: center; align-items: center; min-height: 100vh;
-                      }
-  
-                      .diploma {
-                          width: 297mm; /* Строгий размер А4 */
-                          height: 210mm; /* Строгий размер А4 */
-                          padding: 40px;
-                          background: #fff;
-                          border: 15px solid transparent;
-                          border-image: linear-gradient(135deg, #22d3ee, #a78bfa) 1;
-                          text-align: center;
-                          position: relative;
-                          box-shadow: 0 40px 60px rgba(0,0,0,0.1);
-                          box-sizing: border-box;
-                          display: flex; flex-direction: column; justify-content: center;
-                      }
-  
-                      .logo { font-size: 24px; font-weight: 800; color: #1f4e79; margin-bottom: 15px; }
-                      h1 { font-size: 64px; margin: 0; color: #1f4e79; text-transform: uppercase; letter-spacing: 2px; }
-                      .award-text { font-size: 22px; color: #64748b; margin: 15px 0; }
-                      .rank-badge { 
-                          display: inline-block; padding: 10px 28px; background: #f97316; 
-                          color: #fff; border-radius: 999px; font-size: 24px; font-weight: 800; margin: 0 auto 25px;
-                      }
-                      
-                      .stats-box {
-                          display: flex; justify-content: center; gap: 80px; margin-bottom: 20px;
-                      }
-                      .stat-item { text-align: center; }
-                      .stat-val { font-size: 64px; font-weight: 800; color: #22d3ee; display: block; line-height: 1; margin-bottom: 5px; }
-                      .stat-label { font-size: 14px; color: #94a3b8; text-transform: uppercase; font-weight: 600; letter-spacing: 1px; }
-                      
-                      .detailed-analytics {
-                          margin: 0 auto 25px;
-                          font-size: 18px; color: #1f4e79; text-align: left;
-                          background: #f8fafc; padding: 20px 40px; border-radius: 16px; display: inline-block;
-                          border: 1px dashed #cbd5e1;
-                      }
-                      .analytic-line { margin: 8px 0; }
-                      .analytic-line b { color: #64748b; margin-right: 10px; }
-  
-                      .seal {
-                          position: absolute; bottom: 40px; right: 40px; width: 120px; height: 120px;
-                          background: #fbbf24; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-                          border: 4px dashed #fff; box-shadow: 0 0 0 8px #fbbf24; color: #fff; font-weight: 800; 
-                          font-size: 14px; line-height: 1.2; transform: rotate(-15deg);
-                      }
-  
-                      /* ИСПРАВЛЕННЫЕ ПРАВИЛА ПЕЧАТИ */
-                      @media print {
-                          body { 
-                              background: #fff; 
-                              padding: 0; 
-                              display: block; 
-                              -webkit-print-color-adjust: exact;
-                              print-color-adjust: exact;
-                          }
-                          .diploma { 
-                              width: 297mm;
-                              height: 210mm;
-                              margin: 0;
-                              box-shadow: none; 
-                              border: 15px solid #22d3ee; 
-                              border-image: none; 
-                              page-break-after: avoid; 
-                          }
-                      }
-                  </style>
-            </head>
-            <body>
-              <div class="diploma">
-                <div class="corner corner-left"></div>
-                <div class="corner corner-right"></div>
-            
-                <div class="logo">LINGUALAB ACADEMY</div>
-                <h1>Diploma</h1>
-                <p class="award-text">Awarded for reaching the rank of</p>
-                <div class="rank-badge">${rank}</div>
-            
-                <div class="stats-box">
-                    <div class="stat-item">
-                        <span class="stat-val">${score}</span>
-                        <span class="stat-label">Tasks Completed</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-val">100%</span>
-                        <span class="stat-label">Effort</span>
-                    </div>
-                </div>
-            
-                <div class="detailed-analytics">
-                    <div class="analytics-title">Learning Highlights</div>
-                    <div class="analytic-line"><b>Focus Time:</b> ${timeMin} min</div>
-                    <div class="analytic-line"><b>Favorite Topic:</b> ${topicText}</div>
-                </div>
-            
-                <p class="closing-line">Your Knowledge Tree is blooming!</p>
-            
-                <div class="diploma-footer">
-                    <div class="signature-block">
-                        <div class="signature-line"></div>
-                        <div class="signature-label">LinguaLab Academy</div>
-                    </div>
-            
-                    <div class="certificate-meta">
-                        <span>Date: ${date}</span>
-                        <span>Certificate ID: LL-${Math.floor(Math.random()*10000)}</span>
-                    </div>
-                </div>
-            
-                <div class="seal">OFFICIAL<br>LinguaLab</div>
-            </div>
-           </body>
-          </html>
-        `);
-        reportWindow.document.close();
+  const wordsTotal =
+    parseInt(localStorage.getItem('learned_words_total'), 10) || 0;
+
+  const clicksData = JSON.parse(
+    localStorage.getItem('category_clicks') || '{}'
+  );
+
+  const timeMin = Math.floor(timeSeconds / 60);
+
+  const topicNames = {
+    family: 'Family & Friends',
+    school: 'My School',
+    face: 'My Face',
+    animals: 'Animals',
+    transport: 'Transport',
+    pets: 'Pets',
+    colors: 'Colors',
+    park: 'Park & Nature',
+    food: 'Yummy Food & Drinks',
+    fruit: 'Fruit Basket',
+    numbers: 'Numbers 1–10'
+  };
+
+  let favoriteTopic = 'None yet';
+  let maxClicks = 0;
+
+  Object.entries(clicksData).forEach(([topic, clicks]) => {
+    const safeClicks = Number(clicks) || 0;
+
+    if (safeClicks > maxClicks) {
+      maxClicks = safeClicks;
+      favoriteTopic = topicNames[topic] || topic;
     }
+  });
+
+  const topicText =
+    maxClicks > 0 ? `${favoriteTopic} (${maxClicks} interactions)` : 'None yet';
+
+  let rank = 'Beginner';
+  if (currentScore >= 100) {
+    rank = 'Master of English';
+  } else if (currentScore >= 50) {
+    rank = 'Knowledge Hero';
+  } else if (currentScore >= 20) {
+    rank = 'Bright Sprout';
+  }
+
+  const certificateId = `LL-${Date.now().toString().slice(-6)}`;
+
+  const certificateWindow = window.open('', '_blank');
+
+  if (!certificateWindow) {
+    alert('Please allow pop-ups to open and download the certificate.');
+    return;
+  }
+
+  certificateWindow.document.write(`
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>LinguaLab Certificate</title>
+
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+      <style>
+        @page {
+          size: A4 landscape;
+          margin: 0;
+        }
+
+        * {
+          box-sizing: border-box;
+        }
+
+        body {
+          margin: 0;
+          padding: 20px;
+          background: #cbd5e1;
+          font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: 100vh;
+        }
+
+        .print-button {
+          position: fixed;
+          top: 18px;
+          right: 18px;
+          z-index: 10;
+          border: none;
+          border-radius: 999px;
+          padding: 12px 20px;
+          background: #1f4e79;
+          color: #fff;
+          font-weight: 800;
+          cursor: pointer;
+          box-shadow: 0 10px 25px rgba(15, 23, 42, 0.2);
+        }
+
+        .certificate {
+          width: 297mm;
+          height: 210mm;
+          padding: 42px 54px;
+          background:
+            radial-gradient(circle at top left, rgba(34, 211, 238, 0.14), transparent 28%),
+            radial-gradient(circle at bottom right, rgba(167, 139, 250, 0.18), transparent 32%),
+            #ffffff;
+          border: 15px solid transparent;
+          border-image: linear-gradient(135deg, #22d3ee, #a78bfa) 1;
+          text-align: center;
+          position: relative;
+          box-shadow: 0 40px 60px rgba(0, 0, 0, 0.12);
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          overflow: hidden;
+        }
+
+        .logo {
+          font-size: 24px;
+          font-weight: 800;
+          color: #1f4e79;
+          letter-spacing: 1px;
+          margin-bottom: 12px;
+        }
+
+        .small-title {
+          color: #64748b;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 2px;
+          font-size: 14px;
+          margin-bottom: 8px;
+        }
+
+        h1 {
+          font-size: 58px;
+          margin: 0;
+          color: #1f4e79;
+          text-transform: uppercase;
+          letter-spacing: 2px;
+          line-height: 1.05;
+        }
+
+        .award-text {
+          font-size: 22px;
+          color: #64748b;
+          margin: 18px 0 12px;
+        }
+
+        .rank-badge {
+          display: inline-block;
+          padding: 12px 30px;
+          background: linear-gradient(90deg, #f97316, #fbbf24);
+          color: #ffffff;
+          border-radius: 999px;
+          font-size: 24px;
+          font-weight: 800;
+          margin: 0 auto 26px;
+          box-shadow: 0 12px 25px rgba(249, 115, 22, 0.24);
+        }
+
+        .stats-box {
+          display: flex;
+          justify-content: center;
+          gap: 56px;
+          margin: 0 auto 24px;
+        }
+
+        .stat-item {
+          min-width: 150px;
+          text-align: center;
+          background: #f8fafc;
+          border: 1px solid #e2e8f0;
+          border-radius: 20px;
+          padding: 18px 24px;
+        }
+
+        .stat-val {
+          font-size: 48px;
+          font-weight: 800;
+          color: #22d3ee;
+          display: block;
+          line-height: 1;
+          margin-bottom: 8px;
+        }
+
+        .stat-label {
+          font-size: 13px;
+          color: #64748b;
+          text-transform: uppercase;
+          font-weight: 800;
+          letter-spacing: 1px;
+        }
+
+        .detailed-analytics {
+          margin: 0 auto 24px;
+          font-size: 17px;
+          color: #1f4e79;
+          text-align: left;
+          background: #f8fafc;
+          padding: 18px 34px;
+          border-radius: 18px;
+          display: inline-block;
+          border: 1px dashed #cbd5e1;
+          min-width: 430px;
+        }
+
+        .analytics-title {
+          font-weight: 800;
+          color: #1f4e79;
+          margin-bottom: 8px;
+          text-align: center;
+        }
+
+        .analytic-line {
+          margin: 8px 0;
+        }
+
+        .analytic-line b {
+          color: #64748b;
+          margin-right: 8px;
+        }
+
+        .closing-line {
+          font-size: 20px;
+          color: #1f4e79;
+          font-weight: 800;
+          margin: 8px 0 28px;
+        }
+
+        .diploma-footer {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-end;
+          gap: 20px;
+          margin-top: 10px;
+          color: #64748b;
+          font-size: 14px;
+        }
+
+        .signature-block {
+          text-align: left;
+          width: 260px;
+        }
+
+        .signature-line {
+          border-top: 2px solid #94a3b8;
+          margin-bottom: 8px;
+        }
+
+        .signature-label {
+          font-weight: 700;
+        }
+
+        .certificate-meta {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          gap: 4px;
+          font-weight: 700;
+        }
+
+        .seal {
+          position: absolute;
+          bottom: 42px;
+          right: 52px;
+          width: 112px;
+          height: 112px;
+          background: #fbbf24;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 4px dashed #ffffff;
+          box-shadow: 0 0 0 8px #fbbf24;
+          color: #ffffff;
+          font-weight: 800;
+          font-size: 13px;
+          line-height: 1.2;
+          transform: rotate(-15deg);
+        }
+
+        @media print {
+          body {
+            background: #ffffff;
+            padding: 0;
+            display: block;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+          }
+
+          .print-button {
+            display: none;
+          }
+
+          .certificate {
+            width: 297mm;
+            height: 210mm;
+            margin: 0;
+            box-shadow: none;
+            border: 15px solid #22d3ee;
+            border-image: none;
+            page-break-after: avoid;
+          }
+        }
+      </style>
+    </head>
+
+    <body>
+      <button class="print-button" onclick="window.print()">Save as PDF</button>
+
+      <div class="certificate">
+        <div class="logo">LINGUALAB ACADEMY</div>
+        <div class="small-title">Certificate of Progress</div>
+
+        <h1>Certificate</h1>
+
+        <p class="award-text">Awarded for wonderful learning progress</p>
+
+        <div class="rank-badge">${rank}</div>
+
+        <div class="stats-box">
+          <div class="stat-item">
+            <span class="stat-val">${currentScore}</span>
+            <span class="stat-label">Points Earned</span>
+          </div>
+
+          <div class="stat-item">
+            <span class="stat-val">${wordsTotal}</span>
+            <span class="stat-label">Words Practiced</span>
+          </div>
+
+          <div class="stat-item">
+            <span class="stat-val">100%</span>
+            <span class="stat-label">Effort</span>
+          </div>
+        </div>
+
+        <div class="detailed-analytics">
+          <div class="analytics-title">Learning Highlights</div>
+          <div class="analytic-line"><b>Time on Site:</b> ${timeMin} min</div>
+          <div class="analytic-line"><b>Favorite Topic:</b> ${topicText}</div>
+          <div class="analytic-line"><b>Learning Rank:</b> ${rank}</div>
+        </div>
+
+        <p class="closing-line">Your Knowledge Tree is blooming!</p>
+
+        <div class="diploma-footer">
+          <div class="signature-block">
+            <div class="signature-line"></div>
+            <div class="signature-label">LinguaLab Academy</div>
+          </div>
+
+          <div class="certificate-meta">
+            <span>Date: ${date}</span>
+            <span>Certificate ID: ${certificateId}</span>
+          </div>
+        </div>
+
+        <div class="seal">OFFICIAL<br>LinguaLab</div>
+      </div>
+
+      <script>
+        window.onload = function () {
+          window.focus();
+          setTimeout(function () {
+            window.print();
+          }, 500);
+        };
+      <\/script>
+    </body>
+    </html>
+  `);
+
+  certificateWindow.document.close();
+}
 
     // Авто-обновление
     setInterval(() => {
