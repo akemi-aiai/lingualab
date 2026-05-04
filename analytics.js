@@ -1,7 +1,7 @@
 const Analytics = {
   STORAGE_KEY: 'll_research_data',
   ARCHIVE_KEY: 'll_research_weekly_archive',
-  DB_VERSION: 2,
+  DB_VERSION: 5,
   RESEARCH_TIMEZONE: 'Asia/Shanghai',
   TIMER_STEP_SECONDS: 10,
 
@@ -137,8 +137,6 @@ const Analytics = {
   },
 
   migrateLegacyData(data) {
-    wordsExposed: this.normalizeStringArray(day?.wordsExposed || day?.words),
-    categoriesVisited: this.normalizeStringArray(day?.categoriesVisited),
     const upgraded = data || {};
 
     upgraded.dbVersion = this.DB_VERSION;
@@ -157,6 +155,8 @@ const Analytics = {
         clicks: this.safeNumber(day?.clicks),
         words: this.normalizeStringArray(day?.words),
         reviewedWords: this.normalizeStringArray(day?.reviewedWords || day?.words),
+        wordsExposed: this.normalizeStringArray(day?.wordsExposed || day?.words),
+        categoriesVisited: this.normalizeStringArray(day?.categoriesVisited),
         sessionsCount: this.safeNumber(day?.sessionsCount),
         grammar: {
           attempts: this.safeNumber(day?.grammar?.attempts),
@@ -201,33 +201,32 @@ const Analytics = {
     }
   },
 
-  ensureTodayRecord() {
-    this.ensureCurrentWeek();
-
-    const data = this.getData();
-    const today = this.getResearchDateKey();
-
-
-      data.dailyActivity[today] = {
-        time: 0,
-        clicks: 0,
-        words: [],
-        reviewedWords: [],
-        wordsExposed: [],
-        categoriesVisited: [],
-        sessionsCount: 0,
-        grammar: {
-          attempts: 0,
-          incorrect: 0,
-          correct: 0
+    ensureTodayRecord() {
+      this.ensureCurrentWeek();
+    
+      const data = this.getData();
+      const today = this.getResearchDateKey();
+    
+      if (!data.dailyActivity[today]) {
+        data.dailyActivity[today] = {
+          time: 0,
+          clicks: 0,
+          words: [],
+          reviewedWords: [],
+          wordsExposed: [],
+          categoriesVisited: [],
+          sessionsCount: 0,
+          grammar: {
+            attempts: 0,
+            incorrect: 0,
+            correct: 0
+          }
+        };
       }
-    };
-
+    
       this.saveData(data);
-    }
-
-    return { data, today };
-  },
+      return { data, today };
+    },
 
   markSessionStart() {
     if (document.hidden || this.sessionOpen) return;
@@ -267,26 +266,6 @@ const Analytics = {
     this.saveData(data);
     return { wordId: normalizedWordId, source };
   },
-  logWordsExposed(words, category) {
-  const { data, today } = this.ensureTodayRecord();
-  const day = data.dailyActivity[today];
-
-  if (!day.wordsExposed) day.wordsExposed = [];
-  if (!day.categoriesVisited) day.categoriesVisited = [];
-
-  words.forEach(word => {
-    const id = String(word.id);
-    if (!day.wordsExposed.includes(id)) {
-      day.wordsExposed.push(id);
-    }
-  });
-
-  if (!day.categoriesVisited.includes(category)) {
-    day.categoriesVisited.push(category);
-  }
-
-  this.saveData(data);
-},
 
   logWordClick(wordId) {
     return this.logWordReview(wordId, 'click');
@@ -539,5 +518,5 @@ const Analytics = {
     return 'LL-REPORT:' + btoa(binary);
   }
 };
-
+window.Analytics = Analytics;
 Analytics.init();
