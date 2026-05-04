@@ -263,6 +263,26 @@ const Analytics = {
     this.saveData(data);
     return { wordId: normalizedWordId, source };
   },
+  logWordsExposed(words, category) {
+  const { data, today } = this.ensureTodayRecord();
+  const day = data.dailyActivity[today];
+
+  if (!day.wordsExposed) day.wordsExposed = [];
+  if (!day.categoriesVisited) day.categoriesVisited = [];
+
+  words.forEach(word => {
+    const id = String(word.id);
+    if (!day.wordsExposed.includes(id)) {
+      day.wordsExposed.push(id);
+    }
+  });
+
+  if (!day.categoriesVisited.includes(category)) {
+    day.categoriesVisited.push(category);
+  }
+
+  this.saveData(data);
+},
 
   logWordClick(wordId) {
     return this.logWordReview(wordId, 'click');
