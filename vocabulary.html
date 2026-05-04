@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script src="analytics.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Word Bank — LinguaLab</title>
@@ -1042,21 +1041,21 @@ const dictionary = {
 
     const audioPlayer = new Audio();
   
-    function playWordAudio(src, wordId = '') {
-      if (!src) return;
-    
-      audioPlayer.pause();
-      audioPlayer.currentTime = 0;
-      audioPlayer.src = src;
-    
-      audioPlayer.play().catch(err => {
-        console.error("Audio play error:", err);
-      });
-    
-      if (window.Analytics && typeof Analytics.logWordAudio === 'function' && wordId) {
-        Analytics.logWordAudio(wordId);
-      }
-    }
+  function playWordAudio(src, wordId = '', shouldLog = true) {
+  if (!src) return;
+
+  audioPlayer.pause();
+  audioPlayer.currentTime = 0;
+  audioPlayer.src = src;
+
+  audioPlayer.play().catch(err => {
+    console.error("Audio play error:", err);
+  });
+
+  if (shouldLog && window.Analytics && typeof Analytics.logWordAudio === 'function' && wordId) {
+    Analytics.logWordAudio(wordId);
+  }
+}
 
     function init() {
         const categories = Object.keys(dictionary);
@@ -1091,10 +1090,12 @@ const dictionary = {
     let currentCatKey = ""; 
     function loadCategory(catKey, btn) {
         document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+}
         if(btn) btn.classList.add('active');
         
         learnedCards.clear();
         currentCatKey = catKey;
+    }
 
         const data = dictionary[catKey];
         currentCategoryWordsCount = data.words.length;
@@ -1149,15 +1150,14 @@ function flipCard(element, wordId) {
   const currentWords = dictionary[currentCatKey]?.words || [];
   const currentWord = currentWords.find(w => w.id === wordId);
 
-  if (currentWord?.audio) {
-    playWordAudio(currentWord.audio, wordId);
-  }
 
-  if (window.Analytics && typeof Analytics.logWordReview === 'function') {
-    Analytics.logWordReview(wordId, 'flip');
-  } else if (window.Analytics && typeof Analytics.logWordClick === 'function') {
-    Analytics.logWordClick(wordId);
-  }
+  if (currentWord?.audio) {
+  playWordAudio(currentWord.audio, wordId, false);
+}
+
+if (window.Analytics && typeof Analytics.logWordReview === 'function') {
+  Analytics.logWordReview(wordId, 'flip');
+}
 
   if (typeof currentCatKey !== 'undefined') {
     let clicksData = JSON.parse(localStorage.getItem('category_clicks') || '{}');
