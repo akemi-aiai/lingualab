@@ -1007,11 +1007,11 @@
         <div class="mode-grid" role="tablist" aria-label="Game modes">
           <button class="mode-card active" type="button" data-mode="audio" aria-selected="true">
             <h3>Audio Surf <span class="cn-line">听音冲浪</span></h3>
-            <p>Listen to the real word audio and catch the matching picture card. <br>听真实单词音频，抓住对应图片卡片。</p>
+            <p>Listen to the audio and catch the matching picture card. <br>听真实单词音频，抓住对应图片卡片。</p>
           </button>
           <button class="mode-card" type="button" data-mode="word" aria-selected="false">
             <h3>Word Surf <span class="cn-line">单词冲浪</span></h3>
-            <p>Read the prompt and catch the correct image-word pair. <br>看提示词，抓住正确的图片和单词卡片。</p>
+            <p>Catch the correct pair. <br>看提示词，抓住正确的图片和单词卡片。</p>
           </button>
         </div>
 
@@ -1041,8 +1041,6 @@
 
         <p class="helper-note" id="helperNote">
           Every correct catch gives <strong>+1 vocabulary point</strong>. Each run shows about <strong>30 card variants</strong>, taken from the selected module or a mixed library.
-          <br>每抓对一个单词，就会获得 <strong>+1 词汇积分</strong>。每一轮大约会出现 <strong>30 张不同卡片变体</strong>，来自所选模块或混合词库。
-          <br><strong>Controls • 操作：</strong> Use <strong>← →</strong>, tap left/right, or use swipe on phone and tablet.
         </p>
       </div>
     </section>
@@ -1050,8 +1048,6 @@
     <section class="content-grid">
       <aside class="panel side-panel">
         <h2>Session Stats <span class="cn-line">本轮数据</span></h2>
-        <p class="section-subtitle">Short run, clear feedback, easy for preschoolers. <br>短时挑战，反馈清晰，更适合学龄前儿童。</p>
-
         <div class="stats-grid">
           <div class="hud-card">
             <small>Time Left • 剩余时间</small>
@@ -1078,22 +1074,20 @@
 
       <section class="game-wrap">
         <div class="prompt" id="promptBox">
-          <small>Prompt • 提示</small>
           <div class="prompt-main">
             <div class="prompt-art" id="promptArt"></div>
             <div class="prompt-text">
-              <strong id="promptPrimary">Press Start to begin.</strong>
+              <strong id="promptPrimary">Press START.</strong>
               <span id="promptSecondary">点击开始，开始冲浪挑战。</span>
             </div>
           </div>
         </div>
 
-        <div class="arena" id="arena" aria-label="Surf Challenge game area">
+        <div class="arena" id="arena" aria-label="Surf Challenge">
           <div class="arena-start-panel" id="arenaStartPanel">
             <div class="arena-start-card">
-              <strong>Ready to ride? • 准备冲浪吗？</strong>
-              <p>Start inside the game block. This round uses about 30 card variants.<br>直接在游戏区开始。本轮会轮换约 30 张卡片变体。</p>
-              <button class="btn primary" id="arenaStartBtn" type="button">Start Here • 在这里开始</button>
+              <strong>Ready to surf?</strong>
+              <button class="btn primary" id="arenaStartBtn" type="button">START</button>
             </div>
           </div>
           <div class="cloud" style="left: 8%; top: 34px;"></div>
@@ -1443,13 +1437,13 @@
     function updateHelperText() {
       const active = getActiveModuleSet();
       const activeBank = getActiveBank();
-      helperNoteEl.innerHTML = `Every correct catch gives <strong>+1 vocabulary point</strong>. This page load uses a fresh shuffled set of <strong>${activeBank.length}</strong> cards from <strong>${active.title}</strong>.<br>每抓对一个单词，就会获得 <strong>+1 词汇积分</strong>。当前页面会从 <strong>${active.zhTitle}</strong> 随机刷新出 <strong>${activeBank.length}</strong> 张重新洗牌的卡片。<br><strong>Controls • 操作：</strong> Use <strong>← →</strong>, tap left/right, or use swipe on phone and tablet.`;
+      helperNoteEl.innerHTML = `Every correct catch gives <strong>+1 vocabulary point</strong>. This page load uses a shuffled set of <strong>${activeBank.length}</strong> cards from <strong>${active.title}</strong>.<br>每抓对一个单词，就会获得 <strong>+1 词汇积分</strong>。当前页面会从 <strong>${active.zhTitle}</strong> 随机刷新出 <strong>${activeBank.length}</strong> 张重新洗牌的卡片。<br><strong>Controls • 操作：</strong> Use <strong>← →</strong>, tap left/right, or use swipe on phone and tablet.`;
     }
 
     function renderLibraryStrip() {
       const active = getActiveModuleSet();
       const previewWords = getActiveBank().slice(0, Math.min(12, getActiveBank().length));
-      librarySubtitleEl.innerHTML = `These cards use the real site assets and a refreshed shuffled set from <strong>${active.title}</strong>. <br>这些卡片直接使用站点中的真实图片素材，并来自 <strong>${active.zhTitle}</strong> 的重新洗牌卡组。`;
+      librarySubtitleEl.innerHTML = `These cards use a shuffled set from <strong>${active.title}</strong>. <br>这些卡片直接使用站点中的真实图片素材，并来自 <strong>${active.zhTitle}</strong> 的重新洗牌卡组。`;
       libraryStripEl.innerHTML = previewWords.map(item => `
         <div class="mini-word">
           <img src="${item.img}" alt="${item.en}" loading="lazy">
@@ -1715,7 +1709,7 @@
       finalPointsEl.textContent = state.run.points;
       finalScoreBoxEl.textContent = state.run.points;
       starsLineEl.textContent = getStars(state.run.points, state.run.mistakes);
-      resultNoteEl.innerHTML = `This run added <strong>${state.run.points}</strong> synced vocabulary points to Word Bank.<br>本轮已同步 <strong>${state.run.points}</strong> 个词汇积分到 Word Bank。`;
+      resultNoteEl.innerHTML = `This run added <strong>${state.run.points}</strong> vocabulary points to Word Bank.<br>本轮已同步 <strong>${state.run.points}</strong> 个词汇积分到 Word Bank。`;
       overlayEl.style.display = 'flex';
       updateHUD();
     }
@@ -1835,7 +1829,7 @@
         state.runPool = [];
         state.promptIndex = 0;
         promptArtEl.innerHTML = '';
-        promptPrimaryEl.textContent = 'Press Start to begin.';
+        promptPrimaryEl.textContent = 'Press START.';
         promptSecondaryEl.textContent = '点击开始，开始冲浪挑战。';
         arenaStartPanelEl.style.display = 'flex';
       }
