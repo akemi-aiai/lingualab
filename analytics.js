@@ -1,5 +1,6 @@
 const Analytics = {
   STORAGE_KEY: 'll_research_data',
+  ARCHIVE_KEY: 'll_research_weekly_archive',
   DB_VERSION: 2,
   RESEARCH_TIMEZONE: 'Asia/Shanghai',
   TIMER_STEP_SECONDS: 10,
