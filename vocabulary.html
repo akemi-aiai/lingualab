@@ -1067,6 +1067,7 @@ const dictionary = {
                         if (index === 0) {
                 btn.classList.add('active');
                 loadCategory(catKey, btn);
+                          
             }
 
             btn.onclick = () => loadCategory(catKey, btn);
@@ -1098,6 +1099,9 @@ const dictionary = {
     }
 
         const data = dictionary[catKey];
+        if (window.Analytics && typeof Analytics.logWordsExposed === 'function') {
+        Analytics.logWordsExposed(data.words, catKey);
+      }
         currentCategoryWordsCount = data.words.length;
 
         let html = `
@@ -1149,15 +1153,6 @@ function flipCard(element, wordId) {
 
   const currentWords = dictionary[currentCatKey]?.words || [];
   const currentWord = currentWords.find(w => w.id === wordId);
-
-
-  if (currentWord?.audio) {
-  playWordAudio(currentWord.audio, wordId, false);
-}
-
-if (window.Analytics && typeof Analytics.logWordReview === 'function') {
-  Analytics.logWordReview(wordId, 'flip');
-}
 
   if (typeof currentCatKey !== 'undefined') {
     let clicksData = JSON.parse(localStorage.getItem('category_clicks') || '{}');
