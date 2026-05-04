@@ -136,6 +136,8 @@ const Analytics = {
   },
 
   migrateLegacyData(data) {
+    wordsExposed: this.normalizeStringArray(day?.wordsExposed || day?.words),
+    categoriesVisited: this.normalizeStringArray(day?.categoriesVisited),
     const upgraded = data || {};
 
     upgraded.dbVersion = this.DB_VERSION;
@@ -205,18 +207,18 @@ const Analytics = {
     const today = this.getResearchDateKey();
 
 
-    data.dailyActivity[today] = {
-      time: 0,
-      clicks: 0,
-      words: [],
-      reviewedWords: [],
-      wordsExposed: [],
-      categoriesVisited: [],
-      sessionsCount: 0,
-      grammar: {
-        attempts: 0,
-        incorrect: 0,
-        correct: 0
+      data.dailyActivity[today] = {
+        time: 0,
+        clicks: 0,
+        words: [],
+        reviewedWords: [],
+        wordsExposed: [],
+        categoriesVisited: [],
+        sessionsCount: 0,
+        grammar: {
+          attempts: 0,
+          incorrect: 0,
+          correct: 0
       }
     };
 
@@ -247,18 +249,16 @@ const Analytics = {
 
   logWordReview(wordId, source = 'flip') {
     if (!wordId) return;
-
+  
     const normalizedWordId = String(wordId);
     const { data, today } = this.ensureTodayRecord();
     const day = data.dailyActivity[today];
-
-    data.interactionHeatmap[normalizedWordId] = this.safeNumber(data.interactionHeatmap[normalizedWordId]) + 1;
+  
+    data.interactionHeatmap[normalizedWordId] =
+      this.safeNumber(data.interactionHeatmap[normalizedWordId]) + 1;
+  
     day.clicks += 1;
-
-    if (!day.words.includes(normalizedWordId)) {
-      day.words.push(normalizedWordId);
-    }
-
+  
     if (!day.reviewedWords.includes(normalizedWordId)) {
       day.reviewedWords.push(normalizedWordId);
     }
@@ -302,9 +302,9 @@ const Analytics = {
   if (!day.wordsExposed) day.wordsExposed = [];
   if (!day.categoriesVisited) day.categoriesVisited = [];
 
-  words.forEach((word) => {
-    const id = String(word.id || word.en || word);
-    if (!day.wordsExposed.includes(id)) {
+  words.forEach(word => {
+    const id = String(word.id || word.w || word.en || word);
+    if (id && id !== 'undefined' && !day.wordsExposed.includes(id)) {
       day.wordsExposed.push(id);
     }
   });
@@ -397,6 +397,8 @@ const Analytics = {
           clicks: this.safeNumber(day?.clicks),
           words: this.normalizeStringArray(day?.words),
           reviewedWords: this.normalizeStringArray(day?.reviewedWords || day?.words),
+          wordsExposed: this.normalizeStringArray(day?.wordsExposed || day?.words),
+          categoriesVisited: this.normalizeStringArray(day?.categoriesVisited),
           sessionsCount: this.safeNumber(day?.sessionsCount),
           grammar: {
             attempts: this.safeNumber(day?.grammar?.attempts),
@@ -467,7 +469,9 @@ const Analytics = {
     Object.values(weeklyLog).forEach((day) => {
       const seconds = this.safeNumber(day?.time);
       const clicks = this.safeNumber(day?.clicks);
-      const words = Array.isArray(day?.words) ? day.words : [];
+      const words = Array.isArray(day?.wordsExposed)
+      ? day.wordsExposed
+      : (Array.isArray(day?.words) ? day.words : []);
       const reviewed = Array.isArray(day?.reviewedWords) ? day.reviewedWords : [];
 
       totalSeconds += seconds;
