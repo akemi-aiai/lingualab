@@ -1089,31 +1089,33 @@ const dictionary = {
     }
 
     let currentCatKey = ""; 
-    function loadCategory(catKey, btn) {
-        document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-}
-        if(btn) btn.classList.add('active');
-        
-        learnedCards.clear();
-        currentCatKey = catKey;
+function loadCategory(catKey, btn) {
+    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+
+    if (btn) btn.classList.add('active');
+
+    learnedCards.clear();
+    currentCatKey = catKey;
+
+    const data = dictionary[catKey];
+    if (!data) return;
+
+    if (window.Analytics && typeof Analytics.logWordsExposed === 'function') {
+        Analytics.logWordsExposed(data.words, catKey);
     }
 
-        const data = dictionary[catKey];
-        if (window.Analytics && typeof Analytics.logWordsExposed === 'function') {
-        Analytics.logWordsExposed(data.words, catKey);
-      }
-        currentCategoryWordsCount = data.words.length;
+    currentCategoryWordsCount = data.words.length;
 
-        let html = `
-            <div class="wiki-box">
-                <div class="wiki-text-area">
-                    <div class="wiki-title">Parent Cheat Sheet (家长小抄)</div>
-                    <div class="wiki-content">${data.wiki}</div>
-                </div>
-                <div class="progress-counter" id="progress-text">0 / ${currentCategoryWordsCount}</div>
+    let html = `
+        <div class="wiki-box">
+            <div class="wiki-text-area">
+                <div class="wiki-title">Parent Cheat Sheet (家长小抄)</div>
+                <div class="wiki-content">${data.wiki}</div>
             </div>
-            <div class="flashcard-grid">
-        `;
+            <div class="progress-counter" id="progress-text">0 / ${currentCategoryWordsCount}</div>
+        </div>
+        <div class="flashcard-grid">
+    `;
 
     data.words.forEach((word) => {
         html += `
@@ -1122,18 +1124,20 @@ const dictionary = {
                     <div class="flashcard-front">
                         <img src="${word.img}" alt="${word.en}" onerror="this.src='assets/img/fallback.png'">
                         <h2>${word.en}</h2>
-                          <button
+
+                        <button
                             class="audio-btn"
                             type="button"
                             aria-label="Play audio"
                             title="Play audio"
                             onclick="event.stopPropagation(); playWordAudio('${word.audio}', '${word.id}')"
-                          >
+                        >
                             <svg viewBox="0 0 24 24" aria-hidden="true">
-                              <path d="M14 3.23v17.54a1 1 0 0 1-1.64.77L7.91 18H4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h3.91l4.45-3.54A1 1 0 0 1 14 3.23Zm3.54 4.35a1 1 0 0 1 1.41 0 6 6 0 0 1 0 8.48 1 1 0 0 1-1.41-1.41 4 4 0 0 0 0-5.66 1 1 0 0 1 0-1.41Zm-2.83 2.82a1 1 0 0 1 1.41 0 2 2 0 0 1 0 2.83 1 1 0 0 1-1.41-1.41.01.01 0 0 0 0-.01.01.01 0 0 0 0-.01 1 1 0 0 1 0-1.4Z"/>
+                                <path d="M14 3.23v17.54a1 1 0 0 1-1.64.77L7.91 18H4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h3.91l4.45-3.54A1 1 0 0 1 14 3.23Zm3.54 4.35a1 1 0 0 1 1.41 0 6 6 0 0 1 0 8.48 1 1 0 0 1-1.41-1.41 4 4 0 0 0 0-5.66 1 1 0 0 1 0-1.41Zm-2.83 2.82a1 1 0 0 1 1.41 0 2 2 0 0 1 0 2.83 1 1 0 0 1-1.41-1.41.01.01 0 0 0 0-.01.01.01 0 0 0 0-.01 1 1 0 0 1 0-1.4Z"/>
                             </svg>
-                          </button>
+                        </button>
                     </div>
+
                     <div class="flashcard-back">
                         <h3>${word.en}</h3>
                         <p class="pinyin">${word.pinyin}</p>
@@ -1144,9 +1148,10 @@ const dictionary = {
             </div>
         `;
     });
-        html += `</div>`;
-        contentAreaEl.innerHTML = html;
-    }
+
+    html += `</div>`;
+    contentAreaEl.innerHTML = html;
+}
 
 function flipCard(element, wordId) {
   element.classList.toggle('flipped');
