@@ -291,68 +291,71 @@
       margin-top: 4px;
     }
 
-    .message-types {
-      padding: 0 5% 70px;
-    }
+.message-types {
+  padding: 0 5% 70px;
+}
 
-    .message-grid {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-    }
+.message-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 26px;
+}
 
-    .mini-card {
-      background: #fff;
-      border-radius: 30px;
-      border: 1px solid #e2e8f0;
-      padding: 30px 22px 28px;
-      text-align: center;
-      box-shadow: 0 20px 45px rgba(31, 78, 121, 0.08);
+.mini-card {
+  background: #fff;
+  border-radius: 30px;
+  border: 1px solid #e2e8f0;
+  padding: 24px 28px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  min-height: 210px;
+  box-shadow: 0 20px 45px rgba(31, 78, 121, 0.08);
 
-      cursor: default;
-      transform: none;
-      transition: none;
-    }
+  cursor: default;
+  transform: none;
+  transition: none;
+}
 
-    .mini-card:hover {
-      transform: none;
-      box-shadow: 0 20px 45px rgba(31, 78, 121, 0.08);
-    }
+.mini-card:hover {
+  transform: none;
+  box-shadow: 0 20px 45px rgba(31, 78, 121, 0.08);
+}
 
-    .mini-icon {
-      width: 150px;
-      height: 150px;
-      margin: 0 auto 20px;
-      border-radius: 28px;
-      background: #f8fafc;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      padding: 12px;
-    }
+.mini-icon {
+  width: 175px;
+  height: 175px;
+  flex: 0 0 175px;
+  border-radius: 30px;
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 10px;
+}
 
-    .mini-icon img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
-    }
+.mini-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
 
-    .mini-card h3 {
-      color: var(--navy);
-      font-size: 20px;
-      margin-bottom: 10px;
-      font-weight: 800;
-    }
+.mini-card h3 {
+  color: var(--navy);
+  font-size: 22px;
+  margin-bottom: 10px;
+  font-weight: 800;
+}
 
-    .mini-card p {
-      color: #64748b;
-      font-size: 14px;
-      line-height: 1.55;
-    }
+.mini-card p {
+  color: #64748b;
+  font-size: 15px;
+  line-height: 1.55;
+}
 
     footer {
       background: #0f172a;
@@ -392,15 +395,20 @@
         grid-template-columns: 1fr;
       }
 
-      .message-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
+  .message-grid {
+    grid-template-columns: 1fr;
+  }
 
-      .mini-icon {
-        width: 145px;
-        height: 145px;
-      }
-    }
+  .mini-card {
+    min-height: 190px;
+  }
+
+  .mini-icon {
+    width: 155px;
+    height: 155px;
+    flex-basis: 155px;
+  }
+}
 
     @media (max-width: 560px) {
       body {
@@ -421,18 +429,21 @@
         height: 135px;
       }
 
-      .message-grid {
-        grid-template-columns: 1fr;
-      }
+  .message-grid {
+    grid-template-columns: 1fr;
+  }
 
-      .mini-card {
-        padding: 32px 24px;
-      }
+  .mini-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 30px 24px;
+  }
 
-      .mini-icon {
-        width: 165px;
-        height: 165px;
-      }
+  .mini-icon {
+    width: 175px;
+    height: 175px;
+    flex-basis: auto;
+  }
     }
   </style>
 </head>
@@ -475,7 +486,7 @@
         <aside class="info-card">
           <div>
             <div class="info-icon">
-              <img src="assets/contact/mail.png" alt="Contact icon" class="icon-img">
+              <img src="assets/contact/mail.jpg" alt="Contact icon" class="icon-img">
             </div>
 
             <h2>
@@ -557,7 +568,7 @@
 
         <div class="mini-card">
           <div class="mini-icon">
-            <img src="assets/contact/question.png" alt="Questions">
+            <img src="assets/contact/question.jpg" alt="Questions">
           </div>
           <h3>Questions</h3>
           <p>Ask about lessons, grammar, vocabulary, homework, or learning paths.</p>
@@ -565,7 +576,7 @@
 
         <div class="mini-card">
           <div class="mini-icon">
-            <img src="assets/contact/wish.png" alt="Wishes">
+            <img src="assets/contact/wish.jpg" alt="Wishes">
           </div>
           <h3>Wishes</h3>
           <p>Tell us what you would like to see in future LinguaLab materials.</p>
@@ -573,7 +584,7 @@
 
         <div class="mini-card">
           <div class="mini-icon">
-            <img src="assets/contact/idea.png" alt="Lesson ideas">
+            <img src="assets/contact/idea.jpg" alt="Lesson ideas">
           </div>
           <h3>Lesson ideas</h3>
           <p>Suggest topics, games, stories, or bilingual activities for children.</p>
@@ -581,7 +592,7 @@
 
         <div class="mini-card">
           <div class="mini-icon">
-            <img src="assets/contact/cooperation.png" alt="Cooperation">
+            <img src="assets/contact/cooperation.jpg" alt="Cooperation">
           </div>
           <h3>Cooperation</h3>
           <p>Contact us about schools, teachers, families, or education partnerships.</p>
