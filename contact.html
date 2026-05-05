@@ -33,7 +33,7 @@
       padding-top: 80px;
     }
 
-    /* NAVBAR */
+
     .navbar {
       position: fixed;
       top: 0;
@@ -86,7 +86,7 @@
       color: var(--accent);
     }
 
-    /* HERO */
+  
     .hero {
       padding: 95px 10% 80px;
       text-align: center;
@@ -94,18 +94,6 @@
       color: #fff;
     }
 
-    .hero-label {
-      display: inline-block;
-      padding: 7px 16px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.18);
-      border: 1px solid rgba(255, 255, 255, 0.35);
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 18px;
-    }
 
     .hero h1 {
       font-size: clamp(36px, 6vw, 56px);
@@ -129,7 +117,6 @@
       margin: 0 auto;
     }
 
-    /* CONTACT AREA */
     .contact-section {
       padding: 70px 5%;
     }
@@ -231,7 +218,7 @@
     .form-title p {
       text-transform: uppercase;
       font-weight: 800;
-      color: var(--primary);
+      color: var(--navy);
       letter-spacing: 1px;
       font-size: 14px;
       margin-bottom: 8px;
@@ -310,7 +297,7 @@
       margin-top: 4px;
     }
 
-    /* MINI CARDS */
+
     .message-types {
       padding: 0 5% 70px;
     }
@@ -329,12 +316,6 @@
       border: 1px solid #e2e8f0;
       padding: 22px;
       transition: 0.3s;
-    }
-
-    .mini-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-      border-color: transparent;
     }
 
     .mini-card .emoji {
@@ -396,6 +377,43 @@
         grid-template-columns: repeat(2, 1fr);
       }
     }
+    .info-icon {
+      width: 90px;
+      height: 90px;
+      border-radius: 24px;
+      background: #ecfeff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      overflow: hidden;
+      padding: 10px;
+    }
+    
+    .icon-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    
+    .mini-icon {
+      width: 64px;
+      height: 64px;
+      margin-bottom: 12px;
+      border-radius: 18px;
+      background: #f8fafc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 8px;
+    }
+    
+    .mini-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
 
     @media (max-width: 560px) {
       body {
@@ -442,15 +460,12 @@
 
   <main>
     <section class="hero">
-      <div class="hero-label">Contact Us</div>
-
       <h1>
         Send us your questions and wishes
-        <span class="cn-line">欢迎留下您的问题与建议</span>
       </h1>
 
       <p>
-        Share your questions, lesson ideas, feedback, wishes, or cooperation requests with LinguaLab.
+        欢迎留下您的问题与建议
       </p>
     </section>
 
@@ -458,8 +473,9 @@
       <div class="contact-container">
         <aside class="info-card">
           <div>
-            <div class="info-icon">💌</div>
-
+        <div class="info-icon">
+          <img src="assets/img/contact/mail.png" alt="Contact icon" class="icon-img">
+        </div>
             <h2>
               We would love to hear from you
             </h2>
@@ -490,7 +506,7 @@
         <section class="form-card">
           <div class="form-title">
             <p>Message form</p>
-            <h2>Questions, wishes and ideas</h2>
+            <h2>Let us know</h2>
           </div>
 
           <form class="wish-form" id="wishForm">
@@ -538,26 +554,35 @@
 
     <section class="message-types">
       <div class="message-grid">
+
         <div class="mini-card">
-          <div class="emoji">❓</div>
+          <div class="mini-icon">
+            <img src="assets/img/contact/question.png" alt="Questions">
+          </div>
           <h3>Questions</h3>
           <p>Ask about lessons, grammar, vocabulary, homework, or learning paths.</p>
         </div>
 
         <div class="mini-card">
-          <div class="emoji">🌱</div>
+          <div class="mini-icon">
+            <img src="assets/img/contact/wish.png" alt="Wishes">
+          </div>
           <h3>Wishes</h3>
           <p>Tell us what you would like to see in future LinguaLab materials.</p>
         </div>
-
+        
         <div class="mini-card">
-          <div class="emoji">🎨</div>
+          <div class="mini-icon">
+            <img src="assets/img/contact/idea.png" alt="Lesson ideas">
+          </div>
           <h3>Lesson ideas</h3>
           <p>Suggest topics, games, stories, or bilingual activities for children.</p>
         </div>
-
+        
         <div class="mini-card">
-          <div class="emoji">🤝</div>
+          <div class="mini-icon">
+            <img src="assets/img/contact/cooperation.png" alt="Cooperation">
+          </div>
           <h3>Cooperation</h3>
           <p>Contact us about schools, teachers, families, or education partnerships.</p>
         </div>
