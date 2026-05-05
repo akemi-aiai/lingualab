@@ -98,7 +98,7 @@
       justify-content: center;
     }
 
-    /* Анимация покачивания дерева */
+
     @keyframes sway {
       0%, 100% { transform: rotate(-1.5deg); }
       50% { transform: rotate(1.5deg); }
@@ -362,69 +362,8 @@
   text-decoration: none;
   font-weight: 700;
 }
-
-.cooperation-form {
-  display: grid;
-  gap: 16px;
-}
-
-.cooperation-form label {
-  display: grid;
-  gap: 7px;
-  font-weight: 700;
-  color: #334155;
-}
-
-.cooperation-form input,
-.cooperation-form select,
-.cooperation-form textarea {
-  width: 100%;
-  padding: 13px 15px;
-  border: 1px solid #cbd5e1;
-  border-radius: 16px;
-  font: inherit;
-  background: #ffffff;
-  outline: none;
-}
-
-.cooperation-form input:focus,
-.cooperation-form select:focus,
-.cooperation-form textarea:focus {
-  border-color: #60a5fa;
-  box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.18);
-}
-
-.cooperation-form button {
-  border: none;
-  border-radius: 999px;
-  padding: 15px 22px;
-  background: #2563eb;
-  color: white;
-  font-weight: 800;
-  cursor: pointer;
-  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.22);
-}
-
-.cooperation-form button:hover {
-  background: #1d4ed8;
-}
-
-.form-note {
-  margin: 0;
-  color: #64748b;
-  font-size: 0.9rem;
-}
-
-@media (max-width: 800px) {
-  .contact-card {
-    grid-template-columns: 1fr;
-    padding: 24px;
-    border-radius: 24px;
+ 
   }
-}
-      
-      
-   }
 
 
   </style>
@@ -459,7 +398,7 @@
       <a href="vocabulary.html">Word Bank</a>
       <a href="exercises.html">Fun Homework</a>
       <a href="parents.html">Wiki Parents</a>
-      <a href="#contacts">Contact us</a>
+
     </nav>
   </header>
 
@@ -522,78 +461,10 @@
   </section>
 
 <footer>
-<section id="contacts" class="contact-section">
-  <div class="contact-card">
-    <div class="contact-text">
-      <p class="section-label">Contact Us</p>
-
-      <h2>
-        Send us your questions and wishes
-        <span class="cn-line">欢迎留下您的问题与建议</span>
-      </h2>
-
-      <p>
-        You can send us your questions, wishes, lesson ideas, feedback, or cooperation requests.
-      </p>
-
-      <p class="cn-small">
-        欢迎家长、教师、学校和教育合作伙伴留下问题、建议、课程想法、反馈或合作意向。
-      </p>
-
-      <div class="contact-links">
-        <a href="mailto:your.email@example.com">Email: roonie.ru@yandex.ru</a>
-        <span>WeChat: akemi_aiai</span>
-      </div>
-    </div>
-
-    <form class="cooperation-form" id="wishForm">
-      <label>
-        Your name
-        <input type="text" id="contactName" placeholder="Parent / Teacher / School" required>
-      </label>
-
-      <label>
-        Email or WeChat
-        <input type="text" id="contactInfo" placeholder="Your email or WeChat ID" required>
-      </label>
-
-      <label>
-        Message type
-        <select id="messageType" required>
-          <option value="">Choose one</option>
-          <option value="Question">Question</option>
-          <option value="Wish or suggestion">Suggestion</option>
-          <option value="Lesson idea">Lesson idea</option>
-          <option value="Feedback">Feedback</option>
-          <option value="Cooperation request">Cooperation request</option>
-          <option value="Other">Other</option>
-        </select>
-      </label>
-
-      <label>
-        Your message
-        <textarea 
-          id="contactMessage" 
-          rows="5" 
-          placeholder="Write your question, wish, suggestion, or idea here..." 
-          required
-        ></textarea>
-      </label>
-
-      <button type="submit">Send message</button>
-
-      <p class="form-note">
-        The button will open your email app with a prepared message.
-      </p>
-    </form>
-  </div>
-</section>
-
-  
-
-  
     <div class="footer-links">
+      <a href="contact.html" class="footer-link">Contact us</a>
         <a href="privacy.html" class="footer-link">Privacy Policy</a>
+      
     </div>
   
     <div class="footer-text">
@@ -603,7 +474,6 @@
   </div>
 
   <script>
-    // Подсчет суммы всех очков
     let score = (parseInt(localStorage.getItem('ll_score')) || 0) + (parseInt(localStorage.getItem('vocab_points')) || 0);
 
     function updateDisplay() {
@@ -1250,37 +1120,6 @@ h1 {
         document.getElementById('year').innerText = new Date().getFullYear();
         initConsentGate();
     };
-  </script>
-
-  <script>
-  const wishForm = document.getElementById("wishForm");
-
-  if (wishForm) {
-    wishForm.addEventListener("submit", function (event) {
-      event.preventDefault();
-
-      const name = document.getElementById("contactName").value.trim();
-      const contact = document.getElementById("contactInfo").value.trim();
-      const type = document.getElementById("messageType").value;
-      const message = document.getElementById("contactMessage").value.trim();
-
-      const email = "roonie.ru@yandex.ru";
-      const subject = encodeURIComponent("LinguaLab question");
-
-      const body = encodeURIComponent(
-        `Hello LinguaLab,\n\n` +
-        `I would like to send a message.\n\n` +
-        `Name: ${name}\n` +
-        `Contact: ${contact}\n` +
-        `Message type: ${type}\n\n` +
-        `Message:\n${message}\n\n` +
-        `Best regards,\n${name}`
-      );
-
-      window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
-    });
-  }
-</script>
-  
+  </script> 
 </body>
 </html>
