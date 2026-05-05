@@ -33,7 +33,6 @@
       padding-top: 80px;
     }
 
-
     .navbar {
       position: fixed;
       top: 0;
@@ -86,14 +85,12 @@
       color: var(--accent);
     }
 
-  
     .hero {
       padding: 95px 10% 80px;
       text-align: center;
       background: linear-gradient(135deg, #22d3ee, #a78bfa);
       color: #fff;
     }
-
 
     .hero h1 {
       font-size: clamp(36px, 6vw, 56px);
@@ -102,19 +99,19 @@
       line-height: 1.1;
     }
 
+    .hero p {
+      font-size: 20px;
+      opacity: 0.92;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
     .cn-line {
       display: block;
       font-size: clamp(20px, 3vw, 28px);
       font-weight: 600;
       margin-top: 12px;
       opacity: 0.95;
-    }
-
-    .hero p {
-      font-size: 20px;
-      opacity: 0.92;
-      max-width: 820px;
-      margin: 0 auto;
     }
 
     .contact-section {
@@ -147,15 +144,24 @@
     }
 
     .info-icon {
-      width: 76px;
-      height: 76px;
-      border-radius: 24px;
+      width: 150px;
+      height: 150px;
+      border-radius: 32px;
       background: #ecfeff;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 38px;
-      margin-bottom: 18px;
+      margin-bottom: 24px;
+      overflow: hidden;
+      padding: 14px;
+      box-shadow: 0 18px 40px rgba(34, 211, 238, 0.14);
+    }
+
+    .icon-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
     }
 
     .info-card h2 {
@@ -182,7 +188,7 @@
       gap: 12px;
     }
 
-    .contact-link {
+    .contact-item {
       display: flex;
       align-items: center;
       gap: 12px;
@@ -191,12 +197,9 @@
       background: #f8fafc;
       border: 1px solid #e2e8f0;
       color: var(--navy);
-      text-decoration: none;
-      font-weight: 600;
-      transition: 0.3s;
+      font-weight: 700;
       word-break: break-word;
     }
-
 
     .form-card {
       padding: 34px;
@@ -288,7 +291,6 @@
       margin-top: 4px;
     }
 
-
     .message-types {
       padding: 0 5% 70px;
     }
@@ -298,32 +300,58 @@
       margin: 0 auto;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
+      gap: 24px;
     }
 
     .mini-card {
       background: #fff;
-      border-radius: var(--radius);
+      border-radius: 30px;
       border: 1px solid #e2e8f0;
-      padding: 22px;
-      transition: 0.3s;
+      padding: 30px 22px 28px;
+      text-align: center;
+      box-shadow: 0 20px 45px rgba(31, 78, 121, 0.08);
+
+      cursor: default;
+      transform: none;
+      transition: none;
     }
 
-    .mini-card .emoji {
-      font-size: 30px;
-      margin-bottom: 10px;
+    .mini-card:hover {
+      transform: none;
+      box-shadow: 0 20px 45px rgba(31, 78, 121, 0.08);
+    }
+
+    .mini-icon {
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 20px;
+      border-radius: 28px;
+      background: #f8fafc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 12px;
+    }
+
+    .mini-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
     }
 
     .mini-card h3 {
       color: var(--navy);
-      font-size: 18px;
-      margin-bottom: 8px;
+      font-size: 20px;
+      margin-bottom: 10px;
       font-weight: 800;
     }
 
     .mini-card p {
       color: #64748b;
       font-size: 14px;
+      line-height: 1.55;
     }
 
     footer {
@@ -367,43 +395,11 @@
       .message-grid {
         grid-template-columns: repeat(2, 1fr);
       }
-    }
-    .info-icon {
-      width: 90px;
-      height: 90px;
-      border-radius: 24px;
-      background: #ecfeff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 18px;
-      overflow: hidden;
-      padding: 10px;
-    }
-    
-    .icon-img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-    
-    .mini-icon {
-      width: 64px;
-      height: 64px;
-      margin-bottom: 12px;
-      border-radius: 18px;
-      background: #f8fafc;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      padding: 8px;
-    }
-    
-    .mini-icon img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
+
+      .mini-icon {
+        width: 145px;
+        height: 145px;
+      }
     }
 
     @media (max-width: 560px) {
@@ -420,8 +416,22 @@
         padding: 24px;
       }
 
+      .info-icon {
+        width: 135px;
+        height: 135px;
+      }
+
       .message-grid {
         grid-template-columns: 1fr;
+      }
+
+      .mini-card {
+        padding: 32px 24px;
+      }
+
+      .mini-icon {
+        width: 165px;
+        height: 165px;
       }
     }
   </style>
@@ -464,9 +474,10 @@
       <div class="contact-container">
         <aside class="info-card">
           <div>
-        <div class="info-icon">
-          <img src="assets/contact/mail.png" alt="Contact icon" class="icon-img">
-        </div>
+            <div class="info-icon">
+              <img src="assets/contact/mail.png" alt="Contact icon" class="icon-img">
+            </div>
+
             <h2>
               We would love to hear from you
             </h2>
@@ -482,12 +493,12 @@
           </div>
 
           <div class="contact-links">
-              <span>Email: roonie.ru@yandex.ru</span>
-            </a>
+            <div class="contact-item">
+              Email: roonie.ru@yandex.ru
+            </div>
 
-            <div class="contact-links">
-              <span>WeChat: akemi_ai</span>
-              
+            <div class="contact-item">
+              WeChat: akemi_ai
             </div>
           </div>
         </aside>
@@ -559,7 +570,7 @@
           <h3>Wishes</h3>
           <p>Tell us what you would like to see in future LinguaLab materials.</p>
         </div>
-        
+
         <div class="mini-card">
           <div class="mini-icon">
             <img src="assets/contact/idea.png" alt="Lesson ideas">
@@ -567,7 +578,7 @@
           <h3>Lesson ideas</h3>
           <p>Suggest topics, games, stories, or bilingual activities for children.</p>
         </div>
-        
+
         <div class="mini-card">
           <div class="mini-icon">
             <img src="assets/contact/cooperation.png" alt="Cooperation">
@@ -575,6 +586,7 @@
           <h3>Cooperation</h3>
           <p>Contact us about schools, teachers, families, or education partnerships.</p>
         </div>
+
       </div>
     </section>
   </main>
