@@ -16,6 +16,10 @@
       --accent: #f97316;
       --navy: #1f4e79;
       --bg: #f8fafc;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --soft-border: #eef2f7;
       --radius: 24px;
     }
 
@@ -28,7 +32,7 @@
     body {
       font-family: 'Inter', sans-serif;
       background: var(--bg);
-      color: #0f172a;
+      color: var(--text);
       line-height: 1.6;
       padding-top: 80px;
     }
@@ -77,7 +81,7 @@
       font-weight: 600;
       text-decoration: none;
       font-size: 14px;
-      transition: 0.3s;
+      transition: color 0.3s;
     }
 
     .navbar-right a:hover,
@@ -131,7 +135,7 @@
     .form-card {
       background: #fff;
       border-radius: var(--radius);
-      border: 1px solid #e2e8f0;
+      border: 1px solid var(--border);
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
     }
 
@@ -147,14 +151,15 @@
       width: 150px;
       height: 150px;
       border-radius: 32px;
-      background: #ecfeff;
+      background: #fff;
+      border: 1px solid var(--soft-border);
       display: flex;
       align-items: center;
       justify-content: center;
       margin-bottom: 24px;
       overflow: hidden;
       padding: 14px;
-      box-shadow: 0 18px 40px rgba(34, 211, 238, 0.14);
+      box-shadow: 0 18px 40px rgba(31, 78, 121, 0.08);
     }
 
     .icon-img {
@@ -173,13 +178,13 @@
     }
 
     .info-card p {
-      color: #64748b;
+      color: var(--muted);
       font-size: 16px;
       margin-bottom: 14px;
     }
 
     .cn-small {
-      color: #64748b;
+      color: var(--muted);
       font-size: 15px;
     }
 
@@ -195,7 +200,7 @@
       padding: 15px 16px;
       border-radius: 18px;
       background: #f8fafc;
-      border: 1px solid #e2e8f0;
+      border: 1px solid var(--border);
       color: var(--navy);
       font-weight: 700;
       word-break: break-word;
@@ -243,13 +248,13 @@
     .wish-form textarea {
       width: 100%;
       padding: 14px 16px;
-      border: 1px solid #e2e8f0;
+      border: 1px solid var(--border);
       border-radius: 18px;
       font: inherit;
-      color: #0f172a;
+      color: var(--text);
       background: #f8fafc;
       outline: none;
-      transition: 0.25s;
+      transition: background 0.25s, border-color 0.25s;
     }
 
     .wish-form textarea {
@@ -261,8 +266,9 @@
     .wish-form select:focus,
     .wish-form textarea:focus {
       background: #fff;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.16);
+      border-color: var(--border);
+      box-shadow: none;
+      outline: none;
     }
 
     .send-btn {
@@ -286,76 +292,86 @@
     }
 
     .form-note {
-      color: #64748b;
+      color: var(--muted);
       font-size: 14px;
       margin-top: 4px;
     }
 
-.message-types {
-  padding: 0 5% 70px;
-}
+    .message-types {
+      padding: 0 5% 70px;
+    }
 
-.message-grid {
-  max-width: 1100px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 26px;
-}
+    .message-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 26px;
+    }
 
-.mini-card {
-  background: #fff;
-  border-radius: 30px;
-  border: 1px solid #e2e8f0;
-  padding: 24px 28px;
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  min-height: 210px;
-  box-shadow: 0 20px 45px rgba(31, 78, 121, 0.08);
+    .mini-card {
+      background: #fff;
+      border-radius: 30px;
+      border: 1px solid var(--border);
+      padding: 24px 26px;
+      min-height: 220px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      box-shadow: 0 20px 45px rgba(31, 78, 121, 0.08);
+      cursor: default;
+      transform: none;
+      transition: none;
+    }
 
-  cursor: default;
-  transform: none;
-  transition: none;
-}
+    .mini-card:hover {
+      transform: none;
+      box-shadow: 0 20px 45px rgba(31, 78, 121, 0.08);
+    }
 
-.mini-card:hover {
-  transform: none;
-  box-shadow: 0 20px 45px rgba(31, 78, 121, 0.08);
-}
+    .mini-icon {
+      width: 175px;
+      height: 175px;
+      flex: 0 0 175px;
+      border-radius: 30px;
+      background: #fff;
+      border: 1px solid var(--soft-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 12px;
+      box-shadow: 0 12px 28px rgba(31, 78, 121, 0.06);
+    }
 
-.mini-icon {
-  width: 175px;
-  height: 175px;
-  flex: 0 0 175px;
-  border-radius: 30px;
-  background: #f8fafc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  padding: 10px;
-}
+    .mini-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
 
-.mini-icon img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-}
+    .mini-text {
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
 
-.mini-card h3 {
-  color: var(--navy);
-  font-size: 22px;
-  margin-bottom: 10px;
-  font-weight: 800;
-}
+    .mini-card h3 {
+      color: var(--navy);
+      font-size: 22px;
+      line-height: 1.2;
+      margin-bottom: 10px;
+      font-weight: 800;
+    }
 
-.mini-card p {
-  color: #64748b;
-  font-size: 15px;
-  line-height: 1.55;
-}
+    .mini-card p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.55;
+      margin: 0;
+    }
 
     footer {
       background: #0f172a;
@@ -395,20 +411,20 @@
         grid-template-columns: 1fr;
       }
 
-  .message-grid {
-    grid-template-columns: 1fr;
-  }
+      .message-grid {
+        grid-template-columns: 1fr;
+      }
 
-  .mini-card {
-    min-height: 190px;
-  }
+      .mini-card {
+        min-height: 200px;
+      }
 
-  .mini-icon {
-    width: 155px;
-    height: 155px;
-    flex-basis: 155px;
-  }
-}
+      .mini-icon {
+        width: 160px;
+        height: 160px;
+        flex-basis: 160px;
+      }
+    }
 
     @media (max-width: 560px) {
       body {
@@ -429,21 +445,26 @@
         height: 135px;
       }
 
-  .message-grid {
-    grid-template-columns: 1fr;
-  }
+      .message-grid {
+        grid-template-columns: 1fr;
+      }
 
-  .mini-card {
-    flex-direction: column;
-    text-align: center;
-    padding: 30px 24px;
-  }
+      .mini-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px 24px;
+        min-height: auto;
+      }
 
-  .mini-icon {
-    width: 175px;
-    height: 175px;
-    flex-basis: auto;
-  }
+      .mini-icon {
+        width: 180px;
+        height: 180px;
+        flex-basis: auto;
+      }
+
+      .mini-text {
+        min-height: auto;
+      }
     }
   </style>
 </head>
@@ -486,7 +507,7 @@
         <aside class="info-card">
           <div>
             <div class="info-icon">
-              <img src="assets/contact/mail.jpg" alt="Contact icon" class="icon-img">
+              <img src="assets/contact/mail.png" alt="Contact icon" class="icon-img">
             </div>
 
             <h2>
@@ -568,34 +589,46 @@
 
         <div class="mini-card">
           <div class="mini-icon">
-            <img src="assets/contact/question.jpg" alt="Questions">
+            <img src="assets/contact/question.png" alt="Questions">
           </div>
-          <h3>Questions</h3>
-          <p>Ask about lessons, grammar, vocabulary, homework, or learning paths.</p>
+
+          <div class="mini-text">
+            <h3>Questions</h3>
+            <p>Ask about lessons, grammar, vocabulary, homework, or learning paths.</p>
+          </div>
         </div>
 
         <div class="mini-card">
           <div class="mini-icon">
-            <img src="assets/contact/wish.jpg" alt="Wishes">
+            <img src="assets/contact/wish.png" alt="Wishes">
           </div>
-          <h3>Wishes</h3>
-          <p>Tell us what you would like to see in future LinguaLab materials.</p>
+
+          <div class="mini-text">
+            <h3>Wishes</h3>
+            <p>Tell us what you would like to see in future LinguaLab materials.</p>
+          </div>
         </div>
 
         <div class="mini-card">
           <div class="mini-icon">
-            <img src="assets/contact/idea.jpg" alt="Lesson ideas">
+            <img src="assets/contact/idea.png" alt="Lesson ideas">
           </div>
-          <h3>Lesson ideas</h3>
-          <p>Suggest topics, games, stories, or bilingual activities for children.</p>
+
+          <div class="mini-text">
+            <h3>Lesson ideas</h3>
+            <p>Suggest topics, games, stories, or bilingual activities for children.</p>
+          </div>
         </div>
 
         <div class="mini-card">
           <div class="mini-icon">
-            <img src="assets/contact/cooperation.jpg" alt="Cooperation">
+            <img src="assets/contact/cooperation.png" alt="Cooperation">
           </div>
-          <h3>Cooperation</h3>
-          <p>Contact us about schools, teachers, families, or education partnerships.</p>
+
+          <div class="mini-text">
+            <h3>Cooperation</h3>
+            <p>Contact us about schools, teachers, families, or education partnerships.</p>
+          </div>
         </div>
 
       </div>
