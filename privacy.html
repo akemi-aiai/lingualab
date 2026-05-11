@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JGY92EVDFQ"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#74b9ff">
   
-    gtag('config', 'G-JGY92EVDFQ');
-  </script>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="LinguaLab">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  
+  <link rel="apple-touch-icon" href="assets/img/icon-192.png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Privacy & Ethics — LinguaLab</title>
@@ -211,5 +210,15 @@
       </a>
     </section>
   </main>
+  <script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker
+        .register("/lingualab/sw.js")
+        .then(() => console.log("LinguaLab PWA is ready"))
+        .catch((error) => console.log("Service Worker error:", error));
+    });
+  }
+</script>
 </body>
 </html>
