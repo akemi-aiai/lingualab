@@ -306,7 +306,7 @@
 }
  
   }
-      @media (max-width: 900px) {
+@media (max-width: 900px) {
   body {
     padding-top: 120px;
   }
@@ -320,7 +320,7 @@
   }
 
   .navbar-left {
-    width: auto;
+    width: 100%;
     justify-content: flex-start;
   }
 
@@ -334,7 +334,7 @@
 
   .navbar-right {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: flex-start;
     flex-wrap: wrap;
     width: 100%;
@@ -344,6 +344,7 @@
   }
 
   .navbar-right a {
+    margin-left: 0;
     font-size: 14px;
     text-align: left;
     white-space: nowrap;
@@ -362,7 +363,7 @@
   }
 
   .navbar-left {
-    width: auto;
+    width: 100%;
     justify-content: flex-start;
   }
 
@@ -376,16 +377,16 @@
 
   .navbar-right {
     justify-content: flex-start;
+    align-items: flex-start;
     gap: 10px 14px;
   }
 
   .navbar-right a {
+    margin-left: 0;
     font-size: 13px;
     white-space: nowrap;
   }
 }
-
-
   </style>
 </head>
 <body>
