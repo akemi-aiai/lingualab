@@ -395,68 +395,29 @@
       font-weight: 700;
     }
 
-     @media (max-width: 900px) {
+@media (max-width: 900px) {
   body {
-    padding-top: 120px;
-  }
-
-  .navbar {
-    align-items: flex-start;
-    flex-direction: column;
-    height: auto;
-    padding: 14px 20px;
-    gap: 12px;
-  }
-
-  .navbar-left {
-    width: auto;
-    justify-content: flex-start;
-  }
-
-  .nav-logo {
-    height: 50px;
-  }
-
-  .nav-title {
-    font-size: 24px;
-  }
-
-  .navbar-right {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    width: 100%;
-    gap: 12px 16px;
     padding-top: 0;
-    border-top: none;
-  }
-
-  .navbar-right a {
-    font-size: 14px;
-    text-align: left;
-    white-space: nowrap;
-    line-height: 1.2;
-  }
-}
-
-@media (max-width: 560px) {
-  body {
-    padding-top: 145px;
   }
 
   .navbar {
-    padding: 14px 18px;
-    gap: 12px;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    align-items: stretch;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 14px 12px;
   }
 
   .navbar-left {
-    width: auto;
+    width: 100%;
     justify-content: flex-start;
   }
 
   .nav-logo {
-    height: 46px;
+    height: 42px;
+    flex: 0 0 auto;
   }
 
   .nav-title {
@@ -464,16 +425,134 @@
   }
 
   .navbar-right {
-    justify-content: flex-start;
-    gap: 10px 14px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
   }
 
   .navbar-right a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    padding: 8px 6px;
+    text-align: center;
     font-size: 13px;
-    white-space: nowrap;
+    line-height: 1.15;
+    border-radius: 999px;
+    background: #f8fafc;
+    border: 1px solid var(--border);
+  }
+
+  .navbar-right a.active {
+    background: #fff7ed;
+    border-color: #fed7aa;
+    color: var(--accent);
+  }
+
+  .hero {
+    padding: 52px 6% 50px;
+  }
+
+  .contact-section {
+    padding: 42px 5%;
+  }
+
+  .message-types {
+    padding: 0 5% 48px;
   }
 }
 
+@media (max-width: 560px) {
+  .navbar {
+    padding: 10px 12px 12px;
+  }
+
+  .navbar-right {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .navbar-right a {
+    font-size: 12.5px;
+    min-height: 36px;
+    padding: 8px 5px;
+  }
+
+  .hero h1 {
+    font-size: clamp(28px, 9vw, 38px);
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  .info-card,
+  .form-card {
+    padding: 22px;
+    border-radius: 22px;
+  }
+
+  .form-title h2,
+  .info-card h2 {
+    font-size: 26px;
+  }
+
+  .contact-item {
+    align-items: flex-start;
+    font-size: 14px;
+    padding: 12px 14px;
+  }
+
+  .send-btn {
+    width: 100%;
+  }
+
+  .mini-card {
+    padding: 24px 18px;
+    border-radius: 24px;
+    gap: 16px;
+  }
+
+  .mini-icon {
+    width: 150px;
+    height: 150px;
+  }
+
+  footer {
+    margin-top: 24px;
+    padding: 32px 6%;
+  }
+}
+
+@media (max-width: 380px) {
+  .nav-title {
+    font-size: 20px;
+  }
+
+  .nav-logo {
+    height: 38px;
+  }
+
+  .navbar-right a {
+    font-size: 12px;
+    padding: 7px 4px;
+  }
+
+  .hero {
+    padding: 44px 5% 44px;
+  }
+
+  .info-card,
+  .form-card {
+    padding: 18px;
+  }
+
+  .mini-icon {
+    width: 135px;
+    height: 135px;
+  }
+}
 
   </style>
 </head>
