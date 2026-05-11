@@ -395,85 +395,86 @@
       font-weight: 700;
     }
 
-    @media (max-width: 900px) {
-      body {
-        padding-top: 120px;
-      }
+     @media (max-width: 900px) {
+  body {
+    padding-top: 120px;
+  }
 
-      .navbar {
-        align-items: flex-start;
-        flex-direction: column;
-        padding: 14px 20px;
-        gap: 12px;
-      }
+  .navbar {
+    align-items: flex-start;
+    flex-direction: column;
+    height: auto;
+    padding: 14px 20px;
+    gap: 12px;
+  }
 
-      .navbar-right {
-        gap: 12px 16px;
-      }
+  .navbar-left {
+    width: auto;
+    justify-content: flex-start;
+  }
 
-      .hero {
-        padding: 70px 6% 60px;
-      }
+  .nav-logo {
+    height: 50px;
+  }
 
-      .contact-container {
-        grid-template-columns: 1fr;
-      }
+  .nav-title {
+    font-size: 24px;
+  }
 
-      .message-grid {
-        grid-template-columns: 1fr;
-      }
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 12px 16px;
+    padding-top: 0;
+    border-top: none;
+  }
 
-      .mini-card {
-        min-height: 200px;
-      }
+  .navbar-right a {
+    font-size: 14px;
+    text-align: left;
+    white-space: nowrap;
+    line-height: 1.2;
+  }
+}
 
-      .mini-icon {
-        width: 160px;
-        height: 160px;
-        flex-basis: 160px;
-      }
-    }
+@media (max-width: 560px) {
+  body {
+    padding-top: 145px;
+  }
 
-    @media (max-width: 560px) {
-      body {
-        padding-top: 145px;
-      }
+  .navbar {
+    padding: 14px 18px;
+    gap: 12px;
+  }
 
-      .navbar-right a {
-        font-size: 13px;
-      }
+  .navbar-left {
+    width: auto;
+    justify-content: flex-start;
+  }
 
-      .info-card,
-      .form-card {
-        padding: 24px;
-      }
+  .nav-logo {
+    height: 46px;
+  }
 
-      .info-icon {
-        width: 135px;
-        height: 135px;
-      }
+  .nav-title {
+    font-size: 22px;
+  }
 
-      .message-grid {
-        grid-template-columns: 1fr;
-      }
+  .navbar-right {
+    justify-content: flex-start;
+    gap: 10px 14px;
+  }
 
-      .mini-card {
-        flex-direction: column;
-        text-align: center;
-        padding: 30px 24px;
-        min-height: auto;
-      }
+  .navbar-right a {
+    font-size: 13px;
+    white-space: nowrap;
+  }
+}
 
-      .mini-icon {
-        width: 180px;
-        height: 180px;
-        flex-basis: auto;
-      }
 
-      .mini-text {
-        min-height: auto;
-      }
-    }
   </style>
 </head>
 
