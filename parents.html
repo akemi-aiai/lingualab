@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#74b9ff">
+  
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="LinguaLab">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  
+  <link rel="apple-touch-icon" href="assets/img/icon-192.png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Wiki Parents — LinguaLab</title>
@@ -224,7 +232,7 @@ body {
   line-height: 1.5;
 }
 
-/* GRID */
+
 .parent-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -232,7 +240,7 @@ body {
   align-items: start;
 }
 
-/* GENERIC CARD */
+
 .panel-card {
   background: #fff;
   border-radius: var(--radius);
@@ -348,7 +356,6 @@ body {
   min-width: 0;
 }
 
-/* RESEARCH */
 .research-card {
   margin-top: 30px;
   overflow: hidden;
@@ -576,7 +583,6 @@ body {
   line-height: 1.68;
 }
 
-/* FOOTER */
 footer {
   background: #0f172a;
   color: #94a3b8;
@@ -599,7 +605,6 @@ footer {
   margin-bottom: 8px;
 }
 
-/* TABLET */
 @media (max-width: 1024px) {
   .navbar {
     padding: 12px 24px;
@@ -1541,5 +1546,15 @@ window.addEventListener('load', () => {
 });
 
   </script>
+  <script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker
+        .register("/lingualab/sw.js")
+        .then(() => console.log("LinguaLab PWA is ready"))
+        .catch((error) => console.log("Service Worker error:", error));
+    });
+  }
+</script>
 </body>
 </html>  
