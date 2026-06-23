@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="manifest" href="manifest.webmanifest">
   <meta name="theme-color" content="#74b9ff">
-  
+
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="LinguaLab">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  
+
   <link rel="apple-touch-icon" href="assets/img/icon-192.png">
 
   <title>Contact Us | LinguaLab</title>
@@ -29,6 +29,10 @@
       --border: #e2e8f0;
       --soft-border: #eef2f7;
       --radius: 24px;
+      --blue-soft: #e0f2fe;
+      --orange-soft: #fff7ed;
+      --green-soft: #ecfdf5;
+      --purple-soft: #f3e8ff;
     }
 
     * {
@@ -41,7 +45,7 @@
     body {
       overflow-x: hidden;
     }
-    
+
     body {
       font-family: 'Inter', sans-serif;
       background: var(--bg);
@@ -62,7 +66,7 @@
       padding: 15px 40px;
       background: #fff;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-      height: 80px;
+      min-height: 80px;
     }
 
     .navbar-left {
@@ -104,7 +108,7 @@
     }
 
     .hero {
-      padding: 60px 8% 140px;
+      padding: 60px 8% 115px;
       text-align: center;
       background: linear-gradient(135deg, #22d3ee, #a78bfa);
       color: #fff;
@@ -121,7 +125,7 @@
     .hero p {
       font-size: 20px;
       opacity: 0.92;
-      max-width: 820px;
+      max-width: 860px;
       margin: 0 auto;
     }
 
@@ -134,7 +138,7 @@
     }
 
     .contact-section {
-      padding: 70px 5%;
+      padding: 70px 5% 40px;
     }
 
     .contact-container {
@@ -147,7 +151,10 @@
     }
 
     .info-card,
-    .form-card {
+    .form-card,
+    .edition-card,
+    .review-card,
+    .final-card {
       background: #fff;
       border-radius: var(--radius);
       border: 1px solid var(--border);
@@ -184,7 +191,10 @@
       display: block;
     }
 
-    .info-card h2 {
+    .info-card h2,
+    .form-title h2,
+    .edition-card h2,
+    .final-card h2 {
       color: var(--navy);
       font-size: 30px;
       line-height: 1.15;
@@ -192,7 +202,9 @@
       font-weight: 800;
     }
 
-    .info-card p {
+    .info-card p,
+    .edition-card p,
+    .final-card p {
       color: var(--muted);
       font-size: 16px;
       margin-bottom: 14px;
@@ -238,13 +250,6 @@
       margin-bottom: 8px;
     }
 
-    .form-title h2 {
-      color: var(--navy);
-      font-size: 30px;
-      line-height: 1.15;
-      font-weight: 800;
-    }
-
     .wish-form {
       display: grid;
       gap: 16px;
@@ -281,38 +286,11 @@
     .wish-form select:focus,
     .wish-form textarea:focus {
       background: #fff;
-      border-color: var(--border);
-      box-shadow: none;
-      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.12);
     }
 
-    .send-btn {
-      margin-top: 6px;
-      padding: 14px 32px;
-      border-radius: 999px;
-      border: none;
-      background: var(--navy);
-      color: #fff;
-      font-weight: 800;
-      cursor: pointer;
-      transition: 0.3s;
-      font-family: inherit;
-      font-size: 16px;
-    }
-
-    .send-btn:hover {
-      background: var(--accent);
-      transform: translateY(-2px);
-      box-shadow: 0 14px 28px rgba(249, 115, 22, 0.22);
-    }
-
-    .form-note {
-      color: var(--muted);
-      font-size: 14px;
-      margin-top: 4px;
-    }
-
-    .message-types {
+        .message-types {
       padding: 0 5% 70px;
     }
 
@@ -388,6 +366,136 @@
       margin: 0;
     }
 
+
+    .send-btn {
+      margin-top: 6px;
+      padding: 14px 32px;
+      border-radius: 999px;
+      border: none;
+      background: var(--navy);
+      color: #fff;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.3s;
+      font-family: inherit;
+      font-size: 16px;
+    }
+
+    .send-btn:hover {
+      background: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px rgba(249, 115, 22, 0.22);
+    }
+
+    .form-note {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    .edition-section {
+      padding: 20px 5% 40px;
+    }
+
+    .edition-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      gap: 26px;
+    }
+
+    .edition-card {
+      padding: 34px;
+    }
+
+    .edition-highlight {
+      margin-top: 18px;
+      padding: 18px 20px;
+      border-radius: 20px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      color: #475569;
+      font-size: 15px;
+    }
+
+    .review-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+
+    .review-card {
+      padding: 26px;
+      min-height: 210px;
+    }
+
+    .review-card h3 {
+      color: var(--navy);
+      font-size: 22px;
+      line-height: 1.2;
+      margin-bottom: 10px;
+      font-weight: 800;
+    }
+
+    .review-card p,
+    .review-card li {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .review-card ul {
+      padding-left: 18px;
+      margin-top: 8px;
+    }
+
+    .review-card li {
+      margin-bottom: 7px;
+    }
+
+    .blue {
+      background: linear-gradient(180deg, #fff, var(--blue-soft));
+    }
+
+    .orange {
+      background: linear-gradient(180deg, #fff, var(--orange-soft));
+    }
+
+    .green {
+      background: linear-gradient(180deg, #fff, var(--green-soft));
+    }
+
+    .purple {
+      background: linear-gradient(180deg, #fff, var(--purple-soft));
+    }
+
+    .final-section {
+      padding: 20px 5% 70px;
+    }
+
+    .final-card {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 34px;
+    }
+
+    .final-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .final-item {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 16px;
+      color: var(--navy);
+      font-weight: 800;
+      font-size: 14px;
+    }
+
     footer {
       background: #0f172a;
       color: #94a3b8;
@@ -402,224 +510,141 @@
       font-weight: 700;
     }
 
-@media (max-width: 900px) {
-  .navbar {
-    align-items: flex-start;
-    flex-direction: column;
-    height: auto;
-    padding: 14px 20px;
-    gap: 12px;
-  }
+    @media (max-width: 900px) {
+      .navbar {
+        align-items: flex-start;
+        flex-direction: column;
+        height: auto;
+        padding: 14px 20px;
+        gap: 12px;
+      }
 
-  .navbar-left {
-    width: auto;
-    justify-content: flex-start;
-  }
+      .navbar-left {
+        width: auto;
+        justify-content: flex-start;
+      }
 
-  .nav-logo {
-    height: 50px;
-  }
+      .nav-logo {
+        height: 50px;
+      }
 
-  .nav-title {
-    font-size: 24px;
-  }
+      .nav-title {
+        font-size: 24px;
+      }
 
-  .navbar-right {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    width: 100%;
-    gap: 12px 16px;
-    padding-top: 0;
-    border-top: none;
-    overflow: visible;
-  }
+      .navbar-right {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        width: 100%;
+        gap: 12px 16px;
+      }
 
-  .navbar-right a {
-    font-size: 14px;
-    text-align: left;
-    white-space: nowrap;
-    line-height: 1.2;
-    background: transparent;
-    border: none;
-    border-radius: 0;
-    padding: 0;
-    min-height: auto;
-  }
+      .navbar-right a {
+        font-size: 14px;
+        text-align: left;
+        white-space: nowrap;
+      }
 
-  .hero {
-    padding: 60px 20px 120px;
-  }
+      .hero {
+        padding: 60px 20px 100px;
+      }
 
-  .contact-section {
-    padding: 50px 5%;
-  }
+      .contact-section {
+        padding: 50px 5% 30px;
+      }
 
-  .contact-container {
-    grid-template-columns: 1fr;
-    gap: 28px;
-  }
+      .contact-container,
+      .review-grid,
+      .final-list {
+        grid-template-columns: 1fr;
+      }
 
-  .message-types {
-    padding: 0 5% 70px;
-  }
+      footer {
+        padding: 40px 8%;
+        margin-top: 50px;
+      }
+    }
 
-  .message-grid {
-    grid-template-columns: 1fr;
-    gap: 26px;
-  }
+    @media (max-width: 560px) {
+      .navbar {
+        padding: 14px 18px;
+        gap: 12px;
+      }
 
-  footer {
-    padding: 40px 8%;
-    margin-top: 50px;
-  }
-}
+      .nav-logo {
+        height: 46px;
+      }
 
-@media (max-width: 560px) {
-  .navbar {
-    padding: 14px 18px;
-    gap: 12px;
-  }
+      .nav-title {
+        font-size: 22px;
+      }
 
-  .navbar-left {
-    width: auto;
-    justify-content: flex-start;
-  }
+      .navbar-right {
+        justify-content: flex-start;
+        gap: 10px 14px;
+      }
 
-  .nav-logo {
-    height: 46px;
-  }
+      .navbar-right a {
+        font-size: 13px;
+        white-space: nowrap;
+      }
 
-  .nav-title {
-    font-size: 22px;
-  }
+      .hero {
+        padding: 48px 14px 90px;
+      }
 
-  .navbar-right {
-    justify-content: flex-start;
-    gap: 10px 14px;
-    overflow: visible;
-  }
+      .hero h1 {
+        font-size: 30px;
+        line-height: 1.15;
+      }
 
-  .navbar-right a {
-    font-size: 13px;
-    white-space: nowrap;
-    background: transparent;
-    border: none;
-    border-radius: 0;
-    padding: 0;
-    min-height: auto;
-  }
+      .hero p {
+        font-size: 16px;
+      }
 
-  .hero {
-    padding: 48px 14px 110px;
-  }
+      .contact-section {
+        padding: 42px 12px 24px;
+      }
 
-  .hero h1 {
-    font-size: 30px;
-    line-height: 1.15;
-  }
+      .info-card,
+      .form-card,
+      .edition-card,
+      .review-card,
+      .final-card {
+        padding: 22px;
+        border-radius: 22px;
+      }
 
-  .hero p {
-    font-size: 16px;
-  }
+      .info-icon {
+        width: 120px;
+        height: 120px;
+        border-radius: 26px;
+      }
 
-  .contact-section {
-    padding: 42px 12px;
-  }
+      .form-title h2,
+      .info-card h2,
+      .edition-card h2,
+      .final-card h2 {
+        font-size: 26px;
+      }
 
-  .info-card,
-  .form-card {
-    padding: 22px;
-    border-radius: 22px;
-  }
+      .contact-item {
+        align-items: flex-start;
+        font-size: 14px;
+        padding: 12px 14px;
+      }
 
-  .info-icon {
-    width: 120px;
-    height: 120px;
-    border-radius: 26px;
-  }
+      .send-btn {
+        width: 100%;
+      }
 
-  .form-title h2,
-  .info-card h2 {
-    font-size: 26px;
-  }
-
-  .contact-item {
-    align-items: flex-start;
-    font-size: 14px;
-    padding: 12px 14px;
-  }
-
-  .send-btn {
-    width: 100%;
-  }
-
-  .message-types {
-    padding: 0 12px 70px;
-  }
-
-  .mini-card {
-    min-height: auto;
-    padding: 20px;
-    border-radius: 24px;
-    gap: 16px;
-  }
-
-  .mini-icon {
-    width: 120px;
-    height: 120px;
-    flex: 0 0 120px;
-    border-radius: 24px;
-  }
-
-  .mini-text {
-    min-height: auto;
-  }
-
-  .mini-card h3 {
-    font-size: 20px;
-  }
-
-  .mini-card p {
-    font-size: 14px;
-  }
-
-  footer {
-    padding: 40px 8%;
-    margin-top: 50px;
-  }
-}
-
-@media (max-width: 420px) {
-  .hero h1 {
-    font-size: 28px;
-  }
-
-  .hero p {
-    font-size: 15px;
-  }
-
-  .navbar-right {
-    gap: 9px 12px;
-  }
-
-  .navbar-right a {
-    font-size: 12.5px;
-  }
-
-  .mini-card {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .mini-icon {
-    width: 120px;
-    height: 120px;
-    flex: 0 0 auto;
-  }
-}
-
+      footer {
+        padding: 40px 8%;
+        margin-top: 50px;
+      }
+    }
   </style>
 </head>
 
@@ -635,27 +660,23 @@
       <span class="nav-title">LinguaLab</span>
     </a>
 
-
-  <nav class="navbar-right">
-  <a href="surf.html">Splash Ride</a>
-  <a href="grammar.html">Grammar Magic</a>
-  <a href="vocabulary.html">Word Bank</a>
-  <a href="exercises.html">Fun Homework</a>
-  <a href="parents.html">Wiki Parents</a>
-  <a href="index.html">Main Page</a>
-  <a href="contact.html">Contact us</a>
-
+    <nav class="navbar-right">
+      <a href="surf.html">Surf Challenge</a>
+      <a href="grammar.html">Grammar Magic</a>
+      <a href="vocabulary.html">Word Bank</a>
+      <a href="exercises.html">Fun Homework</a>
+      <a href="parents.html">Wiki Parents</a>
+      <a href="index.html">Main Page</a>
+      <a href="contact.html" class="active">Contact us</a>
     </nav>
   </header>
 
   <main>
     <section class="hero">
-      <h1>
-        Send us your questions and wishes
-      </h1>
-
+      <h1>Contact LinguaLab</h1>
       <p>
-        欢迎留下您的问题与建议
+        Questions, feedback, cooperation, and edition materials request
+        <span class="cn-line">欢迎留下您的问题、建议与合作意向</span>
       </p>
     </section>
 
@@ -667,17 +688,15 @@
               <img src="assets/contact/mail.jpg" alt="Contact icon" class="icon-img">
             </div>
 
-            <h2>
-              We would love to hear from you
-            </h2>
+            <h2>We would love to hear from you</h2>
 
             <p>
-              Parents, teachers, schools, and education partners can contact us here.
-              Your feedback helps LinguaLab become warmer, clearer, and more useful for children.
+              Parents, teachers, schools, education partners, and reviewers can contact LinguaLab here.
+              Your feedback helps the edition become clearer, warmer, and more useful for children.
             </p>
 
             <p class="cn-small">
-              欢迎家长、教师、学校和教育合作伙伴留下问题、建议、课程想法、反馈或合作意向。
+              欢迎家长、教师、学校、教育合作伙伴和评审专家留下问题、建议、反馈或合作意向。
             </p>
           </div>
 
@@ -701,7 +720,7 @@
           <form class="wish-form" id="wishForm">
             <label>
               Your name
-              <input type="text" id="contactName" placeholder="Parent / Teacher / School" required>
+              <input type="text" id="contactName" placeholder="Parent / Teacher / School / Reviewer" required>
             </label>
 
             <label>
@@ -715,8 +734,9 @@
                 <option value="">Choose one</option>
                 <option value="Question">Question</option>
                 <option value="Suggestion">Suggestion</option>
-                <option value="Lesson idea">Lesson idea</option>
                 <option value="Feedback">Feedback</option>
+                <option value="Lesson idea">Lesson idea</option>
+                <option value="Edition materials request">Edition materials request</option>
                 <option value="Cooperation request">Cooperation request</option>
                 <option value="Other">Other</option>
               </select>
@@ -726,7 +746,7 @@
               Your message
               <textarea
                 id="contactMessage"
-                placeholder="Write your question, wish, suggestion, or idea here..."
+                placeholder="Write your question, wish, suggestion, request, or idea here..."
                 required
               ></textarea>
             </label>
@@ -741,7 +761,7 @@
       </div>
     </section>
 
-    <section class="message-types">
+        <section class="message-types">
       <div class="message-grid">
 
         <div class="mini-card">
@@ -790,13 +810,70 @@
 
       </div>
     </section>
+
+    <section class="edition-section">
+      <div class="edition-container">
+        <article class="edition-card">
+          <h2>About LinguaLab</h2>
+          <p>
+            <strong>LinguaLab</strong> is an interactive electronic learning and methodological edition for early
+            bilingual English learning. It combines vocabulary games, grammar mini-lessons, audio support, creative
+            homework tasks, parent guidance, weekly reflection, and local progress tracking.
+          </p>
+          <p>
+            The edition is designed for short, playful, and parent-supported English practice. It helps children repeat
+            familiar vocabulary, listen to target words, practice basic grammar patterns, complete simple creative tasks,
+            and gradually build confidence in using English.
+          </p>
+
+          <div class="edition-highlight">
+            LinguaLab is not a full independent English course and does not replace live communication with a teacher.
+            Its main purpose is to support repetition, home practice, family involvement, and soft progress observation.
+          </div>
+        </article>
+
+        <div class="review-grid">
+          <article class="review-card blue">
+            <h3>Educational relevance</h3>
+            <p>
+              LinguaLab responds to the need for child-friendly, interactive, and safe digital formats in early English
+              learning. It supports short practice instead of long screen-based study.
+            </p>
+          </article>
+
+          <article class="review-card orange">
+            <h3>Original structure</h3>
+            <p>
+              The edition connects several components in one environment: Word Bank, Grammar Magic,
+              Fun Homework, and Wiki Parents.
+            </p>
+          </article>
+
+          <article class="review-card green">
+            <h3>Practical value</h3>
+            <p>
+              The resource can be used by children for playful practice, by parents for gentle home support, and by
+              teachers as a digital supplement for early English learning activities.
+            </p>
+          </article>
+
+          <article class="review-card purple">
+            <h3>Interactivity and analytics</h3>
+            <p>
+              LinguaLab includes audio, cards, games, weekly reflection, and progress tracking.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <footer>
     <p>
       <a class="footer-link" href="privacy.html">Privacy Policy</a>
     </p>
-    <p>© LinguaLab • Small lessons. Real progress. All rights reserved.</p>
+    <p>© 2026 LinguaLab • Author: Yaroslava Antoshina.</p>
   </footer>
 
   <script>
@@ -812,7 +889,7 @@
         const message = document.getElementById("contactMessage").value.trim();
 
         const email = "roonie.ru@yandex.ru";
-        const subject = encodeURIComponent("LinguaLab question, wish or cooperation request");
+        const subject = encodeURIComponent("LinguaLab contact request");
 
         const body = encodeURIComponent(
           `Hello LinguaLab,\n\n` +
@@ -828,15 +905,16 @@
       });
     }
   </script>
+
   <script>
-  if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
-      navigator.serviceWorker
-        .register("/lingualab/sw.js")
-        .then(() => console.log("LinguaLab PWA is ready"))
-        .catch((error) => console.log("Service Worker error:", error));
-    });
-  }
-</script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker
+          .register("/lingualab/sw.js")
+          .then(() => console.log("LinguaLab PWA is ready"))
+          .catch((error) => console.log("Service Worker error:", error));
+      });
+    }
+  </script>
 </body>
 </html>
