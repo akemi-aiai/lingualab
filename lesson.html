@@ -1285,21 +1285,32 @@ const db = {
         }
 
         // C. PHRASE / SPEAKING
-        else if (step.type === 'phrase' || step.type === 'speak') {
-            html += `
-                <div style="background:#ecfeff; padding:20px; border-radius:12px; margin-bottom:20px; text-align:left;">
-                    <div style="font-size:12px; font-weight:700; color:var(--navy); text-transform:uppercase;">Script</div>
-                    <div style="font-size:16px; color:#334155;">"${step.script || step.phrase || ''}"</div>
+else if (step.type === 'phrase' || step.type === 'speak') {
+    html += `
+        <div style="background:#ecfeff; padding:20px; border-radius:12px; margin-bottom:20px; text-align:left;">
+            <div style="font-size:12px; font-weight:700; color:var(--navy); text-transform:uppercase;">Script</div>
+            <div style="font-size:16px; color:#334155;">"${step.script || step.phrase || ''}"</div>
+        </div>
+
+        ${step.audio ? `
+            <div class="audio-control">
+                <button class="play-btn" onclick="playStepAudio()">${ICON_PLAY}</button>
+                <div style="flex:1; text-align:left;">
+                    <strong style="color:var(--navy);">Listen:</strong><br>
+                    <span style="font-size:18px; font-weight:700;">"${step.text || step.phrase || ''}"</span>
                 </div>
-                <div class="audio-control">
-                    <button class="mic-btn" onclick="toggleMic(this)">${ICON_MIC}</button>
-                    <div style="flex:1; text-align:left;">
-                        <strong style="color:var(--navy);">Your turn:</strong><br>
-                        <span style="font-size:18px; font-weight:700;">"${step.text || step.phrase || ''}"</span>
-                    </div>
-                </div>
-            `;
-        }
+            </div>
+        ` : ''}
+
+        <div class="audio-control">
+            <button class="mic-btn" onclick="toggleMic(this)">${ICON_MIC}</button>
+            <div style="flex:1; text-align:left;">
+                <strong style="color:var(--navy);">Your turn:</strong><br>
+                <span style="font-size:18px; font-weight:700;">"${step.text || step.phrase || ''}"</span>
+            </div>
+        </div>
+    `;
+}
 
         // D. GAME
         else if (step.type === 'game') {
@@ -1400,27 +1411,17 @@ const db = {
         }
     }
     
-    function playStepAudio() {
-        const step = currentData.steps[stepIndex];
-        if (!step) return;
-    
-        if (step.audio) {
-            playAudio(step.audio);
-        } else if (step.phrase) {
-            speak(step.phrase);
-        } else if (step.text) {
-            speak(step.text);
-        }
+function playStepAudio() {
+  const step = currentData.steps[stepIndex];
+  if (!step) return;
+
+  if (step.audio) {
+    playAudio(step.audio);
+  } else {
+    alert("Audio file is missing for this step.");
+  }
     }
     
-    function speak(text) {
-        if ('speechSynthesis' in window) {
-            const msg = new SpeechSynthesisUtterance(text);
-            msg.lang = 'en-US';
-            msg.rate = 0.9;
-            window.speechSynthesis.speak(msg);
-        }
-    }
     function finishLesson() {
         document.getElementById('screen-lesson').classList.remove('active');
         document.getElementById('screen-report').classList.add('active');
