@@ -318,11 +318,11 @@ const db = {
           ]
         },
         { type:'phrase', tag:'C. Key Sentences', title:"Phrase of the Day",
-          text:"Good morning, Daddy! Good morning, Mommy!", audio:"assets/audio/GoodMorningDaddy.mp3",
+          text:"Good morning, Daddy! Good morning, Mommy!",
           script:"Ask your child: 'Who do you see in the morning?'",
           parentTip:"Don't correct pronunciation yet. Just praise effort."
         },
-        { type:'game', tag:'D. Game', title:"Hug Game", text:"Hug Daddy and Mommy!", sub:"Ready? Go!", img:"assets/img/hug.png", audio:"assets/audio/HugDaddy.mp3" },
+        { type:'game', tag:'D. Game', title:"Hug Game", text:"Hug Daddy and Mommy!", sub:"Ready? Go!", img:"assets/img/hug.png"},
         { type:'offscreen', tag:'E. Mission', title:"Real World", text:"Find a family photo.", image:"assets/img/photo.png" }
       ]
     },
@@ -1253,9 +1253,6 @@ const db = {
                     <button class="play-btn" onclick="playStepAudio()">${ICON_PLAY}</button>
                     <p style="font-size:18px; font-weight:600; margin:10px 0;">${step.text}</p>
                     <p style="color:#64748b;">${step.action}</p>
-                    ${step.audio ? `
-                        <div style="margin-top:10px; font-size:12px; color:#64748b;">Custom audio added</div>
-                    ` : ''}
                 </div>
             `;
         }
