@@ -647,9 +647,9 @@ const db = {
         { type: 'warmup', tag: 'A. Warm Up', title: "Shhh", text: "Put finger on lips.", action: "Shhh...", phrase: "Shhh.", audio:"assets/audio/shh.mp3" },
         { type: 'words', tag: 'B. Key Words', title: "Rules", 
           items: [
-            { w:"Quiet", zh:"安静", img:"assets/img/quiet.png", "audio:"assets/audio/quiet.mp3" },
-            { w:"Sleep", zh:"睡觉", img:"assets/img/sleep.png",  audio:"assets/audio/sleep.mp3" },
-            { w:"Loud",  zh:"大声", img:"assets/img/loud.png, audio:"assets/audio/loud.mp3"" }
+            { w:"Quiet", zh:"安静", img:"assets/img/quiet.png", audio:"assets/audio/quiet.mp3" },
+            { w:"Sleep", zh:"睡觉", img:"assets/img/sleep.png", audio:"assets/audio/sleep.mp3" },
+            { w:"Loud",  zh:"大声", img:"assets/img/loud.png", audio:"assets/audio/loud.mp3" }
           ] 
         },
         { type: 'phrase', tag: 'C. Key Sentences', title: "Polite", text: "Be quiet, please.", script: "The animals are sleeping.", parentTip: "Whisper this phrase." },
@@ -1402,14 +1402,14 @@ else if (step.type === 'phrase' || step.type === 'speak') {
             console.log('Audio play error:', err);
         });
     }
-    
+
     function playWordAudio(audio, word) {
-        if (audio) {
-            playAudio(audio);
-        } else {
-            speak(word);
-        }
-    }
+  if (audio) {
+    playAudio(audio);
+  } else {
+    alert("Audio file is missing for: " + word);
+  }
+}
     
 function playStepAudio() {
   const step = currentData.steps[stepIndex];
