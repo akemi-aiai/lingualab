@@ -309,7 +309,7 @@ const db = {
     {
       unit: "Unit 1: Family", vocab: "Daddy, Mommy", phrase: "Good morning, Daddy!",
       steps: [
-        { type:'warmup', tag:'A. Warm Up', title:"Listen & Wave", text:"Let's say Hello!", action:"Wave your hand", phrase:"Hello!" },
+        { type:'warmup', tag:'A. Warm Up', title:"Listen & Wave", text:"Let's say Hello!", action:"Wave your hand", phrase:"Hello!", audio:"assets/audio/hello.mp3" },
         { type:'words', tag:'B. Key Words', title:"Family Members",
           items: [
             { w:"Daddy",  zh:"爸爸", img:"assets/img/daddy.png", audio:"assets/audio/daddy.mp3" },
@@ -329,7 +329,7 @@ const db = {
     {
       unit: "Unit 2: School", vocab: "Bag, Book", phrase: "It is a book.",
       steps: [
-        { type:'warmup', tag:'A. Warm Up', title:"Stand Up!", text:"Stand up... Sit down.", action:"Do it 3 times.", phrase:"Stand up!" },
+        { type:'warmup', tag:'A. Warm Up', title:"Stand Up!", text:"Stand up... Sit down.", action:"Do it 3 times.", phrase:"Stand up!", audio:"assets/audio/stand-up.mp3" },
         { type:'words', tag:'B. Key Words', title:"School Objects",
           items: [
             { w:"Bag",    zh:"书包", img:"assets/img/bag.png", audio:"assets/audio/bag.mp3" },
@@ -345,7 +345,7 @@ const db = {
     {
       unit: "Unit 2: Phonics", vocab: "Bb /b/", phrase: "Open your book.",
       steps: [
-        { type:'warmup', tag:'A. Warm Up', title:"Clap Hands", text:"Clap 1, 2, 3.", action:"Clap!", phrase:"Clap!" },
+        { type:'warmup', tag:'A. Warm Up', title:"Clap Hands", text:"Clap 1, 2, 3.", action:"Clap!", phrase:"Clap!", audio:"assets/audio/clap.mp3" },
         { type:'words', tag:'B. Key Words', title:"B Sound",
           items: [
             { w:"Bb",   zh:"字母B", img:"assets/img/bb.png", audio:"assets/audio/b.mp3"  },
@@ -361,11 +361,11 @@ const db = {
     {
       unit: "Review", vocab: "Mike, Kelly", phrase: "Hello, I am [Name].",
       steps: [
-        { type:'warmup', tag:'A. Warm Up', title:"Shake", text:"Shake your body!", action:"Shake!", phrase:"Shake!" },
+        { type:'warmup', tag:'A. Warm Up', title:"Shake", text:"Shake your body!", action:"Shake!", phrase:"Shake!", audio:"assets/audio/shake.mp3" },
         { type:'words', tag:'B. Key Words', title:"Review",
           items: [
-            { w:"What's your name?", zh:"你叫什么名字？", img:"assets/img/name_q.png" },
-            { w:"My name is", zh:"我叫…", img:"assets/img/name.png" },
+            { w:"What's your name?", zh:"你叫什么名字？", img:"assets/img/name_q.png", audio:"assets/audio/w-name.mp3" },
+            { w:"My name is", zh:"我叫…", img:"assets/img/name.png", audio:"assets/audio/name1.mp3" },
             { w:"Teacher", zh:"老师", img:"assets/img/teacher.png", audio:"assets/audio/teacher.mp3"  }
           ]
         },
@@ -381,7 +381,7 @@ const db = {
       unit: "Unit 3: Friends", vocab: "Boy, Girl", phrase: "I am a boy. I am a girl.",
       tips: "Use family photos to help your child understand 'He' (for a boy) and 'She' (for a girl).",
       steps: [
-        { type:'warmup', tag:'A. Warm Up', title:"High Five", text:"High five Mommy!", action:"Give me a high five", phrase:"High five!" },
+        { type:'warmup', tag:'A. Warm Up', title:"High Five", text:"High five Mommy!", action:"Give me a high five", phrase:"High five!", audio:"assets/audio/high-5.mp3" },
         { type:'words', tag:'B. Key Words', title:"Gender",
           items: [
             { w:"Boy",    zh:"男孩", img:"assets/img/boy.png", audio:"assets/audio/boy.mp3" },
@@ -398,7 +398,7 @@ const db = {
       unit: "Unit 3: Social", vocab: "My Friend", phrase: "This is my friend.",
       tips: "Teach your child to introduce others politely.",
       steps: [
-        { type:'warmup', tag:'A. Warm Up', title:"Handshake", text:"Shake hands.", action:"Nice to meet you.", phrase:"Nice to meet you." },
+        { type:'warmup', tag:'A. Warm Up', title:"Handshake", text:"Shake hands.", action:"Nice to meet you.", phrase:"Nice to meet you.", audio:"assets/audio/shake-hands.mp3" },
         { type:'words', tag:'B. Key Words', title:"Friendship",
           items: [
             { w:"My Friend",     zh:"我的朋友",     img:"assets/img/friend.png", audio:"assets/audio/myfriend.mp3" },
@@ -415,7 +415,7 @@ const db = {
       unit: "Unit 3: Phonics", vocab: "Gg /g/", phrase: "Stand up, please!",
       tips: "Letter G makes the /g/ sound (hard G), not /j/.",
       steps: [
-        { type: 'warmup', tag: 'A. Warm Up', title: "Wiggle", text: "Wiggle your fingers.", action: "Wiggle wiggle!", phrase: "Wiggle!" },
+        { type: 'warmup', tag: 'A. Warm Up', title: "Wiggle", text: "Wiggle your fingers.", action: "Wiggle wiggle!", phrase: "Wiggle!", audio:"assets/audio/wiggle.mp3" },
         { type: 'words', tag: 'B. Key Words', title: "G Sound", 
           items: [
             { w: "Gg",   zh: "字母G", img: "assets/img/gg.png", audio:"assets/audio/g.mp3" },
@@ -432,7 +432,7 @@ const db = {
       unit: "Reader 1", vocab: "Family, Messy", phrase: "Who is this?",
       tips: "Reading week! Focus on the pictures in the story.",
       steps: [
-        { type: 'warmup', tag: 'A. Warm Up', title: "Look", text: "Open your eyes wide!", action: "Look around.", phrase: "Look around!" },
+        { type: 'warmup', tag: 'A. Warm Up', title: "Look", text: "Open your eyes wide!", action: "Look around.", phrase: "Look around!", audio:"assets/audio/look-around.mp3" },
         { type: 'words', tag: 'B. Key Words', title: "Story Words", 
           items: [
             { w: "Family", zh: "家人", img: "assets/img/family.png", audio:"assets/audio/family.mp3" },
@@ -451,7 +451,7 @@ const db = {
       unit: "Unit 4: My Face", vocab: "Eye, Nose, Mouth", phrase: "This is my nose.",
       tips: "Use a mirror so your child can see their own face while learning.",
       steps: [
-        { type: 'warmup', tag: 'A. Warm Up', title: "Touch Game", text: "Touch your nose!", action: "Do it fast!", phrase: "Touch your nose!" },
+        { type: 'warmup', tag: 'A. Warm Up', title: "Touch Game", text: "Touch your nose!", action: "Do it fast!", phrase: "Touch your nose!", audio:"assets/audio/touch-your-nose.mp3" },
         { type: 'words', tag: 'B. Key Words', title: "Face Parts", 
           items: [
             { w:"Eye",   zh:"眼睛", img:"assets/img/eye.png", audio:"assets/audio/eye.mp3" },
@@ -468,7 +468,7 @@ const db = {
       unit: "Unit 4: Creativity", vocab: "Ear, Hair, Mouth", phrase: "My mouth is big.",
       tips: "Make learning fun by making silly faces together!",
       steps: [
-        { type: 'warmup', tag: 'A. Warm Up', title: "Smile", text: "Big Smile! Sad face.", action: "Show me emotions.", phrase: "Smile!" },
+        { type: 'warmup', tag: 'A. Warm Up', title: "Smile", text: "Big Smile! Sad face.", action: "Show me emotions.", phrase: "Smile!", audio:"assets/audio/big-smile.mp3" },
         { type: 'words', tag: 'B. Key Words', title: "More Parts", 
           items: [
             { w:"Ear",  zh:"耳朵", img:"assets/img/ear.png", audio:"assets/audio/ear.mp3" },
@@ -485,7 +485,7 @@ const db = {
       unit: "Unit 4: Phonics Mm", vocab: "Mm /m/", phrase: "Close your eyes",
       tips: "The /m/ sound vibrates on your lips. Mmmmmm!",
       steps: [
-        { type: 'warmup', tag: 'A. Warm Up', title: "Yummy", text: "Rub your tummy.", action: "Say Mmmmmm!", phrase: "Yummy!" },
+        { type: 'warmup', tag: 'A. Warm Up', title: "Yummy", text: "Rub your tummy.", action: "Say Mmmmmm!", phrase: "Yummy!", audio:"assets/audio/rub.mp3" },
         { type: 'words', tag: 'B. Key Words', title: "M Sound", 
           items: [
             { w:"Mm",     zh:"字母M", img:"assets/img/mm.png", audio:"assets/audio/m.mp3" },
@@ -502,7 +502,7 @@ const db = {
       unit: "Reader 2", vocab: "Bee, Hair", phrase: "Oh, my hair!",
       tips: "Read the story 'Buzz! Buzz!'. It's a story about a bee landing on your nose, ears, and mouth.",
       steps: [
-        { type: 'warmup', tag: 'A. Warm Up', title: "Buzz", text: "Buzz like a bee...", action: "Fly around!", phrase: "Buzzzzz." },
+        { type: 'warmup', tag: 'A. Warm Up', title: "Buzz", text: "Buzz like a bee...", action: "Fly around!", phrase: "Buzzzzz.", audio:"assets/audio/buzz.mp3" },
         { type: 'words', tag: 'B. Key Words', title: "Story Words", 
           items: [
             { w:"Bee",  zh:"蜜蜂", img:"assets/img/bee.png", audio:"assets/audio/bee.mp3"  },
@@ -522,7 +522,7 @@ const db = {
       unit: "Unit 5: Farm", vocab: "Cow, Pig", phrase: "It is a cow.",
       tips: "Animal sounds are fun! Don't be afraid to be loud.",
       steps: [
-        { type: 'warmup', tag: 'A. Warm Up', title: "Sounds", text: "Moo! Oink!", action: "Make animal sounds.", phrase: "Moo!" },
+        { type: 'warmup', tag: 'A. Warm Up', title: "Sounds", text: "Moo! Oink!", action: "Make animal sounds.", phrase: "Moo!", audio:"assets/audio/moo.mp3" },
         { type: 'words', tag: 'B. Key Words', title: "Farm Animals", 
           items: [
             { w:"Cow",  zh:"牛",   img:"assets/img/cow.png",  audio:"assets/audio/cow.mp3" },
@@ -539,7 +539,7 @@ const db = {
       unit: "Unit 5: Math", vocab: "One, Two, Three", phrase: "Two pigs.",
       tips: "Count everything: fingers, toes, toys.",
       steps: [
-        { type: 'warmup', tag: 'A. Warm Up', title: "Fingers", text: "Show me 1 finger.", action: "Show me 2 fingers.", phrase: "One, two." },
+        { type: 'warmup', tag: 'A. Warm Up', title: "Fingers", text: "Show me 1 finger.", action: "Show me 2 fingers.", phrase: "One, two.", audio:"assets/audio/show-me.mp3" },
         { type: 'words', tag: 'B. Key Words', title: "Numbers", 
           items: [
             { w:"One",   zh:"一", img:"assets/img/one.png",  audio:"assets/audio/one.mp3" },
@@ -556,7 +556,7 @@ const db = {
       unit: "Unit 5: Phonics P", vocab: "Pp, Pink", phrase: "A pink pig.",
       tips: "P is a 'popping' sound. Put a hand in front of your mouth to feel the air.",
       steps: [
-        { type: 'warmup', tag: 'A. Warm Up', title: "Pop!", text: "Pop your cheeks!", action: "P-p-p-pop!", phrase: "Pop!" },
+        { type: 'warmup', tag: 'A. Warm Up', title: "Pop!", text: "Pop your cheeks!", action: "P-p-p-pop!", phrase: "Pop!", audio:"assets/audio/ppop.mp3" },
         { type: 'words', tag: 'B. Key Words', title: "P Words", 
           items: [
             { w:"Pp",   zh:"字母P", img:"assets/img/pp.png", audio:"assets/audio/p.mp3" },
@@ -573,7 +573,7 @@ const db = {
       unit: "Unit 5: Review", vocab: "Animals", phrase: "I like animals.",
       tips: "Review week! Sing the song together.",
       steps: [
-        { type: 'warmup', tag: 'A. Warm Up', title: "Clap", text: "Clap 3 times.", action: "1, 2, 3!", phrase: "One, two, three" },
+        { type: 'warmup', tag: 'A. Warm Up', title: "Clap", text: "Clap 3 times.", action: "1, 2, 3!", phrase: "One, two, three", audio:"assets/audio/clap.mp3" },
         { type: 'words', tag: 'B. Key Words', title: "Review", 
           items: [
             { w:"Hen", zh:"母鸡", img:"assets/img/hen.png",  audio:"assets/audio/hen.mp3"  },
@@ -593,7 +593,7 @@ const db = {
       unit: "Unit 6: Zoo", vocab: "Panda, Tiger", phrase: "Look at the panda!",
       tips: "Use a deep voice for big animals, high voice for small ones.",
       steps: [
-        { type: 'warmup', tag: 'A. Warm Up', title: "Roar!", text: "Roar like a tiger!", action: "Roar!", phrase: "Roar!" },
+        { type: 'warmup', tag: 'A. Warm Up', title: "Roar!", text: "Roar like a tiger!", action: "Roar!", phrase: "Roar!", audio:"assets/audio/roar.mp3" },
         { type: 'words', tag: 'B. Key Words', title: "Wild Animals", 
           items: [
             { w:"Panda", zh:"熊猫", img:"assets/img/panda.png",  audio:"assets/audio/panda.mp3" },
@@ -610,7 +610,7 @@ const db = {
       unit: "Unit 6: Photo", vocab: "Photo, Zoo", phrase: "Take a photo.",
       tips: "Pretend your hands are a camera.",
       steps: [
-        { type: 'warmup', tag: 'A. Warm Up', title: "Smile", text: "Say cheese! Smile big.", action: "Smile!", phrase: "Cheese!" },
+        { type: 'warmup', tag: 'A. Warm Up', title: "Smile", text: "Say cheese! Smile big.", action: "Smile!", phrase: "Cheese!", audio:"assets/audio/smile.mp3" },
         { type: 'words', tag: 'B. Key Words', title: "Zoo Words", 
           items: [
             { w:"Monkey", zh:"猴子",   img:"assets/img/monkey.png",  audio:"assets/audio/monkey.mp3" },
@@ -627,7 +627,7 @@ const db = {
       unit: "Unit 6: Phonics T", vocab: "Tt, Tea, Table", phrase: "Touch the table.",
       tips: "T is a ticking sound. T-t-t-tiger.",
       steps: [
-        { type: 'warmup', tag: 'A. Warm Up', title: "Tap", text: "Tap your toe.", action: "Tap tap tap.", phrase: "Tap!" },
+        { type: 'warmup', tag: 'A. Warm Up', title: "Tap", text: "Tap your toe.", action: "Tap tap tap.", phrase: "Tap!", audio:"assets/audio/tap-tap.mp3" },
         { type: 'words', tag: 'B. Key Words', title: "T Words", 
           items: [
             { w:"Tt",    zh:"字母T", img:"assets/img/Tt.png",  audio:"assets/audio/t.mp3" },
@@ -644,7 +644,7 @@ const db = {
       unit: "Unit 6: Rules", vocab: "Quiet", phrase: "Be quiet, please.",
       tips: "Practice whispering. It calms children down.",
       steps: [
-        { type: 'warmup', tag: 'A. Warm Up', title: "Shhh", text: "Put finger on lips.", action: "Shhh...", phrase: "Shhh." },
+        { type: 'warmup', tag: 'A. Warm Up', title: "Shhh", text: "Put finger on lips.", action: "Shhh...", phrase: "Shhh.", audio:"assets/audio/shh.mp3" },
         { type: 'words', tag: 'B. Key Words', title: "Rules", 
           items: [
             { w:"Quiet", zh:"安静", img:"assets/img/quiet.png", "audio:"assets/audio/quiet.mp3" },
