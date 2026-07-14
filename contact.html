@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#74b9ff">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="LinguaLab">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="apple-touch-icon" href="assets/img/icon-192.png">
+
+  <title>Contact Us | LinguaLab</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #22d3ee;
+      --accent: #f97316;
+      --navy: #1f4e79;
+      --bg: #f8fafc;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --surface: #ffffff;
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --content-width: 1100px;
+      --shadow: 0 22px 60px rgba(31, 78, 121, 0.10);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-top: 80px;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      z-index: 1000;
+      width: 100%;
+      height: 80px;
+      padding: 15px 40px;
+      justify-content: space-between;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      background: #fff;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .navbar-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .nav-logo {
+      width: auto;
+      height: 50px;
+      display: block;
+    }
+
+    .nav-title {
+      color: var(--navy);
+      font-size: 24px;
+      line-height: 1.1;
+      font-weight: 800;
+    }
+
+    .navbar-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .navbar-right a {
+      color: var(--navy);
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .navbar-right a:hover {
+      color: var(--accent);
+    }
+
+    .hero {
+      min-height: 260px;
+      padding: 60px 8% 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      background: linear-gradient(135deg, #22d3ee 0%, #58b5f3 48%, #9b87f5 100%);
+    }
+
+
+ .hero-compact {
+    padding: 60px 8% 140px;
+    text-align: center;
+    background: linear-gradient(135deg, var(--primary), #a78bfa);
+    color: #fff;
+    width: 100%;
+  }
+
+  .hero-compact h1 {
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    line-height: 1.15;
+  }
+
+  .hero-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-size: 18px;
+    flex-wrap: wrap;
+  }
+
+  .hero-copy {
+    max-width: 760px;
+    line-height: 1.6;
+    font-size: 17px;
+  }
+
+  .hero-copy .cn-line {
+    display: block;
+    font-size: 16px;
+    font-weight: 400;
+    opacity: 0.92;
+    margin-top: 6px;
+    line-height: 1.55;
+  }
+    
+    .hero h1 {
+      margin-bottom: 16px;
+      font-size: clamp(42px, 6vw, 64px);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      font-weight: 800;
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 0 auto;
+      font-size: clamp(17px, 2vw, 21px);
+      line-height: 1.6;
+      opacity: 0.96;
+    }
+
+    .cn-line {
+      display: block;
+      margin-top: 8px;
+      font-size: clamp(17px, 2.2vw, 23px);
+      font-weight: 600;
+    }
+
+    .main-content {
+      width: min(calc(100% - 40px), var(--content-width));
+      margin: -72px auto 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .contact-shell {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+      align-items: stretch;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .contact-intro,
+    .form-panel {
+      min-width: 0;
+      padding: 40px;
+    }
+
+    .contact-intro {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 28px;
+      background:
+        radial-gradient(circle at top left, rgba(34, 211, 238, 0.12), transparent 42%),
+        #fff;
+      border-right: 1px solid var(--border);
+    }
+
+    .intro-top {
+      display: grid;
+      gap: 18px;
+    }
+
+    .info-icon {
+      width: 112px;
+      height: 112px;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      background: #fff;
+      box-shadow: 0 14px 34px rgba(31, 78, 121, 0.08);
+      overflow: hidden;
+    }
+
+    .info-icon img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+    }
+
+    .section-title {
+      color: var(--navy);
+      font-size: clamp(27px, 3vw, 34px);
+      line-height: 1.18;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .intro-copy {
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .intro-copy + .intro-copy {
+      margin-top: 2px;
+    }
+
+
+    .reason-section {
+      padding: 28px 0 0;
+    }
+
+    .reason-heading {
+      margin-bottom: 16px;
+      color: var(--navy);
+      font-size: 19px;
+      line-height: 1.3;
+      font-weight: 800;
+    }
+
+    .reason-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .reason-card {
+      min-width: 0;
+      padding: 18px;
+      display: grid;
+      grid-template-columns: 76px minmax(0, 1fr);
+      align-items: center;
+      gap: 16px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: #fff;
+      box-shadow: 0 12px 30px rgba(31, 78, 121, 0.06);
+    }
+
+    .reason-icon {
+      width: 76px;
+      height: 76px;
+      padding: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 18px;
+      background: linear-gradient(145deg, #f8fafc, #eef8ff);
+      overflow: hidden;
+    }
+
+    .reason-icon img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+    }
+
+    .reason-card h3 {
+      margin-bottom: 5px;
+      color: var(--navy);
+      font-size: 17px;
+      line-height: 1.25;
+      font-weight: 800;
+    }
+
+    .reason-card p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+
+    .form-panel {
+      background: #fff;
+    }
+
+    .eyebrow {
+      margin-bottom: 8px;
+      color: var(--primary);
+      font-size: 13px;
+      line-height: 1.2;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .form-panel .section-title {
+      margin-bottom: 26px;
+    }
+
+    .wish-form {
+      display: grid;
+      gap: 16px;
+    }
+
+    .wish-form label {
+      display: grid;
+      gap: 8px;
+      color: var(--navy);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .wish-form input,
+    .wish-form select,
+    .wish-form textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: #f8fafc;
+      color: var(--text);
+      outline: none;
+      transition: 0.2s ease;
+    }
+
+    .wish-form textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .wish-form input:focus,
+    .wish-form select:focus,
+    .wish-form textarea:focus {
+      border-color: var(--primary);
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.12);
+    }
+
+    .send-btn {
+      min-height: 50px;
+      margin-top: 2px;
+      padding: 14px 26px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--navy);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .send-btn:hover {
+      background: var(--accent);
+      transform: translateY(-1px);
+      box-shadow: 0 12px 28px rgba(249, 115, 22, 0.22);
+    }
+
+    .form-note {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .about-section {
+      padding: 36px 0 72px;
+    }
+
+    .about-card {
+      padding: 42px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: #fff;
+      box-shadow: 0 18px 44px rgba(31, 78, 121, 0.06);
+    }
+
+    .about-card .section-title {
+      margin-bottom: 20px;
+    }
+
+    .about-copy {
+      max-width: 940px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .about-copy p + p {
+      margin-top: 14px;
+    }
+
+    .about-copy strong {
+      color: var(--navy);
+    }
+
+    .review-summary {
+      margin-top: 24px;
+      padding-top: 22px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .review-summary p + p {
+      margin-top: 10px;
+    }
+
+    .review-summary strong {
+      color: var(--navy);
+    }
+
+    .edition-note {
+      margin-top: 22px;
+      padding: 16px 18px;
+      border-left: 4px solid var(--primary);
+      border-radius: 12px;
+      background: #f0f9ff;
+      color: #375a76;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    footer {
+      margin-top: 0;
+      padding: 36px 8%;
+      text-align: center;
+      background: #0f172a;
+      color: #94a3b8;
+      font-size: 14px;
+    }
+
+    footer p + p {
+      margin-top: 6px;
+    }
+
+    .footer-link {
+      color: var(--accent);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    @media (min-width: 561px) and (max-width: 1024px) {
+      .navbar {
+        height: auto;
+        min-height: 80px;
+        padding: 14px 24px;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+      }
+    
+      .navbar-left {
+        width: 100%;
+        justify-content: flex-start;
+        gap: 12px;
+      }
+    
+      .nav-logo {
+        height: 48px;
+        max-width: 160px;
+        object-fit: contain;
+      }
+    
+      .nav-title {
+        font-size: 23px;
+      }
+    
+      .navbar-right {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 10px 18px;
+      }
+    
+      .navbar-right a {
+        font-size: 14px;
+        line-height: 1.3;
+        white-space: nowrap;
+      }     
+      .hero-compact { padding: 50px 5% 120px; }
+      .hero-compact h1 { font-size: 36px; }
+      .hero-info { gap: 16px; }
+      .hero-copy { max-width: 680px; margin: 0 auto; font-size: 16px; }
+      .hero-copy .cn-line { font-size: 15px; }
+      .page-shell { width: min(calc(100% - 32px), 940px); margin-top: -56px; }
+      footer { margin-top: 45px; padding: 34px 5%; }
+      .main-content {
+        width: min(calc(100% - 32px), 900px);
+        margin-top: -60px;
+      }
+
+      .contact-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-intro {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .contact-intro,
+      .form-panel {
+        padding: 34px;
+      }
+
+      .about-card {
+        padding: 34px;
+      }
+      
+      .reason-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    
+    @media (max-width: 560px) {
+
+        .navbar {
+          height: auto;
+          min-height: 0;
+          padding: 12px 16px;
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 10px;
+        }
+      
+        .navbar-left {
+          width: 100%;
+          justify-content: flex-start;
+          gap: 10px;
+        }
+      
+        .nav-logo {
+          height: 42px;
+          max-width: 130px;
+          object-fit: contain;
+        }
+      
+        .nav-title {
+          font-size: 21px;
+        }
+      
+        .navbar-right {
+          width: 100%;
+          justify-content: flex-start;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: 8px 12px;
+        }
+      
+        .navbar-right a {
+          font-size: 12px;
+          line-height: 1.3;
+          white-space: nowrap;
+        }
+      .hero-compact { padding: 34px 16px 92px; }
+      .hero-compact h1 { margin-bottom: 12px; font-size: 29px; line-height: 1.2; }
+      .hero-info { flex-direction: column; gap: 14px; }
+      .hero-copy { max-width: 100%; font-size: 15px; line-height: 1.55; }
+      .hero-copy 
+      .cn-line { margin-top: 5px; font-size: 14px; }
+
+      .main-content {
+        width: calc(100% - 24px);
+        margin-top: -46px;
+      }
+
+      .contact-shell,
+      .about-card {
+        border-radius: 20px;
+      }
+
+      .contact-intro,
+      .form-panel,
+      .about-card {
+        padding: 24px 18px;
+      }
+
+      .info-icon {
+        width: 92px;
+        height: 92px;
+        border-radius: 20px;
+      }
+
+      .section-title {
+        font-size: 25px;
+      }
+
+      .intro-copy,
+      .about-copy {
+        font-size: 14px;
+      }
+
+      .reason-section {
+        padding-top: 20px;
+      }
+
+      .reason-heading {
+        margin-bottom: 12px;
+        font-size: 17px;
+      }
+
+      .reason-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .reason-card {
+        grid-template-columns: 62px minmax(0, 1fr);
+        gap: 13px;
+        padding: 14px;
+        border-radius: 16px;
+      }
+
+      .reason-icon {
+        width: 62px;
+        height: 62px;
+        border-radius: 14px;
+      }
+
+      .reason-card h3 {
+        font-size: 16px;
+      }
+
+      .reason-card p {
+        font-size: 13px;
+      }
+
+      .wish-form input,
+      .wish-form select,
+      .wish-form textarea {
+        padding: 13px 14px;
+        font-size: 16px;
+      }
+
+      .send-btn {
+        width: 100%;
+      }
+
+      .about-section {
+        padding: 24px 0 44px;
+      }
+
+      .review-summary {
+        font-size: 14px;
+      }
+
+      footer { margin-top: 35px; padding: 28px 16px; font-size: 13px; }
+      .footer-text { margin-top: 8px; line-height: 1.5; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="navbar">
+    <a href="index.html" class="navbar-left" aria-label="LinguaLab main page">
+      <img
+        src="assets/img/logo.png"
+        alt="LinguaLab logo"
+        class="nav-logo"
+        onerror="this.src='https://cdn-icons-png.flaticon.com/512/3081/3081078.png'"
+      >
+      <span class="nav-title">LinguaLab</span>
+    </a>
+
+    <nav class="navbar-right" aria-label="Main navigation">
+      <a href="surf.html">Splash Ride</a>
+      <a href="grammar.html">Grammar Magic</a>
+      <a href="vocabulary.html">Word Bank</a>
+      <a href="exercises.html">Fun Homework</a>
+      <a href="parents.html">Wiki Parents</a>
+      <a href="index.html">Main Page</a>
+      <a href="research.html">Research</a>
+      <a href="contact.html" class="active" aria-current="page">Contact us</a>
+    </nav>
+  </header>
+
+
+  <section class="hero-compact">
+    <h1>Contact LinguaLab</h1>
+    <div class="hero-info">
+      <div class="hero-copy">
+        Questions, feedback, cooperation, or edition materials
+        <span class="cn-line">欢迎留下您的问题、建议与合作意向</span>
+    </div>
+  </section>
+  
+
+    <div class="main-content">
+      <section class="contact-shell" aria-label="Contact LinguaLab">
+        <aside class="contact-intro">
+          <div class="intro-top">
+            <div class="info-icon">
+              <img src="assets/contact/mail.jpg" alt="Contact icon">
+            </div>
+
+            <h2 class="section-title">We would love to hear from you</h2>
+
+            <p class="intro-copy">
+              Parents, teachers, schools, education partners, and reviewers can contact LinguaLab here.
+              Use the form to share a question, suggestion, lesson idea, feedback, or cooperation request.
+            </p>
+
+            <p class="intro-copy">
+              欢迎家长、教师、学校、教育合作伙伴和评审专家联系我们。
+            </p>
+
+          </div>
+        </aside>
+
+        <section class="form-panel">
+          <p class="eyebrow">Message form</p>
+          <h2 class="section-title">Let us know</h2>
+
+          <form class="wish-form" id="wishForm">
+            <label>
+              Your name
+              <input type="text" id="contactName" placeholder="Parent / Teacher / School / Reviewer" required>
+            </label>
+
+            <label>
+              Email or WeChat
+              <input type="text" id="contactInfo" placeholder="Your email or WeChat ID" required>
+            </label>
+
+            <label>
+              Message type
+              <select id="messageType" required>
+                <option value="">Choose one</option>
+                <option value="Question">Question</option>
+                <option value="Suggestion">Suggestion</option>
+                <option value="Feedback">Feedback</option>
+                <option value="Lesson idea">Lesson idea</option>
+                <option value="Edition materials request">Edition materials request</option>
+                <option value="Cooperation request">Cooperation request</option>
+                <option value="Other">Other</option>
+              </select>
+            </label>
+
+            <label>
+              Your message
+              <textarea
+                id="contactMessage"
+                placeholder="Write your question, suggestion, request, or idea here..."
+                required
+              ></textarea>
+            </label>
+
+            <button class="send-btn" type="submit">Send message</button>
+
+            <p class="form-note">
+              The button opens your email app with a prepared message.
+            </p>
+          </form>
+        </section>
+      </section>
+
+      <section class="reason-section" aria-labelledby="reason-title">
+        <h2 class="reason-heading" id="reason-title">What can you contact us about?</h2>
+
+        <div class="reason-grid">
+          <article class="reason-card">
+            <div class="reason-icon">
+              <img src="assets/contact/question.jpg" alt="Questions">
+            </div>
+            <div>
+              <h3>Questions</h3>
+              <p>Ask about lessons, grammar, vocabulary, homework, or learning paths.</p>
+            </div>
+          </article>
+
+          <article class="reason-card">
+            <div class="reason-icon">
+              <img src="assets/contact/wish.jpg" alt="Wishes">
+            </div>
+            <div>
+              <h3>Wishes</h3>
+              <p>Tell us what you would like to see in future LinguaLab materials.</p>
+            </div>
+          </article>
+
+          <article class="reason-card">
+            <div class="reason-icon">
+              <img src="assets/contact/idea.jpg" alt="Lesson ideas">
+            </div>
+            <div>
+              <h3>Lesson ideas</h3>
+              <p>Suggest topics, games, stories, or bilingual activities for children.</p>
+            </div>
+          </article>
+
+          <article class="reason-card">
+            <div class="reason-icon">
+              <img src="assets/contact/cooperation.jpg" alt="Cooperation">
+            </div>
+            <div>
+              <h3>Cooperation</h3>
+              <p>Contact us about schools, teachers, families, or education partnerships.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="about-section">
+        <article class="about-card">
+          <h2 class="section-title">About LinguaLab</h2>
+
+          <div class="about-copy">
+            <p>
+              <strong>LinguaLab</strong> is an interactive electronic learning and methodological edition
+              for early bilingual English learning. It brings together vocabulary games, grammar mini-lessons,
+              audio support, creative homework, parent guidance, weekly reflection, and local progress tracking
+              in one child-friendly environment.
+            </p>
+
+            <p>
+              The edition is designed for short, playful, parent-supported practice. Children repeat familiar
+              vocabulary, listen to target words, use simple grammar patterns, complete creative tasks, and
+              gradually build confidence in English. Parents receive clear prompts for gentle home support,
+              while teachers can use the materials as a digital supplement to early English activities.
+            </p>
+          </div>
+
+          <div class="review-summary">
+            <p>
+              <strong>Educational relevance.</strong> LinguaLab supports short, safe, and age-appropriate
+              digital practice instead of long screen-based study.
+            </p>
+            <p>
+              <strong>Original structure and practical value.</strong> Word Bank, Grammar Magic,
+              Fun Homework, and Wiki Parents work as one connected environment for children, families,
+              teachers, schools, and education partners.
+            </p>
+            <p>
+              <strong>Interactivity.</strong> Audio, cards, games, weekly reflection, and progress tracking
+              make practice visible without turning learning into a test.
+            </p>
+          </div>
+
+          <div class="edition-note">
+            LinguaLab is a supplementary learning edition. It does not replace live communication with a teacher;
+            its purpose is to support repetition, home practice, family involvement, and soft progress observation.
+          </div>
+        </article>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <p><a class="footer-link" href="privacy.html">Privacy Policy</a></p>
+    <p>© 2026 LinguaLab • Small lessons. Real progress. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const wishForm = document.getElementById("wishForm");
+
+    if (wishForm) {
+      wishForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const name = document.getElementById("contactName").value.trim();
+        const contact = document.getElementById("contactInfo").value.trim();
+        const type = document.getElementById("messageType").value;
+        const message = document.getElementById("contactMessage").value.trim();
+
+        const email = "roonie.ru@yandex.ru";
+        const subject = encodeURIComponent("LinguaLab contact request");
+        const body = encodeURIComponent(
+          `Hello LinguaLab,\n\n` +
+          `I would like to send a message.\n\n` +
+          `Name: ${name}\n` +
+          `Contact: ${contact}\n` +
+          `Message type: ${type}\n\n` +
+          `Message:\n${message}\n\n` +
+          `Best regards,\n${name}`
+        );
+
+        window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+      });
+    }
+  </script>
+
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker
+          .register("/lingualab/sw.js")
+          .then(() => console.log("LinguaLab PWA is ready"))
+          .catch((error) => console.log("Service Worker error:", error));
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,2674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#74b9ff">
+  
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="LinguaLab">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  
+  <link rel="apple-touch-icon" href="assets/img/icon-192.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Splash Ride — LinguaLab</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --primary: #22d3ee;
+      --primary-strong: #0ea5e9;
+      --primary-light: #ecfeff;
+      --accent: #f97316;
+      --navy: #1f4e79;
+      --green: #22c55e;
+      --bg: #f8fafc;
+      --text: #0f172a;
+      --muted: #64748b;
+      --line: #e2e8f0;
+      --card: #ffffff;
+      --radius: 24px;
+      --shadow-soft: 0 4px 15px rgba(0,0,0,0.04);
+      --shadow-card: 0 20px 40px rgba(0,0,0,0.08);
+      --danger: #ef4444;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { overflow-x: hidden; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(34, 211, 238, 0.15), transparent 28%),
+        linear-gradient(180deg, #f0f9ff 0%, #f8fafc 55%, #eff6ff 100%);
+      color: var(--text);
+      line-height: 1.6;
+      padding-top: 80px;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 40px;
+      background: #fff;
+      box-shadow: 0 4px 20px rgba(0,0,0,.05);
+      height: 80px;
+      gap: 18px;
+    }
+
+    .navbar-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      min-width: 0;
+    }
+
+    .nav-logo {
+      height: 50px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.1;
+      white-space: nowrap;
+    }
+
+    .navbar-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .navbar-right a {
+      text-decoration: none;
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 15px;
+      transition: color 0.18s ease;
+      white-space: nowrap;
+    }
+
+    .navbar-right a:hover,
+    .navbar-right a:focus-visible {
+      color: var(--primary-strong);
+      outline: none;
+    }
+
+    .page {
+      width: min(1200px, calc(100% - 28px));
+      margin: 18px auto 36px;
+    }
+
+    .hero-compact {
+      display: flex;
+      align-items: stretch;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .hero-card,
+    .hud-card,
+    .panel,
+    .result-card,
+    .prompt,
+    .mobile-controls {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-card);
+    }
+
+    .hero-card {
+      flex: 1 1 420px;
+      padding: 24px;
+      min-width: 0;
+    }
+
+    .hero-card h1 {
+      color: var(--navy);
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .cn-line {
+      display: block;
+      color: var(--muted);
+      font-size: 0.98rem;
+      margin-top: 6px;
+      font-weight: 600;
+    }
+
+    .hero-copy {
+      color: var(--text);
+      font-size: 1.02rem;
+      margin-bottom: 16px;
+    }
+
+    .hero-copy .cn-line {
+      margin-top: 8px;
+    }
+
+    .badge-row,
+    .mode-grid,
+    .stats-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .badge-row {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-bottom: 16px;
+    }
+
+    .tree-badge {
+      background: linear-gradient(135deg, #ecfeff, #f8fafc);
+      border: 1px solid #d7f4fb;
+      border-radius: 20px;
+      padding: 16px 18px;
+      box-shadow: var(--shadow-soft);
+      min-width: 0;
+    }
+
+    .tree-badge small {
+      display: block;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .tree-badge strong {
+      color: var(--navy);
+      font-size: 1.35rem;
+      font-weight: 800;
+    }
+
+    .mode-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-bottom: 14px;
+    }
+
+    .mode-card {
+      border-radius: 18px;
+      border: 2px solid #dbeafe;
+      background: #fff;
+      padding: 16px;
+      cursor: pointer;
+      text-align: left;
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+      min-width: 0;
+    }
+
+    .mode-card:hover,
+    .mode-card:focus-visible,
+    .mode-card.active {
+      border-color: var(--primary);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(14,165,233,0.12);
+      outline: none;
+    }
+
+    .mode-card h3 {
+      color: var(--navy);
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+
+    .mode-card p {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .module-row {
+      margin: 4px 0 14px;
+    }
+
+    .module-picker {
+      display: block;
+      width: 100%;
+      background: linear-gradient(135deg, #ecfeff, #f8fafc);
+      border: 1px solid #d7f4fb;
+      border-radius: 20px;
+      padding: 14px 16px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .module-picker span {
+      display: block;
+      color: var(--navy);
+      font-size: 0.78rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .module-select {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-family: inherit;
+      font-size: 0.96rem;
+      font-weight: 700;
+      color: var(--navy);
+      background: white;
+      outline: none;
+    }
+
+    .module-select:focus-visible {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.18);
+    }
+
+    .btn,
+    .game-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 18px;
+      border-radius: 999px;
+      border: none;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 15px;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .btn.primary,
+    .game-btn {
+      color: #fff;
+      background: linear-gradient(90deg, var(--primary), var(--primary-strong));
+      box-shadow: 0 10px 24px rgba(14, 165, 233, 0.25);
+    }
+
+    .btn.secondary {
+      background: #fff;
+      color: var(--navy);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .btn:hover,
+    .game-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .helper-note {
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.55;
+    }
+
+    .helper-note strong {
+      color: var(--navy);
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: minmax(320px, 420px) minmax(0, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .panel {
+      padding: 20px;
+      min-width: 0;
+    }
+
+    .panel h2 {
+      color: var(--navy);
+      font-size: 1.24rem;
+      margin-bottom: 4px;
+    }
+
+    .panel .section-subtitle {
+      color: var(--muted);
+      margin-bottom: 16px;
+      font-size: 0.95rem;
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-bottom: 14px;
+    }
+
+    .hud-card {
+      padding: 14px;
+      min-width: 0;
+    }
+
+    .hud-card small {
+      display: block;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .hud-card strong {
+      display: block;
+      color: var(--navy);
+      font-size: 1.28rem;
+      font-weight: 800;
+    }
+
+    .library-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .mini-word {
+      background: linear-gradient(180deg, #ffffff, #f8fafc);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 10px;
+      text-align: center;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .mini-word img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: contain;
+      background: #fff;
+      border-radius: 14px;
+      margin-bottom: 6px;
+    }
+
+    .mini-word span {
+      display: block;
+      color: var(--navy);
+      font-size: 0.82rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .mini-word em {
+      display: block;
+      font-style: normal;
+      color: var(--muted);
+      font-size: 0.74rem;
+    }
+
+    .game-wrap {
+      min-width: 0;
+    }
+
+    .prompt {
+      padding: 16px 18px;
+      margin-bottom: 14px;
+      background: linear-gradient(90deg, rgba(34,211,238,0.12), rgba(249,115,22,0.10));
+      border-color: rgba(34,211,238,0.18);
+    }
+
+    .prompt small {
+      display: block;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .prompt-main {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-height: 88px;
+      min-width: 0;
+    }
+
+    .prompt-art {
+      width: 76px;
+      height: 76px;
+      border-radius: 18px;
+      background: #fff;
+      border: 1px solid rgba(255,255,255,0.9);
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      overflow: hidden;
+    }
+
+    .prompt-art img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 10px;
+    }
+
+    .prompt-text {
+      min-width: 0;
+    }
+
+    .prompt-text strong {
+      display: block;
+      color: var(--navy);
+      font-size: clamp(1.2rem, 2.8vw, 1.8rem);
+      line-height: 1.12;
+    }
+
+    .prompt-text span {
+      display: block;
+      color: var(--muted);
+      margin-top: 4px;
+      font-size: 0.96rem;
+      font-weight: 600;
+    }
+
+    .arena {
+      position: relative;
+      height: 580px;
+      overflow: hidden;
+      border-radius: 28px;
+      border: 2px solid rgba(255,255,255,0.9);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.22) 0 20%, transparent 20%),
+        linear-gradient(180deg, #dbeafe 0%, #7dd3fc 18%, #38bdf8 44%, #0ea5e9 100%);
+      box-shadow: var(--shadow-card);
+    }
+
+
+    .score-window {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      z-index: 16;
+      min-width: 120px;
+      padding: 12px 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.96);
+      border: 1px solid rgba(255,255,255,0.88);
+      box-shadow: 0 12px 28px rgba(15,23,42,0.14);
+      text-align: center;
+      backdrop-filter: blur(8px);
+    }
+
+    .score-window small {
+      display: block;
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+      line-height: 1.2;
+    }
+
+    .score-window strong {
+      display: block;
+      color: var(--navy);
+      font-size: 1.55rem;
+      font-weight: 800;
+      line-height: 1.05;
+    }
+
+    .wave-deco,
+    .cloud,
+    .lane-line,
+    .surfer,
+    .collectible,
+    .countdown,
+    .overlay {
+      position: absolute;
+    }
+
+    .cloud {
+      width: 120px;
+      height: 38px;
+      background: rgba(255,255,255,0.88);
+      border-radius: 999px;
+      filter: blur(.2px);
+    }
+
+    .cloud::before,
+    .cloud::after {
+      content: "";
+      position: absolute;
+      background: rgba(255,255,255,0.92);
+      border-radius: 50%;
+    }
+
+    .cloud::before { width: 46px; height: 46px; left: 12px; top: -18px; }
+    .cloud::after { width: 58px; height: 58px; right: 12px; top: -24px; }
+
+    .lane-line {
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: repeating-linear-gradient(180deg, rgba(255,255,255,0.44) 0 20px, rgba(255,255,255,0.05) 20px 42px);
+    }
+
+    .wave-deco {
+      left: -8%;
+      right: -8%;
+      bottom: 0;
+      height: 98px;
+      background:
+        radial-gradient(circle at 10% 36%, rgba(255,255,255,0.86) 0 18px, transparent 19px),
+        radial-gradient(circle at 21% 58%, rgba(255,255,255,0.76) 0 14px, transparent 15px),
+        radial-gradient(circle at 34% 40%, rgba(255,255,255,0.85) 0 17px, transparent 18px),
+        radial-gradient(circle at 52% 55%, rgba(255,255,255,0.76) 0 15px, transparent 16px),
+        radial-gradient(circle at 68% 38%, rgba(255,255,255,0.86) 0 18px, transparent 19px),
+        radial-gradient(circle at 82% 58%, rgba(255,255,255,0.76) 0 14px, transparent 15px),
+        linear-gradient(180deg, rgba(255,255,255,0.20), rgba(255,255,255,0.62));
+      pointer-events: none;
+      opacity: 0.95;
+    }
+
+    .surfer {
+      bottom: 48px;
+      width: 94px;
+      height: 116px;
+      transform: translateX(-50%);
+      transition: left 0.18s ease;
+      z-index: 12;
+    }
+
+  .surfer {
+    bottom: 42px;
+    width: 118px;
+    height: 138px;
+    transform: translateX(-50%);
+    transition: left 0.18s ease;
+    z-index: 12;
+  }
+  
+  .surfer .monkey-rider {
+    position: absolute;
+    left: 50%;
+    bottom: 14px;
+    width: 112px;
+    height: 112px;
+    object-fit: contain;
+    transform: translateX(-50%) rotate(-3deg);
+    z-index: 2;
+    filter: drop-shadow(0 8px 10px rgba(15, 23, 42, 0.18));
+    pointer-events: none;
+  }
+  
+  .surfer .board {
+    position: absolute;
+    left: 8px;
+    right: 8px;
+    bottom: 0;
+    height: 18px;
+    background: linear-gradient(90deg, var(--accent), #fb923c);
+    border-radius: 999px;
+    box-shadow: 0 10px 18px rgba(249, 115, 22, 0.28);
+    z-index: 1;
+  }
+
+
+    .collectible {
+      width: 18%;
+      min-width: 82px;
+      max-width: 126px;
+      padding: 4px;
+      transform: translateX(-50%);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.97);
+      border: 2px solid rgba(255,255,255,0.85);
+      box-shadow: 0 16px 30px rgba(15,23,42,0.16);
+      z-index: 7;
+      text-align: center;
+    }
+
+    .collectible.correct { border-color: rgba(34,197,94,0.55); }
+    .collectible.wrong { border-color: rgba(239,68,68,0.45); }
+
+    .collectible-image {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 13px;
+      background: #fff;
+      border: 1px solid var(--line);
+      margin-bottom: 6px;
+      overflow: hidden;
+    }
+
+    .collectible-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 4px;
+    }
+
+    .collectible-label {
+      color: var(--navy);
+      font-weight: 800;
+      font-size: 0.9rem;
+      line-height: 1.15;
+    }
+
+    .collectible-zh {
+      color: var(--muted);
+      font-size: 0.60rem;
+      margin-top: 4px;
+      font-weight: 600;
+      line-height: 1.15;
+    }
+
+
+    .arena-start-panel {
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      z-index: 18;
+      background: rgba(15,23,42,0.10);
+    }
+
+    .arena-start-card {
+      width: min(360px, 100%);
+      text-align: center;
+      background: rgba(255,255,255,0.94);
+      border: 1px solid rgba(255,255,255,0.9);
+      border-radius: 24px;
+      padding: 22px 18px;
+      box-shadow: 0 18px 38px rgba(15,23,42,0.18);
+      backdrop-filter: blur(8px);
+    }
+
+    .arena-start-card strong {
+      display: block;
+      color: var(--navy);
+      font-size: 1.2rem;
+      margin-bottom: 6px;
+    }
+
+    .arena-start-card p {
+      color: var(--muted);
+      font-size: 0.94rem;
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+    .countdown,
+    .overlay {
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 25;
+    }
+
+    .countdown {
+      background: rgba(15,23,42,0.18);
+      font-weight: 800;
+      font-size: clamp(3rem, 8vw, 5rem);
+      color: #fff;
+      text-shadow: 0 10px 28px rgba(15,23,42,0.35);
+    }
+
+    .overlay {
+      background: rgba(15,23,42,0.34);
+    }
+
+    .result-card {
+      width: min(560px, 100%);
+      padding: 28px;
+      text-align: center;
+    }
+
+    .result-card h2 {
+      color: var(--navy);
+      font-size: 2rem;
+      margin-bottom: 10px;
+      line-height: 1.12;
+    }
+
+    .stars {
+      font-size: 2rem;
+      letter-spacing: 4px;
+      margin: 10px 0 14px;
+    }
+
+    .result-score-box {
+      width: min(240px, 100%);
+      margin: 0 auto 18px;
+      padding: 16px 18px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #ecfeff, #ffffff);
+      border: 1px solid #d7f4fb;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .result-score-box span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.84rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .result-score-box strong {
+      display: block;
+      color: var(--navy);
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1.05;
+    }
+
+    .result-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 18px 0 22px;
+    }
+
+    .result-stat {
+      background: #f8fafc;
+      border-radius: 18px;
+      padding: 14px 10px;
+      border: 1px solid var(--line);
+    }
+
+    .result-stat span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.82rem;
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+
+    .result-stat strong {
+      color: var(--navy);
+      font-size: 1.4rem;
+    }
+
+    .mini-note {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-top: 12px;
+    }
+
+    .mobile-controls {
+      display: none;
+      gap: 12px;
+      padding: 12px;
+      margin-top: 14px;
+    }
+
+    .mobile-controls button {
+      flex: 1;
+      min-height: 54px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--navy);
+      font-weight: 800;
+      font-size: 1.05rem;
+      box-shadow: var(--shadow-soft);
+      cursor: pointer;
+    }
+
+    .flash { animation: flash 360ms ease; }
+
+    @keyframes flash {
+      0% { transform: translateX(-50%) scale(1); }
+      50% { transform: translateX(-50%) scale(1.04); }
+      100% { transform: translateX(-50%) scale(1); }
+    }
+
+@media (min-width: 561px) and (max-width: 1024px) {
+  body {
+    padding-top: 122px;
+  }
+
+  .navbar {
+    height: auto;
+    min-height: 116px;
+    padding: 14px 24px;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .navbar-left {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 12px;
+  }
+
+  .nav-logo {
+    height: 48px;
+    max-width: 160px;
+    object-fit: contain;
+  }
+
+  .nav-title {
+    font-size: 23px;
+  }
+
+  .navbar-right {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px 18px;
+  }
+
+  .navbar-right a {
+    font-size: 14px;
+    line-height: 1.3;
+    white-space: nowrap;
+  }
+
+  .page {
+    width: calc(100% - 40px);
+    max-width: 900px;
+    margin: 18px auto 40px;
+  }
+
+  .hero-compact {
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+
+  .hero-card {
+    flex: 1 1 100%;
+    padding: 24px 22px;
+    border-radius: 22px;
+  }
+
+  .hero-card h1 {
+    font-size: 36px;
+  }
+
+  .hero-copy {
+    font-size: 16px;
+  }
+
+  .cn-line {
+    font-size: 14px;
+  }
+
+  .badge-row,
+  .mode-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .tree-badge,
+  .module-picker {
+    border-radius: 18px;
+  }
+
+  .mode-card {
+    padding: 15px;
+    border-radius: 18px;
+  }
+
+  .controls {
+    gap: 10px;
+  }
+
+  .btn,
+  .game-btn {
+    min-height: 48px;
+    padding: 13px 18px;
+    font-size: 14px;
+  }
+
+  .content-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .game-wrap {
+    order: 1;
+  }
+
+  .side-panel {
+    order: 2;
+  }
+
+  .panel,
+  .prompt,
+  .result-card {
+    border-radius: 22px;
+  }
+
+  .panel {
+    padding: 20px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .hud-card {
+    padding: 14px 10px;
+  }
+
+  .library-strip {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 9px;
+  }
+
+  .mini-word {
+    padding: 8px;
+    border-radius: 16px;
+  }
+
+  .prompt {
+    padding: 15px 17px;
+  }
+
+  .prompt-main {
+    min-height: 82px;
+  }
+
+  .prompt-art {
+    width: 72px;
+    height: 72px;
+  }
+
+  .arena {
+    height: 520px;
+    border-radius: 24px;
+  }
+
+  .score-window {
+    min-width: 110px;
+    padding: 11px 13px;
+  }
+
+  .collectible {
+    width: 17%;
+    min-width: 80px;
+    max-width: 116px;
+  }
+
+  .surfer {
+    width: 106px;
+    height: 126px;
+  }
+
+  .surfer .monkey-rider {
+    width: 100px;
+    height: 100px;
+  }
+
+  .mobile-controls {
+    display: flex;
+    border-radius: 20px;
+  }
+
+  .result-stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  img,
+  video,
+  audio {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 560px) {
+  body {
+    padding-top: 112px;
+  }
+
+  .navbar {
+    height: auto;
+    min-height: 106px;
+    padding: 12px 16px;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .navbar-left {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  .nav-logo {
+    height: 42px;
+    max-width: 130px;
+    object-fit: contain;
+  }
+
+  .nav-title {
+    font-size: 21px;
+  }
+
+  .navbar-right {
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    padding-top: 0;
+    border-top: none;
+  }
+
+  .navbar-right a {
+    font-size: 12px;
+    line-height: 1.3;
+    white-space: nowrap;
+  }
+
+  .page {
+    width: calc(100% - 24px);
+    margin: 14px auto 32px;
+  }
+
+  .hero-compact {
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .hero-card {
+    flex: 1 1 100%;
+    padding: 18px 16px;
+    border-radius: 18px;
+  }
+
+  .hero-card h1 {
+    font-size: 29px;
+    line-height: 1.2;
+  }
+
+  .hero-copy {
+    margin-bottom: 14px;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .cn-line {
+    margin-top: 5px;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .badge-row,
+  .mode-grid,
+  .stats-grid,
+  .result-stats {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .tree-badge {
+    padding: 14px;
+    border-radius: 16px;
+  }
+
+  .tree-badge strong {
+    font-size: 20px;
+  }
+
+  .mode-card {
+    padding: 14px;
+    border-radius: 16px;
+  }
+
+  .mode-card h3 {
+    font-size: 16px;
+  }
+
+  .mode-card p {
+    font-size: 13px;
+  }
+
+  .module-picker {
+    padding: 13px;
+    border-radius: 16px;
+  }
+
+  .module-select {
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 14px;
+  }
+
+  .controls {
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .btn,
+  .game-btn {
+    width: 100%;
+    min-height: 48px;
+    padding: 13px 16px;
+    font-size: 14px;
+  }
+
+  .helper-note {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .content-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .game-wrap {
+    order: 1;
+  }
+
+  .side-panel {
+    order: 2;
+  }
+
+  .panel,
+  .prompt,
+  .result-card,
+  .mobile-controls {
+    border-radius: 18px;
+  }
+
+  .panel {
+    padding: 16px;
+  }
+
+  .panel h2 {
+    font-size: 18px;
+  }
+
+  .panel .section-subtitle {
+    margin-bottom: 13px;
+    font-size: 13px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hud-card {
+    padding: 12px 10px;
+    border-radius: 16px;
+  }
+
+  .hud-card small {
+    font-size: 11px;
+  }
+
+  .hud-card strong {
+    font-size: 19px;
+  }
+
+  .library-strip {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .mini-word {
+    padding: 7px;
+    border-radius: 14px;
+  }
+
+  .mini-word img {
+    border-radius: 11px;
+  }
+
+  .mini-word span {
+    font-size: 11px;
+  }
+
+  .mini-word em {
+    font-size: 10px;
+  }
+
+  .prompt {
+    padding: 13px;
+    margin-bottom: 10px;
+  }
+
+  .prompt-main {
+    min-height: 68px;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .prompt-art {
+    width: 58px;
+    height: 58px;
+    border-radius: 14px;
+  }
+
+  .prompt-text strong {
+    font-size: 17px;
+  }
+
+  .prompt-text span {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .arena {
+    height: 430px;
+    border-radius: 20px;
+  }
+
+  .score-window {
+    top: 10px;
+    right: 10px;
+    min-width: 94px;
+    padding: 9px 10px;
+    border-radius: 15px;
+  }
+
+  .score-window small {
+    font-size: 10px;
+  }
+
+  .score-window strong {
+    font-size: 20px;
+  }
+
+  .collectible {
+    width: 22%;
+    min-width: 70px;
+    max-width: 92px;
+    padding: 3px;
+    border-radius: 15px;
+  }
+
+  .collectible-image {
+    margin-bottom: 4px;
+    border-radius: 11px;
+  }
+
+  .collectible-label {
+    font-size: 11px;
+  }
+
+  .collectible-zh {
+    margin-top: 2px;
+    font-size: 9px;
+  }
+
+  .surfer {
+    width: 88px;
+    height: 108px;
+    bottom: 38px;
+  }
+
+  .surfer .monkey-rider {
+    width: 84px;
+    height: 84px;
+    bottom: 13px;
+  }
+
+  .surfer .board {
+    left: 7px;
+    right: 7px;
+    height: 15px;
+  }
+
+  .arena-start-panel {
+    padding: 14px;
+  }
+
+  .arena-start-card {
+    width: min(300px, 100%);
+    padding: 18px 14px;
+    border-radius: 18px;
+  }
+
+  .result-card {
+    padding: 20px 15px;
+  }
+
+  .result-card h2 {
+    font-size: 25px;
+  }
+
+  .stars {
+    font-size: 25px;
+  }
+
+  .result-score-box {
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .result-score-box strong {
+    font-size: 27px;
+  }
+
+  .result-stat {
+    padding: 12px 9px;
+    border-radius: 15px;
+  }
+
+  .mobile-controls {
+    display: flex;
+    gap: 8px;
+    padding: 9px;
+    margin-top: 10px;
+  }
+
+  .mobile-controls button {
+    min-width: 0;
+    min-height: 48px;
+    padding: 10px 6px;
+    border-radius: 14px;
+    font-size: 14px;
+  }
+
+  img,
+  video,
+  audio {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <a class="navbar-left" href="index.html">
+      <img src="assets/img/logo.png" alt="LL" class="nav-logo" onerror="this.style.display='none'">
+      <span class="nav-title">LinguaLab</span>
+    </a>
+
+  <nav class="navbar-right">
+    <a href="surf.html">Splash Ride</a>
+    <a href="grammar.html">Grammar Magic</a>
+    <a href="vocabulary.html">Word Bank</a>
+    <a href="exercises.html">Fun Homework</a>
+    <a href="parents.html">Wiki Parents</a>
+    <a href="index.html">Main Page</a>
+    <a href="research.html">Research</a>
+    <a href="contact.html">Contact us</a>
+  </nav>
+  </header>
+
+  <main class="page">
+    <section class="hero-compact">
+      <div class="hero-card">
+        <h1>Splash Ride <span class="cn-line">冲浪闯关</span></h1>
+        <p class="hero-copy">
+          A short surfing game for vocabulary revision. Catch the correct card with the real picture and audio from LinguaLab.
+          <span class="cn-line">一个简短的词汇复习游戏。孩子在海浪上前进，抓住来自 LinguaLab 词库的正确图片和音频卡片。</span>
+        </p>
+
+        <div class="badge-row">
+          <div class="tree-badge">
+            <small>Vocabulary Points • 词汇积分</small>
+            <strong id="totalVocabPoints">0</strong>
+          </div>
+          <div class="tree-badge">
+            <small>Best Surf Score • 最佳冲浪得分</small>
+            <strong id="bestSurfScore">0</strong>
+          </div>
+        </div>
+
+        <div class="module-row">
+          <label class="module-picker" for="moduleSelect">
+            <span>Word Set • 词汇模块</span>
+            <select class="module-select" id="moduleSelect">
+              <option value="mixed">Mixed word run • 混合词汇轮换</option>
+              <option value="family">Family & Friends • 家人朋友</option>
+              <option value="school">My School • 我的学校</option>
+              <option value="face">My Face • 我的脸</option>
+              <option value="animals">Farm & Zoo Animals • 农场和动物园动物</option>
+              <option value="transport">Transport & Safety • 交通工具</option>
+              <option value="pets">My Pets • 我的宠物</option>
+              <option value="colors">Colors • 颜色</option>
+              <option value="park">In the Park • 在公园</option>
+              <option value="food">Yummy Food & Drinks • 美味食物和饮料</option>
+              <option value="fruit">Fruit & Numbers • 水果和数字</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="controls">
+          <button class="btn primary" id="startBtn" type="button">Start 25s Challenge • 开始 25 秒挑战</button>
+        </div>
+
+        <p class="helper-note" id="helperNote">
+          Every correct catch gives <strong>+1 vocabulary point</strong>. Catch as many cards as you can before the timer reaches zero.
+        </p>
+      </div>
+    </section>
+
+    <section class="content-grid">
+      <aside class="panel side-panel">
+        <h2>Session Stats <span class="cn-line">本轮数据</span></h2>
+        <div class="stats-grid">
+          <div class="hud-card">
+            <small>Time Left • 剩余时间</small>
+            <strong id="timeLeft">25</strong>
+          </div>
+          <div class="hud-card">
+            <small>Words Caught • 抓对单词</small>
+            <strong id="caughtCount">0</strong>
+          </div>
+          <div class="hud-card">
+            <small>Mistakes • 错误次数</small>
+            <strong id="mistakeCount">0</strong>
+          </div>
+          <div class="hud-card">
+            <small>Run Points • 本轮积分</small>
+            <strong id="runPoints">0</strong>
+          </div>
+        </div>
+
+        <h2 style="margin-top: 14px;">Word Library <span class="cn-line">词卡素材库</span></h2>
+        <p class="section-subtitle" id="librarySubtitle">These cards use the real site assets and the selected module bank. <br>这些卡片直接使用站点中的真实图片素材和所选模块词库。</p>
+        <div class="library-strip" id="libraryStrip"></div>
+      </aside>
+
+      <section class="game-wrap">
+        <div class="prompt" id="promptBox">
+          <div class="prompt-main">
+            <div class="prompt-art" id="promptArt"></div>
+            <div class="prompt-text">
+              <strong id="promptPrimary">Press START.</strong>
+              <span id="promptSecondary">点击开始，开始冲浪挑战。</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="arena" id="arena" aria-label="Surf Challenge">
+          <div class="arena-start-panel" id="arenaStartPanel">
+            <div class="arena-start-card">
+              <strong>Ready to surf?</strong>
+              <button class="btn primary" id="arenaStartBtn" type="button">START</button>
+            </div>
+          </div>
+          <div class="cloud" style="left: 8%; top: 34px;"></div>
+          <div class="cloud" style="left: 68%; top: 70px; transform: scale(0.82);"></div>
+          <div class="lane-line" style="left: 33.333%;"></div>
+          <div class="lane-line" style="left: 66.666%;"></div>
+
+        <div class="surfer" id="surfer" aria-label="Monkey surfer">
+          <img class="monkey-rider" src="assets/img/monkey-surfer.png" alt="Monkey surfer">
+          <div class="board"></div>
+        </div>
+
+          <div class="score-window" id="scoreWindow" aria-live="polite">
+            <small>Score • 积分</small>
+            <strong id="scoreWindowValue">0</strong>
+          </div>
+
+          <div class="wave-deco"></div>
+          <div class="countdown" id="countdown"></div>
+
+          <div class="overlay" id="overlay">
+            <div class="result-card">
+              <h2>Ride Complete! <span class="cn-line" style="font-size: 0.9rem;">冲浪完成！</span></h2>
+              <div class="stars" id="starsLine">⭐</div>
+              <div class="result-score-box">
+                <span>Total Score • 总得分</span>
+                <strong id="finalScoreBox">0</strong>
+              </div>
+              <div class="result-stats">
+                <div class="result-stat">
+                  <span>Words Caught • 抓对单词</span>
+                  <strong id="finalCaught">0</strong>
+                </div>
+                <div class="result-stat">
+                  <span>Mistakes • 错误次数</span>
+                  <strong id="finalMistakes">0</strong>
+                </div>
+                <div class="result-stat">
+                  <span>Points Earned • 获得积分</span>
+                  <strong id="finalPoints">0</strong>
+                </div>
+              </div>
+              <button class="btn primary" id="playAgainBtn" type="button">Play Again • 再玩一次</button>
+              <p class="mini-note" id="resultNote"></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mobile-controls" aria-hidden="false">
+          <button type="button" id="mobileLeftBtn">← Left • 左</button>
+          <button type="button" id="mobileRightBtn">Right • 右 →</button>
+        </div>
+      </section>
+    </section>
+  </main>
+<script src="analytics.js"></script>
+
+  <script>
+    const VOCAB_POINTS_KEY = 'vocab_points';
+    const SURF_BEST_KEY = 'lingualab_surf_best';
+    const SURF_RUNS_KEY = 'lingualab_surf_runs';
+    const SURF_LAST_RUN_KEY = 'lingualab_surf_last_run';
+
+
+    const RUN_DURATION_SECONDS = 25;
+    const LANES = [16.666, 50, 83.333];
+
+    // Calm starting speed. After 8 seconds it rises only a little.
+    const SPEED_BASE = 125;
+    const SPEED_RAMP_START_SECONDS = 8;
+    const SPEED_RAMP = 1.2;
+    const SPEED_MAX = 145;
+
+    const CATCH_REWARD = 1;
+    const SURF_MODULE_KEY = 'lingualab_surf_module';
+
+    const MODULE_SETS = {
+      family: {
+        title: 'Family & Friends',
+        zhTitle: '家人朋友',
+        words: [
+          { id: 'daddy', en: 'Daddy', zh: '爸爸', pinyin: 'bà ba', img: 'assets/img/daddy.png', audio: 'assets/audio/daddy.mp3' },
+          { id: 'mommy', en: 'Mommy', zh: '妈妈', pinyin: 'mā ma', img: 'assets/img/mommy.png', audio: 'assets/audio/mommy.mp3' },
+          { id: 'grandma', en: 'Grandma', zh: '奶奶 / 外婆', pinyin: 'nǎi nai / wài pó', img: 'assets/img/grandma.png', audio: 'assets/audio/grandma.mp3' },
+          { id: 'grandpa', en: 'Grandpa', zh: '爷爷 / 外公', pinyin: 'yé ye / wài gōng', img: 'assets/img/grandpa.png', audio: 'assets/audio/grandpa.mp3' },
+          { id: 'aunt', en: 'Aunt', zh: '阿姨 / 姑姑', pinyin: 'ā yí / gū gu', img: 'assets/img/aunt.png', audio: 'assets/audio/aunt.mp3' },
+          { id: 'uncle', en: 'Uncle', zh: '叔叔 / 舅舅', pinyin: 'shū shu / jiù jiu', img: 'assets/img/uncle.png', audio: 'assets/audio/uncle.mp3' },
+          { id: 'boy', en: 'Boy', zh: '男孩', pinyin: 'nán hái', img: 'assets/img/boy.png', audio: 'assets/audio/boy.mp3' },
+          { id: 'girl', en: 'Girl', zh: '女孩', pinyin: 'nǚ hái', img: 'assets/img/girl.png', audio: 'assets/audio/girl.mp3' },
+          { id: 'family', en: 'Family', zh: '家人', pinyin: 'jiā ren', img: 'assets/img/family.png', audio: 'assets/audio/family.mp3' }
+        ]
+      },
+      school: {
+        title: 'My School',
+        zhTitle: '我的学校',
+        words: [
+          { id: 'bag', en: 'Bag', zh: '书包', pinyin: 'shū bāo', img: 'assets/img/bag.png', audio: 'assets/audio/bag.mp3' },
+          { id: 'book', en: 'Book', zh: '书', pinyin: 'shū', img: 'assets/img/book.png', audio: 'assets/audio/book.mp3' },
+          { id: 'pencil', en: 'Pencil', zh: '铅笔', pinyin: 'qiān bǐ', img: 'assets/img/pencil.png', audio: 'assets/audio/pencil.mp3' },
+          { id: 'teacher', en: 'Teacher', zh: '老师', pinyin: 'lǎo shī', img: 'assets/img/teacher.png', audio: 'assets/audio/teacher.mp3' }
+        ]
+      },
+      face: {
+        title: 'My Face',
+        zhTitle: '我的脸',
+        words: [
+          { id: 'eye', en: 'Eye', zh: '眼睛', pinyin: 'yǎn jing', img: 'assets/img/eye.png', audio: 'assets/audio/eye.mp3' },
+          { id: 'nose', en: 'Nose', zh: '鼻子', pinyin: 'bí zi', img: 'assets/img/nose.png', audio: 'assets/audio/nose.mp3' },
+          { id: 'mouth', en: 'Mouth', zh: '嘴巴', pinyin: 'zuǐ ba', img: 'assets/img/mouth.png', audio: 'assets/audio/mouth.mp3' },
+          { id: 'ear', en: 'Ear', zh: '耳朵', pinyin: 'ěr duo', img: 'assets/img/ear.png', audio: 'assets/audio/ear.mp3' },
+          { id: 'hair', en: 'Hair', zh: '头发', pinyin: 'tóu fa', img: 'assets/img/hair.png', audio: 'assets/audio/hair.mp3' },
+          { id: 'face', en: 'Face', zh: '脸', pinyin: 'liǎn', img: 'assets/img/face.png', audio: 'assets/audio/face.mp3' }
+        ]
+      },
+      animals: {
+        title: 'Farm & Zoo Animals',
+        zhTitle: '农场和动物园动物',
+        words: [
+          { id: 'cow', en: 'Cow', zh: '牛', pinyin: 'niú', img: 'assets/img/cow.png', audio: 'assets/audio/cow.mp3' },
+          { id: 'pig', en: 'Pig', zh: '猪', pinyin: 'zhū', img: 'assets/img/pig.png', audio: 'assets/audio/pig.mp3' },
+          { id: 'duck', en: 'Duck', zh: '鸭子', pinyin: 'yā zi', img: 'assets/img/duck.png', audio: 'assets/audio/duck.mp3' },
+          { id: 'hen', en: 'Hen', zh: '母鸡', pinyin: 'mǔ jī', img: 'assets/img/hen.png', audio: 'assets/audio/hen.mp3' },
+          { id: 'panda', en: 'Panda', zh: '熊猫', pinyin: 'xióng māo', img: 'assets/img/panda.png', audio: 'assets/audio/panda.mp3' },
+          { id: 'tiger', en: 'Tiger', zh: '老虎', pinyin: 'lǎo hǔ', img: 'assets/img/tiger.png', audio: 'assets/audio/tiger.mp3' },
+          { id: 'bear', en: 'Bear', zh: '熊', pinyin: 'xióng', img: 'assets/img/bear.png', audio: 'assets/audio/bear.mp3' },
+          { id: 'monkey', en: 'Monkey', zh: '猴子', pinyin: 'hóu zi', img: 'assets/img/monkey.png', audio: 'assets/audio/monkey.mp3' }
+        ]
+      },
+      transport: {
+        title: 'Transport & Safety',
+        zhTitle: '交通工具',
+        words: [
+          { id: 'car', en: 'Car', zh: '汽车', pinyin: 'qì chē', img: 'assets/img/car.png', audio: 'assets/audio/car.mp3' },
+          { id: 'bus', en: 'Bus', zh: '公交车', pinyin: 'gōng jiāo chē', img: 'assets/img/bus.png', audio: 'assets/audio/bus.mp3' },
+          { id: 'bike', en: 'Bike', zh: '自行车', pinyin: 'zì xíng chē', img: 'assets/img/bike.png', audio: 'assets/audio/bike.mp3' },
+          { id: 'taxi', en: 'Taxi', zh: '出租车', pinyin: 'chū zū chē', img: 'assets/img/taxi.png', audio: 'assets/audio/taxi.mp3' },
+          { id: 'wheel', en: 'Wheel', zh: '轮子', pinyin: 'lún zi', img: 'assets/img/wheel.png', audio: 'assets/audio/wheel.mp3' }
+        ]
+      },
+      pets: {
+        title: 'My Pets',
+        zhTitle: '我的宠物',
+        words: [
+          { id: 'bird', en: 'Bird', zh: '鸟', pinyin: 'niǎo', img: 'assets/img/bird.png', audio: 'assets/audio/bird.mp3' },
+          { id: 'fish', en: 'Fish', zh: '鱼', pinyin: 'yú', img: 'assets/img/fish.png', audio: 'assets/audio/fish.mp3' },
+          { id: 'rabbit', en: 'Rabbit', zh: '兔子', pinyin: 'tù zi', img: 'assets/img/rabbit.png', audio: 'assets/audio/rabbit.mp3' },
+          { id: 'turtle', en: 'Turtle', zh: '乌龟', pinyin: 'wū guī', img: 'assets/img/turtle.png', audio: 'assets/audio/turtle.mp3' },
+          { id: 'dog', en: 'Dog', zh: '狗', pinyin: 'gǒu', img: 'assets/img/dog.png', audio: 'assets/audio/dog.mp3' },
+          { id: 'pet', en: 'Pet', zh: '宠物', pinyin: 'chǒng wù', img: 'assets/img/pet.png', audio: 'assets/audio/pet.mp3' }
+        ]
+      },
+      colors: {
+        title: 'Colors',
+        zhTitle: '颜色',
+        words: [
+          { id: 'red', en: 'Red', zh: '红色', pinyin: 'hóng sè', img: 'assets/img/red.png', audio: 'assets/audio/red.mp3' },
+          { id: 'blue', en: 'Blue', zh: '蓝色', pinyin: 'lán sè', img: 'assets/img/blue.png', audio: 'assets/audio/blue.mp3' },
+          { id: 'yellow', en: 'Yellow', zh: '黄色', pinyin: 'huáng sè', img: 'assets/img/yellow1.png', audio: 'assets/audio/yellow.mp3' },
+          { id: 'green', en: 'Green', zh: '绿色', pinyin: 'lǜ sè', img: 'assets/img/green.png', audio: 'assets/audio/green.mp3' },
+          { id: 'orange_color', en: 'Orange', zh: '橙色', pinyin: 'chéng sè', img: 'assets/img/orange_color.png', audio: 'assets/audio/orange.mp3' },
+          { id: 'color', en: 'Color', zh: '颜色', pinyin: 'yán sè', img: 'assets/img/color.png', audio: 'assets/audio/color.mp3' }
+        ]
+      },
+      park: {
+        title: 'In the Park',
+        zhTitle: '在公园',
+        words: [
+          { id: 'flower', en: 'Flower', zh: '花', pinyin: 'huā', img: 'assets/img/flower.png', audio: 'assets/audio/flower.mp3' },
+          { id: 'grass', en: 'Grass', zh: '草', pinyin: 'cǎo', img: 'assets/img/grass.png', audio: 'assets/audio/grass.mp3' },
+          { id: 'park', en: 'Park', zh: '公园', pinyin: 'gōng yuán', img: 'assets/img/park.png', audio: 'assets/audio/park.mp3' },
+          { id: 'insect', en: 'Insect', zh: '昆虫', pinyin: 'kūn chóng', img: 'assets/img/insect.png', audio: 'assets/audio/insect.mp3' },
+          { id: 'kite', en: 'Kite', zh: '风筝', pinyin: 'fēng zheng', img: 'assets/img/kite.png', audio: 'assets/audio/kite.mp3' },
+          { id: 'tree', en: 'Tree', zh: '树', pinyin: 'shù', img: 'assets/img/tree.png', audio: 'assets/audio/tree.mp3' }
+        ]
+      },
+      food: {
+        title: 'Yummy Food & Drinks',
+        zhTitle: '美味食物和饮料',
+        words: [
+          { id: 'bread', en: 'Bread', zh: '面包', pinyin: 'miàn bāo', img: 'assets/img/bread.png', audio: 'assets/audio/bread.mp3' },
+          { id: 'cake', en: 'Cake', zh: '蛋糕', pinyin: 'dàn gāo', img: 'assets/img/cake.png', audio: 'assets/audio/cake.mp3' },
+          { id: 'food', en: 'Food', zh: '食物', pinyin: 'shí wù', img: 'assets/img/food.png', audio: 'assets/audio/food.mp3' },
+          { id: 'juice', en: 'Juice', zh: '果汁', pinyin: 'guǒ zhī', img: 'assets/img/juice.png', audio: 'assets/audio/juice.mp3' },
+          { id: 'milk', en: 'Milk', zh: '牛奶', pinyin: 'niú nǎi', img: 'assets/img/milk.png', audio: 'assets/audio/milk.mp3' },
+          { id: 'water', en: 'Water', zh: '水', pinyin: 'shuǐ', img: 'assets/img/water.png', audio: 'assets/audio/water.mp3' },
+          { id: 'jam', en: 'Jam', zh: '果酱', pinyin: 'guǒ jiàng', img: 'assets/img/jam.png', audio: 'assets/audio/jam.mp3' }
+        ]
+      },
+      fruit: {
+        title: 'Fruit & Numbers',
+        zhTitle: '水果和数字',
+        words: [
+          { id: 'apple', en: 'Apple', zh: '苹果', pinyin: 'píng guǒ', img: 'assets/img/apple.png', audio: 'assets/audio/apple.mp3' },
+          { id: 'banana', en: 'Banana', zh: '香蕉', pinyin: 'xiāng jiāo', img: 'assets/img/banana.png', audio: 'assets/audio/banana.mp3' },
+          { id: 'pear', en: 'Pear', zh: '梨', pinyin: 'lí', img: 'assets/img/pear.png', audio: 'assets/audio/pear.mp3' },
+          { id: 'orange_fruit', en: 'Orange', zh: '橙子', pinyin: 'chéng zi', img: 'assets/img/orange.png', audio: 'assets/audio/an_orange.mp3' },
+          { id: 'one', en: 'One', zh: '一', pinyin: 'yī', img: 'assets/img/one.png', audio: 'assets/audio/one.mp3' },
+          { id: 'two', en: 'Two', zh: '二', pinyin: 'èr', img: 'assets/img/two.png', audio: 'assets/audio/two.mp3' },
+          { id: 'three', en: 'Three', zh: '三', pinyin: 'sān', img: 'assets/img/three.png', audio: 'assets/audio/three.mp3' },
+          { id: 'four', en: 'Four', zh: '四', pinyin: 'sì', img: 'assets/img/four.png', audio: 'assets/audio/four.mp3' },
+          { id: 'five', en: 'Five', zh: '五', pinyin: 'wǔ', img: 'assets/img/five.png', audio: 'assets/audio/five.mp3' },
+          { id: 'six', en: 'Six', zh: '六', pinyin: 'liù', img: 'assets/img/six.png', audio: 'assets/audio/six.mp3' },
+          { id: 'seven', en: 'Seven', zh: '七', pinyin: 'qī', img: 'assets/img/seven.png', audio: 'assets/audio/seven.mp3' },
+          { id: 'eight', en: 'Eight', zh: '八', pinyin: 'bā', img: 'assets/img/eight.png', audio: 'assets/audio/eight.mp3' },
+          { id: 'nine', en: 'Nine', zh: '九', pinyin: 'jiǔ', img: 'assets/img/nine.png', audio: 'assets/audio/nine.mp3' },
+          { id: 'ten', en: 'Ten', zh: '十', pinyin: 'shí', img: 'assets/img/ten.png', audio: 'assets/audio/ten.mp3' }
+        ]
+      }
+    };
+
+    const ALL_WORDS = Object.values(MODULE_SETS).flatMap(module => module.words);
+    const audioCache = new Map();
+
+    function trackWordsExposed(words, category) {
+  if (
+    !Array.isArray(words) ||
+    !words.length ||
+    !window.Analytics ||
+    typeof window.Analytics.logWordsExposed !== 'function'
+  ) {
+    return;
+  }
+
+  window.Analytics.logWordsExposed(
+    words,
+    category
+  );
+}
+
+    function preloadAudioLibrary() {
+      ALL_WORDS.forEach(word => {
+        if (!word.audio || audioCache.has(word.id)) return;
+        try {
+          const audio = new Audio(word.audio);
+          audio.preload = 'auto';
+          audioCache.set(word.id, audio);
+        } catch (error) {
+          console.warn('Audio preload failed:', word.audio, error);
+        }
+      });
+    }
+
+    const state = {
+      mode: 'audio',
+      starting: false,
+      playing: false,
+      finished: false,
+      lane: 0,
+      prompt: null,
+      options: [],
+      objects: [],
+      activeModule: localStorage.getItem(SURF_MODULE_KEY) || 'mixed',
+      sessionBanks: {},
+      promptResolved: false,
+      mistakeRecorded: false,
+      timerSeconds: RUN_DURATION_SECONDS,
+      endTime: 0,
+      elapsedMs: 0,
+      lastFrame: 0,
+      animationId: null,
+      timerId: null,
+      run: { caught: 0, mistakes: 0, points: 0 },
+      touchStartX: null
+    };
+
+    const arena = document.getElementById('arena');
+    const surferEl = document.getElementById('surfer');
+    const promptArtEl = document.getElementById('promptArt');
+    const promptPrimaryEl = document.getElementById('promptPrimary');
+    const promptSecondaryEl = document.getElementById('promptSecondary');
+    const timeLeftEl = document.getElementById('timeLeft');
+    const caughtCountEl = document.getElementById('caughtCount');
+    const mistakeCountEl = document.getElementById('mistakeCount');
+    const runPointsEl = document.getElementById('runPoints');
+    const scoreWindowValueEl = document.getElementById('scoreWindowValue');
+    const totalVocabPointsEl = document.getElementById('totalVocabPoints');
+    const bestSurfScoreEl = document.getElementById('bestSurfScore');
+    const countdownEl = document.getElementById('countdown');
+    const overlayEl = document.getElementById('overlay');
+    const finalCaughtEl = document.getElementById('finalCaught');
+    const finalMistakesEl = document.getElementById('finalMistakes');
+    const finalPointsEl = document.getElementById('finalPoints');
+    const finalScoreBoxEl = document.getElementById('finalScoreBox');
+    const resultNoteEl = document.getElementById('resultNote');
+    const starsLineEl = document.getElementById('starsLine');
+    const libraryStripEl = document.getElementById('libraryStrip');
+    const librarySubtitleEl = document.getElementById('librarySubtitle');
+    const moduleSelectEl = document.getElementById('moduleSelect');
+    const helperNoteEl = document.getElementById('helperNote');
+    const arenaStartPanelEl = document.getElementById('arenaStartPanel');
+    const startBtnEl = document.getElementById('startBtn');
+    const arenaStartBtnEl = document.getElementById('arenaStartBtn');
+    const playAgainBtnEl = document.getElementById('playAgainBtn');
+
+    function setStartButtonsDisabled(disabled) {
+      [startBtnEl, arenaStartBtnEl, playAgainBtnEl].forEach(button => {
+        if (button) button.disabled = disabled;
+      });
+    }
+
+    function safeReadNumber(key) {
+      const raw = localStorage.getItem(key);
+      const value = Number(raw || 0);
+      return Number.isFinite(value) ? value : 0;
+    }
+
+    function updateSyncedTotals() {
+      totalVocabPointsEl.textContent = safeReadNumber(VOCAB_POINTS_KEY);
+      bestSurfScoreEl.textContent = safeReadNumber(SURF_BEST_KEY);
+    }
+
+    function addVocabPoints(amount) {
+      const current = safeReadNumber(VOCAB_POINTS_KEY);
+      const next = current + amount;
+      localStorage.setItem(VOCAB_POINTS_KEY, String(next));
+      totalVocabPointsEl.textContent = next;
+
+      window.dispatchEvent(new StorageEvent('storage', {
+        key: VOCAB_POINTS_KEY,
+        oldValue: String(current),
+        newValue: String(next),
+        storageArea: localStorage
+      }));
+    }
+
+    function saveSurfRun() {
+      const best = safeReadNumber(SURF_BEST_KEY);
+      if (state.run.points > best) {
+        localStorage.setItem(SURF_BEST_KEY, String(state.run.points));
+      }
+
+      const history = JSON.parse(localStorage.getItem(SURF_RUNS_KEY) || '[]');
+      const currentRun = {
+        date: new Date().toISOString(),
+        mode: state.mode,
+        caught: state.run.caught,
+        mistakes: state.run.mistakes,
+        points: state.run.points
+      };
+      history.unshift(currentRun);
+      localStorage.setItem(SURF_RUNS_KEY, JSON.stringify(history.slice(0, 20)));
+      localStorage.setItem(SURF_LAST_RUN_KEY, JSON.stringify(currentRun));
+      updateSyncedTotals();
+    }
+
+
+    function getActiveModuleSet(moduleKey = state.activeModule) {
+      if (moduleKey === 'mixed') {
+        return { title: 'Mixed Library', zhTitle: '混合词库', words: ALL_WORDS };
+      }
+      return MODULE_SETS[moduleKey] || { title: 'Mixed Library', zhTitle: '混合词库', words: ALL_WORDS };
+    }
+
+    function resetSessionBank(moduleKey = state.activeModule) {
+      delete state.sessionBanks[moduleKey];
+    }
+
+    function getSessionBank(moduleKey = state.activeModule) {
+    const cachedBank = state.sessionBanks[moduleKey];
+    
+    if (cachedBank && cachedBank.length) {
+      return cachedBank;
+    }
+
+      const sourceWords = getActiveModuleSet(moduleKey).words;
+      const sessionBank = shuffle([...sourceWords]);
+
+      state.sessionBanks[moduleKey] = sessionBank;
+      return sessionBank;
+    }
+
+    function getActiveBank() {
+      return getSessionBank(state.activeModule);
+    }
+
+    function updateHelperText() {
+      const active = getActiveModuleSet();
+      helperNoteEl.innerHTML = `
+        Every correct catch gives <strong>+1 vocabulary point</strong>.
+        Catch as many cards as you can in <strong>${RUN_DURATION_SECONDS} seconds</strong>.
+        Words are selected continuously from <strong>${active.title}</strong>.
+        <br>
+        每抓对一个单词，就会获得 <strong>+1 词汇积分</strong>。
+        在 <strong>${RUN_DURATION_SECONDS} 秒</strong>内尽可能多地抓住卡片。
+        单词会持续从 <strong>${active.zhTitle}</strong> 中随机出现。
+      `;
+    }
+
+function renderLibraryStrip() {
+  const active = getActiveModuleSet();
+
+  const activeBank =
+    getActiveBank();
+
+  const previewWords =
+    activeBank.slice(
+      0,
+      Math.min(12, activeBank.length)
+    );
+
+  trackWordsExposed(
+    previewWords,
+    `surf-${state.activeModule}-library`
+  );
+      librarySubtitleEl.innerHTML = `These cards use a shuffled set from <strong>${active.title}</strong>. <br>这些卡片直接使用站点中的真实图片素材，并来自 <strong>${active.zhTitle}</strong> 的重新洗牌卡组。`;
+      libraryStripEl.innerHTML = previewWords.map(item => `
+        <div class="mini-word">
+          <img src="${item.img}" alt="${item.en}" loading="lazy">
+          <span>${item.en}</span>
+          <em>${item.zh}</em>
+        </div>
+      `).join('');
+      updateHelperText();
+    }
+
+    function shuffle(array) {
+
+      const copy = [...array];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+
+    function getDistinctOptions(baseOptions, bank, correctWord) {
+      const result = [];
+      const usedIds = new Set();
+
+      baseOptions.forEach(item => {
+        if (item && !usedIds.has(item.id)) {
+          result.push(item);
+          usedIds.add(item.id);
+        }
+      });
+
+      const fillers = shuffle([...bank]);
+
+      for (const item of fillers) {
+        if (result.length >= 3) break;
+
+        if (
+          item &&
+          !usedIds.has(item.id)
+        ) {
+          result.push(item);
+          usedIds.add(item.id);
+        }
+      }
+
+      while (result.length < 3) {
+        result.push(correctWord);
+      }
+
+      return shuffle(result.slice(0, 3));
+    }
+
+    function buildPromptOptions(correctWord) {
+      return getDistinctOptions(
+        [correctWord],
+        getActiveBank(),
+        correctWord
+      );
+    }
+
+    function choosePrompt() {
+      const bank = getActiveBank();
+      if (!bank.length) return false;
+
+      const correct = bank[Math.floor(Math.random() * bank.length)];
+
+      state.prompt = correct;
+      state.options = buildPromptOptions(correct);
+      state.promptResolved = false;
+      state.mistakeRecorded = false;
+      
+      renderPrompt(correct);
+      playWordAudio(correct);
+
+      return true;
+    }
+
+    function renderPrompt(word) {
+      promptArtEl.innerHTML = `
+        <img src="${word.img}" alt="${word.en}">
+      `;
+      promptPrimaryEl.textContent = 'Listen and catch the correct card.';
+      promptSecondaryEl.textContent =
+        `听音频，抓住 ${word.zh} / ${word.en} 的正确图片卡片。`;
+    }
+
+function playWordAudio(word) {
+  if (!word || !word.id) {
+    return false;
+  }
+
+  const audio =
+    audioCache.get(word.id);
+
+  if (!audio) {
+    return false;
+  }
+
+  try {
+    audio.pause();
+    audio.currentTime = 0;
+
+    const playPromise =
+      audio.play();
+
+    if (
+      playPromise &&
+      typeof playPromise.then === 'function'
+    ) {
+      playPromise
+        .then(() => {
+          if (
+            window.Analytics &&
+            typeof window.Analytics.logWordAudio === 'function'
+          ) {
+            window.Analytics.logWordAudio(
+              word.id
+            );
+          }
+        })
+        .catch((error) => {
+          console.warn(
+            'Audio play failed:',
+            error
+          );
+        });
+    } else if (
+      window.Analytics &&
+      typeof window.Analytics.logWordAudio === 'function'
+    ) {
+      window.Analytics.logWordAudio(
+        word.id
+      );
+    }
+
+    return true;
+  } catch (error) {
+    console.warn(
+      'Audio play failed:',
+      error
+    );
+
+    return false;
+  }
+}
+
+    function createCollectible(option, laneIndex) {
+      const arenaHeight = arena.clientHeight;
+      const el = document.createElement('div');
+      const isCorrect = option.id === state.prompt.id;
+      el.className = `collectible ${isCorrect ? 'correct' : 'wrong'}`;
+      el.style.left = `${LANES[laneIndex]}%`;
+      el.style.top = '-132px';
+      el.innerHTML = `
+        <div class="collectible-image">
+          <img src="${option.img}" alt="${option.en}" loading="lazy">
+        </div>
+        <div class="collectible-label">${option.en}</div>
+        <div class="collectible-zh">${option.zh}</div>
+      `;
+      arena.appendChild(el);
+
+      state.objects.push({
+        el,
+        laneIndex,
+        y: -132,
+        option,
+        isCorrect,
+        counted: false,
+        bottomLimit: arenaHeight - 118
+      });
+    }
+
+function spawnSet() {
+  trackWordsExposed(
+    state.options,
+    `surf-${state.activeModule}-game`
+  );
+
+  const lanes =
+    shuffle([0, 1, 2]);
+
+  state.options.forEach(
+    (option, index) => {
+      createCollectible(
+        option,
+        lanes[index]
+      );
+    }
+  );
+}
+
+    function clearArenaObjects() {
+      state.objects.forEach(obj => obj.el.remove());
+      state.objects = [];
+    }
+
+    function setLane(index) {
+      state.lane = Math.max(0, Math.min(LANES.length - 1, index));
+      surferEl.style.left = `${LANES[state.lane]}%`;
+      surferEl.classList.remove('flash');
+      void surferEl.offsetWidth;
+      surferEl.classList.add('flash');
+    }
+
+    function updateHUD() {
+      timeLeftEl.textContent = String(Math.max(0, state.timerSeconds));
+      caughtCountEl.textContent = String(state.run.caught);
+      mistakeCountEl.textContent = String(state.run.mistakes);
+      runPointsEl.textContent = String(state.run.points);
+      scoreWindowValueEl.textContent = String(state.run.points);
+    }
+
+    function awardCatch() {
+      state.run.caught += 1;
+      state.run.points += CATCH_REWARD;
+      addVocabPoints(CATCH_REWARD);
+      updateHUD();
+    }
+
+function recordMistakeOnce() {
+  if (state.mistakeRecorded) return;
+
+  state.mistakeRecorded = true;
+  state.run.mistakes += 1;
+  updateHUD();
+}
+
+function advancePrompt() {
+  if (!state.playing || state.finished) return;
+
+  clearArenaObjects();
+
+  if (choosePrompt()) {
+    spawnSet();
+  }
+}
+
+function handleCollision(obj) {
+  if (
+    obj.counted ||
+    state.promptResolved ||
+    !state.playing ||
+    state.finished
+  ) {
+    return;
+  }
+
+  obj.counted = true;
+
+  if (
+    obj.option?.id &&
+    window.Analytics &&
+    typeof window.Analytics.logWordClick === 'function'
+  ) {
+    window.Analytics.logWordClick(
+      obj.option.id
+    );
+  }
+
+  state.promptResolved = true;
+
+  if (obj.isCorrect) {
+    obj.el.style.transform =
+      'translateX(-50%) scale(1.07)';
+
+    obj.el.style.opacity = '0.18';
+
+    awardCatch();
+
+    setTimeout(
+      advancePrompt,
+      160
+    );
+  } else {
+    recordMistakeOnce();
+
+    obj.el.style.transform =
+      'translateX(-50%) scale(1.05)';
+
+    obj.el.style.opacity = '0.18';
+
+    setTimeout(
+      advancePrompt,
+      180
+    );
+  }
+}
+
+function animationLoop(timestamp) {
+  if (!state.playing || state.finished) return;
+
+  if (!state.lastFrame) {
+    state.lastFrame = timestamp;
+  }
+  const delta = Math.min(
+    timestamp - state.lastFrame,
+    50
+  );
+
+  state.lastFrame = timestamp;
+  state.elapsedMs += delta;
+
+  const deltaSeconds = delta / 1000;
+  const elapsedSeconds = state.elapsedMs / 1000;
+
+  const rampSeconds = Math.max(
+    0,
+    elapsedSeconds - SPEED_RAMP_START_SECONDS
+  );
+
+  const speed = Math.min(
+    SPEED_BASE + rampSeconds * SPEED_RAMP,
+    SPEED_MAX
+  );
+
+  state.objects.forEach(obj => {
+    obj.y += speed * deltaSeconds;
+    obj.el.style.top = `${obj.y}px`;
+
+    const withinCatchZone =
+      obj.y >= obj.bottomLimit - 20 &&
+      obj.y <= obj.bottomLimit + 20;
+
+    if (
+      !obj.counted &&
+      obj.laneIndex === state.lane &&
+      withinCatchZone
+    ) {
+      handleCollision(obj);
+    }
+  });
+
+  state.objects.forEach(obj => {
+    const isGone =
+      obj.y > arena.clientHeight + 60;
+
+    if (!isGone) return;
+
+    obj.y = -132;
+    obj.counted = false;
+    obj.bottomLimit = arena.clientHeight - 118;
+
+    obj.el.style.top = '-132px';
+    obj.el.style.opacity = '1';
+    obj.el.style.transform =
+      'translateX(-50%)';
+  });
+
+  if (state.playing && !state.finished) {
+    state.animationId =
+      requestAnimationFrame(animationLoop);
+  }
+}
+    function getStars(points, mistakes) {
+  if (points >= 14 && mistakes <= 2) return '⭐⭐⭐';
+  if (points >= 8) return '⭐⭐';
+  return '⭐';
+}
+
+function finishGame() {
+  if (state.finished) return;
+
+  state.finished = true;
+  state.starting = false;
+  state.playing = false;
+  state.timerSeconds = 0;
+
+  if (state.timerId !== null) {
+    clearInterval(state.timerId);
+    state.timerId = null;
+  }
+
+  if (state.animationId !== null) {
+    cancelAnimationFrame(state.animationId);
+    state.animationId = null;
+  }
+
+  clearArenaObjects();
+
+  audioCache.forEach(audio => {
+    audio.pause();
+    audio.currentTime = 0;
+  });
+
+  updateHUD();
+  saveSurfRun();
+
+  finalCaughtEl.textContent =
+    String(state.run.caught);
+
+  finalMistakesEl.textContent =
+    String(state.run.mistakes);
+
+  finalPointsEl.textContent =
+    String(state.run.points);
+
+  finalScoreBoxEl.textContent =
+    String(state.run.points);
+
+  starsLineEl.textContent =
+    getStars(
+      state.run.points,
+      state.run.mistakes
+    );
+
+  resultNoteEl.innerHTML = `
+    This run added <strong>${state.run.points}</strong>
+    vocabulary points to Word Bank.
+    <br>
+    本轮已同步 <strong>${state.run.points}</strong>
+    个词汇积分到 Word Bank。
+  `;
+
+  overlayEl.style.display = 'flex';
+  setStartButtonsDisabled(false);
+}
+
+async function startCountdown() {
+  countdownEl.style.display = 'flex';
+
+  for (const value of [3, 2, 1, 'Go!']) {
+    countdownEl.textContent = value;
+
+    await new Promise(resolve =>
+      setTimeout(resolve, 520)
+    );
+  }
+
+  countdownEl.style.display = 'none';
+}
+
+function updateGameTimer() {
+  if (
+    !state.playing ||
+    state.finished
+  ) {
+    return;
+  }
+
+  const millisecondsLeft =
+    state.endTime - performance.now();
+
+  const secondsLeft =
+    Math.max(
+      0,
+      Math.ceil(
+        millisecondsLeft / 1000
+      )
+    );
+
+  if (
+    secondsLeft !==
+    state.timerSeconds
+  ) {
+    state.timerSeconds =
+      secondsLeft;
+
+    updateHUD();
+  }
+
+  if (secondsLeft <= 0) {
+    finishGame();
+  }
+}
+
+async function startGame() {
+  if (
+    state.starting ||
+    state.playing
+  ) {
+    return;
+  }
+
+  state.starting = true;
+  state.finished = false;
+
+  setStartButtonsDisabled(true);
+
+  if (state.timerId !== null) {
+    clearInterval(state.timerId);
+    state.timerId = null;
+  }
+
+  if (state.animationId !== null) {
+    cancelAnimationFrame(
+      state.animationId
+    );
+
+    state.animationId = null;
+  }
+
+  overlayEl.style.display = 'none';
+
+  clearArenaObjects();
+
+  audioCache.forEach(audio => {
+    audio.pause();
+    audio.currentTime = 0;
+  });
+
+  state.playing = false;
+  state.prompt = null;
+  state.options = [];
+
+  state.timerSeconds =
+    RUN_DURATION_SECONDS;
+
+  state.endTime = 0;
+  state.elapsedMs = 0;
+  state.lastFrame = 0;
+
+  state.promptResolved = false;
+  state.mistakeRecorded = false;
+
+  state.run = {
+    caught: 0,
+    mistakes: 0,
+    points: 0
+  };
+
+  setLane(0);
+
+  arenaStartPanelEl.style.display =
+    'none';
+
+  updateHUD();
+
+  await startCountdown();
+
+  if (!choosePrompt()) {
+    state.starting = false;
+    setStartButtonsDisabled(false);
+    return;
+  }
+
+  spawnSet();
+
+  state.starting = false;
+  state.playing = true;
+
+  state.endTime =
+    performance.now() +
+    RUN_DURATION_SECONDS * 1000;
+
+  state.timerId =
+    setInterval(
+      updateGameTimer,
+      100
+    );
+
+  state.animationId =
+    requestAnimationFrame(
+      animationLoop
+    );
+}
+
+startBtnEl.addEventListener(
+  'click',
+  startGame
+);
+
+arenaStartBtnEl.addEventListener(
+  'click',
+  startGame
+);
+
+playAgainBtnEl.addEventListener(
+  'click',
+  startGame
+);
+
+document
+  .getElementById('mobileLeftBtn')
+  .addEventListener(
+    'click',
+    () => {
+      setLane(
+        state.lane - 1
+      );
+    }
+  );
+
+document
+  .getElementById('mobileRightBtn')
+  .addEventListener(
+    'click',
+    () => {
+      setLane(
+        state.lane + 1
+      );
+    }
+  );
+
+window.addEventListener(
+  'keydown',
+  event => {
+    if (event.key === 'ArrowLeft') {
+      setLane(
+        state.lane - 1
+      );
+    }
+
+    if (event.key === 'ArrowRight') {
+      setLane(
+        state.lane + 1
+      );
+    }
+  }
+);
+
+arena.addEventListener(
+  'click',
+  event => {
+    if (
+      event.target.closest('button')
+    ) {
+      return;
+    }
+
+    const rect =
+      arena.getBoundingClientRect();
+
+    const clickX =
+      event.clientX - rect.left;
+
+    if (
+      clickX <
+      rect.width / 2
+    ) {
+      setLane(
+        state.lane - 1
+      );
+    } else {
+      setLane(
+        state.lane + 1
+      );
+    }
+  }
+);
+
+arena.addEventListener(
+  'touchstart',
+  event => {
+    state.touchStartX =
+      event.changedTouches[0]
+        .clientX;
+  },
+  {
+    passive: true
+  }
+);
+
+arena.addEventListener(
+  'touchend',
+  event => {
+    if (
+      state.touchStartX === null
+    ) {
+      return;
+    }
+
+    const currentX =
+      event.changedTouches[0]
+        .clientX;
+
+    const dx =
+      currentX -
+      state.touchStartX;
+
+    if (Math.abs(dx) > 18) {
+      setLane(
+        state.lane +
+        (dx > 0 ? 1 : -1)
+      );
+    } else {
+      const rect =
+        arena.getBoundingClientRect();
+
+      const x =
+        currentX - rect.left;
+
+      setLane(
+        state.lane +
+        (
+          x > rect.width / 2
+            ? 1
+            : -1
+        )
+      );
+    }
+
+    state.touchStartX = null;
+  },
+  {
+    passive: true
+  }
+);
+
+moduleSelectEl.value =
+  state.activeModule;
+
+moduleSelectEl.addEventListener(
+  'change',
+  () => {
+    state.activeModule =
+      moduleSelectEl.value ||
+      'mixed';
+
+    localStorage.setItem(
+      SURF_MODULE_KEY,
+      state.activeModule
+    );
+
+    resetSessionBank(
+      state.activeModule
+    );
+
+    renderLibraryStrip();
+
+    if (!state.playing) {
+      promptArtEl.innerHTML = '';
+
+      promptPrimaryEl.textContent =
+        'Press START.';
+
+      promptSecondaryEl.textContent =
+        '点击开始，开始冲浪挑战。';
+
+      arenaStartPanelEl.style.display =
+        'flex';
+    }
+  }
+);
+
+window.addEventListener(
+  'storage',
+  event => {
+    if (
+      event.key ===
+        VOCAB_POINTS_KEY ||
+      event.key ===
+        SURF_BEST_KEY
+    ) {
+      updateSyncedTotals();
+    }
+  }
+);
+
+preloadAudioLibrary();
+renderLibraryStrip();
+updateSyncedTotals();
+updateHUD();
+    </script>
+</body>
+</html>

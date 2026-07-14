@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#74b9ff">
+  
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="LinguaLab">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  
+  <link rel="apple-touch-icon" href="assets/img/icon-192.png">
+  <title>Word Bank — LinguaLab</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --primary: #22d3ee;
+    --primary-light: #ecfeff;
+    --accent: #f97316;
+    --navy: #1f4e79;
+    --green: #22c55e;
+    --bg: #f8fafc;
+    --radius: 24px;
+    --text: #0f172a;
+    --muted: #64748b;
+    --line: #e2e8f0;
+    --shadow-soft: 0 4px 15px rgba(0,0,0,0.04);
+    --shadow-card: 0 20px 40px rgba(0,0,0,0.08);
+  }
+
+    .game-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 20px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 16px;
+    color: #fff;
+    background: linear-gradient(90deg, #22d3ee, #0ea5e9);
+    box-shadow: 0 10px 24px rgba(14, 165, 233, 0.25);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  
+  .game-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 28px rgba(14, 165, 233, 0.30);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding-top: 80px;
+  }
+
+  .navbar-left,
+  .navbar-right,
+  .hero-copy,
+  .content-wrapper,
+  .category-container,
+  .wiki-box,
+  .wiki-text-area,
+  .flashcard-grid,
+  .flashcard-wrapper,
+  .flashcard-front,
+  .flashcard-back,
+  .footer-text {
+    min-width: 0;
+  }
+
+  .navbar-right a,
+  .hero-copy,
+  .hero-copy .cn-line,
+  .wiki-content,
+  .wiki-title,
+  .progress-counter,
+  .category-btn,
+  .flashcard-front h2,
+  .flashcard-back h3,
+  .flashcard-back p,
+  .footer-text {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 40px;
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(0,0,0,.05);
+    height: 80px;
+  }
+
+  .navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .nav-logo {
+    height: 50px;
+    width: auto;
+    display: block;
+  }
+
+  .nav-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.1;
+  }
+
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .navbar-right a {
+    color: var(--navy);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+  }
+
+  .navbar-right a:hover {
+    color: var(--accent);
+  }
+
+  .hero-compact {
+    padding: 60px 8% 140px;
+    text-align: center;
+    background: linear-gradient(135deg, var(--primary), #a78bfa);
+    color: #fff;
+    width: 100%;
+  }
+
+  .hero-compact h1 {
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    line-height: 1.15;
+  }
+
+  .hero-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-size: 18px;
+    flex-wrap: wrap;
+  }
+
+  .hero-copy {
+    max-width: 760px;
+    line-height: 1.6;
+    font-size: 17px;
+  }
+
+  .hero-copy .cn-line {
+    display: block;
+    font-size: 16px;
+    font-weight: 400;
+    opacity: 0.92;
+    margin-top: 6px;
+    line-height: 1.55;
+  }
+
+  .tree-badge {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 18px;
+    border-radius: 999px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    font-weight: 800;
+    white-space: nowrap;
+    font-size: 15px;
+    line-height: 1.2;
+  }
+
+  .content-wrapper {
+    max-width: 1100px;
+    margin: -100px auto 50px;
+    position: relative;
+    z-index: 10;
+    padding: 0 20px;
+  }
+
+  .category-container {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 30px 40px;
+    box-shadow: var(--shadow-card);
+    margin-bottom: 40px;
+    border: 1px solid var(--line);
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .category-btn {
+    flex: 0 0 auto;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: 800;
+    color: #475569;
+    transition: 0.2s;
+    font-size: 15px;
+    line-height: 1.25;
+    background: #f1f5f9;
+  }
+
+  .category-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(0.97);
+  }
+
+  .category-btn.active {
+    background: var(--navy);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(31, 78, 121, 0.3);
+    transform: scale(1.04);
+  }
+
+  .wiki-box {
+    background: #fff7ed;
+    border-left: 5px solid var(--accent);
+    padding: 30px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .wiki-text-area {
+    flex-grow: 1;
+    padding-right: 20px;
+  }
+
+  .wiki-title {
+    font-weight: 800;
+    color: #c2410c;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 1px;
+    line-height: 1.35;
+  }
+
+  .wiki-content {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #431407;
+  }
+
+  .wiki-content div + div {
+    margin-top: 8px;
+  }
+
+  .progress-counter {
+    background: #fff;
+    color: var(--accent);
+    font-weight: 800;
+    padding: 10px 20px;
+    border-radius: 999px;
+    font-size: 18px;
+    box-shadow: 0 4px 10px rgba(249, 115, 22, 0.15);
+    white-space: nowrap;
+    line-height: 1.2;
+    flex-shrink: 0;
+  }
+
+  .flashcard-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 25px;
+  }
+  
+  .flashcard-wrapper {
+    background: transparent;
+    aspect-ratio: 1 / 1;
+    perspective: 1000px;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .flashcard-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transform-style: preserve-3d;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+  }
+  
+  .flashcard-wrapper.flipped .flashcard-inner {
+    transform: rotateY(180deg);
+  }
+  
+  .flashcard-front,
+  .flashcard-back {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    overflow: hidden;
+  }
+  
+  .flashcard-front {
+    background: #fff;
+    border: 2px solid transparent;
+    transition: 0.3s;
+  }
+  
+  .flashcard-front img {
+    width: 112px;
+    height: 112px;
+    max-width: 72%;
+    max-height: 48%;
+    object-fit: contain;
+    object-position: center;
+    margin-bottom: 14px;
+    flex-shrink: 0;
+  }
+  
+  .flashcard-front h2 {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--navy);
+    margin: 0;
+    line-height: 1.2;
+  }
+  
+  .flashcard-back {
+    background: var(--navy);
+    color: #fff;
+    transform: rotateY(180deg);
+    border: 2px solid var(--navy);
+  }
+  
+  .flashcard-back h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #ffffff;
+    line-height: 1.35;
+    font-weight: 800;
+  }
+  
+  .flashcard-back p.sentence-zh {
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    color: var(--primary);
+    line-height: 1.3;
+  }
+  
+  .flashcard-back p.sentence-pinyin {
+    font-size: 15px;
+    line-height: 1.5;
+    color: #cbd5e1;
+  }
+  
+  .audio-btn {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.96);
+    color: var(--navy);
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.12);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    z-index: 5;
+    padding: 0;
+  }
+  
+  .audio-btn:hover {
+    transform: translateY(-1px) scale(1.04);
+    box-shadow: 0 10px 22px rgba(15, 23, 42, 0.16);
+  }
+  
+  .audio-btn:active {
+    transform: scale(0.96);
+  }
+  
+  .audio-btn:focus-visible {
+    outline: 3px solid rgba(34, 211, 238, 0.45);
+    outline-offset: 2px;
+  }
+  
+  .audio-btn svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+    fill: currentColor;
+  }
+  
+
+  #reward-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 40px 60px;
+    border-radius: var(--radius);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    z-index: 2000;
+    text-align: center;
+    border-top: 6px solid var(--green);
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    max-width: calc(100vw - 32px);
+  }
+
+  #reward-popup .trophy {
+    font-size: 60px;
+    margin-bottom: 10px;
+    animation: tada 1s ease-in-out infinite;
+  }
+
+  #reward-popup h2 {
+    color: var(--navy);
+    font-size: 32px;
+    margin-bottom: 10px;
+    line-height: 1.25;
+  }
+
+  #reward-popup p {
+    color: #64748b;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.55;
+  }
+
+  @keyframes tada {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-10deg) scale(1.1); }
+    50% { transform: rotate(10deg) scale(1.1); }
+    75% { transform: rotate(-10deg) scale(1.1); }
+  }
+
+  @keyframes popIn {
+    0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  }
+
+  #overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.6);
+    z-index: 1999;
+    backdrop-filter: blur(3px);
+  }
+
+  /* FOOTER */
+  footer {
+    background: #0f172a;
+    color: #94a3b8;
+    padding: 40px 8%;
+    text-align: center;
+    margin-top: 50px;
+  }
+
+  .footer-link {
+    color: #f97316;
+    text-decoration: none !important;
+  }
+
+  .footer-text {
+    font-size: 14px;
+    line-height: 1.65;
+    margin-top: 8px;
+  }
+
+
+@media (min-width: 561px) and (max-width: 1024px) {
+
+  .navbar {
+    height: auto;
+    min-height: 116px;
+    padding: 14px 24px;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .navbar-left {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 12px;
+  }
+
+  .nav-logo {
+    height: 48px;
+    max-width: 160px;
+    object-fit: contain;
+  }
+
+  .nav-title {
+    font-size: 23px;
+  }
+
+  .navbar-right {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px 18px;
+  }
+
+  .navbar-right a {
+    font-size: 14px;
+    line-height: 1.3;
+    white-space: nowrap;
+  }
+
+  .hero-compact {
+    padding: 50px 5% 120px;
+  }
+
+  .hero-compact h1 {
+    font-size: 36px;
+  }
+
+  .hero-info {
+    gap: 16px;
+  }
+
+  .hero-copy {
+    max-width: 680px;
+    font-size: 16px;
+  }
+
+  .hero-copy .cn-line {
+    font-size: 15px;
+  }
+
+  .tree-badge {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .content-wrapper {
+    max-width: 900px;
+    margin: -82px auto 45px;
+    padding: 0 20px;
+  }
+
+  .category-container {
+    padding: 24px 20px;
+    margin-bottom: 30px;
+    gap: 10px;
+    border-radius: 22px;
+  }
+
+  .category-btn {
+    padding: 11px 20px;
+    font-size: 14px;
+  }
+
+  .wiki-box {
+    padding: 24px;
+    margin-bottom: 26px;
+    gap: 18px;
+    border-radius: 20px;
+  }
+
+  .wiki-text-area {
+    padding-right: 10px;
+  }
+
+  .wiki-content {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .progress-counter {
+    padding: 9px 16px;
+    font-size: 16px;
+  }
+
+  .flashcard-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .flashcard-wrapper {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+
+  .flashcard-inner,
+  .flashcard-front,
+  .flashcard-back {
+    border-radius: 22px;
+  }
+
+  .flashcard-front,
+  .flashcard-back {
+    padding: 16px;
+  }
+
+  .flashcard-front img {
+    width: 96px;
+    height: 96px;
+    max-width: 70%;
+    max-height: 46%;
+    margin-bottom: 12px;
+  }
+
+  .flashcard-front h2 {
+    font-size: 21px;
+  }
+
+  .flashcard-back h3 {
+    font-size: 17px;
+  }
+
+  .flashcard-back p.translation,
+  .flashcard-back p.sentence-zh {
+    font-size: 20px;
+  }
+
+  .flashcard-back p.pinyin,
+  .flashcard-back p.sentence-pinyin {
+    font-size: 14px;
+  }
+
+  .flashcard-back p.sentence {
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .audio-btn {
+    width: 40px;
+    height: 40px;
+    top: 12px;
+    right: 12px;
+  }
+
+  .surf-game-entry {
+    margin: 20px 0 28px !important;
+    padding: 0 20px;
+  }
+
+  .game-btn {
+    min-height: 48px;
+    padding: 13px 20px;
+    font-size: 15px;
+  }
+
+  #reward-popup {
+    width: min(480px, calc(100vw - 40px));
+    padding: 34px 30px;
+  }
+
+  img,
+  video,
+  audio {
+    max-width: 100%;
+  }
+
+  footer {
+    margin-top: 45px;
+    padding: 34px 5%;
+  }
+}
+
+
+@media (max-width: 560px) {
+  body {
+    padding-top: 112px;
+  }
+
+  .navbar {
+    height: auto;
+    min-height: 106px;
+    padding: 12px 16px;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .navbar-left {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  .nav-logo {
+    height: 42px;
+    max-width: 130px;
+    object-fit: contain;
+  }
+
+  .nav-title {
+    font-size: 21px;
+  }
+
+  .navbar-right {
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    padding-top: 0;
+    border-top: none;
+  }
+
+  .navbar-right a {
+    font-size: 12px;
+    line-height: 1.3;
+    white-space: nowrap;
+  }
+
+  .hero-compact {
+    padding: 34px 16px 90px;
+  }
+
+  .hero-compact h1 {
+    margin-bottom: 10px;
+    font-size: 29px;
+    line-height: 1.2;
+  }
+
+  .hero-info {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .hero-copy {
+    max-width: 100%;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .hero-copy .cn-line {
+    margin-top: 5px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .tree-badge {
+    padding: 7px 14px;
+    font-size: 13px;
+  }
+
+  .content-wrapper {
+    margin: -58px auto 35px;
+    padding: 0 12px;
+  }
+
+  .category-container {
+    padding: 16px 12px;
+    margin-bottom: 20px;
+    gap: 8px;
+    border-radius: 18px;
+  }
+
+  .category-btn {
+    width: 100%;
+    max-width: 100%;
+    padding: 12px 14px;
+    font-size: 14px;
+    border-radius: 14px;
+  }
+
+  .wiki-box {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    padding: 18px 16px;
+    margin-bottom: 20px;
+    text-align: left;
+    border-radius: 18px;
+  }
+
+  .wiki-text-area {
+    width: 100%;
+    padding-right: 0;
+  }
+
+  .wiki-title {
+    margin-bottom: 8px;
+    font-size: 11px;
+  }
+
+  .wiki-content {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .wiki-content div + div {
+    margin-top: 7px;
+  }
+
+  .progress-counter {
+    align-self: flex-start;
+    padding: 8px 14px;
+    font-size: 15px;
+    white-space: nowrap;
+  }
+
+  .flashcard-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .flashcard-wrapper {
+    width: 100%;
+    height: 240px;
+    aspect-ratio: auto;
+  }
+
+  .flashcard-inner,
+  .flashcard-front,
+  .flashcard-back {
+    border-radius: 18px;
+  }
+
+  .flashcard-front,
+  .flashcard-back {
+    padding: 16px;
+  }
+
+  .flashcard-front img {
+    width: 104px;
+    height: 104px;
+    max-width: 68%;
+    max-height: 50%;
+    margin-bottom: 12px;
+  }
+
+  .flashcard-front h2 {
+    font-size: 20px;
+  }
+
+  .flashcard-back h3 {
+    margin-bottom: 7px;
+    font-size: 19px;
+  }
+
+  .flashcard-back p.translation,
+  .flashcard-back p.sentence-zh {
+    margin-bottom: 6px;
+    font-size: 21px;
+  }
+
+  .flashcard-back p.pinyin,
+  .flashcard-back p.sentence-pinyin {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .flashcard-back p.sentence {
+    padding-top: 9px;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .audio-btn {
+    width: 38px;
+    height: 38px;
+    top: 11px;
+    right: 11px;
+  }
+
+  .audio-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .surf-game-entry {
+    margin: 18px 0 24px !important;
+    padding: 0 12px;
+  }
+
+  .game-btn {
+    width: 100%;
+    min-height: 48px;
+    padding: 13px 16px;
+    font-size: 14px;
+  }
+
+  #reward-popup {
+    width: calc(100vw - 24px);
+    padding: 26px 18px;
+    border-radius: 18px;
+  }
+
+  #reward-popup .trophy {
+    font-size: 46px;
+  }
+
+  #reward-popup h2 {
+    font-size: 24px;
+  }
+
+  #reward-popup p {
+    font-size: 15px;
+  }
+
+  img,
+  video,
+  audio {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  footer {
+    margin-top: 35px;
+    padding: 28px 16px;
+    font-size: 13px;
+  }
+
+  .footer-text {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+}
+</style>
+</head>
+<body>
+    <header class="navbar">
+      <div class="navbar-left">
+        <img src="assets/img/logo.png" alt="LL" class="nav-logo" onerror="this.style.display='none'">
+        <span class="nav-title">LinguaLab</span>
+      </div>
+
+      
+    
+  <nav class="navbar-right">
+    <a href="surf.html">Splash Ride</a>
+    <a href="grammar.html">Grammar Magic</a>
+    <a href="vocabulary.html">Word Bank</a>
+    <a href="exercises.html">Fun Homework</a>
+    <a href="parents.html">Wiki Parents</a>
+    <a href="index.html">Main Page</a>
+    <a href="research.html">Research</a>
+    <a href="contact.html">Contact us</a>
+  </nav>
+    </header>
+    
+    <section class="hero-compact">
+      <h1>Word Bank</h1>
+      <div class="hero-info">
+        <div class="hero-copy">
+          Tap, listen, and flip!
+          <span class="cn-line">点一点，听一听，翻一翻！</span>
+        </div>
+        <div class="tree-badge">Points: <span id="header-score">0</span></div>
+      </div>
+    </section>
+    
+    <div class="content-wrapper">
+      <div class="category-container" id="category-list"></div>
+      <div id="content-area"></div>
+    </div>  
+
+  <div class="surf-game-entry" style="margin:18px 0 26px; display:flex; justify-content:center;">
+  <a href="surf.html" class="game-btn">Play Splash Ride</a>
+</div>
+
+
+<div id="overlay"></div>
+<div id="reward-popup">
+    <div class="trophy">🌟</div>
+    <h2 style="color: var(--accent);">Mission Complete! <br><span style="font-size: 28px;">任务完成！</span></h2>
+    <p>You unlocked all the words!<br><span style="font-size: 15px; opacity: 0.8;">你解锁了所有单词！</span></p>
+</div>
+
+<footer>
+    <div class="footer-links">
+        <a href="privacy.html" class="footer-link">Privacy Policy</a>
+    </div>
+  
+    <div class="footer-text">
+      © 2026 LinguaLab • Small lessons. Real progress. All rights reserved.
+    </div>
+  </footer>
+
+<script src="analytics.js"></script>
+
+<script>
+  const dictionary = {
+    "family": { 
+        title: "Family & Friends", 
+        wiki: `
+          <div><b>Focus (今日词汇):</b> Family members, greetings, and simple self-introduction: Daddy, Mommy, Grandma, Grandpa, Aunt, Uncle, Boy, Girl, Family.</div>
+          <div><b>Say (可以这样说):</b> “Good morning, Mommy.” / “Hello, Uncle.” / “This is my family.” / “I am a girl.”</div>
+          <div><b>Play (互动小贴士):</b> Use real family photos. Point to each person and say the word together. Then make one short sentence.</div>
+          <div><b>Ask (亲子提问):</b> “Who is this?” / “Is this Grandma?” / “Can you say hello to Daddy?”</div>
+          <div><b>Parent note (家长观察):</b> This unit is good for emotional connection. Let the child use real names or photos, not only flashcards.</div>
+          <div class="cn-line">重点：家庭成员和简单问候。建议用真实家庭照片练习，让孩子把英语和真实生活联系起来。</div>
+            `,
+
+      words: [
+            { id: "daddy", en: "Daddy", pinyin: "bà ba", zh: "爸爸", sentence: "Good morning, Daddy.", img: "assets/img/daddy.png", audio: "assets/audio/daddy.mp3" },
+            { id: "mommy", en: "Mommy", pinyin: "mā ma", zh: "妈妈", sentence: "Good morning, Mommy.", img: "assets/img/mommy.png", audio: "assets/audio/mommy.mp3" },
+            { id: "grandma", en: "Grandma", pinyin: "nǎi nai / wài pó", zh: "奶奶 / 外婆", sentence: "How are you, Grandma?", img: "assets/img/grandma.png", audio: "assets/audio/grandma.mp3" },
+            { id: "grandpa", en: "Grandpa", pinyin: "yé ye / wài gōng", zh: "爷爷 / 外公", sentence: "How are you, Grandpa?", img: "assets/img/grandpa.png", audio: "assets/audio/grandpa.mp3" },
+            { id: "aunt", en: "Aunt", pinyin: "ā yí / gū gu", zh: "阿姨 / 姑姑", sentence: "Hello, Aunt.", img: "assets/img/aunt.png", audio: "assets/audio/aunt.mp3" },
+            { id: "uncle", en: "Uncle", pinyin: "shū shu / jiù jiu", zh: "叔叔 / 舅舅", sentence: "Hello, Uncle.", img: "assets/img/uncle.png", audio: "assets/audio/uncle.mp3" },
+            { id: "boy", en: "Boy", pinyin: "nán hái", zh: "男孩", sentence: "I am a boy.", img: "assets/img/boy.png", audio: "assets/audio/boy.mp3" },
+            { id: "girl", en: "Girl", pinyin: "nǚ hái", zh: "女孩", sentence: "I am a girl.", img: "assets/img/girl.png", audio: "assets/audio/girl.mp3" },
+            { id: "family", en: "Family", pinyin: "jiā ren", zh: "家人", sentence: "This is my family.", img: "assets/img/family.png", audio: "assets/audio/family.mp3" }
+        ] 
+    },
+
+    "school": { 
+        title: "My School", 
+        wiki: `
+            <div><b>Focus (今日词汇):</b> School objects and classroom actions: bag, book, pencil, teacher.</div>
+            <div><b>Say (可以这样说):</b> “Open your bag.” / “It is a book.” / “This is a pencil.” / “Hello, Teacher.”</div>
+            <div><b>Play (互动小贴士):</b> Put a book and pencil inside a real bag. Let the child take one item out and say the word or sentence.</div>
+            <div><b>Ask (亲子提问):</b> “What is in your bag?” / “Is it a book?” / “Can you find a pencil?”</div>
+            <div><b>Parent note (家长观察):</b> This unit works best with real objects. Short commands like “open,” “find,” and “show me” help children understand through action.</div>
+            <div class="cn-line">重点：书包、书、铅笔、老师，以及简单课堂动作。可以用真实文具做小游戏。</div>
+          `,
+        words: [
+            { id: "bag", en: "Bag", pinyin: "shū bāo", zh: "书包", sentence: "Open your bag.", img: "assets/img/bag.png", audio: "assets/audio/bag.mp3" },
+            { id: "book", en: "Book", pinyin: "shū", zh: "书", sentence: "It is a book.", img: "assets/img/book.png", audio: "assets/audio/book.mp3" },
+            { id: "pencil", en: "Pencil", pinyin: "qiān bǐ", zh: "铅笔", sentence: "This is a pencil.", img: "assets/img/pencil.png", audio: "assets/audio/pencil.mp3" },
+            { id: "teacher", en: "Teacher", pinyin: "lǎo shī", zh: "老师", sentence: "Hello, Teacher.", img: "assets/img/teacher.png", audio: "assets/audio/teacher.mp3" }
+        ] 
+    },
+
+    "face": { 
+        title: "My Face", 
+        wiki: `
+          <div><b>Focus (今日词汇):</b> Face parts and body-awareness sentences: eye, nose, mouth, ear, hair, face.</div>
+          <div><b>Say (可以这样说):</b> “This is my nose.” / “Touch your ear.” / “Close your eyes.” / “This is my face.”</div>
+          <div><b>Play (互动小贴士):</b> Stand in front of a mirror. Parent says a word, child touches the correct body part.</div>
+          <div><b>Ask (亲子提问):</b> “Where is your nose?” / “Can you touch your ears?” / “What is this?”</div>
+          <div><b>Parent note (家长观察):</b> Movement helps memory. If the child answers by touching instead of speaking, that is still meaningful comprehension.</div>
+          <div class="cn-line">重点：五官词汇。照镜子、摸一摸、说一说，可以帮助孩子通过动作记忆单词。</div>
+        `,
+        words: [
+            { id: "eye", en: "Eye", pinyin: "yǎn jing", zh: "眼睛", sentence: "Close your eyes.", img: "assets/img/eye.png", audio: "assets/audio/eye.mp3" },
+            { id: "nose", en: "Nose", pinyin: "bí zi", zh: "鼻子", sentence: "This is my nose.", img: "assets/img/nose.png", audio: "assets/audio/nose.mp3" },
+            { id: "mouth", en: "Mouth", pinyin: "zuǐ ba", zh: "嘴巴", sentence: "This is my mouth.", img: "assets/img/mouth.png", audio: "assets/audio/mouth.mp3" },
+            { id: "ear", en: "Ear", pinyin: "ěr duo", zh: "耳朵", sentence: "Touch your ear.", img: "assets/img/ear.png", audio: "assets/audio/ear.mp3" },
+            { id: "hair", en: "Hair", pinyin: "tóu fa", zh: "头发", sentence: "My hair!", img: "assets/img/hair.png", audio: "assets/audio/hair.mp3" },
+            { id: "face", en: "Face", pinyin: "liǎn", zh: "脸", sentence: "This is my face.", img: "assets/img/face.png", audio: "assets/audio/face.mp3" }
+        ] 
+    },
+
+    "animals": { 
+        title: "Farm & Zoo Animals", 
+        wiki: `
+          <div><b>Focus (今日词汇):</b> Farm and zoo animals: cow, pig, duck, hen, panda, tiger, bear, monkey.</div>
+          <div><b>Say (可以这样说):</b> “It is a cow.” / “Look at the panda.” / “Two tigers.” / “Act like a monkey.”</div>
+          <div><b>Play (互动小贴士):</b> Make animal sounds or movements. Let the child guess the animal and then say the English word.</div>
+          <div><b>Ask (亲子提问):</b> “What animal is it?” / “Can you walk like a duck?” / “Is it a tiger or a panda?”</div>
+          <div><b>Parent note (家长观察):</b> Animal units are perfect for shy children because they can act first and speak later.</div>
+          <div class="cn-line">重点：农场和动物园动物。可以通过叫声、动作和猜谜帮助孩子自然开口。</div>
+        `,
+        words: [
+            { id: "cow", en: "Cow", pinyin: "niú", zh: "牛", sentence: "It is a cow.", img: "assets/img/cow.png", audio: "assets/audio/cow.mp3" },
+            { id: "pig", en: "Pig", pinyin: "zhū", zh: "猪", sentence: "One pig.", img: "assets/img/pig.png", audio: "assets/audio/pig.mp3" },
+            { id: "duck", en: "Duck", pinyin: "yā zi", zh: "鸭子", sentence: "Walk like a duck.", img: "assets/img/duck.png", audio: "assets/audio/duck.mp3" },
+            { id: "hen", en: "Hen", pinyin: "mǔ jī", zh: "母鸡", sentence: "It is a hen.", img: "assets/img/hen.png", audio: "assets/audio/hen.mp3" },
+            { id: "panda", en: "Panda", pinyin: "xióng māo", zh: "熊猫", sentence: "Look at the panda.", img: "assets/img/panda.png", audio: "assets/audio/panda.mp3" },
+            { id: "tiger", en: "Tiger", pinyin: "lǎo hǔ", zh: "老虎", sentence: "Two tigers.", img: "assets/img/tiger.png", audio: "assets/audio/tiger.mp3" },
+            { id: "bear", en: "Bear", pinyin: "xióng", zh: "熊", sentence: "It is a bear.", img: "assets/img/bear.png", audio: "assets/audio/bear.mp3" },
+            { id: "monkey", en: "Monkey", pinyin: "hóu zi", zh: "猴子", sentence: "Act like a monkey.", img: "assets/img/monkey.png", audio: "assets/audio/monkey.mp3" }
+        ] 
+    },
+
+    "transport": { 
+        title: "Transport & Safety", 
+        wiki: `
+          <div><b>Focus (今日词汇):</b> Vehicles and simple traffic language: car, bus, bike, taxi, wheel.</div>
+          <div><b>Say (可以这样说):</b> “Look at the car.” / “It is a bus.” / “Oh, my bike!” / “Find a wheel.”</div>
+          <div><b>Play (互动小贴士):</b> Look out of the window or use toy vehicles. Sort them into “car,” “bus,” “bike,” and “taxi.”</div>
+          <div><b>Ask (亲子提问):</b> “What can you see?” / “Is it a bus?” / “Can you find a wheel?”</div>
+          <div><b>Parent note (家长观察):</b> This topic connects well with daily life. Practice during walks, taxi rides, or on the way to school.</div>
+          <div class="cn-line">重点：交通工具和简单交通表达。可以在路上、车里或用玩具车进行自然练习。</div>
+        `,
+        words: [
+            { id: "car", en: "Car", pinyin: "qì chē", zh: "汽车", sentence: "Look at the car.", img: "assets/img/car.png", audio: "assets/audio/car.mp3" },
+            { id: "bus", en: "Bus", pinyin: "gōng jiāo chē", zh: "公交车", sentence: "It is a bus.", img: "assets/img/bus.png", audio: "assets/audio/bus.mp3" },
+            { id: "bike", en: "Bike", pinyin: "zì xíng chē", zh: "自行车", sentence: "Oh, my bike!", img: "assets/img/bike.png", audio: "assets/audio/bike.mp3" },
+            { id: "taxi", en: "Taxi", pinyin: "chū zū chē", zh: "出租车", sentence: "It is a taxi.", img: "assets/img/taxi.png", audio: "assets/audio/taxi.mp3" },
+            { id: "wheel", en: "Wheel", pinyin: "lún zi", zh: "轮子", sentence: "Find a wheel.", img: "assets/img/wheel.png", audio: "assets/audio/wheel.mp3" }
+        ] 
+    },
+
+    "pets": { 
+        title: "My Pets", 
+      wiki: `
+        <div><b>Focus (今日词汇):</b> Pet animals and the sentence pattern “I have…”: bird, fish, rabbit, turtle, dog, pet.</div>
+        <div><b>Say (可以这样说):</b> “I have a bird.” / “I have a rabbit.” / “It is a fish.” / “It is my pet.”</div>
+        <div><b>Play (互动小贴士):</b> Use toy animals or pictures. Let the child choose one pet and say “I have a…”</div>
+        <div><b>Ask (亲子提问):</b> “What pet do you have?” / “Do you like dogs?” / “Is it a fish or a turtle?”</div>
+        <div><b>Parent note (家长观察):</b> Encourage the child to personalize the sentence. It can be real or imaginary: “I have a dragon” is also playful language practice.</div>
+        <div class="cn-line">重点：宠物词汇和 “I have...” 句型。可以让孩子选择自己喜欢的宠物来说句子。</div>
+      `,
+        words: [
+            { id: "bird", en: "Bird", pinyin: "niǎo", zh: "鸟", sentence: "I have a bird.", img: "assets/img/bird.png", audio: "assets/audio/bird.mp3" },
+            { id: "fish", en: "Fish", pinyin: "yú", zh: "鱼", sentence: "It is a fish.", img: "assets/img/fish.png", audio: "assets/audio/fish.mp3" },
+            { id: "rabbit", en: "Rabbit", pinyin: "tù zi", zh: "兔子", sentence: "I have a rabbit.", img: "assets/img/rabbit.png", audio: "assets/audio/rabbit.mp3" },
+            { id: "turtle", en: "Turtle", pinyin: "wū guī", zh: "乌龟", sentence: "I have a turtle.", img: "assets/img/turtle.png", audio: "assets/audio/turtle.mp3" },
+            { id: "dog", en: "Dog", pinyin: "gǒu", zh: "狗", sentence: "I have a dog.", img: "assets/img/dog.png", audio: "assets/audio/dog.mp3" },
+            { id: "pet", en: "Pet", pinyin: "chǒng wù", zh: "宠物", sentence: "It is my pet.", img: "assets/img/pet.png", audio: "assets/audio/pet.mp3" }
+        ] 
+    },
+
+    "colors": { 
+        title: "Colors", 
+        wiki: `
+          <div><b>Focus (今日词汇):</b> Basic colors and the question “What color is it?”: red, blue, yellow, green, orange, color.</div>
+          <div><b>Say (可以这样说):</b> “It is red.” / “It is blue.” / “What color is it?” / “It is orange.”</div>
+          <div><b>Play (互动小贴士):</b> Use clothes, toys, crayons, or food. Parent asks “What color is it?” and the child answers with one color.</div>
+          <div><b>Ask (亲子提问):</b> “Can you find something green?” / “What color is your shirt?” / “Is it yellow?”</div>
+          <div><b>Parent note (家长观察):</b> Color words are easy to review many times a day. Short, repeated practice is better than one long session.</div>
+          <div class="cn-line">重点：颜色词和 “What color is it?” 问答。可以用衣服、玩具、彩笔随时复习。</div>
+        `,
+        words: [
+            { id: "red", en: "Red", pinyin: "hóng sè", zh: "红色", sentence: "It is red.", img: "assets/img/red.png", audio: "assets/audio/red.mp3" },
+            { id: "blue", en: "Blue", pinyin: "lán sè", zh: "蓝色", sentence: "It is blue.", img: "assets/img/blue.png", audio: "assets/audio/blue.mp3" },
+            { id: "yellow", en: "Yellow", pinyin: "huáng sè", zh: "黄色", sentence: "It is yellow.", img: "assets/img/yellow1.png", audio: "assets/audio/yellow.mp3" },
+            { id: "green", en: "Green", pinyin: "lǜ sè", zh: "绿色", sentence: "It is green.", img: "assets/img/green.png", audio: "assets/audio/green.mp3" },
+            { id: "orange_color", en: "Orange", pinyin: "chéng sè", zh: "橙色", sentence: "It is orange.", img: "assets/img/orange_color.png", audio: "assets/audio/orange.mp3" },
+            { id: "color", en: "Color", pinyin: "yán sè", zh: "颜色", sentence: "What color is it?", img: "assets/img/color.png", audio: "assets/audio/color.mp3" }
+        ] 
+    },
+
+    "park": { 
+        title: "In the Park", 
+        wiki: `
+        <div><b>Focus (今日词汇):</b> Nature words: flower, grass, park, insect, kite, tree. Children also practice short describing sentences such as “It is a tree” and “Look at the insect.”</div>
+        <div><b>Say (可以这样说):</b> “It is a flower.” / “Touch the grass.” / “Look at the tree.” / “Let’s go to the park.”</div>
+        <div><b>Play (互动小贴士):</b> Go outside or look at pictures. Point to real objects and let the child say one word first, then repeat the full sentence together.</div>
+        <div><b>Ask (亲子提问):</b> “What is it?” / “Can you find a tree?” / “What do you see in the park?”</div>
+        <div><b>Parent note (家长观察):</b> Do not force long answers. If the child can point, repeat, or say one keyword, it already counts as useful practice.</div>
+        <div class="cn-line">重点词汇：flower, grass, park, insect, kite, tree。家长可以带孩子在户外指认真实物品，先说单词，再一起说完整句子。</div>,
+      `,
+        words: [
+            { id: "flower", en: "Flower", pinyin: "huā", zh: "花", sentence: "It's a flower.", img: "assets/img/flower.png", audio: "assets/audio/flower.mp3" },
+            { id: "grass", en: "Grass", pinyin: "cǎo", zh: "草", sentence: "Touch the grass.", img: "assets/img/grass.png", audio: "assets/audio/grass.mp3" },
+            { id: "park", en: "Park", pinyin: "gōng yuán", zh: "公园", sentence: "Let's go to the park.", img: "assets/img/park.png", audio: "assets/audio/park.mp3" },
+            { id: "insect", en: "Insect", pinyin: "kūn chóng", zh: "昆虫", sentence: "Look at the insect.", img: "assets/img/insect.png", audio: "assets/audio/insect.mp3" },
+            { id: "kite", en: "Kite", pinyin: "fēng zheng", zh: "风筝", sentence: "It's a kite.", img: "assets/img/kite.png", audio: "assets/audio/kite.mp3" },
+            { id: "tree", en: "Tree", pinyin: "shù", zh: "树", sentence: "It is a tree.", img: "assets/img/tree.png", audio: "assets/audio/tree.mp3" }
+        ] 
+    },
+
+    "food": { 
+        title: "Yummy Food & Drinks", 
+        wiki: `
+          <div><b>Focus (今日词汇):</b> Food and drinks: bread, cake, food, juice, milk, water, jam. Children also practice the useful pattern “I like...”</div>
+          <div><b>Say (可以这样说):</b> “I like bread.” / “I like milk.” / “Drink some water.” / “Yummy food!”</div>
+          <div><b>Play (互动小贴士):</b> Use snack time as a natural mini-lesson. Point to real food and drinks, say the word, then make one short sentence together.</div>
+          <div><b>Ask (亲子提问):</b> “Do you like milk?” / “What do you like?” / “Is it juice or water?” / “Can you say: I like cake?”</div>
+          <div><b>Parent note (家长观察):</b> This unit is useful for daily routines. Try not to correct every mistake immediately. Repeat the correct sentence naturally: Child says “I like milk” → Parent says “Great! I like milk too.”</div>
+          <div class="cn-line">重点：食物、饮料和 “I like...” 句型。可以在吃点心、喝水、吃早餐时自然练习。</div>
+        `, 
+        words: [
+            { id: "bread", en: "Bread", pinyin: "miàn bāo", zh: "面包", sentence: "I like bread.", img: "assets/img/bread.png", audio: "assets/audio/bread.mp3" },
+            { id: "cake", en: "Cake", pinyin: "dàn gāo", zh: "蛋糕", sentence: "I like cake.", img: "assets/img/cake.png", audio: "assets/audio/cake.mp3" },
+            { id: "food", en: "Food", pinyin: "shí wù", zh: "食物", sentence: "Yummy food!", img: "assets/img/food.png", audio: "assets/audio/food.mp3" },
+            { id: "juice", en: "Juice", pinyin: "guǒ zhī", zh: "果汁", sentence: "I like juice.", img: "assets/img/juice.png", audio: "assets/audio/juice.mp3" },
+            { id: "milk", en: "Milk", pinyin: "niú nǎi", zh: "牛奶", sentence: "I like milk.", img: "assets/img/milk.png", audio: "assets/audio/milk.mp3" },
+            { id: "water", en: "Water", pinyin: "shuǐ", zh: "水", sentence: "Drink some water.", img: "assets/img/water.png", audio: "assets/audio/water.mp3" },
+            { id: "jam", en: "Jam", pinyin: "guǒ jiàng", zh: "果酱", sentence: "Jam on bread.", img: "assets/img/jam.png", audio: "assets/audio/jam.mp3" }
+        ] 
+    },
+
+      "fruit": { 
+      title: "Fruit Basket", 
+    
+      wiki: `
+        <div><b>Focus (今日词汇):</b> Fruit words: apple, banana, pear, orange. Children practice naming fruit and using simple preference sentences.</div>
+        <div><b>Say (可以这样说):</b> “I have an apple.” / “I like bananas.” / “Peel an orange.” / “This is a pear.”</div>
+        <div><b>Play (互动小贴士):</b> Use real fruit, toy fruit, or pictures. Put fruit in a small basket and let the child choose one item and say the English word.</div>
+        <div><b>Ask (亲子提问):</b> “What fruit is it?” / “Do you like bananas?” / “Is it an apple or a pear?” / “Can you find an orange?”</div>
+        <div><b>Parent note (家长观察):</b> Fruit vocabulary is easy to connect with real life. Let the child smell, touch, or choose the fruit first, then say the word. Real context helps memory.</div>
+        <div class="cn-line">重点：水果词汇和简单喜好表达。建议用真实水果或玩具水果练习，让孩子边看边说。</div>
+      `, 
+    
+      words: [
+        { id: "apple", en: "Apple", pinyin: "píng guǒ", zh: "苹果", sentence: "I have an apple.", img: "assets/img/apple.png", audio: "assets/audio/apple.mp3" },
+        { id: "banana", en: "Banana", pinyin: "xiāng jiāo", zh: "香蕉", sentence: "I like bananas.", img: "assets/img/banana.png", audio: "assets/audio/banana.mp3" },
+        { id: "pear", en: "Pear", pinyin: "lí", zh: "梨", sentence: "I have a pear.", img: "assets/img/pear.png", audio: "assets/audio/pear.mp3" },
+        { id: "orange_fruit", en: "Orange", pinyin: "chéng zi", zh: "橙子", sentence: "Peel an orange.", img: "assets/img/orange.png", audio: "assets/audio/an_orange.mp3" }
+      ] 
+    },
+
+    "numbers": { 
+        title: "Numbers 1–10", 
+      
+        wiki: `
+          <div><b>Focus (今日词汇):</b> Numbers from one to ten. Children practice counting objects and making simple quantity phrases.</div>
+          <div><b>Say (可以这样说):</b> “One banana.” / “Two oranges.” / “Five apples.” / “Ten pears.”</div>
+          <div><b>Play (互动小贴士):</b> Count real objects: fruit, toys, pencils, blocks, or fingers. Start with 1–3, then slowly add more numbers.</div>
+          <div><b>Ask (亲子提问):</b> “How many?” / “Can you count?” / “How many apples?” / “Can you show me five?”</div>
+          <div><b>Parent note (家长观察):</b> Counting is easier when the child can touch or move objects. Do not rush to 10 immediately. Stable counting from 1 to 5 is already a strong first step.</div>
+          <div class="cn-line">重点：数字 1–10 和简单数量表达。建议用水果、玩具、积木或手指进行实物数数。</div>
+        `, 
+      
+        words: [
+          { id: "one", en: "One", pinyin: "yī", zh: "一", sentence: "One banana.", img: "assets/img/one.png", audio: "assets/audio/one.mp3" },
+          { id: "two", en: "Two", pinyin: "èr", zh: "二", sentence: "Two oranges.", img: "assets/img/two.png", audio: "assets/audio/two.mp3" },
+          { id: "three", en: "Three", pinyin: "sān", zh: "三", sentence: "Three grapes.", img: "assets/img/three.png", audio: "assets/audio/three.mp3" },
+          { id: "four", en: "Four", pinyin: "sì", zh: "四", sentence: "Four apples.", img: "assets/img/four.png", audio: "assets/audio/four.mp3" },
+          { id: "five", en: "Five", pinyin: "wǔ", zh: "五", sentence: "Five apples.", img: "assets/img/five.png", audio: "assets/audio/five.mp3" },
+          { id: "six", en: "Six", pinyin: "liù", zh: "六", sentence: "Six bananas.", img: "assets/img/six.png", audio: "assets/audio/six.mp3" },
+          { id: "seven", en: "Seven", pinyin: "qī", zh: "七", sentence: "Seven pears.", img: "assets/img/seven.png", audio: "assets/audio/seven.mp3" },
+          { id: "eight", en: "Eight", pinyin: "bā", zh: "八", sentence: "Eight bananas.", img: "assets/img/eight.png", audio: "assets/audio/eight.mp3" },
+          { id: "nine", en: "Nine", pinyin: "jiǔ", zh: "九", sentence: "Nine pears.", img: "assets/img/nine.png", audio: "assets/audio/nine.mp3" },
+          { id: "ten", en: "Ten", pinyin: "shí", zh: "十", sentence: "Ten pears.", img: "assets/img/ten.png", audio: "assets/audio/ten.mp3" }
+        ] 
+      },
+  };
+    
+    let learnedCards = new Set();
+    let currentCategoryWordsCount = 0;
+
+    const categoryListEl = document.getElementById('category-list');
+    const contentAreaEl = document.getElementById('content-area');
+
+let activeAudio = null;
+
+function stopActiveAudio() {
+  if (!activeAudio) return;
+
+  try {
+    activeAudio.pause();
+
+    if (
+      Number.isFinite(activeAudio.duration) &&
+      activeAudio.readyState > 0
+    ) {
+      activeAudio.currentTime = 0;
+    }
+  } catch (error) {
+    console.warn(
+      'Cannot stop previous audio:',
+      error
+    );
+  }
+
+  activeAudio = null;
+}
+
+function playWordAudio(
+  src,
+  wordId = '',
+  shouldLog = true
+) {
+  if (!src) {
+    console.warn('Audio source is empty.');
+    return false;
+  }
+
+  stopActiveAudio();
+  const audio = new Audio(src);
+
+  audio.preload = 'auto';
+  audio.setAttribute('playsinline', '');
+  audio.setAttribute('webkit-playsinline', '');
+
+  activeAudio = audio;
+
+  const logSuccessfulPlay = () => {
+    if (
+      shouldLog &&
+      wordId &&
+      window.Analytics &&
+      typeof window.Analytics.logWordAudio ===
+        'function'
+    ) {
+      window.Analytics.logWordAudio(
+        wordId
+      );
+    }
+  };
+
+  const handleAudioError = error => {
+    console.error(
+      'Audio could not be played:',
+      src,
+      error
+    );
+
+    if (activeAudio === audio) {
+      activeAudio = null;
+    }
+  };
+
+  audio.addEventListener(
+    'ended',
+    () => {
+      if (activeAudio === audio) {
+        activeAudio = null;
+      }
+    },
+    {
+      once: true
+    }
+  );
+
+  audio.addEventListener(
+    'error',
+    () => {
+      handleAudioError(
+        audio.error ||
+        new Error(
+          'The audio file could not be loaded.'
+        )
+      );
+    },
+    {
+      once: true
+    }
+  );
+
+  try {
+    const playPromise =
+      audio.play();
+
+    if (
+      playPromise &&
+      typeof playPromise.then ===
+        'function'
+    ) {
+      playPromise
+        .then(() => {
+          logSuccessfulPlay();
+        })
+        .catch(handleAudioError);
+    } else {
+      logSuccessfulPlay();
+    }
+
+    return true;
+  } catch (error) {
+    handleAudioError(error);
+    return false;
+  }
+}
+
+
+    function init() {
+        const categories = Object.keys(dictionary);
+        
+        categories.forEach((catKey, index) => {
+            const btn = document.createElement('button');
+            btn.className = 'category-btn';
+            btn.innerText = dictionary[catKey].title;
+                        if (index === 0) {
+                btn.classList.add('active');
+                loadCategory(catKey, btn);
+                          
+            }
+
+            btn.onclick = () => loadCategory(catKey, btn);
+            categoryListEl.appendChild(btn);
+        });
+    }
+function onWordFlip(word) {
+  if (
+    word &&
+    word.id &&
+    window.Analytics &&
+    typeof window.Analytics.logWordReview === 'function'
+  ) {
+    window.Analytics.logWordReview(
+      word.id,
+      'flip'
+    );
+  }
+}
+    function updateVocabPointsDisplay() {
+      let vocabScore = parseInt(localStorage.getItem('vocab_points')) || 0;
+    
+      let pointsEl = document.getElementById('header-score');
+      if (pointsEl) {
+        pointsEl.innerText = vocabScore;
+      }
+    }
+
+    let currentCatKey = ""; 
+function loadCategory(catKey, btn) {
+    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+
+    if (btn) btn.classList.add('active');
+
+    learnedCards.clear();
+    currentCatKey = catKey;
+
+    const data = dictionary[catKey];
+    if (!data) return;
+
+    if (
+    window.Analytics &&
+    typeof window.Analytics.logWordsExposed === 'function'
+  ) {
+    window.Analytics.logWordsExposed(
+      data.words,
+      catKey
+    );
+  }
+
+    currentCategoryWordsCount = data.words.length;
+
+    let html = `
+        <div class="wiki-box">
+            <div class="wiki-text-area">
+                <div class="wiki-title">Parent Cheat Sheet (家长小抄)</div>
+                <div class="wiki-content">${data.wiki}</div>
+            </div>
+            <div class="progress-counter" id="progress-text">0 / ${currentCategoryWordsCount}</div>
+        </div>
+        <div class="flashcard-grid">
+    `;
+
+    data.words.forEach((word) => {
+        html += `
+            <div
+              class="flashcard-wrapper"
+              onclick="flipCard(
+                this,
+                '${word.id}',
+                '${word.audio}'
+              )"
+            >
+                <div class="flashcard-inner">
+                    <div class="flashcard-front">
+                        <img src="${word.img}" alt="${word.en}" onerror="this.src='assets/img/fallback.png'">
+                        <h2>${word.en}</h2>
+
+                                <button
+                                  class="audio-btn"
+                                  type="button"
+                                  aria-label="Play audio"
+                                  title="Play audio"
+                                  onclick="
+                                    event.stopPropagation();
+                                    playWordAudio(
+                                      '${word.audio}',
+                                      '${word.id}'
+                                    );
+                                  "
+                                >
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M14 3.23v17.54a1 1 0 0 1-1.64.77L7.91 18H4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h3.91l4.45-3.54A1 1 0 0 1 14 3.23Zm3.54 4.35a1 1 0 0 1 1.41 0 6 6 0 0 1 0 8.48 1 1 0 0 1-1.41-1.41 4 4 0 0 0 0-5.66 1 1 0 0 1 0-1.41Zm-2.83 2.82a1 1 0 0 1 1.41 0 2 2 0 0 1 0 2.83 1 1 0 0 1-1.41-1.41.01.01 0 0 0 0-.01.01.01 0 0 0 0-.01 1 1 0 0 1 0-1.4Z"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="flashcard-back">
+                        <h3>${word.en}</h3>
+                        <p class="pinyin">${word.pinyin}</p>
+                        <p class="translation">${word.zh}</p>
+                        <p class="sentence">"${word.sentence}"</p>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+
+    html += `</div>`;
+    contentAreaEl.innerHTML = html;
+}
+
+function flipCard(element, wordId, audioSrc) {
+  const isNowFlipped = element.classList.toggle('flipped');
+   const currentCategory =
+    dictionary[currentCatKey];
+  
+  const currentWord =
+    currentCategory
+      ? currentCategory.words.find(
+          word => word.id === wordId
+        )
+      : null;
+
+  if (isNowFlipped) {
+    playWordAudio(audioSrc, wordId);
+    if (currentWord) onWordFlip(currentWord);
+  }
+
+  if (learnedCards.has(wordId)) return;
+
+  learnedCards.add(wordId);
+
+  const progressEl = document.getElementById('progress-text');
+  if (progressEl) progressEl.textContent = `${learnedCards.size} / ${currentCategoryWordsCount}`;
+
+  if (learnedCards.size === currentCategoryWordsCount) {
+    setTimeout(showReward, 800);
+  }
+}
+  
+function showReward() {
+  const popup = document.getElementById('reward-popup');
+  const overlay = document.getElementById('overlay');
+
+  popup.style.display = 'block';
+  overlay.style.display = 'block';
+
+  const currentPoints = parseInt(localStorage.getItem('vocab_points'), 10) || 0;
+  localStorage.setItem('vocab_points', String(currentPoints + 2));
+  updateVocabPointsDisplay();
+
+  setTimeout(() => {
+    popup.style.display = 'none';
+    overlay.style.display = 'none';
+  }, 3000);
+}
+
+init();
+updateVocabPointsDisplay();
+  
+</script>
+</body>
+</html>

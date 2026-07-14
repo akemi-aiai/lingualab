@@ -1,0 +1,3113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#74b9ff">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="LinguaLab">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    
+    <link rel="apple-touch-icon" href="assets/img/icon-192.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson — LinguaLab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<style>
+        :root { 
+            --primary: #22d3ee; 
+            --primary-light: #ecfeff;
+            --accent: #f97316;
+            --navy: #1f4e79; 
+            --bg: #f8fafc; 
+            --white: #ffffff; 
+            --orange: #f97316; 
+            --green: #10b981;
+            --radius: 24px;
+            --text: #0f172a;
+            --muted: #64748b;
+            --line: #e2e8f0;
+            --shadow-soft: 0 4px 15px rgba(0,0,0,0.04);
+            --shadow-card: 0 20px 40px rgba(0,0,0,0.08);
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        html, body { overflow-x: hidden; }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: var(--bg); 
+            color: var(--text); 
+            line-height: 1.6; 
+            padding-top: 80px; 
+        }
+
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 40px;
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(0,0,0,.05);
+    height: 80px;
+  }
+
+  .navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .nav-logo {
+    height: 50px;
+    width: auto;
+    display: block;
+  }
+
+  .nav-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.1;
+  }
+
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .navbar-right a {
+    color: var(--navy);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+  }
+
+  .navbar-right a:hover {
+    color: var(--accent);
+  }
+
+        .parent-switch {
+            display: flex; align-items: center; gap: 8px; 
+            background: #f1f5f9; padding: 6px 12px; border-radius: 99px; cursor: pointer; border: 1px solid #e2e8f0;
+        }
+        .parent-switch.active { background: var(--navy); color: white; border-color: var(--navy); }
+        .switch-label { font-size: 12px; font-weight: 700; text-transform: uppercase; }
+        .progress-container { position: fixed; top: 70px; left: 0; width: 100%; height: 6px; background: #e2e8f0;}
+        .progress-fill { height: 100%; background: var(--orange); width: 0%; transition: width 0.5s ease; }
+
+  .hero-compact {
+    padding: 60px 8% 140px;
+    text-align: center;
+    background: linear-gradient(135deg, var(--primary), #a78bfa);
+    color: #fff;
+    width: 100%;
+  }
+
+  .hero-compact h1 {
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    line-height: 1.15;
+  }
+    
+      .hero-info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        font-size: 18px;
+        flex-wrap: wrap;
+      }    
+        .container { 
+            max-width: 800px; margin: 0px auto 0; 
+            padding: 0 20px; position: relative; z-index: 10;
+        }
+
+        .screen { display: none; animation: fadeUp 0.4s ease; }
+        .screen.active { display: block; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .card {
+            background: white; border-radius: var(--radius); padding: 40px;
+            box-shadow: var(--shadow-card); margin-bottom: 30px; text-align: center;
+            border: 1px solid var(--line);
+        }
+
+        .trust-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 20px; }
+        .badge { background: #f0f9ff; color: var(--navy); padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 700; }
+        
+        .promise-box { margin: 25px 0; text-align: left; background: #f8fafc; padding: 20px; border-radius: 16px; }
+        .promise-item { display: flex; gap: 10px; margin-bottom: 12px; font-size: 15px; color: #475569; align-items: center; }
+        .check-icon { color: var(--green); font-weight: bold; }
+
+        .step-header { margin-bottom: 20px; }
+        .step-tag { 
+            color: var(--primary); font-weight: 800; text-transform: uppercase; 
+            font-size: 12px; letter-spacing: 1px; display: block; margin-bottom: 5px;
+        }
+        .step-title { font-size: 28px; font-weight: 800; color: var(--navy); line-height: 1.3; }
+        
+        .parent-tip {
+            display: none; text-align: left; background: #fff7ed; 
+            border-left: 4px solid var(--orange); padding: 15px; 
+            border-radius: 8px; margin-bottom: 25px; font-size: 14px; color: #9a3412;
+        }
+        
+        .flashcards-grid{ display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 15px; margin: 20px 0; }
+        .flashcard{
+            background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 16px;
+            cursor: pointer; transition: 0.2s; aspect-ratio: 1 / 1; width: 100%; padding: 12px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; position: relative; overflow: hidden;
+        }
+        .flashcard:hover{ border-color: var(--primary); background: #ecfeff; transform: scale(1.03); }
+        .fc-img{ width: 82%; height: 64%; object-fit: contain; display: block; margin: 0 auto 8px; }
+        .fc-icon{ font-size: 34px; display: block; margin-bottom: 8px; }
+        .fc-word{ font-weight: 700; color: var(--navy); font-size: 14px; }
+        .flashcard-zh{ font-size: 12px; color: #64748b; margin-bottom: 5px; }
+
+        .audio-control {
+            background: #f1f5f9; padding: 20px; border-radius: 16px; 
+            display: flex; align-items: center; gap: 15px; margin: 20px 0;
+        }
+        .play-btn {
+            width: 50px; height: 50px; border-radius: 50%; border: none; background: var(--primary); 
+            color: white; cursor: pointer; display: flex; justify-content: center; align-items: center; flex-shrink: 0;
+        }
+        .mic-btn {
+            width: 60px; height: 60px; border-radius: 50%; border: none; background: #ef4444; 
+            color: white; cursor: pointer; display: flex; justify-content: center; align-items: center;
+            box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3); transition: 0.2s; flex-shrink: 0;
+        }
+        .mic-btn:hover { transform: scale(1.1); }
+        .mic-btn.recording { animation: pulse 1.5s infinite; background: #b91c1c; }
+
+        .mission-box {
+            border: 2px dashed #cbd5e1; padding: 20px; border-radius: 16px; margin: 20px 0;
+            background: #f8fafc; color: #475569;
+        }
+
+        .bottom-nav {
+            position: fixed; bottom: 0; left: 0; width: 100%; 
+            background: white; padding: 15px 20px; 
+            border-top: 1px solid #e2e8f0; display: flex; gap: 10px; z-index: 1000;
+            justify-content: center; box-shadow: 0 -4px 15px rgba(0,0,0,0.03);
+        }
+        .nav-btn {
+            background: var(--navy); color: white; border: none; 
+            padding: 16px 32px; border-radius: 14px; font-size: 16px; 
+            font-weight: 700; cursor: pointer; width: 100%; max-width: 600px; transition: 0.2s;
+        }
+        .nav-btn:hover { background: #334155; }
+        .nav-btn.secondary { background: white; color: var(--navy); border: 2px solid #e2e8f0; }
+
+        .report-list { text-align: left; margin: 20px 0; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; }
+        .report-item { margin-bottom: 10px; font-size: 15px; color: #334155; display: flex; align-items: center; gap: 10px; }
+
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6); } 70% { box-shadow: 0 0 0 15px rgba(239, 68, 68, 0); } }
+
+
+@media (min-width: 561px) and (max-width: 1024px) {
+  body {
+    padding-top: 122px;
+    overflow-x: hidden;
+  }
+
+  .navbar {
+    height: auto;
+    min-height: 116px;
+    padding: 14px 24px;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .navbar-left {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 12px;
+  }
+
+  .nav-logo {
+    height: 48px;
+    max-width: 160px;
+    object-fit: contain;
+  }
+
+  .nav-title {
+    font-size: 23px;
+  }
+
+  .navbar-right {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px 18px;
+  }
+
+  .navbar-right a {
+    margin-left: 0;
+    font-size: 14px;
+    line-height: 1.3;
+    white-space: nowrap;
+  }
+
+  .parent-switch {
+    min-height: 38px;
+    padding: 7px 14px;
+  }
+
+
+  .hero-compact {
+    padding: 50px 5% 120px;
+  }
+
+  .hero-compact h1 {
+    font-size: 36px;
+  }
+
+  .hero-info {
+    max-width: 680px;
+    margin: 0 auto;
+    gap: 16px;
+    font-size: 16px;
+  }
+
+  .container {
+    max-width: 700px;
+    margin: -82px auto 0;
+    padding: 0 20px;
+  }
+
+  .card {
+    padding: 34px 28px;
+    margin-bottom: 28px;
+  }
+
+  .step-title {
+    font-size: 26px;
+  }
+
+  .flashcards-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .flashcard {
+    padding: 10px;
+  }
+
+  .fc-img {
+    width: 80%;
+    height: 62%;
+  }
+
+  .fc-word {
+    font-size: 14px;
+  }
+
+  .audio-control {
+    padding: 18px;
+    gap: 14px;
+  }
+
+  .mission-box {
+    padding: 18px;
+  }
+
+  .bottom-nav {
+    padding: 12px 20px;
+    gap: 10px;
+  }
+
+  .nav-btn {
+    min-height: 50px;
+    padding: 14px 24px;
+    font-size: 15px;
+  }
+
+  .report-list {
+    padding: 18px;
+  }
+
+  img,
+  video,
+  audio {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 560px) {
+  body {
+    padding-top: 118px;
+    font-size: 16px;
+  }
+  .navbar {
+    min-height: 112px;
+  }
+  .nav-title { font-size: 23px; }
+  .navbar-right a { font-size: 13px; }
+  .switch-label { font-size: 12px; }
+  .hero-compact h1 { font-size: 33px; }
+  .hero-info { font-size: 17px; }
+  .start-title { font-size: 31px; }
+  .start-lead { font-size: 17px; }
+  .badge { font-size: 12px; }
+  .promise-item { font-size: 15px; }
+  .step-tag { font-size: 13px; }
+  .step-title { font-size: 26px; }
+  .parent-tip { font-size: 15px; }
+  .fc-word { font-size: 16px; }
+  .flashcard-zh { font-size: 13px; }
+  .warmup-main,
+  .phrase-line,
+  .mission-text { font-size: 19px; }
+  .warmup-action,
+  .script-text { font-size: 16px; }
+  .audio-copy { font-size: 16px; }
+  .report-item { font-size: 15px; }
+  .game-section { padding: 16px; }
+  .game-section h4 { font-size: 17px; }
+  .game-section p,
+  .game-section li { font-size: 16px; }
+  .speech-chip { font-size: 15px; }
+  .age-options { grid-template-columns: 1fr; }
+  .age-card strong { font-size: 16px; }
+  .age-card p,
+  .safety-box { font-size: 15px; }
+  .bottom-nav .nav-btn { font-size: 14px; }
+}
+
+
+
+:root {
+  --nav-height: 80px;
+  --content-width: 900px;
+  --bottom-nav-height: 82px;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  min-height: 100vh;
+  padding-top: var(--nav-height);
+  padding-bottom: calc(var(--bottom-nav-height) + 28px);
+  font-size: 16px;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.navbar {
+  height: var(--nav-height);
+  padding: 13px 40px;
+}
+
+.nav-logo {
+  height: 52px;
+}
+
+.nav-title {
+  font-size: 25px;
+}
+
+.navbar-right {
+  flex-wrap: nowrap;
+  gap: 22px;
+}
+
+.navbar-right a {
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+.parent-switch {
+  min-height: 42px;
+  padding: 8px 15px;
+  color: var(--navy);
+  font-family: inherit;
+}
+
+.switch-label {
+  font-size: 13px;
+}
+
+.progress-container {
+  top: var(--nav-height);
+  height: 5px;
+  z-index: 999;
+}
+
+.hero-compact {
+  min-height: 230px;
+  padding: 42px 6% 92px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.hero-compact h1 {
+  margin: 0 0 8px;
+  font-size: clamp(36px, 4.2vw, 48px);
+  line-height: 1.12;
+}
+
+.hero-info {
+  max-width: 760px;
+  margin: 0 auto;
+  font-size: 18px;
+  line-height: 1.45;
+  opacity: .95;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--content-width);
+  margin: -64px auto 0;
+  padding: 0 22px 28px;
+}
+
+.card {
+  width: 100%;
+  padding: 34px;
+  margin-bottom: 28px;
+  border-radius: 24px;
+  box-shadow: 0 18px 46px rgba(15, 23, 42, .10);
+}
+
+.screen.active {
+  display: block;
+}
+
+.start-title {
+  margin-bottom: 12px;
+  color: var(--navy);
+  font-size: clamp(30px, 4vw, 38px);
+  line-height: 1.18;
+}
+
+.start-lead {
+  margin-bottom: 22px;
+  color: var(--muted);
+  font-size: 17px;
+}
+
+.trust-badges {
+  margin-bottom: 18px;
+}
+
+.badge {
+  padding: 7px 12px;
+  font-size: 13px;
+}
+
+.promise-box {
+  max-width: 680px;
+  margin: 24px auto;
+  padding: 20px 22px;
+}
+
+.promise-item {
+  margin-bottom: 10px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.step-header {
+  margin-bottom: 24px;
+}
+
+.step-tag {
+  margin-bottom: 7px;
+  font-size: 13px;
+}
+
+.step-title {
+  font-size: clamp(28px, 3.5vw, 34px);
+  line-height: 1.22;
+}
+
+.parent-tip {
+  padding: 15px 17px;
+  margin-bottom: 22px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* Prevent browser-default SVG dimensions (300×150). */
+.icon {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+  fill: currentColor;
+  vertical-align: middle;
+}
+
+.parent-switch .icon {
+  width: 20px;
+  height: 20px;
+  flex-basis: 20px;
+}
+
+.flashcard .icon {
+  width: 22px;
+  height: 22px;
+  margin-top: 6px;
+  flex-basis: 22px;
+}
+
+.report-item .icon {
+  width: 24px;
+  height: 24px;
+  flex-basis: 24px;
+  color: var(--green);
+}
+
+.flashcards-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 18px 0 4px;
+}
+
+.flashcard {
+  min-height: 250px;
+  aspect-ratio: auto;
+  padding: 14px 12px;
+  border-radius: 18px;
+}
+
+.fc-img {
+  width: 100%;
+  height: 155px;
+  margin: 0 auto 10px;
+  object-fit: contain;
+}
+
+.fc-word {
+  font-size: 17px;
+  line-height: 1.25;
+}
+
+.flashcard-zh {
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+.audio-control {
+  max-width: 720px;
+  margin: 18px auto;
+  padding: 18px 20px;
+  border-radius: 16px;
+}
+
+.audio-copy {
+  flex: 1;
+  text-align: left;
+  color: var(--navy);
+  font-size: 16px;
+}
+
+.play-btn {
+  width: 52px;
+  height: 52px;
+}
+
+.play-btn .icon {
+  width: 25px;
+  height: 25px;
+  flex-basis: 25px;
+}
+
+.mic-btn {
+  width: 58px;
+  height: 58px;
+}
+
+.warmup-main {
+  margin: 6px 0;
+  font-size: 21px;
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+.warmup-action {
+  color: var(--muted);
+  font-size: 17px;
+}
+
+.script-box {
+  max-width: 720px;
+  margin: 0 auto 18px;
+  padding: 18px 20px;
+  border-radius: 15px;
+  background: var(--primary-light);
+  text-align: center;
+}
+
+.script-label,
+.report-label {
+  color: var(--navy);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.script-text {
+  margin-top: 5px;
+  color: #334155;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.phrase-line {
+  font-size: 19px;
+  line-height: 1.45;
+  font-weight: 700;
+}
+
+.mission-box {
+  max-width: 700px;
+  margin: 10px auto 0;
+  padding: 24px;
+}
+
+.mission-title {
+  margin-bottom: 8px;
+  color: #334155;
+  font-size: 21px;
+}
+
+.mission-text {
+  color: var(--navy);
+  font-size: 19px;
+  line-height: 1.5;
+  font-weight: 700;
+}
+
+/* Detailed game layout */
+.game-panel {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  text-align: left;
+}
+
+.game-meta,
+.game-play,
+.game-say,
+.age-options,
+.safety-box {
+  grid-column: 1 / -1;
+}
+
+.game-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 9px;
+  margin-bottom: 2px;
+}
+
+.game-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 7px 12px;
+  border: 1px solid #bae6fd;
+  border-radius: 999px;
+  background: #f0f9ff;
+  color: var(--navy);
+  font-size: 13px;
+  line-height: 1.2;
+  font-weight: 800;
+}
+
+.game-section {
+  padding: 17px 18px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #f8fafc;
+}
+
+.game-section h4 {
+  margin-bottom: 7px;
+  color: var(--navy);
+  font-size: 17px;
+  line-height: 1.3;
+}
+
+.game-section p,
+.game-section li {
+  color: #334155;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.game-section ol {
+  padding-left: 22px;
+}
+
+.game-section li + li {
+  margin-top: 8px;
+}
+
+.game-prompts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.speech-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 7px 11px;
+  border-radius: 11px;
+  background: #fff;
+  color: #0f4c75;
+  font-size: 14px;
+  line-height: 1.35;
+  font-weight: 700;
+  box-shadow: var(--shadow-soft);
+}
+
+.age-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.age-card {
+  padding: 16px;
+  border: 1px solid #ddd6fe;
+  border-radius: 15px;
+  background: #faf5ff;
+}
+
+.age-card strong {
+  display: block;
+  margin-bottom: 5px;
+  color: #5b21b6;
+  font-size: 16px;
+}
+
+.age-card p {
+  color: #4c1d95;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.safety-box {
+  padding: 14px 16px;
+  border-left: 5px solid var(--green);
+  border-radius: 12px;
+  background: #ecfdf5;
+  color: #065f46;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+
+#screen-report .card {
+  max-width: 760px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.report-list {
+  max-width: 660px;
+  margin: 24px auto;
+  padding: 20px 22px;
+}
+
+.report-label {
+  margin-bottom: 14px;
+}
+
+.report-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  margin-bottom: 12px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.report-item:last-child {
+  margin-bottom: 0;
+}
+
+.bottom-nav {
+  min-height: var(--bottom-nav-height);
+  padding: 12px max(20px, calc((100vw - var(--content-width)) / 2 + 22px));
+  gap: 12px;
+}
+
+.bottom-nav .nav-btn {
+  min-height: 54px;
+  padding: 13px 22px;
+  font-size: 16px;
+  border-radius: 14px;
+}
+
+.nav-btn {
+  max-width: none;
+}
+
+.play-btn,
+.mic-btn,
+.nav-btn,
+.flashcard,
+.parent-switch {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.play-btn:focus-visible,
+.mic-btn:focus-visible,
+.nav-btn:focus-visible,
+.flashcard:focus-visible,
+.parent-switch:focus-visible,
+.navbar-right a:focus-visible {
+  outline: 3px solid #fbbf24;
+  outline-offset: 3px;
+}
+
+@media (min-width: 561px) and (max-width: 1024px) {
+  :root {
+    --nav-height: 116px;
+    --bottom-nav-height: 78px;
+  }
+
+  .navbar {
+    height: var(--nav-height);
+    min-height: 0;
+    padding: 12px 22px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 9px;
+  }
+
+  .navbar-left {
+    width: 100%;
+  }
+
+  .nav-logo {
+    height: 43px;
+  }
+
+  .nav-title {
+    font-size: 23px;
+  }
+
+  .navbar-right {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 9px 15px;
+  }
+
+  .navbar-right a {
+    margin-left: 0 !important;
+    font-size: 13px;
+  }
+
+  .parent-switch {
+    min-height: 35px;
+    padding: 6px 11px;
+  }
+
+  .hero-compact {
+    min-height: 208px;
+    padding: 34px 5% 80px;
+  }
+
+  .hero-compact h1 {
+    font-size: 36px;
+  }
+
+  .hero-info {
+    font-size: 16px;
+  }
+
+  .container {
+    max-width: 760px;
+    margin-top: -58px;
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .card {
+    padding: 30px 26px;
+  }
+
+  .flashcard {
+    min-height: 225px;
+  }
+
+  .fc-img {
+    height: 132px;
+  }
+}
+
+@media (max-width: 700px) {
+  :root {
+    --nav-height: 112px;
+    --bottom-nav-height: 74px;
+  }
+
+  .navbar {
+    height: var(--nav-height);
+    min-height: 0;
+    padding: 10px 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .navbar-left {
+    width: 100%;
+    gap: 9px;
+  }
+
+  .nav-logo {
+    height: 40px;
+  }
+
+  .nav-title {
+    font-size: 21px;
+  }
+
+  .navbar-right {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 7px 11px;
+  }
+
+  .navbar-right a {
+    margin-left: 0 !important;
+    font-size: 12px;
+  }
+
+  .parent-switch {
+    min-height: 32px;
+    padding: 5px 9px;
+  }
+
+  .switch-label {
+    font-size: 11px;
+  }
+
+  .hero-compact {
+    min-height: 186px;
+    padding: 28px 16px 72px;
+  }
+
+  .hero-compact h1 {
+    font-size: 30px;
+  }
+
+  .hero-info {
+    font-size: 15px;
+  }
+
+  .container {
+    margin-top: -48px;
+    padding: 0 11px 22px;
+  }
+
+  .card {
+    padding: 23px 15px;
+    border-radius: 18px;
+  }
+
+  .start-title {
+    font-size: 29px;
+  }
+
+  .start-lead {
+    font-size: 16px;
+  }
+
+  .promise-box {
+    padding: 15px;
+  }
+
+  .promise-item {
+    align-items: flex-start;
+    font-size: 14px;
+  }
+
+  .step-title {
+    font-size: 25px;
+  }
+
+  .flashcards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .flashcard {
+    min-height: 205px;
+    padding: 10px 8px;
+    border-radius: 14px;
+  }
+
+  .fc-img {
+    height: 118px;
+  }
+
+  .fc-word {
+    font-size: 15px;
+  }
+
+  .flashcard-zh {
+    font-size: 12px;
+  }
+
+  .audio-control {
+    padding: 14px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .audio-copy {
+    width: 100%;
+    text-align: center;
+  }
+
+  .script-text,
+  .phrase-line,
+  .mission-text {
+    font-size: 16px;
+  }
+
+  .game-panel {
+    grid-template-columns: 1fr;
+    gap: 11px;
+  }
+
+  .game-meta,
+  .game-play,
+  .game-say,
+  .age-options,
+  .safety-box {
+    grid-column: auto;
+  }
+
+  .game-section {
+    padding: 14px;
+  }
+
+  .game-section h4 {
+    font-size: 16px;
+  }
+
+  .game-section p,
+  .game-section li {
+    font-size: 14px;
+  }
+
+  .age-options {
+    grid-template-columns: 1fr;
+  }
+
+  .bottom-nav {
+    padding: 9px 10px;
+    gap: 8px;
+  }
+
+  .bottom-nav .nav-btn {
+    min-width: 0;
+    min-height: 48px;
+    padding: 10px 8px;
+    font-size: 14px;
+    border-radius: 12px;
+  }
+
+  .bottom-nav .nav-btn:first-child {
+    width: 36% !important;
+  }
+
+  .bottom-nav .nav-btn:last-child {
+    width: 64% !important;
+  }
+}
+
+
+
+/* Final navbar safeguards */
+.navbar-left,
+.navbar-left *,
+.exit-lesson,
+.exit-lesson:link,
+.exit-lesson:visited,
+.exit-lesson:hover,
+.exit-lesson:focus,
+.exit-lesson:active {
+  text-decoration: none !important;
+}
+
+.exit-lesson {
+  color: var(--navy);
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.exit-lesson:hover { color: var(--accent); }
+
+</style>
+</head>
+<body>
+
+<div class="progress-container"><div class="progress-fill" id="progress-bar"></div></div>
+
+<header class="navbar" id="siteNavbar">
+  <div class="navbar-left" aria-label="LinguaLab">
+    <img src="assets/img/logo.png" alt="LinguaLab logo" class="nav-logo" onerror="this.style.display='none'">
+    <span class="nav-title">LinguaLab</span>
+  </div>
+
+  <div class="navbar-right">
+    <button type="button" class="parent-switch" onclick="toggleParentMode()" aria-pressed="false">
+      <span class="switch-label">Parent Mode</span>
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+      </svg>
+    </button>
+
+    <a href="exercises.html" class="exit-lesson">Exit Lesson</a>
+  </div>
+</header>
+
+<section class="hero-compact">
+    <h1>Fun Homework</h1>
+    <div class="hero-info" id="hero-date">Ready to play?</div>
+</section>
+
+<div class="container">
+
+    <div id="screen-start" class="screen active">
+        <div class="card">
+            <div class="trust-badges">
+                <span class="badge">Ages 2–5</span>
+                <span class="badge">Talk, not scroll</span>
+            </div>
+            <h2 class="start-title">10 minutes.<br>Press and play.</h2>
+            <p class="start-lead">We guide you step-by-step.</p>
+            
+            <div class="promise-box">
+                <div class="promise-item"><span class="check-icon">✓</span> <b>Today:</b> 2–3 words, 1 phrase, and 1 game</div>
+                <div class="promise-item"><span class="check-icon">✓</span> <b>No battles:</b> tired day? use “2-min mode”</div>
+                <div class="promise-item"><span class="check-icon">✓</span> <b>Progress:</b> you’ll see it today</div>
+            </div>
+
+            <button class="nav-btn" onclick="startLesson()">Play</button>
+        </div>
+    </div>
+
+    <div id="screen-lesson" class="screen">
+        <div class="card" id="lesson-card-content">
+            </div>
+        
+        <div class="bottom-nav">
+            <button class="nav-btn secondary" style="width:30%" onclick="prevStep()">Back</button>
+            <button class="nav-btn" style="width:70%" onclick="nextStep()" id="next-btn">Next Step →</button>
+        </div>
+    </div>
+
+    <div id="screen-report" class="screen">
+        <div class="card" style="border-top: 6px solid var(--green);">
+            <div style="font-size:60px; margin-bottom:10px;">🏆</div>
+            <h2 style="color:var(--navy); margin-bottom:5px;">You did it!</h2>
+            <p style="color:#64748b;">You showed up — that’s a win.</p>
+
+            <div class="report-list">
+                <div class="report-label">Parent Report</div>
+                <div class="report-item">
+                    <svg class="icon" style="color:var(--green)" viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>
+                    <span><b>Learned:</b> <span id="report-vocab"></span></span>
+                </div>
+                <div class="report-item">
+                    <svg class="icon" style="color:var(--green)" viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>
+                    <span><b>Spoke:</b> <span id="report-phrase"></span></span>
+                </div>
+                <div class="report-item">
+                    <svg class="icon" style="color:var(--green)" viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>
+                    <span><b>Next Time:</b> Review & Play</span>
+                </div>
+            </div>
+
+            <button class="nav-btn" onclick="backToHomework()"> Back to Fun Homework </button>
+        </div>
+    </div>
+
+</div>
+<script src="analytics.js"></script>
+<script>
+
+    const ICON_AUDIO = '<svg class="icon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>';
+    const ICON_PLAY = '<svg class="icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+    const ICON_MIC = '<svg class="icon" style="width:30px;height:30px" viewBox="0 0 24 24"><path fill="white" d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path fill="white" d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>';
+
+
+const db = {
+  "Sep": [
+    {
+      unit: "Unit 1: Family", vocab: "Daddy, Mommy", phrase: "Good morning, Daddy!",
+      steps: [
+        { type:'warmup', tag:'A. Warm Up', title:"Listen & Wave", text:"Let's say Hello!", action:"Wave your hand", phrase:"Hello!", audio:"assets/audio/hello.mp3" },
+        { type:'words', tag:'B. Key Words', title:"Family Members",
+          items: [
+            { w:"Daddy",  zh:"爸爸", img:"assets/img/daddy.png", audio:"assets/audio/daddy.mp3" },
+            { w:"Mommy",  zh:"妈妈", img:"assets/img/mommy.png", audio:"assets/audio/mommy.mp3" },
+            { w:"Family", zh:"家人", img:"assets/img/family.png", audio:"assets/audio/family.mp3" }
+          ]
+        },
+        { type:'phrase', tag:'C. Key Sentences', title:"Phrase of the Day",
+          text:"Good morning, Daddy! Good morning, Mommy!",
+          script:"Ask your child: 'Who do you see in the morning?'",
+          parentTip:"Don't correct pronunciation yet. Just praise effort."
+        },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Family Doorbell",
+        goal: "Use a morning greeting.",
+        duration: "3–4 minutes",
+        materials: "Two large family photos or picture cards and one soft toy.",
+        gameSteps: ["Place the Daddy and Mommy pictures face up on the floor or table.", "Tap the table like a gentle doorbell and say, “Ding-dong! Who is here?”", "Let the child choose one picture, point to it, and say the word together.", "Wave to the picture and finish with “Good morning, Daddy!” or “Good morning, Mommy!”"],
+        prompts: ["Who is here?", "Good morning, Daddy!", "Good morning, Mommy!"],
+        age2to3: "Offer only two pictures and let the child point or repeat one word.",
+        age4to5: "Mix the pictures, add the Family card, and let the child lead one round.",
+        safety: "Use photos or cards with rounded corners. Hugs are optional; waving is always enough."
+      },
+        { type:'offscreen', tag:'E. Mission', title:"Real World", text:"Find a family photo.", image:"assets/img/photo.png" }
+      ]
+    },
+    {
+      unit: "Unit 2: School", vocab: "Bag, Book", phrase: "It is a book.",
+      steps: [
+        { type:'warmup', tag:'A. Warm Up', title:"Stand Up!", text:"Stand up... Sit down.", action:"Do it 3 times.", phrase:"Stand up!", audio:"assets/audio/stand-up.mp3" },
+        { type:'words', tag:'B. Key Words', title:"School Objects",
+          items: [
+            { w:"Bag",    zh:"书包", img:"assets/img/bag.png", audio:"assets/audio/bag.mp3" },
+            { w:"Book",   zh:"书",   img:"assets/img/book.png", audio:"assets/audio/book.mp3" },
+            { w:"Pencil", zh:"铅笔", img:"assets/img/pencil.png", audio:"assets/audio/pencil.mp3" }
+          ]
+        },
+        { type:'phrase', tag:'C. Key Sentences', title:"Phrase of the Day", text:"It is a book.", script: "Point to a book and ask: 'What is this?'", parentTip:"Say the word first, let them repeat." },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Book Bag Delivery",
+        goal: "Practice Bag, Book, Pencil and the sentence “It is a book.”",
+        duration: "3–5 minutes",
+        materials: "A soft bag, one book, and one large pencil or chunky crayon.",
+        gameSteps: ["Put the three objects in a clear space within easy reach.", "Name one object: “Find the book.” The child points to or picks it up.", "Ask, “What is this?” Model the answer: “It is a book.”", "The child walks the object to the bag and places it inside. Repeat with the other objects."],
+        prompts: ["Find the book.", "What is this?", "It is a book."],
+        age2to3: "Use only the book and bag; pointing counts as a correct answer.",
+        age4to5: "Give two-part directions such as “Find the pencil and put it in the bag.”",
+        safety: "Use lightweight objects only. Keep the walking path clear and do not use sharpened pencils."
+      },
+        { type:'offscreen', tag:'E. Mission', title:"Real World", text:"Put a book in a bag.", image:"assets/img/book_and_bag.png" }
+      ]
+    },
+    {
+      unit: "Unit 2: Phonics", vocab: "Bb /b/", phrase: "Open your book.",
+      steps: [
+        { type:'warmup', tag:'A. Warm Up', title:"Clap Hands", text:"Clap 1, 2, 3.", action:"Clap!", phrase:"Clap!", audio:"assets/audio/clap.mp3" },
+        { type:'words', tag:'B. Key Words', title:"B Sound",
+          items: [
+            { w:"Bb",   zh:"字母B", img:"assets/img/bb.png", audio:"assets/audio/b.mp3"  },
+            { w:"Ball", zh:"球",     img:"assets/img/ball.png", audio:"assets/audio/ball.mp3"  },
+            { w:"Baby", zh:"宝宝",   img:"assets/img/baby.png", audio:"assets/audio/baby.mp3"  }
+          ]
+        },
+        { type:'phrase', tag:'C. Action', title:"TPR Command", text:"Open your book.", script:"Model the action first.", parentTip:"Emphasize the 'b' sound in Book." },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "B Sound Bubble Path",
+        goal: "Hear and repeat the /b/ sound in Bb, Ball, Baby, and Blue.",
+        duration: "3–4 minutes",
+        materials: "Four large paper circles labeled B, Ball, Baby, and Blue.",
+        gameSteps: ["Place the paper circles close together on the floor like big pretend bubbles.", "Say a word slowly with a strong beginning sound: “B-b-ball.”", "The child taps the matching circle with a hand or foot.", "Together say the word once more, then make a gentle pretend “pop” with your hands."],
+        prompts: ["B-b-ball.", "Tap the B bubble.", "B is for Ball."],
+        age2to3: "Use two circles and let the child copy the /b/ sound.",
+        age4to5: "Say one B word and one non-B word; the child taps only when the word begins with /b/.",
+        safety: "Use flat paper circles, not balloons or small bubble toys. Tapping should be gentle."
+      },
+        { type:'offscreen', tag:'E. Mission', title:"Real World", text:"Find a blue toy.", image:"assets/img/blue_toy.png" }
+      ]
+    },
+    {
+      unit: "Review", vocab: "Mike, Kelly", phrase: "Hello, I am [Name].",
+      steps: [
+        { type:'warmup', tag:'A. Warm Up', title:"Shake", text:"Shake your body!", action:"Shake!", phrase:"Shake!", audio:"assets/audio/shake.mp3" },
+        { type:'words', tag:'B. Key Words', title:"Review",
+          items: [
+            { w:"What's your name?", zh:"你叫什么名字？", img:"assets/img/name_q.png", audio:"assets/audio/w-name.mp3" },
+            { w:"My name is", zh:"我叫…", img:"assets/img/name.png", audio:"assets/audio/name1.mp3" },
+            { w:"Teacher", zh:"老师", img:"assets/img/teacher.png", audio:"assets/audio/teacher.mp3"  }
+          ]
+        },
+        { type:'phrase', tag:'C. Key Sentences', title:"Roleplay", text:"Hello, I am [Name].", script:"Practice with a puppet.", parentTip:"Roleplay builds confidence." },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Puppet Name Parade",
+        goal: "Practice “Hello, I am…” and answer a simple name question.",
+        duration: "3–5 minutes",
+        materials: "Two soft toys or hand puppets.",
+        gameSteps: ["Give each toy a simple name such as Mike or Kelly.", "Move the first toy forward and say, “Hello, I am Mike.”", "Ask the child, “What’s your name?” Accept their name, a gesture, or a repeated model.", "Take turns introducing the toys, the parent, and the child."],
+        prompts: ["Hello, I am Mike.", "What’s your name?", "My name is…"],
+        age2to3: "Let the child say only the name or wave while the adult completes the sentence.",
+        age4to5: "The child chooses toy names and asks the adult, “What’s your name?”",
+        safety: "Use soft, washable toys with no loose buttons or small detachable parts."
+      },
+        { type:'offscreen', tag:'E. Mission', title:"Real World", text:"Say Hello to a toy.", image:"assets/img/hello_toy.png" }
+      ]
+    }
+  ],
+
+  "Oct": [
+    {
+      unit: "Unit 3: Friends", vocab: "Boy, Girl", phrase: "I am a boy. I am a girl.",
+      tips: "Use family photos to help your child understand 'He' (for a boy) and 'She' (for a girl).",
+      steps: [
+        { type:'warmup', tag:'A. Warm Up', title:"High Five", text:"High five Mommy!", action:"Give me a high five", phrase:"High five!", audio:"assets/audio/high-5.mp3" },
+        { type:'words', tag:'B. Key Words', title:"Gender",
+          items: [
+            { w:"Boy",    zh:"男孩", img:"assets/img/boy.png", audio:"assets/audio/boy.mp3" },
+            { w:"Girl",   zh:"女孩", img:"assets/img/girl.png", audio:"assets/audio/girl.mp3" },
+            { w:"My Friend", zh:"我的朋友", img:"assets/img/friend.png", audio:"assets/audio/myfriend.mp3" }
+          ]
+        },
+        { type:'phrase', tag:'C. Key Sentences', title:"Identity", text:"I am a boy. I am a girl.", script:"Point to your child and say the phrase.", parentTip:"Point to yourself (I am) and the child (You are)." },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Friend Card Hello",
+        goal: "Recognize Boy, Girl, and Friend while practicing a friendly greeting.",
+        duration: "3–4 minutes",
+        materials: "Three large inclusive character cards: a boy, a girl, and two friends.",
+        gameSteps: ["Place the cards face up and look at them together.", "Say, “Find the boy,” “Find the girl,” or “Find the friends.”", "The child points to a card and waves to the character.", "Finish each turn with “Hello, my friend!”"],
+        prompts: ["Find the boy.", "Find the girl.", "Hello, my friend!"],
+        age2to3: "Use two cards and accept pointing as the response.",
+        age4to5: "Let the child choose a card and give the instruction to the adult.",
+        safety: "Do not ask children to classify themselves or other real people. Keep the activity focused on the illustrated characters."
+      },
+        { type:'offscreen', tag:'E. Mission', title:"Real World", text:"Count how many boys are in your family.", image:"assets/img/count.png"}
+      ]
+    },
+    {
+      unit: "Unit 3: Social", vocab: "My Friend", phrase: "This is my friend.",
+      tips: "Teach your child to introduce others politely.",
+      steps: [
+        { type:'warmup', tag:'A. Warm Up', title:"Handshake", text:"Shake hands.", action:"Nice to meet you.", phrase:"Nice to meet you.", audio:"assets/audio/shake-hands.mp3" },
+        { type:'words', tag:'B. Key Words', title:"Friendship",
+          items: [
+            { w:"My Friend",     zh:"我的朋友",     img:"assets/img/friend.png", audio:"assets/audio/myfriend.mp3" },
+            { w:"Play",       zh:"玩",       img:"assets/img/play.png", audio:"assets/audio/play.mp3" },
+            { w:"Teddy Bear", zh:"泰迪熊",   img:"assets/img/teddy_bear.png", audio:"assets/audio/teddy_bear.mp3" }
+          ]
+        },
+        { type:'phrase', tag:'C. Key Sentences', title:"Intro", text:"This is my friend.", script:"Introduce a toy to Mommy.", parentTip:"Use a teddy bear to practice introductions." },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Toy Friendship Picnic",
+        goal: "Use “This is my friend” while practicing gentle social play.",
+        duration: "4–5 minutes",
+        materials: "Two soft toys, a cloth napkin, and two unbreakable empty cups.",
+        gameSteps: ["Seat the two toys on the napkin for a pretend picnic.", "The child chooses one toy and introduces it: “This is my friend.”", "Offer the toy an empty cup and say, “Let’s play.”", "Swap toys and repeat, ending with both toys waving goodbye."],
+        prompts: ["This is my friend.", "Let’s play.", "Goodbye, friend!"],
+        age2to3: "The adult says the full sentence and pauses for the child to add “friend.”",
+        age4to5: "The child introduces both toys and asks, “Do you want to play?”",
+        safety: "Use only empty, unbreakable cups and soft toys. Do not use real hot drinks or small pretend-food pieces."
+      },
+          
+        { type:'offscreen', tag:'E. Mission', title:"Real World", text:"Hug your friend (or a toy).", image:"assets/img/hug_friend.png" }
+      ]
+    },
+    {
+      unit: "Unit 3: Phonics", vocab: "Gg /g/", phrase: "Stand up, please!",
+      tips: "Letter G makes the /g/ sound (hard G), not /j/.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Wiggle", text: "Wiggle your fingers.", action: "Wiggle wiggle!", phrase: "Wiggle!", audio:"assets/audio/wiggle.mp3" },
+        { type: 'words', tag: 'B. Key Words', title: "G Sound", 
+          items: [
+            { w: "Gg",   zh: "字母G", img: "assets/img/gg.png", audio:"assets/audio/g.mp3" },
+            { w: "Girl", zh: "女孩",   img: "assets/img/girl.png", audio:"assets/audio/girl.mp3" },
+            { w: "Game", zh: "游戏",   img: "assets/img/game.png", audio:"assets/audio/game.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Action', title: "TPR Command", text: "Stand up, please.", script: "Give commands politely.", parentTip: "Add 'Please' to teach manners." },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "G Sound Garden",
+        goal: "Notice the hard /g/ sound in Gg, Girl, Game, and Go.",
+        duration: "3–4 minutes",
+        materials: "Three large picture cards and one paper flower or leaf.",
+        gameSteps: ["Place the G, Girl, and Game cards around the paper flower as a pretend garden.", "Say one word slowly: “G-g-game.”", "The child touches the matching card and then makes the /g/ sound once.", "After three turns, say “Go!” and both take one careful step around the garden."],
+        prompts: ["G-g-game.", "Touch G.", "Go, please!"],
+        age2to3: "Use two cards and focus on copying the /g/ sound.",
+        age4to5: "Mix in a non-G picture; the child says “No G” when it does not begin with /g/.",
+        safety: "Cards stay close together so no running is needed. Use one slow step only."
+      },
+          
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Play a quick game of Tag.", image: "assets/img/tag_game.png" }
+      ]
+    },
+    {
+      unit: "Reader 1", vocab: "Family, Messy", phrase: "Who is this?",
+      tips: "Reading week! Focus on the pictures in the story.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Look", text: "Open your eyes wide!", action: "Look around.", phrase: "Look around!", audio:"assets/audio/look-around.mp3" },
+        { type: 'words', tag: 'B. Key Words', title: "Story Words", 
+          items: [
+            { w: "Family", zh: "家人", img: "assets/img/family.png", audio:"assets/audio/family.mp3" },
+            { w: "Messy",  zh: "乱糟糟", img: "assets/img/messy.png", audio:"assets/audio/messy.mp3" }
+          ]
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Question", text: "Who is this?", script: "Point to a character in the book.", parentTip: "Encourage child to answer: 'This is Daddy'." },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Tidy Story Detective",
+        goal: "Understand Family, Messy, and “Who is this?” through a simple sorting story.",
+        duration: "4–5 minutes",
+        materials: "A family picture, three large soft toys, and one open basket.",
+        gameSteps: ["Scatter the three toys near the basket and say, “Oh! It is messy.”", "Show the family picture and ask, “Who is this?”", "The child names or points to a family member, then puts one toy into the basket.", "Repeat until the space is tidy, celebrating each item with “Clean!”"],
+        prompts: ["It is messy.", "Who is this?", "Put it in the basket."],
+        age2to3: "Use one or two toys and model every phrase.",
+        age4to5: "Let the child decide which toy to tidy after answering the family question.",
+        safety: "Use a low, open basket and soft toys only. Keep all items within arm’s reach."
+      },
+          
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Find a toy under the bed/chair.", image: "assets/img/find.png" }
+      ]
+    }
+  ],
+
+  "Nov": [
+    {
+      unit: "Unit 4: My Face", vocab: "Eye, Nose, Mouth", phrase: "This is my nose.",
+      tips: "Use a mirror so your child can see their own face while learning.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Touch Game", text: "Touch your nose!", action: "Do it fast!", phrase: "Touch your nose!", audio:"assets/audio/touch-your-nose.mp3" },
+        { type: 'words', tag: 'B. Key Words', title: "Face Parts", 
+          items: [
+            { w:"Eye",   zh:"眼睛", img:"assets/img/eye.png", audio:"assets/audio/eye.mp3" },
+            { w:"Nose",  zh:"鼻子", img:"assets/img/nose.png", audio:"assets/audio/nose.mp3" },
+            { w:"Mouth", zh:"嘴巴", img:"assets/img/mouth.png", audio:"assets/audio/mouth.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Identity", text: "This is my nose.", script: "Point to your nose and say: 'my nose'.", parentTip: "Model the sentence first: 'This is *my* nose'." },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Mirror Face Spotlight",
+        goal: "Name Eye, Nose, Mouth and say “This is my…”",
+        duration: "3–4 minutes",
+        materials: "A child-safe unbreakable mirror or the phone’s front camera with no recording.",
+        gameSteps: ["Look together at the child’s reflection.", "Say one word, such as “Nose,” and point to your own nose.", "The child points to the same part on their own face and says, “My nose.”", "Add the full sentence: “This is my nose.” Repeat with eye and mouth."],
+        prompts: ["Where is your nose?", "My nose.", "This is my mouth."],
+        age2to3: "Use one-word answers and only two face parts per round.",
+        age4to5: "Let the child be the leader and name three parts in a new order.",
+        safety: "Use an unbreakable mirror and avoid touching the child’s face. The child points to their own face."
+      },
+          
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Look in a mirror and name 3 face parts.", image: "assets/img/mirror.png" }
+      ]
+    },
+    {
+      unit: "Unit 4: Creativity", vocab: "Ear, Hair, Mouth", phrase: "My mouth is big.",
+      tips: "Make learning fun by making silly faces together!",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Smile", text: "Big Smile! Sad face.", action: "Show me emotions.", phrase: "Smile!", audio:"assets/audio/big-smile.mp3" },
+        { type: 'words', tag: 'B. Key Words', title: "More Parts", 
+          items: [
+            { w:"Ear",  zh:"耳朵", img:"assets/img/ear.png", audio:"assets/audio/ear.mp3" },
+            { w:"Hair", zh:"头发", img:"assets/img/hair.png", audio:"assets/audio/hair.mp3" },
+            { w:"Face", zh:"脸",   img:"assets/img/face.png", audio:"assets/audio/face.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Description", text: "This is my mouth.", script: "Open your mouth wide!", parentTip: "Make it a game: Big mouth vs Small mouth." },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Funny Face Builder",
+        goal: "Review Ear, Hair, Face, and Mouth while creating a pretend face.",
+        duration: "4–6 minutes",
+        materials: "One large paper face and oversized paper pieces for ears, hair, and mouth.",
+        gameSteps: ["Place the large face sheet on the table or floor.", "Show one piece and ask, “What is this?”", "The child places it on the face and says the word or repeats after the adult.", "When the face is complete, describe it together: “This is my mouth. My mouth is big.”"],
+        prompts: ["What is this?", "This is the hair.", "My mouth is big."],
+        age2to3: "Offer one piece at a time and let the child place it anywhere.",
+        age4to5: "Invite the child to choose big or small features and describe the funny face.",
+        safety: "All paper pieces should be larger than the child’s palm. Avoid pins, magnets, beads, or glue."
+      },
+          
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Draw a funny face on paper.", image: "assets/img/draw.png" }
+      ]
+    },
+    {
+      unit: "Unit 4: Phonics Mm", vocab: "Mm /m/", phrase: "Close your eyes",
+      tips: "The /m/ sound vibrates on your lips. Mmmmmm!",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Yummy", text: "Rub your tummy.", action: "Say Mmmmmm!", phrase: "Yummy!", audio:"assets/audio/rub.mp3" },
+        { type: 'words', tag: 'B. Key Words', title: "M Sound", 
+          items: [
+            { w:"Mm",     zh:"字母M", img:"assets/img/mm.png", audio:"assets/audio/m.mp3" },
+            { w:"Monkey", zh:"猴子",  img:"assets/img/monkey.png", audio:"assets/audio/monkey.mp3" },
+            { w:"Milk",   zh:"牛奶",  img:"assets/img/milk.png", audio:"assets/audio/milk.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Action', title: "TPR Command", text: "Close your eyes.", script: "Open... and Close.", parentTip: "Play Peek-a-boo to practice." },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Mmm Music Pass",
+        goal: "Practice the /m/ sound in Mm, Monkey, and Milk.",
+        duration: "3–4 minutes",
+        materials: "One large soft monkey toy or cushion.",
+        gameSteps: ["Sit facing each other and gently pass the soft toy.", "While passing, hum “Mmmmm” together.", "When the adult says “Stop,” the person holding the toy chooses a word: Monkey, Milk, or Mm.", "Say the word slowly and pass again."],
+        prompts: ["Mmmmm.", "M is for Monkey.", "Milk starts with M."],
+        age2to3: "Use only Monkey and Milk and allow the child to point to a picture.",
+        age4to5: "Ask the child whether a new word starts with /m/ before passing again.",
+        safety: "Stay seated and pass, never throw, the toy. Use a large soft object with no hard parts."
+      },
+          
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Drink some milk (or water).", image: "assets/img/drink.png" }
+      ]
+    },
+    {
+      unit: "Reader 2", vocab: "Bee, Hair", phrase: "Oh, my hair!",
+      tips: "Read the story 'Buzz! Buzz!'. It's a story about a bee landing on your nose, ears, and mouth.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Buzz", text: "Buzz like a bee...", action: "Fly around!", phrase: "Buzzzzz.", audio:"assets/audio/buzz.mp3" },
+        { type: 'words', tag: 'B. Key Words', title: "Story Words", 
+          items: [
+            { w:"Bee",  zh:"蜜蜂", img:"assets/img/bee.png", audio:"assets/audio/bee.mp3"  },
+            { w:"Hair", zh:"头发", img:"assets/img/hair.png", audio:"assets/audio/hair.mp3"  },
+            { w:"No",   zh:"不",   img:"assets/img/no.png", audio:"assets/audio/no.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Reaction", text: "Oh, my hair!", script: "Pretend there's a bee in your hair.", parentTip: "Use a dramatic voice: 'Oh no!'" },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Oh no!",
+        goal: "Use Bee, Hair, Nose, and the reaction “Oh, my…” without frightening contact.",
+        duration: "3–4 minutes",
+        materials: "One large paper bee attached to a craft stick or held in the adult’s hand.",
+        gameSteps: ["Move the paper bee slowly through the air, keeping it away from the child’s face.", "Land it on a picture of hair, nose, or mouth placed on the table.", "The child points to their own matching body part and says, “My hair!” or “My nose!”", "Finish by guiding the bee back to a paper flower."],
+        prompts: ["Buzz, buzz.", "Oh, my hair!", "Fly to the flower."],
+        age2to3: "Use two body-part pictures and model the phrase.",
+        age4to5: "The child moves the bee to a picture while the adult says the matching reaction.",
+        safety: "Never touch the child’s face with the prop. Keep the stick under adult control and use a blunt, short handle."
+      },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Find something yellow.", image: "assets/img/yellow.png" }
+      ]
+    }
+  ],
+
+  "Dec": [
+    {
+      unit: "Unit 5: Farm", vocab: "Cow, Pig", phrase: "It is a cow.",
+      tips: "Animal sounds are fun! Don't be afraid to be loud.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Sounds", text: "Moo! Oink!", action: "Make animal sounds.", phrase: "Moo!", audio:"assets/audio/moo.mp3" },
+        { type: 'words', tag: 'B. Key Words', title: "Farm Animals", 
+          items: [
+            { w:"Cow",  zh:"牛",   img:"assets/img/cow.png",  audio:"assets/audio/cow.mp3" },
+            { w:"Pig",  zh:"猪",   img:"assets/img/pig.png", audio:"assets/audio/pig.mp3" },
+            { w:"Duck", zh:"鸭子", img:"assets/img/duck.png",  audio:"assets/audio/duck.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Phrase", text: "It is a cow.", script: "Point to a picture. Ask: What is this?", parentTip: "Encourage pointing while speaking." },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Barn Sound Mail",
+        goal: "Match Cow, Pig, and Duck with their sounds and say “It is a…”",
+        duration: "4–5 minutes",
+        materials: "Three large animal cards and a cardboard box drawn like a barn.",
+        gameSteps: ["Place the animal cards face up beside the barn box.", "Make one animal sound: moo, oink, or quack.", "The child selects the matching card and says the animal name.", "Together say, “It is a cow,” then post the card into the barn."],
+        prompts: ["Who says moo?", "It is a cow.", "Into the barn!"],
+        age2to3: "Offer a choice of two cards and accept animal sounds as answers.",
+        age4to5: "The child makes the sound while the adult guesses and says the full sentence.",
+        safety: "Use a wide box opening and cards larger than the child’s hand. No blindfolding or closed-eye guessing."
+      },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Walk like a duck around the room.", image: "assets/img/duck_walk.png" }
+      ]
+    },
+    {
+      unit: "Unit 5: Math", vocab: "One, Two, Three", phrase: "Two pigs.",
+      tips: "Count everything: fingers, toes, toys.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Fingers", text: "Show me 1 finger.", action: "Show me 2 fingers.", phrase: "One, two.", audio:"assets/audio/show-me.mp3" },
+        { type: 'words', tag: 'B. Key Words', title: "Numbers", 
+          items: [
+            { w:"One",   zh:"一", img:"assets/img/one.png",  audio:"assets/audio/one.mp3" },
+            { w:"Two",   zh:"二", img:"assets/img/two.png",  audio:"assets/audio/two.mp3" },
+            { w:"Three", zh:"三", img:"assets/img/three.png",  audio:"assets/audio/three.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Counting", text: "Look! Two pigs.", script: "Count toys together.", parentTip: "Count slowly and clearly." },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Three Farm Gates",
+        goal: "Count One, Two, Three and combine numbers with farm animals.",
+        duration: "4–5 minutes",
+        materials: "Three large floor mats or paper “gates” labeled 1, 2, and 3, plus three large toy animals.",
+        gameSteps: ["Place the numbered gates close together.", "Give the child one, two, or three animals.", "Count them together, touching each toy once.", "The child places the group at the matching gate and says, for example, “Two pigs.”"],
+        prompts: ["How many?", "One, two, three.", "Two pigs."],
+        age2to3: "Work only with one and two objects.",
+        age4to5: "Mix the groups and ask the child to choose the correct number gate independently.",
+        safety: "Use large toys only and keep the gates within one or two steps. No small counters."
+      },
+          
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Find 3 spoons in the kitchen.", image: "assets/img/spoon.png" }
+      ]
+    },
+    {
+      unit: "Unit 5: Phonics P", vocab: "Pp, Pink", phrase: "A pink pig.",
+      tips: "P is a 'popping' sound. Put a hand in front of your mouth to feel the air.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Pop!", text: "Pop your cheeks!", action: "P-p-p-pop!", phrase: "Pop!", audio:"assets/audio/ppop.mp3" },
+        { type: 'words', tag: 'B. Key Words', title: "P Words", 
+          items: [
+            { w:"Pp",   zh:"字母P", img:"assets/img/pp.png", audio:"assets/audio/p.mp3" },
+            { w:"Pink", zh:"粉色",  img:"assets/img/pink.png",  audio:"assets/audio/p-pink.mp3" },
+            { w:"Pig",  zh:"猪",    img:"assets/img/pig.png",  audio:"assets/audio/p-pig.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Color Phrase", text: "A pink pig.", script: "Find pink things.", parentTip: "Emphasize the 'P' sound." },
+
+         {
+        type: 'game',
+        tag: 'D. Game',
+        title: "P Puff and Point",
+        goal: "Feel the gentle puff of /p/ and connect Pp, Pink, and Pig.",
+        duration: "3–4 minutes",
+        materials: "Three large cards: P, a pink color patch, and a pig.",
+        gameSteps: ["Hold an open hand a few centimeters in front of your own mouth.", "Say “P-p-p” softly and notice the little puff of air.", "Show one card and say its word slowly.", "The child points to the matching card and repeats: “P-p-pig” or “Pink pig.”"],
+        prompts: ["P-p-p.", "P is for Pig.", "A pink pig."],
+        age2to3: "Use the pig and pink cards and let the child copy one sound.",
+        age4to5: "Mix the cards and ask which words begin with /p/.",
+        safety: "Do not blow objects toward the child and do not place hands directly on anyone’s mouth."
+      },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Touch something pink.", image: "assets/img/touch_pink.png" }
+      ]
+    },
+    {
+      unit: "Unit 5: Review", vocab: "Animals", phrase: "I like animals.",
+      tips: "Review week! Sing the song together.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Clap", text: "Clap 3 times.", action: "1, 2, 3!", phrase: "One, two, three", audio:"assets/audio/clap.mp3" },
+        { type: 'words', tag: 'B. Key Words', title: "Review", 
+          items: [
+            { w:"Hen", zh:"母鸡", img:"assets/img/hen.png",  audio:"assets/audio/hen.mp3"  },
+            { w:"Cow", zh:"牛",   img:"assets/img/cow.png",  audio:"assets/audio/cow.mp3"  },
+            { w:"Pig", zh:"猪",   img:"assets/img/pig.png",  audio:"assets/audio/pig.mp3"  }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Expression", text: "I like animals.", script: "Hug a toy animal.", parentTip: "Ask: Do you like pigs?" },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Farm Footprint Trail",
+        goal: "Review Hen, Cow, Pig and “I like animals.”",
+        duration: "4–5 minutes",
+        materials: "Three large paper footprints and three animal picture cards.",
+        gameSteps: ["Place the footprints in a short line with one animal card at each end.", "The child walks slowly to the first footprint.", "Show an animal card; the child names it or makes its sound.", "At the final footprint, say together, “I like animals.”"],
+        prompts: ["Walk to the cow.", "What animal is it?", "I like animals."],
+        age2to3: "Use two footprints and allow animal sounds instead of words.",
+        age4to5: "The child chooses the animal card and tells the adult how to move slowly.",
+        safety: "Tape paper flat so it cannot slide. Walk only; do not hop or run."
+      },
+          
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Sing 'Old McDonald' together.", image: "assets/img/sing.png" }
+      ]
+    }
+  ],
+
+  "Jan": [
+    {
+      unit: "Unit 6: Zoo", vocab: "Panda, Tiger", phrase: "Look at the panda!",
+      tips: "Use a deep voice for big animals, high voice for small ones.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Roar!", text: "Roar like a tiger!", action: "Roar!", phrase: "Roar!", audio:"assets/audio/roar.mp3" },
+        { type: 'words', tag: 'B. Key Words', title: "Wild Animals", 
+          items: [
+            { w:"Panda", zh:"熊猫", img:"assets/img/panda.png",  audio:"assets/audio/panda.mp3" },
+            { w:"Tiger", zh:"老虎", img:"assets/img/tiger.png",  audio:"assets/audio/tiger.mp3" },
+            { w:"Bear",  zh:"熊",   img:"assets/img/bear.png",  audio:"assets/audio/bear.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Pointing", text: "Look at the panda.", script: "Point to the screen.", parentTip: "Use your finger to point." },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Zoo Keeper Delivery",
+        goal: "Name Panda, Tiger, Bear and use “Look at the…”",
+        duration: "4–5 minutes",
+        materials: "Three large animal toys or cards and three paper habitat mats.",
+        gameSteps: ["Place the animals beside the child and the habitat mats nearby.", "Say, “Look at the panda,” while pointing.", "The child carries or slides the panda to one habitat mat.", "Repeat with tiger and bear, then let the child point and lead a turn."],
+        prompts: ["Look at the panda.", "Here is the tiger.", "Welcome to the zoo!"],
+        age2to3: "Use two animals and let the child point or move the card.",
+        age4to5: "Ask the child to give the full instruction to the adult.",
+        safety: "Use soft toys or flat cards and keep all stations within a small, clear area."
+      },
+          
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Find a teddy bear.", image: "assets/img/teddy_bear_toy.png" }
+      ]
+    },
+    {
+      unit: "Unit 6: Photo", vocab: "Photo, Zoo", phrase: "Take a photo.",
+      tips: "Pretend your hands are a camera.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Smile", text: "Say cheese! Smile big.", action: "Smile!", phrase: "Cheese!", audio:"assets/audio/smile.mp3" },
+        { type: 'words', tag: 'B. Key Words', title: "Zoo Words", 
+          items: [
+            { w:"Monkey", zh:"猴子",   img:"assets/img/monkey.png",  audio:"assets/audio/monkey.mp3" },
+            { w:"Photo",  zh:"照片",   img:"assets/img/photo.png",  audio:"assets/audio/photo.mp3" },
+            { w:"Zoo",    zh:"动物园", img:"assets/img/zoo.png",  audio:"assets/audio/zoo.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Action", text: "Take a photo.", script: "Click! Pretend to take a picture.", parentTip: "Make the 'Click' sound." },
+
+                  {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Animal Photo Studio",
+        goal: "Practice Photo, Zoo, Monkey and the action phrase “Take a photo.”",
+        duration: "4–5 minutes",
+        materials: "Three animal cards and a cardboard picture frame.",
+        gameSteps: ["The child chooses an animal card and holds it beside the cardboard frame.", "Say, “Look at the monkey. Take a photo.”", "Both make a safe still pose for two seconds while the adult says “Click!”", "Swap roles: the child says “Take a photo” and the adult poses."],
+        prompts: ["Take a photo.", "Look at the monkey.", "Click!"],
+        age2to3: "Use one animal and copy a simple smile or wave.",
+        age4to5: "The child chooses the animal and gives a two-part direction.",
+        safety: "Use a cardboard frame with smooth edges. No real photography is required, and no flash should be used."
+      },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Pretend to take a photo of Mom", image: "assets/img/camera.png" }
+      ]
+    },
+    {
+      unit: "Unit 6: Phonics T", vocab: "Tt, Tea, Table", phrase: "Touch the table.",
+      tips: "T is a ticking sound. T-t-t-tiger.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Tap", text: "Tap your toe.", action: "Tap tap tap.", phrase: "Tap!", audio:"assets/audio/tap-tap.mp3" },
+        { type: 'words', tag: 'B. Key Words', title: "T Words", 
+          items: [
+            { w:"Tt",    zh:"字母T", img:"assets/img/Tt.png",  audio:"assets/audio/t.mp3" },
+            { w:"Tea",   zh:"茶",    img:"assets/img/tea.png",  audio:"assets/audio/tea.mp3" },
+            { w:"Table", zh:"桌子",  img:"assets/img/table.png",  audio:"assets/audio/table.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Phrase", text: "Touch the table.", script: "Touch a table and say it.", parentTip: "The tongue goes behind the teeth for T." },        
+
+                  {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Tapping Train",
+        goal: "Practice the /t/ sound in Tt, Tea, Table and the phrase “Touch the table.”",
+        duration: "3–4 minutes",
+        materials: "A table or firm cushion and three large T-word cards.",
+        gameSteps: ["Make a pretend train rhythm by tapping two fingers softly: tap-tap.", "Show a card and say the word with a clear /t/: “T-t-table.”", "The child touches the table or cushion once and repeats the word.", "Finish with the full instruction, “Touch the table.”"],
+        prompts: ["T-t-table.", "Tap, tap.", "Touch the table."],
+        age2to3: "Use one card at a time and copy the tap rhythm.",
+        age4to5: "The child decides whether each shown word begins with /t/ before tapping.",
+        safety: "Use fingertips only and tap softly. Avoid glass, sharp edges, or unstable furniture."
+      },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Touch a table.", image: "assets/img/touch_table.png" }
+      ]
+    },
+    {
+      unit: "Unit 6: Rules", vocab: "Quiet", phrase: "Be quiet, please.",
+      tips: "Practice whispering. It calms children down.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Shhh", text: "Put finger on lips.", action: "Shhh...", phrase: "Shhh.", audio:"assets/audio/shh.mp3" },
+        { type: 'words', tag: 'B. Key Words', title: "Rules", 
+          items: [
+            { w:"Quiet", zh:"安静", img:"assets/img/quiet.png", audio:"assets/audio/quiet.mp3" },
+            { w:"Sleep", zh:"睡觉", img:"assets/img/sleep.png", audio:"assets/audio/sleep.mp3" },
+            { w:"Loud",  zh:"大声", img:"assets/img/loud.png", audio:"assets/audio/loud.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Polite", text: "Be quiet, please.", script: "The animals are sleeping.", parentTip: "Whisper this phrase." },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Quiet Sound Detective",
+        goal: "Understand Quiet, Loud, Sleep and practice “Be quiet, please.”",
+        duration: "3–4 minutes",
+        materials: "A soft toy and two picture cards: quiet and loud.",
+        gameSteps: ["Seat the soft toy as if it is sleeping.", "Show the Quiet card and whisper one word such as “Hello.”", "Show the Loud card and speak in a normal indoor voice, not a shout.", "The child chooses the right card when you ask, “The toy is sleeping. Quiet or loud?” Then whisper, “Be quiet, please.”"],
+        prompts: ["The toy is sleeping.", "Quiet or loud?", "Be quiet, please."],
+        age2to3: "Use gestures: finger to lips for quiet and open hands for loud.",
+        age4to5: "The child becomes the sound detective and selects the card after each voice.",
+        safety: "Do not shout near the child’s ears. Keep all sounds comfortable and at normal indoor volume or lower."
+      },
+          
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Walk on tip-toes.", image: "assets/img/tiptoe.png" }
+      ]
+    }
+  ],
+
+  "Feb": [
+    {
+      unit: "Unit 7: Cars", vocab: "Car, Bus, Bike", phrase: "It is a bus.",
+      tips: "Boys usually love this unit! Make engine noises.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Beep", text: "Beep Beep!", action: "Press the horn.", phrase: "Beep!", audio:"assets/audio/beep-beep.mp3"},
+        { type: 'words', tag: 'B. Key Words', title: "Vehicles", 
+          items: [
+            { w:"Car",  zh:"汽车",   img:"assets/img/car.png",  audio:"assets/audio/car.mp3" },
+            { w:"Bus",  zh:"公交车", img:"assets/img/bus.png",  audio:"assets/audio/bus.mp3" },
+            { w:"Bike", zh:"自行车", img:"assets/img/bike.png",  audio:"assets/audio/bike.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Identification", text: "It is a bus.", script: "Show a toy car/bus.", parentTip: "Ask: What is it?" },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Little Road Delivery",
+        goal: "Name Car, Bus, Bike and say “It is a bus.”",
+        duration: "4–5 minutes",
+        materials: "A strip of painter’s tape as a road and large toy vehicles or picture cards.",
+        gameSteps: ["Make one short road on the floor or table.", "Place the vehicles at the start and one soft block at the end.", "Ask for one vehicle: “Find the bus.”", "The child pushes or slides it slowly to the block and says, “It is a bus.”"],
+        prompts: ["Find the bus.", "Drive slowly.", "It is a bus."],
+        age2to3: "Use two vehicles and model the full sentence.",
+        age4to5: "Add directions such as “Bus, stop” and “Car, go.”",
+        safety: "Use floor-safe tape and large vehicles. Children push toys only; they do not ride or run."
+      },
+          
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Find a wheel.", image: "assets/img/find_wheel.png" }
+      ]
+    },
+    {
+      unit: "Unit 7: Situations", vocab: "Taxi", phrase: "Oh, my bike!",
+      tips: "Teach emotion: 'Oh no!'",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Oh no!", text: "Hands on cheeks. Oh no!", action: "Make a sad face.", phrase: "Oh no!", audio:"assets/audio/sad-face.mp3"},
+        { type: 'words', tag: 'B. Key Words', title: "More Vehicles", 
+          items: [
+            { w:"Taxi",   zh:"出租车", img:"assets/img/taxi.png",  audio:"assets/audio/taxi.mp3" },
+            { w:"Wheel",  zh:"轮子",   img:"assets/img/wheel.png",  audio:"assets/audio/wheel.mp3" },
+            { w:"Broken", zh:"坏了",   img:"assets/img/broken.png",  audio:"assets/audio/broken.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Expression", text: "Oh, my bike!", script: "Pretend a toy is broken.", parentTip: "Use dramatic expression." },
+
+                  {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Kind Repair Garage",
+        goal: "Practice Taxi, Wheel, Broken and the expression “Oh, my bike!”",
+        duration: "4–5 minutes",
+        materials: "A large cardboard vehicle picture and one oversized removable paper wheel.",
+        gameSteps: ["Show the vehicle with the paper wheel beside it and say, “Oh no. It is broken.”", "The child points to the missing place and names “Wheel.”", "Help the child place the large paper wheel onto the picture.", "Celebrate the pretend repair and say together, “Oh, my bike! It is ready.”"],
+        prompts: ["It is broken.", "Where is the wheel?", "The bike is ready."],
+        age2to3: "Let the child place the wheel while the adult says the words.",
+        age4to5: "The child explains the problem with “The wheel is broken.”",
+        safety: "Use paper or Velcro only. Do not use real tools, metal parts, batteries, or broken toys."
+      },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Fix a broken toy.", image: "assets/img/fix.png" }
+      ]
+    },
+    {
+      unit: "Unit 7: Phonics C", vocab: "Cc, Cat", phrase: "Stop and go.",
+      tips: "C sounds like 'K' (Cat), not 'S'.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Meow", text: "Act like a cat.", action: "Meow!", phrase: "Meow.", audio:"assets/audio/meow.mp3"},
+        { type: 'words', tag: 'B. Key Words', title: "C Words", 
+          items: [
+            { w:"Cc",  zh:"字母C", img:"assets/img/cc.png",  audio:"assets/audio/c.mp3" },
+            { w:"Cat", zh:"猫",    img:"assets/img/cat.png",  audio:"assets/audio/c-cat.mp3" },
+            { w:"Cup", zh:"杯子",  img:"assets/img/cup.png",  audio:"assets/audio/cup.mp3"  }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Traffic", text: "Stop and Go.", script: "Red light, Green light.", parentTip: "Use hand signals: Palm for Stop." },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Cat’s Stop-and-Go Path",
+        goal: "Practice Cc, Cat, Cup and understand Stop and Go.",
+        duration: "3–4 minutes",
+        materials: "A large cat card, a cup card, and two colored signs: green GO and red STOP.",
+        gameSteps: ["Place the cat card at one end of a short table or floor path and the cup card at the other.", "Move two fingers like a walking cat when the green GO sign is shown.", "Freeze the fingers when the red STOP sign appears.", "At the cup, say, “C-c-cat. C-c-cup. Stop and go.”"],
+        prompts: ["Go, cat!", "Stop!", "C is for Cat."],
+        age2to3: "The adult moves the finger-cat while the child holds up Stop or Go.",
+        age4to5: "The child controls both the signs and the finger-cat, then names the C words.",
+        safety: "This is a finger or tabletop game, so no running is needed. Use an empty unbreakable cup if using a real prop."
+      },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Drink water from a cup.", image: "assets/img/drink_water.png" }
+      ]
+    },
+    {
+      unit: "Review", vocab: "Colors", phrase: "Red light. Stop",
+      tips: "Safety lesson: Red means Stop.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Stop", text: "Freeze!", action: "Don't move.", phrase: "Stop!", audio:"assets/audio/freeze.mp3"},
+        { type: 'words', tag: 'B. Key Words', title: "Colors", 
+          items: [
+            { w:"Red",    zh:"红色", img:"assets/img/red.png",  audio:"assets/audio/red.mp3" },
+            { w:"Green",  zh:"绿色", img:"assets/img/green.png",  audio:"assets/audio/green.mp3" },
+            { w:"Yellow", zh:"黄色", img:"assets/img/yellow1.png",  audio:"assets/audio/yellow.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Safety", text: "Red light. Stop.", script: "Look at traffic lights.", parentTip: "Practice this when crossing street." },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Traffic Light Walking Mat",
+        goal: "Review Red, Green, Yellow and the safety phrase “Red light. Stop.”",
+        duration: "4–5 minutes",
+        materials: "Three large colored paper circles taped flat to the floor.",
+        gameSteps: ["Place the circles in a short row: green, yellow, red.", "The child takes one slow step when you say “Green.”", "On “Yellow,” the child stands still and taps knees gently.", "On “Red,” the child freezes and says, “Red light. Stop.”"],
+        prompts: ["Green light. Go slowly.", "Yellow light. Wait.", "Red light. Stop."],
+        age2to3: "Use only green and red.",
+        age4to5: "Let the child call the colors while the adult follows.",
+        safety: "Walk slowly in a clear area. Tape paper flat and never connect this pretend game with crossing a real road without an adult."
+      },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Find something Red.", image: "assets/img/find_red.png" }
+      ]
+    }
+  ],
+    "Mar": [
+    {
+      unit: "Unit 1: A Visit", vocab: "Grandma, Grandpa", phrase: "How are you?",
+      tips: "Use real family photos to practice these words with your child.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Wave Hello", text: "Wave your hand and smile.", action: "Say hello!", phrase: "Hello!", audio:"assets/audio/hello.mp3"},
+        { type: 'words', tag: 'B. Key Words', title: "Family", 
+          items: [
+            { w:"Grandma", zh:"奶奶/外婆", img:"assets/img/grandma.png", audio:"assets/audio/grandma.mp3" },
+            { w:"Grandpa", zh:"爷爷/外公", img:"assets/img/grandpa.png", audio:"assets/audio/grandpa.mp3" },
+            { w:"Family",  zh:"家人", img:"assets/img/family.png", audio:"assets/audio/family.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Greeting", text: "How are you?", script: "Wave to a toy. Ask: How are you?", parentTip: "Practice this phrase when waking up." },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Grandparent Greeting Phone",
+        goal: "Practice Grandma, Grandpa and “How are you?”",
+        duration: "4–5 minutes",
+        materials: "A cardboard pretend phone and two large family picture cards.",
+        gameSteps: ["Choose the Grandma or Grandpa card and place it near the pretend phone.", "Make a gentle ringing sound and pick up the cardboard phone.", "Say, “Hello, Grandma. How are you?”", "The child answers with a wave, “I’m fine,” or repeats the greeting, then swaps roles."],
+        prompts: ["Hello, Grandma.", "How are you?", "I’m fine, thank you."],
+        age2to3: "Use one card and let the child say “Hello” or wave.",
+        age4to5: "Practice the full two-line conversation and switch caller roles.",
+        safety: "Use a flat cardboard phone with no cord, batteries, or small buttons."
+      },
+          
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Hug your family.", image: "assets/img/hug.png" }
+      ]
+    },
+    {
+      unit: "Unit 1: Family", vocab: "Aunt, Uncle", phrase: "I'm fine. Thank you!",
+      tips: "Role-play knocking on a door and greeting a guest.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Knock Knock", text: "Knock on the table 3 times.", action: "Knock knock knock!", phrase: "Who is it?", audio:"assets/audio/knock.mp3"},
+        { type: 'words', tag: 'B. Key Words', title: "More Family", 
+          items: [
+            { w:"Aunt",  zh:"阿姨/姑姑", img:"assets/img/aunt.png",  audio:"assets/audio/aunt.mp3" },
+            { w:"Uncle", zh:"叔叔/舅舅", img:"assets/img/uncle.png", audio:"assets/audio/uncle.mp3" },
+            { w:"Home", zh:"房子", img:"assets/img/house.png", audio:"assets/audio/home.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Replying", text: "Who is it?", script: "Pretend to be Auntie answering the door.", parentTip: "Nod and smile when saying 'Thank you'." },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Family Door Picture",
+        goal: "Practice Aunt, Uncle, Home and “Who is it?”",
+        duration: "4–5 minutes",
+        materials: "A folded cardboard “door” and large Aunt and Uncle picture cards.",
+        gameSteps: ["Hide one family card behind the cardboard door while the child watches.", "Knock softly on the table and ask, “Who is it?”", "Open the cardboard door and let the child name or point to Aunt or Uncle.", "Say together, “It is Aunt,” then place the card beside the Home picture."],
+        prompts: ["Knock, knock.", "Who is it?", "It is Uncle."],
+        age2to3: "Show the edge of the card and offer two spoken choices.",
+        age4to5: "The child hides the card and asks the adult, “Who is it?”",
+        safety: "Use a pretend cardboard door only. Do not send the child to open a real household door."
+      },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Call an Aunt or Uncle and say Hello.", image: "assets/img/phone_aunt.png" }
+      ]
+    },
+    {
+      unit: "Unit 1: Phonics U", vocab: "Uu, Umbrella", phrase: "Up, up, up!",
+      tips: "The 'U' sound is like opening an umbrella: uh, uh, up!",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Point Up", text: "Point your finger to the ceiling.", action: "Reach up high!", phrase: "Up!", audio:"assets/audio/ceiling.mp3"},
+        { type: 'words', tag: 'B. Key Words', title: "U Words", 
+          items: [
+            { w:"Uu",       zh:"字母U", img:"assets/img/uu.png", audio:"assets/audio/u.mp3" },
+            { w:"Uncle",    zh:"叔叔",   img:"assets/img/uncle.png", audio:"assets/audio/uncle.mp3" },
+              { w:"Umbrella",    zh:"雨伞",   img:"assets/img/umbrella.png", audio:"assets/audio/umbrella.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Phonics", text: "U is for Umbrella.", script: "Pretend to hold an umbrella.", parentTip: "Emphasize the short 'uh' sound." },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Umbrella Up and Down",
+        goal: "Practice Uu, Uncle, Umbrella and the word Up.",
+        duration: "3–4 minutes",
+        materials: "A flat paper umbrella picture and a large U card.",
+        gameSteps: ["Hold the paper umbrella low and say, “Down.”", "Lift it to shoulder height and say, “Up, up, up!”", "The child copies with open hands or their own paper umbrella.", "Place the umbrella beside the U card and say, “U is for Umbrella.”"],
+        prompts: ["Up, up, up!", "U is for Umbrella.", "Umbrella up."],
+        age2to3: "Copy only the up-and-down movement and the word “Up.”",
+        age4to5: "The child becomes the leader and gives “Up” and “Down” directions.",
+        safety: "Use a flat paper prop, not a real opening umbrella indoors. Keep movements below face level."
+      },
+          
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Find an umbrella in your house.", image: "assets/img/find_umbrella.png" }
+      ]
+    },
+    {
+      unit: "Unit 1: Review", vocab: "Family & U", phrase: "How are you, Grandpa?",
+      tips: "Review week! Combine greetings and family words.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "High Five", text: "Give mom or dad a high five.", action: "Clap hands!", phrase: "Give me five!", audio:"assets/audio/high-5.mp3"},
+        { type: 'words', tag: 'B. Key Words', title: "Review", 
+          items: [
+            { w:"Grandpa", zh:"爷爷", img:"assets/img/grandpa.png", audio:"assets/audio/grandpa.mp3" },
+            { w:"Aunt",    zh:"阿姨", img:"assets/img/aunt.png", audio:"assets/audio/aunt.mp3" },
+            { w:"Umbrella",zh:"雨伞", img:"assets/img/umbrella.png", audio:"assets/audio/umbrella.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Expression", text: "I'm fine. Thank you.", script: "Practice the full dialogue together.", parentTip: "Use different funny voices." },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Family Greeting Echo",
+        goal: "Review family words and the dialogue “How are you?” — “I’m fine. Thank you.”",
+        duration: "4–5 minutes",
+        materials: "Three large cards: Grandpa, Aunt, Umbrella.",
+        gameSteps: ["Place the cards face down and let the child turn over one card.", "If it is a person, greet the picture: “How are you, Grandpa?”", "If it is Umbrella, hold hands above the head like a roof and say the word.", "The adult says one short line and the child echoes it, then roles switch."],
+        prompts: ["How are you, Grandpa?", "I’m fine. Thank you.", "Umbrella!"],
+        age2to3: "Echo one or two words only.",
+        age4to5: "The child creates the greeting and chooses a silly but gentle voice.",
+        safety: "Keep voices comfortable, not shouting. Use large cards and seated play."
+      },
+          
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Draw a picture of your family.", image: "assets/img/draw_family.png" }
+      ]
+    }
+  ],
+
+  "Apr": [
+    {
+      unit: "Unit 2: My Pets", vocab: "Bird, Fish", phrase: "I have a bird.",
+      tips: "Act like the animals to make learning memorable.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Fly & Swim", text: "Flap arms like a bird.", action: "Make fish lips.", phrase: "Fly! Swim!", audio:"assets/audio/flap.mp3"},
+        { type: 'words', tag: 'B. Key Words', title: "Pets", 
+          items: [
+            { w:"Bird", zh:"鸟", img:"assets/img/bird.png", audio:"assets/audio/bird.mp3" },
+            { w:"Fish", zh:"鱼", img:"assets/img/fish.png", audio:"assets/audio/fish.mp3" },
+            { w:"Pet",  zh:"宠物", img:"assets/img/pet.png", audio:"assets/audio/pet.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Having Pets", text: "I have a bird.", script: "Hold a toy bird.", parentTip: "Point to yourself when saying 'I have'." },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Pet Home Match",
+        goal: "Match Bird, Fish, and Pet with simple homes and use “I have a…”",
+        duration: "4–5 minutes",
+        materials: "Large bird and fish cards plus large nest and water-bowl pictures.",
+        gameSteps: ["Place the two animal cards and two home pictures face up.", "Ask, “Where does the bird go?”", "The child matches bird to nest and fish to water.", "Hold up one animal card and say together, “I have a bird.”"],
+        prompts: ["Where does the bird go?", "Bird and nest.", "I have a fish."],
+        age2to3: "Match one animal at a time with adult guidance.",
+        age4to5: "Mix the cards and let the child explain each match using a full sentence.",
+        safety: "Use pictures rather than live pets or real water. All cards should be oversized."
+      },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Flap your arms and run like a bird outside.", image: "assets/img/bird_fly.png" }
+      ]
+    },
+    {
+      unit: "Unit 2: My Pets", vocab: "Rabbit, Turtle", phrase: "I have a rabbit.",
+      tips: "Compare fast (rabbit) and slow (turtle).",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Fast & Slow", text: "Hop fast! Crawl slow!", action: "Hop hop hop!", phrase: "Fast and slow.", audio:"assets/audio/crawl-slow.mp3"},
+        { type: 'words', tag: 'B. Key Words', title: "Pets", 
+          items: [
+            { w:"Rabbit", zh:"兔子", img:"assets/img/rabbit.png", audio:"assets/audio/rabbit.mp3" },
+            { w:"Turtle", zh:"乌龟", img:"assets/img/turtle.png", audio:"assets/audio/turtle.mp3" },
+            { w:"Dog",    zh:"狗",   img:"assets/img/dog.png", audio:"assets/audio/dog.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Having Pets", text: "I have a rabbit.", script: "Hop like a rabbit while saying it.", parentTip: "Make bunny ears with your hands." },
+
+                {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Fast Fingers, Slow Hands",
+        goal: "Compare Rabbit and Turtle and practice “I have a rabbit.”",
+        duration: "3–4 minutes",
+        materials: "Large rabbit and turtle cards.",
+        gameSteps: ["Show the Rabbit card and wiggle two fingers quickly like bunny ears.", "Show the Turtle card and move one flat hand slowly across the table.", "The child copies the movement and says the animal word.", "Choose one card to hold and complete the sentence, “I have a rabbit” or “I have a turtle.”"],
+        prompts: ["Rabbit is fast.", "Turtle is slow.", "I have a rabbit."],
+        age2to3: "Focus on fast/slow gestures and one-word answers.",
+        age4to5: "The child chooses the card secretly and lets the adult guess from the movement.",
+        safety: "Use hand movements at the table; no running, hopping, or crawling is required."
+      },
+          { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Crawl on the floor slowly like a turtle.", image: "assets/img/turtle_crawl.png" }
+      ]
+    },
+    {
+      unit: "Unit 2: Phonics R", vocab: "Rr, Rabbit", phrase: "Run, rabbit, run!",
+      tips: "R sounds like an engine: rrrrrrrr.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Engine", text: "Pretend to drive a car.", action: "Rrrrrr!", phrase: "Vroom!", audio:"assets/audio/drive.mp3"},
+        { type: 'words', tag: 'B. Key Words', title: "R Words", 
+          items: [
+            { w:"Rr",     zh:"字母R", img:"assets/img/rr.png", audio:"assets/audio/r.mp3" },
+            { w:"Rabbit", zh:"兔子",   img:"assets/img/rabbit.png", audio:"assets/audio/rabbit.mp3" },
+            { w:"Run",    zh:"跑",     img:"assets/img/run.png", audio:"assets/audio/run.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Phonics", text: "R is for Rabbit.", script: "Make the 'r-r-r' sound.", parentTip: "Let the child feel the vibration in their throat." },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "R Road Rhythm",
+        goal: "Practice Rr, Rabbit, Run and the /r/ sound.",
+        duration: "3–4 minutes",
+        materials: "A large paper R shaped like a road and a soft toy rabbit.",
+        gameSteps: ["Place the paper R on the table or floor.", "Move the rabbit slowly along the R while making a gentle “Rrrr” sound.", "Pause at the top and say, “R is for Rabbit.”", "Move the rabbit again while saying, “Run, rabbit, run,” without the child actually running."],
+        prompts: ["Rrrr.", "R is for Rabbit.", "Run, rabbit, run!"],
+        age2to3: "Trace the road with one finger and copy the /r/ sound.",
+        age4to5: "The child leads the rabbit and identifies which shown words begin with R.",
+        safety: "The toy runs in the story; the child stays seated or walks slowly. Use a flat paper road."
+      },
+          
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Run from the bedroom to the living room.", image: "assets/img/run_room.png" }
+      ]
+    },
+    {
+      unit: "Unit 2: Review", vocab: "Pets", phrase: "I have a turtle.",
+      tips: "Can your child name all 4 pets from this unit?",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Animal Sounds", text: "Make 3 different animal noises.", action: "Tweet! Blub! Hop!", phrase: "Listen!", audio:"assets/audio/tweet.mp3"},
+        { type: 'words', tag: 'B. Key Words', title: "Review", 
+          items: [
+            { w:"Bird",   zh:"鸟",   img:"assets/img/bird.png", audio:"assets/audio/bird.mp3" },
+            { w:"Turtle", zh:"乌龟", img:"assets/img/turtle.png", audio:"assets/audio/turtle.mp3" },
+            { w:"Rabbit", zh:"兔子", img:"assets/img/rabbit.png", audio:"assets/audio/rabbit.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Expression", text: "I have a turtle.", script: "Use toy animals to practice.", parentTip: "Ask: Do you have a bird?" },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Pet Care Station",
+        goal: "Review pet names and use “I have a…” through pretend caring routines.",
+        duration: "4–6 minutes",
+        materials: "Large pet cards, one soft cloth, and paper pictures of food, water, and bed.",
+        gameSteps: ["Let the child choose a pet card.", "Ask what the pet needs: food, water, or bed.", "The child places one large care picture beside the pet.", "Say together, “I have a turtle. The turtle needs water,” then gently pretend to tuck it in with the cloth."],
+        prompts: ["Choose a pet.", "What does it need?", "I have a turtle."],
+        age2to3: "Offer only two care choices and use one-word answers.",
+        age4to5: "The child creates a two-step care routine and explains it.",
+        safety: "Use pretend paper food and water only. Do not involve live animals or small feeding pieces."
+      },
+          
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Draw your favorite pet on a paper.", image: "assets/img/draw_pet.png" }
+      ]
+    }
+  ],
+
+  "May": [
+    {
+      unit: "Unit 3: Color Fun", vocab: "Red, Blue, Yellow", phrase: "What color is it?",
+      tips: "Point to objects around the house to practice colors.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Touch Colors", text: "Touch something red. Touch something blue.", action: "Go fast!", phrase: "Red! Blue!", audio:"assets/audio/touch-colors.mp3"},
+        { type: 'words', tag: 'B. Key Words', title: "Colors", 
+          items: [
+            { w:"Red",    zh:"红色", img:"assets/img/red.png", audio:"assets/audio/red.mp3" },
+            { w:"Blue",   zh:"蓝色", img:"assets/img/blue.png", audio:"assets/audio/blue.mp3" },
+            { w:"Yellow", zh:"黄色", img:"assets/img/yellow1.png", audio:"assets/audio/yellow.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Asking", text: "What color is it?", script: "Hold up a red block. Ask the question.", parentTip: "Shrug your shoulders when asking." },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Color Post Office",
+        goal: "Recognize Red, Blue, Yellow and ask “What color is it?”",
+        duration: "4–5 minutes",
+        materials: "Three large color cards and three matching open boxes or paper “mail slots.”",
+        gameSteps: ["Place the color cards in a small pile.", "The child turns over one card.", "Ask, “What color is it?” and model the answer if needed.", "The child delivers the card to the matching color box and says the color."],
+        prompts: ["What color is it?", "It is red.", "Deliver the blue card."],
+        age2to3: "Use two colors and accept matching without speech.",
+        age4to5: "The child asks the question and checks the adult’s delivery.",
+        safety: "Use large cards and shallow boxes with wide openings. No small envelopes or stickers."
+      },
+          { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Find 3 yellow things in your toy box.", image: "assets/img/yellow_toys.png" }
+      ]
+    },
+    {
+      unit: "Unit 3: More Colors", vocab: "Green, Orange", phrase: "It's green.",
+      tips: "Mix yellow and blue paint to make green!",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Show me", text: "Show me a green crayon.", action: "Hold it up!", phrase: "It's green.", audio:"assets/audio/crayon.mp3"},
+        { type: 'words', tag: 'B. Key Words', title: "Colors", 
+          items: [
+            { w:"Green",  zh:"绿色", img:"assets/img/green.png", audio:"assets/audio/green.mp3" },
+            { w:"Orange", zh:"橙色", img:"assets/img/orange_color.png", audio:"assets/audio/orange.mp3" },
+            { w:"Color",  zh:"颜色", img:"assets/img/color.png", audio:"assets/audio/color.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Answering", text: "It's orange.", script: "Point to an orange object and answer.", parentTip: "Always use the full sentence 'It's...'." },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Color Recipe",
+        goal: "Practice Green, Orange, Color and the answer “It’s…”",
+        duration: "4–5 minutes",
+        materials: "Large green and orange cards, a paper bowl, and a large spoon.",
+        gameSteps: ["Place the paper bowl on the table.", "The child chooses a color card and puts it beside the bowl.", "Pretend to stir with the large spoon while asking, “What color is it?”", "The child answers, “It’s green” or “It’s orange,” then serves the pretend color to a toy."],
+        prompts: ["Choose a color.", "What color is it?", "It’s orange."],
+        age2to3: "Offer one card at a time and repeat the color together.",
+        age4to5: "Let the child combine two cards and invent a name for the pretend color recipe.",
+        safety: "Use an empty paper bowl and a large blunt spoon. No real paint, liquids, or tasting."
+      },
+          { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Look at the trees outside. Are they green?", image: "assets/img/green_tree.png" }
+      ]
+    },
+    {
+      unit: "Unit 3: Phonics O", vocab: "Oo, Orange", phrase: "O is for Orange.",
+      tips: "Make your mouth into an 'O' shape.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Mouth Shape", text: "Make a big 'O' with your lips.", action: "O-o-o!", phrase: "O!", audio:"assets/audio/olips.mp3"},
+        { type: 'words', tag: 'B. Key Words', title: "O Words", 
+          items: [
+            { w:"Oo",     zh:"字母O", img:"assets/img/oo.png", audio:"assets/audio/o.mp3" },
+            { w:"Orange", zh:"橙色/橙子", img:"assets/img/orange.png", audio:"assets/audio/an_orange.mp3" },
+            { w:"Octopus",zh:"章鱼", img:"assets/img/octopus.png", audio:"assets/audio/octopus.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Phonics", text: "O is for Orange.", script: "Draw an O in the air.", parentTip: "Exaggerate the 'ah' or 'oh' sound." },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Octopus O Builder",
+        goal: "Connect Oo, Orange, Octopus with the shape and sound of O.",
+        duration: "4–5 minutes",
+        materials: "One large paper O and eight wide paper strips.",
+        gameSteps: ["Place the big O on the table and say, “O-o-o.”", "Add one wide strip below it as an octopus arm.", "The child adds more strips one at a time while repeating O or Octopus.", "When finished, point to the round head and say, “O is for Octopus” and “O is for Orange.”"],
+        prompts: ["Make a big O.", "O is for Octopus.", "One more arm."],
+        age2to3: "Use four strips and focus on the O shape.",
+        age4to5: "Count up to eight arms and name another O word.",
+        safety: "Use large paper strips with rounded corners. Do not use string, pipe cleaners, staples, or small fasteners."
+      },
+          { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Eat an orange or drink orange juice.", image: "assets/img/eat_orange.png" }
+      ]
+    },
+    {
+      unit: "Unit 3: Review", vocab: "All Colors", phrase: "What color is it? It's red.",
+      tips: "Time for a colorful review! Play with building blocks.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Rainbow Dance", text: "Wave colorful scarves or ribbons.", action: "Dance!", phrase: "Colors!", audio:"assets/audio/wave-colorful.mp3"},
+        { type: 'words', tag: 'B. Key Words', title: "Review", 
+          items: [
+            { w:"Red",    zh:"红色", img:"assets/img/red.png", audio:"assets/audio/red.mp3" },
+            { w:"Blue",   zh:"蓝色", img:"assets/img/blue.png", audio:"assets/audio/blue.mp3" },
+            { w:"Green",  zh:"绿色", img:"assets/img/green.png", audio:"assets/audio/green.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Dialogue", text: "What color is it? It's red.", script: "Have a mini conversation.", parentTip: "Take turns asking and answering." },
+
+                  {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Rainbow Rescue",
+        goal: "Review color words and the dialogue “What color is it? It’s…”",
+        duration: "4–5 minutes",
+        materials: "Three large color mats and several large toys in matching colors.",
+        gameSteps: ["Place one or two toys near the color mats.", "Pick up a toy and ask, “What color is it?”", "The child answers and moves the toy to its matching mat.", "After all toys are sorted, swap roles so the child asks the question."],
+        prompts: ["What color is it?", "It’s blue.", "Put it on blue."],
+        age2to3: "Use two mats and one toy at a time.",
+        age4to5: "Add a toy with two colors and let the child choose and explain the main color.",
+        safety: "Use large toys with no loose pieces. Mats should lie flat and the activity should be done seated or walking slowly."
+      },
+          { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Sort your blocks by color.", image: "assets/img/sort_blocks.png" }
+      ]
+    }
+  ],
+
+  "Jun": [
+    {
+      unit: "Unit 4: In the Park", vocab: "Flower, Grass", phrase: "It's a flower.",
+      tips: "Go for a real walk in the park and point these out.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Sniff", text: "Pretend to smell a flower.", action: "Sniff deeply.", phrase: "Flower!", audio:"assets/audio/sniff.mp3"},
+        { type: 'words', tag: 'B. Key Words', title: "Nature", 
+          items: [
+            { w:"Flower", zh:"花", img:"assets/img/flower.png", audio:"assets/audio/flower.mp3" },
+            { w:"Grass",  zh:"草", img:"assets/img/grass.png", audio:"assets/audio/grass.mp3" },
+            { w:"Park",   zh:"公园", img:"assets/img/park.png", audio:"assets/audio/park.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Naming", text: "It's a flower.", script: "Point to a picture of a park.", parentTip: "Connect the words with outside nature." },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Park Action Cards",
+        goal: "Practice Flower, Grass, Park and “It’s a flower.”",
+        duration: "3–4 minutes",
+        materials: "Large flower, grass, and park cards.",
+        gameSteps: ["Place the three cards face up.", "Show a gentle action for each: smell the air for Flower, pat knees for Grass, and look around for Park.", "Name one word and let the child perform the matching action.", "Hold up the card and say together, “It’s a flower.”"],
+        prompts: ["Smell the flower.", "Touch your knees for grass.", "It’s a flower."],
+        age2to3: "Use two cards and copy the adult’s action.",
+        age4to5: "The child chooses a card, performs the action, and lets the adult guess.",
+        safety: "Use pretend actions indoors. Do not ask the child to touch unknown plants, soil, or flowers."
+      },
+          
+          { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Go outside and touch the green grass.", image: "assets/img/touch_grass.png" }
+      ]
+    },
+    {
+      unit: "Unit 4: Park Fun", vocab: "Insect, Kite", phrase: "It's a kite. It's red.",
+      tips: "Combine nature words with colors from Unit 3!",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Buzz & Fly", text: "Buzz like a bee, fly like a kite.", action: "Bzzzz!", phrase: "Bzzzzz", audio:"assets/audio/like-a-bee.mp3"},
+        { type: 'words', tag: 'B. Key Words', title: "Things in Park", 
+          items: [
+            { w:"Insect", zh:"昆虫", img:"assets/img/insect.png", audio:"assets/audio/insect.mp3" },
+            { w:"Kite",   zh:"风筝", img:"assets/img/kite.png", audio:"assets/audio/kite.mp3" },
+            { w:"Tree",   zh:"树",   img:"assets/img/tree.png", audio:"assets/audio/tree.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Describing", text: "It's a kite. It's red.", script: "Describe toys using two sentences.", parentTip: "First name the object, then its color." },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Kite Wind Story",
+        goal: "Practice Insect, Kite, Tree and describe an object with a color.",
+        duration: "4–5 minutes",
+        materials: "A light scarf, plus large kite, insect, and tree cards.",
+        gameSteps: ["Place the cards on the table and hold the scarf low as pretend wind.", "Move the scarf gently toward one card.", "The child names the card and chooses a color for it.", "Say two short sentences together: “It’s a kite. It’s red.”"],
+        prompts: ["The wind is blowing.", "What is it?", "It’s a kite. It’s red."],
+        age2to3: "Use two cards and one-word color choices.",
+        age4to5: "The child moves the wind scarf and creates the two-sentence description.",
+        safety: "Keep the scarf below shoulder height and away from faces and necks. Adult supervises the scarf at all times."
+      },
+          { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Look for a small insect outside (don't touch!).", image: "assets/img/find_insect.png" }
+      ]
+    },
+    {
+      unit: "Unit 4: Phonics I", vocab: "Ii, Insect", phrase: "I is for insect.",
+      tips: "The short 'i' sound is like 'ih-ih-ih'.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Tickle", text: "Pretend an insect is walking on your arm.", action: "Tickle tickle!", phrase: "Insect!", audio:"assets/audio/walking-insect.mp3"},
+        { type: 'words', tag: 'B. Key Words', title: "I Words", 
+          items: [
+            { w:"Ii",     zh:"字母I", img:"assets/img/ii.png", audio:"assets/audio/i.mp3" },
+            { w:"Insect", zh:"昆虫", img:"assets/img/insect.png", audio:"assets/audio/insect.mp3" },
+            { w:"Igloo",  zh:"冰屋", img:"assets/img/igloo.png", audio:"assets/audio/igloo.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Phonics", text: "I is for Insect.", script: "Make your fingers crawl like a bug.", parentTip: "Keep the 'ih' sound very short." },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Insect Inch Path",
+        goal: "Practice Ii, Insect, Igloo and the short /i/ sound.",
+        duration: "3–4 minutes",
+        materials: "A large paper I path and a fingertip insect puppet or paper insect.",
+        gameSteps: ["Place the I path flat on the table.", "Move the insect slowly from the bottom to the top while saying “I-i-insect.”", "The child takes a turn moving it and repeats the short /i/ sound.", "Show the Igloo card and ask whether it also begins with I."],
+        prompts: ["I-i-insect.", "Follow the I path.", "I is for Igloo."],
+        age2to3: "Use only the I and Insect pictures and copy the sound.",
+        age4to5: "Compare Insect with one non-I word and decide which starts with /i/.",
+        safety: "Use a flat paper insect or a large fingertip prop. Do not catch or touch real insects."
+      },
+          
+          { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Draw a little insect on a leaf.", image: "assets/img/draw_bug.png" }
+      ]
+    },
+    {
+      unit: "Unit 4: Review", vocab: "Park words", phrase: "It's a flower. It's yellow.",
+      tips: "Review week! Build sentences with nouns and colors.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Park Walk", text: "Walk in place. Pretend you are in the park.", action: "Look around!", phrase: "A beautiful park.", audio:"assets/audio/look-around.mp3"},
+        { type: 'words', tag: 'B. Key Words', title: "Review", 
+          items: [
+            { w:"Kite",   zh:"风筝", img:"assets/img/kite.png", audio:"assets/audio/kite.mp3" },
+            { w:"Grass",  zh:"草", img:"assets/img/grass.png", audio:"assets/audio/grass.mp3" },
+            { w:"Flower", zh:"花", img:"assets/img/flower.png", audio:"assets/audio/flower.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Combo Sentences", text: "It's a kite. It's blue.", script: "Draw a blue kite and say the sentence.", parentTip: "Praise your child for using two sentences." },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Build a Park Picture",
+        goal: "Review Kite, Grass, Flower and create two-part descriptions.",
+        duration: "4–6 minutes",
+        materials: "One large park background and oversized paper pieces: kite, grass, flower.",
+        gameSteps: ["Place the blank park background on the table.", "The child chooses one piece and names it.", "Ask the child where it should go, then place it together.", "Describe the finished scene: “It’s a flower. It’s yellow.”"],
+        prompts: ["Choose a park thing.", "Where does it go?", "It’s a blue kite."],
+        age2to3: "Offer one piece at a time and model the sentence.",
+        age4to5: "The child arranges all pieces and tells a two- or three-sentence park story.",
+        safety: "Use pieces larger than the child’s palm. Avoid magnets, pins, staples, or tiny decorations."
+      },
+          
+          { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Make a paper kite and fly it.", image: "assets/img/make_kite.png" }
+      ]
+    }
+  ],
+
+  "Jul": [
+    {
+      unit: "Unit 5: Yummy", vocab: "Bread, Cake", phrase: "I like cake.",
+      tips: "Use meal times to practice 'I like...'.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Rub Tummy", text: "Rub your tummy and smile.", action: "Mmmm!", phrase: "Yummy!", audio:"assets/audio/tummy-and-smile.mp3"},
+        { type: 'words', tag: 'B. Key Words', title: "Food", 
+          items: [
+            { w:"Bread", zh:"面包", img:"assets/img/bread.png", audio:"assets/audio/bread.mp3" },
+            { w:"Cake",  zh:"蛋糕", img:"assets/img/cake.png", audio:"assets/audio/cake.mp3" },
+            { w:"Food",  zh:"食物", img:"assets/img/food.png", audio:"assets/audio/food.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Preferences", text: "I like cake.", script: "Pretend to eat and say the phrase.", parentTip: "Exaggerate how much you like it." },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Teddy’s Food Vote",
+        goal: "Practice Bread, Cake, Food and express “I like…”",
+        duration: "3–4 minutes",
+        materials: "A teddy bear and large bread, cake, and neutral non-food picture cards.",
+        gameSteps: ["Show Teddy one food card and ask, “Do you like bread?”", "The child gives Teddy a thumbs-up or gently shakes their head.", "Model the sentence, “I like bread,” and let the child repeat or choose another food.", "Finish by sorting pictures into “I like” and “Not today” areas."],
+        prompts: ["Do you like cake?", "I like bread.", "Not today."],
+        age2to3: "Use two food cards and gestures.",
+        age4to5: "The child asks Teddy the question and answers for Teddy in a pretend voice.",
+        safety: "Use pictures, not real food, so allergies and choking risks are avoided. Never label foods or preferences as “good” or “bad.”"
+      },
+          
+          { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Have a piece of bread for a snack.", image: "assets/img/eat_bread.png" }
+      ]
+    },
+    {
+      unit: "Unit 5: Drinks", vocab: "Juice, Milk", phrase: "I like milk.",
+      tips: "Practice these words at breakfast.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Drink Up", text: "Pretend to hold a cup and drink.", action: "Glug glug!", phrase: "Drink it all.", audio:"assets/audio/hold.mp3"},
+        { type: 'words', tag: 'B. Key Words', title: "Drinks", 
+          items: [
+            { w:"Juice", zh:"果汁", img:"assets/img/juice.png", audio:"assets/audio/juice.mp3" },
+            { w:"Milk",  zh:"牛奶", img:"assets/img/milk.png", audio:"assets/audio/milk.mp3" },
+            { w:"Water", zh:"水",   img:"assets/img/water.png", audio:"assets/audio/water.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Preferences", text: "I like juice.", script: "Pour imaginary juice.", parentTip: "Ask: Do you like juice?" },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Pretend Drink Café",
+        goal: "Practice Juice, Milk, Water and “I like…”",
+        duration: "4–5 minutes",
+        materials: "Two empty unbreakable cups and large drink picture cards.",
+        gameSteps: ["Set the empty cups on the table as a pretend café.", "The child chooses a drink card and places it beside a cup.", "Pretend to pour without liquid and ask, “Do you like juice?”", "The child answers, “I like juice,” then serves the empty cup to a toy."],
+        prompts: ["What would you like?", "I like milk.", "Here you are."],
+        age2to3: "Offer two drink cards and accept pointing.",
+        age4to5: "The child becomes the café helper and asks the adult what they like.",
+        safety: "Cups stay empty and must be unbreakable. Do not use hot drinks or encourage drinking during active play."
+      },
+          { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Pour a glass of milk.", image: "assets/img/pour_milk.png" }
+      ]
+    },
+    {
+      unit: "Unit 5: Phonics J", vocab: "Jj, Jam", phrase: "J is for Jam.",
+      tips: "J is a fun, bouncy sound. Jump when you say it!",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Jump", text: "Jump up and down 3 times.", action: "Jump!", phrase: "J-j-jump!", audio:"assets/audio/jump-un-down.mp3"},
+        { type: 'words', tag: 'B. Key Words', title: "J Words", 
+          items: [
+            { w:"Jj",    zh:"字母J", img:"assets/img/j.png", audio:"assets/audio/j.mp3" },
+            { w:"Jam",   zh:"果酱", img:"assets/img/jam.png", audio:"assets/audio/jam.mp3" },
+            { w:"Juice", zh:"果汁", img:"assets/img/juice.png", audio:"assets/audio/juice.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Phonics", text: "J is for Jam.", script: "Say the 'j-j-j' sound clearly.", parentTip: "Put some jam on bread and say the word." },
+        {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Jelly Jam Kitchen",
+        goal: "Practice Jj, Jam, Juice and “J is for Jam.”",
+        duration: "4–5 minutes",
+        materials: "A large paper bread shape, a red paper jam patch, and a large blunt spoon.",
+        gameSteps: ["Place the paper bread on the table.", "Say “J-j-jam” while moving the spoon over the paper jam patch.", "The child slides the paper jam onto the bread and repeats the word.", "Do a gentle seated “jelly jiggle” with shoulders and say, “J is for Jam.”"],
+        prompts: ["J-j-jam.", "Spread the pretend jam.", "J is for Jam."],
+        age2to3: "Focus on the J sound and placing the paper jam.",
+        age4to5: "Ask the child to find which of Jam and Juice begin with J.",
+        safety: "Use paper only, not real jam. Keep the spoon large and blunt, and do the movement seated."
+      },
+          
+          { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Make a jam sandwich", image: "assets/img/eat_jam.png" }
+      ]
+    },
+    {
+      unit: "Unit 5: Review", vocab: "Yummy Food", phrase: "I like cake.",
+      tips: "Review week! Set up a pretend restaurant.",
+      steps: [
+        { type: 'warmup', tag: 'A. Warm Up', title: "Hungry", text: "Pat your belly. Say 'I am hungry'.", action: "Pat pat.", phrase: "Hungry!", audio:"assets/audio/hungry.mp3"},
+        { type: 'words', tag: 'B. Key Words', title: "Review", 
+          items: [
+            { w:"Cake",  zh:"蛋糕", img:"assets/img/cake.png", audio:"assets/audio/cake.mp3" },
+            { w:"Milk",  zh:"牛奶", img:"assets/img/milk.png", audio:"assets/audio/milk.mp3" },
+            { w:"Jam",   zh:"果酱", img:"assets/img/jam.png", audio:"assets/audio/jam.mp3" }
+          ] 
+        },
+        { type: 'phrase', tag: 'C. Key Sentences', title: "Restaurant", text: "I like cake.", script: "Ask child: What do you like?", parentTip: "Use real snacks as props." },
+
+                  {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Picture Menu Café",
+        goal: "Review Cake, Milk, Jam and order politely using “I like…”",
+        duration: "4–6 minutes",
+        materials: "A large picture menu, one soft toy customer, and empty unbreakable dishes.",
+        gameSteps: ["Place the picture menu in front of the toy customer.", "The child points to one item and says, “I like cake, please.”", "The adult places the matching picture on an empty dish and says, “Here you are.”", "Swap roles so the child serves and the adult orders."],
+        prompts: ["What do you like?", "I like milk, please.", "Here you are."],
+        age2to3: "Let the child point and say one food word.",
+        age4to5: "Practice the full polite exchange and two-item orders.",
+        safety: "Use picture food and empty dishes only. Avoid glassware, cutlery, hot items, and real food allergies."
+      },
+          { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Help set the table for dinner.", image: "assets/img/set_table.png" }
+      ]
+    }
+  ],
+
+ "Aug": [
+  {
+    unit: "Unit 6: I Like Fruit",
+    vocab: "Apple, Four, Five",
+    phrase: "I have five apples.",
+    tips: "Combine fruit words with numbers you learned earlier.",
+    steps: [
+      { type: 'warmup', tag: 'A. Warm Up', title: "Count 5", text: "Clap your hands five times.", action: "1..2..3..4..5!", phrase: "Five.", audio:"assets/audio/clap.mp3"},
+      { type: 'words', tag: 'B. Key Words', title: "Fruit & Numbers", 
+        items: [
+          { w:"Apple", zh:"苹果", img:"assets/img/apple.png", audio:"assets/audio/apple.mp3" },
+          { w:"Four", zh:"四", img:"assets/img/four.png", audio:"assets/audio/four.mp3" },
+          { w:"Five", zh:"五", img:"assets/img/five.png", audio:"assets/audio/five.mp3" }
+        ] 
+      },
+      { type: 'phrase', tag: 'C. Key Sentences', title: "Quantity", text: "I have five apples.", script: "Count 5 real or toy apples.", parentTip: "Point to each item while counting." },
+      {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Five Apple Tree",
+        goal: "Practice Apple, Four, Five and “I have five apples.”",
+        duration: "4–5 minutes",
+        materials: "A large paper tree and five oversized paper apples.",
+        gameSteps: ["Place the empty tree on the table.", "The child adds one apple at a time while everyone counts aloud.", "After the fourth apple, pause and ask, “How many?”", "Add the fifth apple and say together, “I have five apples.”"],
+        prompts: ["One apple.", "Four apples.", "I have five apples."],
+        age2to3: "Count up to three first, then let the adult finish to five.",
+        age4to5: "Mix four and five apples and ask the child to make the requested number.",
+        safety: "Paper apples should be larger than the child’s palm. Do not use small counters, seeds, or real fruit pieces."
+      },
+        
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Wash a real apple and eat it.", image: "assets/img/wash_apple.png" }
+    ]
+  },
+  {
+    unit: "Unit 6: More Fruit",
+    vocab: "Pear, Orange, Seven",
+    phrase: "I have seven pears.",
+    tips: "Practice plural 's' at the end of words like pears and oranges.",
+    steps: [
+      { type: 'warmup', tag: 'A. Warm Up', title: "Count 7", text: "Stomp your feet seven times.", action: "Stomp stomp!", phrase: "Seven.", audio:"assets/audio/count-7.mp3"},
+      { type: 'words', tag: 'B. Key Words', title: "Fruit & Numbers", 
+        items: [
+          { w:"Pear", zh:"梨", img:"assets/img/pear.png", audio:"assets/audio/pear.mp3" },
+          { w:"Orange", zh:"橙子", img:"assets/img/orange.png", audio:"assets/audio/an_orange.mp3" },
+          { w:"Seven", zh:"七", img:"assets/img/seven.png", audio:"assets/audio/seven.mp3" }
+        ] 
+      },
+      { type: 'phrase', tag: 'C. Key Sentences', title: "Quantity", text: "I have seven pears.", script: "Hold up 7 fingers.", parentTip: "Emphasize the 's' in pears." },
+      {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Seven-Car Fruit Train",
+        goal: "Practice Pear, Orange, Seven and plural fruit words.",
+        duration: "4–5 minutes",
+        materials: "Seven large paper train cars and oversized pear and orange cards.",
+        gameSteps: ["Line up the seven paper train cars on the table or floor.", "The child places one fruit card on each car while counting.", "Pause after each placement to say “One pear,” “Two pears,” and so on.", "At seven, wave to the train and say, “I have seven pears.”"],
+        prompts: ["Put on one pear.", "How many pears?", "I have seven pears."],
+        age2to3: "Use three or four cars and count with the adult.",
+        age4to5: "Build a mixed train and ask the child to count pears and oranges separately.",
+        safety: "Keep the train in one place and use flat oversized cards. No small wheels, toy tracks, or rolling parts."
+      },
+        
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Peel an orange with mom or dad.", image: "assets/img/peel_orange.png" }
+    ]
+  },
+  {
+    unit: "Unit 6: Ten Pears",
+    vocab: "Pear, Nine, Ten",
+    phrase: "I have ten pears.",
+    tips: "Count on fingers and stress the plural sound in 'pears'.",
+    steps: [
+      { type: 'warmup', tag: 'A. Warm Up', title: "Big Bite", text: "Pretend to hold a pear and take a big bite.", action: "Munch munch!", phrase: "Pear!", audio:"assets/audio/big-bite.mp3"},
+      { 
+        type: 'words',
+        tag: 'B. Key Words',
+        title: "Fruit & Numbers",
+        items: [
+          { w:"Pear", zh:"梨", img:"assets/img/pear.png", audio:"assets/audio/pear.mp3" },
+          { w:"Nine", zh:"九", img:"assets/img/nine.png", audio:"assets/audio/nine.mp3" },
+          { w:"Ten", zh:"十", img:"assets/img/ten.png", audio:"assets/audio/ten.mp3" }
+        ] 
+      },
+      { 
+        type: 'phrase',
+        tag: 'C. Key Sentences',
+        title: "Counting",
+        text: "I have ten pears.",
+        script: "Show 10 fingers, then pretend to hold many pears.",
+        parentTip: "Count slowly together and say 'pears' clearly at the end."
+      },
+      {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Ten Pear Parking Spots",
+        goal: "Count Nine and Ten and say “I have ten pears.”",
+        duration: "5–6 minutes",
+        materials: "A large mat with ten drawn circles and ten oversized paper pears.",
+        gameSteps: ["Place the parking mat on the table or floor.", "The child puts one pear in each circle while counting slowly.", "At nine, pause and say, “Nine pears. One more.”", "Place the final pear and celebrate with, “I have ten pears.”"],
+        prompts: ["Count slowly.", "Nine pears. One more.", "I have ten pears."],
+        age2to3: "Count five pears first; the adult adds the rest while the child watches and joins in.",
+        age4to5: "Remove one or two pears and ask how many spaces are empty before completing ten.",
+        safety: "Use large flat paper pears only. Keep the mat flat and avoid small counting objects."
+      },
+        
+      { 
+        type: 'offscreen',
+        tag: 'E. Mission',
+        title: "Real World",
+        text: "Draw ten pears or count 10 small toys at home.",
+        image: "assets/img/ten_pears.png"
+      }
+    ]
+  },
+  {
+    unit: "Unit 6: Review",
+    vocab: "Fruit & Numbers",
+    phrase: "I have six bananas.",
+    tips: "Review week! Great time for a real fruit salad.",
+    steps: [
+      { type: 'warmup', tag: 'A. Warm Up', title: "Mix It", text: "Pretend to stir a big bowl of fruit.", action: "Mix mix mix!", phrase: "Fruit salad.", audio:"assets/audio/mix.mp3"},
+      { type: 'words', tag: 'B. Key Words', title: "Review", 
+        items: [
+          { w:"Banana", zh:"香蕉", img:"assets/img/banana.png", audio:"assets/audio/banana.mp3" },
+          { w:"Pear", zh:"梨", img:"assets/img/pear.png", audio:"assets/audio/pear.mp3" },
+          { w:"Apple", zh:"苹果", img:"assets/img/apple.png", audio:"assets/audio/apple.mp3" }
+        ] 
+      },
+      { type: 'phrase', tag: 'C. Key Sentences', title: "Expression", text: "I have six bananas.", script: "Review counting with fruit or blocks.", parentTip: "Use blocks to represent fruit if needed." },
+      {
+        type: 'game',
+        tag: 'D. Game',
+        title: "Fruit Basket Challenge",
+        goal: "Review Banana, Pear, Apple and combine fruit names with numbers.",
+        duration: "5–6 minutes",
+        materials: "A wide basket or paper basket picture and large fruit cards.",
+        gameSteps: ["Spread the large fruit cards face up.", "Give one simple order, such as “Find two apples.”", "The child counts the correct cards and places them in the basket.", "Finish with a sentence such as “I have six bananas,” using the available cards or pretend counting on fingers."],
+        prompts: ["Find two apples.", "Put them in the basket.", "I have six bananas."],
+        age2to3: "Use two fruit types and quantities up to three.",
+        age4to5: "Use quantities up to ten and let the child give the adult an order.",
+        safety: "Use oversized cards and a low, open basket. Do not use real fruit as throwing or counting objects."
+      },
+        { type: 'offscreen', tag: 'E. Mission', title: "Real World", text: "Make a real fruit salad together.", image: "assets/img/fruit_salad.png" }
+    ]
+  }
+]
+};
+
+    let currentData = null;
+    let stepIndex = 0;
+    let isRecording = false;
+
+    function init() {
+      const params = new URLSearchParams(window.location.search);
+      const m = params.get('m');
+      const w = parseInt(params.get('w')) || 0;
+    
+      if (m && db[m] && db[m][w]) {
+        currentData = db[m][w];
+      } else {
+        currentData = db["Sep"][0];
+      }
+          document.getElementById('hero-date').innerText =
+        currentData.unit || currentData.meta?.unit || "Ready to play?";
+    }
+
+    function startLesson() {
+        document.getElementById('screen-start').classList.remove('active');
+        document.getElementById('screen-lesson').classList.add('active');
+        renderStep(0);
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    }
+
+    function backToHomework() {
+      const month = new URLSearchParams(window.location.search).get('m');
+      window.location.href = month
+        ? `exercises.html?m=${encodeURIComponent(month)}`
+        : 'exercises.html';
+    }
+    
+    function renderStep(idx) {
+        stepIndex = idx;
+        const step = currentData.steps[idx];
+        const card = document.getElementById('lesson-card-content');
+        
+        // Progress Bar
+        const pct = ((idx + 1) / currentData.steps.length) * 100;
+        document.getElementById('progress-bar').style.width = pct + '%';
+
+        const nextBtn = document.getElementById('next-btn');
+        if (idx === currentData.steps.length - 1) {
+            nextBtn.innerText = "Finish 🎉";
+            nextBtn.onclick = finishLesson;
+        } else {
+            nextBtn.innerText = "Next Step →";
+            nextBtn.onclick = nextStep;
+        }
+        let html = `
+            <div class="step-header">
+                <span class="step-tag">${step.tag}</span>
+                <h2 class="step-title">${step.title}</h2>
+            </div>
+        `;
+
+        // Parent Tip
+        if (step.parentTip) {
+            html += `<div class="parent-tip">💡 <b>Parent Tip:</b> ${step.parentTip}</div>`;
+        }
+
+        // A. WARMUP
+        if (step.type === 'warmup') {
+            html += `
+                <div class="audio-control" style="justify-content:center; flex-direction:column; text-align:center;">
+                    <button class="play-btn" onclick="playStepAudio()" aria-label="Play audio">${ICON_PLAY}</button>
+                    <p class="warmup-main">${step.text}</p>
+                    <p class="warmup-action">${step.action}</p>
+                </div>
+            `;
+        }
+
+        // B. WORDS
+        else if (step.type === 'vocab' || step.type === 'words') {
+          html += `<div class="flashcards-grid">`;
+          step.items.forEach(item => {
+        
+            const wordSafe = (item.w || '').replace(/'/g, "\\'");
+            const audioSafe = (item.audio || '').replace(/'/g, "\\'");
+        
+            let visual = item.img
+              ? `<img src="${encodeURI(item.img)}" class="fc-img" alt="${item.w}"
+                      onerror="this.onerror=null; this.src='assets/img/book.png';">`
+              : `<div class="fc-icon">${item.i || ''}</div>`;
+        
+            html += `
+              <button type="button" class="flashcard" onclick="playWordAudio('${audioSafe}', '${wordSafe}')" aria-label="Play ${item.w}">
+                ${visual}
+                <div class="fc-word">${item.w}</div>
+                ${item.zh ? `<div class="flashcard-zh">${item.zh}</div>` : ''}
+                ${ICON_AUDIO}
+              </button>`;
+          });
+          html += `</div>`;
+        }
+
+        // C. PHRASE / SPEAKING
+else if (step.type === 'phrase' || step.type === 'speak') {
+    html += `
+        <div class="script-box">
+            <div class="script-label">Script</div>
+            <div class="script-text">"${step.script || step.phrase || ''}"</div>
+        </div>
+
+        ${step.audio ? `
+            <div class="audio-control">
+                <button class="play-btn" onclick="playStepAudio()" aria-label="Play phrase audio">${ICON_PLAY}</button>
+                <div class="audio-copy">
+                    <strong>Listen:</strong><br>
+                    <span class="phrase-line">"${step.text || step.phrase || ''}"</span>
+                </div>
+            </div>
+        ` : ''}
+
+        <div class="audio-control">
+            <button class="mic-btn" onclick="toggleMic(this)" aria-label="Start or stop speaking practice">${ICON_MIC}</button>
+            <div class="audio-copy">
+                <strong>Your turn:</strong><br>
+                <span class="phrase-line">"${step.text || step.phrase || ''}"</span>
+            </div>
+        </div>
+    `;
+}
+
+        // D. GAME
+        else if (step.type === 'game') {
+            const gameSteps = Array.isArray(step.gameSteps) ? step.gameSteps : [];
+            const prompts = Array.isArray(step.prompts) ? step.prompts : [];
+
+            html += `
+                <div class="game-panel">
+                    <div class="game-meta">
+                        <span class="game-chip">${step.duration || '4–5 minutes'}</span>
+                        <span class="game-chip">Ages 2–5</span>
+                    </div>
+
+                    <div class="game-section game-goal">
+                        <h4>Learning goal</h4>
+                        <p>${step.goal || step.text || ''}</p>
+                    </div>
+
+                    <div class="game-section game-materials">
+                        <h4>What you need</h4>
+                        <p>${step.materials || 'No special materials.'}</p>
+                    </div>
+
+                    <div class="game-section game-play">
+                        <h4>How to play</h4>
+                        <ol>
+                            ${gameSteps.map(item => `<li>${item}</li>`).join('')}
+                        </ol>
+                    </div>
+
+                    <div class="game-section game-say">
+                        <h4>Say these words</h4>
+                        <div class="game-prompts">
+                            ${prompts.map(item => `<span class="speech-chip">${item}</span>`).join('')}
+                        </div>
+                    </div>
+
+                    <div class="age-options">
+                        <div class="age-card">
+                            <strong>Ages 2–3</strong>
+                            <p>${step.age2to3 || ''}</p>
+                        </div>
+                        <div class="age-card">
+                            <strong>Ages 4–5</strong>
+                            <p>${step.age4to5 || ''}</p>
+                        </div>
+                    </div>
+
+                    <div class="safety-box">
+                        <b>Safety:</b> ${step.safety || 'Adult supervision is required.'}
+                    </div>
+                </div>
+            `;
+        }
+
+        // E. MISSION
+            else if (step.type === 'offscreen') {
+                html += `
+                    <div class="mission-box" style="text-align:center;">
+                        ${step.image ? `
+                            <img 
+                                src="${encodeURI(step.image)}" 
+                                alt="${step.title || 'Mission image'}"
+                                style="max-width:220px; width:100%; height:auto; border-radius:16px; margin-bottom:15px;"
+                                onerror="this.style.display='none'"
+                            >
+                        ` : ''}
+            
+                        <h3 class="mission-title">Do it now</h3>
+                        <p class="mission-text">${step.text}</p>
+                    </div>
+                `;
+            }
+
+        card.innerHTML = html;
+        trackStepAnalytics(step);
+        
+        applyParentModeVisibility();
+        
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: 'auto'
+        });
+   }
+    function nextStep() {
+        if (stepIndex < currentData.steps.length - 1) {
+            renderStep(stepIndex + 1);
+        }
+    }
+
+    function prevStep() {
+        if (stepIndex > 0) {
+            renderStep(stepIndex - 1);
+        } else {
+            document.getElementById('screen-lesson').classList.remove('active');
+            document.getElementById('screen-start').classList.add('active');
+        }
+    }
+
+    function toggleMic(btn) {
+        if (!isRecording) {
+            btn.classList.add('recording');
+            isRecording = true;
+        } else {
+            btn.classList.remove('recording');
+            isRecording = false;
+            // Success sound
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.frequency.setValueAtTime(600, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
+            osc.start();
+            osc.stop(ctx.currentTime + 0.5);
+        }
+    }
+
+     function toggleParentMode() {
+        const btn = document.querySelector('.parent-switch');
+        btn.classList.toggle('active');
+        btn.setAttribute('aria-pressed', String(btn.classList.contains('active')));
+        applyParentModeVisibility();
+    }
+    
+    function applyParentModeVisibility() {
+        const btn = document.querySelector('.parent-switch');
+        const isActive = btn.classList.contains('active');
+        document.querySelectorAll('.parent-tip').forEach(el => {
+            el.style.display = isActive ? 'block' : 'none';
+        });
+    }
+    
+    async function playAudio(src) {
+      if (!src) return false;
+    
+      try {
+        const audioElement = new Audio(src);
+        await audioElement.play();
+        return true;
+      } catch (error) {
+        console.log('Audio play error:', error);
+        return false;
+      }
+    }
+
+async function playWordAudio(audio, word) {
+  const wordId = String(word || '').trim();
+  if (
+    wordId &&
+    window.Analytics &&
+    typeof window.Analytics.logWordClick === 'function'
+  ) {
+    window.Analytics.logWordClick(wordId);
+  }
+
+  if (!audio) {
+    alert('Audio file is missing for: ' + wordId);
+    return;
+  }
+
+  const audioStarted = await playAudio(audio);
+  if (
+    audioStarted &&
+    wordId &&
+    window.Analytics &&
+    typeof window.Analytics.logWordAudio === 'function'
+  ) {
+    window.Analytics.logWordAudio(wordId);
+  }
+}
+    
+function playStepAudio() {
+  const step = currentData.steps[stepIndex];
+  if (!step) return;
+
+  if (step.audio) {
+    playAudio(step.audio);
+  } else {
+    alert("Audio file is missing for this step.");
+  }
+    }
+
+function trackStepAnalytics(step) {
+  if (
+    !step ||
+    !window.Analytics
+  ) {
+    return;
+  }
+  if (
+    (step.type === 'words' || step.type === 'vocab') &&
+    Array.isArray(step.items) &&
+    typeof window.Analytics.logWordsExposed === 'function'
+  ) {
+    window.Analytics.logWordsExposed(
+      step.items,
+      currentData?.unit || 'Fun Homework'
+    );
+  }
+}
+    
+    function finishLesson() {
+        document.getElementById('screen-lesson').classList.remove('active');
+        document.getElementById('screen-report').classList.add('active');
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+        
+       const vocab = currentData.vocab || currentData.meta?.vocab || "";
+       const phrase = currentData.phrase || currentData.meta?.phrase || ""; 
+       document.getElementById('report-vocab').innerText = vocab;
+       document.getElementById('report-phrase').innerText = phrase ? `"${phrase}"` : "";
+
+        if (typeof confetti === 'function') {
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#22d3ee', '#f97316', '#a78bfa'] });
+        }
+    }
+
+    init();
+</script>
+</body>
+</html>
+
