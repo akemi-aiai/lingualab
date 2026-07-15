@@ -1791,9 +1791,9 @@ function updateStats() {
     Number(weekly.activeTimeSeconds) ||
     (Number(weekly.activeTimeMinutes) || 0) * 60;
 
-  const wordsExposed =
+  const clickedWord =
     Number(
-      weekly.wordsExposed ??
+      weekly.clickedWords ??
       weekly.newW
     ) || 0;
 
@@ -1807,7 +1807,7 @@ function updateStats() {
   const scoreEl = document.getElementById('p-score');
 
   if (timeEl) timeEl.textContent = timeText;
-  if (wordsEl) wordsEl.textContent = String(wordsExposed);
+  if (wordsEl) wordsEl.textContent = String(clickedWords);
   if (scoreEl) scoreEl.textContent = String(totalPoints);
 }
   
