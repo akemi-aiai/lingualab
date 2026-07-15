@@ -1719,39 +1719,66 @@ function getWeeklyFallback() {
   let data = {};
 
   try {
-    data = JSON.parse(localStorage.getItem('ll_research_data') || '{}') || {};
+    data =
+      JSON.parse(
+        localStorage.getItem('ll_research_data') || '{}'
+      ) || {};
   } catch (error) {
-    console.error('Cannot read weekly analytics:', error);
+    console.error(
+      'Cannot read weekly analytics:',
+      error
+    );
   }
 
-  const words = new Set();
+  const clickedCards = new Set();
   let totalSeconds = 0;
 
   const weekStart = data.weekStart || '';
-  const startMs = weekStart ? Date.parse(`${weekStart}T00:00:00Z`) : NaN;
-  const endMs = Number.isFinite(startMs) ? startMs + 7 * 86400000 : Infinity;
 
-  Object.entries(data.dailyActivity || {}).forEach(([dateKey, day]) => {
-    const dayMs = Date.parse(`${dateKey}T00:00:00Z`);
+  const startMs = weekStart
+    ? Date.parse(`${weekStart}T00:00:00Z`)
+    : NaN;
 
-    if (Number.isFinite(startMs) && (dayMs < startMs || dayMs >= endMs)) {
+  const endMs = Number.isFinite(startMs)
+    ? startMs + 7 * 86400000
+    : Infinity;
+
+  Object.entries(
+    data.dailyActivity || {}
+  ).forEach(([dateKey, day]) => {
+    const dayMs =
+      Date.parse(`${dateKey}T00:00:00Z`);
+
+    if (
+      Number.isFinite(startMs) &&
+      (dayMs < startMs || dayMs >= endMs)
+    ) {
       return;
     }
 
-    totalSeconds += Number(day?.time ?? day?.activeTimeSeconds) || 0;
+    totalSeconds +=
+      Number(day?.time) || 0;
 
-    const exposed = Array.isArray(day?.wordsExposed)
-      ? day.wordsExposed
-      : Array.isArray(day?.words)
-        ? day.words
-        : [];
+    const reviewedWords =
+      Array.isArray(day?.reviewedWords)
+        ? day.reviewedWords
+        : Array.isArray(day?.words)
+          ? day.words
+          : [];
 
-    exposed.forEach(word => words.add(String(word)));
+    reviewedWords.forEach(wordId => {
+      const normalizedId =
+        String(wordId || '').trim();
+
+      if (normalizedId) {
+        clickedCards.add(normalizedId);
+      }
+    });
   });
 
   return {
     activeTimeSeconds: totalSeconds,
-    wordsExposed: words.size
+    reviewedWords: clickedCards.size
   };
 }
 
@@ -1760,55 +1787,68 @@ function updateStats() {
 
   if (
     window.Analytics &&
-    typeof window.Analytics.getWeeklySummary === 'function'
+    typeof window.Analytics.getWeeklySummary ===
+      'function'
   ) {
     try {
-      weekly = window.Analytics.getWeeklySummary(0);
+      weekly =
+        window.Analytics.getWeeklySummary(0);
     } catch (error) {
-      console.error('Weekly statistics error:', error);
+      console.error(
+        'Weekly statistics error:',
+        error
+      );
     }
   }
 
-  let totalPoints =
-    getStoredNumber('ll_score') +
+  /*
+   * Баллы за всё время:
+   * ll_score — Grammar;
+   * vocab_points — Vocabulary.
+   */
+  const grammarPoints =
+    getStoredNumber('ll_score');
+
+  const vocabularyPoints =
     getStoredNumber('vocab_points');
 
-  if (
-    window.Analytics &&
-    typeof window.Analytics.getScoreBreakdown === 'function'
-  ) {
-    try {
-      totalPoints =
-        Number(
-          window.Analytics.getScoreBreakdown().totalXP
-        ) || totalPoints;
-    } catch (error) {
-      console.error('Score statistics error:', error);
-    }
-  }
-
+  const totalPoints =
+    grammarPoints + vocabularyPoints;
   const totalSeconds =
     Number(weekly.activeTimeSeconds) ||
     (Number(weekly.activeTimeMinutes) || 0) * 60;
 
-  const clickedWord =
-    Number(
-      weekly.clickedWords ??
-      weekly.newW
-    ) || 0;
+  const clickedCards =
+    Number(weekly.reviewedWords) || 0;
 
   const timeText =
-    totalSeconds > 0 && totalSeconds < 60
+    totalSeconds > 0 &&
+    totalSeconds < 60
       ? '<1 min'
       : `${Math.floor(totalSeconds / 60)} min`;
 
-  const timeEl = document.getElementById('p-time');
-  const wordsEl = document.getElementById('p-words');
-  const scoreEl = document.getElementById('p-score');
+  const timeEl =
+    document.getElementById('p-time');
 
-  if (timeEl) timeEl.textContent = timeText;
-  if (wordsEl) wordsEl.textContent = String(clickedWords);
-  if (scoreEl) scoreEl.textContent = String(totalPoints);
+  const wordsEl =
+    document.getElementById('p-words');
+
+  const scoreEl =
+    document.getElementById('p-score');
+
+  if (timeEl) {
+    timeEl.textContent = timeText;
+  }
+
+  if (wordsEl) {
+    wordsEl.textContent =
+      String(clickedCards);
+  }
+
+  if (scoreEl) {
+    scoreEl.textContent =
+      String(totalPoints);
+  }
 }
   
     
