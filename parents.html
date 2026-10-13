@@ -1117,7 +1117,7 @@ footer {
       <div class="panel-card" style="grid-column: 1 / -1; margin-bottom: 20px;">
         <div class="panel-header">
           <div class="panel-kicker">Bedtime</div>
-          <h3>Your Storyteller</h3>
+          <h3>Your Storyteller (BETA)</h3>
         </div>
         <div class="panel-body">
           <p class="clil-desc" style="margin-top: 0;">Type 3-5 words your child learned today. We'll weave them into a magical bedtime story.</p>
@@ -1969,17 +1969,18 @@ async function generateAIStory() {
         const data = await response.json();
         
         if(data.status === "success") {
-            const finalStory = data.story.replace(/\n/g, '<br><br>');
+            const finalStory = data.story.replace(/\n/g, '<br>');
             output.innerHTML = finalStory;
         } else {
-            output.innerHTML = `<span style="color:red;">Error: ${data.message}</span>`;
+            // Если Groq выдал ошибку (перегружен)
+            output.innerHTML = `<span style="color:#f97316; font-weight: 600;">The storyteller is taking a quick breath... Please click the button one more time!</span>`;
         }
     } catch (error) {
         console.error("API Error:", error);
-        output.innerHTML = `<span style="color:red;">Failed to connect to magic server. Please try again.</span>`;
+        output.innerHTML = `<span style="color:#f97316; font-weight: 600;">The storyteller is taking a quick breath... Please click the button one more time!</span>`;
     } finally {
         btn.disabled = false;
-        btn.innerText = "Create Magic Story!";
+        btn.innerText = "Create a Story";
     }
 }
   
