@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wiki Parents — LinguaLab</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      /* Точные цвета из вашего макета */
+      --navy: #151e32;
+      --bg-cream: #fdf6e3;
+      --hero-grad-left: #f8e5f8;
+      --hero-grad-right: #d2f0ff;
+      --dome-purple: #e2cbf5;
+      --nav-active: #e6d6f4;
+      
+      --stat-purple: #ebdcf9;
+      --stat-blue: #daeefc;
+      
+      --story-bg: #dcb8f8;
+      --story-inner: #fdf6e3;
+      --btn-dark: #192238;
+      
+      --card-cyan: #c4eff5;
+      --card-purple: #ebdbfa;
+      --card-dark: #374151;
+      
+      --radius: 20px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-cream);
+      color: var(--navy);
+      overflow-x: hidden;
+    }
+
+    /* Навигация */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      background: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    }
+    .nav-logo-wrap { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--navy); font-weight: 800; font-size: 22px; }
+    .nav-logo-wrap img { height: 35px; }
+    .nav-links { display: flex; gap: 20px; align-items: center; }
+    .nav-links a { text-decoration: none; color: var(--navy); font-weight: 600; font-size: 15px; padding: 8px 16px; border-radius: 20px; transition: 0.2s; }
+    .nav-links a.active { background-color: var(--nav-active); }
+
+    /* Геро-секция с куполом */
+    .hero-section {
+      background: linear-gradient(90deg, var(--hero-grad-left) 0%, var(--hero-grad-right) 100%);
+      padding-top: 40px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+    }
+    
+    .hero-dome {
+      background-color: var(--dome-purple);
+      width: 120%;
+      max-width: 1000px;
+      border-radius: 50% 50% 0 0;
+      padding: 50px 20px 0;
+      text-align: center;
+      position: relative;
+      margin-bottom: -1px; /* Скрывает шов */
+    }
+
+    .hero-dome h1 { font-size: 54px; font-weight: 800; color: var(--navy); margin-bottom: 10px; }
+    .hero-subtitle { font-size: 16px; color: var(--navy); line-height: 1.5; margin-bottom: 20px; opacity: 0.9; }
+    .hero-img { width: 220px; border-radius: 20px 20px 0 0; display: block; margin: 0 auto; margin-top: 10px;}
+    
+    /* Декорации SVG */
+    .decor { position: absolute; pointer-events: none; }
+    .cloud-1 { top: 20px; left: 15%; width: 60px; }
+    .cloud-2 { top: 40px; right: 20%; width: 80px; }
+    .star-1 { top: 40px; left: 35%; width: 25px; }
+    .star-2 { top: 80px; right: 35%; width: 35px; }
+    .loop-1 { top: 120px; left: 20%; width: 50px; }
+    .lines-1 { top: 60px; right: 15%; width: 40px; }
+
+    /* Основной контейнер */
+    .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+
+    /* Блок статистики */
+    .stats-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 40px;
+    }
+    .stats-title { font-size: 24px; font-weight: 800; display: flex; align-items: center; gap: 15px; }
+    .squiggle { width: 60px; height: auto; }
+    
+    .stat-card {
+      border-radius: var(--radius);
+      padding: 15px 25px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex: 1;
+    }
+    .stat-card.purple { background: var(--stat-purple); }
+    .stat-card.blue { background: var(--stat-blue); }
+    .stat-info span { display: block; font-size: 13px; font-weight: 600; opacity: 0.8; margin-bottom: 4px; }
+    .stat-info b { display: block; font-size: 26px; font-weight: 800; line-height: 1; }
+    .stat-info p { font-size: 12px; margin-top: 4px; opacity: 0.7; }
+    .stat-icon { width: 45px; height: 45px; background: rgba(255,255,255,0.4); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; }
+
+    /* Сказки на ночь */
+    .story-card {
+      background: var(--story-bg);
+      border-radius: var(--radius);
+      padding: 30px;
+      position: relative;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    .story-card h2 { font-size: 24px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+    .story-card p { font-size: 14px; margin-bottom: 20px; }
+    
+    .input-group { display: flex; gap: 15px; max-width: 700px; margin: 0 auto 20px; }
+    .input-group input {
+      flex: 1; padding: 14px 20px; border-radius: 30px; border: none; font-size: 15px; outline: none;
+    }
+    .input-group button {
+      background: var(--btn-dark); color: #fff; border: none; padding: 14px 30px; border-radius: 30px;
+      font-weight: 600; font-size: 15px; cursor: pointer; display: flex; align-items: center; gap: 8px;
+    }
+    
+    .story-output-box {
+      background: var(--story-inner);
+      border-radius: 15px;
+      padding: 20px;
+      font-size: 14px;
+      line-height: 1.6;
+      text-align: left;
+      border: 1px dashed rgba(0,0,0,0.1);
+      display: none;
+    }
+    .story-output-box.show { display: block; }
+    
+    /* Декор сказок */
+    .moon-icon { width: 60px; position: absolute; top: 20px; left: 20px; }
+    .zzz-icon { width: 50px; position: absolute; top: 30px; right: 30px; }
+
+    /* Нижняя сетка */
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .grid-card { border-radius: var(--radius); padding: 25px; }
+    .grid-card h3 { font-size: 18px; font-weight: 800; margin-bottom: 8px; }
+    .grid-card.cyan { background: var(--card-cyan); position: relative; }
+    .grid-card.purple { background: var(--card-purple); }
+    .grid-card.dark { background: var(--card-dark); color: #fff; }
+    .card-kicker { font-size: 12px; font-weight: 600; opacity: 0.8; margin-bottom: 5px; }
+
+    /* Футер */
+    footer {
+      background: var(--card-dark);
+      color: #9ca3af;
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 13px;
+      position: relative;
+      overflow: hidden;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Навигация -->
+  <header class="navbar">
+    <a href="index.html" class="nav-logo-wrap">
+      <!-- Замените ссылку на свое лого -->
+      <img src="https://cdn-icons-png.flaticon.com/512/3081/3081078.png" alt="Logo">
+      LinguaLab
+    </a>
+    <nav class="nav-links">
+      <a href="surf.html">Splash Ride</a>
+      <a href="grammar.html">Grammar Magic</a>
+      <a href="parents.html" class="active">Wiki Parents</a>
+      <a href="contact.html">Contact Us</a>
+    </nav>
+  </header>
+
+  <!-- Геро-секция (градиент и купол) -->
+  <section class="hero-section">
+    <!-- SVG декорации -->
+    <svg class="decor cloud-1" viewBox="0 0 100 60" fill="#ffffff"><path d="M70,20 a20,20 0 0,0 -35,-5 a20,20 0 0,0 -25,15 a15,15 0 0,0 5,28 h70 a15,15 0 0,0 5,-28 a15,15 0 0,0 -20,-10 z"/></svg>
+    <svg class="decor cloud-2" viewBox="0 0 100 60" fill="#ffffff"><path d="M70,20 a20,20 0 0,0 -35,-5 a20,20 0 0,0 -25,15 a15,15 0 0,0 5,28 h70 a15,15 0 0,0 5,-28 a15,15 0 0,0 -20,-10 z"/></svg>
+    <svg class="decor star-1" viewBox="0 0 512 512" fill="#ffdd57"><path d="M256,0 C256,141.38 370.62,256 512,256 C370.62,256 256,370.62 256,512 C256,370.62 141.38,256 0,256 C141.38,256 256,141.38 256,0 Z"/></svg>
+    <svg class="decor star-2" viewBox="0 0 512 512" fill="#ff9999"><path d="M256,0 C256,141.38 370.62,256 512,256 C370.62,256 256,370.62 256,512 C256,370.62 141.38,256 0,256 C141.38,256 256,141.38 256,0 Z"/></svg>
+    <svg class="decor loop-1" viewBox="0 0 100 50" fill="none" stroke="#151e32" stroke-width="3" stroke-linecap="round"><path d="M0,25 Q15,0 30,25 T60,25 T90,25" /></svg>
+    
+    <div class="hero-dome">
+      <h1>Wiki Parents</h1>
+      <p class="hero-subtitle">
+        Science-based insights and everyday activities<br>for bilingual learning at home.<br>
+        <span style="font-weight: 400;">家庭双语教育的科学启发与日常活动灵感。</span>
+      </p>
+      <!-- Вставьте сюда картинку мамы с ребенком -->
+      <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=300&h=200" alt="Reading together" class="hero-img">
+    </div>
+  </section>
+
+  <div class="container">
+    
+    <!-- СТАТИСТИКА -->
+    <div class="stats-row">
+      <svg class="squiggle" viewBox="0 0 100 20" fill="none" stroke="#6b7280" stroke-width="2" stroke-linecap="round"><path d="M0,10 Q10,0 20,10 T40,10 T60,10 T80,10"/></svg>
+      <div class="stats-title">Statistics</div>
+      
+      <div class="stat-card purple">
+        <div class="stat-info">
+          <span>Time Spent</span>
+          <b>24 min</b>
+          <p>This week</p>
+        </div>
+        <div class="stat-icon">⏰</div>
+      </div>
+      
+      <div class="stat-card blue">
+        <div class="stat-info">
+          <span>Words Exposed</span>
+          <b>19</b>
+          <p>Unique words</p>
+        </div>
+        <div class="stat-icon">📚</div>
+      </div>
+      
+      <div class="stat-card blue">
+        <div class="stat-info">
+          <span>Total Points</span>
+          <b>120</b>
+          <p>Grammar & Vocab</p>
+        </div>
+        <div class="stat-icon">🎖️</div>
+      </div>
+      
+      <svg class="squiggle" viewBox="0 0 100 20" fill="none" stroke="#6b7280" stroke-width="2" stroke-linecap="round"><path d="M0,10 Q10,20 20,10 T40,10 T60,10 T80,10"/></svg>
+    </div>
+
+    <!-- СКАЗКИ НА НОЧЬ -->
+    <div class="story-card">
+      <svg class="moon-icon" viewBox="0 0 100 100" fill="#fff9c4" stroke="#151e32" stroke-width="2"><path d="M50,10 A40,40 0 1,0 90,50 A30,30 0 0,1 50,10 Z"/></svg>
+      <div class="zzz-icon" style="font-size: 24px; color: var(--navy); font-weight: 800; font-family: monospace;">zZz</div>
+      
+      <h2>Magic Bedtime Storyteller ✨</h2>
+      <p>Type 3-5 words your child learned today. We'll weave them into a magical, safe bedtime story with a fun TPR action!</p>
+      
+      <div class="input-group">
+        <input type="text" id="story-words" placeholder="e.g. apple, jump, blue">
+        <button id="story-btn" onclick="generateAIStory()">Create Magic Story ✨</button>
+      </div>
+
+      <div id="story-output" class="story-output-box"></div>
+    </div>
+
+    <!-- НИЖНЯЯ СЕТКА -->
+    <div class="bottom-grid">
+      <div class="grid-card cyan">
+        <div class="card-kicker">Experiment</div>
+        <h3>Milk Rainbow 牛奶彩虹</h3>
+        <p style="font-size: 13px; opacity: 0.8;">CLIL card</p>
+      </div>
+      
+      <div class="grid-card purple">
+        <div class="card-kicker">Speaking</div>
+        <h3>Today's Twisters</h3>
+      </div>
+      
+      <div class="grid-card dark">
+        <h3>Home Mission Control</h3>
+        <div style="display: flex; gap: 10px; margin-top: 15px;">
+          <div style="flex: 1; height: 30px; background: rgba(255,255,255,0.2); border-radius: 10px;"></div>
+          <div style="flex: 1; height: 30px; background: rgba(255,255,255,0.2); border-radius: 10px;"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>© 2028 LinguaLab • The LinguaLab Team. All rights reserved.</p>
+  </footer>
+
+  <!-- СКРИПТ ГЕНЕРАЦИИ СКАЗОК -->
+  <script>
+    async function generateAIStory() {
+      const output = document.getElementById("story-output");
+      const btn = document.getElementById("story-btn");
+      const wordsInput = document.getElementById("story-words").value.trim();
+
+      if (!wordsInput) {
+        alert("Please enter a few words first! (e.g., cat, run, yellow)");
+        return;
+      }
+
+      output.classList.add("show");
+      output.innerHTML = "<div style='text-align: center; color: #6b7280;'><b>^ Cozy A1-A2 level v</b><br><br><i>✨ Weaving a gentle story...</i></div>";
+      btn.disabled = true;
+
+      try {
+        const response = await fetch("https://lingualab-backend.onrender.com/generate_story", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ words: wordsInput })
+        });
+
+        if (!response.ok) throw new Error('Network error');
+
+        const data = await response.json();
+        
+        if(data.status === "success") {
+            const finalStory = data.story.replace(/\n/g, '<br>');
+            output.innerHTML = "<div style='text-align: center; color: #6b7280; margin-bottom:10px;'><b>^ Cozy A1-A2 level v</b></div>" + finalStory;
+        } else {
+            output.innerHTML = `<span style="color:#f97316; font-weight: 600;">✨ The storyteller is taking a quick breath... Please click the button one more time!</span>`;
+        }
+      } catch (error) {
+        console.error("API Error:", error);
+        output.innerHTML = `<span style="color:#f97316; font-weight: 600;">✨ The storyteller is taking a quick breath... Please click the button one more time!</span>`;
+      } finally {
+        btn.disabled = false;
+        btn.innerText = "Create Magic Story ✨";
+      }
+    }
+  </script>
+</body>
+</html>
