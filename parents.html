@@ -1945,59 +1945,54 @@ async function generateIBReport() {
     const btn = document.getElementById("ib-report-btn");
     
     reportContainer.style.display = "block";
-    reportContainer.innerHTML = "<i>Analyzing progress and generating the report (this may take up to 30 seconds)...</i>";
+    reportContainer.innerHTML = "<i>Analyzing data and generating report...</i>";
     btn.disabled = true;
-    btn.innerText = "Generating...";
-    btn.style.opacity = "0.7";
+    
+    const wordsExposed = document.getElementById('p-words').textContent || "0";
+    const timeSpent = document.getElementById('p-time').textContent || "0 min";
+    
+    let researchData = {};
+    try {
+        researchData = JSON.parse(localStorage.getItem('ll_research_data') || '{}');
+    } catch (e) {
+        console.warn("No research data found");
+    }
 
-    // Collect session data (in the future, fetch this from localStorage or real user stats)
     const sessionData = {
-        student_name: "Dear Student", 
-        age: 5,
-        module: "LinguaLab Weekly Review",
-        mastered_words: [document.getElementById('p-words').textContent + " words exposed"], 
-        struggling_words: ["complex vocabulary"],
-        tpr_response: "Active physical participation",
-        engagement_level: "High"
+        student_name: "", 
+        module: "Weekly LinguaLab Activity",
+        mastered_words: [`Words exposed: ${wordsExposed}`, `Time spent: ${timeSpent}`],
+        struggling_words: researchData.hard_words || ["Complex new vocabulary"],
+        tpr_response: "Interacted with web platform exercises",
+        engagement_level: "Measured via session time"
     };
 
     try {
         const response = await fetch("https://lingualab-backend.onrender.com/generate_report", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(sessionData)
         });
 
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
+        if (!response.ok) throw new Error('Network error');
 
         const data = await response.json();
         
         if(data.status === "success") {
-            const formattedReport = data.report.replace(/\n/g, '<br>');
-            reportContainer.innerHTML = formattedReport;
+            // Форматируем текст (переносы строк)
+            const finalReport = data.report.replace(/\n/g, '<br>');
+            reportContainer.innerHTML = finalReport;
         } else {
-            reportContainer.innerHTML = `<span style="color:red;">Generation Error: ${data.message}</span>`;
+            reportContainer.innerHTML = `<span style="color:red;">Error: ${data.message}</span>`;
         }
     } catch (error) {
         console.error("API Error:", error);
-        
-        reportContainer.innerHTML = `
-            <b>Weekly Progress (Preview Mode)</b><br><br>
-            This week, your child showed amazing engagement in the LinguaLab environment. Following the IB framework, they demonstrated the qualities of a true <b>Inquirer</b> by actively exploring new words.<br><br>
-            <b>Successes:</b> Excellent motor reaction during Total Physical Response (TPR) exercises. By linking actions to vocabulary, they are developing strong skills as a <b>Communicator</b>.<br><br>
-            <b>Home Tip:</b> Keep practicing action verbs at home by playing "Simon Says" to build muscle memory!<br><br>
-            <i><span style="color: #64748b; font-size: 12px;">(Note: This is a sample report. Please deploy the Backend API to generate real-time AI reports).</span></i>
-        `;
+        reportContainer.innerHTML = `<span style="color:red;">Failed to connect to AI server. Please try again.</span>`;
     } finally {
-        // Restore the button to its default state
         btn.disabled = false;
         btn.innerText = "Generate IB Report";
-        btn.style.opacity = "1";
     }
+}
 }
  </script>
 </body>
