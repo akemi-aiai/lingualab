@@ -1114,25 +1114,27 @@ footer {
 
     <div class="parent-grid">
       
-      <!-- НОВАЯ КАРТОЧКА: IB REPORT -->
-      <div class="panel-card" style="grid-column: 1 / -1; margin-bottom: 20px;">
-        <div class="panel-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
-          <div>
-            <div class="panel-kicker">Analytics</div>
-            <h3>IB Progress Report (Beta)</h3>
-          </div>
+<!-- КАРТОЧКА AI STORY -->
+      <div class="panel-card" style="margin-bottom: 20px;">
+        <div class="panel-header">
+          <div class="panel-kicker">Bedtime</div>
+          <h3>Magic Storyteller</h3>
         </div>
-        
         <div class="panel-body">
-          <p class="clil-desc" style="margin-top: 0;">Get an AI-generated weekly report based on the Learner Profile.</p>
-                    <button id="ib-report-btn" class="research-btn" type="button" onclick="generateIBReport()" style="min-width: auto; padding: 12px 24px; font-size: 14px;">
-                    Generate IB Report
-                  </button>
-                    <div id="ib-report-output" style="display: none; margin-top: 15px; padding: 20px; background: #f8fafc; border-radius: 18px; border: 1px solid var(--line); font-size: 14px; line-height: 1.7; color: var(--navy);">
+          <p class="clil-desc" style="margin-top: 0;">Type 3-5 words your child learned today. We'll weave them into a magical, safe bedtime story with a fun TPR action!</p>
+          
+          <input type="text" id="story-words" placeholder="e.g. apple, jump, blue" style="width: 100%; padding: 14px; margin-bottom: 15px; border: 2px solid #eef2f7; border-radius: 12px; font-size: 15px; outline: none; transition: 0.2s;">
+          
+          <button id="story-btn" class="research-btn" type="button" onclick="generateAIStory()" style="width: 100%; padding: 14px; font-size: 15px;">
+            Create Magic Story
+          </button>
+          
+          <div id="story-output" style="display: none; margin-top: 15px; padding: 20px; background: #fffcf8; border-radius: 18px; border: 1px solid #fde68a; font-size: 15px; line-height: 1.7; color: var(--navy);">
           </div>
         </div>
       </div>
-      <!-- КОНЕЦ КАРТОЧКИ IB REPORT -->
+      <!-- КОНЕЦ КАРТОЧКИ AI STORY -->
+      
 
       <div class="panel-card">
         <div class="panel-header">
@@ -1940,39 +1942,25 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!document.hidden) updateStats();
   });
   
-async function generateIBReport() {
-    const reportContainer = document.getElementById("ib-report-output");
-    const btn = document.getElementById("ib-report-btn");
-    
-    reportContainer.style.display = "block";
-    reportContainer.innerHTML = "<i>Analyzing data and generating report...</i>";
-    btn.disabled = true;
-    
-    const wordsExposed = document.getElementById('p-words').textContent || "0";
-    const timeSpent = document.getElementById('p-time').textContent || "0 min";
-    
-    let researchData = {};
-    try {
-        researchData = JSON.parse(localStorage.getItem('ll_research_data') || '{}');
-    } catch (e) {
-        console.warn("No research data found");
+async function generateAIStory() {
+    const output = document.getElementById("story-output");
+    const btn = document.getElementById("story-btn");
+    const wordsInput = document.getElementById("story-words").value.trim();
+
+    if (!wordsInput) {
+        alert("Please enter a few words first! (e.g., cat, run, yellow)");
+        return;
     }
 
-    const sessionData = {
-        student_name: "", 
-        age: 5,
-        module: "Weekly LinguaLab Activity",
-        mastered_words: [`Words exposed: ${wordsExposed}`, `Time spent: ${timeSpent}`],
-        struggling_words: researchData.hard_words || ["Complex new vocabulary"],
-        tpr_response: "Interacted with web platform exercises",
-        engagement_level: "Measured via session time"
-    };
+    output.style.display = "block";
+    output.innerHTML = "<i>Weaving a magical story...</i>";
+    btn.disabled = true;
 
     try {
-        const response = await fetch("https://lingualab-backend.onrender.com/generate_report", {
+        const response = await fetch("https://lingualab-backend.onrender.com/generate_story", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(sessionData)
+            body: JSON.stringify({ words: wordsInput })
         });
 
         if (!response.ok) throw new Error('Network error');
@@ -1980,20 +1968,20 @@ async function generateIBReport() {
         const data = await response.json();
         
         if(data.status === "success") {
-            // Форматируем текст (переносы строк)
-            const finalReport = data.report.replace(/\n/g, '<br>');
-            reportContainer.innerHTML = finalReport;
+            const finalStory = data.story.replace(/\n/g, '<br><br>');
+            output.innerHTML = finalStory;
         } else {
-            reportContainer.innerHTML = `<span style="color:red;">Error: ${data.message}</span>`;
+            output.innerHTML = `<span style="color:red;">Error: ${data.message}</span>`;
         }
     } catch (error) {
         console.error("API Error:", error);
-        reportContainer.innerHTML = `<span style="color:red;">Failed to connect to AI server. Please try again.</span>`;
+        output.innerHTML = `<span style="color:red;">Failed to connect to magic server. Please try again.</span>`;
     } finally {
         btn.disabled = false;
-        btn.innerText = "Generate IB Report";
+        btn.innerText = "Create Magic Story!";
     }
 }
+  
  </script>
 </body>
 </html>  
