@@ -69,23 +69,28 @@
     .navbar-right a:hover { color: var(--accent); }
 
     .hero {
+      width: 100%;
       max-width: 1200px;
-      margin: 0 auto 24px auto;
+      margin: 0 auto 24px;
       padding: 0 16px;
     }
     
     .hero img {
+      display: block;
       width: 100%;
       height: auto;
-      display: block;
+      max-height: 220px;
+      object-fit: cover;
+      object-position: center;
       border-radius: 20px;
-      box-shadow: 0 8px 24px rgba(120, 90, 180, 0.15); 
+      box-shadow: 0 8px 24px rgba(120, 90, 180, 0.15);
+    }
+    
+    .features {
+      padding: 20px 5% 60px;
+      text-align: center;
     }
 
-
-    
-
-    .features { padding: 60px 5%; text-align: center; }
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -338,20 +343,22 @@
     white-space: nowrap;
   }
 
-  .hero {
-    padding: 60px 8% 140px;
-    width: 100%;
-    margin: 10px;
-    line-height: 1.15;
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    }
+.hero {
+  width: 100%;
+  margin: 12px auto 16px;
+  padding: 0 12px;
+}
 
+.hero img {
+  width: 100%;
+  max-height: 140px;
+  object-fit: cover;
+  border-radius: 14px;
+}
 
-  .features {
-    padding: 50px 20px;
-  }
+.features {
+  padding: 16px 12px 36px;
+}
 
   .cards-grid {
     max-width: 900px;
@@ -505,14 +512,21 @@
   }
 
 .hero {
-    margin-top: 16px;
-    padding: 0 12px;
-  }
+  width: 100%;
+  margin: 12px auto 16px;
+  padding: 0 12px;
+}
 
+.hero img {
+  width: 100%;
+  max-height: 140px;
+  object-fit: cover;
+  border-radius: 14px;
+}
 
-  .features {
-    padding: 36px 12px;
-  }
+.features {
+  padding: 16px 12px 36px;
+}
 
   .cards-grid {
     grid-template-columns: 1fr;
@@ -703,8 +717,6 @@
 <section class="hero">
     <img src="assets/contact/hero.jpg" alt="LinguaLab Banner">
   </section>
-
-  <section class="features">
 
   <section class="features">
     <div class="cards-grid">
