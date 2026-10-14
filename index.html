@@ -69,14 +69,21 @@
     .navbar-right a:hover { color: var(--accent); }
 
     .hero {
-      padding: 120px 10%;
-      text-align: center;
-      background: linear-gradient(135deg, #22d3ee, #a78bfa);
-      color: #fff;
+      max-width: 1200px;
+      margin: 0 auto 24px auto;
+      padding: 0 16px;
     }
-    .hero h1 { font-size: clamp(36px, 6vw, 56px); font-weight: 800; margin-bottom: 20px; }
-    .hero p { font-size: 20px; opacity: 0.9; max-width: 800px; margin: 0 auto; }
+    
+    .hero img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(120, 90, 180, 0.15); 
+    }
 
+
+    
 
     .features { padding: 60px 5%; text-align: center; }
     .cards-grid {
@@ -335,17 +342,6 @@
     padding: 72px 5%;
   }
 
-  .hero h1 {
-    margin-bottom: 16px;
-    font-size: 42px;
-    line-height: 1.15;
-  }
-
-  .hero p {
-    max-width: 680px;
-    font-size: 17px;
-    line-height: 1.6;
-  }
 
   .features {
     padding: 50px 20px;
@@ -506,17 +502,6 @@
     padding: 54px 16px;
   }
 
-  .hero h1 {
-    margin-bottom: 12px;
-    font-size: 34px;
-    line-height: 1.2;
-  }
-
-  .hero p {
-    max-width: 100%;
-    font-size: 15px;
-    line-height: 1.55;
-  }
 
   .features {
     padding: 36px 12px;
@@ -709,10 +694,6 @@
   </nav>
   </header>
 
-  <section class="hero">
-    <h1>LinguaLab</h1>
-    <p>Bilingual mini-lessons with audio, games, and weekly practice — designed for families.</p>
-  </section>
 
   <section class="features">
     <div class="cards-grid">
@@ -1316,6 +1297,9 @@ body {
     </head>
 
     <body>
+    <div class="hero-banner">
+  <img src="assets/contact/banner.jpg" alt="LinguaLab Banner">
+</div>
       <button class="print-button" onclick="window.print()">Save as PDF</button>
 
       <div class="certificate">
@@ -1335,7 +1319,7 @@ body {
         <span class="stat-val">${currentScore}</span>
         <span class="stat-label">Total Points</span>
       </div>
-    
+      
       <div class="stat-item">
         <span class="stat-val">${grammarPoints}</span>
         <span class="stat-label">Grammar Points</span>
